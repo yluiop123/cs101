@@ -3,24 +3,62 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base:'/cs101/',
-  title: "My Awesome Project",
-  description: "A VitePress Site",
+  title: "CS101",
+  description: "计算机知识教程",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
-    ],
-
-    sidebar: [
+      { text: '首页', link: '/' },
       {
-        text: 'Examples',
+        text: '计算机基础',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: '操作系统', link: '/item-1' },
+          { text: '数据结构', link: '/item-2' },
+          { text: '计算机网络', link: '/item-2' },
+          { text: '软件工程', link: '/item-2' },
+          { text: '数据库', link: '/item-3' }
+        ]
+      },
+      {
+        text: '学习路线',
+        items: [
+          { text: 'java开发', link: '/route/java/java8' },
+          { text: '前端开发', link: '/route/java/java8/index2' },
+          { text: 'gis开发', link: '/item-3' },
+          { text: '网络安全', link: '/item-3'}
         ]
       }
     ],
+
+    sidebar: {
+      '/route/': [
+        {
+          text: 'JAVA学习路线',
+          items: [
+            { text: 'java8教程', link: '/route/java/java8' },
+            { text: 'java最新教程', link: '/route/java/java' },
+            { text: 'springboot', link: '/route/java/springboot' },
+            { text: 'springcloud+alibaba', link: '/route/java/java' },
+            { text: 'lombok', link: '/route/java/java' },
+            { text: 'java最新教程', link: '/route/java/java' },
+            { text: 'java最新教程', link: '/route/java/java' },
+            { text: 'springboot', link: '/route/java/java8/index2' }
+          ]
+        },
+      ],
+
+      // 当用户位于 `config` 目录时，会显示此侧边栏
+      '/config/': [
+        {
+          text: 'Config',
+          items: [
+            { text: 'Index', link: '/config/' },
+            { text: 'Three', link: '/config/three' },
+            { text: 'Four', link: '/config/four' }
+          ]
+        }
+      ]
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
