@@ -22,7 +22,7 @@ export default defineConfig({
       {
         text: '学习路线',
         items: [
-          { text: 'java开发', link: '/route/java/java8' },
+          { text: 'java开发', link: '/route/java/java/getting-started'},
           { text: '前端开发', link: '/route/java/java8/index2' },
           { text: 'gis开发', link: '/item-3' },
           { text: '网络安全', link: '/item-3'}
@@ -35,8 +35,19 @@ export default defineConfig({
         {
           text: 'JAVA学习路线',
           items: [
-            { text: 'java8教程', link: '/route/java/java8' },
-            { text: 'java最新教程', link: '/route/java/java' },
+            { text: 'java教程', 
+              collapsed: false,
+              items: [
+                {
+                  text: '入门指南',
+                  link: '/route/java/java/getting-started',
+                },
+                {
+                  text: '面向对象',
+                  link: '/route/java/java/oop',
+                }
+              ]
+            },
             { text: 'springboot', link: '/route/java/springboot' },
             { text: 'springcloud+alibaba', link: '/route/java/java' },
             { text: 'lombok', link: '/route/java/java' },
