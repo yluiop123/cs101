@@ -23,7 +23,7 @@ export default defineConfig({
         text: '学习路线',
         items: [
           { text: 'java开发', link: '/route/java/java/getting-started'},
-          { text: '前端开发', link: '/route/java/java8/index2' },
+          { text: '前端开发', link: '/route/java/java/index2' },
           { text: 'gis开发', link: '/item-3' },
           { text: '网络安全', link: '/item-3'}
         ]
@@ -45,6 +45,24 @@ export default defineConfig({
                 {
                   text: '面向对象',
                   link: '/route/java/java/oop',
+                },
+                {
+                  text: 'java语言基础',
+                  link: '/route/java/java/language-basics',
+                  items: [
+                    {
+                      text: '创建变量及命名',
+                      link: '/route/java/java/language-basics/variables',
+                    },
+                    {
+                      text: '基本数据类型',
+                      link: '/route/java/java/language-basics/primitive-types',
+                    },
+                    {
+                      text: '数组',
+                      link: '/route/java/java/language-basics/arrays',
+                    }
+                  ]
                 }
               ]
             },
