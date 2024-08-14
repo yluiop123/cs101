@@ -48,7 +48,6 @@ export default defineConfig({
                 },
                 {
                   text: 'java语言基础',
-                  link: '/route/java/java/language-basics',
                   collapsed: true,
                   items: [
                     {
