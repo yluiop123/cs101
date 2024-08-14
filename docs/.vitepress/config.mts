@@ -31,7 +31,7 @@ export default defineConfig({
     ],
 
     sidebar: {
-      '/route/': [
+      '/route/java/': [
         {
           text: 'JAVA学习路线',
           items: [
@@ -49,6 +49,7 @@ export default defineConfig({
                 {
                   text: 'java语言基础',
                   link: '/route/java/java/language-basics',
+                  collapsed: true,
                   items: [
                     {
                       text: '创建变量及命名',
@@ -61,6 +62,34 @@ export default defineConfig({
                     {
                       text: '数组',
                       link: '/route/java/java/language-basics/arrays',
+                    },
+                    {
+                      text: '使用 var 类型标识符',
+                      link: '/route/java/java/language-basics/using-var',
+                    },
+                    {
+                      text: '运算符的使用',
+                      link: '/route/java/java/language-basics/using-operators',
+                    },
+                    {
+                      text: '运算符概述',
+                      link: '/route/java/java/language-basics/all-operators',
+                    },
+                    {
+                      text: '表达式、语句和代码块',
+                      link: '/route/java/java/language-basics/expressions-statements-blocks',
+                    },
+                    {
+                      text: '控制流语句',
+                      link: '/route/java/java/language-basics/controlling-flow',
+                    },
+                    {
+                      text: 'Switch 语句',
+                      link: '/route/java/java/language-basics/switch-statement',
+                    },
+                    {
+                      text: 'Switch 表达式',
+                      link: '/route/java/java/language-basics/switch-expression',
                     }
                   ]
                 }
