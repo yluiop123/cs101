@@ -58,7 +58,7 @@ public Bicycle seeWhosFastest(Bicycle myBike, Bicycle yourBike, Environment env)
 
 当一个方法使用类名作为其返回类型，如 `seeWhosFastest()`，返回对象的类必须是返回类型的子类，或者是返回类型的确切类。假设您有一个类层次结构，其中 `ImaginaryNumber` 是 `java.lang.Number` 的子类，而 `Number` 又是 `Object` 的子类，如下图所示。
 
-![ImaginaryNumber 类层次结构](https://dev.java/assets/images/classes-objects/03_class-hierarchy-imaginary.png)
+![ImaginaryNumber 类层次结构](./image/03_class-hierarchy-imaginary.png)
 
 现在假设您有一个声明为返回 `Number` 的方法：
 
