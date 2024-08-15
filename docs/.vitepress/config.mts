@@ -91,6 +91,48 @@ export default defineConfig({
                       link: '/route/java/java/language-basics/switch-expression',
                     }
                   ]
+                },
+                {
+                  text: '类和对象',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: '创建类',
+                      link: '/route/java/java/classes-objects/creating-classes',
+                    },
+                    {
+                      text: '定义方法',
+                      link: '/route/java/java/classes-objects/defining-methods',
+                    },
+                    {
+                      text: '为类提供构造函数',
+                      link: '/route/java/java/classes-objects/defining-constructors',
+                    },
+                    {
+                      text: '调用方法和构造函数',
+                      link: '/route/java/java/classes-objects/calling-methods-constructors',
+                    },
+                    {
+                      text: '创建和使用对象',
+                      link: '/route/java/java/classes-objects/creating-objects',
+                    },
+                    {
+                      text: '有关类的更多信息',
+                      link: '/route/java/java/classes-objects/more-on-classes',
+                    },
+                    {
+                      text: '嵌套类',
+                      link: '/route/java/java/classes-objects/nested-classes',
+                    },
+                    {
+                      text: '枚举',
+                      link: '/route/java/java/classes-objects/enums',
+                    },
+                    {
+                      text: '最佳实践',
+                      link: '/route/java/java/classes-objects/design-best-practices',
+                    }
+                  ]
                 }
               ]
             },
