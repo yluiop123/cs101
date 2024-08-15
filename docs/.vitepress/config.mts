@@ -33,6 +33,7 @@ export default defineConfig({
     sidebar: {
       '/route/java/': [
         {
+          base: '/route/java/',
           text: 'JAVA学习路线',
           items: [
             { text: 'java教程', 
@@ -40,97 +41,99 @@ export default defineConfig({
               items: [
                 {
                   text: '入门指南',
-                  link: '/route/java/java/getting-started',
+                  link: 'java/getting-started',
                 },
                 {
                   text: '面向对象',
-                  link: '/route/java/java/oop',
+                  link: '/java/oop',
                 },
                 {
+                  base: '/route/java/java/language-basics/',
                   text: 'java语言基础',
                   collapsed: true,
                   items: [
                     {
                       text: '创建变量及命名',
-                      link: '/route/java/java/language-basics/variables',
+                      link: 'variables',
                     },
                     {
                       text: '基本数据类型',
-                      link: '/route/java/java/language-basics/primitive-types',
+                      link: 'primitive-types',
                     },
                     {
                       text: '数组',
-                      link: '/route/java/java/language-basics/arrays',
+                      link: 'arrays',
                     },
                     {
                       text: '使用 var 类型标识符',
-                      link: '/route/java/java/language-basics/using-var',
+                      link: 'using-var',
                     },
                     {
                       text: '运算符的使用',
-                      link: '/route/java/java/language-basics/using-operators',
+                      link: 'using-operators',
                     },
                     {
                       text: '运算符概述',
-                      link: '/route/java/java/language-basics/all-operators',
+                      link: 'all-operators',
                     },
                     {
                       text: '表达式、语句和代码块',
-                      link: '/route/java/java/language-basics/expressions-statements-blocks',
+                      link: 'expressions-statements-blocks',
                     },
                     {
                       text: '控制流语句',
-                      link: '/route/java/java/language-basics/controlling-flow',
+                      link: 'controlling-flow',
                     },
                     {
                       text: 'Switch 语句',
-                      link: '/route/java/java/language-basics/switch-statement',
+                      link: 'switch-statement',
                     },
                     {
                       text: 'Switch 表达式',
-                      link: '/route/java/java/language-basics/switch-expression',
+                      link: 'switch-expression',
                     }
                   ]
                 },
                 {
+                  base: '/route/java/java/classes-objects/',
                   text: '类和对象',
                   collapsed: true,
                   items: [
                     {
                       text: '创建类',
-                      link: '/route/java/java/classes-objects/creating-classes',
+                      link: 'creating-classes',
                     },
                     {
                       text: '定义方法',
-                      link: '/route/java/java/classes-objects/defining-methods',
+                      link: 'defining-methods',
                     },
                     {
                       text: '为类提供构造函数',
-                      link: '/route/java/java/classes-objects/defining-constructors',
+                      link: 'defining-constructors',
                     },
                     {
                       text: '调用方法和构造函数',
-                      link: '/route/java/java/classes-objects/calling-methods-constructors',
+                      link: 'calling-methods-constructors',
                     },
                     {
                       text: '创建和使用对象',
-                      link: '/route/java/java/classes-objects/creating-objects',
+                      link: 'creating-objects',
                     },
                     {
                       text: '有关类的更多信息',
-                      link: '/route/java/java/classes-objects/more-on-classes',
+                      link: 'more-on-classes',
                     },
                     {
                       text: '嵌套类',
-                      link: '/route/java/java/classes-objects/nested-classes',
+                      link: 'nested-classes',
                     },
                     {
                       text: '枚举',
-                      link: '/route/java/java/classes-objects/enums',
+                      link: 'enums',
                     },
                     {
                       text: '最佳实践',
-                      link: '/route/java/java/classes-objects/design-best-practices',
+                      link: 'design-best-practices',
                     }
                   ]
                 }
