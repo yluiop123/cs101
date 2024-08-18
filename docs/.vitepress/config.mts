@@ -214,6 +214,33 @@ export default defineConfig({
                       link: 'interfaces-as-a-type',
                     }
                   ]
+                },
+                {
+                  base: '/route/java/java/generics/',
+                  text: '泛型',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: '泛型介绍',
+                      link: 'intro'
+                    },
+                    {
+                      text: '类型推断',
+                      link: 'type-inference'
+                    },
+                    {
+                      text: '通配符',
+                      link: 'wildcards'
+                    },
+                    {
+                      text: '类型擦除',
+                      link: 'type-erasure'
+                    },
+                    {
+                      text: '对泛型的限制',
+                      link: 'restrictions'
+                    }
+                  ]
                 }
               ]
             },
