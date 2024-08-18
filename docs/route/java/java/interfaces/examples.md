@@ -1,5 +1,5 @@
 # 接口的实现
-# 定义接口 Relatable
+## 定义接口 Relatable
 
 要声明一个实现接口的类，你需要在类声明中包含一个 `implements` 子句。你的类可以实现多个接口，因此 `implements` 关键字后面跟着由逗号分隔的接口列表，这些接口由类实现。按照惯例，如果有 `extends` 子句，`implements` 子句跟在它后面。
 

@@ -241,6 +241,153 @@ export default defineConfig({
                       link: 'restrictions'
                     }
                   ]
+                },
+                {
+                  base: '/route/java/java/lambdas/',
+                  text: 'lambda表达式',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: '编写你的第一个Lambda表达式',
+                      link: 'first-lambdas'
+                    },
+                    {
+                      text: '在应用程序中使用Lambda表达式',
+                      link: 'functional-interfaces'
+                    },
+                    {
+                      text: '将Lambda表达式写成方法引用',
+                      link: 'method-references'
+                    },
+                    {
+                      text: '组合Lambda表达式',
+                      link: 'combining-chaining-composing'
+                    },
+                    {
+                      text: '编写和组合比较器',
+                      link: 'writing-comparators'
+                    }
+                  ]
+                },
+                {
+                  text: 'Java 注解（Annotations）',
+                  link: 'java/annotations',
+                },
+                {
+                  text: 'Java 包（Packages）',
+                  link: 'java/packages',
+                },
+                {
+                  text: '模式匹配',
+                  link: 'java/pattern-matching',
+                },
+                {
+                  base: '/route/java/java/exceptions/',
+                  text: '异常',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: 'Java 中的异常是什么',
+                      link: 'what-is-an-exception'
+                    },
+                    {
+                      text: '异常捕获和处理',
+                      link: 'catching-handling'
+                    },
+                    {
+                      text: 'Java 中的异常抛出',
+                      link: 'throwing'
+                    },
+                    {
+                      text: 'Java 中的未检查异常-讨论',
+                      link: 'unchecked-exception-controversy'
+                    }
+                  ]
+                },
+                {
+                  base: '/route/java/java/refactoring-to-functional-style/',
+                  text: '函数式风格',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: '简单循环',
+                      link: 'simpleloops'
+                    },
+                    {
+                      text: '带步长循环',
+                      link: 'loopswithsteps'
+                    },
+                    {
+                      text: '带有`if`的`foreach`',
+                      link: 'foreachwithif'
+                    },
+                    {
+                      text: '带有转换的迭代',
+                      link: 'iteartionwithtransformation'
+                    },
+                    {
+                      text: '数据源',
+                      link: 'convertingtostreams'
+                    }
+                  ]
+                },
+                {
+                  base: '/route/java/java/collections-framework/',
+                  text: '集合框架',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: '集合框架介绍',
+                      link: 'intro'
+                    },
+                    {
+                      text: '集合框架层次结构',
+                      link: 'organization'
+                    },
+                    {
+                      text: '在集合中存储元素',
+                      link: 'collection-interface'
+                    },
+                    {
+                      text: '循环访问集合的元素',
+                      link: 'iterating'
+                    },
+                    {
+                      text: 'List',
+                      link: 'lists'
+                    },
+                    {
+                      text: 'Set',
+                      link: 'sets'
+                    },
+                    {
+                      text: '不可变集合',
+                      link: 'immutable-collections'
+                    },
+                    {
+                      text: 'Stack和Queue',
+                      link: 'stacks-queues'
+                    },
+                    {
+                      text: 'Map',
+                      link: 'maps'
+                    },{
+                      text: '管理Map的内容',
+                      link: 'working-with-keys-and-values'
+                    },
+                    {
+                      text: 'Map和lambda',
+                      link: 'maps-and-lambdas'
+                    },
+                    {
+                      text: 'SortedMap和NavigableMap',
+                      link: 'sorted-maps'
+                    },
+                    {
+                      text: '选择不可变类型作为Map的键',
+                      link: 'choosing-keys'
+                    }
+                  ]
                 }
               ]
             },
