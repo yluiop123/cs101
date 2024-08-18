@@ -24,6 +24,10 @@ export default defineConfig({
         items: [
           { text: 'java开发', link: '/route/java/java/getting-started'},
           { text: '前端开发', link: '/route/java/java/index2' },
+          { text: 'python开发', link: '/item-3' },
+          { text: 'c/c++', link: '/item-3' },
+          { text: 'go语言', link: '/item-3' },
+          { text: 'c#', link: '/item-3' },
           { text: 'gis开发', link: '/item-3' },
           { text: '网络安全', link: '/item-3'}
         ]
@@ -386,6 +390,56 @@ export default defineConfig({
                     {
                       text: '选择不可变类型作为Map的键',
                       link: 'choosing-keys'
+                    }
+                  ]
+                },
+                {
+                  base: '/route/java/java/streams/',
+                  text: '流（Stream）',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: '使用Stream API在内存中处理数据',
+                      link: 'map-filter-reduce'
+                    },
+                    {
+                      text: '流的中间操作',
+                      link: 'intermediate-operation'
+                    },
+                    {
+                      text: '创建流',
+                      link: 'creating'
+                    },
+                    {
+                      text: '归约流',
+                      link: 'reducing'
+                    },
+                    {
+                      text: '终端操作',
+                      link: 'terminal-operations'
+                    },
+                    {
+                      text: '流的特征',
+                      link: 'characteristics'
+                    },
+                    {
+                      text: '使用收集器',
+                      link: 'using-collectors'
+                    },
+                    {
+                      text: '自定义收集器',
+                      link: 'custom-collectors'
+                    },
+                    {
+                      text: '实现 Collector 接口',
+                      link: 'collector-interface'
+                    },{
+                      text: '使用 Optionals',
+                      link: 'optionals'
+                    },
+                    {
+                      text: '并行流',
+                      link: 'parallel-streams'
                     }
                   ]
                 }
