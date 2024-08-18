@@ -496,5 +496,5 @@ interface PayloadList<E, P> extends List<E> {
 - `PayloadList<String,Integer>`
 - `PayloadList<String,Exception>`
 
-![img](./image/java-logo-vector.png)
+![img](./image/03_more-inheritance.png)
 
