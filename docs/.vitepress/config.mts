@@ -442,6 +442,55 @@ export default defineConfig({
                       link: 'parallel-streams'
                     }
                   ]
+                },
+                {
+                  base: '/route/java/java/java-io/',
+                  text: 'I/O API',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: ' I/O 概念介绍',
+                      link: 'intro'
+                    },
+                    {
+                      base: '/route/java/java/java-io/file-system/',
+                      text: '文件系统',
+                      collapsed: true,
+                      items: [
+                        {
+                          text: '使用Paths访问资源',
+                          link: 'file-path'
+                        },{
+                          text: 'Paths操作',
+                          link: 'path'
+                        },{
+                          text: '访问文件系统',
+                          link: 'file-system'
+                        },{
+                          text: '操作文件和目录',
+                          link: 'move-copy-delete'
+                        },{
+                          text: '链接、符号和其他',
+                          link: 'links'
+                        },{
+                          text: '文件属性',
+                          link: 'metadata'
+                        },{
+                          text: '读写文件',
+                          link: 'creating-reading-directories'
+                        },{
+                          text: '列出目录的内容',
+                          link: 'listing'
+                        },{
+                          text: '遍历文件树',
+                          link: 'walking-tree'
+                        },{
+                          text: '监视目录的更改',
+                          link: 'watching-dir-changes'
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
