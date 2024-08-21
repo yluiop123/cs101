@@ -1,5 +1,5 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
-import {sidebarJava} from './sidebar/siderbar-java.mjs'
+import {routeJava} from './sidebar/java/route-java.mjs'
 import {nav} from './nav.mjs'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav:nav() ,
     sidebar: {
-      '/route/java/': sidebarJava(),
+      '/route/java/': routeJava(),
 
       // 当用户位于 `config` 目录时，会显示此侧边栏
       '/config/': [
