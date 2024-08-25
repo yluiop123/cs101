@@ -568,10 +568,303 @@ export function sidebarJava(): DefaultTheme.SidebarItem[] {
         ]
       },{
         text: '反射',
-        link: 'java/introduction_to_java_reflection',
+        base: '/route/java/java/reflect/',
+        collapsed: true,
+        items: [
+          {
+            text: '概述',
+            link: 'index'
+          },{
+            text: '类',
+            link: 'classes'
+          },{
+            text: '构造函数',
+            link: 'constructors'
+          },{
+            text: '字段',
+            link: 'fields'
+          },{
+            text: '方法',
+            link: 'methods'
+          },{
+            text: 'Getters 和 Setters',
+            link: 'getters-setters'
+          },{
+            text: '私有字段和方法',
+            link: 'private-fields-and-methods'
+          },{
+            text: '注解',
+            link: 'annotations'
+          },{
+            text: '泛型',
+            link: 'generics'
+          },{
+            text: '数组',
+            link: 'arrays'
+          },{
+            text: '动态代理',
+            link: 'dynamic-proxies'
+          },{
+            text: '类的加载和重载',
+            link: 'dynamic-class-loading-reloading'
+          },{
+            text: '模块',
+            link: 'modules'
+          },{
+            text: '其他',
+            link: 'introduction_to_java_reflection'
+          }
+        ]
       },{
         text: '方法 Handles',
         link: 'java/introduction_to_method_handles',
+      },
+      {
+        base: '/route/java/java/security/',
+        text: '安全',
+        collapsed: true,
+        items: [
+          {
+            text: '加密/解密简介',
+            link: 'intro'
+          },{
+            text: '数字签名和证书',
+            link: 'digital-signature'
+          },{
+            text: '安全监控',
+            link: 'monitor'
+          },{
+            text: 'JDK 安全工具',
+            link: 'app-integrity-tools'
+          }
+        ]
+      },
+      {
+        base: '/route/java/java/thread/',
+        text: '并发和多线程',
+        collapsed: true,
+        items: [
+          {
+            base: '/route/java/java/thread/concurrency/',
+            text: '并发和多线程',
+            items: [
+              {
+                text: 'Java并发和多线程',
+                link: 'index'
+              },{
+                text: '多线程的好处',
+                link: 'benefits'
+              },{
+                text: '多线程应用的成本',
+                link: 'costs'
+              },{
+                text: '并发模型',
+                link: 'concurrency-models'
+              },{
+                text: '单线程',
+                link: 'same-threading'
+              },{
+                text: '单线程并发',
+                link: 'single-threaded-concurrency'
+              },{
+                text: '并发与并行：对比教程',
+                link: 'concurrency-vs-parallelism'
+              },{
+                text: '创建和启动Java线程',
+                link: 'creating-and-starting-threads'
+              },{
+                text: 'Java 虚拟线程',
+                link: 'java-virtual-threads'
+              },{
+                text: '竞态条件和临界区',
+                link: 'race-conditions-and-critical-sections'
+              },{
+                text: '线程安全与共享资源',
+                link: 'thread-safety'
+              },{
+                text: '线程安全与不变性',
+                link: 'thread-safety-and-immutability'
+              },{
+                text: 'Java内存模型',
+                link: 'java-memory-model'
+              },{
+                text: 'Java Happens Before',
+                link: 'java-happens-before-guarantee'
+              },{
+                text: 'Java 同步块',
+                link: 'synchronized'
+              },{
+                text: 'volatile 关键字',
+                link: 'volatile'
+              },{
+                text: '缓存一致性',
+                link: 'cache-coherence-in-java-concurrency'
+              },{
+                text: '伪共享',
+                link: 'false-sharing'
+              },{
+                text: 'Threadlocal',
+                link: 'threadlocal'
+              },{
+                text: '线程信号',
+                link: 'thread-signaling'
+              },{
+                text: '线程死锁',
+                link: 'deadlock'
+              },{
+                text: '死锁预防',
+                link: 'deadlock-prevention'
+              },{
+                text: '饥饿与公平性',
+                link: 'starvation-and-fairness'
+              },{
+                text: '嵌套监视器锁定',
+                link: 'nested-monitor-lockout'
+              },{
+                text: '条件滑动',
+                link: 'slipped-conditions'
+              },{
+                text: 'Java中的锁',
+                link: 'locks'
+              },{
+                text: 'Java中的读写锁',
+                link: 'read-write-locks'
+              },{
+                text: '可重入锁',
+                link: 'reentrance-lockout'
+              },{
+                text: 'Semaphore',
+                link: 'semaphores'
+              },{
+                text: '阻塞队列',
+                link: 'blocking-queues'
+              },{
+                text: '生产者消费者模式',
+                link: 'producer-consumer'
+              },{
+                text: '线程池',
+                link: 'thread-pools'
+              },{
+                text: '线程拥塞',
+                link: 'thread-congestion'
+              },{
+                text: 'CAS',
+                link: 'compare-and-swap'
+              },{
+                text: '同步器剖析',
+                link: 'anatomy-of-a-synchronizer'
+              },{
+                text: '非阻塞算法',
+                link: 'non-blocking-algorithms'
+              },{
+                text: '阿姆达尔定律',
+                link: 'amdahls-law'
+              }
+            ]
+          },{
+            base: '/route/java/java/thread/concurrent-util/',
+            text: '并发工具',
+            items: [
+              {
+                text: 'Java 并发工具 - JUC',
+                link: 'index'
+              },{
+                text: 'BlockingQueue',
+                link: 'blockingqueue'
+              },{
+                text: 'ArrayBlockingQueue',
+                link: 'arrayblockingqueue'
+              },{
+                text: 'DelayQueue',
+                link: 'delayqueue'
+              },{
+                text: 'LinkedBlockingQueue',
+                link: 'linkedblockingqueue'
+              },{
+                text: 'PriorityBlockingQueue',
+                link: 'priorityblockingqueue'
+              },{
+                text: 'SynchronousQueue',
+                link: 'synchronousqueue'
+              },{
+                text: 'BlockingDeque',
+                link: 'blockingdeque'
+              },{
+                text: 'LinkedBlockingDeque',
+                link: 'linkedblockingdeque'
+              },{
+                text: 'ConcurrentMap',
+                link: 'concurrentmap'
+              },{
+                text: 'ConcurrentNavigableMap',
+                link: 'concurrentnavigablemap'
+              },{
+                text: 'CountDownLatch',
+                link: 'countdownlatch'
+              },{
+                text: 'CyclicBarrier',
+                link: 'cyclicbarrier'
+              },{
+                text: 'Exchanger',
+                link: 'exchanger'
+              },{
+                text: 'Semaphore',
+                link: 'semaphore'
+              },{
+                text: 'ExecutorService',
+                link: 'executorservice'
+              },{
+                text: 'Callable',
+                link: 'java-callable'
+              },{
+                text: 'Future',
+                link: 'java-future'
+              },{
+                text: 'ThreadPoolExecutor',
+                link: 'threadpoolexecutor'
+              },{
+                text: 'ScheduledExecutorService',
+                link: 'scheduledexecutorservice'
+              },{
+                text: 'ForkJoinPool',
+                link: 'java-fork-and-join-forkjoinpool'
+              },{
+                text: 'Lock',
+                link: 'lock'
+              },{
+                text: 'ReadWriteLock',
+                link: 'readwritelock'
+              },{
+                text: 'AtomicBoolean',
+                link: 'atomicboolean'
+              },{
+                text: 'AtomicInteger',
+                link: 'atomicinteger'
+              },{
+                text: 'AtomicLong',
+                link: 'atomiclong'
+              },{
+                text: 'AtomicReference',
+                link: 'atomicreference'
+              },{
+                text: 'AtomicStampedReference',
+                link: 'atomicstampedreference'
+              },{
+                text: 'AtomicIntegerArray',
+                link: 'atomicintegerarray'
+              },{
+                text: 'AtomicLongArray',
+                link: 'atomiclongarray'
+              },{
+                text: 'AtomicReferenceArray',
+                link: 'atomicreferencearray'
+              }
+            ]
+          },{
+            text: '虚拟线程',
+            link: 'virtual-threads'
+          }
+        ]
       }
     ]
   }

@@ -15,9 +15,11 @@ export function routeJava(): DefaultTheme.SidebarItem[] {
           { text: 'springboot', link: '/route/java/springboot' },
           { text: 'springcloud+alibaba', link: '/route/java/java' },
           { text: 'lombok', link: '/route/java/java' },
-          { text: 'java最新教程', link: '/route/java/java' },
-          { text: 'java最新教程', link: '/route/java/java' },
-          { text: 'springboot', link: '/route/java/java8/index2' }
+          { text: 'guava', link: '/route/java/java' },
+          { text: 'apache common', link: '/route/java/java' },
+          { text: 'maven', link: '/route/java/java' },
+          { text: 'gradle', link: '/route/java/java' },
+          { text: '文档处理技术', link: '/route/java/java8/index2' }
         ]
       },
     ]

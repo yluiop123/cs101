@@ -21,6 +21,10 @@ export function nav(): DefaultTheme.NavItem[] {
           { text: 'c/c++', link: '/item-3' },
           { text: 'go语言', link: '/item-3' },
           { text: 'c#', link: '/item-3' },
+          { text: '测试', link: '/item-3' },
+          { text: '安卓', link: '/item-3' },
+          { text: '大数据', link: '/item-3' },
+          { text: '云计算', link: '/item-3' },
           { text: 'gis开发', link: '/item-3' },
           { text: '网络安全', link: '/item-3'}
         ]
