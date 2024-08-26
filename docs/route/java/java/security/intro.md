@@ -94,7 +94,7 @@ AES_192/CBC/NoPadding
 
 对称或共享密钥加密是一种方法，其中双方共享一个密钥，由双方保密。例如，发送者`A`可以使用共享密钥加密消息，然后接收者`B`只能使用该密钥解密加密的消息。
 
-![img](./images/symmetric_encryption.png)_图2: 对称加密_
+![img](./image/symmetric_encryption.png)_图2: 对称加密_
 
 要在Java中实现对称加密，您首先需要生成一个共享密钥。您可以使用以下片段来实现：
 
