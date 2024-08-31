@@ -6,6 +6,11 @@ import {nav} from './nav.mjs'
 // https://vitepress.dev/reference/site-config
 
 export default withMermaid({
+  vite: {
+    ssr: {
+      noExternal: ['vuetify'],
+    },
+  },
   mermaid: {
   
   },
