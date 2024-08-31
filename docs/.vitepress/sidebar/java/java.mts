@@ -645,6 +645,7 @@ export function sidebarJava(): DefaultTheme.SidebarItem[] {
         collapsed: true,
         items: [
           {
+            collapsed: true,
             base: '/route/java/java/thread/concurrency/',
             text: '并发和多线程',
             items: [
@@ -762,6 +763,7 @@ export function sidebarJava(): DefaultTheme.SidebarItem[] {
               }
             ]
           },{
+            collapsed: true,
             base: '/route/java/java/thread/concurrent-util/',
             text: '并发工具',
             items: [
@@ -860,6 +862,9 @@ export function sidebarJava(): DefaultTheme.SidebarItem[] {
                 link: 'atomicreferencearray'
               }
             ]
+          },{
+            text: 'CompletableFuture',
+            link: 'completablefuture'
           },{
             text: '虚拟线程',
             link: 'virtual-threads'

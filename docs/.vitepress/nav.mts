@@ -5,7 +5,7 @@ export function nav(): DefaultTheme.NavItem[] {
       {
         text: '计算机基础',
         items: [
-          { text: '操作系统', link: '/item-1' },
+          { text: '操作系统', link: '/base/cs/operating-systems/basics/introduction-of-operating-system' },
           { text: '数据结构', link: '/item-2' },
           { text: '计算机网络', link: '/item-2' },
           { text: '软件工程', link: '/item-2' },

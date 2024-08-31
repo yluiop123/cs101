@@ -1,8 +1,17 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
+import { withMermaid } from "vitepress-plugin-mermaid";
 import {routeJava} from './sidebar/java/route-java.mjs'
+import {baseCs} from './sidebar/cs/base-cs.mjs'
 import {nav} from './nav.mjs'
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+
+export default withMermaid({
+  mermaid: {
+  
+  },
+  mermaidPlugin: {
+    class: "mermaid my-class",
+  },
   base:'/cs101/',
   title: "CS101",
   description: "计算机知识教程",
@@ -11,18 +20,7 @@ export default defineConfig({
     nav:nav() ,
     sidebar: {
       '/route/java/': routeJava(),
-
-      // 当用户位于 `config` 目录时，会显示此侧边栏
-      '/config/': [
-        {
-          text: 'Config',
-          items: [
-            { text: 'Index', link: '/config/' },
-            { text: 'Three', link: '/config/three' },
-            { text: 'Four', link: '/config/four' }
-          ]
-        }
-      ]
+      '/base/cs/': baseCs()
     },
 
     socialLinks: [
