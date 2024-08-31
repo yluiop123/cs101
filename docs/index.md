@@ -8,8 +8,8 @@ hero:
   tagline: 让我们从这里开始吧
   actions:
     - theme: brand
-      text: 计算机基础
-      link: /markdown-examples
+      text: 资源总览
+      link: /roadmap
     - theme: alt
       text: 技术路线
       link: /api-examples
