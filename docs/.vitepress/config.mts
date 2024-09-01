@@ -56,7 +56,10 @@ export default withMermaid({
     sidebarMenuLabel: '菜单',
     darkModeSwitchLabel: '主题',
     lightModeSwitchTitle: '切换到浅色模式',
-    darkModeSwitchTitle: '切换到深色模式'
+    darkModeSwitchTitle: '切换到深色模式',
+    search: {
+      provider: 'local'
+    }
   }
 })
 

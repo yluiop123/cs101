@@ -1,7 +1,4 @@
 <style>
-.vp-doc a{
- text-decoration: none;
-}
 </style>
 <script setup>
 import { reactive, computed } from 'vue'
@@ -54,6 +51,9 @@ const colorTheme = computed(() => {
   }
 })
 
+function goHerf(herf) {
+  location.href = herf;
+}
 </script>
 <v-card 
   width="100%"
@@ -74,7 +74,7 @@ const colorTheme = computed(() => {
           :color="colorTheme.subColor"
           :subtitle="item.subtitle"
           :title="item.title"
-          :href="item.herf"
+          @click="goHerf(item.herf)"
         >
         </v-card>
       </v-col>
