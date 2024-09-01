@@ -870,6 +870,53 @@ export function sidebarJava(): DefaultTheme.SidebarItem[] {
             link: 'virtual-threads'
           }
         ]
+      },
+      {
+        base: '/route/java/java/modules/',
+        text: '模块',
+        collapsed: true,
+        items: [
+          {
+            text: '模块简介',
+            link: 'intro'
+          },{
+            text: '反射访问',
+            link: 'opening-for-reflection'
+          },{
+            text: 'requires static',
+            link: 'optional-dependencies'
+          },{
+            text: 'requires transitive',
+            link: 'implied-readability'
+          },{
+            text: 'exportsopens',
+            link: 'qualified-exports-opens'
+          },{
+            text: '模块与服务解耦',
+            link: 'services'
+          },{
+            text: '未命名的模块',
+            link: 'unnamed-module'
+          },{
+            text: '自动模块',
+            link: 'automatic-module'
+          },{
+            text: '构建模块',
+            link: 'building'
+          },{
+            text: '强封装',
+            link: 'strong-encapsulation'
+          },{
+            text: '使用 和 规避强封装',
+            link: 'add-exports-opens'
+          },{
+            text: '使用 和 扩展模块',
+            link: 'add-modules-reads'
+          },{
+            text: 'Jlink',
+            link: 'jlink'
+          }
+        ]
       }
     ]
   }
