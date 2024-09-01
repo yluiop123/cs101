@@ -10,7 +10,7 @@ UEFI代表统一可扩展固件接口。它是传统BIOS（基本输入/输出�
 
 它代表基本输入输出系统。它是一种固件接口，充当硬件组件和PC设备的运行机器之间的第一层软件。BIOS负责在启动过程中执行重要任务，并为操作系统和安装的软件程序提供简单的输入/输出服务。
 
-![img](https://media.geeksforgeeks.org/wp-content/uploads/20240209160527/BIOS.jpg)
+![img](./image/BIOS.jpg)
 
 ### 什么使BIOS过时？
 

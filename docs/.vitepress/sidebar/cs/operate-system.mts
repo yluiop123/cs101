@@ -87,6 +87,101 @@ export function sidebarOperateSystem(): DefaultTheme.SidebarItem[] {
             link: 'privileged-and-non-privileged-instructions-in-operating-system',
           }
         ]
+      },
+      {
+        base: '/base/cs/operating-systems/cpuscheduling/',
+        text: 'CPU调度',
+        collapsed: true,
+        items: [
+          {
+            text: '进程管理简介',
+            link: 'introduction-of-process-management',
+          },
+          {
+            text: '操作系统中的进程状态',
+            link: 'states-of-a-process-in-operating-systems',
+          },
+          {
+            text: '进程表和进程控制块（PCB）',
+            link: 'process-table-and-process-control-block-pcb',
+          },
+          {
+            text: '操作系统中的进程调度',
+            link: 'process-schedulers-in-operating-system',
+          },
+          {
+            text: '作系统中的CPU调度',
+            link: 'cpu-scheduling-in-operating-systems',
+          },
+          {
+            text: '抢占式和非抢占式调度',
+            link: 'preemptive-and-non-preemptive-scheduling',
+          },
+          {
+            text: '度量上下文切换所花费的时间',
+            link: 'measure-time-spent-context-switch',
+          },
+          {
+            text: '调度器和分派器之间的区别',
+            link: 'difference-between-dispatcher-and-scheduler',
+          },
+          {
+            text: 'FCFS 1',
+            link: 'program-for-fcfs-cpu-scheduling-set-1',
+          },
+          {
+            text: 'FCFS 2',
+            link: 'program-for-fcfs-cpu-scheduling-set-2-processes-with-different-arrival-times',
+          },
+          {
+            text: '操作系统中的车队效应',
+            link: 'convoy-effect-operating-systems',
+          },
+          {
+            text: 'Belady异常',
+            link: 'beladys-anomaly-in-page-replacement-algorithms',
+          },
+          {
+            text: '非抢占式最短作业优先',
+            link: 'program-for-shortest-job-first-or-sjf-cpu-scheduling-set-1-non-preemptive',
+          },
+          {
+            text: '最短剩余时间优先',
+            link: 'shortest-remaining-time-first-preemptive-sjf-scheduling-algorithm',
+          },
+          {
+            text: '最短作业优先',
+            link: 'shortest-job-first-cpu-scheduling-with-predicted-burst-time',
+          },
+          {
+            text: '最长剩余时间优先 (LRTF) CPU 调度程序',
+            link: 'longest-remaining-time-first-lrtf-cpu-scheduling-program',
+          },
+          {
+            text: '最长剩余时间优先',
+            link: 'longest-remaining-time-first-lrtf-cpu-scheduling-algorithm',
+          },
+          {
+            text: '111',
+            link: 'qqq',
+          },
+          {
+            text: '111',
+            link: 'qqq',
+          },
+          {
+            text: '111',
+            link: 'qqq',
+          },
+          {
+            text: '111',
+            link: 'qqq',
+          },
+          {
+            text: '111',
+            link: 'qqq',
+          }
+        ]
       }
     ]
   }
