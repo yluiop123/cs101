@@ -20,7 +20,7 @@ P4      4 毫秒      8 毫秒
 
 甘特图如下所示，
 
-![img](https://media.geeksforgeeks.org/wp-content/uploads/GANT.png)
+![img](./image/GANT.png)
 
 由于完成时间 (CT) 可以通过甘特图直接确定，并且
 

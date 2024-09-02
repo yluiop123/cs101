@@ -162,12 +162,12 @@ export function sidebarOperateSystem(): DefaultTheme.SidebarItem[] {
             link: 'longest-remaining-time-first-lrtf-cpu-scheduling-algorithm',
           },
           {
-            text: '111',
-            link: 'qqq',
+            text: '循环轮转调度算法',
+            link: 'program-for-round-robin-scheduling-for-the-same-arrival-time',
           },
           {
-            text: '111',
-            link: 'qqq',
+            text: '自私的循环轮转',
+            link: 'selfish-round-robin-cpu-scheduling',
           },
           {
             text: '111',
