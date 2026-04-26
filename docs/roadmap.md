@@ -8,32 +8,62 @@ const routes = reactive([
     {
     title:'JAVA技术路线',
     items:[
-      {title:'JAVA',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'Springboot',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'SpringCloud',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'SpringCloudAlibaba',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'Lombok',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'Guava',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'Apache-Common',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'Maven',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'Gradle',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'文档处理技术',subtitle:"AAAAAA",herf:"./route/java/java"},
-      {title:'lombok',subtitle:"AAAAAA",herf:"./route/java/java"}
+      {title:'JAVA',herf:"./route/java/java"},
+      {title:'Springboot',herf:"./route/java/java"},
+      {title:'SpringCloud',herf:"./route/java/java"},
+      {title:'SpringCloudAlibaba',herf:"./route/java/java"},
+      {title:'Lombok',herf:"./route/java/java"},
+      {title:'Guava',herf:"./route/java/java"},
+      {title:'Apache-Common',herf:"./route/java/java"},
+      {title:'Maven',herf:"./route/java/java"},
+      {title:'Gradle',herf:"./route/java/java"},
+      {title:'lombok',herf:"./route/java/java"},
+      {title:'POI',herf:"./route/java/java"},
+    ]
+  },{
+    title:'Python技术路线',
+    items:[
+      {title:'Python'},
+      {title:'FastAPI'},
+      {title:'NumPy'},
+      {title:'Pandas'},
+      {title:'SciPy'},
+      {title:'Polars'},
+      {title:'LangChain'},
+      {title:'Matplotlib'},
+      {title:'Playwright'},
+      {title:'Scrapy'},
+      {title:'Netmiko'},
+    ]
+  },{
+    title:'GO技术路线',
+    items:[
+      {title:'GO'},
+      {title:'Gin'},
+      {title:'GORM'},
+      {title:'go-redis'},
+      {title:'SciPy'},
+      {title:'Polars'},
+      {title:'LangChain'},
+      {title:'Matplotlib'},
+      {title:'Playwright'},
+      {title:'Scrapy'},
+      {title:'Netmiko'},
     ]
   },{
     title:'前端技术路线',
     items:[
-      {title:'Html',subtitle:"AAAAAA"},
-      {title:'Css',subtitle:"AAAAAA"},
-      {title:'Javascript',subtitle:"AAAAAA"},
-      {title:'Vue',subtitle:"AAAAAA"},
-      {title:'React',subtitle:"AAAAAA"},
-      {title:'Angular',subtitle:"AAAAAA"},
-      {title:'Webpack',subtitle:"AAAAAA"},
-      {title:'Angular',subtitle:"AAAAAA"},
-      {title:'Angular',subtitle:"AAAAAA"},
-      {title:'Angular',subtitle:"AAAAAA"},
-      {title:'Angular',subtitle:"AAAAAA"},
+      {title:'Html'},
+      {title:'Css'},
+      {title:'Javascript'},
+      {title:'Vue'},
+      {title:'React'},
+      {title:'Angular'},
+      {title:'Vite'},
+      {title:'Nest'},
+      {title:'Next'},
+      {title:'Nuxt'},
+      {title:'Angular'},
     ]
   }])
 
@@ -72,7 +102,6 @@ function goHerf(herf) {
           class="mx-auto text-center"
           rel="noopener"
           :color="colorTheme.subColor"
-          :subtitle="item.subtitle"
           :title="item.title"
           @click="goHerf(item.herf)"
         >
