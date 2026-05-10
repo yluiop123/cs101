@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'CS101',
+  base:'/cs101/',
   description: '全面的技术学习路径汇总 —— 计算机科学 / 技术栈 / 应用领域',
   lang: 'zh-CN',
   head: [
