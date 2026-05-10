@@ -1,5 +1,18 @@
+import { readFileSync } from 'fs'
 import vuetify from 'vite-plugin-vuetify'
 import { defineConfig } from 'vitepress'
+
+function extractTitles(md_src: string): { pageName: string; titles: string[] } {
+  const titles: string[] = []
+  const regex = /(?:title|name):\s*'([^']+)'/g
+  let match
+  while ((match = regex.exec(md_src)) !== null) {
+    const text = match[1].replace(/\*\*/g, '').trim()
+    if (text && text.length > 1) titles.push(text)
+  }
+  const nameMatch = md_src.match(/name:\s*'([^']+)'/)
+  return { pageName: nameMatch ? nameMatch[1] : '', titles }
+}
 
 export default defineConfig({
   title: 'CS101',
@@ -107,6 +120,33 @@ export default defineConfig({
           ],
         },
       ],
+    },
+    search: {
+      provider: 'local',
+      options: {
+        miniSearch: {
+          _splitIntoSections(file: string) {
+            const src = readFileSync(file, 'utf-8')
+            const { pageName, titles } = extractTitles(src)
+            if (!titles.length) return undefined
+            return [{ anchor: '', titles: pageName ? [pageName] : ['CS101'], text: titles.join(' ') }]
+          },
+        },
+        translations: {
+          button: {
+            buttonText: '搜索',
+            buttonAriaLabel: '搜索文档',
+          },
+          modal: {
+            noResultsText: '未找到相关结果',
+            resetButtonTitle: '清除搜索条件',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+            },
+          },
+        },
+      },
     },
     socialLinks: [],
     footer: {

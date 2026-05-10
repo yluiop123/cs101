@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import RoadmapDiagram from './RoadmapDiagram.vue'
 
 interface ResourceItem { title: string; url: string; icon?: string }
@@ -35,22 +35,29 @@ function openItem(item: Item) {
 function closeDrawer() {
   drawer.value = false
 }
+
+watch(viewMode, () => {
+  closeDrawer()
+})
 </script>
 
 <template>
   <div class="pa-2 pa-md-4">
     <p class="text-body-1 text-grey-darken-1 mb-4">{{ data.description }}</p>
 
-    <div class="d-flex align-center ga-2 mb-6">
+    <div class="d-flex align-center mb-6">
       <v-btn-toggle
         v-model="viewMode"
         color="primary"
         density="compact"
         variant="outlined"
         mandatory
+        rounded="xl"
+        class="view-toggle"
+        divided
       >
-        <v-btn value="document" prepend-icon="mdi-file-document-outline">文档视图</v-btn>
-        <v-btn value="roadmap" prepend-icon="mdi-graph-outline">路线图</v-btn>
+        <v-btn value="document" prepend-icon="mdi-file-document-outline" class="toggle-btn" size="small">文档视图</v-btn>
+        <v-btn value="roadmap" prepend-icon="mdi-graph-outline" class="toggle-btn" size="small">路线图</v-btn>
       </v-btn-toggle>
     </div>
 
@@ -62,11 +69,11 @@ function closeDrawer() {
     </div>
 
     <!-- 文档内容 -->
-    <template v-if="viewMode === 'document'">
+    <div v-show="viewMode === 'document'">
     <div v-for="(section, si) in data.items" :key="si" class="mb-6">
-      <div class="d-flex align-center ga-2 mb-3">
+      <div class="d-flex ga-2 mb-3" style="align-items: baseline;">
         <h2 :id="'item-' + si" class="text-h4 font-weight-bold ma-0">{{ section.name }}</h2>
-        <v-chip v-if="section.subtitle" size="x-small" color="primary" variant="flat" class="font-weight-medium">
+        <v-chip v-if="section.subtitle" size="x-small" color="primary" variant="flat" class="font-weight-medium subtitle-chip">
           {{ section.subtitle }}
         </v-chip>
       </div>
@@ -92,7 +99,7 @@ function closeDrawer() {
         </v-card>
       </div>
     </div>
-    </template>
+    </div>
 
     <!-- ====== DRAWER SCRIM ====== -->
     <transition name="fade">
@@ -202,4 +209,23 @@ function closeDrawer() {
 .item-card:hover .item-arrow { opacity: 0.8; }
 .item-card--no-click { cursor: default !important; }
 .item-arrow { opacity: 0.4; transition: opacity 0.15s; }
+
+.view-toggle {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f8f9fa;
+}
+.view-toggle .toggle-btn {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  min-width: 100px;
+}
+.view-toggle .v-btn--active {
+  background: rgb(var(--v-theme-primary)) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+.view-toggle .v-btn--active .v-icon {
+  color: #fff !important;
+}
+
 </style>
