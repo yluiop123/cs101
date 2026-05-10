@@ -1,67 +1,116 @@
-import { defineConfig, type DefaultTheme } from 'vitepress'
-import { withMermaid } from "vitepress-plugin-mermaid";
-import {routeJava} from './sidebar/java/route-java.mjs'
-import {baseCs} from './sidebar/cs/base-cs.mjs'
-import {nav} from './nav.mjs'
-// https://vitepress.dev/reference/site-config
+import vuetify from 'vite-plugin-vuetify'
+import { defineConfig } from 'vitepress'
 
-export default withMermaid({
+export default defineConfig({
+  title: 'CS101',
+  description: '全面的技术学习路径汇总 —— 计算机科学 / 技术栈 / 应用领域',
+  lang: 'zh-CN',
+  head: [
+    ['link', { rel: 'icon', href: '/icon.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'apple-touch-icon', href: '/icon.svg' }],
+    ['style', {}, `.VPNavBar .logo { height: 40px; width: auto; }`],
+  ],
   vite: {
+    plugins: [vuetify({ autoImport: true })],
     ssr: {
       noExternal: ['vuetify'],
     },
   },
-  mermaid: {
-  
-  },
-  mermaidPlugin: {
-    class: "mermaid my-class",
-  },
-  base:'/cs101/',
-  title: "CS101",
-  description: "计算机知识教程",
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav:nav() ,
-    sidebar: {
-      '/route/java/': routeJava(),
-      '/base/cs/': baseCs()
-    },
-
-    socialLinks: [
-      { icon: 'github',
-        link: 'https://github.com/yluiop123/cs101' },
-      { icon: {svg:`<svg t="1725095528389" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4233" width="200" height="200"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#C71D23" p-id="4234"></path></svg>`}, 
-        link: 'https://github.com/yluiop123/cs101' },
+    logo: '/icon.svg',
+    nav: [
+      { text: '首页', link: '/' },
+      { text: '计算机科学', link: '/computer-science/' },
+      { text: '技术栈路线', link: '/tech-stack/' },
+      { text: '应用领域路线', link: '/domain/' },
     ],
-    docFooter: {
-      prev: '上一页',
-      next: '下一页'
+    sidebar: {
+      '/tech-stack/': [
+        {text: '概览', link: '/tech-stack/' },
+        {
+          text: '编程语言',
+          items: [
+            { text: 'Java', link: '/tech-stack/java' },
+            { text: 'Python', link: '/tech-stack/python' },
+            { text: 'JavaScript / TypeScript', link: '/tech-stack/javascript-typescript' },
+            { text: 'Go', link: '/tech-stack/go' },
+            { text: 'C / C++', link: '/tech-stack/c-cpp' },
+            { text: 'Rust', link: '/tech-stack/rust' },
+            { text: 'C#', link: '/tech-stack/c-sharp' },
+            { text: 'Kotlin / Swift / Dart', link: '/tech-stack/kotlin-swift-dart' },
+          ],
+        },
+        {
+          text: '数据库',
+          items: [
+            { text: 'SQL 与关系型数据库', link: '/tech-stack/sql-database' },
+            { text: 'MySQL', link: '/tech-stack/mysql' },
+            { text: 'PostgreSQL', link: '/tech-stack/postgresql' },
+            { text: 'Redis', link: '/tech-stack/redis' },
+            { text: 'MongoDB', link: '/tech-stack/mongodb' },
+            { text: 'Elasticsearch', link: '/tech-stack/elasticsearch' },
+          ],
+        },
+        {
+          text: '中间件',
+          items: [
+            { text: 'Kafka / 消息队列', link: '/tech-stack/kafka' },
+            { text: 'Nginx', link: '/tech-stack/nginx' },
+          ],
+        },
+        {
+          text: '运维与云',
+          items: [
+            { text: 'Docker', link: '/tech-stack/docker' },
+            { text: 'Kubernetes', link: '/tech-stack/kubernetes' },
+          ],
+        },
+      ],
+      '/domain/': [
+        { text: '概览', link: '/domain/' },
+        {
+          text: '应用领域路线',
+          items: [
+            { text: 'Web开发 / SaaS应用', link: '/domain/web-saas' },
+            { text: '大数据 / 数据工程', link: '/domain/big-data' },
+            { text: '人工智能 / 机器学习', link: '/domain/ai-ml' },
+            { text: '网络安全', link: '/domain/cybersecurity' },
+            { text: '移动开发', link: '/domain/mobile-dev' },
+            { text: 'DevOps / 云计算 / 运维', link: '/domain/devops-cloud' },
+            { text: 'GIS 技术路线', link: '/domain/gis' },
+            { text: '可视化技术路线', link: '/domain/visualization' },
+            { text: '游戏开发 / VR / AR', link: '/domain/game-vr-ar' },
+            { text: '嵌入式 / IoT', link: '/domain/embedded-iot' },
+            { text: '区块链 / Web3', link: '/domain/blockchain-web3' },
+            { text: '软件测试 / QA', link: '/domain/software-testing' },
+            { text: '金融科技 / 风控系统', link: '/domain/fintech' },
+          ],
+        },
+      ],
+      '/computer-science/': [
+        {
+          text: '计算机科学',
+          items: [
+            { text: '概览', link: '/computer-science/' },
+            { text: '数据结构与算法', link: '/computer-science/data-structures-algorithms' },
+            { text: '计算机网络', link: '/computer-science/computer-networks' },
+            { text: '操作系统', link: '/computer-science/operating-systems' },
+            { text: '数据库系统原理', link: '/computer-science/database-systems' },
+            { text: '计算机组成原理', link: '/computer-science/computer-organization' },
+            { text: '编译原理', link: '/computer-science/compilers' },
+            { text: '离散数学', link: '/computer-science/discrete-mathematics' },
+            { text: '软件工程', link: '/computer-science/software-engineering' },
+            { text: '人工智能导论', link: '/computer-science/artificial-intelligence' },
+            { text: '计算机图形学', link: '/computer-science/computer-graphics' },
+            { text: '密码学', link: '/computer-science/cryptography' },
+          ],
+        },
+      ],
     },
-
-    outline: {
-      label: '页面导航'
+    socialLinks: [],
+    footer: {
+      message: '基于 VitePress 构建 | 内容参考开源学习路径',
+      copyright: '仅供学习参考',
     },
-
-    lastUpdated: {
-      text: '最后更新于',
-      formatOptions: {
-        dateStyle: 'short',
-        timeStyle: 'medium'
-      }
-    },
-
-    langMenuLabel: '多语言',
-    returnToTopLabel: '回到顶部',
-    sidebarMenuLabel: '菜单',
-    darkModeSwitchLabel: '主题',
-    lightModeSwitchTitle: '切换到浅色模式',
-    darkModeSwitchTitle: '切换到深色模式',
-    search: {
-      provider: 'local'
-    }
-  }
+  },
 })
-
-
-
