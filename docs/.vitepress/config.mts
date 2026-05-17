@@ -71,8 +71,8 @@ export default defineConfig({
   description: '全面的技术学习路径汇总 —— 计算机科学 / 技术栈 / 应用领域',
   lang: 'zh-CN',
   head: [
-    ['link', { rel: 'icon', href: '/icon.svg', type: 'image/svg+xml' }],
-    ['link', { rel: 'apple-touch-icon', href: '/icon.svg' }],
+    ['link', { rel: 'icon', href: '/cs101/icon.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'apple-touch-icon', href: '/cs101/icon.svg' }],
     ['style', {}, `.VPNavBar .logo { height: 40px; width: auto; }
 a { text-decoration: none !important; }
 a:hover { text-decoration: none !important; }
