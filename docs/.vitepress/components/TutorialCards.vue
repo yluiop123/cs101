@@ -28,11 +28,11 @@ function openItem(item: { title: string; url: string; desc?: string; lang?: 'zh'
 <template>
   <section :id="id" class="tutorial-section">
     <!-- Section Header -->
-    <div class="section-header d-flex align-center ga-3 mb-4">
-      <div class="icon-circle d-flex align-center justify-center" :style="{ background: color + '18', color: color }">
+    <div class="section-header d-flex align-center ga-3 mb-3">
+      <div class="icon-circle d-flex align-center justify-center mt-2" :style="{ background: color + '18', color: color }">
         <v-icon :icon="icon" size="20" />
       </div>
-      <h2 class="text-h5 font-weight-bold ma-0 d-flex align-center" :style="{ color: color, lineHeight: '32px' }">{{ title }}</h2>
+      <h2 class="text-h5 font-weight-bold ma-0 d-flex align-center" :style="{ color: color, lineHeight: '32px',marginTop:'0px',border:'0px' }">{{ title }}</h2>
     </div>
 
     <!-- Card Grid -->
