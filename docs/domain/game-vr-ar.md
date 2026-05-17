@@ -12,7 +12,7 @@ const data = {
         {
           title: 'C# 语言（Unity 方向）',
           description: '面向对象、委托、协程、LINQ',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -33,7 +33,7 @@ const data = {
         {
           title: 'C++ 语言（Unreal 方向）',
           description: '指针、模板、STL、智能指针',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -54,7 +54,7 @@ const data = {
         {
           title: '3D 数学基础',
           description: '向量运算、矩阵变换、四元数、欧拉角',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -68,7 +68,7 @@ const data = {
         {
           title: '坐标系变换',
           description: '模型空间 / 世界空间 / 观察空间 / 裁剪空间',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -89,7 +89,7 @@ const data = {
         {
           title: 'Unreal Engine',
           description: '蓝图可视化脚本、Actor / Component、物理引擎、材质系统',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -110,7 +110,7 @@ const data = {
         {
           title: 'Godot 引擎',
           description: '场景树、GDScript、信号系统（轻量入门选项）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -124,7 +124,7 @@ const data = {
         {
           title: 'Cocos Creator',
           description: 'TypeScript/JavaScript 开发、组件化架构、2D 性能优异、原生打包（iOS/Android/小游戏）、Cocos 3D 支持',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -145,7 +145,7 @@ const data = {
         {
           title: '2D 游戏开发',
           description: '精灵动画、碰撞检测、Tilemap，Cocos Creator 2D 工作流（Spine/DragonBones 骨骼动画、物理碰撞）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -166,7 +166,7 @@ const data = {
         {
           title: '3D 游戏开发',
           description: '模型导入、光照、摄像机控制、NavMesh 导航，Cocos 3D（模型/光照/粒子）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -186,7 +186,7 @@ const data = {
         {
           title: '渲染管线',
           description: '固定管线 vs 可编程管线、顶点着色器、片段着色器',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -200,7 +200,7 @@ const data = {
         {
           title: '光照模型',
           description: 'Lambert / Phong / Blinn-Phong / PBR',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -218,7 +218,7 @@ const data = {
           title: 'ARKit（iOS）',
           description: '平面检测、图像追踪、人形遮挡',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -233,7 +233,7 @@ const data = {
           title: 'ARCore（Android）',
           description: '环境理解、光照估计、云锚点',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -248,7 +248,7 @@ const data = {
           title: 'OpenXR 标准',
           description: '跨平台 VR/AR 应用开发',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -264,7 +264,7 @@ const data = {
           title: '程序化生成',
           description: 'Perlin 噪声、地形生成、关卡自动生成',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -284,7 +284,7 @@ const data = {
           title: 'DCC 工具集成',
           description: 'Blender / Maya / Substance Painter 工作流',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",

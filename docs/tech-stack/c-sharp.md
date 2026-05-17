@@ -12,7 +12,7 @@ const data = {
         {
           title: 'C# 语法核心',
           description: '数据类型、运算符、流程控制、数组与字符串',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -33,7 +33,7 @@ const data = {
         {
           title: '面向对象编程',
           description: '类与对象、继承、多态、接口、抽象类',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -72,7 +72,7 @@ const data = {
         {
           title: '.NET 运行时',
           description: 'CLR、GC 垃圾回收、JIT 编译、程序集（Assembly）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -86,7 +86,7 @@ const data = {
         {
           title: 'ASP.NET Core Web API',
           description: '控制器、路由、中间件、依赖注入',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -127,7 +127,7 @@ const data = {
           title: 'Unity 引擎入门',
           description: '场景编辑、预制体、物理系统、协程',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -155,7 +155,7 @@ const data = {
           title: 'Godot 引擎',
           description: 'GDScript 对比 C#、场景树、信号系统',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -176,7 +176,7 @@ const data = {
           title: 'WPF 桌面应用',
           description: 'XAML、数据绑定、MVVM 模式、控件模板',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -203,7 +203,7 @@ const data = {
           title: '微服务架构',
           description: '.NET 微服务、gRPC、Ocelot 网关、Dapper ORM',
           optional: true,
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: ".NET 微服务架构指南", url: "https://docs.microsoft.com/en-us/dotnet/architecture/microservices/", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: ".NET 微服务架构指南", url: "https://docs.microsoft.com/en-us/dotnet/architecture/microservices/", icon: "mdi-file-document-outline" }] }]
         }
       ]
     },
@@ -213,27 +213,27 @@ const data = {
         {
           title: 'Microsoft Learn',
           description: 'C# 和 .NET 交互式教程',
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Microsoft Learn", url: "https://docs.microsoft.com/zh-cn/learn/", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Microsoft Learn", url: "https://docs.microsoft.com/zh-cn/learn/", icon: "mdi-file-document-outline" }] }]
         },
         {
           title: '.NET 官方文档',
           description: '完整的框架参考',
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: ".NET 官方文档", url: "https://docs.microsoft.com/en-us/dotnet/", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: ".NET 官方文档", url: "https://docs.microsoft.com/en-us/dotnet/", icon: "mdi-file-document-outline" }] }]
         },
         {
           title: 'Unity Learn',
           description: 'Unity 游戏开发教程',
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Unity Learn", url: "https://learn.unity.com/", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Unity Learn", url: "https://learn.unity.com/", icon: "mdi-file-document-outline" }] }]
         },
         {
           title: 'Brackeys',
           description: 'Unity 最受欢迎的教程频道',
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Brackeys", url: "https://www.youtube.com/@Brackeys", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Brackeys", url: "https://www.youtube.com/@Brackeys", icon: "mdi-file-document-outline" }] }]
         },
         {
           title: 'IAmTimCorey',
           description: 'C#/.NET 全栈开发教程',
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "IAmTimCorey", url: "https://www.youtube.com/@IAmTimCorey", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "IAmTimCorey", url: "https://www.youtube.com/@IAmTimCorey", icon: "mdi-file-document-outline" }] }]
         }
       ]
     }

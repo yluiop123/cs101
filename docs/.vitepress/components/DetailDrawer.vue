@@ -43,7 +43,7 @@ const drawerModel = computed({
               <p class="text-body-2 mb-0" style="color: rgba(var(--v-theme-on-surface), 0.7); line-height: 1.7;">{{ item.description }}</p>
             </div>
 
-            <ResourceLinkList v-if="item.groups?.length" :groups="item.groups" />
+            <ResourceLinkList v-if="item.resources?.length" :groups="item.resources" />
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ const drawerModel = computed({
   border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
   border-radius: 10px;
   padding: 16px 18px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 @media (max-width: 768px) {

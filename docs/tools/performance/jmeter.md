@@ -10,7 +10,7 @@ const data = {
         {
           title: 'JMeter 简介',
           description: 'Apache JMeter 是 Apache 基金会旗下的开源性能测试工具，采用纯 Java 开发。它最初专为 Web 应用压测而设计，现已扩展支持数据库（JDBC）、FTP、LDAP、SOAP/WebService、JMS、gRPC 等多种协议。JMeter 提供了可视化界面、丰富的报告生成器和分布式压测能力，是性能和可靠性测试的首选工具。',
-          groups: [
+          resources: [
             {
               name: '官方文档',
               icon: 'mdi-file-document-outline',
@@ -25,7 +25,7 @@ const data = {
         {
           title: '安装方式',
           description: 'JMeter 需要 Java 8+ 环境。从官网下载二进制包直接解压运行（bin/jmeter.bat 或 bin/jmeter.sh），或通过 Homebrew（brew install jmeter）安装。',
-          groups: [
+          resources: [
             {
               name: '下载',
               icon: 'mdi-download',
@@ -52,7 +52,7 @@ const data = {
         {
           title: '测试计划与线程组',
           description: '测试计划是 JMeter 的顶层容器，线程组用于模拟并发用户。可以设置线程数、Ramp-Up 时间和循环次数，精确控制施压模型。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -65,7 +65,7 @@ const data = {
         {
           title: '取样器（Samplers）',
           description: 'JMeter 提供 HTTP 请求、JDBC 请求、TCP 请求、SOAP/XML-RPC 等多种取样器，每种取样器可配置协议细节、参数化、超时等属性，是压测请求的执行单元。',
-          groups: [
+          resources: [
             {
               name: '参考文档',
               icon: 'mdi-file-document-outline',
@@ -78,7 +78,7 @@ const data = {
         {
           title: '监听器与报告',
           description: 'JMeter 提供丰富的监听器来收集和分析结果，包括聚合报告、图形结果、响应时间图、TPS 图等。还可以生成 HTML 格式的 Dashboard 报告。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -91,7 +91,7 @@ const data = {
         {
           title: '断言（Assertions）',
           description: '通过响应断言、JSON 断言、Duration 断言等机制验证请求返回结果是否符合预期，确保压测过程中的功能正确性。',
-          groups: [
+          resources: [
             {
               name: '文档',
               icon: 'mdi-file-document-outline',
@@ -104,7 +104,7 @@ const data = {
         {
           title: '分布式压测',
           description: 'JMeter 支持 Master-Slave 分布式架构，可协调多台机器同时施压，突破单机性能瓶颈，支持大规模并发场景。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -124,7 +124,7 @@ const data = {
           title: '参数化与 CSV 数据驱动',
           description: '使用 CSV Data Set Config 从外部文件读取测试数据，实现数据驱动的压测。支持随机读取、顺序读取和共享模式。',
           optional: true,
-          groups: [
+          resources: [
             {
               name: '文档',
               icon: 'mdi-file-document-outline',
@@ -138,7 +138,7 @@ const data = {
           title: 'JMeter 插件生态',
           description: 'JMeter Plugins 社区提供了大量扩展插件，包括 3D 图表、事务控制器、Stepping Thread Group、PerfMon 监控等。推荐安装 Plugins Manager 统一管理。',
           optional: true,
-          groups: [
+          resources: [
             {
               name: '资源',
               icon: 'mdi-puzzle',

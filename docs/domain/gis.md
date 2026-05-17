@@ -12,7 +12,7 @@ const data = {
         {
           title: 'GIS 基本概念',
           description: '坐标系（WGS84 / CGCS2000）、地图投影（墨卡托 / 高斯-克吕格）、比例尺与分辨率',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -33,7 +33,7 @@ const data = {
         {
           title: '空间数据模型',
           description: '矢量数据（点/线/面）与栅格数据（DEM / 遥感影像）、矢量瓦片',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -46,7 +46,7 @@ const data = {
         {
           title: '常见数据格式',
           description: 'GeoJSON / Shapefile / GeoTIFF / MVT / GPKG / KML / GML',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -61,7 +61,7 @@ const data = {
         {
           title: '地图服务协议',
           description: 'WMS / WMTS / WFS / WCS / TMS / OGC API Features',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -76,7 +76,7 @@ const data = {
           title: '坐标系统与投影转换',
           description: 'Proj.4 / EPSG 注册库、动态投影、坐标系转换参数',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -96,7 +96,7 @@ const data = {
         {
           title: 'Leaflet',
           description: '轻量级地图库入门，支持瓦片地图、标记、弹窗、GeoJSON 加载、插件体系',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -117,7 +117,7 @@ const data = {
         {
           title: 'OpenLayers',
           description: '功能全面的地图库，支持多源数据加载、地图控件、空间查询、矢量编辑',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -131,7 +131,7 @@ const data = {
         {
           title: 'Mapbox GL JS',
           description: '矢量瓦片渲染引擎，Mapbox Studio 样式定制，表达式语法',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -145,7 +145,7 @@ const data = {
         {
           title: '地图交互与可视化',
           description: '缩放平移、点击查询、绘制编辑、热力图、聚类图、轨迹动画',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -160,7 +160,7 @@ const data = {
           title: '前端地图框架设计',
           description: 'React / Vue 地图组件封装、状态管理、分层架构',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -175,7 +175,7 @@ const data = {
           title: 'Cesium 三维地球',
           description: '三维场景、相机控制、影像与地形图层、3D Tiles 加载',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -195,7 +195,7 @@ const data = {
         {
           title: 'PostgreSQL + PostGIS',
           description: '空间数据类型、空间索引（GIST）、空间查询函数（ST_Within / ST_Buffer / ST_Intersects）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -209,7 +209,7 @@ const data = {
         {
           title: 'GeoServer',
           description: '数据发布、样式配置（SLD）、图层组、WMS/WFS/WMTS 服务',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -223,7 +223,7 @@ const data = {
         {
           title: '服务端 GIS 开发',
           description: 'Python（GeoDjango / Shapely / Fiona）、Node.js（Turf.js / Terraformer）、Java（GeoTools）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -239,7 +239,7 @@ const data = {
           title: 'MongoDB 地理空间查询',
           description: 'GeoJSON 存储、2dsphere 索引、地理空间聚合管道',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -264,7 +264,7 @@ const data = {
           title: 'Android 地图 SDK',
           description: 'Mapbox Android SDK / ArcGIS Runtime SDK for Android / 高德地图 SDK',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -279,7 +279,7 @@ const data = {
           title: 'iOS 地图开发',
           description: 'MapKit / ArcGIS Runtime SDK for iOS / Mapbox iOS SDK',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -294,7 +294,7 @@ const data = {
           title: '跨平台地图方案',
           description: 'Flutter（flutter_map / Mapbox GL）、React Native（react-native-maps）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -309,7 +309,7 @@ const data = {
           title: '离线地图与室内定位',
           description: '离线瓦片缓存、MBTiles 格式、室内定位技术（WiFi / 蓝牙 / UWB）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -323,7 +323,7 @@ const data = {
           title: 'GPS / GNSS 数据采集',
           description: 'NMEA 协议解析、RTK 高精度定位、移动端轨迹记录',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -344,7 +344,7 @@ const data = {
           title: 'Qt / C++ 桌面 GIS 开发',
           description: 'Qt Widgets / QML 界面、Qt 地图模块、OpenGL 集成、自定义地图控件、QGIS 源码架构分析',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -360,7 +360,7 @@ const data = {
           title: '.NET / WPF 桌面 GIS',
           description: 'ArcGIS Runtime SDK for .NET / WPF MapControl、MVVM 架构、矢量与栅格渲染、桌面制图工具开发',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -375,7 +375,7 @@ const data = {
           title: 'Java 桌面 GIS',
           description: 'GeoTools 桌面开发、JMapFrame、JavaFX 地图集成、Swing 地图控件、uDig 框架',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -390,7 +390,7 @@ const data = {
           title: 'Electron 跨平台桌面地图',
           description: 'Web 技术构建桌面 GIS、Electron + Leaflet/Mapbox、Node.js 本地文件读写、系统托盘与原生菜单',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -405,7 +405,7 @@ const data = {
           title: '桌面 GIS 架构设计',
           description: '插件化架构（Plugin）、图层管理、多线程渲染、本地空间数据引擎、SQLite/SpatiaLite 集成',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -431,7 +431,7 @@ const data = {
           title: 'Cesium 深入进阶',
           description: '3D Tiles 规范与处理、CZML 动态实体、时间序列可视化、地形编辑',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -446,7 +446,7 @@ const data = {
           title: 'Three.js GIS 集成',
           description: '自定义 3D 场景、地球渲染、BIM 模型展示、建筑白模',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -461,7 +461,7 @@ const data = {
           title: 'WebGL / WebGPU 渲染',
           description: '高性能地图渲染原理、着色器编程、GPU 加速',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -475,7 +475,7 @@ const data = {
           title: '空间分析与 GIS 算法',
           description: '缓冲区分析、叠加分析、路径分析、泰森多边形、空间插值',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -490,7 +490,7 @@ const data = {
           title: '智慧城市与 IoT 融合',
           description: '倾斜摄影、BIM+GIS、IoT 传感器数据可视化、数字孪生',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",

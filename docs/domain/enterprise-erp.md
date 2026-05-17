@@ -12,7 +12,7 @@ const data = {
         {
           title: 'Java 核心基础',
           description: '面向对象、集合框架、IO、多线程、异常处理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: 'SQL 与关系数据库',
           description: 'MySQL 增删改查、多表 JOIN、子查询、事务、索引',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: 'JDBC / 连接池',
           description: '数据库连接管理、HikariCP / Druid 配置优化',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -71,7 +71,7 @@ const data = {
           title: 'Maven / Gradle',
           description: '项目构建、依赖管理、多模块配置',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -99,7 +99,7 @@ const data = {
         {
           title: 'Spring Boot 核心',
           description: 'IoC / DI、AOP、自动配置、YAML 配置',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -121,7 +121,7 @@ const data = {
         {
           title: 'MyBatis / MyBatis-Plus',
           description: 'ORM 映射、动态 SQL、分页、代码生成器',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -142,7 +142,7 @@ const data = {
         {
           title: 'Spring MVC',
           description: 'REST API、拦截器、统一异常处理、参数校验',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -163,7 +163,7 @@ const data = {
         {
           title: '业务建模',
           description: '实体关系设计（ER 图）、业务分层（Controller / Service / DAO）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -178,7 +178,7 @@ const data = {
           title: 'Spring Data JPA / Hibernate',
           description: 'JPA 规范、级联、JPQL 查询',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -198,7 +198,7 @@ const data = {
         {
           title: 'RBAC 权限模型',
           description: '用户 / 角色 / 权限表设计、Spring Security / Shiro',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -219,7 +219,7 @@ const data = {
         {
           title: '数据权限',
           description: '行级权限过滤、部门数据隔离、数据脱敏',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -233,7 +233,7 @@ const data = {
         {
           title: '操作审计',
           description: '操作日志记录、变更追踪、AOP 实现日志切面',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -255,7 +255,7 @@ const data = {
           title: '动态表单',
           description: '自定义表单设计器、表单与流程绑定',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -275,7 +275,7 @@ const data = {
         {
           title: 'Vue 或 React 企业级开发',
           description: '配合 Ant Design / Element Plus 搭建管理后台',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -297,7 +297,7 @@ const data = {
         {
           title: '动态报表',
           description: 'Apache POI / EasyExcel 导入导出、JasperReports / 帆软',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -318,7 +318,7 @@ const data = {
         {
           title: '数据可视化',
           description: 'ECharts / AntV 图表库、大屏展示',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -341,7 +341,7 @@ const data = {
           title: '低代码平台',
           description: '表单设计器、流程配置、页面拖拽搭建',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -361,7 +361,7 @@ const data = {
         {
           title: 'Spring Cloud 微服务',
           description: 'Nacos 注册中心 / 配置中心、Gateway 网关',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -383,7 +383,7 @@ const data = {
         {
           title: 'Feign / OpenFeign',
           description: '服务间远程调用、负载均衡',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -397,7 +397,7 @@ const data = {
         {
           title: '分布式事务',
           description: 'Seata、TCC 模式、可靠消息最终一致性',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -418,7 +418,7 @@ const data = {
         {
           title: '接口幂等性与防重',
           description: '幂等表、Redis 分布式锁、Token 机制',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -433,7 +433,7 @@ const data = {
           title: 'Sentinel 熔断限流',
           description: '流量控制、熔断降级、系统自适应保护',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -454,7 +454,7 @@ const data = {
           title: 'SOA / ESB 集成',
           description: '企业服务总线、异构系统对接（SAP / 金蝶 / 用友）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -469,7 +469,7 @@ const data = {
           title: '定时任务调度',
           description: 'XXL-JOB / Quartz 分布式调度',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -484,7 +484,7 @@ const data = {
           title: '缓存架构',
           description: 'Redis 多级缓存、缓存穿透 / 击穿 / 雪崩解决方案',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -506,7 +506,7 @@ const data = {
           title: '高可用设计',
           description: '数据库主从、读写分离、多活架构、备份恢复',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -521,7 +521,7 @@ const data = {
           title: '容器化部署',
           description: 'Docker + K8s 部署微服务、Helm Charts',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",

@@ -5,5 +5,5 @@ export interface DrawerItem {
   title: string
   description?: string
   optional?: boolean
-  groups?: ResourceGroup[]
+  resources?: ResourceGroup[]
 }

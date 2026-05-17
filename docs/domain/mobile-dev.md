@@ -12,7 +12,7 @@ const data = {
         {
           title: 'Java 核心（Android 方向）',
           description: '面向对象、集合、IO、多线程、泛型、反射',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: 'Kotlin 核心（Android 方向）',
           description: '协程、扩展函数、数据类、密封类、空安全',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -55,7 +55,7 @@ const data = {
         {
           title: 'Swift 核心（iOS 方向）',
           description: '结构体与类、枚举、闭包、可选值、协议',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -77,7 +77,7 @@ const data = {
         {
           title: 'Dart 核心（Flutter 方向）',
           description: '异步编程、Stream、Mixin、泛型',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -100,7 +100,7 @@ const data = {
           title: 'JavaScript / TypeScript（React Native 方向）',
           description: 'ES6+、TS 类型系统',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -128,7 +128,7 @@ const data = {
         {
           title: 'Android Studio 与项目结构',
           description: 'Gradle 构建、Manifest 配置、资源管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -148,7 +148,7 @@ const data = {
         {
           title: 'Activity / Fragment 生命周期',
           description: '页面导航、Bundle 传值、状态保存',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -169,7 +169,7 @@ const data = {
         {
           title: '布局与 UI 控件',
           description: 'XML 布局、ConstraintLayout、RecyclerView、ViewPager',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -190,7 +190,7 @@ const data = {
         {
           title: 'Jetpack Compose',
           description: '声明式 UI、状态管理、Modifier、Composable 函数',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -211,7 +211,7 @@ const data = {
         {
           title: '网络请求',
           description: 'Retrofit / OkHttp、协程网络调用、JSON 解析（Gson / Moshi）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -233,7 +233,7 @@ const data = {
           title: 'Service / BroadcastReceiver',
           description: '后台任务、系统广播监听',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -246,7 +246,7 @@ const data = {
         {
           title: 'Xcode 与项目结构',
           description: 'Storyboard / XIB、Swift Package Manager',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -267,7 +267,7 @@ const data = {
         {
           title: 'UIKit 核心',
           description: 'UIView / UIViewController、Auto Layout、UITableView / UICollectionView',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -287,7 +287,7 @@ const data = {
         {
           title: 'SwiftUI',
           description: '声明式 UI、@State / @Binding / @ObservableObject',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -309,7 +309,7 @@ const data = {
         {
           title: '网络请求',
           description: 'URLSession、Codable 协议、Combine 框架',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -331,7 +331,7 @@ const data = {
           title: 'Core Data / SwiftData',
           description: '本地持久化存储',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -345,7 +345,7 @@ const data = {
         {
           title: 'Flutter 环境与项目结构',
           description: 'Widget 树、Material Design、pubspec 管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -367,7 +367,7 @@ const data = {
         {
           title: 'Flutter UI',
           description: 'StatelessWidget / StatefulWidget、布局组件、导航',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -388,7 +388,7 @@ const data = {
         {
           title: '状态管理',
           description: 'Provider / Riverpod / Bloc 模式',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -409,7 +409,7 @@ const data = {
         {
           title: '网络与存储',
           description: 'http / dio 请求、JSON 序列化、SharedPreferences / SQLite',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -431,7 +431,7 @@ const data = {
           title: 'Platform Channel',
           description: '原生平台交互调用',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -450,7 +450,7 @@ const data = {
         {
           title: 'MVVM 架构',
           description: 'ViewModel + LiveData / StateFlow（Android）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -471,7 +471,7 @@ const data = {
         {
           title: 'MVI 架构',
           description: 'Intent → State → Model 单向数据流',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -485,7 +485,7 @@ const data = {
         {
           title: 'Clean Architecture',
           description: '分层抽象（Data / Domain / Presentation）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -506,7 +506,7 @@ const data = {
         {
           title: '依赖注入',
           description: 'Hilt / Dagger（Android）、Swinject（iOS）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -528,7 +528,7 @@ const data = {
           title: '组件化与模块化',
           description: '多模块拆分、ARouter 路由、SPM / CocoaPods',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -548,7 +548,7 @@ const data = {
         {
           title: 'Room（Android）',
           description: 'DAO、Entity、Migration、Flow 响应式查询',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -568,7 +568,7 @@ const data = {
         {
           title: 'CoreData / SwiftData（iOS）',
           description: '托管对象、持久化容器',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -582,7 +582,7 @@ const data = {
         {
           title: 'SQLite（Flutter）',
           description: 'sqflite 插件、Drift ORM',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -596,7 +596,7 @@ const data = {
         {
           title: 'SharedPreferences / NSUserDefaults',
           description: '轻量级键值存储',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -611,7 +611,7 @@ const data = {
           title: 'MMKV',
           description: '腾讯开源高性能 KV 存储组件',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -630,7 +630,7 @@ const data = {
         {
           title: '内存优化',
           description: '内存泄漏检测（LeakCanary）、Profiler 分析',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -651,7 +651,7 @@ const data = {
         {
           title: '启动速度优化',
           description: '懒加载、启动任务链路优化、App Startup',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -665,7 +665,7 @@ const data = {
         {
           title: '包体积优化',
           description: '资源混淆（AndResGuard）、代码混淆（ProGuard / R8）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -679,7 +679,7 @@ const data = {
         {
           title: '列表性能',
           description: 'RecyclerView 复用优化、DiffUtil、图片缓存（Glide / Coil）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -701,7 +701,7 @@ const data = {
           title: 'ANR 分析与治理',
           description: '主线程阻塞检测、Systrace 分析',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -721,7 +721,7 @@ const data = {
         {
           title: '单元测试',
           description: 'JUnit / Mockito（Android）、XCTest（iOS）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -742,7 +742,7 @@ const data = {
         {
           title: 'UI 测试',
           description: 'Espresso / Compose Test（Android）、XCUITest（iOS）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -756,7 +756,7 @@ const data = {
         {
           title: '自动化测试',
           description: 'Appium 跨平台自动化脚本',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -777,7 +777,7 @@ const data = {
           title: 'CI/CD 移动端',
           description: 'GitHub Actions / GitLab CI 自动打包、Firebase Test Lab',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -797,7 +797,7 @@ const data = {
         {
           title: '应用打包签名',
           description: 'APK / AAB 打包、iOS Archive、Provisioning Profile',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -818,7 +818,7 @@ const data = {
         {
           title: '应用商店上架',
           description: 'Google Play Console / App Store Connect 提交流程',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -832,7 +832,7 @@ const data = {
         {
           title: '版本管理与灰度发布',
           description: '应用内更新、Feature Flag',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -846,7 +846,7 @@ const data = {
         {
           title: '崩溃监控',
           description: 'Firebase Crashlytics / Sentry 集成',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -868,7 +868,7 @@ const data = {
           title: '埋点与用户分析',
           description: '事件追踪、漏斗分析、A/B 测试',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -889,7 +889,7 @@ const data = {
           title: '跨平台深入',
           description: 'Flutter 渲染引擎（Skia / Impeller）、React Native TurboModules',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -904,7 +904,7 @@ const data = {
           title: '原生底层开发',
           description: 'NDK / JNI（Android）、Metal / ARKit（iOS）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -919,7 +919,7 @@ const data = {
           title: '移动端安全',
           description: '代码加固（360加固）、反编译防护、HTTPS 证书绑定',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -934,7 +934,7 @@ const data = {
           title: '大前端融合',
           description: 'Kotlin Multiplatform（KMP）、WebAssembly 移动应用',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",

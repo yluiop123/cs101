@@ -12,7 +12,7 @@ const data = {
         {
           title: '可视化基本概念',
           description: '数据到图形的映射流程、可视化的目标（探索/分析/展示）、数据类型与图表选择',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -33,7 +33,7 @@ const data = {
         {
           title: '视觉感知与认知理论',
           description: 'Gestalt 完形原则（接近/相似/闭合/连续）、前注意加工、视觉认知负荷、格式塔理论在图表设计中的应用',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -47,7 +47,7 @@ const data = {
         {
           title: '视觉编码与视觉通道',
           description: '位置/长度/角度/面积/颜色/形状等通道的排序与表达力、通道有效性（Mackinlay 准则）、定量 vs 定性的编码',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -61,7 +61,7 @@ const data = {
         {
           title: '图形语法（Grammar of Graphics）',
           description: 'Wilkinson 图形语法理论、数据→几何→标度→坐标系→分面、ggplot2 / Vega-Lite 实现',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -77,7 +77,7 @@ const data = {
           title: '交互与探索理论',
           description: 'Shneiderman  mantra（Overview first → Zoom → Filter → Details-on-demand）、Brushing & Linking、多视图联动',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -91,7 +91,7 @@ const data = {
           title: '色彩理论与配色',
           description: '颜色空间（RGB / HSL / Lab / HCL）、色盲友好设计（ColorBrewer）、顺序/发散/定性配色方案',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -106,7 +106,7 @@ const data = {
           title: '图形学数学基础',
           description: '向量与矩阵运算、齐次坐标、变换矩阵（平移/旋转/缩放/投影）、四元数与旋转插值、坐标系与空间变换',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -122,7 +122,7 @@ const data = {
           title: '渲染管线原理',
           description: '固定管线 vs 可编程管线、顶点处理→光栅化→片元处理→输出合并、GPU 并行架构与 SIMT、渲染流水线优化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -138,7 +138,7 @@ const data = {
           title: '坐标系统与投影变换',
           description: '局部→世界→观察→裁剪→屏幕空间、正交投影 vs 透视投影、视口变换、深度缓冲原理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -158,7 +158,7 @@ const data = {
         {
           title: 'ECharts',
           description: '折线图 / 柱状图 / 散点图 / 饼图 / 雷达图、数据集声明、事件交互、响应式适配',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -179,7 +179,7 @@ const data = {
         {
           title: 'AntV 系列',
           description: 'G2 统计图表、G6 图可视化、F2 移动端、L7 地理可视化、LiteInsight 自动洞察',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -194,7 +194,7 @@ const data = {
         {
           title: 'D3.js 数据驱动文档',
           description: '选择集、数据绑定（data/enter/exit/update）、比例尺（scale）、力导向图、过渡动画',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -209,7 +209,7 @@ const data = {
           title: 'Canvas / SVG 高级绘图',
           description: 'Canvas 像素操作与硬件加速、SVG 动画与交互、Web Workers 后台渲染',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -224,7 +224,7 @@ const data = {
           title: 'Vega-Lite / Vega',
           description: '声明式可视化语法、Vega-Lite 高层规范、Vega 低层渲染、交互式多视图',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -245,7 +245,7 @@ const data = {
           title: 'Qt Charts / QCustomPlot（C++）',
           description: 'Qt Charts 折线/柱状/饼图/极坐标图、QCustomPlot 高性能实时曲线、OpenGL 加速、Qt Quick 3D 可视化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -261,7 +261,7 @@ const data = {
           title: '.NET WPF 可视化（C#）',
           description: 'LiveCharts2 实时图表、ScottPlot 科学绘图、WPF 数据绑定与 MVVM、OxyPlot 线图与统计图、Visifire/AnyChart',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -277,7 +277,7 @@ const data = {
           title: 'Java 桌面可视化',
           description: 'JFreeChart 图表库、JavaFX Charts 组件、FXGraphics2D + D3.js 集成、Orson Charts 3D',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -292,7 +292,7 @@ const data = {
           title: 'Python 桌面可视化',
           description: 'PyQtGraph 高性能实时绘图、PyQtChart（Qt Charts Python 绑定）、Matplotlib 嵌入 PyQt/PySide、VisPy GPU 加速',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -308,7 +308,7 @@ const data = {
           title: 'VTK 可视化工具包',
           description: 'VTK 管线架构（Source → Filter → Mapper → Actor → Renderer）、体渲染、等值面提取、交互式裁剪、VTK + Qt 集成',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -324,7 +324,7 @@ const data = {
           title: 'ParaView 与科学可视化平台',
           description: 'ParaView 大规模并行可视化、Python 脚本（PVPython）、Cinema 数据库、In-Situ 可视化（Catalyst）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -344,7 +344,7 @@ const data = {
         {
           title: 'Matplotlib',
           description: 'Figure/Axes 架构、折线图/散点图/柱状图/直方图、子图布局、样式定制、中文支持',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -365,7 +365,7 @@ const data = {
         {
           title: 'Seaborn',
           description: '统计图表：箱线图、小提琴图、热力图、配对图、分类散点图、回归图',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -379,7 +379,7 @@ const data = {
         {
           title: 'Plotly Python',
           description: '交互式图表、Dash 仪表盘框架、3D 可视化、金融图表、地理图表',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -394,7 +394,7 @@ const data = {
           title: 'Tableau / Power BI',
           description: '拖拽式仪表盘、数据连接、计算字段、LOD 表达式、故事叙事、参数控制',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -409,7 +409,7 @@ const data = {
           title: 'ggplot2 / R 可视化',
           description: '图形语法实现、分面（facet）、主题系统、统计变换、与 Python plotnine 对比',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -424,7 +424,7 @@ const data = {
           title: '地理数据可视化',
           description: 'GeoPandas 绘图、Choropleth 分级统计图、散点地图、连接地图、kepler.gl 地理分析',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -439,7 +439,7 @@ const data = {
           title: 'Bokeh / Altair',
           description: '声明式可视化、交互式控件、流式数据更新、服务端集成',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -460,7 +460,7 @@ const data = {
           title: 'OpenGL 基础（桌面端）',
           description: '现代 OpenGL（3.3+）核心模式、VAO/VBO/EBO 缓冲对象、着色器（Shader）与着色器程序、图元装配与光栅化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -476,7 +476,7 @@ const data = {
           title: 'GLSL 着色器编程',
           description: '顶点着色器（Vertex Shader）、片元着色器（Fragment Shader）、uniform/attribute/varying 传递、GLSL 内置变量与函数',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -491,7 +491,7 @@ const data = {
           title: 'OpenGL 高级渲染',
           description: '光照模型（Phong/Blinn-Phong/PBR）、帧缓冲与离屏渲染、阴影贴图、HDR 与泛光、立方体贴图与环境映射',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -507,7 +507,7 @@ const data = {
           title: 'WebGL 与 OpenGL ES',
           description: 'WebGL 基于 OpenGL ES 2.0/3.0、WebGL 上下文创建、JavaScript 与 GLSL 绑定、WebGL 2.0 新特性（实例化/VAO/UBO）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -523,7 +523,7 @@ const data = {
           title: 'WebGL 高级技术',
           description: '帧缓冲对象（FBO）离屏渲染、实例化绘制（Instanced Drawing）、Uniform Buffer Object、Transform Feedback 粒子系统、GPU 拾取（Picking）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -538,7 +538,7 @@ const data = {
           title: 'WebGPU 下一代 Web 渲染',
           description: '计算着色器（Compute Shader）、资源绑定模型（Bind Group）、WGSL 着色器语言、与 WebGL 架构对比',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -554,7 +554,7 @@ const data = {
           title: 'GPU 性能优化',
           description: 'Draw Call 合并（Batching）、GPU 实例化、LOD 层级细节、遮挡剔除、纹理压缩与压缩格式（BC/ETC/ASTC）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -575,7 +575,7 @@ const data = {
           title: 'Three.js 基础',
           description: '场景（Scene）、相机（Camera）、渲染器（Renderer）、几何体、材质与光照、加载器（GLTF/OBJ）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -597,7 +597,7 @@ const data = {
           title: 'Three.js 进阶',
           description: 'ShaderMaterial 自定义着色器、后期处理（EffectComposer）、粒子系统、Raycaster 交互、CSS2DRenderer',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -612,7 +612,7 @@ const data = {
           title: 'Babylon.js',
           description: '游戏级 3D 引擎、物理引擎、XR/AR 支持、场景编辑器、SPS 粒子系统、材质节点编辑器',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -627,7 +627,7 @@ const data = {
           title: 'Unity 可视化应用',
           description: '实时渲染管线（URP/HDRP）、Shader Graph、粒子系统 VFX Graph、可视化数据仪表盘开发',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -648,7 +648,7 @@ const data = {
           title: '大规模数据可视化',
           description: 'WebGL 实例化渲染、LOD 层级细节、虚拟滚动、数据聚合下采样、Canvas 2D 硬件加速、Deck.gl GPU 大数据渲染',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -663,7 +663,7 @@ const data = {
           title: '体积渲染与科学可视化',
           description: '光线投射（Ray Casting）体积渲染、等值面（Marching Cubes）、流线/迹线可视化、医学影像 DICOM 可视化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -678,7 +678,7 @@ const data = {
           title: '图可视化与网络分析',
           description: '力导向布局、分层布局（Sugiyama）、矩阵视图、社区发现可视化、Gephi / Cytoscape',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -693,7 +693,7 @@ const data = {
           title: '高维数据可视化',
           description: '降维可视化（PCA / t-SNE / UMAP）、平行坐标（Parallel Coordinates）、雷达图、散点图矩阵（SPLOM）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -708,7 +708,7 @@ const data = {
           title: '实时数据可视化',
           description: 'WebSocket 推送、流式图表更新、时间序列可视化、实时仪表盘架构、增量渲染',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -722,7 +722,7 @@ const data = {
           title: '可视化设计原则与叙事',
           description: 'Tufte 原则（数据-墨水比）、图表垃圾清理、配色可访问性、Scrollytelling 叙事结构、数据新闻',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",

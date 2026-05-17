@@ -10,12 +10,12 @@ const data = {
         {
           title: '工具简介',
           description: 'Snipaste（截图 + 贴图）是一款轻量级截图工具，核心特色是截图后可以将图片"贴"在屏幕上作为参考。内置取色器、标注工具和像素放大镜，非常适合 UI 设计和前端开发场景。',
-          groups: [{ name: '官方文档', icon: 'mdi-file-document-outline', items: [{ title: 'Snipaste 官网', url: 'https://www.snipaste.com' }] }]
+          resources: [{ name: '官方文档', icon: 'mdi-file-document-outline', items: [{ title: 'Snipaste 官网', url: 'https://www.snipaste.com' }] }]
         },
         {
           title: '安装方式',
           description: '从 Snipaste 官网下载对应操作系统的版本。Windows 用户也可通过 Microsoft Store 安装。绿色版无需安装，解压即用。',
-          groups: [{ name: '下载', icon: 'mdi-download', items: [{ title: '下载页面', url: 'https://www.snipaste.com/download.html' }] }]
+          resources: [{ name: '下载', icon: 'mdi-download', items: [{ title: '下载页面', url: 'https://www.snipaste.com/download.html' }] }]
         }
       ]
     },
@@ -25,17 +25,17 @@ const data = {
         {
           title: '截图与标注',
           description: '按 F1 快捷键快速截图，支持矩形/椭圆/多边形/自由笔等多种标注工具，以及箭头、文字、马赛克和序号等标注元素。',
-          groups: [{ name: '教程', icon: 'mdi-play-circle-outline', items: [{ title: '使用指南', url: 'https://www.snipaste.com/manual' }] }]
+          resources: [{ name: '教程', icon: 'mdi-play-circle-outline', items: [{ title: '使用指南', url: 'https://www.snipaste.com/manual' }] }]
         },
         {
           title: '贴图功能',
           description: 'Snipaste 最独特的功能——截图后按 F3 可将截图"贴"在屏幕上，作为设计参考或临时备忘录。支持多张贴图、缩放旋转和透明度调节。',
-          groups: [{ name: '教程', icon: 'mdi-sticker-outline', items: [{ title: '贴图功能介绍', url: 'https://www.snipaste.com/manual#paste' }] }]
+          resources: [{ name: '教程', icon: 'mdi-sticker-outline', items: [{ title: '贴图功能介绍', url: 'https://www.snipaste.com/manual#paste' }] }]
         },
         {
           title: '取色器',
           description: '内置取色器支持屏幕任意位置取色，F1 截图界面中按 C 键即可复制颜色值，支持 HEX、RGB 等多种格式输出。',
-          groups: [{ name: '教程', icon: 'mdi-eyedropper', items: [{ title: '取色器使用', url: 'https://www.snipaste.com/manual#color-picker' }] }]
+          resources: [{ name: '教程', icon: 'mdi-eyedropper', items: [{ title: '取色器使用', url: 'https://www.snipaste.com/manual#color-picker' }] }]
         }
       ]
     },
@@ -51,7 +51,7 @@ const data = {
           title: '历史记录与回放',
           description: 'Snipaste 会保存截图历史记录，Shift+F1 可查看历史截图。支持截图回放功能，方便回顾之前的操作。',
           optional: true,
-          groups: [{ name: '参考', icon: 'mdi-history', items: [{ title: '历史记录说明', url: 'https://www.snipaste.com/manual#history' }] }]
+          resources: [{ name: '参考', icon: 'mdi-history', items: [{ title: '历史记录说明', url: 'https://www.snipaste.com/manual#history' }] }]
         }
       ]
     }

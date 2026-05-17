@@ -85,7 +85,7 @@ const data = {
       ]
     },
   ],
-  groups: [
+  resources: [
     {
       name: "推荐资源",
       items: [

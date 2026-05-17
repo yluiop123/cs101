@@ -12,7 +12,7 @@ const data = {
         {
           title: 'C 语言深入',
           description: '指针、内存管理、位运算、结构体、链表',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -33,7 +33,7 @@ const data = {
         {
           title: '电路基础',
           description: '欧姆定律、数字电路（与或非门）、模数转换',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -54,7 +54,7 @@ const data = {
         {
           title: '开发工具',
           description: 'Keil / STM32CubeIDE / PlatformIO / Arduino IDE',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -68,7 +68,7 @@ const data = {
         {
           title: '实验平台',
           description: 'Arduino Uno / STM32 开发板 + 面包板 + 基本元器件',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -100,7 +100,7 @@ const data = {
         {
           title: 'GPIO 编程',
           description: 'LED 控制、按键输入、中断触发',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -124,7 +124,7 @@ const data = {
         {
           title: '中断管理',
           description: '中断优先级、临界段保护、延迟中断处理',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -138,7 +138,7 @@ const data = {
         {
           title: 'BLE（蓝牙低功耗）',
           description: 'ESP32 BLE 应用、传感器数据上传',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -160,7 +160,7 @@ const data = {
           title: 'IoT 云平台',
           description: '阿里云 IoT / AWS IoT Core / 腾讯云 IoT Hub',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -175,7 +175,7 @@ const data = {
           title: 'ESP32 + WiFi',
           description: 'HTTP / MQTT 连接云平台、OTA 远程升级',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -197,7 +197,7 @@ const data = {
           title: '边缘计算',
           description: 'EdgeX Foundry 架构、TensorFlow Lite 模型部署',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -212,7 +212,7 @@ const data = {
           title: '数据采集与可视化',
           description: 'InfluxDB + Grafana 时序数据监控',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -233,7 +233,7 @@ const data = {
           title: 'Linux 嵌入式',
           description: '交叉编译、设备树、内核模块、Yocto / Buildroot',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -248,7 +248,7 @@ const data = {
           title: 'Raspberry Pi',
           description: 'GPIO 控制、摄像头、传感器网络',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -263,7 +263,7 @@ const data = {
           title: 'Zigbee / Thread',
           description: 'Mesh 网络、智能家居互联标准（Matter）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -278,7 +278,7 @@ const data = {
           title: '功能安全',
           description: 'RTOS 安全机制、看门狗、CRC 校验',
           optional: true,
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "FreeRTOS 安全", url: "https://www.freertos.org/safety-certification.html", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "FreeRTOS 安全", url: "https://www.freertos.org/safety-certification.html", icon: "mdi-file-document-outline" }] }]
         },
         {
           title: '项目实战',

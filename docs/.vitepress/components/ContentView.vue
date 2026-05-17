@@ -6,7 +6,7 @@ import type { ResourceGroup } from './types'
 
 interface Item {
   title: string; description: string; optional?: boolean
-  groups?: ResourceGroup[]
+  resources?: ResourceGroup[]
 }
 
 interface ItemSection { name: string; subtitle?: string; note?: string; children: Item[] }

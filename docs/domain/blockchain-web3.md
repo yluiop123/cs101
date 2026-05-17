@@ -12,7 +12,7 @@ const data = {
         {
           title: '区块链核心概念',
           description: '分布式账本、默克尔树、UTXO vs 账户模型',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -26,7 +26,7 @@ const data = {
         {
           title: '共识机制',
           description: 'PoW（工作量证明）/ PoS（权益证明）/ DPoS / PBFT',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -40,7 +40,7 @@ const data = {
         {
           title: '公链对比',
           description: 'Ethereum / Solana / Polkadot / Cosmos',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -60,7 +60,7 @@ const data = {
         {
           title: '密码学基础',
           description: '哈希函数（SHA-256 / Keccak-256）、非对称加密（ECDSA）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -81,7 +81,7 @@ const data = {
         {
           title: 'ERC 标准',
           description: 'ERC-20（代币）/ ERC-721（NFT）/ ERC-1155（多代币标准）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -95,7 +95,7 @@ const data = {
         {
           title: 'Hardhat 框架',
           description: '项目初始化、合约编译、本地节点测试、脚本部署',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -109,7 +109,7 @@ const data = {
         {
           title: '合约测试',
           description: 'Chai 断言、Hardhat Network 模拟、Gas 报告',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -124,7 +124,7 @@ const data = {
           title: 'Foundry（Rust 编写的 Solidity 测试框架）',
           description: '',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -139,7 +139,7 @@ const data = {
         {
           title: 'wagmi + RainbowKit',
           description: 'React 钱包连接、链切换、交易交互',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -153,7 +153,7 @@ const data = {
         {
           title: 'The Graph',
           description: '子图查询与事件索引',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -167,7 +167,7 @@ const data = {
         {
           title: 'IPFS 集成',
           description: 'Pinning Service（Pinata）、文件上传和访问',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -181,7 +181,7 @@ const data = {
         {
           title: 'DApp 架构',
           description: '前端 React + 智能合约 + Graph Node',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -205,7 +205,7 @@ const data = {
           title: '借贷协议',
           description: 'Aave 闪电贷、超额抵押清算机制',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -223,20 +223,20 @@ const data = {
           title: 'Gas 优化技巧',
           description: '变量打包、缓存 storage、unchecked 块',
           optional: true,
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Gas 优化指南", url: "https://docs.soliditylang.org/en/v0.8.19/gas-saving-tips.html", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Gas 优化指南", url: "https://docs.soliditylang.org/en/v0.8.19/gas-saving-tips.html", icon: "mdi-file-document-outline" }] }]
         },
         {
           title: '审计报告分析',
           description: '学习知名项目审计报告（Trail of Bits / OpenZeppelin）',
           optional: true,
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "OpenZeppelin 审计", url: "https://blog.openzeppelin.com/security-audits/", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "OpenZeppelin 审计", url: "https://blog.openzeppelin.com/security-audits/", icon: "mdi-file-document-outline" }] }]
         },
         {
           title: 'CTF 挑战',
           description: 'Ethernaut / Capture the Ether',
           optional: true,
-          groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Ethernaut CTF 通关教程", url: "https://www.bilibili.com/video/BV1St411a7k2", icon: "mdi-play-circle-outline" }] }],
-          groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Ethernaut CTF", url: "https://ethernaut.openzeppelin.com/", icon: "mdi-file-document-outline" }] }]
+          resources: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Ethernaut CTF 通关教程", url: "https://www.bilibili.com/video/BV1St411a7k2", icon: "mdi-play-circle-outline" }] }],
+          resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Ethernaut CTF", url: "https://ethernaut.openzeppelin.com/", icon: "mdi-file-document-outline" }] }]
         }
       ]
     }

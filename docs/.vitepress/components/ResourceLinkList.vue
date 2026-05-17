@@ -4,9 +4,9 @@ defineProps<{ groups: ResourceGroup[] }>()
 </script>
 
 <template>
-  <div v-for="(group, gi) in groups" :key="gi" class="mb-5">
+  <div v-for="(group, gi) in groups" :key="gi" class="mb-6">
     <!-- Group header -->
-    <div class="d-flex align-center ga-2 mb-2">
+    <div class="d-flex align-center ga-2 mb-3">
       <div class="group-icon-badge d-flex align-center justify-center">
         <v-icon v-if="group.icon" size="14">{{ group.icon }}</v-icon>
       </div>
@@ -21,8 +21,8 @@ defineProps<{ groups: ResourceGroup[] }>()
         class="resource-item"
       >
         <div class="resource-item-content">
-          <div class="text-body-2 font-weight-medium">{{ r.title }}</div>
-          <div v-if="r.lang || r.type" class="d-flex ga-1 mt-1">
+          <div class="d-flex align-center ga-2 flex-wrap">
+            <span class="text-body-2 font-weight-medium">{{ r.title }}</span>
             <span v-if="r.lang" class="tag" :class="r.lang === 'zh' ? 'tag-zh' : 'tag-en'">
               {{ r.lang === 'zh' ? '中文' : 'EN' }}
             </span>
@@ -48,23 +48,27 @@ defineProps<{ groups: ResourceGroup[] }>()
 }
 
 .resource-list {
-  border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
-  border-radius: 10px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .resource-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(var(--v-theme-on-surface), 0.06);
-  transition: background 0.15s;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.26) !important;
+  border-radius: 10px;
+  background: rgba(var(--v-theme-on-surface), 0.03);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
   color: inherit;
   text-decoration: none !important;
 }
-.resource-item:last-child { border-bottom: none; }
-.resource-item:hover { background: rgba(var(--v-theme-on-surface), 0.04); }
+.resource-item:hover {
+  background: rgba(var(--v-theme-on-surface), 0.06);
+  border-color: rgba(var(--v-theme-on-surface), 0.35) !important;
+}
 .resource-item:hover .resource-arrow { opacity: 1; }
 
 .resource-item-content {

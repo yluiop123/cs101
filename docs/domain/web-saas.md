@@ -12,7 +12,7 @@ const data = {
         {
           title: 'HTML5 + CSS3',
           description: '语义化标签、Flex/Grid 布局、响应式设计',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: 'JavaScript 核心',
           description: 'ES6+ 语法、DOM 操作、异步编程（Promise / async-await）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: '包管理器与构建工具',
           description: 'npm / yarn、Vite / Webpack 基础配置',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -78,7 +78,7 @@ const data = {
           title: 'TypeScript 入门',
           description: '类型系统、接口、泛型（前端进阶必备）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -106,7 +106,7 @@ const data = {
         {
           title: 'React 或 Vue 选其一深入',
           description: '组件化、生命周期、Hooks / Composition API',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -128,7 +128,7 @@ const data = {
         {
           title: '前端路由与状态管理',
           description: 'React Router / Vue Router、Redux / Zustand / Pinia',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -149,7 +149,7 @@ const data = {
         {
           title: 'UI 组件库',
           description: 'Ant Design / Element Plus / ShadCN 快速搭建页面',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -164,7 +164,7 @@ const data = {
           title: 'Tailwind CSS',
           description: '原子化 CSS 方案，提升样式开发效率',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -185,7 +185,7 @@ const data = {
           title: '前端测试',
           description: 'Vitest / Jest、React Testing Library',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -205,7 +205,7 @@ const data = {
         {
           title: '选择一门后端语言深入',
           description: 'Java（Spring Boot）或 Python（FastAPI）或 Node.js（Nest.js）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -227,7 +227,7 @@ const data = {
         {
           title: 'RESTful API 设计',
           description: '路由、请求校验、状态码、API 文档（Swagger / OpenAPI）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -248,7 +248,7 @@ const data = {
         {
           title: '数据库操作',
           description: 'SQL 基础、ORM（MyBatis / Prisma / SQLAlchemy）、迁移工具',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -269,7 +269,7 @@ const data = {
         {
           title: '用户认证与授权',
           description: 'JWT、OAuth 2.0、Session 管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -291,7 +291,7 @@ const data = {
           title: 'GraphQL',
           description: 'Apollo Server / Client，灵活的数据查询方案',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -318,7 +318,7 @@ const data = {
         {
           title: 'MySQL / PostgreSQL',
           description: '表设计、索引优化、事务隔离级别、Explain 分析',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -340,7 +340,7 @@ const data = {
         {
           title: 'Redis',
           description: '缓存策略、分布式锁、Session 共享、数据类型应用',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -363,7 +363,7 @@ const data = {
           title: 'MongoDB',
           description: 'NoSQL 设计模式、聚合管道（适合非结构化数据场景）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -385,7 +385,7 @@ const data = {
           title: 'ORM 进阶',
           description: 'N+1 查询优化、事务管理、级联操作',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -405,7 +405,7 @@ const data = {
         {
           title: '前后端联调',
           description: 'Axios / Fetch、跨域处理（CORS）、接口 Mock',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -426,7 +426,7 @@ const data = {
         {
           title: 'Docker 容器化',
           description: 'Dockerfile 编写、docker-compose 多服务编排',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -448,7 +448,7 @@ const data = {
         {
           title: 'CI/CD 基础',
           description: 'GitHub Actions / GitLab CI 自动化构建部署',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -469,7 +469,7 @@ const data = {
         {
           title: '云服务部署',
           description: '阿里云 ECS / AWS EC2、Nginx 反向代理、SSL 证书',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -491,7 +491,7 @@ const data = {
           title: 'Serverless',
           description: 'Vercel / AWS Lambda / 云函数，低成本部署方案',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -519,7 +519,7 @@ const data = {
           title: '微服务架构',
           description: 'Spring Cloud / Nest.js 微服务、服务注册发现',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -542,7 +542,7 @@ const data = {
           title: '消息队列',
           description: 'RabbitMQ / Kafka 异步通信、削峰填谷',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -565,7 +565,7 @@ const data = {
           title: '性能优化',
           description: '前端懒加载 / 后端缓存 / 数据库查询优化 / CDN',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -580,7 +580,7 @@ const data = {
           title: '监控与日志',
           description: 'Sentry、ELK、Grafana + Prometheus',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -595,7 +595,7 @@ const data = {
           title: 'SaaS 多租户设计',
           description: '数据库隔离方案、租户路由、计费系统',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",

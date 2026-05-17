@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import DetailDrawer from './DetailDrawer.vue'
-import type { DrawerItem } from './types'
+import { computed, ref } from 'vue';
+import DetailDrawer from './DetailDrawer.vue';
+import type { DrawerItem } from './types';
 
 defineProps<{
   id: string
@@ -16,11 +16,7 @@ const drawer = ref(false)
 
 const drawerItem = computed<DrawerItem | null>(() => {
   if (!selectedItem.value) return null
-  return {
-    title: selectedItem.value.title,
-    description: selectedItem.value.desc,
-    groups: [{ name: '教程链接', icon: 'mdi-link-variant', items: [{ title: selectedItem.value.title, url: selectedItem.value.url, lang: selectedItem.value.lang, type: selectedItem.value.type }] }]
-  }
+  return selectedItem.value;
 })
 
 function openItem(item: { title: string; url: string; desc?: string; lang?: 'zh' | 'en'; type?: 'article' | 'video' }) {

@@ -12,7 +12,7 @@ const data = {
         {
           title: '软件测试基础',
           description: '测试目的、测试原则、测试类型（功能 / 非功能）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -33,7 +33,7 @@ const data = {
         {
           title: '测试设计方法',
           description: '等价类划分、边界值分析、因果图、正交实验法',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -63,7 +63,7 @@ const data = {
         {
           title: 'HTTP 协议',
           description: '请求方法（GET / POST / PUT / DELETE）、状态码、Headers',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -77,7 +77,7 @@ const data = {
         {
           title: 'Supertest（Node.js）',
           description: 'Express / Koa 接口测试',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -105,7 +105,7 @@ const data = {
         {
           title: 'Playwright',
           description: '多浏览器支持、自动等待、网络拦截、截图对比',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -119,7 +119,7 @@ const data = {
         {
           title: 'Cypress',
           description: '端到端测试、时间旅行调试、Dashboard 集成',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -133,7 +133,7 @@ const data = {
         {
           title: '数据驱动测试',
           description: 'Excel / CSV / YAML 数据源 + TestNG 参数化 / Pytest parametrize',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -147,7 +147,7 @@ const data = {
         {
           title: '持续集成集成',
           description: 'Jenkins / GitHub Actions 触发自动化测试',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -168,7 +168,7 @@ const data = {
         {
           title: 'k6',
           description: 'JavaScript 脚本、指标监控、阈值设定、云执行',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -182,7 +182,7 @@ const data = {
         {
           title: '性能瓶颈分析',
           description: 'CPU / 内存 / 磁盘 / 网络 / 数据库慢查询',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -197,7 +197,7 @@ const data = {
           title: 'Gatling（Scala 编写的高性能测试框架）',
           description: '',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -213,7 +213,7 @@ const data = {
           title: 'BDD（行为驱动开发）',
           description: 'Cucumber / SpecFlow / Behave 框架',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -233,7 +233,7 @@ const data = {
           title: '代码覆盖率',
           description: 'JaCoCo / Istanbul / Coverage.py',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",

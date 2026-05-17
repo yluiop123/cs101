@@ -12,7 +12,7 @@ const data = {
         {
           title: 'JavaScript 语言概述',
           description: '历史与版本、浏览器控制台、开发工具链',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: '基本语法',
           description: '变量声明 var/let/const、数据类型、运算符、类型转换',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: '流程控制与循环',
           description: 'if/switch、for/while/do-while、break/continue',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -78,7 +78,7 @@ const data = {
         {
           title: '函数详解',
           description: '函数声明与表达式、箭头函数、参数默认值、rest 参数',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -100,7 +100,7 @@ const data = {
         {
           title: '数组与对象',
           description: '数组方法（map/filter/reduce/find）、对象属性描述符',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -122,7 +122,7 @@ const data = {
         {
           title: '字符串与模板字面量',
           description: '字符串方法、模板字符串、标签函数',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -144,7 +144,7 @@ const data = {
         {
           title: 'DOM 操作',
           description: '元素选择、事件监听、DOM 增删改、事件冒泡与捕获',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -166,7 +166,7 @@ const data = {
         {
           title: 'BOM 与浏览器 API',
           description: 'window/document/location、setTimeout/setInterval、localStorage',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -194,7 +194,7 @@ const data = {
         {
           title: '解构赋值',
           description: '数组解构、对象解构、嵌套解构、默认值',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -216,7 +216,7 @@ const data = {
         {
           title: '展开运算符与剩余参数',
           description: '数组/对象展开、函数参数收集',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -238,7 +238,7 @@ const data = {
         {
           title: 'Promise 与异步编程',
           description: '回调地狱、Promise 链式调用、async/await、微任务队列',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -260,7 +260,7 @@ const data = {
         {
           title: '模块化',
           description: 'ES Module import/export、CommonJS 对比、动态导入',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -282,7 +282,7 @@ const data = {
         {
           title: 'Map、Set、WeakMap、WeakSet',
           description: '新集合类型、垃圾回收优化',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -304,7 +304,7 @@ const data = {
         {
           title: 'Symbol 与迭代器',
           description: 'Symbol 内置属性、可迭代协议、for...of',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -326,7 +326,7 @@ const data = {
         {
           title: '生成器 Generator',
           description: 'function* 声明、yield 暂停、异步生成器',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -348,7 +348,7 @@ const data = {
         {
           title: 'Proxy 与 Reflect',
           description: '元编程、响应式原理基础、数据劫持',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -371,7 +371,7 @@ const data = {
           title: '正则表达式进阶',
           description: '前瞻/后瞻断言、命名捕获组、RegExp 方法',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -393,7 +393,7 @@ const data = {
         {
           title: 'ES6+ 参考资源',
           description: '全面了解 ES6+ 新特性',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -413,7 +413,7 @@ const data = {
         {
           title: 'TypeScript 基础',
           description: '安装配置、tsconfig.json、编译选项',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -435,7 +435,7 @@ const data = {
         {
           title: '基础类型',
           description: 'any/unknown/never/void、字面量类型、联合类型、交叉类型',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -457,7 +457,7 @@ const data = {
         {
           title: '接口 Interface',
           description: '可选属性、只读属性、函数类型、索引签名、接口继承',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -479,7 +479,7 @@ const data = {
         {
           title: '类与面向对象',
           description: '访问修饰符、抽象类、implements、装饰器',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -501,7 +501,7 @@ const data = {
         {
           title: '泛型',
           description: '泛型函数/类/接口、泛型约束、条件类型、infer 推断',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -523,7 +523,7 @@ const data = {
         {
           title: '类型工具',
           description: 'Partial/Required/Readonly/Pick/Omit/Record 工具类型',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -545,7 +545,7 @@ const data = {
         {
           title: '类型守卫与类型断言',
           description: 'typeof、instanceof、自定义守卫、as 断言',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -567,7 +567,7 @@ const data = {
         {
           title: '声明文件',
           description: '.d.ts 文件编写、模块声明、全局类型声明',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -582,7 +582,7 @@ const data = {
           title: '模板字面量类型',
           description: '模板字面量字符串、联合类型推导',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -597,7 +597,7 @@ const data = {
           title: '装饰器',
           description: '类装饰器、方法装饰器、属性装饰器、参数装饰器',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -617,7 +617,7 @@ const data = {
         {
           title: 'React 核心',
           description: 'JSX 语法、函数组件、Hooks（useState/useEffect/useContext）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -639,7 +639,7 @@ const data = {
         {
           title: 'React 进阶',
           description: 'useReducer/useMemo/useCallback/useRef、自定义 Hooks',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -661,7 +661,7 @@ const data = {
         {
           title: 'React 状态管理',
           description: 'Context API、Zustand、Redux Toolkit、React Query',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -683,7 +683,7 @@ const data = {
         {
           title: 'React 路由',
           description: 'React Router v6、嵌套路由、路由守卫、懒加载',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -705,7 +705,7 @@ const data = {
         {
           title: 'Vue 3 核心',
           description: 'Composition API、ref/reactive、生命周期、指令系统',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -727,7 +727,7 @@ const data = {
         {
           title: 'Vue 3 进阶',
           description: 'Teleport/Suspense、Pinia 状态管理、Vue Router',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -749,7 +749,7 @@ const data = {
         {
           title: '组件化开发',
           description: '组件通信、高阶组件 HOC、Render Props、插槽',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -771,7 +771,7 @@ const data = {
         {
           title: 'UI 框架',
           description: 'Ant Design / Element Plus / ShadCN / Tailwind CSS',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -794,7 +794,7 @@ const data = {
           title: '框架原理',
           description: 'Virtual DOM diff 算法、响应式原理、Fiber 架构',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -817,7 +817,7 @@ const data = {
           title: '测试框架',
           description: 'Vitest / Jest / Testing Library、组件测试、E2E 测试 Playwright',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -845,7 +845,7 @@ const data = {
         {
           title: 'Vite 构建工具',
           description: '快速搭建项目、HMR 热更新、环境变量与模式',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -867,7 +867,7 @@ const data = {
         {
           title: 'Webpack 核心',
           description: 'Loader 与 Plugin、代码分割、Tree Shaking、缓存策略',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -889,7 +889,7 @@ const data = {
         {
           title: '包管理器',
           description: 'npm / yarn / pnpm、workspace 多包管理、lock 文件',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -911,7 +911,7 @@ const data = {
         {
           title: 'CSS 工程化',
           description: 'CSS Modules、Tailwind CSS PostCSS、CSS-in-JS',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -933,7 +933,7 @@ const data = {
         {
           title: 'Git 协作',
           description: '分支策略、代码审查、Commit 规范（Conventional Commits）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -955,7 +955,7 @@ const data = {
         {
           title: '浏览器渲染原理',
           description: '关键渲染路径、重排/重绘、图层与合成',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -977,7 +977,7 @@ const data = {
         {
           title: '性能优化',
           description: '懒加载、图片优化、CDN 加速、首屏加载优化、性能监控',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -999,7 +999,7 @@ const data = {
         {
           title: '前端安全',
           description: 'XSS 防御、CSRF 防御、CSP 内容安全策略',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1022,7 +1022,7 @@ const data = {
           title: '微前端',
           description: 'Module Federation、qiankun 沙箱、子应用通信',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1045,7 +1045,7 @@ const data = {
           title: '构建工具对比',
           description: 'Rollup / esbuild / Turbopack / SWC',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -1065,7 +1065,7 @@ const data = {
         {
           title: 'Node.js 运行时',
           description: 'CommonJS 模块、Event Loop、Buffer/Stream、child_process',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1087,7 +1087,7 @@ const data = {
         {
           title: 'Express / Koa 框架',
           description: '中间件机制、路由、错误处理、REST API',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1109,7 +1109,7 @@ const data = {
         {
           title: 'Nest.js 全栈框架',
           description: '模块/控制器/服务、依赖注入、GraphQL 支持、WebSocket',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1131,7 +1131,7 @@ const data = {
         {
           title: 'Next.js / Nuxt.js',
           description: 'SSR/SSG/ISR 渲染模式、文件路由、API Routes',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1153,7 +1153,7 @@ const data = {
         {
           title: '数据库集成',
           description: 'Prisma / TypeORM、Mongoose MongoDB、Sequelize',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1175,7 +1175,7 @@ const data = {
         {
           title: 'GraphQL / tRPC',
           description: 'Schema 定义、Resolver、Apollo Server、类型安全的 API',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1198,7 +1198,7 @@ const data = {
           title: '认证与授权',
           description: 'NextAuth.js、Passport.js、JWT、Session 管理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1221,7 +1221,7 @@ const data = {
           title: 'Docker 部署',
           description: 'Dockerfile 多阶段构建、Nginx 反向代理、pm2 进程管理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1250,7 +1250,7 @@ const data = {
           title: 'Leaflet',
           description: '地图加载、标记与弹窗、图层控制、瓦片服务',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1273,7 +1273,7 @@ const data = {
           title: 'OpenLayers',
           description: '矢量图层、空间查询、投影转换、动画',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1296,7 +1296,7 @@ const data = {
           title: 'Cesium',
           description: '三维地球、3D Tiles、时间轴动画、地形分析',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1319,7 +1319,7 @@ const data = {
           title: 'GeoJSON / TopoJSON',
           description: '地理数据格式、样式配置、交互',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -1334,7 +1334,7 @@ const data = {
           title: '地图可视化',
           description: 'Mapbox GL、Deck.gl、ECharts Geo',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1357,7 +1357,7 @@ const data = {
           title: '空间数据库',
           description: 'PostGIS 空间查询、GeoServer 地图服务',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",

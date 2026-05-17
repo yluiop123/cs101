@@ -12,7 +12,7 @@ const data = {
         {
           title: '开发环境搭建',
           description: 'GCC/MinGW 安装、VS Code 配置、命令行编译运行',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: '基本语法',
           description: '数据类型、运算符、表达式、printf/scanf 输入输出',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: '流程控制',
           description: 'if/else、switch/case、for/while/do-while 循环',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -78,7 +78,7 @@ const data = {
         {
           title: '数组与字符串',
           description: '一维/二维数组、字符数组、字符串处理函数',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -100,7 +100,7 @@ const data = {
         {
           title: '函数',
           description: '函数定义与声明、参数传递（值传递/地址传递）、递归函数',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -122,7 +122,7 @@ const data = {
         {
           title: '指针核心',
           description: '指针与地址、指针运算、指针与数组、指针与函数',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -144,7 +144,7 @@ const data = {
         {
           title: '动态内存管理',
           description: 'malloc/calloc/realloc/free、内存泄漏防范',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -166,7 +166,7 @@ const data = {
         {
           title: '结构体与联合体',
           description: 'struct 定义与嵌套、typedef、union、enum',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -188,7 +188,7 @@ const data = {
         {
           title: '文件操作',
           description: 'fopen/fclose/fread/fwrite、文本文件与二进制文件',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -210,7 +210,7 @@ const data = {
         {
           title: '预处理指令',
           description: '#define 宏定义、条件编译、头文件包含',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -238,7 +238,7 @@ const data = {
         {
           title: 'C++ 与 C 的区别',
           description: '新增关键字、函数重载、命名空间、默认参数',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -260,7 +260,7 @@ const data = {
         {
           title: '引用',
           description: '引用与指针的区别、引用传递、常引用、右值引用',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -282,7 +282,7 @@ const data = {
         {
           title: '面向对象',
           description: '类与对象、构造/析构函数、拷贝构造、this 指针',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -304,7 +304,7 @@ const data = {
         {
           title: '继承与多态',
           description: '继承方式、虚函数、纯虚函数与抽象类、虚表机制',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -326,7 +326,7 @@ const data = {
         {
           title: '运算符重载',
           description: '成员函数/友元函数重载、常见运算符重载',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -348,7 +348,7 @@ const data = {
         {
           title: '模板编程',
           description: '函数模板、类模板、模板特化、可变参数模板',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -370,7 +370,7 @@ const data = {
         {
           title: 'STL 标准库',
           description: 'vector/list/deque/map/set、迭代器、算法（sort/find）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -392,7 +392,7 @@ const data = {
         {
           title: '智能指针',
           description: 'unique_ptr/shared_ptr/weak_ptr、RAII 资源管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -414,7 +414,7 @@ const data = {
         {
           title: '异常处理',
           description: 'try/catch/throw、标准异常类、noexcept',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -436,7 +436,7 @@ const data = {
         {
           title: 'C++11/14/17/20 新特性',
           description: 'auto/decltype、lambda 表达式、constexpr、concepts',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -464,7 +464,7 @@ const data = {
         {
           title: '线性表',
           description: '动态数组、链表（单/双/循环）、栈、队列',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -486,7 +486,7 @@ const data = {
         {
           title: '树结构',
           description: '二叉树、二叉搜索树、AVL 树、红黑树',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -508,7 +508,7 @@ const data = {
         {
           title: '图',
           description: '邻接矩阵/邻接表、DFS/BFS 遍历、最短路径（Dijkstra/Floyd）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -530,7 +530,7 @@ const data = {
         {
           title: '排序算法',
           description: '快速排序、归并排序、堆排序、计数排序',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -552,7 +552,7 @@ const data = {
         {
           title: '查找算法',
           description: '二分查找、哈希表、平衡树查找',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -574,7 +574,7 @@ const data = {
         {
           title: '算法分析与设计',
           description: '时间/空间复杂度、递归分治、动态规划、贪心算法',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -596,7 +596,7 @@ const data = {
         {
           title: '字符串算法',
           description: 'KMP 匹配、Trie 字典树、后缀数组',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -624,7 +624,7 @@ const data = {
         {
           title: 'Linux 操作系统基础',
           description: '常用命令、文件权限、进程管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -646,7 +646,7 @@ const data = {
         {
           title: 'Linux C 环境编程',
           description: 'gcc/gdb 调试、Makefile 编写、CMake 构建',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -668,7 +668,7 @@ const data = {
         {
           title: '文件 I/O 系统调用',
           description: 'open/read/write/close、文件描述符、缓冲区',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -690,7 +690,7 @@ const data = {
         {
           title: '多进程编程',
           description: 'fork/exec/wait、进程间通信（管道/信号/共享内存）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -712,7 +712,7 @@ const data = {
         {
           title: '多线程编程',
           description: 'pthread 库、线程同步（互斥锁/条件变量/读写锁）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -734,7 +734,7 @@ const data = {
         {
           title: '网络编程',
           description: 'socket 套接字、TCP/UDP 通信、epoll 多路复用',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -755,7 +755,7 @@ const data = {
         {
           title: '内存管理深入',
           description: '堆栈布局、内存对齐、缓存行（Cache Line）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -778,7 +778,7 @@ const data = {
           title: 'Shell 脚本',
           description: 'Bash 编程、自动化脚本编写',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -801,7 +801,7 @@ const data = {
           title: 'GDB 高级调试',
           description: '断点调试、core dump 分析、反汇编调试',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -830,7 +830,7 @@ const data = {
           title: 'STM32 开发',
           description: 'GPIO/Timer/UART/SPI/I2C 外设驱动开发',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -853,7 +853,7 @@ const data = {
           title: '实时操作系统 FreeRTOS',
           description: '任务调度、信号量、消息队列',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -876,7 +876,7 @@ const data = {
           title: 'Arduino 与传感器',
           description: '传感器数据采集、I2C/SPI 协议',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -899,7 +899,7 @@ const data = {
           title: 'Raspberry Pi',
           description: 'GPIO 控制、Linux 嵌入式系统、摄像头模块',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -922,7 +922,7 @@ const data = {
           title: '硬件调试',
           description: '逻辑分析仪使用、示波器基本操作、Bootloader',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -943,7 +943,7 @@ const data = {
           title: '多线程进阶',
           description: 'OpenMP 并行编程、任务调度',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -966,7 +966,7 @@ const data = {
           title: '分布式计算',
           description: 'MPI 消息传递接口、集群并行计算',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -989,7 +989,7 @@ const data = {
           title: 'GPU 编程',
           description: 'CUDA 编程模型、线程/块/网格、共享内存优化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1012,7 +1012,7 @@ const data = {
           title: '性能优化',
           description: '编译器优化选项、SIMD 指令集、循环展开、缓存优化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -1027,7 +1027,7 @@ const data = {
           title: '性能分析工具',
           description: 'perf/gprof/Valgrind、火焰图分析',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1056,7 +1056,7 @@ const data = {
           title: '图形学基础',
           description: 'OpenGL/DirectX 渲染管线、着色器编写',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1079,7 +1079,7 @@ const data = {
           title: 'Unreal Engine',
           description: 'C++ 与蓝图结合、Actor/Component 体系',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -1102,7 +1102,7 @@ const data = {
           title: '物理引擎',
           description: 'Bullet/PhysX 集成、碰撞检测、刚体模拟',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -1117,7 +1117,7 @@ const data = {
           title: '游戏架构',
           description: '游戏循环、ECS 实体组件系统、资源管理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",

@@ -12,7 +12,7 @@ const data = {
         {
           title: 'Java 核心',
           description: '集合、并发（JUC）、JVM 内存模型与调优',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -33,7 +33,7 @@ const data = {
         {
           title: 'Spring Boot',
           description: '自动配置、Starter、Actuator、统一异常处理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -54,7 +54,7 @@ const data = {
         {
           title: 'Spring Cloud 微服务',
           description: 'Nacos（注册中心/配置中心）、Gateway、Feign、Sentinel',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -68,7 +68,7 @@ const data = {
         {
           title: 'MyBatis / MyBatis-Plus',
           description: 'ORM 映射、分页、多数据源',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -82,7 +82,7 @@ const data = {
         {
           title: 'MySQL 高级',
           description: '索引原理、事务隔离级别、MVCC、分库分表（ShardingSphere）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -97,7 +97,7 @@ const data = {
           title: '单元测试与集成测试（JUnit + Mockito + H2）',
           description: '',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -117,7 +117,7 @@ const data = {
         {
           title: 'Kafka',
           description: 'Topic/Partition 机制、生产者/消费者 API、消息可靠性、幂等性',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -131,7 +131,7 @@ const data = {
         {
           title: 'RocketMQ',
           description: '事务消息、顺序消息、延迟消息、死信队列',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -145,7 +145,7 @@ const data = {
         {
           title: '分布式事务',
           description: 'Seata（AT/TCC/Saga）、可靠消息最终一致性方案',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -159,7 +159,7 @@ const data = {
         {
           title: '分布式 ID',
           description: '雪花算法、Leaf、号段模式',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -180,7 +180,7 @@ const data = {
         {
           title: 'Flink SQL',
           description: '动态表、维表关联、窗口聚合',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -194,7 +194,7 @@ const data = {
         {
           title: '风控模型',
           description: '规则评分卡（Scorecard）、特征工程、机器学习风控（XGBoost / LightGBM）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -213,7 +213,7 @@ const data = {
           title: 'Spark Streaming（微批处理模式）',
           description: '',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -235,7 +235,7 @@ const data = {
           title: '支付系统设计',
           description: '账户体系、清结算、对账、差错处理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -250,7 +250,7 @@ const data = {
           title: '数据加密与安全',
           description: '国密（SM2/SM3/SM4）、TLS 1.3、HSM 硬件加密',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",

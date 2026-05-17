@@ -12,7 +12,7 @@ const data = {
         {
           title: '计算机网络',
           description: 'OSI 七层模型、TCP/IP 协议栈、三次握手 / 四次挥手',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: '操作系统原理',
           description: '进程与线程、内存管理、文件系统、权限模型',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: 'Linux 基础',
           description: '常用命令、用户与权限、网络配置、服务管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -78,7 +78,7 @@ const data = {
         {
           title: 'Python 基础',
           description: 'Socket 编程、网络请求、数据包处理（Scapy）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -101,7 +101,7 @@ const data = {
           title: 'C 语言基础',
           description: '指针与内存管理（二进制漏洞分析必备）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -124,7 +124,7 @@ const data = {
           title: '数据库基础',
           description: 'SQL 语句（SQL 注入分析需要）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -151,7 +151,7 @@ const data = {
         {
           title: 'HTTP / HTTPS 协议',
           description: '请求方法、状态码、Cookie / Session、TLS 握手',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -173,7 +173,7 @@ const data = {
         {
           title: 'XSS（跨站脚本）',
           description: '反射型 / 存储型 / DOM 型、CSP 防御',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -194,7 +194,7 @@ const data = {
         {
           title: 'CSRF（跨站请求伪造）',
           description: 'Token 验证、SameSite Cookie',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -215,7 +215,7 @@ const data = {
         {
           title: 'SQL 注入',
           description: '联合查询 / 报错 / 布尔盲注 / 时间盲注、预编译防御',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -237,7 +237,7 @@ const data = {
         {
           title: 'SSRF（服务端请求伪造）',
           description: '内网探测、协议利用、URL 白名单防御',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -251,7 +251,7 @@ const data = {
         {
           title: '文件上传漏洞',
           description: '绕过检测、WebShell 上传、文件类型校验',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -273,7 +273,7 @@ const data = {
           title: 'RCE（远程代码执行）',
           description: '命令注入、反序列化漏洞',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -288,7 +288,7 @@ const data = {
           title: 'JWT 安全',
           description: 'JWT 伪造、算法混淆、密钥泄露',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -315,7 +315,7 @@ const data = {
         {
           title: 'Kali Linux 环境搭建',
           description: '工具集使用、网络扫描、漏洞扫描',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -336,7 +336,7 @@ const data = {
         {
           title: '信息收集',
           description: '子域名枚举（Sublist3r）、端口扫描（Nmap）、指纹识别',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -357,7 +357,7 @@ const data = {
         {
           title: 'Burp Suite',
           description: '代理抓包、Repeater / Intruder、插件扩展',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -379,7 +379,7 @@ const data = {
         {
           title: 'Metasploit Framework',
           description: '漏洞利用模块、Payload 生成、Meterpreter',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -400,7 +400,7 @@ const data = {
         {
           title: '漏洞扫描工具',
           description: 'AWVS / Nessus / OpenVAS 扫描与报告解读',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -422,7 +422,7 @@ const data = {
           title: '社会工程学',
           description: '钓鱼邮件、诱导攻击、社工工具（SET）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -437,7 +437,7 @@ const data = {
           title: '内网渗透',
           description: '横向移动、提权、隧道（frp / ngrok）、域渗透',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -464,7 +464,7 @@ const data = {
         {
           title: '安全编码规范',
           description: '输入校验、输出编码、最小权限原则',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -478,7 +478,7 @@ const data = {
         {
           title: 'Java / Python Web 安全审计',
           description: '常见漏洞模式、代码审计工具（Fortify / SonarQube）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -499,7 +499,7 @@ const data = {
         {
           title: 'SDL（安全开发生命周期）',
           description: '威胁建模、安全需求、安全测试',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -521,7 +521,7 @@ const data = {
           title: '逆向分析',
           description: 'IDA Pro / Ghidra 反编译、调试器（x64dbg / OllyDbg）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -544,7 +544,7 @@ const data = {
           title: '二进制漏洞',
           description: '缓冲区溢出、ROP、格式化字符串',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -571,7 +571,7 @@ const data = {
         {
           title: '防火墙与 WAF',
           description: 'iptables / nftables 规则、ModSecurity 规则编写',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -592,7 +592,7 @@ const data = {
         {
           title: 'IDS / IPS',
           description: 'Snort / Suricata 入侵检测规则、告警分析',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -606,7 +606,7 @@ const data = {
         {
           title: '日志分析与 SIEM',
           description: 'ELK 日志平台、Splunk 查询、异常检测',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -628,7 +628,7 @@ const data = {
         {
           title: '基线检查与加固',
           description: '系统基线、数据库加固、中间件安全配置',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -643,7 +643,7 @@ const data = {
           title: '零信任架构',
           description: '身份认证、设备信任、最小权限访问',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -665,7 +665,7 @@ const data = {
           title: '云安全',
           description: '安全组配置、IAM 策略、容器安全（Trivy / Falco）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -693,7 +693,7 @@ const data = {
           title: '应急响应流程',
           description: '事件分类、遏制、根因分析、恢复、复盘',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -715,7 +715,7 @@ const data = {
           title: '数字取证',
           description: '内存取证（Volatility）、磁盘取证（FTK Imager）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -737,7 +737,7 @@ const data = {
           title: '恶意代码分析',
           description: '静态分析（PE 结构、YARA）、动态分析（沙箱 Cuckoo）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -752,7 +752,7 @@ const data = {
           title: '安全合规',
           description: '等保 2.0 / GDPR / ISO 27001 合规要求',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -773,7 +773,7 @@ const data = {
           title: 'CISSP',
           description: '安全与风险管理、资产安全、安全架构',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -788,7 +788,7 @@ const data = {
           title: 'OSCP / PNPT',
           description: '实战渗透测试认证',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -803,7 +803,7 @@ const data = {
           title: 'CTF 竞赛',
           description: 'Bugku / XCTF / Hack The Box / TryHackMe',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",

@@ -12,7 +12,7 @@ const data = {
         {
           title: 'Python 核心',
           description: '数据类型、函数式编程、面向对象、常用标准库',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: '线性代数',
           description: '矩阵运算、特征分解、SVD 分解、向量空间',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: '概率论与统计',
           description: '常见分布、贝叶斯定理、假设检验、最大似然估计',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -77,7 +77,7 @@ const data = {
         {
           title: '微积分（导数与优化）',
           description: '梯度、链式法则、凸优化基础',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -99,7 +99,7 @@ const data = {
           title: '信息论基础',
           description: '熵、KL 散度、交叉熵',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -119,7 +119,7 @@ const data = {
         {
           title: 'NumPy',
           description: '数组运算、广播机制、线性代数操作',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -141,7 +141,7 @@ const data = {
         {
           title: 'Pandas',
           description: 'DataFrame 操作、数据清洗、分组聚合、时间序列',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -163,7 +163,7 @@ const data = {
         {
           title: 'Matplotlib / Seaborn',
           description: '折线图、柱状图、热力图、子图布局',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -184,7 +184,7 @@ const data = {
         {
           title: 'EDA（探索性数据分析）',
           description: '缺失值处理、异常检测、相关性分析',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -206,7 +206,7 @@ const data = {
           title: 'Plotly / Bokeh',
           description: '交互式数据可视化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -226,7 +226,7 @@ const data = {
         {
           title: 'Scikit-learn 框架',
           description: '统一的 fit / predict / transform 接口',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -247,7 +247,7 @@ const data = {
         {
           title: '监督学习',
           description: '线性回归、逻辑回归、决策树、随机森林、SVM',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -269,7 +269,7 @@ const data = {
         {
           title: '集成学习',
           description: 'Bagging、Boosting、XGBoost、LightGBM、CatBoost',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -290,7 +290,7 @@ const data = {
         {
           title: '无监督学习',
           description: 'K-Means、DBSCAN、层次聚类、PCA / t-SNE',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -304,7 +304,7 @@ const data = {
         {
           title: '模型评估',
           description: '交叉验证、混淆矩阵、ROC / AUC、过拟合与正则化',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -319,7 +319,7 @@ const data = {
           title: '特征工程',
           description: '特征编码、特征选择、特征缩放、多项式特征',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -346,7 +346,7 @@ const data = {
         {
           title: 'PyTorch 核心',
           description: 'Tensor 操作、自动求导、nn.Module、DataLoader',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -368,7 +368,7 @@ const data = {
         {
           title: '神经网络基础',
           description: '全连接网络、激活函数、反向传播、优化器（SGD / Adam）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -390,7 +390,7 @@ const data = {
         {
           title: '卷积神经网络（CNN）',
           description: '卷积层、池化层、ResNet、图像分类实战',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -411,7 +411,7 @@ const data = {
         {
           title: '循环神经网络（RNN / LSTM / GRU）',
           description: '序列建模、文本分类',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -432,7 +432,7 @@ const data = {
         {
           title: 'Transformer 架构',
           description: 'Self-Attention、Multi-Head Attention、Positional Encoding',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -455,7 +455,7 @@ const data = {
           title: 'TensorFlow / Keras',
           description: '对比学习，了解高层 API 与 TF Serving',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -477,7 +477,7 @@ const data = {
           title: 'GAN / VAE',
           description: '生成模型，图像生成与数据增强',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -505,7 +505,7 @@ const data = {
           title: 'CV 方向',
           description: 'OpenCV 图像处理、YOLO 目标检测、UNet 语义分割',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -528,7 +528,7 @@ const data = {
           title: 'NLP 方向',
           description: '词向量（Word2Vec / GloVe）、BERT 微调、文本分类 / NER',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -550,7 +550,7 @@ const data = {
           title: '图像分类实战',
           description: '迁移学习（ResNet / EfficientNet）、数据增强',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -565,7 +565,7 @@ const data = {
           title: '序列标注',
           description: '命名实体识别、分词、词性标注',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -585,7 +585,7 @@ const data = {
         {
           title: 'HuggingFace Transformers',
           description: '加载预训练模型、Pipeline、模型微调',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -606,7 +606,7 @@ const data = {
         {
           title: 'LangChain',
           description: 'LLM 调用、Prompt 模板、Chain 编排、Memory',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -628,7 +628,7 @@ const data = {
         {
           title: 'RAG（检索增强生成）',
           description: '向量数据库（Chroma / Milvus / FAISS）、Embedding 模型',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -649,7 +649,7 @@ const data = {
         {
           title: '模型微调（Fine-tuning）',
           description: 'LoRA / QLoRA、PEFT、SFT 训练',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -671,7 +671,7 @@ const data = {
           title: 'LLM 部署',
           description: 'vLLM / Ollama 推理加速、OpenAI API 兼容服务',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -686,7 +686,7 @@ const data = {
           title: 'Agent / 智能体',
           description: 'ReAct 模式、Function Calling、多 Agent 协作',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -714,7 +714,7 @@ const data = {
           title: '模型打包与部署',
           description: 'ONNX 导出、TorchScript、Triton Inference Server',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -729,7 +729,7 @@ const data = {
           title: 'MLflow / WandB',
           description: '实验跟踪、模型注册、版本管理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -751,7 +751,7 @@ const data = {
           title: '模型监控',
           description: '数据漂移检测、模型退化告警',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -766,7 +766,7 @@ const data = {
           title: 'Docker + 云部署',
           description: '模型 API 容器化部署、GPU 资源管理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",

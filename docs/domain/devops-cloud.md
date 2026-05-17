@@ -12,7 +12,7 @@ const data = {
         {
           title: 'Linux 系统管理',
           description: '文件系统、进程管理、用户权限、systemd 服务管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: 'Shell 脚本编程',
           description: '变量、循环、条件判断、函数、sed / awk 文本处理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: '文本编辑器',
           description: 'Vim 操作、Vim 配置与插件',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -78,7 +78,7 @@ const data = {
         {
           title: '网络基础',
           description: 'IP 地址 / 子网掩码、路由、DNS 解析、iptables 规则',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -100,7 +100,7 @@ const data = {
         {
           title: '版本控制',
           description: 'Git 分支策略、Git Flow、GitHub / GitLab 协作流程',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -123,7 +123,7 @@ const data = {
           title: 'Go / Python 编程',
           description: '自动化脚本、CLI 工具开发、REST API 调用',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -151,7 +151,7 @@ const data = {
         {
           title: 'Docker 核心',
           description: '镜像构建、Dockerfile 编写、docker-compose 编排',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -173,7 +173,7 @@ const data = {
         {
           title: 'Docker 网络与存储',
           description: 'Bridge / Host / Overlay 网络、Volume / Bind Mount',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -187,7 +187,7 @@ const data = {
         {
           title: 'Docker 最佳实践',
           description: '多阶段构建、镜像瘦身、安全扫描',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -208,7 +208,7 @@ const data = {
         {
           title: 'Kubernetes 核心概念',
           description: 'Pod、Deployment、Service、ConfigMap / Secret',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -230,7 +230,7 @@ const data = {
         {
           title: 'kubectl 日常操作',
           description: '资源查询、日志查看、端口转发、滚动更新',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -251,7 +251,7 @@ const data = {
         {
           title: 'Helm',
           description: 'Chart 结构、模板化部署、仓库管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -273,7 +273,7 @@ const data = {
           title: 'Kustomize',
           description: '声明式配置管理、环境差异化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -288,7 +288,7 @@ const data = {
           title: 'Podman / containerd',
           description: '无守护进程容器引擎、CRI 接口',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -308,7 +308,7 @@ const data = {
         {
           title: 'GitHub Actions',
           description: 'Workflow 编写、Job / Step 定义、矩阵构建',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -329,7 +329,7 @@ const data = {
         {
           title: 'GitLab CI',
           description: '.gitlab-ci.yml 配置、Runner 搭建、Pipeline 可视化',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -349,7 +349,7 @@ const data = {
         {
           title: 'Jenkins',
           description: 'Pipeline as Code（Declarative / Scripted）、插件生态',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -371,7 +371,7 @@ const data = {
         {
           title: '制品管理',
           description: 'Nexus / Artifactory / Docker Registry 搭建与配置',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -385,7 +385,7 @@ const data = {
         {
           title: '自动化测试集成',
           description: '单元测试、代码扫描（SonarQube）、构建质量门禁',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -406,7 +406,7 @@ const data = {
           title: 'ArgoCD',
           description: 'GitOps 声明式部署、应用自动同步',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -432,7 +432,7 @@ const data = {
         {
           title: 'Terraform 核心',
           description: 'HCL 语法、Provider / Resource / State 管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -453,7 +453,7 @@ const data = {
         {
           title: 'Terraform 进阶',
           description: 'Module 封装、远程 State（S3 / Consul）、Workspace',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -467,7 +467,7 @@ const data = {
         {
           title: 'Ansible',
           description: 'Playbook 编写、Inventory 管理、Role 复用',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -488,7 +488,7 @@ const data = {
         {
           title: '配置管理',
           description: 'Ansible 批量配置分发、环境一致性保障',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -503,7 +503,7 @@ const data = {
           title: 'Pulumi',
           description: '通用编程语言定义基础设施（TypeScript / Python / Go）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -524,7 +524,7 @@ const data = {
           title: 'Packer',
           description: '统一镜像构建（AMI / VM / Docker）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -550,7 +550,7 @@ const data = {
         {
           title: 'Prometheus',
           description: '指标采集、PromQL 查询、Alertmanager 告警',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -571,7 +571,7 @@ const data = {
         {
           title: 'Grafana',
           description: 'Dashboard 面板、数据源配置、告警通知',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -591,7 +591,7 @@ const data = {
         {
           title: '日志收集（ELK / Loki）',
           description: 'Filebeat / Fluentd 日志采集、Elasticsearch 存储、Kibana 可视化',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -613,7 +613,7 @@ const data = {
         {
           title: '链路追踪',
           description: 'Jaeger / Zipkin 分布式追踪、OpenTelemetry 标准',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -635,7 +635,7 @@ const data = {
           title: 'SLO / SLI / SLA',
           description: '服务可用性指标定义、错误预算',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -650,7 +650,7 @@ const data = {
           title: 'APM 工具',
           description: 'Datadog / New Relic / SkyWalking',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -670,7 +670,7 @@ const data = {
         {
           title: 'AWS 核心服务',
           description: 'EC2、S3、RDS、VPC、ELB、IAM 权限管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -691,7 +691,7 @@ const data = {
         {
           title: '阿里云核心服务',
           description: 'ECS、OSS、RDS、VPC、SLB、RAM',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -713,7 +713,7 @@ const data = {
         {
           title: '云原生数据库',
           description: 'AWS Aurora / 阿里云 PolarDB、Redis 托管服务',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -727,7 +727,7 @@ const data = {
         {
           title: '对象存储',
           description: 'S3 / OSS 权限策略、生命周期管理、CDN 加速',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -749,7 +749,7 @@ const data = {
           title: 'Azure / GCP',
           description: 'AKS / GKE 托管 Kubernetes、Cloud Functions',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -764,7 +764,7 @@ const data = {
           title: '多云与混合云',
           description: '云互联、云迁移策略、成本优化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -785,7 +785,7 @@ const data = {
           title: '镜像安全扫描',
           description: 'Trivy / Clair / Anchore',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -807,7 +807,7 @@ const data = {
           title: 'Kubernetes 安全',
           description: 'RBAC / PodSecurityPolicy / NetworkPolicy / OPA Gatekeeper',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -829,7 +829,7 @@ const data = {
           title: '密钥管理',
           description: 'HashiCorp Vault / AWS Secrets Manager / Kubernetes External Secrets',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -851,7 +851,7 @@ const data = {
           title: '合规审计',
           description: 'CIS Benchmark、kube-bench、kube-hunter',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -872,7 +872,7 @@ const data = {
           title: '容量规划',
           description: '压力测试、资源评估、弹性伸缩（HPA / VPA / Cluster Autoscaler）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -894,7 +894,7 @@ const data = {
           title: '故障演练',
           description: 'Chaos Engineering、Litmus / Chaos Mesh',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -916,7 +916,7 @@ const data = {
           title: '容灾与备份',
           description: '跨区域复制、RTO / RPO 定义、定期恢复演练',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -931,7 +931,7 @@ const data = {
           title: '成本治理',
           description: '云成本分析（FinOps）、资源优化、预留实例',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -946,7 +946,7 @@ const data = {
           title: 'SRE 实践',
           description: '值班 On-Call、事故管理、事后复盘（Blameless Postmortem）',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",

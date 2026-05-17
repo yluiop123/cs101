@@ -10,7 +10,7 @@ const data = {
         {
           title: 'Fiddler 简介',
           description: 'Fiddler 是由 Telerik 推出的 HTTP 调试代理工具，在 Windows 平台上拥有悠久历史。它以强大的会话管理、请求构造器和脚本扩展能力著称，支持 HTTP/HTTPS 流量的捕获、分析和修改。Fiddler Everywhere 是跨平台的新一代版本，支持 macOS 和 Linux。',
-          groups: [
+          resources: [
             {
               name: '官方文档',
               icon: 'mdi-file-document-outline',
@@ -25,7 +25,7 @@ const data = {
         {
           title: '安装方式',
           description: 'Fiddler Classic 仅支持 Windows 且免费。Fiddler Everywhere 是跨平台商业版，可通过官网下载或 Homebrew（macOS）安装。',
-          groups: [
+          resources: [
             {
               name: '下载',
               icon: 'mdi-download',
@@ -52,7 +52,7 @@ const data = {
         {
           title: '会话列表与过滤',
           description: 'Fiddler 以会话（Session）为单位展示所有 HTTP 流量，支持按 URL、状态码、Host、请求方法等多种条件组合过滤，绿色高亮显示图片、蓝色显示 HTML 等直观标识。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -65,7 +65,7 @@ const data = {
         {
           title: 'AutoResponder',
           description: 'Fiddler 的标志性功能之一。可以设置自动响应规则，将特定请求直接返回预设的响应内容（本地文件或自定义文本），非常适合前端 Mock 数据和离线调试。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -78,7 +78,7 @@ const data = {
         {
           title: 'Composer 请求构造器',
           description: '内置请求构造器，可以手动编辑并发送 HTTP 请求，支持设置方法、URL、Headers 和 Body，用于快速测试 API 接口。',
-          groups: [
+          resources: [
             {
               name: '文档',
               icon: 'mdi-file-document-outline',
@@ -91,7 +91,7 @@ const data = {
         {
           title: 'FiddlerScript',
           description: 'Fiddler 内置基于 JScript.NET 的脚本引擎 FiddlerScript，可以在请求/响应生命周期的各个阶段注入自定义逻辑，实现复杂的流量处理和自动化。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -104,7 +104,7 @@ const data = {
         {
           title: 'HTTPS 解密',
           description: 'Fiddler 支持通过生成根证书来解密 HTTPS 流量，可以查看加密请求的完整内容。支持按域名排除、按进程过滤等灵活配置。',
-          groups: [
+          resources: [
             {
               name: '文档',
               icon: 'mdi-file-document-outline',
@@ -124,7 +124,7 @@ const data = {
           title: '扩展与插件',
           description: 'Fiddler 拥有丰富的扩展生态，包括 Traffic Differ（流量对比）、SyntaxView（语法高亮）、JavaScript Formatter 等数百款社区插件。',
           optional: true,
-          groups: [
+          resources: [
             {
               name: '扩展',
               icon: 'mdi-puzzle',
@@ -138,7 +138,7 @@ const data = {
           title: '命令行模式与 API',
           description: 'Fiddler 支持通过命令行参数自动化启动和配置，并提供 ExecAction 自动化接口，可与 CI/CD 流程集成。',
           optional: true,
-          groups: [
+          resources: [
             {
               name: '文档',
               icon: 'mdi-file-document-outline',

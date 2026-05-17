@@ -10,7 +10,7 @@ const data = {
         {
           title: 'Wireshark 简介',
           description: 'Wireshark（原名 Ethereal）是目前全球使用最广泛的开源网络协议分析工具。它可以实时捕获网络接口上的数据包，并提供强大的过滤、分析和可视化功能，是网络工程师、安全从业者和开发者的必备工具。支持 Windows、macOS 和 Linux 三大平台。',
-          groups: [
+          resources: [
             {
               name: '官方文档',
               icon: 'mdi-file-document-outline',
@@ -33,7 +33,7 @@ const data = {
         {
           title: '安装方式',
           description: 'Wireshark 提供各平台的安装包和源码，安装过程会自动集成 Npcap/WinPcap 驱动用于底层抓包。',
-          groups: [
+          resources: [
             {
               name: '下载',
               icon: 'mdi-download',
@@ -52,7 +52,7 @@ const data = {
         {
           title: '实时抓包',
           description: '选择网络接口即可开始实时捕获数据包，支持同时捕获多个接口、设置捕获过滤规则（BPF 语法），以及使用环形缓冲区限制内存占用。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -65,7 +65,7 @@ const data = {
         {
           title: '显示过滤',
           description: 'Wireshark 最强大的功能之一。使用表达式语法（如 http.request、tcp.port==80、ip.addr==192.168.1.1）快速筛选目标数据包，支持逻辑运算符组合和颜色高亮规则。',
-          groups: [
+          resources: [
             {
               name: '参考文档',
               icon: 'mdi-file-document-outline',
@@ -79,7 +79,7 @@ const data = {
         {
           title: '协议解析',
           description: 'Wireshark 内置数千种协议解析器，支持 HTTP、TCP/IP、DNS、TLS、HTTP/2、gRPC、WebSocket 等常见协议的结构化解析，并能自动识别协议版本和字段含义。',
-          groups: [
+          resources: [
             {
               name: '协议列表',
               icon: 'mdi-file-document-outline',
@@ -92,7 +92,7 @@ const data = {
         {
           title: '统计分析',
           description: '提供丰富的统计功能，包括协议分层统计、会话列表、端点统计、IO 图表、TCP 流图（时序图/吞吐量）、服务响应时间分析等，帮助快速定位网络性能瓶颈。',
-          groups: [
+          resources: [
             {
               name: '文档',
               icon: 'mdi-file-document-outline',
@@ -105,7 +105,7 @@ const data = {
         {
           title: '追踪 TCP 流',
           description: '右键点击数据包即可完整追踪 TCP 流，自动重组并展示应用层数据传输全过程，支持 HTTP 请求/响应、文件传输等内容的完整查看与导出。',
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -125,7 +125,7 @@ const data = {
           title: 'TLS 解密',
           description: '通过导入服务器私钥或配置 SSLKEYLOGFILE 环境变量（浏览器支持），Wireshark 可以解密 HTTPS 流量，查看 TLS 握手详情和加密后的应用数据。',
           optional: true,
-          groups: [
+          resources: [
             {
               name: '教程',
               icon: 'mdi-play-circle-outline',
@@ -140,7 +140,7 @@ const data = {
           title: '命令行工具 tshark',
           description: 'Wireshark 提供命令行版的 tshark，可用于服务器端抓包和自动化脚本，支持与 grep/awk 等工具配合进行批量数据处理。',
           optional: true,
-          groups: [
+          resources: [
             {
               name: '文档',
               icon: 'mdi-file-document-outline',

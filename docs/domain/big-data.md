@@ -12,7 +12,7 @@ const data = {
         {
           title: 'Java SE 核心',
           description: '集合、IO、多线程、网络编程（大数据框架多基于 JVM）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -34,7 +34,7 @@ const data = {
         {
           title: 'Python 基础',
           description: '数据处理脚本编写、爬虫基础（辅助 ETL 开发）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -56,7 +56,7 @@ const data = {
         {
           title: 'SQL 进阶',
           description: '复杂查询、窗口函数、CTE、SQL 优化与执行计划',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -77,7 +77,7 @@ const data = {
         {
           title: 'Linux 操作',
           description: '常用命令、Shell 脚本、权限管理、进程管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -100,7 +100,7 @@ const data = {
           title: '数据结构与算法',
           description: '排序、Hash、树、分布式场景下的常用算法',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -128,7 +128,7 @@ const data = {
         {
           title: '数据仓库理论',
           description: '维度建模（星型 / 雪花型）、分层架构（ODS / DWD / DWS / ADS）',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -142,7 +142,7 @@ const data = {
         {
           title: 'Hive 数据仓库',
           description: 'HiveQL、分区表 / 分桶表、存储格式（Parquet / ORC）',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -164,7 +164,7 @@ const data = {
         {
           title: 'HDFS 分布式存储',
           description: '文件读写原理、副本机制、NameNode / DataNode 架构',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -185,7 +185,7 @@ const data = {
         {
           title: '数据采集',
           description: 'Flume / Logstash 日志采集、DataX / Sqoop 数据同步',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -200,7 +200,7 @@ const data = {
           title: 'Apache Hudi / Iceberg',
           description: '湖仓一体、ACID 事务、增量查询',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -220,7 +220,7 @@ const data = {
         {
           title: 'MapReduce 编程模型',
           description: 'Mapper / Reducer、Shuffle 原理、Combiner',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -240,7 +240,7 @@ const data = {
         {
           title: 'Apache Spark 核心',
           description: 'RDD、DataFrame / Dataset、Spark SQL、Spark Streaming',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -262,7 +262,7 @@ const data = {
         {
           title: 'Spark 调优',
           description: '内存管理、Shuffle 调优、数据倾斜解决方案',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -275,7 +275,7 @@ const data = {
         {
           title: 'Apache Flink 核心',
           description: 'DataStream API、时间语义、Watermark、状态管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -297,7 +297,7 @@ const data = {
           title: 'Flink CDC',
           description: '实时数据同步、MySQL Binlog 捕获',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -312,7 +312,7 @@ const data = {
           title: 'Presto / Trino',
           description: '联邦查询、跨数据源分析',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -332,7 +332,7 @@ const data = {
         {
           title: 'Apache Kafka',
           description: '生产者 / 消费者、Topic / Partition、偏移量管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -353,7 +353,7 @@ const data = {
         {
           title: 'Kafka 高阶特性',
           description: '幂等性、事务、Exactly-Once 语义、Kafka Streams',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -367,7 +367,7 @@ const data = {
         {
           title: '实时数仓架构',
           description: 'Kafka + Flink + ClickHouse 实时管道搭建',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -382,7 +382,7 @@ const data = {
           title: 'Apache Pulsar',
           description: '多租户、分层存储、计算存储分离',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -396,7 +396,7 @@ const data = {
           title: 'RocketMQ',
           description: '事务消息、延时消息、顺序消息',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -415,7 +415,7 @@ const data = {
         {
           title: '任务调度',
           description: 'Apache Airflow DAG 编写、Cron 触发、依赖管理',
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -436,7 +436,7 @@ const data = {
         {
           title: 'DolphinScheduler',
           description: '可视化工作流、定时调度、告警机制',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -449,7 +449,7 @@ const data = {
         {
           title: '数据治理',
           description: '元数据管理（Atlas）、数据质量（Griffin）、血缘分析',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -463,7 +463,7 @@ const data = {
         {
           title: '数据可视化',
           description: 'Superset / Grafana 搭建报表平台',
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -478,7 +478,7 @@ const data = {
           title: '数据安全',
           description: '数据脱敏、访问控制、审计日志',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -499,7 +499,7 @@ const data = {
           title: 'Lambda 架构',
           description: '批流一体化数据处理',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -514,7 +514,7 @@ const data = {
           title: 'Kappa 架构',
           description: '纯流式数据处理架构',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -529,7 +529,7 @@ const data = {
           title: 'ClickHouse 实时 OLAP',
           description: '列式存储、MergeTree 引擎、查询优化',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
@@ -551,7 +551,7 @@ const data = {
           title: 'Doris',
           description: '现代化 MPP 分析数据库、StarRocks',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "官方文档",
               icon: "mdi-file-document-outline",
@@ -566,7 +566,7 @@ const data = {
           title: '云原生大数据',
           description: 'EMR / Databricks / Snowflake 云数仓',
           optional: true,
-          groups: [
+          resources: [
             {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
