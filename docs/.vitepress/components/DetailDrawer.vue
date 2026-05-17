@@ -40,7 +40,10 @@ const drawerModel = computed({
         <div class="drawer-body">
           <div v-if="item">
             <div v-if="item.description" class="description-card">
-              <p class="text-body-2 mb-0" style="color: rgba(var(--v-theme-on-surface), 0.7); line-height: 1.7;">{{ item.description }}</p>
+              <div class="description-accent" />
+              <div class="description-content">
+                <p class="description-text">{{ item.description }}</p>
+              </div>
             </div>
 
             <ResourceLinkList v-if="item.resources?.length" :groups="item.resources" />
@@ -91,11 +94,32 @@ const drawerModel = computed({
 }
 
 .description-card {
-  background: rgba(var(--v-theme-on-surface), 0.03);
-  border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+  display: flex;
+  gap: 0;
+  background: linear-gradient(135deg, rgba(var(--v-theme-primary), 0.04) 0%, rgba(var(--v-theme-primary), 0.01) 100%);
+  border: 1px solid rgba(var(--v-theme-primary), 0.1);
   border-radius: 10px;
-  padding: 16px 18px;
   margin-bottom: 28px;
+  overflow: hidden;
+}
+
+.description-accent {
+  width: 4px;
+  flex-shrink: 0;
+  background: rgb(var(--v-theme-primary));
+  opacity: 0.5;
+}
+
+.description-content {
+  padding: 14px 18px;
+  flex: 1;
+}
+
+.description-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: rgba(var(--v-theme-on-surface), 0.75);
 }
 
 @media (max-width: 768px) {
