@@ -17,7 +17,7 @@ const data = {
               name: "视频教程",
               icon: "mdi-play-circle-outline",
               items: [
-                { title: "尚硅谷 HTML+CSS 教程", url: "https://www.bilibili.com/video/BV1Kg4y1i7Fb", icon: "mdi-play-circle-outline" },
+                { title: "尚硅谷 HTML+CSS 教程", url: "https://www.bilibili.com/video/BV1Kg4y1i7Fb", icon: "mdi-play-circle-outline",lang:"zh",type:"article" },
                 { title: "HTML & CSS Full Course", url: "https://www.youtube.com/watch?v=G3e-cpL7ofc", icon: "mdi-play-circle-outline" }
               ],
             },

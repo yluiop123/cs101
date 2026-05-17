@@ -1,17 +1,68 @@
-import { readFileSync } from 'fs'
-import vuetify from 'vite-plugin-vuetify'
-import { defineConfig } from 'vitepress'
+import { readFileSync } from 'fs';
+import vuetify from 'vite-plugin-vuetify';
+import { defineConfig } from 'vitepress';
 
-function extractTitles(md_src: string): { pageName: string; titles: string[] } {
-  const titles: string[] = []
-  const regex = /(?:title|name):\s*'([^']+)'/g
-  let match
-  while ((match = regex.exec(md_src)) !== null) {
-    const text = match[1].replace(/\*\*/g, '').trim()
-    if (text && text.length > 1) titles.push(text)
+interface SearchSection { anchor: string; titles: string[]; text: string }
+
+function extractSections(md_src: string): SearchSection[] {
+  // Page-level name
+  const pageNameMatch = md_src.match(/name:\s*'([^']+)'/)
+  const pageName = pageNameMatch ? pageNameMatch[1] : ''
+
+  // Find the items array (ContentView pattern)
+  const itemsPos = md_src.indexOf('items: [')
+  if (itemsPos === -1) {
+    // Fallback: use all titles as one section
+    const titles: string[] = []
+    const tRegex = /(?:title|name):\s*'([^']+)'/g
+    let m
+    while ((m = tRegex.exec(md_src)) !== null) {
+      const t = m[1].replace(/\*\*/g, '').trim()
+      if (t && t.length > 1) titles.push(t)
+    }
+    return titles.length ? [{ anchor: '', titles: pageName ? [pageName] : ['CS101'], text: titles.join(' ') }] : []
   }
-  const nameMatch = md_src.match(/name:\s*'([^']+)'/)
-  return { pageName: nameMatch ? nameMatch[1] : '', titles }
+
+  // Parse sections from items array
+  const itemsContent = md_src.slice(itemsPos + 8)
+  const sections: SearchSection[] = []
+  let idx = 0
+
+  // Match each section block: { name: '...', ... children: [...] }
+  const secRegex = /\{\s*name:\s*'([^']+)'(?:[\s\S]*?)children:\s*\[/g
+  let secMatch: RegExpExecArray | null
+
+  while ((secMatch = secRegex.exec(itemsContent)) !== null) {
+    const secName = secMatch[1]
+    const childrenStart = secMatch.index + secMatch[0].length
+
+    // Find matching closing bracket for children[...]
+    let depth = 1
+    let j = childrenStart
+    while (j < itemsContent.length && depth > 0) {
+      if (itemsContent[j] === '[') depth++
+      else if (itemsContent[j] === ']') depth--
+      j++
+    }
+    const childrenBlock = itemsContent.slice(childrenStart, j - 1)
+
+    // Extract child titles
+    const titleRegex = /title:\s*'([^']+)'/g
+    const texts: string[] = [secName]
+    let t
+    while ((t = titleRegex.exec(childrenBlock)) !== null) {
+      texts.push(t[1])
+    }
+
+    sections.push({
+      anchor: '#item-' + idx,
+      titles: pageName ? [pageName, secName] : [secName],
+      text: texts.join(' '),
+    })
+    idx++
+  }
+
+  return sections
 }
 
 export default defineConfig({
@@ -22,7 +73,11 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/icon.svg', type: 'image/svg+xml' }],
     ['link', { rel: 'apple-touch-icon', href: '/icon.svg' }],
-    ['style', {}, `.VPNavBar .logo { height: 40px; width: auto; }`],
+    ['style', {}, `.VPNavBar .logo { height: 40px; width: auto; }
+a { text-decoration: none !important; }
+a:hover { text-decoration: none !important; }
+.VPContent a { text-decoration: none !important; border-bottom: none !important; }
+.VPContent a:hover { text-decoration: none !important; border-bottom: none !important; }`],
   ],
   vite: {
     plugins: [vuetify({ autoImport: true })],
@@ -37,6 +92,8 @@ export default defineConfig({
       { text: '计算机科学', link: '/computer-science/' },
       { text: '技术栈路线', link: '/tech-stack/' },
       { text: '应用领域路线', link: '/domain/' },
+      { text: '全部教程', link: '/tutorials/' },
+      { text: '开发工具', link: '/tools/' },
     ],
     sidebar: {
       '/tech-stack/': [
@@ -102,21 +159,127 @@ export default defineConfig({
         },
       ],
       '/computer-science/': [
+        { text: '核心基础', link: '/computer-science/#core' },
+        { text: '系统与软件', link: '/computer-science/#systems' },
+        { text: '数学与理论', link: '/computer-science/#math' },
+        { text: '应用领域', link: '/computer-science/#applied' },
+      ],
+      '/tutorials/': [
+        { text: '前端开发', link: '/tutorials/#frontend' },
+        { text: '后端开发', link: '/tutorials/#backend' },
+        { text: '数据库', link: '/tutorials/#database' },
+        { text: '移动开发', link: '/tutorials/#mobile' },
+        { text: '运维与 DevOps', link: '/tutorials/#devops' },
+        { text: 'AI 与数据科学', link: '/tutorials/#ai' },
+        { text: '计算机基础', link: '/tutorials/#fundamentals' },
+        { text: '开发工具', link: '/tutorials/#dev-tools' },
+      ],
+      '/tools/': [
+        { text: '概览', link: '/tools/' },
         {
-          text: '计算机科学',
+          text: '版本控制',
           items: [
-            { text: '概览', link: '/computer-science/' },
-            { text: '数据结构与算法', link: '/computer-science/data-structures-algorithms' },
-            { text: '计算机网络', link: '/computer-science/computer-networks' },
-            { text: '操作系统', link: '/computer-science/operating-systems' },
-            { text: '数据库系统原理', link: '/computer-science/database-systems' },
-            { text: '计算机组成原理', link: '/computer-science/computer-organization' },
-            { text: '编译原理', link: '/computer-science/compilers' },
-            { text: '离散数学', link: '/computer-science/discrete-mathematics' },
-            { text: '软件工程', link: '/computer-science/software-engineering' },
-            { text: '人工智能导论', link: '/computer-science/artificial-intelligence' },
-            { text: '计算机图形学', link: '/computer-science/computer-graphics' },
-            { text: '密码学', link: '/computer-science/cryptography' },
+            { text: 'Git', link: '/tools/version-control/git' },
+            { text: 'Git GUI 工具', link: '/tools/version-control/git-gui' },
+          ],
+        },
+        {
+          text: 'IDE 与编辑器',
+          items: [
+            { text: 'VS Code', link: '/tools/ide/vscode' },
+            { text: 'IntelliJ IDEA', link: '/tools/ide/intellij-idea' },
+            { text: 'WebStorm', link: '/tools/ide/webstorm' },
+            { text: 'PyCharm', link: '/tools/ide/pycharm' },
+            { text: 'GoLand', link: '/tools/ide/goland' },
+            { text: 'Vim / Neovim', link: '/tools/ide/vim' },
+          ],
+        },
+        {
+          text: '终端与 Shell',
+          items: [
+            { text: 'Windows Terminal', link: '/tools/terminal/windows-terminal' },
+            { text: 'iTerm2', link: '/tools/terminal/iterm2' },
+            { text: 'Warp', link: '/tools/terminal/warp' },
+            { text: 'Oh My Zsh / Oh My Posh', link: '/tools/terminal/oh-my-zsh' },
+            { text: 'tmux', link: '/tools/terminal/tmux' },
+          ],
+        },
+        {
+          text: 'API 调试与接口',
+          items: [
+            { text: 'Postman', link: '/tools/api/postman' },
+            { text: 'Bruno', link: '/tools/api/bruno' },
+            { text: 'Insomnia', link: '/tools/api/insomnia' },
+            { text: 'cURL / HTTPie', link: '/tools/api/curl' },
+          ],
+        },
+        {
+          text: '数据库客户端',
+          items: [
+            { text: 'DBeaver', link: '/tools/database/dbeaver' },
+            { text: 'DataGrip', link: '/tools/database/datagrip' },
+            { text: 'Navicat', link: '/tools/database/navicat' },
+            { text: 'Redis Insight', link: '/tools/database/redis-insight' },
+            { text: 'MongoDB Compass', link: '/tools/database/mongodb-compass' },
+          ],
+        },
+        {
+          text: '容器与虚拟化',
+          items: [
+            { text: 'Docker Desktop', link: '/tools/container/docker-desktop' },
+            { text: 'OrbStack', link: '/tools/container/orbstack' },
+            { text: 'Podman', link: '/tools/container/podman' },
+            { text: 'Vagrant / Multipass', link: '/tools/container/vagrant-multipass' },
+          ],
+        },
+        {
+          text: '网络与抓包',
+          items: [
+            { text: 'Wireshark', link: '/tools/network/wireshark' },
+            { text: 'Charles', link: '/tools/network/charles' },
+            { text: 'Proxyman', link: '/tools/network/proxyman' },
+            { text: 'Fiddler', link: '/tools/network/fiddler' },
+          ],
+        },
+        {
+          text: '性能与诊断',
+          items: [
+            { text: 'JMeter', link: '/tools/performance/jmeter' },
+            { text: 'Arthas', link: '/tools/performance/arthas' },
+            { text: 'VisualVM', link: '/tools/performance/visualvm' },
+            { text: 'async-profiler', link: '/tools/performance/async-profiler' },
+          ],
+        },
+        {
+          text: 'AI 辅助开发',
+          items: [
+            { text: 'GitHub Copilot', link: '/tools/ai/github-copilot' },
+            { text: 'Claude Code', link: '/tools/ai/claude-code' },
+            { text: 'Cursor', link: '/tools/ai/cursor' },
+          ],
+        },
+        {
+          text: '设计 / 截图',
+          items: [
+            { text: 'Figma', link: '/tools/design/figma' },
+            { text: 'Snipaste', link: '/tools/design/snipaste' },
+          ],
+        },
+        {
+          text: '包管理器',
+          items: [
+            { text: 'npm / pnpm / yarn', link: '/tools/package-manager/npm-pnpm-yarn' },
+            { text: 'pip', link: '/tools/package-manager/pip' },
+            { text: 'Maven / Gradle', link: '/tools/package-manager/maven-gradle' },
+            { text: 'Homebrew / Scoop / Chocolatey', link: '/tools/package-manager/homebrew-scoop-choco' },
+          ],
+        },
+        {
+          text: 'CLI 效率工具',
+          items: [
+            { text: 'lazygit / lazydocker', link: '/tools/cli/lazygit-lazydocker' },
+            { text: 'jq / yq', link: '/tools/cli/jq-yq' },
+            { text: 'ripgrep / fd / fzf / htop', link: '/tools/cli/rg-fd-fzf-htop' },
           ],
         },
       ],
@@ -127,9 +290,7 @@ export default defineConfig({
         miniSearch: {
           _splitIntoSections(file: string) {
             const src = readFileSync(file, 'utf-8')
-            const { pageName, titles } = extractTitles(src)
-            if (!titles.length) return undefined
-            return [{ anchor: '', titles: pageName ? [pageName] : ['CS101'], text: titles.join(' ') }]
+            return extractSections(src)
           },
         },
         translations: {

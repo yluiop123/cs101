@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue'
 import RoadmapDiagram from './RoadmapDiagram.vue'
-
-interface ResourceItem { title: string; url: string; icon?: string }
-
-interface ResourceGroup {
-  name: string
-  icon?: string
-  items: ResourceItem[]
-}
+import DetailDrawer from './DetailDrawer.vue'
+import type { ResourceGroup } from './types'
 
 interface Item {
-  title: string; description: string; optional?: boolean; note?: string; detail?: string
+  title: string; description: string; optional?: boolean
   groups?: ResourceGroup[]
 }
 
@@ -57,7 +51,7 @@ watch(viewMode, async (newMode) => {
 
 <template>
   <div class="pa-2 pa-md-4">
-    <p class="text-body-1 text-grey-darken-1 mb-4">{{ data.description }}</p>
+    <p class="text-body-1 mb-4" style="color: rgba(var(--v-theme-on-surface), 0.6);">{{ data.description }}</p>
 
     <div class="d-flex align-center mb-6">
       <v-btn-toggle
@@ -70,7 +64,7 @@ watch(viewMode, async (newMode) => {
         class="view-toggle"
         divided
       >
-        <v-btn value="document" prepend-icon="mdi-file-document-outline" class="toggle-btn" size="small">文档视图</v-btn>
+        <v-btn value="document" prepend-icon="mdi-file-document-outline" class="toggle-btn" size="small">文档</v-btn>
         <v-btn value="roadmap" prepend-icon="mdi-graph-outline" class="toggle-btn" size="small">路线图</v-btn>
       </v-btn-toggle>
     </div>
@@ -85,161 +79,83 @@ watch(viewMode, async (newMode) => {
     <!-- 文档内容 -->
     <div v-show="viewMode === 'document'">
     <div v-for="(section, si) in data.items" :key="si" class="mb-6">
-      <h2 :id="'item-' + si" class="text-h4 font-weight-bold ma-0 mb-3">
-        {{ section.name }}
-        <v-chip v-if="section.subtitle" size="x-small" color="primary" variant="flat" class="font-weight-medium" style="vertical-align: middle;">
+      <div class="d-flex align-center ga-2 mb-3">
+        <h2 :id="'item-' + si" class="text-h5 font-weight-bold ma-0">
+          {{ section.name }}
+        </h2>
+        <v-chip v-if="section.subtitle" size="x-small" color="primary" variant="flat" class="font-weight-medium">
           {{ section.subtitle }}
         </v-chip>
-      </h2>
-      <p v-if="section.note" class="text-caption text-grey font-italic mb-3">{{ section.note }}</p>
+      </div>
+      <p v-if="section.note" class="text-caption font-italic mb-3" style="color: rgba(var(--v-theme-on-surface), 0.5);">{{ section.note }}</p>
 
-      <div class="d-flex flex-column ga-1">
+      <div class="d-flex flex-column ga-2">
         <v-card
           v-for="(child, ii) in section.children" :key="ii"
-          variant="outlined" color="grey"
+          rounded="lg"
+          variant="flat"
           class="item-card"
           @click="openItem(child)"
         >
-          <div class="d-flex align-center ga-3 pa-3">
-            <v-icon :color="child.optional ? 'grey-lighten-1' : 'success'" size="small">
-              {{ child.optional ? 'mdi-circle' : 'mdi-check-circle' }}
-            </v-icon>
+          <div class="d-flex align-center ga-2 pa-4">
             <div class="flex-grow-1 min-w-0">
-              <div class="text-subtitle-2 font-weight-bold text-grey-darken-3">{{ child.title }}</div>
-              <div class="text-caption text-grey mt-1 text-truncate">{{ child.description }}</div>
+              <div class="d-flex align-center ga-2">
+                <span class="text-subtitle-2 font-weight-bold">{{ child.title }}</span>
+                <v-chip v-if="child.optional" size="x-small" color="grey" variant="tonal" class="font-weight-medium" style="font-size: 11px;">选修</v-chip>
+                <v-chip v-else size="x-small" color="primary" variant="flat" class="font-weight-medium" style="font-size: 11px;">必修</v-chip>
+              </div>
+              <div class="text-caption mt-1" style="color: rgba(var(--v-theme-on-surface), 0.6);">{{ child.description }}</div>
             </div>
-            <v-icon size="small" color="grey-lighten-1" class="item-arrow">mdi-chevron-right</v-icon>
+            <v-icon size="small" class="item-arrow flex-shrink-0">mdi-chevron-right</v-icon>
           </div>
         </v-card>
       </div>
     </div>
     </div>
-
-    <!-- ====== DRAWER SCRIM ====== -->
-    <transition name="fade">
-      <div v-if="drawer" class="drawer-scrim" @click="closeDrawer" />
-    </transition>
 
     <!-- ====== RIGHT-SIDE DRAWER ====== -->
-    <transition name="slide">
-      <div v-if="drawer" class="drawer-wrapper">
-        <v-card class="drawer-card" elevation="4">
-          <div class="d-flex align-center justify-space-between px-6 pt-5 pb-0">
-            <span class="text-truncate pr-2" v-if="selectedItem">
-              <v-icon :color="selectedItem.optional ? 'grey-lighten-1' : 'success'" size="small" class="mr-1">
-                {{ selectedItem.optional ? 'mdi-circle' : 'mdi-check-circle' }}
-              </v-icon>
-              <span class="text-subtitle-1 font-weight-bold">{{ selectedItem.title }}</span>
-            </span>
-            <v-btn icon="mdi-close" variant="text" size="small" color="grey" class="flex-shrink-0" @click="closeDrawer" />
-          </div>
-          <v-divider class="ma-4" />
-
-          <div class="px-6 pb-6 drawer-body" v-if="selectedItem">
-            <p class="text-body-1 mb-4">{{ selectedItem.description }}</p>
-
-            <v-alert
-              v-if="selectedItem.detail"
-              variant="tonal" color="info" class="mb-4"
-              style="white-space: pre-wrap;"
-              icon="mdi-information"
-            >{{ selectedItem.detail }}</v-alert>
-
-            <v-alert
-              v-if="selectedItem.note"
-              variant="tonal" color="warning" class="mb-4"
-              style="white-space: pre-wrap;"
-              icon="mdi-alert"
-            >{{ selectedItem.note }}</v-alert>
-
-            <div v-if="selectedItem.groups?.length" class="mb-4">
-              <div v-for="(group, gi) in selectedItem.groups" :key="gi" class="mb-4">
-                <div class="d-flex align-center ga-2 mb-1">
-                  <v-icon v-if="group.icon" size="small" color="grey-darken-1">{{ group.icon }}</v-icon>
-                  <span class="text-subtitle-2 font-weight-bold text-grey-darken-2">{{ group.name }}</span>
-                </div>
-                <v-list lines="one" class="bg-transparent">
-                  <v-list-item
-                    v-for="(r, i) in group.items" :key="i"
-                    :href="r.url" target="_blank" rel="noopener"
-                    :title="r.title"
-                    :prepend-icon="r.icon || 'mdi-link-variant'"
-                    color="primary"
-                  />
-                </v-list>
-              </div>
-            </div>
-          </div>
-        </v-card>
-      </div>
-    </transition>
+    <DetailDrawer v-model="drawer" :item="selectedItem" />
   </div>
 </template>
 
-<style>
-.drawer-scrim {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-}
-.drawer-wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50vw;
-  max-width: 680px;
-  height: 100vh;
-  z-index: 1001;
-}
-.drawer-wrapper .v-card.drawer-card {
-  height: 100vh;
-  border-radius: 0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-.drawer-wrapper .drawer-body {
-  flex: 1;
-  overflow-y: auto;
-}
-@media (max-width: 768px) {
-  .drawer-wrapper {
-    width: 100vw;
-    max-width: 100vw;
-  }
-}
-
-.fade-enter-active, .fade-leave-active { transition: opacity 0.25s; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
-
-.slide-enter-active, .slide-leave-active { transition: transform 0.25s ease; }
-.slide-enter-from, .slide-leave-to { transform: translateX(100%); }
-</style>
-
 <style scoped>
-.item-card { cursor: pointer !important; transition: all 0.15s !important; }
-.item-card:hover { border-color: rgb(var(--v-theme-primary)) !important; }
-.item-card:hover .item-arrow { opacity: 0.8; }
-.item-card--no-click { cursor: default !important; }
-.item-arrow { opacity: 0.4; transition: opacity 0.15s; }
+.item-card {
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.08) !important;
+}
+.item-card:hover {
+  border-color: rgb(var(--v-theme-primary)) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+}
+.item-arrow {
+  color: rgba(var(--v-theme-on-surface), 0.25);
+  transition: color 0.15s;
+}
+.item-card:hover .item-arrow {
+  color: rgba(var(--v-theme-on-surface), 0.6);
+}
 
 .view-toggle {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: #f8f9fa;
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.12);
+  background: rgba(var(--v-theme-on-surface), 0.03);
 }
 .view-toggle .toggle-btn {
   font-weight: 500;
   letter-spacing: 0.3px;
-  min-width: 100px;
+  min-width: 90px;
+  text-transform: none;
 }
 .view-toggle .v-btn--active {
   background: rgb(var(--v-theme-primary)) !important;
   color: #fff !important;
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 2px 8px rgba(var(--v-theme-primary), 0.3);
 }
 .view-toggle .v-btn--active .v-icon {
   color: #fff !important;
+}
+.view-toggle .v-btn:not(.v-btn--active):hover {
+  background: rgba(var(--v-theme-on-surface), 0.04);
 }
 
 </style>

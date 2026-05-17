@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(curl -sI \"https://api.github.com/repos/kamranahmedse/developer-roadmap/contents/src/data/roadmaps/datastructures-and-algorithms\")",
+      "Bash(curl -sL \"https://api.github.com/repos/kamranahmedse/developer-roadmap/contents/src/data/roadmaps/datastructures-and-algorithms/datastructures-and-algorithms.json\")",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
