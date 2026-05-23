@@ -1,161 +1,48 @@
-<script setup>
-import TutorialCards from '../.vitepress/components/TutorialCards.vue'
-
-const categories = [
-  {
-    id: 'core',
-    title: '核心基础',
-    icon: 'mdi-monitor',
-    color: '#2196F3',
-    items: [
-      { title: '数据结构与算法', description: '数组、链表、树、图、排序、搜索、动态规划等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '尚硅谷 数据结构与算法', url: 'https://www.bilibili.com/video/BV1LJ411W7dP', icon: 'mdi-play-circle-outline' },
-          { title: 'Algorithms Full Course', url: 'https://www.youtube.com/watch?v=8hly31xKli0', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '数据结构与算法基础', url: './data-structures-algorithms', icon: 'mdi-file-document-outline' },
-          { title: 'VisuAlgo 可视化', url: 'https://visualgo.net/', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-      { title: '计算机网络', description: 'TCP/IP、HTTP/HTTPS、DNS、网络安全协议等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '计算机网络 微学堂', url: 'https://www.bilibili.com/video/BV1c4411d7jb', icon: 'mdi-play-circle-outline' },
-          { title: 'Computer Networking Course', url: 'https://www.youtube.com/watch?v=qiQR5rTSshw', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '计算机网络基础', url: './computer-networks', icon: 'mdi-file-document-outline' },
-          { title: 'MDN HTTP 文档', url: 'https://developer.mozilla.org/zh-CN/docs/Web/HTTP', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-      { title: '操作系统', description: '进程管理、内存管理、文件系统、并发与同步等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '操作系统 微学堂', url: 'https://www.bilibili.com/video/BV1YE411D7nH', icon: 'mdi-play-circle-outline' },
-          { title: 'Operating Systems Course', url: 'https://www.youtube.com/watch?v=vBURTt97EkA', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '操作系统基础', url: './operating-systems', icon: 'mdi-file-document-outline' },
-          { title: 'OS Dev Wiki', url: 'https://wiki.osdev.org/', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-      { title: '数据库系统原理', description: '关系模型、SQL、索引、事务、ACID、范式设计等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '尚硅谷 数据库教程', url: 'https://www.bilibili.com/video/BV1iq4y1u7vj', icon: 'mdi-play-circle-outline' },
-          { title: 'Database Systems Course', url: 'https://www.youtube.com/watch?v=4Z9KEBexzcM', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '数据库系统原理', url: './database-systems', icon: 'mdi-file-document-outline' },
-          { title: 'W3Schools SQL', url: 'https://www.w3schools.com/sql/', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-      { title: '计算机组成原理', description: 'CPU 架构、存储器层次、指令流水线、I/O 系统等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '计算机组成原理 哈工大', url: 'https://www.bilibili.com/video/BV1WW411Q7PF', icon: 'mdi-play-circle-outline' },
-          { title: 'Computer Architecture Course', url: 'https://www.youtube.com/watch?v=zLP_X4wyHbY', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '计算机组成原理', url: './computer-organization', icon: 'mdi-file-document-outline' },
-          { title: 'CPU 架构概览', url: 'https://www.runoob.com/computer-organization/computer-organization-tutorial.html', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-    ],
-  },
-  {
-    id: 'systems',
-    title: '系统与软件',
-    icon: 'mdi-code-brackets',
-    color: '#4CAF50',
-    items: [
-      { title: '编译原理', description: '词法分析、语法分析、语义分析、中间代码生成、优化等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '编译原理 哈工大', url: 'https://www.bilibili.com/video/BV1zW411t7YE', icon: 'mdi-play-circle-outline' },
-          { title: 'Compiler Design Course', url: 'https://www.youtube.com/watch?v=Qkwj65l_96I', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '编译原理基础', url: './compilers', icon: 'mdi-file-document-outline' },
-          { title: 'Crafting Interpreters', url: 'https://craftinginterpreters.com/', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-      { title: '软件工程', description: '软件过程、需求分析、设计模式、测试、项目管理等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '软件工程 教程 B站', url: 'https://www.bilibili.com/video/BV1kW411W7pZ', icon: 'mdi-play-circle-outline' },
-          { title: 'Software Engineering Course', url: 'https://www.youtube.com/watch?v=O753uuutqH8', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '软件工程基础', url: './software-engineering', icon: 'mdi-file-document-outline' },
-          { title: '菜鸟教程 设计模式', url: 'https://www.runoob.com/design-pattern/design-pattern-tutorial.html', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-    ],
-  },
-  {
-    id: 'math',
-    title: '数学与理论',
-    icon: 'mdi-sigma',
-    color: '#9C27B0',
-    items: [
-      { title: '离散数学', description: '数理逻辑、集合论、图论、代数结构、组合数学等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '离散数学 教程 B站', url: 'https://www.bilibili.com/video/BV1Rt41197xe', icon: 'mdi-play-circle-outline' },
-          { title: 'Discrete Mathematics Course', url: 'https://www.youtube.com/watch?v=tyDKR4DCUhs', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '离散数学基础', url: './discrete-mathematics', icon: 'mdi-file-document-outline' },
-          { title: '菜鸟教程 离散数学', url: 'https://www.runoob.com/discrete-mathematics/discrete-mathematics-tutorial.html', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-      { title: '密码学', description: '对称/公钥密码、哈希函数、数字签名、安全协议等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '密码学 教程 B站', url: 'https://www.bilibili.com/video/BV1Kx411N7Qe', icon: 'mdi-play-circle-outline' },
-          { title: 'Cryptography Full Course', url: 'https://www.youtube.com/watch?v=6_Cxj5WKpIw', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '密码学基础', url: './cryptography', icon: 'mdi-file-document-outline' },
-          { title: 'Crypto 101', url: 'https://www.crypto101.io/', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-    ],
-  },
-  {
-    id: 'applied',
-    title: '应用领域',
-    icon: 'mdi-application',
-    color: '#FF9800',
-    items: [
-      { title: '人工智能导论', description: '搜索、知识表示、机器学习、深度学习、强化学习等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '吴恩达 机器学习教程', url: 'https://www.bilibili.com/video/BV1Bq421A7G6', icon: 'mdi-play-circle-outline' },
-          { title: 'AI Full Course', url: 'https://www.youtube.com/watch?v=JMUxmLyrhSk', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '人工智能导论', url: './artificial-intelligence', icon: 'mdi-file-document-outline' },
-          { title: 'Scikit-learn 文档', url: 'https://scikit-learn.org/stable/', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-      { title: '计算机图形学', description: '渲染管线、光照模型、纹理映射、光线追踪等', resources: [
-        { name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-          { title: '计算机图形学 教程 B站', url: 'https://www.bilibili.com/video/BV1X4411W7KF', icon: 'mdi-play-circle-outline' },
-          { title: 'Computer Graphics Course', url: 'https://www.youtube.com/watch?v=00Tb3I31wX0', icon: 'mdi-play-circle-outline' },
-        ]},
-        { name: '在线教程', icon: 'mdi-file-document-outline', items: [
-          { title: '计算机图形学', url: './computer-graphics', icon: 'mdi-file-document-outline' },
-          { title: 'LearnOpenGL', url: 'https://learnopengl.com/', icon: 'mdi-file-document-outline' },
-        ]},
-      ]},
-    ],
-  },
-]
-</script>
-
 # 计算机科学
 
 计算机科学是技术领域的根基，涵盖从底层硬件到上层应用的完整知识体系。掌握计算机科学基础，有助于更深入地理解编程语言、框架和系统设计背后的原理。
 
-<TutorialCards
-  v-for="(cat, i) in categories" :key="i"
-  :id="cat.id"
-  :title="cat.title"
-  :icon="cat.icon"
-  :color="cat.color"
-  :items="cat.items"
-/>
+本栏目提供两套学习路线，你可根据语言偏好和需求选择：
+
+<div style="display: flex; gap: 20px; margin: 32px 0; flex-wrap: wrap;">
+
+<a href="./zh/" style="flex: 1; min-width: 240px; display: block; text-decoration: none; border: 2px solid #e0e0e0; border-radius: 12px; padding: 28px 24px; transition: all 0.2s; color: inherit;" onmouseover="this.style.borderColor='#2563eb';this.style.boxShadow='0 4px 16px rgba(37,99,235,0.1)'" onmouseout="this.style.borderColor='#e0e0e0';this.style.boxShadow='none'">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+    <div style="width: 44px; height: 44px; border-radius: 12px; background: #eff6ff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#2563eb"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <div>
+      <div style="font-size: 1.2rem; font-weight: 700; color: #1e293b;">国内教程</div>
+      <div style="font-size: 0.85rem; color: #64748b;">中文授课 · 国内平台</div>
+    </div>
+  </div>
+  <div style="font-size: 0.9rem; color: #475569; line-height: 1.6;">
+    基于国内高校和平台的中文计算机科学课程体系，适合中文母语学习者。覆盖核心基础、系统与软件、数学理论、应用领域。
+  </div>
+  <div style="margin-top: 16px; color: #2563eb; font-weight: 600; font-size: 0.9rem;">进入 →</div>
+</a>
+
+<a href="./ossu/" style="flex: 1; min-width: 240px; display: block; text-decoration: none; border: 2px solid #e0e0e0; border-radius: 12px; padding: 28px 24px; transition: all 0.2s; color: inherit;" onmouseover="this.style.borderColor='#7c3aed';this.style.boxShadow='0 4px 16px rgba(124,58,237,0.1)'" onmouseout="this.style.borderColor='#e0e0e0';this.style.boxShadow='none'">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+    <div style="width: 44px; height: 44px; border-radius: 12px; background: #f5f3ff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#7c3aed"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+    </div>
+    <div>
+      <div style="font-size: 1.2rem; font-weight: 700; color: #1e293b;">国际教程</div>
+      <div style="font-size: 0.85rem; color: #64748b;">OSSU · 英文授课</div>
+    </div>
+  </div>
+  <div style="font-size: 0.9rem; color: #475569; line-height: 1.6;">
+    开源社区维护的计算机科学自学课程体系（OSSU），汇集 MIT、Stanford、Harvard 等世界顶尖大学的免费课程，对标 CS 2013 大纲。
+  </div>
+  <div style="margin-top: 16px; color: #7c3aed; font-weight: 600; font-size: 0.9rem;">进入 →</div>
+</a>
+
+</div>
+
+## 学习建议
+
+- **打好基础**：数据结构、操作系统、网络、数据库是 CS 核心，建议优先投入时间
+- **动手实践**：编程是实践学科，多写代码、多做项目
+- **持续积累**：计算机科学是长期积累的过程，保持持续学习的习惯
+- **语言选择**：中文资源适合快速入门，英文资源更丰富前沿，建议两者结合

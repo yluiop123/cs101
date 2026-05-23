@@ -7,3 +7,12 @@ export interface DrawerItem {
   optional?: boolean
   resources?: ResourceGroup[]
 }
+
+export interface CardItem {
+  title: string
+  description?: string
+  url?: string
+  lang?: 'zh' | 'en'
+  type?: 'article' | 'video'
+  resources?: ResourceGroup[]
+}

@@ -1,25 +1,29 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import DetailDrawer from './DetailDrawer.vue';
-import type { DrawerItem } from './types';
+import type { DrawerItem, CardItem } from './types';
 
-defineProps<{
+const props = defineProps<{
   id: string
   title: string
   icon: string
   color: string
-  items: { title: string; url: string; desc?: string; lang?: 'zh' | 'en'; type?: 'article' | 'video' }[]
+  items: CardItem[]
 }>()
 
-const selectedItem = ref<{ title: string; url: string; desc?: string; lang?: 'zh' | 'en'; type?: 'article' | 'video' } | null>(null)
+const selectedItem = ref<CardItem | null>(null)
 const drawer = ref(false)
 
 const drawerItem = computed<DrawerItem | null>(() => {
   if (!selectedItem.value) return null
-  return selectedItem.value;
+  return {
+    title: selectedItem.value.title,
+
+    resources: selectedItem.value.resources,
+  }
 })
 
-function openItem(item: { title: string; url: string; desc?: string; lang?: 'zh' | 'en'; type?: 'article' | 'video' }) {
+function openItem(item: CardItem) {
   selectedItem.value = item
   drawer.value = true
 }
@@ -57,9 +61,6 @@ function openItem(item: { title: string; url: string; desc?: string; lang?: 'zh'
                 <v-icon size="16">mdi-book-open-variant</v-icon>
               </div>
               <span class="text-subtitle-2 font-weight-bold">{{ item.title }}</span>
-            </div>
-            <div v-if="item.desc" class="text-caption mt-1" style="color: rgba(var(--v-theme-on-surface), 0.6); margin-left: 36px;">
-              {{ item.desc }}
             </div>
           </v-card-text>
         </v-card>

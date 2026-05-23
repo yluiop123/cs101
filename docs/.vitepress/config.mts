@@ -89,7 +89,13 @@ a:hover { text-decoration: none !important; }
     logo: '/icon.svg',
     nav: [
       { text: '首页', link: '/' },
-      { text: '计算机科学', link: '/computer-science/' },
+      {
+        text: '计算机科学',
+        items: [
+          { text: '国内教程', link: '/computer-science/' },
+          { text: '国际教程', link: '/computer-science/ossu/' },
+        ],
+      },
       { text: '技术栈路线', link: '/tech-stack/' },
       { text: '应用领域路线', link: '/domain/' },
       { text: '全部教程', link: '/tutorials/' },
@@ -159,10 +165,28 @@ a:hover { text-decoration: none !important; }
         },
       ],
       '/computer-science/': [
-        { text: '核心基础', link: '/computer-science/#core' },
-        { text: '系统与软件', link: '/computer-science/#systems' },
-        { text: '数学与理论', link: '/computer-science/#math' },
-        { text: '应用领域', link: '/computer-science/#applied' },
+        { text: '计算机科学', link: '/computer-science/' },
+        {
+          text: '国内教程',
+          items: [
+            { text: '概述', link: '/computer-science/zh/' },
+            { text: '专业基础课', link: '/computer-science/zh/#basic' },
+            { text: '专业必修课', link: '/computer-science/zh/#required' },
+            { text: '专业选修课', link: '/computer-science/zh/#elective' },
+            { text: '数学必修/选修课', link: '/computer-science/zh/#math' },
+          ],
+        },
+        {
+          text: '国际教程',
+          items: [
+            { text: '概述', link: '/computer-science/ossu/' },
+            { text: '入门与编程基础', link: '/computer-science/ossu/#intro-programming' },
+            { text: '数学与理论', link: '/computer-science/ossu/#math-theory' },
+            { text: '系统与软件', link: '/computer-science/ossu/#systems-software' },
+            { text: '安全与伦理', link: '/computer-science/ossu/#security-ethics' },
+            { text: '应用与毕业项目', link: '/computer-science/ossu/#applied-projects' },
+          ],
+        },
       ],
       '/tutorials/': [
         { text: '前端开发', link: '/tutorials/#frontend' },
