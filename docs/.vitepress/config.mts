@@ -92,7 +92,7 @@ a:hover { text-decoration: none !important; }
       {
         text: '计算机科学',
         items: [
-          { text: '国内教程', link: '/computer-science/' },
+          { text: '国内教程', link: '/computer-science/zh/' },
           { text: '国际教程', link: '/computer-science/ossu/' },
         ],
       },
