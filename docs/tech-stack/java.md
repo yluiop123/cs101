@@ -2,82 +2,264 @@
 import ContentView from '../.vitepress/components/ContentView.vue'
 const data = {
   name: 'Java 技术路线',
-  description: 'Java 是最成熟的企业级开发语言之一，拥有极其丰富的生态体系。',
+  description: 'Java 全栈技术图谱，涵盖从基础到架构、微服务与云原生生态',
 
   items: [
     {
-      name: 'Java 基础入门', subtitle: '必修',
+      name: '基础必备',
+      subtitle: '必修',
       children: [
-        { title: 'Java 语言概述与环境搭建', description: 'JDK 安装配置、IntelliJ IDEA 使用、第一个 Java 程序', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 Java 零基础教程", url: "https://www.bilibili.com/video/BV1GJ411x7h7", icon: "mdi-play-circle-outline", lang: "zh", type: "video" }, { title: "Java Full Course", url: "https://www.youtube.com/watch?v=xk4_1vDrzzo", icon: "mdi-play-circle-outline", lang: "en", type: "video" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "廖雪峰 Java 教程", url: "https://www.liaoxuefeng.com/wiki/1252599548343744", icon: "mdi-file-document-outline", lang: "zh", type: "article" }, { title: "Oracle Java Tutorials", url: "https://docs.oracle.com/javase/tutorial/", icon: "mdi-file-document-outline", lang: "en", type: "article" }] }] },
-        { title: '基础语法与流程控制', description: '数据类型、运算符、if/switch/循环结构', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "黑马 JavaSE 教程", url: "https://www.bilibili.com/video/BV1eu411Z7jG", icon: "mdi-play-circle-outline" }, { title: "Java Basics", url: "https://www.youtube.com/watch?v=eIrMbAQSU34", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 Java", url: "https://www.runoob.com/java/java-tutorial.html", icon: "mdi-file-document-outline" }, { title: "W3Schools Java", url: "https://www.w3schools.com/java/", icon: "mdi-file-document-outline" }] }] },
-        { title: '面向对象编程核心', description: '类与对象、继承、封装、多态、抽象类与接口', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "韩顺平 Java OOP", url: "https://www.bilibili.com/video/BV1FH4y1v7jF", icon: "mdi-play-circle-outline" }, { title: "Java OOP Tutorial", url: "https://www.youtube.com/playlist?list=PL9ooVrP1hQOGHNaSa6i4lP4PLVkXeCThS", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "JavaGuide OOP", url: "https://javaguide.cn/java/basis/java-basic-questions-01.html", icon: "mdi-file-document-outline" }, { title: "W3Schools Java OOP", url: "https://www.w3schools.com/java/java_oop.asp", icon: "mdi-file-document-outline" }] }] },
-        { title: '常用基础类库', description: 'String 处理、日期时间 API（java.time）、Math 类', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Java 常用类库", url: "https://www.bilibili.com/video/BV1Kb411W75N", icon: "mdi-play-circle-outline" }, { title: "Java String & Date", url: "https://www.youtube.com/watch?v=YQnX1Md01ks", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 Java String", url: "https://www.runoob.com/java/java-string.html", icon: "mdi-file-document-outline" }, { title: "Oracle Java String", url: "https://docs.oracle.com/javase/tutorial/java/data/strings.html", icon: "mdi-file-document-outline" }] }] },
-        { title: '集合框架', description: 'List、Set、Map 接口体系、HashMap 底层原理、Collections 工具类', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Java 集合框架详解", url: "https://www.bilibili.com/video/BV1LJ411W7dd", icon: "mdi-play-circle-outline" }, { title: "Java Collections", url: "https://www.youtube.com/watch?v=GWJjX0M1FMg", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "JavaGuide 集合", url: "https://javaguide.cn/java/collection/java-collection-questions-01.html", icon: "mdi-file-document-outline" }, { title: "Oracle Collections", url: "https://docs.oracle.com/javase/tutorial/collections/", icon: "mdi-file-document-outline" }] }] },
-        { title: '泛型与注解', description: '泛型类/方法/接口、类型擦除、内置注解与自定义注解', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Java 泛型", url: "https://www.bilibili.com/video/BV1Y7411A79m", icon: "mdi-play-circle-outline" }, { title: "Java Generics", url: "https://www.youtube.com/watch?v=K1iu1kXkVoA", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 Java 泛型", url: "https://www.runoob.com/java/java-generics.html", icon: "mdi-file-document-outline" }, { title: "Oracle Generics", url: "https://docs.oracle.com/javase/tutorial/java/generics/", icon: "mdi-file-document-outline" }] }] },
-        { title: '异常处理机制', description: 'try-catch-finally、throws/throw、自定义异常', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Java 异常处理教程", url: "https://www.bilibili.com/video/BV1Y7411A79m", icon: "mdi-play-circle-outline" }, { title: "Java Exception", url: "https://www.youtube.com/watch?v=2J3R0T4pYOw", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 Java 异常", url: "https://www.runoob.com/java/java-exceptions.html", icon: "mdi-file-document-outline" }, { title: "Oracle Java Exception", url: "https://docs.oracle.com/javase/tutorial/essential/exceptions/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'I/O 流与文件操作', description: '字节流/字符流、缓冲流、转换流、NIO 概述', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Java I/O 流教程", url: "https://www.bilibili.com/video/BV1Y7411A7eK", icon: "mdi-play-circle-outline" }, { title: "Java I/O", url: "https://www.youtube.com/watch?v=7Fi9y7p7QGY", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 Java I/O", url: "https://www.runoob.com/java/java-files-io.html", icon: "mdi-file-document-outline" }, { title: "Oracle I/O Streams", url: "https://docs.oracle.com/javase/tutorial/essential/io/", icon: "mdi-file-document-outline" }] }] },
-        { title: '多线程基础', description: 'Thread/Runnable、线程状态、synchronized、wait/notify', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Java 多线程与并发编程", url: "https://www.bilibili.com/video/BV1cJ411v7BE", icon: "mdi-play-circle-outline" }, { title: "Java Multithreading", url: "https://www.youtube.com/watch?v=WldMTtCPGqY", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "JavaGuide 并发", url: "https://javaguide.cn/java/concurrent/java-concurrent-questions-01.html", icon: "mdi-file-document-outline" }, { title: "Oracle Concurrency", url: "https://docs.oracle.com/javase/tutorial/essential/concurrency/", icon: "mdi-file-document-outline" }] }] },
+        {
+          title: 'Java基础',
+          description: 'Java视频教程，java入门神器（附300道Java面试题剖析）',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Java入门教程（上部）', url: 'https://www.bilibili.com/video/BV1YT4y1H7YM' },
+            { title: '尚硅谷Java入门教程（下部）', url: 'https://www.bilibili.com/video/av1151411044/' },
+          ]}],
+        },
+        {
+          title: 'MySQL',
+          description: 'MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷MySQL百科全书', url: 'https://www.bilibili.com/video/BV1iq4y1u7vj' },
+            { title: '尚硅谷MySQL数据库高级', url: 'https://www.bilibili.com/video/BV1KW411u7vy' },
+          ]}],
+        },
+        {
+          title: 'JDBC',
+          description: '尚硅谷JDBC教程 | jdbc基础到高级一套通关！',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷JDBC核心技术', url: 'https://www.bilibili.com/video/BV1eJ411c7rf' },
+          ]}],
+        },
+        {
+          title: 'JavaWeb',
+          description: 'JavaWeb全套教程，javaweb真正主流技术栈，直接上手独立开发项目',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷JavaWeb全新版', url: 'https://www.bilibili.com/video/BV1UN411x7xe' },
+          ]}],
+        },
+        {
+          title: 'JVM',
+          description: '尚硅谷JVM全套教程（详解java虚拟机）',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷宋红康JVM全套', url: 'https://www.bilibili.com/video/BV1PJ411n7xZ' },
+          ]}],
+        },
+        {
+          title: 'Arthas 线上诊断',
+          description: '阿里开源在线诊断工具：在线反编译、方法追踪、动态热更。配合 JMC + JFR 监控',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Arthas教程', url: 'https://www.bilibili.com/video/BV1LK411V7Nq' },
+          ]}],
+        },
       ]
     },
     {
-      name: '数据库与核心技能', subtitle: '必修',
+      name: '微服务核心',
+      subtitle: '核心',
       children: [
-        { title: 'MySQL 基础与 SQL 优化', description: 'CRUD、多表 JOIN、索引原理、EXPLAIN 执行计划', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 MySQL 高级教程", url: "https://www.bilibili.com/video/BV1Ah411z7qQ", icon: "mdi-play-circle-outline" }, { title: "MySQL Tutorial", url: "https://www.youtube.com/watch?v=7S_tz1z_5bA", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 MySQL", url: "https://www.runoob.com/mysql/mysql-tutorial.html", icon: "mdi-file-document-outline" }, { title: "MySQL Official Docs", url: "https://dev.mysql.com/doc/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'JDBC 与数据库连接池', description: 'JDBC API、PreparedStatement、HikariCP/Druid 连接池', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "JDBC 教程", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }, { title: "JDBC", url: "https://www.youtube.com/watch?v=9iUvuaChDEg", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 JDBC", url: "https://www.runoob.com/java/java-jdbc.html", icon: "mdi-file-document-outline" }, { title: "Oracle JDBC", url: "https://docs.oracle.com/javase/tutorial/jdbc/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'JVM 核心原理', description: '内存模型、垃圾回收、类加载机制', detail: '理解 JVM 是 Java 进阶的必经之路，对排查内存泄漏、性能调优至关重要。\n• 内存区域：堆、栈、方法区、程序计数器、本地方法栈\n• 垃圾回收：GC 算法（标记-清除/复制/标记-整理）、常见收集器（G1/ZGC）\n• 类加载机制：加载→验证→准备→解析→初始化、双亲委派模型\n• 调优基础：堆参数设置、GC 日志分析、OOM 排查思路', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 JVM 教程", url: "https://www.bilibili.com/video/BV1yE411Z7AP", icon: "mdi-play-circle-outline" }, { title: "JVM 原理", url: "https://www.youtube.com/watch?v=1tN0p4U2J_I", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "JavaGuide JVM", url: "https://javaguide.cn/java/jvm/", icon: "mdi-file-document-outline" }, { title: "Oracle JVM 文档", url: "https://docs.oracle.com/javase/specs/jvms/se11/html/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Maven / Gradle 构建工具', description: '依赖管理、生命周期、构建配置。推荐 Maven', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Maven 教程", url: "https://www.bilibili.com/video/BV1dp4y1Y73N", icon: "mdi-play-circle-outline" }, { title: "Gradle 教程", url: "https://www.youtube.com/watch?v=-dtcIn2W2rI", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Maven 中文指南", url: "https://maven.apache.org/guides/getting-started/index.html", icon: "mdi-file-document-outline" }, { title: "Gradle 官方文档", url: "https://docs.gradle.org/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'HTTP 协议', description: '请求/响应结构、状态码、Cookie/Session 机制', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "HTTP 协议详解", url: "https://www.bilibili.com/video/BV1o7411T7Lb", icon: "mdi-play-circle-outline" }, { title: "HTTP Explained", url: "https://www.youtube.com/watch?v=iYM2zFP3Zn0", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 HTTP", url: "https://www.runoob.com/http/http-tutorial.html", icon: "mdi-file-document-outline" }, { title: "MDN HTTP", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP", icon: "mdi-file-document-outline" }] }] },
-        { title: '开发工具', description: 'IntelliJ IDEA、Git 版本控制、API 调试、数据库客户端、接口文档', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "IDEA 教程", url: "https://www.bilibili.com/video/BV1aF411k7Bx", icon: "mdi-play-circle-outline" }, { title: "Git 教程", url: "https://www.youtube.com/watch?v=8JJ101D3knE", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "IntelliJ IDEA 官方文档", url: "https://www.jetbrains.com/help/idea/", icon: "mdi-file-document-outline" }, { title: "Git 官方文档", url: "https://git-scm.com/doc", icon: "mdi-file-document-outline" }] }] },
+        {
+          title: 'Spring6',
+          description: '尚硅谷Spring零基础入门到进阶，一套搞定spring6全套视频教程（源码级讲解）',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Spring6教程', url: 'https://www.bilibili.com/video/BV1kR4y1b7Qc' },
+          ]}],
+        },
+        {
+          title: 'SpringMVC',
+          description: 'SpringMVC教程，一套快速上手spring mvc，springmvc入门到实战',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷SpringMVC教程', url: 'https://www.bilibili.com/video/BV1Ry4y1574R' },
+          ]}],
+        },
+        {
+          title: 'MyBatis',
+          description: 'MyBatis零基础教程，mybatis快速上手，mybatis入门到项目实战',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷MyBatis零基础入门', url: 'https://www.bilibili.com/video/BV1VP4y1c7j7' },
+          ]}],
+        },
+        {
+          title: 'MyBatisPlus',
+          description: 'MyBatisPlus教程，一套玩转mybatisplus框架，mybatis-plus轻松上手',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷MyBatisPlus教程', url: 'https://www.bilibili.com/video/BV12R4y157Be' },
+          ]}],
+        },
+        {
+          title: 'SSM',
+          description: '尚硅谷最新版SSM教程，基于AI的全新ssm框架实战',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷SSM教程（AI版）', url: 'https://www.bilibili.com/video/BV14WtLeDEit' },
+          ]}],
+        },
+        {
+          title: 'Spring Data JPA',
+          description: '尚硅谷SpringData源码级讲授，快速上手spring data jpa',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷SpringData教程', url: 'https://www.bilibili.com/video/BV1w64y1c7dJ' },
+          ]}],
+        },
+        {
+          title: 'Redis7',
+          description: 'Redis教程，redis7零基础到进阶（附redis大厂面试题）',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Redis7教程', url: 'https://www.bilibili.com/video/BV13R4y1v7sP' },
+          ]}],
+        },
+        {
+          title: 'SpringBoot3',
+          description: 'springboot教程，SpringBoot3干活拉满，从零开始轻松拿下面试&加薪',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷SpringBoot3教程', url: 'https://www.bilibili.com/video/BV1Es4y1q7Bf' },
+          ]}],
+        },
+        {
+          title: 'SpringCloud',
+          description: '尚硅谷SpringCloud教程，springcloud从入门到大牛',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷SpringCloud教程', url: 'https://www.bilibili.com/video/BV1QR4y137yM' },
+          ]}],
+        },
+        {
+          title: 'SpringSecurity',
+          description: '尚硅谷Java项目SpringSecurity+OAuth2权限管理实战教程',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷SpringSecurity教程', url: 'https://www.bilibili.com/video/BV14b4y1A7Wz' },
+          ]}],
+        },
       ]
     },
     {
-      name: '主流框架与工程化', subtitle: '必修',
+      name: '微服务生态',
+      subtitle: '生态',
       children: [
-        { title: 'Spring Framework 核心', description: 'IoC 容器与 DI 依赖注入、AOP 切面编程', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 Spring 教程", url: "https://www.bilibili.com/video/BV1gW411W7Mx", icon: "mdi-play-circle-outline" }, { title: "Spring", url: "https://www.youtube.com/watch?v=g2dCJfr3eTY", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Spring 中文文档", url: "https://springdoc.cn/", icon: "mdi-file-document-outline" }, { title: "Spring Official Docs", url: "https://spring.io/docs", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Spring MVC', description: 'DispatcherServlet、拦截器、RESTful API 设计', note: 'Servlet 基础了解即可。JSP 已过时，无需投入时间。', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Spring MVC 教程", url: "https://www.bilibili.com/video/BV1gW411W7Mx", icon: "mdi-play-circle-outline" }, { title: "Spring MVC", url: "https://www.youtube.com/watch?v=a5Q3FQ0Lw6Y", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "菜鸟教程 Spring MVC", url: "https://www.runoob.com/spring-mvc/spring-mvc-tutorial.html", icon: "mdi-file-document-outline" }, { title: "Spring MVC Docs", url: "https://docs.spring.io/spring-framework/reference/web.html", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Spring Boot', description: '自动配置原理、起步依赖、Actuator 监控、全局异常处理', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 Spring Boot 教程", url: "https://www.bilibili.com/video/BV1ei4y1578G", icon: "mdi-play-circle-outline" }, { title: "Spring Boot", url: "https://www.youtube.com/watch?v=vtPkZShrvXQ", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Spring Boot 中文", url: "https://springdoc.cn/spring-boot/", icon: "mdi-file-document-outline" }, { title: "Spring Boot Docs", url: "https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'ORM 框架', description: 'MyBatis/MyBatis-Plus vs Spring Data JPA，二选一即可', note: 'MyBatis：SQL 手写、灵活可控，适合复杂查询，国内企业首选。\nSpring Data JPA：自动生成 SQL，适合 CRUD 为主的标准业务。\n可两者结合使用。', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 MyBatis 教程", url: "https://www.bilibili.com/video/BV1qC4y1X7RQ", icon: "mdi-play-circle-outline" }, { title: "JPA 教程", url: "https://www.youtube.com/watch?v=Yv2xctJxE-w", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "MyBatis 中文文档", url: "https://mybatis.org/mybatis-3/zh/index.html", icon: "mdi-file-document-outline" }, { title: "Spring Data JPA 文档", url: "https://docs.spring.io/spring-data/jpa/docs/current/reference/html/", icon: "mdi-file-document-outline" }] }] },
-        { title: '日志框架', description: 'SLF4J 门面 + Logback 实现', groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Logback 中文教程", url: "https://www.jianshu.com/p/1e5e6c9c0e9e", icon: "mdi-file-document-outline" }, { title: "SLF4J Manual", url: "https://www.slf4j.org/manual.html", icon: "mdi-file-document-outline" }] }] },
-        { title: '单元测试', description: 'JUnit 5 + Mockito + Spring Boot Test', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "JUnit 教程", url: "https://www.bilibili.com/video/BV1Y7411A79m", icon: "mdi-play-circle-outline" }, { title: "JUnit 5", url: "https://www.youtube.com/watch?v=flpmSXVTqBI", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "JUnit 5 中文教程", url: "https://junit.org/junit5/docs/current/user-guide/", icon: "mdi-file-document-outline" }, { title: "JUnit 5 Guide", url: "https://junit.org/junit5/docs/current/user-guide/", icon: "mdi-file-document-outline" }] }] },
+        {
+          title: 'Docker',
+          description: 'Docker实战教程，跟架构师学docker，docker入门到大神',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Docker教程', url: 'https://www.bilibili.com/video/BV1Zn4y1X7AZ' },
+            { title: 'Docker与微服务实战', url: 'https://www.bilibili.com/video/BV1gr4y1U7CY' },
+          ]}],
+        },
+        {
+          title: 'Elasticsearch',
+          description: 'ElasticSearch教程入门到精通（基于ELK技术栈elasticsearch 7.x+8.x新特性）',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷ES教程', url: 'https://www.bilibili.com/video/BV1hh411D7sb' },
+          ]}],
+        },
+        {
+          title: 'Zookeeper',
+          description: '大数据技术之Zookeeper 3.5.7版本教程',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Zookeeper教程', url: 'https://www.bilibili.com/video/BV1to4y1C7gw' },
+          ]}],
+        },
+        {
+          title: 'Nginx',
+          description: '尚硅谷Nginx教程（亿级流量nginx架构设计）',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Nginx教程', url: 'https://www.bilibili.com/video/BV1yS4y1N76R' },
+          ]}],
+        },
+        {
+          title: 'RocketMQ',
+          description: 'RocketMQ教程丨深度掌握MQ消息中间件',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷RocketMQ教程', url: 'https://www.bilibili.com/video/BV1cf4y157sz' },
+          ]}],
+        },
+        {
+          title: 'GitFlow',
+          description: '尚硅谷GitFlow教程，gitflow工作流实战速通',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Git & GitHub教程', url: 'https://www.bilibili.com/video/BV1pW411A7a5' },
+            { title: 'GitFlow实战速通', url: 'https://atguigu.com/video/354/' },
+          ]}],
+        },
       ]
     },
     {
-      name: '微服务与分布式架构', subtitle: '必修 / 选修',
-      children: [
-        { title: 'Spring Cloud Alibaba', description: 'Nacos 注册中心、OpenFeign 远程调用', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 Spring Cloud", url: "https://www.bilibili.com/video/BV1Lq4y1k7w3", icon: "mdi-play-circle-outline" }, { title: "Microservices", url: "https://www.youtube.com/watch?v=Vphg3JfUBrM", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Spring Cloud Alibaba 中文", url: "https://springdoc.cn/spring-cloud-alibaba/", icon: "mdi-file-document-outline" }, { title: "Spring Cloud Docs", url: "https://spring.io/projects/spring-cloud", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Redis 缓存', description: '五大数据类型、持久化 RDB/AOF、分布式锁 Redisson', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 Redis", url: "https://www.bilibili.com/video/BV1Jq4y1z7Yj", icon: "mdi-play-circle-outline" }, { title: "Redis Crash Course", url: "https://www.youtube.com/watch?v=Hbt56gFj998", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Redis 中文教程", url: "https://www.runoob.com/redis/redis-tutorial.html", icon: "mdi-file-document-outline" }, { title: "Redis Official Docs", url: "https://redis.io/docs/", icon: "mdi-file-document-outline" }] }] },
-        { title: '分布式基础理论', description: 'CAP 定理、BASE 理论、Raft/ZAB 一致性算法', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "分布式理论", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }, { title: "Distributed Systems", url: "https://www.youtube.com/watch?v=OsoX9AnJ3So", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "分布式基础", url: "https://javaguide.cn/distributed-system/", icon: "mdi-file-document-outline" }, { title: "CAP Theorem", url: "https://en.wikipedia.org/wiki/CAP_theorem", icon: "mdi-file-document-outline" }] }] },
-        { title: '消息队列选型', description: 'RabbitMQ / RocketMQ / Kafka，三选一', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "RabbitMQ 教程", url: "https://www.bilibili.com/video/BV1dX4y1V7yS", icon: "mdi-play-circle-outline" }, { title: "Kafka 教程", url: "https://www.youtube.com/watch?v=R873BlNVUB4", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "RabbitMQ 文档", url: "https://www.rabbitmq.com/documentation.html", icon: "mdi-file-document-outline" }, { title: "Kafka 文档", url: "https://kafka.apache.org/documentation/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Spring Cloud Gateway', description: '路由断言、过滤器链、跨域配置、限流', optional: true, groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Gateway 中文", url: "https://springdoc.cn/spring-cloud-gateway/", icon: "mdi-file-document-outline" }, { title: "Gateway Docs", url: "https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Docker', description: '镜像与容器、Dockerfile、docker-compose 编排', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷 Docker", url: "https://www.bilibili.com/video/BV1gr4y1F7rs", icon: "mdi-play-circle-outline" }, { title: "Docker", url: "https://www.youtube.com/watch?v=3c8m9v1Tg5I", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Docker 从入门到实践", url: "https://vuepress.mirror.docker-practice.com/", icon: "mdi-file-document-outline" }, { title: "Docker Docs", url: "https://docs.docker.com/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Elasticsearch', description: '倒排索引、DSL 查询、中文分词', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "ES 教程", url: "https://www.bilibili.com/video/BV1to4y1X7tS", icon: "mdi-play-circle-outline" }, { title: "Elasticsearch", url: "https://www.youtube.com/watch?v=Ou35QwCwBSs", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Elasticsearch 中文", url: "https://www.elastic.co/cn/what-is/elasticsearch", icon: "mdi-file-document-outline" }, { title: "ES Docs", url: "https://www.elastic.co/guide/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Spring Security', description: '认证授权、OAuth2、JWT、SSO', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Spring Security", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }, { title: "Spring Security", url: "https://www.youtube.com/watch?v=sm-8qfMWEV8", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Security 中文", url: "https://springdoc.cn/spring-security/", icon: "mdi-file-document-outline" }, { title: "Security Docs", url: "https://docs.spring.io/spring-security/reference/", icon: "mdi-file-document-outline" }] }] },
-        { title: '分布式事务', description: 'Seata AT/TCC/Saga 模式', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Seata 教程", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }, { title: "Distributed Transactions", url: "https://www.youtube.com/watch?v=Xzn5o0FxBJg", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Seata 中文文档", url: "https://seata.apache.org/zh-cn/", icon: "mdi-file-document-outline" }, { title: "Seata Docs", url: "https://seata.apache.org/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Sentinel 熔断限流', description: '流量控制、熔断降级、系统自适应保护', optional: true, groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Sentinel 中文", url: "https://sentinelguard.io/zh-cn/", icon: "mdi-file-document-outline" }, { title: "Sentinel Docs", url: "https://sentinelguard.io/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Kubernetes', description: 'Pod/Service/Deployment、Helm、集群部署', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "K8s 教程", url: "https://www.bilibili.com/video/BV1w4411y7Go", icon: "mdi-play-circle-outline" }, { title: "Kubernetes", url: "https://www.youtube.com/watch?v=X48VuDVv0do", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "K8s 中文指南", url: "https://kubernetes.io/zh-cn/docs/", icon: "mdi-file-document-outline" }, { title: "K8s Docs", url: "https://kubernetes.io/docs/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'SkyWalking 链路追踪', description: '分布式 tracing、APM 监控', optional: true, groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "SkyWalking 中文", url: "https://skywalking.apache.org/zh/", icon: "mdi-file-document-outline" }, { title: "SkyWalking Docs", url: "https://skywalking.apache.org/docs/", icon: "mdi-file-document-outline" }] }] },
-      ]
-    },
-    {
-      name: '问题排查与性能调优', subtitle: '选修', note: '这些技能在实际工作中至关重要，建议在掌握前三阶段后逐步学习。',
-      children: [
-        { title: 'Arthas 在线诊断', description: '在线诊断工具，热替换代码，无需重启', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Arthas 教程", url: "https://www.bilibili.com/video/BV1LK411V7Nq", icon: "mdi-play-circle-outline" }, { title: "Arthas", url: "https://www.youtube.com/watch?v=P1qzE_fA1Q8", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Arthas 官方文档", url: "https://arthas.aliyun.com/doc/", icon: "mdi-file-document-outline" }] }] },
-        { title: '线程 Dump 分析', description: '死锁检测、线程状态分析、CPU 飙高排查', optional: true, groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Java 线程 Dump 分析", url: "https://javaguide.cn/java/concurrent/thread-local.html", icon: "mdi-file-document-outline" }, { title: "Analyze Thread Dump", url: "https://dzone.com/articles/how-to-analyze-java-thread-dumps", icon: "mdi-file-document-outline" }] }] },
-        { title: '内存泄漏排查', description: '堆 Dump 分析、MAT/JProfiler、OOM 案例', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "JVM 调优教程", url: "https://www.bilibili.com/video/BV1yE411Z7AP", icon: "mdi-play-circle-outline" }, { title: "Memory Leak", url: "https://www.youtube.com/watch?v=4Fq4lRM_gCE", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "JavaGuide JVM", url: "https://javaguide.cn/java/jvm/", icon: "mdi-file-document-outline" }, { title: "Oracle JVM Tuning", url: "https://docs.oracle.com/en/java/javase/11/gctuning/", icon: "mdi-file-document-outline" }] }] },
-        { title: '慢 SQL 与数据库性能', description: '慢查询日志、EXPLAIN 分析、索引优化', optional: true, groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "MySQL 性能优化", url: "https://javaguide.cn/database/mysql/mysql-query-optimization.html", icon: "mdi-file-document-outline" }, { title: "SQL Tuning", url: "https://use-the-index-luke.com/", icon: "mdi-file-document-outline" }] }] },
-        { title: '性能压测', description: 'JMeter、QPS/TPS 指标、压测结果分析', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "JMeter 教程", url: "https://www.bilibili.com/video/BV1iJ411R7SP", icon: "mdi-play-circle-outline" }, { title: "JMeter", url: "https://www.youtube.com/watch?v=3w8peaS3VxA", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "JMeter 官方文档", url: "https://jmeter.apache.org/usermanual/", icon: "mdi-file-document-outline" }] }] },
-      ]
-    },
-    {
-      name: '大数据与 AI 后端', subtitle: '选修',
-      children: [
-        { title: 'Hadoop 生态', description: 'HDFS、MapReduce、YARN 资源调度', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Hadoop 教程", url: "https://www.bilibili.com/video/BV1pW411W7DQ", icon: "mdi-play-circle-outline" }, { title: "Hadoop", url: "https://www.youtube.com/watch?v=aReuLtY0D9Y", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Hadoop 中文教程", url: "https://hadoop.apache.org/docs/r3.3.4/hadoop-project-dist/hadoop-common/SingleCluster.html", icon: "mdi-file-document-outline" }, { title: "Hadoop Docs", url: "https://hadoop.apache.org/docs/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Spark 批处理', description: 'RDD/DataFrame/Dataset、Spark SQL', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Spark 教程", url: "https://www.bilibili.com/video/BV1pW411W7DQ", icon: "mdi-play-circle-outline" }, { title: "Spark", url: "https://www.youtube.com/watch?v=9seqM3dOOmM", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Spark 中文", url: "https://spark.apache.org/docs/latest/sql-programming-guide.html", icon: "mdi-file-document-outline" }, { title: "Spark Docs", url: "https://spark.apache.org/docs/latest/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Flink 流处理', description: '事件时间处理、状态管理、Checkpoint', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Flink 教程", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }, { title: "Flink", url: "https://www.youtube.com/watch?v=ZA7JgqSPkZc", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Flink 中文", url: "https://flink.apache.org/zh/", icon: "mdi-file-document-outline" }, { title: "Flink Docs", url: "https://nightlies.apache.org/flink/flink-docs-release-1.17/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Kafka 消息平台', description: '分区副本、生产者/消费者 API、Exactly-Once', optional: true, groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Kafka 教程", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }, { title: "Kafka", url: "https://www.youtube.com/watch?v=R873BlNVUB4", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Kafka 中文", url: "https://kafka.apachecn.org/", icon: "mdi-file-document-outline" }, { title: "Kafka Docs", url: "https://kafka.apache.org/documentation/", icon: "mdi-file-document-outline" }] }] },
-        { title: 'Hive 数仓', description: '数据仓库建模、HQL、分区表与分桶表', optional: true, groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Hive 中文教程", url: "https://hive.apache.org/", icon: "mdi-file-document-outline" }, { title: "Hive Docs", url: "https://cwiki.apache.org/confluence/display/Hive/Home", icon: "mdi-file-document-outline" }] }] },
-      ]
-    },
+    name: '选修内容',
+    subtitle: '选修',
+    children:[
+      {
+          title: 'Netty',
+          optional:true,
+          description: 'Netty 网络编程框架：NIO/Reactor 模型、编解码、RPC 底层通信基石',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Netty教程', url: 'https://www.bilibili.com/video/BV1DJ411m7NR' },
+          ]}],
+        },
+      { title: 'MySQL进阶', optional:true, description: 'MySQL 高级调优、索引优化、读写分离、分库分表',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马MySQL进阶教程', url: 'https://www.bilibili.com/video/BV1Kr4y1i7ru' },
+        ]}]},
+      { title: 'JVM进阶', optional:true, description: '深入 JVM 底层原理、内存模型、GC 调优实战',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马JVM进阶教程', url: 'https://www.bilibili.com/video/BV1r94y1b7eS' },
+        ]}]},
+      { title: '数据结构与算法', optional:true, description: '数据结构系统学习，大厂面试算法与 LeetCode 刷题',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马数据结构与算法（上）', url: 'https://www.bilibili.com/video/BV1Lv4y1e7HL' },
+          { title: '黑马数据结构与算法（下）', url: 'https://www.bilibili.com/video/BV1rv4y1H7o6' },
+        ]}]},
+      { title: 'SSM进阶', optional:true, description: 'Spring+SpringMVC+MyBatis 整合进阶实战',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马SSM进阶教程', url: 'https://www.bilibili.com/video/BV1Fi4y1S7ix' },
+        ]}]},
+      { title: 'SpringBoot进阶', optional:true, description: 'SpringBoot 底层原理与高级应用',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马SpringBoot进阶教程', url: 'https://www.bilibili.com/video/BV14z4y1N7pg' },
+        ]}]},
+      { title: 'Spring高级', optional:true, description: 'Spring 框架源码级深入，IoC/AOP 底层机制',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马Spring高级教程', url: 'https://www.bilibili.com/video/BV1P44y1N7QG' },
+        ]}]},
+      { title: 'SpringCloud进阶', optional:true, description: '微服务架构深入，服务治理与分布式组件',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马SpringCloud进阶教程', url: 'https://www.bilibili.com/video/BV1kH4y1S7wz' },
+        ]}]},
+      { title: 'Docker进阶', optional:true, description: '容器化进阶，Docker Compose/K8s 部署实战',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马Docker进阶教程', url: 'https://www.bilibili.com/video/BV1HP4118797' },
+        ]}]},
+      { title: 'Git', optional:true, description: 'Git 版本控制进阶，分支策略与团队协作',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马Git教程', url: 'https://www.bilibili.com/video/BV1MU4y1Y7h5' },
+        ]}]},
+      { title: 'Maven', optional:true, description: 'Maven 构建工具进阶，多模块管理与私服搭建',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马Maven教程', url: 'https://www.bilibili.com/video/BV1Ah411S7ZE' },
+        ]}]},
+      { title: 'Dubbo', optional:true, description: 'Apache Dubbo RPC 框架，微服务远程调用与治理',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马Dubbo教程', url: 'https://www.bilibili.com/video/BV1VE411q7dX' },
+        ]}]},
+      { title: 'Zookeeper', optional:true, description: 'Zookeeper 分布式协调服务，集群管理与选主',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马Zookeeper教程', url: 'https://www.bilibili.com/video/BV1M741137qY' },
+        ]}]},
+      { title: 'Redis进阶', optional:true, description: 'Redis 底层数据结构与高级应用，缓存策略与集群',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马Redis进阶教程', url: 'https://www.bilibili.com/video/BV1cr4y1671t' },
+        ]}]},
+      { title: 'MongoDB', optional:true, description: 'NoSQL 文档数据库，海量数据存储与高并发读写',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马MongoDB教程', url: 'https://www.bilibili.com/video/BV1bJ411x7mq' },
+        ]}]},
+      { title: 'RabbitMQ', optional:true, description: 'RabbitMQ 消息中间件，异步解耦与可靠消息投递',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马RabbitMQ教程', url: 'https://www.bilibili.com/video/BV1mN4y1Z7t9' },
+        ]}]},
+      { title: 'RocketMQ进阶', optional:true, description: 'RocketMQ 消息中间件进阶，事务消息与高可用',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '黑马RocketMQ进阶教程', url: 'https://www.bilibili.com/video/BV1L4411y7mn' },
+        ]}]},
+    ]
+    }
   ]
 }
 </script>
