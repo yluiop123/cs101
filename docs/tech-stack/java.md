@@ -13,25 +13,38 @@ const data = {
           title: 'Java基础',
           description: 'Java视频教程，java入门神器（附300道Java面试题剖析）',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-            { title: '尚硅谷Java入门教程（上部）', url: 'https://www.bilibili.com/video/BV1YT4y1H7YM' },
-            { title: '尚硅谷Java入门教程（下部）', url: 'https://www.bilibili.com/video/av1151411044/' },
+            { title: '尚硅谷Java教程- 宋红康）', url: 'https://www.bilibili.com/video/BV1PY411e7J6/' },
           ]}],
         },
         {
           title: 'MySQL',
           description: 'MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-            { title: '尚硅谷MySQL百科全书', url: 'https://www.bilibili.com/video/BV1iq4y1u7vj' },
-            { title: '尚硅谷MySQL数据库高级', url: 'https://www.bilibili.com/video/BV1KW411u7vy' },
+            { title: '尚硅谷MySQL百科全书', url: 'https://www.bilibili.com/video/BV1iq4y1u7vj' }
           ]}],
         },
         {
           title: 'JDBC',
+          optional:true,
           description: '尚硅谷JDBC教程 | jdbc基础到高级一套通关！',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
             { title: '尚硅谷JDBC核心技术', url: 'https://www.bilibili.com/video/BV1eJ411c7rf' },
           ]}],
         },
+        {
+          title: 'IDEA',
+          description: 'IDEA使用指南，idea教程，idea从安装到使用技巧',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷IDEA使用指南', url: 'https://www.bilibili.com/video/BV1CK411d7aA' },
+          ]}],
+        },
+        {
+          title: 'MAVEN',
+          description: 'Maven教程，maven安装及使用，5小时上手maven又快又稳',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '尚硅谷Maven教程', url: 'https://www.bilibili.com/video/BV1JN411G7gX' },
+          ]}],
+        },                
         {
           title: 'JavaWeb',
           description: 'JavaWeb全套教程，javaweb真正主流技术栈，直接上手独立开发项目',
@@ -50,7 +63,7 @@ const data = {
           title: 'Arthas 线上诊断',
           description: '阿里开源在线诊断工具：在线反编译、方法追踪、动态热更。配合 JMC + JFR 监控',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-            { title: '尚硅谷Arthas教程', url: 'https://www.bilibili.com/video/BV1LK411V7Nq' },
+            { title: '黑马Arthas教程', url: 'https://www.bilibili.com/video/BV19k4y1k7o9/' },
           ]}],
         },
       ]
@@ -60,7 +73,7 @@ const data = {
       subtitle: '核心',
       children: [
         {
-          title: 'Spring6',
+          title: 'Springframework',
           description: '尚硅谷Spring零基础入门到进阶，一套搞定spring6全套视频教程（源码级讲解）',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
             { title: '尚硅谷Spring6教程', url: 'https://www.bilibili.com/video/BV1kR4y1b7Qc' },
@@ -96,9 +109,9 @@ const data = {
         },
         {
           title: 'Spring Data JPA',
-          description: '尚硅谷SpringData源码级讲授，快速上手spring data jpa',
+          description: 'java进阶教程数据层全栈方案Spring Data高级应用',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-            { title: '尚硅谷SpringData教程', url: 'https://www.bilibili.com/video/BV1w64y1c7dJ' },
+            { title: '黑马SpringData教程', url: 'https://www.bilibili.com/video/BV1RE41167Pk/' },
           ]}],
         },
         {
@@ -119,7 +132,7 @@ const data = {
           title: 'SpringCloud',
           description: '尚硅谷SpringCloud教程，springcloud从入门到大牛',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-            { title: '尚硅谷SpringCloud教程', url: 'https://www.bilibili.com/video/BV1QR4y137yM' },
+            { title: '尚硅谷SpringCloud教程', url: 'https://www.bilibili.com/video/BV1UJc2ezEFU/' },
           ]}],
         },
         {
@@ -183,7 +196,7 @@ const data = {
     },
     {
     name: '选修内容',
-    subtitle: '选修',
+    // subtitle: '选修',
     children:[
       {
           title: 'Netty',
@@ -230,6 +243,10 @@ const data = {
         resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
           { title: '黑马Git教程', url: 'https://www.bilibili.com/video/BV1MU4y1Y7h5' },
         ]}]},
+      { title: 'Gradle', optional:true, description: '尚硅谷】Gradle教程入门到进阶（从gradle安装到项目实战）',
+        resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+          { title: '尚硅谷Gradle', url: 'https://www.bilibili.com/video/BV1yT41137Y7' },
+        ]}]},        
       { title: 'Maven', optional:true, description: 'Maven 构建工具进阶，多模块管理与私服搭建',
         resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
           { title: '黑马Maven教程', url: 'https://www.bilibili.com/video/BV1Ah411S7ZE' },
