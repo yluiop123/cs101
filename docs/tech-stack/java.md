@@ -108,13 +108,6 @@ const data = {
           ]}],
         },
         {
-          title: 'Spring Data JPA',
-          description: 'java进阶教程数据层全栈方案Spring Data高级应用',
-          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-            { title: '黑马SpringData教程', url: 'https://www.bilibili.com/video/BV1RE41167Pk/' },
-          ]}],
-        },
-        {
           title: 'Redis7',
           description: 'Redis教程，redis7零基础到进阶（附redis大厂面试题）',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
@@ -136,7 +129,16 @@ const data = {
           ]}],
         },
         {
+          title: 'Spring Data JPA',
+          optional:true,
+          description: 'java进阶教程数据层全栈方案Spring Data高级应用',
+          resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
+            { title: '黑马SpringData教程', url: 'https://www.bilibili.com/video/BV1RE41167Pk/' },
+          ]}],
+        },        
+        {
           title: 'SpringSecurity',
+          optional:true,
           description: '尚硅谷Java项目SpringSecurity+OAuth2权限管理实战教程',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
             { title: '尚硅谷SpringSecurity教程', url: 'https://www.bilibili.com/video/BV14b4y1A7Wz' },
