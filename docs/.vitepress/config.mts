@@ -98,8 +98,7 @@ a:hover { text-decoration: none !important; }
       },
       { text: '技术栈路线', link: '/tech-stack/' },
       { text: '应用领域路线', link: '/domain/' },
-      { text: '全部教程', link: '/tutorials/' },
-      { text: '开发工具', link: '/tools/' },
+      { text: '全部教程', link: '/tutorials/' }
     ],
     sidebar: {
       '/tech-stack/': [
@@ -196,116 +195,7 @@ a:hover { text-decoration: none !important; }
         { text: 'AI 与数据科学', link: '/tutorials/#ai' },
         { text: '计算机基础', link: '/tutorials/#fundamentals' },
         { text: '开发工具', link: '/tutorials/#dev-tools' },
-      ],
-      '/tools/': [
-        { text: '概览', link: '/tools/' },
-        {
-          text: '版本控制',
-          items: [
-            { text: 'Git', link: '/tools/version-control/git' },
-            { text: 'Git GUI 工具', link: '/tools/version-control/git-gui' },
-          ],
-        },
-        {
-          text: 'IDE 与编辑器',
-          items: [
-            { text: 'VS Code', link: '/tools/ide/vscode' },
-            { text: 'IntelliJ IDEA', link: '/tools/ide/intellij-idea' },
-            { text: 'WebStorm', link: '/tools/ide/webstorm' },
-            { text: 'PyCharm', link: '/tools/ide/pycharm' },
-            { text: 'GoLand', link: '/tools/ide/goland' },
-            { text: 'Vim / Neovim', link: '/tools/ide/vim' },
-          ],
-        },
-        {
-          text: '终端与 Shell',
-          items: [
-            { text: 'Windows Terminal', link: '/tools/terminal/windows-terminal' },
-            { text: 'iTerm2', link: '/tools/terminal/iterm2' },
-            { text: 'Warp', link: '/tools/terminal/warp' },
-            { text: 'Oh My Zsh / Oh My Posh', link: '/tools/terminal/oh-my-zsh' },
-            { text: 'tmux', link: '/tools/terminal/tmux' },
-          ],
-        },
-        {
-          text: 'API 调试与接口',
-          items: [
-            { text: 'Postman', link: '/tools/api/postman' },
-            { text: 'Bruno', link: '/tools/api/bruno' },
-            { text: 'Insomnia', link: '/tools/api/insomnia' },
-            { text: 'cURL / HTTPie', link: '/tools/api/curl' },
-          ],
-        },
-        {
-          text: '数据库客户端',
-          items: [
-            { text: 'DBeaver', link: '/tools/database/dbeaver' },
-            { text: 'DataGrip', link: '/tools/database/datagrip' },
-            { text: 'Navicat', link: '/tools/database/navicat' },
-            { text: 'Redis Insight', link: '/tools/database/redis-insight' },
-            { text: 'MongoDB Compass', link: '/tools/database/mongodb-compass' },
-          ],
-        },
-        {
-          text: '容器与虚拟化',
-          items: [
-            { text: 'Docker Desktop', link: '/tools/container/docker-desktop' },
-            { text: 'OrbStack', link: '/tools/container/orbstack' },
-            { text: 'Podman', link: '/tools/container/podman' },
-            { text: 'Vagrant / Multipass', link: '/tools/container/vagrant-multipass' },
-          ],
-        },
-        {
-          text: '网络与抓包',
-          items: [
-            { text: 'Wireshark', link: '/tools/network/wireshark' },
-            { text: 'Charles', link: '/tools/network/charles' },
-            { text: 'Proxyman', link: '/tools/network/proxyman' },
-            { text: 'Fiddler', link: '/tools/network/fiddler' },
-          ],
-        },
-        {
-          text: '性能与诊断',
-          items: [
-            { text: 'JMeter', link: '/tools/performance/jmeter' },
-            { text: 'Arthas', link: '/tools/performance/arthas' },
-            { text: 'VisualVM', link: '/tools/performance/visualvm' },
-            { text: 'async-profiler', link: '/tools/performance/async-profiler' },
-          ],
-        },
-        {
-          text: 'AI 辅助开发',
-          items: [
-            { text: 'GitHub Copilot', link: '/tools/ai/github-copilot' },
-            { text: 'Claude Code', link: '/tools/ai/claude-code' },
-            { text: 'Cursor', link: '/tools/ai/cursor' },
-          ],
-        },
-        {
-          text: '设计 / 截图',
-          items: [
-            { text: 'Figma', link: '/tools/design/figma' },
-            { text: 'Snipaste', link: '/tools/design/snipaste' },
-          ],
-        },
-        {
-          text: '包管理器',
-          items: [
-            { text: 'npm / pnpm / yarn', link: '/tools/package-manager/npm-pnpm-yarn' },
-            { text: 'pip', link: '/tools/package-manager/pip' },
-            { text: 'Maven / Gradle', link: '/tools/package-manager/maven-gradle' },
-            { text: 'Homebrew / Scoop / Chocolatey', link: '/tools/package-manager/homebrew-scoop-choco' },
-          ],
-        },
-        {
-          text: 'CLI 效率工具',
-          items: [
-            { text: 'lazygit / lazydocker', link: '/tools/cli/lazygit-lazydocker' },
-            { text: 'jq / yq', link: '/tools/cli/jq-yq' },
-            { text: 'ripgrep / fd / fzf / htop', link: '/tools/cli/rg-fd-fzf-htop' },
-          ],
-        },
-      ],
+      ]
     },
     search: {
       provider: 'local',
