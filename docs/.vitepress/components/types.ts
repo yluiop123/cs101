@@ -16,3 +16,8 @@ export interface CardItem {
   type?: 'article' | 'video'
   resources?: ResourceGroup[]
 }
+
+export interface CardGroup {
+  title: string
+  items: CardItem[]
+}

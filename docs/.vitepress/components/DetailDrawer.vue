@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import ResourceLinkList from './ResourceLinkList.vue'
-import type { DrawerItem } from './types'
+import { computed } from 'vue';
+import ResourceLinkList from './ResourceLinkList.vue';
+import type { DrawerItem } from './types';
 
 const props = defineProps<{
   modelValue: boolean
@@ -27,7 +27,7 @@ const drawerModel = computed({
       <div class="drawer-card">
         <!-- Header -->
         <div class="drawer-header d-flex align-center justify-space-between">
-          <div class="d-flex align-center ga-3 text-truncate" v-if="item">
+          <div class="d-flex align-center ga-3 text-truncate" v-if="item&&item.optional">
             <v-chip v-if="item.optional" size="x-small" color="grey" variant="tonal" class="font-weight-medium" style="font-size: 11px;">选修</v-chip>
             <v-chip v-else size="x-small" color="primary" variant="flat" class="font-weight-medium" style="font-size: 11px;">必修</v-chip>
             <span class="text-h6 font-weight-bold text-truncate">{{ item.title }}</span>

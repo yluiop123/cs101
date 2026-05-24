@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import DetailDrawer from './DetailDrawer.vue';
-import type { DrawerItem, CardItem } from './types';
+import type { CardGroup, CardItem, DrawerItem } from './types';
 
 const props = defineProps<{
   id: string
   title: string
   icon: string
   color: string
-  items: CardItem[]
+  items?: CardItem[]
+  groups?: CardGroup[]
 }>()
 
 const selectedItem = ref<CardItem | null>(null)
@@ -16,11 +17,7 @@ const drawer = ref(false)
 
 const drawerItem = computed<DrawerItem | null>(() => {
   if (!selectedItem.value) return null
-  return {
-    title: selectedItem.value.title,
-
-    resources: selectedItem.value.resources,
-  }
+  return selectedItem.value;
 })
 
 function openItem(item: CardItem) {
@@ -40,32 +37,68 @@ function openItem(item: CardItem) {
     </div>
 
     <!-- Card Grid -->
-    <v-row>
-      <v-col v-for="(item, i) in items" :key="i" cols="12" sm="6" md="4">
-        <v-card
-          class="tutorial-card"
-          flat
-          @click="openItem(item)"
-          :style="{
-            borderLeft: '4px solid ' + color,
-            borderRadius: '8px',
-            cursor: 'pointer',
-          }"
-        >
-          <v-card-text class="pa-4">
-            <div class="d-flex align-center ga-2 mb-1">
-              <div
-                class="card-icon-circle d-flex align-center justify-center flex-shrink-0"
-                :style="{ background: color + '18', color: color, width: '28px', height: '28px', borderRadius: '6px' }"
-              >
-                <v-icon size="16">mdi-book-open-variant</v-icon>
+    <template v-if="groups">
+      <div v-for="(group, gi) in groups" :key="gi" class="mb-6">
+        <div class="group-header d-flex align-center ga-2 mb-3">
+          <div class="group-line" :style="{ background: color }"></div>
+          <span class="text-subtitle-1 font-weight-bold" :style="{ color }">{{ group.title }}</span>
+        </div>
+        <v-row>
+          <v-col v-for="(item, i) in group.items" :key="i" cols="12" sm="6" md="4">
+            <v-card
+              class="tutorial-card"
+              flat
+              @click="openItem(item)"
+              :style="{
+                borderLeft: '4px solid ' + color,
+                borderRadius: '8px',
+                cursor: 'pointer',
+              }"
+            >
+              <v-card-text class="pa-4">
+                <div class="d-flex align-center ga-2 mb-1">
+                  <div
+                    class="card-icon-circle d-flex align-center justify-center flex-shrink-0"
+                    :style="{ background: color + '18', color: color, width: '28px', height: '28px', borderRadius: '6px' }"
+                  >
+                    <v-icon size="16">mdi-book-open-variant</v-icon>
+                  </div>
+                  <span class="text-subtitle-2 font-weight-bold">{{ item.title }}</span>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+    </template>
+    <template v-else>
+      <v-row>
+        <v-col v-for="(item, i) in items" :key="i" cols="12" sm="6" md="4">
+          <v-card
+            class="tutorial-card"
+            flat
+            @click="openItem(item)"
+            :style="{
+              borderLeft: '4px solid ' + color,
+              borderRadius: '8px',
+              cursor: 'pointer',
+            }"
+          >
+            <v-card-text class="pa-4">
+              <div class="d-flex align-center ga-2 mb-1">
+                <div
+                  class="card-icon-circle d-flex align-center justify-center flex-shrink-0"
+                  :style="{ background: color + '18', color: color, width: '28px', height: '28px', borderRadius: '6px' }"
+                >
+                  <v-icon size="16">mdi-book-open-variant</v-icon>
+                </div>
+                <span class="text-subtitle-2 font-weight-bold">{{ item.title }}</span>
               </div>
-              <span class="text-subtitle-2 font-weight-bold">{{ item.title }}</span>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </template>
 
     <!-- ====== RIGHT-SIDE DRAWER ====== -->
     <DetailDrawer v-model="drawer" :item="drawerItem" />
@@ -95,6 +128,15 @@ function openItem(item: CardItem) {
 }
 .section-header {
   scroll-margin-top: 80px;
+}
+.group-header {
+  scroll-margin-top: 80px;
+}
+.group-line {
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 .visit-btn {
   text-transform: none;
