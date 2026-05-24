@@ -187,11 +187,10 @@ const data = {
           ]}],
         },
         {
-          title: 'GitFlow',
-          description: '尚硅谷GitFlow教程，gitflow工作流实战速通',
+          title: 'Git全套教程',
+          description: 'Git全套教程，git技术大全（GitHub、Gitee码云、GitLab）',
           resources: [{ name: '视频教程', icon: 'mdi-play-circle-outline', items: [
-            { title: '尚硅谷Git & GitHub教程', url: 'https://www.bilibili.com/video/BV1pW411A7a5' },
-            { title: 'GitFlow实战速通', url: 'https://atguigu.com/video/354/' },
+            { title: 'Git全套教程', url: 'https://www.bilibili.com/video/BV1vy4y1s7k6' },
           ]}],
         },
       ]
