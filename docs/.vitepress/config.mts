@@ -1,10 +1,13 @@
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import vuetify from 'vite-plugin-vuetify';
 import { defineConfig } from 'vitepress';
+import { tutorialSeries } from './tutorial-meta';
 
 interface SearchSection { anchor: string; titles: string[]; text: string }
 
-function extractSections(md_src: string): SearchSection[] {
+function extractSections(md_src: string): SearchSection[] | undefined {
   // Page-level name
   const pageNameMatch = md_src.match(/name:\s*'([^']+)'/)
   const pageName = pageNameMatch ? pageNameMatch[1] : ''
@@ -12,15 +15,9 @@ function extractSections(md_src: string): SearchSection[] {
   // Find the items array (ContentView pattern)
   const itemsPos = md_src.indexOf('items: [')
   if (itemsPos === -1) {
-    // Fallback: use all titles as one section
-    const titles: string[] = []
-    const tRegex = /(?:title|name):\s*'([^']+)'/g
-    let m
-    while ((m = tRegex.exec(md_src)) !== null) {
-      const t = m[1].replace(/\*\*/g, '').trim()
-      if (t && t.length > 1) titles.push(t)
-    }
-    return titles.length ? [{ anchor: '', titles: pageName ? [pageName] : ['CS101'], text: titles.join(' ') }] : []
+    // Plain markdown page: return undefined so VitePress falls back
+    // to default section splitting based on rendered HTML
+    return undefined
   }
 
   // Parse sections from items array
@@ -63,6 +60,54 @@ function extractSections(md_src: string): SearchSection[] {
   }
 
   return sections
+}
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const tutorialsDir = join(__dirname, '..', 'tutorials')
+
+function readFrontmatterTitle(file: string): string {
+  try {
+    const src = readFileSync(file, 'utf-8').replace(/^\uFEFF/, '')
+    const fm = src.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+    const m = fm?.[1].match(/^title:\s*(.+)$/m)
+    return m ? m[1].trim().replace(/^["']|["']$/g, '') : ''
+  } catch {
+    return ''
+  }
+}
+
+/** Scan every tutorial directory and build one sidebar per tutorial */
+function buildTutorialSidebars(): Record<string, any> {
+  const sidebars: Record<string, any> = {}
+  if (!existsSync(tutorialsDir)) return sidebars
+  for (const dir of readdirSync(tutorialsDir)) {
+    const dirPath = join(tutorialsDir, dir)
+    if (!statSync(dirPath).isDirectory()) continue
+    const indexPath = join(dirPath, 'index.md')
+    if (!existsSync(indexPath)) continue
+    const title = readFrontmatterTitle(indexPath) || dir
+    const chapters = readdirSync(dirPath)
+      .filter((f) => /^\d{2}-.+\.md$/.test(f))
+      .sort()
+      .map((f) => ({
+        text: readFrontmatterTitle(join(dirPath, f)) || f,
+        link: `/tutorials/${dir}/${f.slice(0, -3)}`,
+      }))
+    sidebars[`/tutorials/${dir}/`] = [{ text: title, items: chapters }]
+  }
+  return sidebars
+}
+
+/** Sidebar for the tutorial center page: group tutorials by series */
+function buildTutorialCenterSidebar(): any[] {
+  const groups = tutorialSeries.map((s) => ({
+    text: s.title,
+    collapsed: true,
+    items: s.tutorials
+      .filter((t) => t.status !== 'planned')
+      .map((t) => ({ text: t.title, link: `/tutorials/${t.slug}/` })),
+  }))
+  return [{ text: '教程中心', link: '/tutorials/' }, ...groups]
 }
 
 export default defineConfig({
@@ -186,16 +231,8 @@ a:hover { text-decoration: none !important; }
           ],
         },
       ],
-      '/tutorials/': [
-        { text: '前端开发', link: '/tutorials/#frontend' },
-        { text: '后端开发', link: '/tutorials/#backend' },
-        { text: '数据库', link: '/tutorials/#database' },
-        { text: '移动开发', link: '/tutorials/#mobile' },
-        { text: '运维与 DevOps', link: '/tutorials/#devops' },
-        { text: 'AI 与数据科学', link: '/tutorials/#ai' },
-        { text: '计算机基础', link: '/tutorials/#fundamentals' },
-        { text: '开发工具', link: '/tutorials/#dev-tools' },
-      ]
+      '/tutorials/': buildTutorialCenterSidebar(),
+      ...buildTutorialSidebars(),
     },
     search: {
       provider: 'local',
