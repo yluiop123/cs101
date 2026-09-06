@@ -56,12 +56,22 @@ export const tutorialSeries: SeriesMeta[] = [
     icon: 'mdi-server',
     color: '#2563eb',
     description: '主流服务端语言与企业级框架',
+    // 批次 1：8 门语言教程（Gin/Axum 折叠进 Go/Rust 尾部）
+    // 批次 2：4 门框架教程（Spring Boot / Django / FastAPI / ASP.NET Core）
+    // 穿插：SQL + MySQL（数据库系列）需在批次 2 开始前完成
     tutorials: [
-      { slug: 'java', title: 'Java 教程', description: '面向对象、集合泛型、多线程与 JVM 入门', chapters: 15, status: 'planned' },
-      { slug: 'python', title: 'Python 教程', description: '语法、面向对象、标准库与虚拟环境', chapters: 12, status: 'planned' },
-      { slug: 'go', title: 'Go 教程', description: '语法、接口与 goroutine 并发编程', chapters: 10, status: 'planned' },
+      { slug: 'java', title: 'Java 教程', description: '面向对象、集合泛型、多线程与 JVM 入门', chapters: 15, status: 'ready' },
+      { slug: 'python', title: 'Python 教程', description: '语法、面向对象、标准库与虚拟环境', chapters: 12, status: 'ready' },
+      { slug: 'go', title: 'Go 教程', description: '语法、接口、goroutine 并发与 Gin Web 实战', chapters: 14, status: 'ready' },
+      { slug: 'rust', title: 'Rust 教程', description: '所有权、借用、trait 与 Axum Web 初见', chapters: 14, status: 'planned' },
+      { slug: 'c', title: 'C 语言教程', description: '指针与内存、编译链接、系统编程入门', chapters: 10, status: 'planned' },
+      { slug: 'cpp', title: 'C++ 教程', description: 'RAII、STL、智能指针与现代 C++，网络编程初见', chapters: 14, status: 'planned' },
+      { slug: 'csharp', title: 'C# 教程', description: '类型系统、LINQ、async/await 与 .NET 生态', chapters: 12, status: 'planned' },
+      { slug: 'node-backend', title: 'Node.js 后端教程', description: 'Express 进阶、JWT 鉴权、Prisma 与 NestJS 初见', chapters: 10, status: 'planned' },
       { slug: 'spring-boot', title: 'Spring Boot 教程', description: 'IoC/AOP、数据访问、鉴权与企业级实战', chapters: 15, status: 'planned' },
       { slug: 'django', title: 'Django 教程', description: 'MTV 架构、ORM、Admin 与 DRF', chapters: 10, status: 'planned' },
+      { slug: 'fastapi', title: 'FastAPI 教程', description: 'Pydantic、依赖注入、异步与现代 Python API 开发', chapters: 8, status: 'planned' },
+      { slug: 'aspnet', title: 'ASP.NET Core 教程', description: '最小 API、EF Core、中间件与企业级 .NET 后端', chapters: 10, status: 'planned' },
     ],
   },
   {
