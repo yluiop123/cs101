@@ -130,6 +130,14 @@ a:hover { text-decoration: none !important; }
       noExternal: ['vuetify'],
     },
   },
+  markdown: {
+    config: (md) => {
+      md.renderer.rules.code_inline = (tokens, idx) => {
+        const token = tokens[idx];
+        return `<code v-pre>${md.utils.escapeHtml(token.content)}</code>`;
+      };
+    },
+  },
   themeConfig: {
     logo: '/icon.svg',
     nav: [

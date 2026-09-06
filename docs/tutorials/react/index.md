@@ -4,7 +4,7 @@ title: React 教程
 
 # React 教程
 
-> 状态：编写中 · 共 12 章 · 预计 10 小时
+> 状态：可学习 · 共 12 章 · 预计 10 小时
 
 React 是 Meta（Facebook）开源的声明式 UI 库，全球使用率第一的前端框架。它的核心理念是"用函数描述 UI"，配合 Hooks 机制可以优雅地管理状态与副作用。本教程从 JSX 讲到路由、状态管理与完整项目实战。
 
@@ -16,18 +16,18 @@ React 是 Meta（Facebook）开源的声明式 UI 库，全球使用率第一的
 
 ## 章节目录
 
-1. 第 1 章 · 初识 React（编写中）
-2. 第 2 章 · JSX 与组件（编写中）
-3. 第 3 章 · 状态与事件（编写中）
-4. 第 4 章 · 列表与条件渲染（编写中）
-5. 第 5 章 · Hooks 入门：useState 与 useEffect（编写中）
-6. 第 6 章 · 组件通信（编写中）
-7. 第 7 章 · React Router 路由（编写中）
-8. 第 8 章 · 状态管理：Zustand（编写中）
-9. 第 9 章 · 样式方案（编写中）
-10. 第 10 章 · 表单与数据请求（编写中）
-11. 第 11 章 · 性能优化（编写中）
-12. 第 12 章 · 综合实战（编写中）
+1. [第 1 章 · 初识 React](./01-intro)
+2. [第 2 章 · JSX 与组件](./02-jsx-components)
+3. [第 3 章 · 状态与事件](./03-state-events)
+4. [第 4 章 · 列表与条件渲染](./04-lists-conditional)
+5. [第 5 章 · Hooks 入门：useState 与 useEffect](./05-hooks-basics)
+6. [第 6 章 · 组件通信](./06-component-communication)
+7. [第 7 章 · React Router 路由](./07-router)
+8. [第 8 章 · 状态管理：Zustand](./08-zustand)
+9. [第 9 章 · 样式方案](./09-styling)
+10. [第 10 章 · 表单与数据请求](./10-forms-fetching)
+11. [第 11 章 · 性能优化](./11-performance)
+12. [第 12 章 · 综合实战](./12-project)
 
 ## 你将学到
 
