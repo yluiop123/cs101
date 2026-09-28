@@ -6,7 +6,7 @@ const data = {
 
   items: [
     {
-      name: 'C 语言基础',
+      name: '入门 · C 语言与编译基础',
       subtitle: '必修',
       children: [
         {
@@ -228,11 +228,31 @@ const data = {
               ],
             }
           ]
+        },
+        {
+          title: '编译与链接过程',
+          description: '预处理、编译、汇编、链接四阶段，目标文件与符号表、静态库与动态库的链接规则'
+        },
+        {
+          title: '头文件与包含模型',
+          description: '声明与定义分离、include guard 与 pragma once、前向声明、循环依赖的拆解'
+        },
+        {
+          title: '构建系统与 CMake',
+          description: 'Makefile 到 CMake 的演进、target 与依赖关系、常见构建选项与多配置输出'
+        },
+        {
+          title: '调试器 GDB/LLDB 入门',
+          description: '断点与观察点、单步与调用栈、打印变量与内存、编译时保留调试信息'
+        },
+        {
+          title: '未定义行为（UB）与诊断',
+          description: '有符号溢出、越界访问、空指针解引用等未定义行为，用编译器警告与静态检查暴露问题'
         }
       ]
     },
     {
-      name: 'C++ 核心语法',
+      name: '进阶 · C++ 核心与标准库',
       subtitle: '必修',
       children: [
         {
@@ -454,13 +474,23 @@ const data = {
               ],
             }
           ]
-        }
-      ]
-    },
-    {
-      name: '数据结构与算法',
-      subtitle: '必修',
-      children: [
+        },
+        {
+          title: 'RAII 与资源管理',
+          description: '以对象生命周期管理资源、构造获取/析构释放、作用域守卫与锁管理器'
+        },
+        {
+          title: '移动语义与右值引用',
+          description: '左值/右值/xvalue 值类别、std::move 与完美转发、移动构造与移动赋值'
+        },
+        {
+          title: '拷贝/移动/交换规则',
+          description: '三法则/五法则/零法则、自定义 swap 的 copy-and-swap 惯用法、特殊成员函数生成规则'
+        },
+        {
+          title: 'C++20/23 新特性',
+          description: 'Concepts 约束模板、Ranges 库、Modules 模块、协程 co_await 与现代字符串设施'
+        },
         {
           title: '线性表',
           description: '动态数组、链表（单/双/循环）、栈、队列',
@@ -528,28 +558,6 @@ const data = {
           ]
         },
         {
-          title: '排序算法',
-          description: '快速排序、归并排序、堆排序、计数排序',
-          resources: [
-            {
-              name: "视频教程",
-              icon: "mdi-play-circle-outline",
-              items: [
-                { title: "小甲鱼 数据结构与算法", url: "https://www.bilibili.com/video/BV1rJ411n7iW", icon: "mdi-play-circle-outline" },
-                { title: "Sorting Algorithms", url: "https://www.youtube.com/watch?v=HO-P9hCJ7Vg", icon: "mdi-play-circle-outline" }
-              ],
-            },
-            {
-              name: "官方文档",
-              icon: "mdi-file-document-outline",
-              items: [
-                { title: "菜鸟教程 排序", url: "https://www.runoob.com/w3cnote/sort-algorithm.html", icon: "mdi-file-document-outline" },
-                { title: "GeeksforGeeks Sorting", url: "https://www.geeksforgeeks.org/sorting-algorithms/", icon: "mdi-file-document-outline" }
-              ],
-            }
-          ]
-        },
-        {
           title: '查找算法',
           description: '二分查找、哈希表、平衡树查找',
           resources: [
@@ -567,28 +575,6 @@ const data = {
               items: [
                 { title: "菜鸟教程 查找", url: "https://www.runoob.com/data-structures/search-algorithm.html", icon: "mdi-file-document-outline" },
                 { title: "GeeksforGeeks Searching", url: "https://www.geeksforgeeks.org/searching-algorithms/", icon: "mdi-file-document-outline" }
-              ],
-            }
-          ]
-        },
-        {
-          title: '算法分析与设计',
-          description: '时间/空间复杂度、递归分治、动态规划、贪心算法',
-          resources: [
-            {
-              name: "视频教程",
-              icon: "mdi-play-circle-outline",
-              items: [
-                { title: "算法设计教程", url: "https://www.bilibili.com/video/BV1rJ411n7iW", icon: "mdi-play-circle-outline" },
-                { title: "Algorithms", url: "https://www.youtube.com/watch?v=8hly31xKli0", icon: "mdi-play-circle-outline" }
-              ],
-            },
-            {
-              name: "官方文档",
-              icon: "mdi-file-document-outline",
-              items: [
-                { title: "算法入门", url: "https://www.jianshu.com/p/8c5e9b8a1b0e", icon: "mdi-file-document-outline" },
-                { title: "GeeksforGeeks Algorithms", url: "https://www.geeksforgeeks.org/fundamentals-of-algorithms/", icon: "mdi-file-document-outline" }
               ],
             }
           ]
@@ -618,8 +604,86 @@ const data = {
       ]
     },
     {
-      name: '系统编程',
+      name: '精通 · 内存、并发与底层原理',
       subtitle: '必修',
+      children: [
+        {
+          title: '内存模型与对象布局',
+          description: '字节对齐与 padding、位域、柔性数组、struct/class 的内存布局规则'
+        },
+        {
+          title: '动态内存与内存池',
+          description: 'new/delete 底层流程、operator new 重载、内存池与分配器设计、碎片与泄漏治理'
+        },
+        {
+          title: '虚函数表与多态实现机制',
+          description: 'vptr/vtable 布局、虚调用分发路径、多重继承下的调整偏移、RTTI 与 dynamic_cast 代价'
+        },
+        {
+          title: '引用计数与循环引用',
+          description: 'shared_ptr 控制块实现、线程安全边界、weak_ptr 打破循环引用'
+        },
+        {
+          title: 'std::thread/mutex/atomic 与内存序',
+          description: 'C++ 并发库、条件变量与虚假唤醒、atomic 操作与 memory_order 语义'
+        },
+        {
+          title: '排序算法',
+          description: '快速排序、归并排序、堆排序、计数排序',
+          resources: [
+            {
+              name: "视频教程",
+              icon: "mdi-play-circle-outline",
+              items: [
+                { title: "小甲鱼 数据结构与算法", url: "https://www.bilibili.com/video/BV1rJ411n7iW", icon: "mdi-play-circle-outline" },
+                { title: "Sorting Algorithms", url: "https://www.youtube.com/watch?v=HO-P9hCJ7Vg", icon: "mdi-play-circle-outline" }
+              ],
+            },
+            {
+              name: "官方文档",
+              icon: "mdi-file-document-outline",
+              items: [
+                { title: "菜鸟教程 排序", url: "https://www.runoob.com/w3cnote/sort-algorithm.html", icon: "mdi-file-document-outline" },
+                { title: "GeeksforGeeks Sorting", url: "https://www.geeksforgeeks.org/sorting-algorithms/", icon: "mdi-file-document-outline" }
+              ],
+            }
+          ]
+        },
+        {
+          title: '算法分析与设计',
+          description: '时间/空间复杂度、递归分治、动态规划、贪心算法',
+          resources: [
+            {
+              name: "视频教程",
+              icon: "mdi-play-circle-outline",
+              items: [
+                { title: "算法设计教程", url: "https://www.bilibili.com/video/BV1rJ411n7iW", icon: "mdi-play-circle-outline" },
+                { title: "Algorithms", url: "https://www.youtube.com/watch?v=8hly31xKli0", icon: "mdi-play-circle-outline" }
+              ],
+            },
+            {
+              name: "官方文档",
+              icon: "mdi-file-document-outline",
+              items: [
+                { title: "算法入门", url: "https://www.jianshu.com/p/8c5e9b8a1b0e", icon: "mdi-file-document-outline" },
+                { title: "GeeksforGeeks Algorithms", url: "https://www.geeksforgeeks.org/fundamentals-of-algorithms/", icon: "mdi-file-document-outline" }
+              ],
+            }
+          ]
+        },
+        {
+          title: 'Sanitizer 工具链',
+          description: 'ASan 检测越界与Use-after-free、UBSan 捕获未定义行为、TSan 发现数据竞争'
+        },
+        {
+          title: '性能剖析与优化',
+          description: 'cache 友好访问模式、分支预测、false sharing、热点函数定位与优化闭环'
+        }
+      ]
+    },
+    {
+      name: '实战与生态 · 系统编程、构建与方向拓展',
+      subtitle: '选修',
       children: [
         {
           title: 'Linux 操作系统基础',
@@ -819,13 +883,7 @@ const data = {
               ],
             }
           ]
-        }
-      ]
-    },
-    {
-      name: '嵌入式方向',
-      subtitle: '选修',
-      children: [
+        },
         {
           title: 'STM32 开发',
           description: 'GPIO/Timer/UART/SPI/I2C 外设驱动开发',
@@ -932,13 +990,7 @@ const data = {
               ],
             }
           ]
-        }
-      ]
-    },
-    {
-      name: '高性能计算方向',
-      subtitle: '选修',
-      children: [
+        },
         {
           title: '多线程进阶',
           description: 'OpenMP 并行编程、任务调度',
@@ -1045,13 +1097,7 @@ const data = {
               ],
             }
           ]
-        }
-      ]
-    },
-    {
-      name: '游戏引擎方向',
-      subtitle: '选修',
-      children: [
+        },
         {
           title: '图形学基础',
           description: 'OpenGL/DirectX 渲染管线、着色器编写',

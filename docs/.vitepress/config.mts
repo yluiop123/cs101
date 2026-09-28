@@ -148,6 +148,7 @@ a:hover { text-decoration: none !important; }
             { text: 'Java', link: '/tech-stack/java' },
             { text: 'Python', link: '/tech-stack/python' },
             { text: 'JavaScript / TypeScript', link: '/tech-stack/javascript-typescript' },
+            { text: 'Web 前端', link: '/tech-stack/frontend' },
             { text: 'Go', link: '/tech-stack/go' },
             { text: 'C / C++', link: '/tech-stack/c-cpp' },
             { text: 'Rust', link: '/tech-stack/rust' },

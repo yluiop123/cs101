@@ -15,6 +15,12 @@
 | [C#](./c-sharp) | 游戏开发（Unity）、企业应用（.NET） |
 | [Kotlin / Swift / Dart](./kotlin-swift-dart) | Android、iOS、Flutter 跨平台开发 |
 
+## Web 开发
+
+| 核心技术 | 可扩展方向 |
+|---------|-----------|
+| [Web 前端](./frontend) | HTML/CSS 基础、布局体系、Vue/React/Angular 与前端工程化 |
+
 ## 数据库
 
 | 技术 | 说明 |
