@@ -3,6 +3,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import vuetify from 'vite-plugin-vuetify';
 import { defineConfig } from 'vitepress';
+import '../../scripts/gen-tutorial-index.mjs';
 
 interface SearchSection { anchor: string; titles: string[]; text: string }
 
@@ -63,6 +64,18 @@ function extractSections(md_src: string): SearchSection[] | undefined {
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const tutorialsDir = join(__dirname, '..', 'tutorials')
+const srcDir = join(__dirname, '..')
+
+/** dev 下 HMR 会把 srcDir 重复拼进绝对路径，这里回退到真实文件位置 */
+function resolveMdPath(file: string): string {
+  if (existsSync(file)) return file
+  const i = file.lastIndexOf(srcDir)
+  if (i > 0) {
+    const cand = join(srcDir, file.slice(i + srcDir.length).replace(/^[\\/]+/, ''))
+    if (existsSync(cand)) return cand
+  }
+  return file
+}
 
 function readFrontmatterTitle(file: string): string {
   try {
@@ -233,7 +246,7 @@ a:hover { text-decoration: none !important; }
       options: {
         miniSearch: {
           _splitIntoSections(file: string) {
-            const src = readFileSync(file, 'utf-8')
+            const src = readFileSync(resolveMdPath(file), 'utf-8')
             return extractSections(src)
           },
         },
