@@ -103,7 +103,7 @@ watch(viewMode, async (newMode) => {
       <p v-if="section.note" class="text-caption font-italic mb-3" style="color: rgba(var(--v-theme-on-surface), 0.5);">{{ section.note }}</p>
 
       <v-row>
-        <v-col v-for="(child, ii) in section.children" :key="ii" cols="12" sm="6" md="4">
+        <v-col v-for="(child, ii) in section.children" :key="ii" cols="12" sm="6">
           <v-card
             variant="flat"
             class="item-card"
@@ -112,12 +112,12 @@ watch(viewMode, async (newMode) => {
           >
             <div class="d-flex align-center ga-2 pa-4">
               <div class="flex-grow-1 min-w-0">
-                <div class="d-flex align-center ga-2">
-                  <span class="text-subtitle-2 font-weight-bold">{{ child.title }}</span>
-                  <v-chip v-if="child.optional" size="x-small" color="grey" variant="tonal" class="font-weight-medium" style="font-size: 11px;">选修</v-chip>
-                  <v-chip v-else size="x-small" color="primary" variant="flat" class="font-weight-medium" style="font-size: 11px;">必修</v-chip>
+                <div class="d-flex flex-wrap align-items-start ga-2">
+                  <span class="text-subtitle-2 font-weight-bold item-title">{{ child.title }}</span>
+                  <v-chip v-if="child.optional" size="x-small" color="grey" variant="tonal" class="font-weight-medium flex-shrink-0" style="font-size: 11px;">选修</v-chip>
+                  <v-chip v-else size="x-small" color="primary" variant="flat" class="font-weight-medium flex-shrink-0" style="font-size: 11px;">必修</v-chip>
                 </div>
-                <div class="text-caption mt-1" style="color: rgba(var(--v-theme-on-surface), 0.6);">{{ child.description }}</div>
+                <div class="text-caption mt-1 item-desc" style="color: rgba(var(--v-theme-on-surface), 0.6);">{{ child.description }}</div>
               </div>
               <v-icon size="small" class="item-arrow flex-shrink-0">mdi-chevron-right</v-icon>
             </div>
@@ -158,6 +158,17 @@ watch(viewMode, async (newMode) => {
 }
 .item-card:hover .item-arrow {
   color: rgba(var(--v-theme-on-surface), 0.6);
+}
+.item-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.item-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .view-toggle {
