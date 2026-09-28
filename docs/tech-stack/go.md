@@ -8,7 +8,7 @@ const data = {
     {
       name: 'Go 语言基础入门', subtitle: '必修',
       children: [
-        { title: 'Go 语言概述与环境搭建', description: 'Go 安装配置、GOPATH 与 Go Modules、IDE（GoLand/VS Code）', groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Go语言之旅", url: "https://go.dev/tour/welcome/1/", icon: "mdi-file-document-outline" }] }] },
+        { title: 'Go 语言概述与环境搭建', description: 'Go 安装配置、GOPATH 与 Go Modules、IDE（GoLand/VS Code）', resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Go语言之旅", url: "https://go.dev/tour/welcome/1/", icon: "mdi-file-document-outline" }] }] },
         { title: '基础语法', description: '变量与常量、数据类型（int/float/string/bool）、类型推导' },
         { title: '流程控制', description: 'if/else、for 循环（Go 只有 for）、switch、goto' },
         { title: '函数', description: '多返回值、命名返回值、可变参数、defer 延迟执行' },
@@ -24,7 +24,7 @@ const data = {
     {
       name: '并发编程', subtitle: '必修',
       children: [
-        { title: 'goroutine 入门', description: 'go 关键字启动、Goroutine 调度 GMP 模型', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Go并发编程实战", url: "https://www.bilibili.com/video/BV1fD4y1m7TD", icon: "mdi-play-circle-outline" }] }] },
+        { title: 'goroutine 入门', description: 'go 关键字启动、Goroutine 调度 GMP 模型', resources: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "Go并发编程实战", url: "https://www.bilibili.com/video/BV1fD4y1m7TD", icon: "mdi-play-circle-outline" }] }] },
         { title: 'channel 通信', description: '有无缓冲 channel、单向 channel、select 多路复用' },
         { title: 'WaitGroup 同步', description: 'sync.WaitGroup 计数器、任务编排' },
         { title: 'Mutex 与 RWMutex', description: '互斥锁、读写锁、锁竞争避免' },
@@ -40,9 +40,9 @@ const data = {
       children: [
         { title: 'net/http 标准库', description: '路由处理、HTTP 客户端、请求/响应处理' },
         { title: 'template 模板引擎', description: '文本/HTML 模板、模板继承' },
-        { title: 'Gin 框架', description: '路由分组、中间件机制、参数绑定与验证', groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Gin框架官方文档", url: "https://gin-gonic.com/zh-cn/docs/", icon: "mdi-file-document-outline" }] }] },
+        { title: 'Gin 框架', description: '路由分组、中间件机制、参数绑定与验证', resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Gin框架官方文档", url: "https://gin-gonic.com/zh-cn/docs/", icon: "mdi-file-document-outline" }] }] },
         { title: 'RESTful API', description: 'JSON 序列化、状态码规范、版本控制' },
-        { title: '数据库操作', description: 'database/sql 标准库、GORM ORM 框架、迁移', groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "GORM官方文档", url: "https://gorm.io/zh_CN/docs/", icon: "mdi-file-document-outline" }] }] },
+        { title: '数据库操作', description: 'database/sql 标准库、GORM ORM 框架、迁移', resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "GORM官方文档", url: "https://gorm.io/zh_CN/docs/", icon: "mdi-file-document-outline" }] }] },
         { title: 'Redis 集成', description: 'go-redis 库、缓存策略、分布式锁' },
         { title: '日志库', description: 'zap / logrus 结构化日志、日志级别、文件轮转' },
         { title: '单元测试与基准测试', description: 'testing 包、表格驱动测试、httptest、覆盖率' },
@@ -53,13 +53,13 @@ const data = {
     {
       name: '微服务与云原生', subtitle: '必修',
       children: [
-        { title: 'gRPC 框架', description: 'Protocol Buffers 定义、protoc 编译、一元/流式 RPC', groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "gRPC Go官方指南", url: "https://grpc.io/docs/languages/go/", icon: "mdi-file-document-outline" }] }] },
+        { title: 'gRPC 框架', description: 'Protocol Buffers 定义、protoc 编译、一元/流式 RPC', resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "gRPC Go官方指南", url: "https://grpc.io/docs/languages/go/", icon: "mdi-file-document-outline" }] }] },
         { title: '服务注册与发现', description: 'Consul / etcd / Nacos 集成' },
         { title: '配置管理', description: 'Viper 配置库、环境变量解析、热加载' },
         { title: '消息队列', description: 'RabbitMQ / Kafka Go 客户端、生产消费模式' },
         { title: 'Docker 容器化', description: '多阶段 Go 镜像构建、scratch/alpine 基础镜像' },
         { title: 'Docker Compose', description: '多服务编排、网络配置、健康检查' },
-        { title: 'Kubernetes 基础', description: 'Pod/Deployment/Service/ConfigMap 资源对象', groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Kubernetes官方文档", url: "https://kubernetes.io/zh-cn/docs/", icon: "mdi-file-document-outline" }] }] },
+        { title: 'Kubernetes 基础', description: 'Pod/Deployment/Service/ConfigMap 资源对象', resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Kubernetes官方文档", url: "https://kubernetes.io/zh-cn/docs/", icon: "mdi-file-document-outline" }] }] },
         { title: 'Prometheus 监控', description: 'metrics 暴露、Grafana 仪表盘、AlertManager' },
         { title: '服务网格 Istio', description: '流量管理、安全策略、可观测性', optional: true },
         { title: 'Helm 包管理', description: 'Chart 结构、模板渲染、版本管理', optional: true },

@@ -9,7 +9,7 @@ const data = {
       name: 'SQL 基础与关系型数据库入门', subtitle: '必修',
       children: [
         { title: '数据库基本概念', description: '关系型 vs 非关系型、表/行/列、主键/外键' },
-        { title: 'MySQL / PostgreSQL 安装与配置', description: '数据库创建、用户权限管理', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷MySQL基础教程", url: "https://www.bilibili.com/video/BV1ix411M7Rz", icon: "mdi-play-circle-outline" }] }] },
+        { title: 'MySQL / PostgreSQL 安装与配置', description: '数据库创建、用户权限管理', resources: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷MySQL基础教程", url: "https://www.bilibili.com/video/BV1ix411M7Rz", icon: "mdi-play-circle-outline" }] }] },
         { title: 'DDL 数据定义语言', description: 'CREATE/ALTER/DROP 表、字段类型、约束（NOT NULL/UNIQUE/CHECK）' },
         { title: 'DML 数据操作语言', description: 'SELECT/INSERT/UPDATE/DELETE 基本操作' },
         { title: '条件查询与排序', description: 'WHERE 子句、LIKE/IN/BETWEEN/IS NULL、ORDER BY' },
@@ -24,7 +24,7 @@ const data = {
       name: '高级 SQL 与数据库设计', subtitle: '必修',
       children: [
         { title: '索引原理', description: 'B+ 树结构、聚簇索引与非聚簇索引、联合索引、覆盖索引' },
-        { title: '索引优化实战', description: 'EXPLAIN 执行计划分析、type/rows/Extra 字段解读', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷MySQL高级教程", url: "https://www.bilibili.com/video/BV1Ah411z7qQ", icon: "mdi-play-circle-outline" }] }] },
+        { title: '索引优化实战', description: 'EXPLAIN 执行计划分析、type/rows/Extra 字段解读', resources: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷MySQL高级教程", url: "https://www.bilibili.com/video/BV1Ah411z7qQ", icon: "mdi-play-circle-outline" }] }] },
         { title: '事务与隔离级别', description: 'ACID 特性、READ UNCOMMITTED/READ COMMITTED/REPEATABLE READ/SERIALIZABLE' },
         { title: '锁机制', description: '共享锁/排他锁、行锁/表锁、间隙锁（Next-Key Lock）、死锁排查' },
         { title: '存储引擎', description: 'InnoDB vs MyISAM、行格式、MVCC 多版本并发控制' },
@@ -53,12 +53,12 @@ const data = {
     {
       name: 'NoSQL 数据库', subtitle: '选修',
       children: [
-        { title: 'Redis 核心', description: '五大数据类型（String/Hash/List/Set/ZSet）、过期策略', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷Redis教程", url: "https://www.bilibili.com/video/BV1Jq4y1z7Yj", icon: "mdi-play-circle-outline" }] }], groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Redis官方文档", url: "https://redis.io/docs/", icon: "mdi-file-document-outline" }] }] },
+        { title: 'Redis 核心', description: '五大数据类型（String/Hash/List/Set/ZSet）、过期策略', resources: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷Redis教程", url: "https://www.bilibili.com/video/BV1Jq4y1z7Yj", icon: "mdi-play-circle-outline" }] }, { name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Redis官方文档", url: "https://redis.io/docs/", icon: "mdi-file-document-outline" }] }] },
         { title: 'Redis 高级', description: '持久化 RDB/AOF、哨兵模式、Cluster 集群、Redis 管道' },
         { title: 'Redis 应用', description: '分布式锁 Redisson、缓存穿透/击穿/雪崩、布隆过滤器' },
-        { title: 'MongoDB 基础', description: '文档/集合/数据库、CRUD 操作、索引类型', groups: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷MongoDB教程", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }] }] },
+        { title: 'MongoDB 基础', description: '文档/集合/数据库、CRUD 操作、索引类型', resources: [{ name: "视频教程", icon: "mdi-play-circle-outline", items: [{ title: "尚硅谷MongoDB教程", url: "https://www.bilibili.com/video/BV1Yb4y1d7gS", icon: "mdi-play-circle-outline" }] }] },
         { title: 'MongoDB 进阶', description: '聚合管道（$match/$group/$lookup）、副本集、分片集群' },
-        { title: 'Elasticsearch 入门', description: '倒排索引原理、DSL 查询语言、分词器', groups: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Elasticsearch官方指南", url: "https://www.elastic.co/guide/index.html", icon: "mdi-file-document-outline" }] }] },
+        { title: 'Elasticsearch 入门', description: '倒排索引原理、DSL 查询语言、分词器', resources: [{ name: "官方文档", icon: "mdi-file-document-outline", items: [{ title: "Elasticsearch官方指南", url: "https://www.elastic.co/guide/index.html", icon: "mdi-file-document-outline" }] }] },
         { title: 'Elasticsearch 进阶', description: '聚合分析、集群管理、Logstash 数据同步' },
         { title: 'Cassandra', description: '宽表存储、分区键与聚簇键、CQL 查询', optional: true },
         { title: 'ClickHouse', description: '列式存储、MergeTree 引擎、OLAP 分析查询', optional: true },

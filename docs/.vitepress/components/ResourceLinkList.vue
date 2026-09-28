@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import type { ResourceGroup } from './types'
+import { withBase } from 'vitepress'
+import type { ResourceGroup, ResourceItem } from './types'
+
 defineProps<{ groups: ResourceGroup[] }>()
+
+const isInternal = (r: ResourceItem) => r.url.startsWith('/')
+const href = (r: ResourceItem) => (isInternal(r) ? withBase(r.url) : r.url)
 </script>
 
 <template>
@@ -17,7 +22,9 @@ defineProps<{ groups: ResourceGroup[] }>()
     <div class="resource-list">
       <a
         v-for="(r, i) in group.items" :key="i"
-        :href="r.url" target="_blank" rel="noopener"
+        :href="href(r)"
+        :target="isInternal(r) ? undefined : '_blank'"
+        :rel="isInternal(r) ? undefined : 'noopener'"
         class="resource-item"
       >
         <div class="resource-item-content">

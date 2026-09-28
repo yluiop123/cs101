@@ -3,7 +3,6 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import vuetify from 'vite-plugin-vuetify';
 import { defineConfig } from 'vitepress';
-import { tutorialSeries } from './tutorial-meta';
 
 interface SearchSection { anchor: string; titles: string[]; text: string }
 
@@ -98,18 +97,6 @@ function buildTutorialSidebars(): Record<string, any> {
   return sidebars
 }
 
-/** Sidebar for the tutorial center page: group tutorials by series */
-function buildTutorialCenterSidebar(): any[] {
-  const groups = tutorialSeries.map((s) => ({
-    text: s.title,
-    collapsed: true,
-    items: s.tutorials
-      .filter((t) => t.status !== 'planned')
-      .map((t) => ({ text: t.title, link: `/tutorials/${t.slug}/` })),
-  }))
-  return [{ text: '教程中心', link: '/tutorials/' }, ...groups]
-}
-
 export default defineConfig({
   title: 'CS101',
   base:'/cs101/',
@@ -151,7 +138,6 @@ a:hover { text-decoration: none !important; }
       },
       { text: '技术栈路线', link: '/tech-stack/' },
       { text: '应用领域路线', link: '/domain/' },
-      { text: '全部教程', link: '/tutorials/' }
     ],
     sidebar: {
       '/tech-stack/': [
@@ -239,7 +225,6 @@ a:hover { text-decoration: none !important; }
           ],
         },
       ],
-      '/tutorials/': buildTutorialCenterSidebar(),
       ...buildTutorialSidebars(),
     },
     search: {
