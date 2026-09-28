@@ -1,21 +1,31 @@
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue'
+import { ref, watch, nextTick, computed } from 'vue'
 import RoadmapDiagram from './RoadmapDiagram.vue'
 import DetailDrawer from './DetailDrawer.vue'
+import ResourceLinkList from './ResourceLinkList.vue'
 import type { ResourceGroup } from './types'
 
 interface Item {
-  title: string; description: string; optional?: boolean
+  title: string; description?: string; optional?: boolean
   resources?: ResourceGroup[]
 }
 
-interface ItemSection { name: string; subtitle?: string; note?: string; children: Item[] }
+interface RawSection { name: string; subtitle?: string; note?: string; children?: (Item | string)[] }
 interface DetailData {
   name: string; description: string
-  items: ItemSection[]
+  items?: RawSection[]
+  chapters?: RawSection[]
+  resources?: ResourceGroup[]
 }
 
 const props = defineProps<{ data: DetailData }>()
+
+const sections = computed(() =>
+  (props.data.items || props.data.chapters || []).map((s) => ({
+    ...s,
+    children: (s.children || []).map((c) => (typeof c === 'string' ? { title: c } : c)),
+  }))
+)
 
 const sectionColors = ['#2563eb', '#0ea5e9', '#9333ea', '#d97706', '#16a34a', '#e44d26', '#336791', '#4b5563']
 const sectionColor = (i: number) => sectionColors[i % sectionColors.length]
@@ -28,7 +38,7 @@ const activeSection = ref<number | null>(null)
 function openItem(item: Item) {
   selectedItem.value = item
   drawer.value = true
-  const idx = props.data.items.findIndex(s => s.children.includes(item))
+  const idx = sections.value.findIndex(s => (s.children as Item[]).some(c => c.title === item.title))
   if (idx !== -1) {
     activeSection.value = idx
     history.replaceState(null, '', '#item-' + idx)
@@ -75,13 +85,13 @@ watch(viewMode, async (newMode) => {
     <!-- G6 路线图 -->
     <div v-if="viewMode === 'roadmap'" id="roadmap-section" class="mb-6">
       <ClientOnly>
-        <RoadmapDiagram :sections="data.items" :topic-name="data.name" @item-click="openItem" />
+        <RoadmapDiagram :sections="sections" :topic-name="data.name" @item-click="openItem" />
       </ClientOnly>
     </div>
 
     <!-- 文档内容 -->
     <div v-show="viewMode === 'document'">
-    <div v-for="(section, si) in data.items" :key="si" class="mb-6">
+    <div v-for="(section, si) in sections" :key="si" class="mb-6">
       <div class="d-flex align-center ga-2 mb-3">
         <h2 :id="'item-' + si" class="text-h5 font-weight-bold ma-0" :style="{ color: sectionColor(si) }">
           {{ section.name }}
@@ -114,6 +124,14 @@ watch(viewMode, async (newMode) => {
           </v-card>
         </v-col>
       </v-row>
+      <v-card
+        v-if="data.resources?.length"
+        variant="flat"
+        class="pa-4 mt-2"
+        style="border: 1px solid rgba(var(--v-theme-on-surface), 0.08); border-radius: 8px;"
+      >
+        <ResourceLinkList :groups="data.resources" />
+      </v-card>
     </div>
     </div>
 

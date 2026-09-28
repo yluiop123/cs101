@@ -4,8 +4,8 @@ import type { ResourceGroup, ResourceItem } from './types'
 
 defineProps<{ groups: ResourceGroup[] }>()
 
-const isInternal = (r: ResourceItem) => r.url.startsWith('/')
-const href = (r: ResourceItem) => (isInternal(r) ? withBase(r.url) : r.url)
+const isInternal = (r: ResourceItem) => !!r.url && r.url.startsWith('/')
+const href = (r: ResourceItem) => (r.url ? (isInternal(r) ? withBase(r.url) : r.url) : undefined)
 </script>
 
 <template>
@@ -20,11 +20,12 @@ const href = (r: ResourceItem) => (isInternal(r) ? withBase(r.url) : r.url)
 
     <!-- Resource items -->
     <div class="resource-list">
-      <a
+      <component
+        :is="r.url ? 'a' : 'div'"
         v-for="(r, i) in group.items" :key="i"
         :href="href(r)"
-        :target="isInternal(r) ? undefined : '_blank'"
-        :rel="isInternal(r) ? undefined : 'noopener'"
+        :target="r.url && !isInternal(r) ? '_blank' : undefined"
+        :rel="r.url && !isInternal(r) ? 'noopener' : undefined"
         class="resource-item"
       >
         <div class="resource-item-content">
@@ -38,8 +39,8 @@ const href = (r: ResourceItem) => (isInternal(r) ? withBase(r.url) : r.url)
             </span>
           </div>
         </div>
-        <v-icon size="16" color="grey-lighten-2" class="resource-arrow">mdi-chevron-right</v-icon>
-      </a>
+        <v-icon v-if="r.url" size="16" color="grey-lighten-2" class="resource-arrow">mdi-chevron-right</v-icon>
+      </component>
     </div>
   </div>
 </template>
