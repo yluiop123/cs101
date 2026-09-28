@@ -1,0 +1,241 @@
+// 路线规划表：每条路线由哪些教程系列组成，一张卡 = 一个系列。
+// 系列已有站内教程 → 卡片可点进 /tutorials/<slug>/；尚未写成 → 置灰。
+// tutorial-index.ts 由 scripts/gen-tutorial-index.mjs 从 docs/tutorials/** 生成，写完即自动点亮。
+
+export const seriesMeta: Record<string, string> = {
+  java: 'Java 教程', python: 'Python 教程', go: 'Go 教程', rust: 'Rust 教程',
+  c: 'C 语言教程', cpp: 'C++ 教程', csharp: 'C# 教程',
+  javascript: 'JavaScript 教程', typescript: 'TypeScript 教程',
+  html: 'HTML 教程', css: 'CSS 教程', tailwind: 'Tailwind CSS 教程', vite: 'Vite 教程',
+  vue: 'Vue 3 教程', react: 'React 教程', angular: 'Angular 教程',
+  nodejs: 'Node.js 与包管理教程', 'node-backend': 'Node.js 后端教程',
+  vscode: 'VS Code 教程', git: 'Git 教程', markdown: 'Markdown 教程', regex: '正则表达式教程',
+  sql: 'SQL 基础教程', mysql: 'MySQL 教程', postgresql: 'PostgreSQL 教程',
+  redis: 'Redis 教程', mongodb: 'MongoDB 教程', elasticsearch: 'Elasticsearch 教程',
+  'spring-boot': 'Spring Boot 教程', mybatis: 'MyBatis 教程', jvm: 'JVM 原理与调优教程',
+  'spring-cloud': 'Spring Cloud 微服务教程', django: 'Django 教程', fastapi: 'FastAPI 教程',
+  aspnet: 'ASP.NET Core 教程',
+  linux: 'Linux 教程', docker: 'Docker 教程', kubernetes: 'Kubernetes 教程',
+  nginx: 'Nginx 教程', kafka: 'Kafka 与消息队列教程',
+  network: '计算机网络教程', dsa: '数据结构与算法教程', os: '操作系统教程',
+  'design-patterns': '设计模式教程',
+  'data-science': 'Python 数据科学教程', 'machine-learning': '机器学习教程',
+  'deep-learning': '深度学习教程',
+  flutter: 'Flutter 教程', 'react-native': 'React Native 教程',
+  security: '网络安全教程', 'big-data': '大数据教程', embedded: '嵌入式开发教程',
+  'game-dev': '游戏开发教程', testing: '软件测试教程', blockchain: '区块链开发教程',
+  quant: '量化金融教程',
+  prometheus: 'Prometheus 与可观测性教程', grpc: 'gRPC 教程', webassembly: 'WebAssembly 教程',
+}
+
+export interface RouteTier { name: string; items: string[] }
+export const routePlan: Record<string, RouteTier[]> = {
+  java: [
+    { name: '入门 · 语言与工具', items: ['java', 'vscode', 'git', 'markdown'] },
+    { name: '进阶 · 核心机制与数据', items: ['dsa', 'sql', 'mysql', 'redis', 'mongodb'] },
+    { name: '精通 · 并发、虚拟机与原理', items: ['jvm', 'design-patterns', 'network', 'os'] },
+    { name: '实战与生态 · 框架与部署', items: ['spring-boot', 'mybatis', 'spring-cloud', 'kafka', 'nginx', 'docker', 'kubernetes', 'linux'] },
+  ],
+  python: [
+    { name: '入门 · 语言与工具', items: ['python', 'vscode', 'git', 'markdown'] },
+    { name: '进阶 · 核心机制与数据', items: ['dsa', 'sql', 'mysql', 'redis', 'mongodb'] },
+    { name: '精通 · 原理与工程', items: ['design-patterns', 'network', 'os', 'linux'] },
+    { name: '实战与生态 · Web 与数据', items: ['django', 'fastapi', 'data-science', 'machine-learning', 'docker', 'kubernetes'] },
+  ],
+  go: [
+    { name: '入门 · 语言与工具', items: ['go', 'vscode', 'git', 'linux'] },
+    { name: '进阶 · 并发与数据', items: ['dsa', 'sql', 'mysql', 'redis', 'mongodb'] },
+    { name: '精通 · 原理与云原生', items: ['network', 'os', 'design-patterns', 'docker', 'kubernetes'] },
+    { name: '实战与生态 · 服务与中间件', items: ['kafka', 'nginx', 'grpc', 'prometheus'] },
+  ],
+  rust: [
+    { name: '入门 · 语言与工具', items: ['rust', 'vscode', 'git', 'linux'] },
+    { name: '进阶 · 系统与数据', items: ['c', 'dsa', 'sql', 'mysql', 'redis'] },
+    { name: '精通 · 底层与并发', items: ['os', 'network', 'design-patterns', 'c'] },
+    { name: '实战与生态 · 方向拓展', items: ['webassembly', 'blockchain', 'kubernetes'] },
+  ],
+  'c-cpp': [
+    { name: '入门 · C 语言与编译基础', items: ['c', 'linux', 'git', 'vscode'] },
+    { name: '进阶 · C++ 核心与标准库', items: ['cpp', 'dsa', 'design-patterns'] },
+    { name: '精通 · 内存、并发与底层', items: ['os', 'network', 'jvm'] },
+    { name: '实战与生态 · 系统编程与方向', items: ['embedded', 'game-dev', 'linux', 'docker'] },
+  ],
+  'c-sharp': [
+    { name: '入门 · 语言与工具', items: ['csharp', 'vscode', 'git'] },
+    { name: '进阶 · 类型系统与数据', items: ['dsa', 'sql', 'mysql', 'redis'] },
+    { name: '精通 · 运行时与原理', items: ['design-patterns', 'os', 'network'] },
+    { name: '实战与生态 · .NET 与游戏', items: ['aspnet', 'game-dev', 'docker', 'kubernetes'] },
+  ],
+  'kotlin-swift-dart': [
+    { name: '入门 · 选择方向与基础', items: ['flutter', 'react-native', 'git'] },
+    { name: '进阶 · UI 体系与组件', items: ['html', 'css', 'javascript'] },
+    { name: '精通 · 架构、状态与数据', items: ['sql', 'network', 'design-patterns'] },
+    { name: '实战与生态 · 工程化与发布', items: ['testing', 'docker', 'nginx'] },
+  ],
+  'javascript-typescript': [
+    { name: '入门 · 通用工具与语言基础', items: ['javascript', 'typescript', 'vscode', 'git', 'markdown', 'regex'] },
+    { name: '进阶 · 现代 JS 与类型系统', items: ['nodejs', 'html', 'css'] },
+    { name: '精通 · 运行时、渲染与性能', items: ['network', 'dsa', 'design-patterns', 'os'] },
+    { name: '实战与生态 · 框架与全栈', items: ['vue', 'react', 'angular', 'vite', 'tailwind', 'node-backend', 'sql', 'docker'] },
+  ],
+  frontend: [
+    { name: '入门 · Web 基础与页面结构', items: ['html', 'css', 'javascript', 'vscode'] },
+    { name: '进阶 · 布局体系与样式工程', items: ['tailwind', 'typescript', 'vue', 'react', 'angular'] },
+    { name: '精通 · 框架原理与工程化', items: ['vite', 'nodejs', 'network', 'dsa'] },
+    { name: '实战与生态 · 上线与拓展', items: ['git', 'docker', 'nginx', 'testing', 'node-backend'] },
+  ],
+  'sql-database': [
+    { name: '入门 · 环境与 SQL 基础', items: ['sql', 'mysql', 'postgresql'] },
+    { name: '进阶 · 查询语言与数据操作', items: ['mongodb', 'redis', 'elasticsearch'] },
+    { name: '精通 · 索引、事务与性能', items: ['os', 'network', 'dsa'] },
+    { name: '实战与生态 · 设计与运维', items: ['docker', 'linux', 'kafka', 'big-data'] },
+  ],
+  mysql: [
+    { name: '入门 · 关系型与 SQL', items: ['sql', 'mysql', 'linux'] },
+    { name: '进阶 · 索引与事务', items: ['postgresql', 'redis', 'dsa'] },
+    { name: '精通 · 存储引擎与优化', items: ['os', 'network'] },
+    { name: '实战与生态 · 高可用与生态', items: ['mongodb', 'elasticsearch', 'kafka', 'docker', 'big-data'] },
+  ],
+  postgresql: [
+    { name: '入门 · 关系型与 SQL', items: ['sql', 'postgresql', 'linux'] },
+    { name: '进阶 · 索引与事务', items: ['mysql', 'redis', 'dsa'] },
+    { name: '精通 · 内核与性能', items: ['os', 'network'] },
+    { name: '实战与生态 · 部署与分析', items: ['docker', 'elasticsearch', 'big-data'] },
+  ],
+  redis: [
+    { name: '入门 · 数据类型与使用', items: ['redis', 'linux', 'docker'] },
+    { name: '进阶 · 缓存与数据结构', items: ['dsa', 'sql', 'mysql'] },
+    { name: '精通 · 持久化与高可用', items: ['os', 'network'] },
+    { name: '实战与生态 · 场景与运维', items: ['kafka', 'mongodb', 'kubernetes'] },
+  ],
+  mongodb: [
+    { name: '入门 · 文档模型与 CRUD', items: ['mongodb', 'linux', 'docker'] },
+    { name: '进阶 · 索引与聚合', items: ['sql', 'redis', 'dsa'] },
+    { name: '精通 · 分布式与原理', items: ['os', 'network'] },
+    { name: '实战与生态 · 应用与运维', items: ['node-backend', 'elasticsearch', 'kubernetes'] },
+  ],
+  elasticsearch: [
+    { name: '入门 · 核心概念与查询', items: ['elasticsearch', 'linux', 'docker'] },
+    { name: '进阶 · 索引与文本', items: ['dsa', 'mongodb', 'redis'] },
+    { name: '精通 · 分布式与性能', items: ['os', 'network'] },
+    { name: '实战与生态 · 集群与生态', items: ['kafka', 'big-data', 'kubernetes'] },
+  ],
+  kafka: [
+    { name: '入门 · 核心概念与使用', items: ['kafka', 'linux', 'docker'] },
+    { name: '进阶 · 消息模型与可靠性', items: ['network', 'design-patterns'] },
+    { name: '精通 · 分布式与存储', items: ['os', 'dsa'] },
+    { name: '实战与生态 · 生态与运维', items: ['big-data', 'elasticsearch', 'kubernetes'] },
+  ],
+  nginx: [
+    { name: '入门 · 安装与配置', items: ['nginx', 'linux', 'network'] },
+    { name: '进阶 · 代理与负载均衡', items: ['docker', 'node-backend', 'nginx'] },
+    { name: '精通 · 性能与安全', items: ['os', 'security'] },
+    { name: '实战与生态 · 可观测与编排', items: ['prometheus', 'kubernetes', 'docker'] },
+  ],
+  docker: [
+    { name: '入门 · 镜像与容器', items: ['docker', 'linux'] },
+    { name: '进阶 · 编排与网络', items: ['nginx', 'kubernetes', 'network'] },
+    { name: '精通 · 底层原理', items: ['os', 'linux'] },
+    { name: '实战与生态 · 交付与运维', items: ['kubernetes', 'prometheus', 'security'] },
+  ],
+  kubernetes: [
+    { name: '入门 · 架构与基本对象', items: ['kubernetes', 'docker', 'linux'] },
+    { name: '进阶 · 网络与存储', items: ['network', 'nginx', 'redis'] },
+    { name: '精通 · 调度与扩展', items: ['os', 'design-patterns'] },
+    { name: '实战与生态 · 可观测与治理', items: ['prometheus', 'security', 'big-data'] },
+  ],
+  'domain-ai-ml': [
+    { name: '入门 · 数学与编程基础', items: ['python', 'data-science', 'dsa'] },
+    { name: '进阶 · 机器学习方法', items: ['machine-learning', 'deep-learning'] },
+    { name: '精通 · 工程与性能', items: ['linux', 'docker', 'os'] },
+    { name: '实战与生态 · 落地与运维', items: ['kubernetes', 'sql', 'mongodb', 'fastapi'] },
+  ],
+  'domain-big-data': [
+    { name: '入门 · 基础与语言', items: ['sql', 'python', 'linux'] },
+    { name: '进阶 · 存储与消息', items: ['mysql', 'redis', 'kafka', 'mongodb'] },
+    { name: '精通 · 分布式原理', items: ['os', 'network', 'dsa'] },
+    { name: '实战与生态 · 平台与运维', items: ['docker', 'kubernetes', 'elasticsearch', 'big-data'] },
+  ],
+  'domain-blockchain-web3': [
+    { name: '入门 · 基础与密码学', items: ['network', 'c', 'python'] },
+    { name: '进阶 · 链上开发', items: ['blockchain', 'rust', 'node-backend'] },
+    { name: '精通 · 系统与性能', items: ['os', 'dsa', 'security'] },
+    { name: '实战与生态 · 部署与运维', items: ['docker', 'kubernetes', 'linux'] },
+  ],
+  'domain-cybersecurity': [
+    { name: '入门 · 基础与工具', items: ['linux', 'network', 'python'] },
+    { name: '进阶 · 攻防技术', items: ['security', 'os', 'c'] },
+    { name: '精通 · 逆向与底层', items: ['dsa', 'design-patterns'] },
+    { name: '实战与生态 · 云与运维', items: ['docker', 'kubernetes', 'nginx', 'sql'] },
+  ],
+  'domain-devops-cloud': [
+    { name: '入门 · 系统与网络', items: ['linux', 'network', 'git'] },
+    { name: '进阶 · 容器与编排', items: ['docker', 'kubernetes', 'nginx'] },
+    { name: '精通 · 原理与语言', items: ['os', 'go', 'python'] },
+    { name: '实战与生态 · 平台工程', items: ['security', 'prometheus', 'big-data'] },
+  ],
+  'domain-embedded-iot': [
+    { name: '入门 · C 与硬件基础', items: ['c', 'linux', 'network'] },
+    { name: '进阶 · 系统与外设', items: ['embedded', 'os', 'cpp'] },
+    { name: '精通 · 实时与低功耗', items: ['rust', 'design-patterns'] },
+    { name: '实战与生态 · 联网与云', items: ['docker', 'nginx', 'security'] },
+  ],
+  'domain-enterprise-erp': [
+    { name: '入门 · 语言与数据', items: ['java', 'sql', 'mysql'] },
+    { name: '进阶 · 框架与集成', items: ['spring-boot', 'mybatis', 'redis'] },
+    { name: '精通 · 架构与建模', items: ['design-patterns', 'os', 'network'] },
+    { name: '实战与生态 · 交付与运维', items: ['docker', 'kubernetes', 'nginx', 'security'] },
+  ],
+  'domain-fintech': [
+    { name: '入门 · 语言与数据', items: ['python', 'sql', 'mysql'] },
+    { name: '进阶 · 系统与网络', items: ['c', 'network', 'os'] },
+    { name: '精通 · 量化与算法', items: ['dsa', 'quant', 'machine-learning'] },
+    { name: '实战与生态 · 风控与运维', items: ['redis', 'kafka', 'docker', 'security'] },
+  ],
+  'domain-game-vr-ar': [
+    { name: '入门 · 语言与数学', items: ['c', 'cpp', 'dsa'] },
+    { name: '进阶 · 引擎与图形', items: ['game-dev', 'csharp', 'design-patterns'] },
+    { name: '精通 · 性能与底层', items: ['os', 'network'] },
+    { name: '实战与生态 · 上线与运维', items: ['docker', 'nginx', 'embedded'] },
+  ],
+  'domain-gis': [
+    { name: '入门 · 前端与数据基础', items: ['javascript', 'html', 'css'] },
+    { name: '进阶 · 空间数据与数据库', items: ['sql', 'postgresql', 'mongodb'] },
+    { name: '精通 · 算法与系统', items: ['dsa', 'os', 'network'] },
+    { name: '实战与生态 · 服务与部署', items: ['docker', 'nginx', 'node-backend'] },
+  ],
+  'domain-mobile-dev': [
+    { name: '入门 · 语言与工具', items: ['git', 'vscode', 'javascript'] },
+    { name: '进阶 · 跨端框架', items: ['flutter', 'react-native', 'typescript'] },
+    { name: '精通 · 网络与架构', items: ['network', 'design-patterns', 'sql'] },
+    { name: '实战与生态 · 质量与发布', items: ['testing', 'docker', 'nginx'] },
+  ],
+  'domain-software-testing': [
+    { name: '入门 · 基础与工具', items: ['git', 'linux', 'python'] },
+    { name: '进阶 · 自动化测试', items: ['testing', 'javascript', 'nodejs'] },
+    { name: '精通 · 原理与结构', items: ['dsa', 'design-patterns', 'os'] },
+    { name: '实战与生态 · 平台与质量', items: ['docker', 'kubernetes', 'security', 'nginx'] },
+  ],
+  'domain-visualization': [
+    { name: '入门 · 前端与数据', items: ['html', 'css', 'javascript'] },
+    { name: '进阶 · 数据处理', items: ['data-science', 'sql', 'typescript'] },
+    { name: '精通 · 算法与性能', items: ['dsa', 'os', 'network'] },
+    { name: '实战与生态 · 服务与部署', items: ['node-backend', 'docker', 'nginx'] },
+  ],
+  'domain-web-saas': [
+    { name: '入门 · 前端与语言', items: ['html', 'css', 'javascript', 'typescript'] },
+    { name: '进阶 · 服务端与数据', items: ['nodejs', 'node-backend', 'sql', 'mysql', 'redis'] },
+    { name: '精通 · 原理与安全', items: ['network', 'os', 'security', 'design-patterns'] },
+    { name: '实战与生态 · 交付与运维', items: ['vite', 'vue', 'react', 'docker', 'kubernetes', 'nginx'] },
+  ],
+}
+
+// 路线页 → 概览卡片用的技术名（与 tech-stack/index.md 的入口保持一致）
+export const routeTitles: Record<string, string> = {
+  java: 'Java 技术路线', python: 'Python 技术路线', go: 'Go 技术路线', rust: 'Rust 技术路线',
+  'c-cpp': 'C / C++ 技术路线', 'c-sharp': 'C# 技术路线', 'kotlin-swift-dart': '移动与跨平台技术路线',
+  'javascript-typescript': 'JavaScript / TypeScript 技术路线', frontend: 'Web 前端技术路线',
+  'sql-database': 'SQL 与关系型数据库', mysql: 'MySQL', postgresql: 'PostgreSQL', redis: 'Redis',
+  mongodb: 'MongoDB', elasticsearch: 'Elasticsearch', kafka: 'Kafka / 消息队列', nginx: 'Nginx',
+  docker: 'Docker', kubernetes: 'Kubernetes',
+}
