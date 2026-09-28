@@ -135,6 +135,52 @@ export const tutorialIndex: Record<string, TutorialSeries> = {
       }
     ]
   },
+  "docker": {
+    "slug": "docker",
+    "title": "Docker 教程",
+    "chapters": [
+      {
+        "num": 1,
+        "title": "容器概念与安装",
+        "path": "/tutorials/docker/01-concepts-install"
+      },
+      {
+        "num": 2,
+        "title": "镜像与容器基本操作",
+        "path": "/tutorials/docker/02-images-containers"
+      },
+      {
+        "num": 3,
+        "title": "编写 Dockerfile",
+        "path": "/tutorials/docker/03-dockerfile"
+      },
+      {
+        "num": 4,
+        "title": "数据卷与网络",
+        "path": "/tutorials/docker/04-volumes-networks"
+      },
+      {
+        "num": 5,
+        "title": "多阶段构建与镜像优化",
+        "path": "/tutorials/docker/05-multi-stage"
+      },
+      {
+        "num": 6,
+        "title": "Docker Compose 编排",
+        "path": "/tutorials/docker/06-compose"
+      },
+      {
+        "num": 7,
+        "title": "镜像仓库与 CI 发布",
+        "path": "/tutorials/docker/07-registry-ci"
+      },
+      {
+        "num": 8,
+        "title": "综合实战：整套应用容器化",
+        "path": "/tutorials/docker/08-project"
+      }
+    ]
+  },
   "git": {
     "slug": "git",
     "title": "Git 教程",
@@ -465,6 +511,62 @@ export const tutorialIndex: Record<string, TutorialSeries> = {
       }
     ]
   },
+  "linux": {
+    "slug": "linux",
+    "title": "Linux 教程",
+    "chapters": [
+      {
+        "num": 1,
+        "title": "发行版、终端与 shell 基础",
+        "path": "/tutorials/linux/01-shell-basics"
+      },
+      {
+        "num": 2,
+        "title": "文件系统与路径",
+        "path": "/tutorials/linux/02-files-path"
+      },
+      {
+        "num": 3,
+        "title": "文件查看与文本处理",
+        "path": "/tutorials/linux/03-text-tools"
+      },
+      {
+        "num": 4,
+        "title": "权限、用户与组",
+        "path": "/tutorials/linux/04-permission-user"
+      },
+      {
+        "num": 5,
+        "title": "进程与服务管理",
+        "path": "/tutorials/linux/05-process-systemd"
+      },
+      {
+        "num": 6,
+        "title": "软件安装与包管理",
+        "path": "/tutorials/linux/06-packages"
+      },
+      {
+        "num": 7,
+        "title": "网络与排查",
+        "path": "/tutorials/linux/07-network"
+      },
+      {
+        "num": 8,
+        "title": "磁盘、内存与性能观测",
+        "path": "/tutorials/linux/08-performance"
+      },
+      {
+        "num": 9,
+        "title": "Shell 脚本编程",
+        "path": "/tutorials/linux/09-shell-script"
+      },
+      {
+        "num": 10,
+        "title": "综合实战：把一台裸机变成可上线的服务器",
+        "path": "/tutorials/linux/10-deploy-project"
+      }
+    ]
+  },
   "markdown": {
     "slug": "markdown",
     "title": "Markdown 教程",
@@ -488,6 +590,62 @@ export const tutorialIndex: Record<string, TutorialSeries> = {
         "num": 4,
         "title": "工具链与写作工作流",
         "path": "/tutorials/markdown/04-toolchain"
+      }
+    ]
+  },
+  "mysql": {
+    "slug": "mysql",
+    "title": "MySQL 教程",
+    "chapters": [
+      {
+        "num": 1,
+        "title": "安装与体系结构",
+        "path": "/tutorials/mysql/01-architecture"
+      },
+      {
+        "num": 2,
+        "title": "数据类型与表设计",
+        "path": "/tutorials/mysql/02-data-types-schema"
+      },
+      {
+        "num": 3,
+        "title": "索引与 B+ 树",
+        "path": "/tutorials/mysql/03-index"
+      },
+      {
+        "num": 4,
+        "title": "执行计划与查询优化",
+        "path": "/tutorials/mysql/04-explain-optimization"
+      },
+      {
+        "num": 5,
+        "title": "事务与 ACID",
+        "path": "/tutorials/mysql/05-transactions"
+      },
+      {
+        "num": 6,
+        "title": "隔离级别与 MVCC",
+        "path": "/tutorials/mysql/06-isolation-mvcc"
+      },
+      {
+        "num": 7,
+        "title": "锁与死锁",
+        "path": "/tutorials/mysql/07-locks-deadlock"
+      },
+      {
+        "num": 8,
+        "title": "主从复制与读写分离",
+        "path": "/tutorials/mysql/08-replication"
+      },
+      {
+        "num": 9,
+        "title": "高可用与备份恢复",
+        "path": "/tutorials/mysql/09-high-availability"
+      },
+      {
+        "num": 10,
+        "title": "综合实战：一个订单库的优化全过程",
+        "path": "/tutorials/mysql/10-project"
       }
     ]
   },
@@ -689,6 +847,52 @@ export const tutorialIndex: Record<string, TutorialSeries> = {
       }
     ]
   },
+  "redis": {
+    "slug": "redis",
+    "title": "Redis 教程",
+    "chapters": [
+      {
+        "num": 1,
+        "title": "为什么用 Redis 与安装",
+        "path": "/tutorials/redis/01-intro"
+      },
+      {
+        "num": 2,
+        "title": "五大数据类型实战",
+        "path": "/tutorials/redis/02-data-types"
+      },
+      {
+        "num": 3,
+        "title": "key 设计与过期淘汰",
+        "path": "/tutorials/redis/03-keys-expiry"
+      },
+      {
+        "num": 4,
+        "title": "持久化：RDB 与 AOF",
+        "path": "/tutorials/redis/04-persistence"
+      },
+      {
+        "num": 5,
+        "title": "事务与 Lua 脚本",
+        "path": "/tutorials/redis/05-tx-lua"
+      },
+      {
+        "num": 6,
+        "title": "发布订阅与 Stream",
+        "path": "/tutorials/redis/06-pubsub-stream"
+      },
+      {
+        "num": 7,
+        "title": "主从、哨兵与集群",
+        "path": "/tutorials/redis/07-cluster"
+      },
+      {
+        "num": 8,
+        "title": "综合实战：缓存三兄弟与一个商品详情缓存",
+        "path": "/tutorials/redis/08-cache-project"
+      }
+    ]
+  },
   "regex": {
     "slug": "regex",
     "title": "正则表达式教程",
@@ -798,6 +1002,52 @@ export const tutorialIndex: Record<string, TutorialSeries> = {
         "num": 15,
         "title": "Axum 初见：Web 服务",
         "path": "/tutorials/rust/15-axum-web"
+      }
+    ]
+  },
+  "sql": {
+    "slug": "sql",
+    "title": "SQL 基础教程",
+    "chapters": [
+      {
+        "num": 1,
+        "title": "关系模型与 SQL 方言",
+        "path": "/tutorials/sql/01-relational-model"
+      },
+      {
+        "num": 2,
+        "title": "环境与客户端",
+        "path": "/tutorials/sql/02-environment"
+      },
+      {
+        "num": 3,
+        "title": "查询基础",
+        "path": "/tutorials/sql/03-select-basics"
+      },
+      {
+        "num": 4,
+        "title": "过滤、排序与分页",
+        "path": "/tutorials/sql/04-filter-sort-page"
+      },
+      {
+        "num": 5,
+        "title": "聚合与分组",
+        "path": "/tutorials/sql/05-aggregate-group"
+      },
+      {
+        "num": 6,
+        "title": "多表连接",
+        "path": "/tutorials/sql/06-joins"
+      },
+      {
+        "num": 7,
+        "title": "子查询与 CTE",
+        "path": "/tutorials/sql/07-subquery-cte"
+      },
+      {
+        "num": 8,
+        "title": "数据修改与约束",
+        "path": "/tutorials/sql/08-dml-ddl"
       }
     ]
   },
