@@ -1,6 +1,6 @@
 ---
 title: "第 6 章 · 组件通信"
-description: "父 → 子        props（数据下行）"
+description: "父 → 子 props（数据下行）"
 series: react
 sidebar:
   order: 6

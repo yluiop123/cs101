@@ -129,12 +129,12 @@ class DiscountFactory:
     _table = {"none": NoDiscount, "pct": PercentageOff}
     @classmethod
     def create(cls, kind, **kw):
-        return cls._table[kind](./**kw/)
+        return cls._tablekind
 
 cart = Cart(DiscountFactory.create("pct", rate=0.1))
 ```
 
-分工很清楚：**工厂管「造哪个」，策略管「怎么做」，上下文（Cart）只管「用」**。对照[第 8 章 · 综合实战](./08-refactor-project/)里订单计价的改造，就是这条链落地。新增一种折扣：加一个策略类 + 表里登记一行，上下文零改动。
+分工很清楚：**工厂管「造哪个」，策略管「怎么做」，上下文（Cart）只管「用」**。对照[第 8 章 · 综合实战](../08-refactor-project/)里订单计价的改造，就是这条链落地。新增一种折扣：加一个策略类 + 表里登记一行，上下文零改动。
 
 ## 5.6 模板方法与反向控制
 

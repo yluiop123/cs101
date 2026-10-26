@@ -1,6 +1,6 @@
 ---
 title: "第 2 章 · 基础语法与流程控制"
-description: "var count int = 42            // 完整声明：var 名字 类型 = 值"
+description: "var count int = 42 // 完整声明：var 名字 类型 = 值"
 series: go
 sidebar:
   order: 2

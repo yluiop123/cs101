@@ -1,6 +1,6 @@
 ---
 title: "第 12 章 · 综合实战"
-description: "├── api/            # 请求层（纯函数）"
+description: "├── api/ # 请求层（纯函数）"
 series: react
 sidebar:
   order: 12

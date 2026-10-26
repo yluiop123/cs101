@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 排版与颜色"
-description: "<p class=\"text-xs\">极小 12px</p>"
+description: "极小 12px"
 series: tailwind
 sidebar:
   order: 4

@@ -200,7 +200,7 @@ ssh -L 5433:127.0.0.1:5432 prod     # 本机 5433 → 经 prod 转发到 prod �
 
 **连不通的排查顺序（由近及远，每步一条命令）：**
 
-1. 本机应用起来了吗：`ss -tlnp | grep 端口` —— 没监听，看服务日志（journalctl -u，[第 5 章 · 进程与服务管理](./05-process-systemd/)）
+1. 本机应用起来了吗：`ss -tlnp | grep 端口` —— 没监听，看服务日志（journalctl -u，[第 5 章 · 进程与服务管理](../05-process-systemd/)）
 2. 监听地址对吗：`0.0.0.0` 还是 `127.0.0.1` —— 后者外部永远进不来，改服务配置
 3. 本机防火墙放行了吗：`firewall-cmd --list-all` / `ufw status`
 4. 路由通吗：从另一台机器 `ping 服务器IP`、`traceroute`（注意 ICMP 可能被禁）

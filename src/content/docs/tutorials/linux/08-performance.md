@@ -1,6 +1,6 @@
 ---
 title: "第 8 章 · 磁盘、内存与性能观测"
-description: "total        used        free      shared  buff/cache   available"
+description: "total used free shared buff/cache available"
 series: linux
 sidebar:
   order: 8
@@ -199,7 +199,7 @@ TIME_WAIT 是什么：**主动关闭连接的一方**要等 2MSL（常见约 60 
 4. `iostat -x 1` 确认磁盘：await 与 %util 异常则查是哪个进程在读写（`sudo iotop -o` 可看每进程 IO，属iotop 包，装法同 sysstat 思路）。
 5. `free -h` + `vmstat 1`：available 与 si/so 判断是否内存压力引发 GC/换页抖动。
 6. `ss -s` + `ss -tan state time-wait | wc -l`：连接层是否堆积。
-7. 拿到"进程 + 资源类型 + 时间点"三要素后，转入应用层：journalctl 对齐时间轴（[第 5 章 · 进程与服务管理](./05-process-systemd/)）、日志找异常栈、profile 找热点函数（第 4 步的 TID 在此兑现）。
+7. 拿到"进程 + 资源类型 + 时间点"三要素后，转入应用层：journalctl 对齐时间轴（[第 5 章 · 进程与服务管理](../05-process-systemd/)）、日志找异常栈、profile 找热点函数（第 4 步的 TID 在此兑现）。
 
 ## 本章小结
 

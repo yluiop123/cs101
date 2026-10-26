@@ -127,7 +127,7 @@ fn main() { run(); }           // 二进制与库是两个独立 crate，各有�
 
 ## 12.5 单元测试：#[test] 与 #[should_panic]
 
-单元测试与业务代码同文件，装在 `#[cfg(test)]` 模块里——**只有 `cargo test` 时才编译**，发布产物不含；`assert!` 失败即 panic，接的是[第 7 章 · 错误处理](./07-error-handling/) 的断言工具：
+单元测试与业务代码同文件，装在 `#[cfg(test)]` 模块里——**只有 `cargo test` 时才编译**，发布产物不含；`assert!` 失败即 panic，接的是[第 7 章 · 错误处理](../07-error-handling/) 的断言工具：
 
 ```rust
 pub fn guarantee_positive(n: i32) -> i32 {

@@ -1,6 +1,6 @@
 ---
 title: "第 2 章 · 项目结构与配置文件"
-description: "├── index.html          # 入口！Vite 以它为起点（不在 public 里）"
+description: "├── index.html # 入口！Vite 以它为起点（不在 public 里）"
 series: vite
 sidebar:
   order: 2

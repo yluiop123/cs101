@@ -171,7 +171,7 @@ $ sysctl net.ipv4.tcp_recovery   # 0=Reno 1=RFC6675 2=RFC6582，影响快恢复�
 ```text
 RTT=200ms、initcwnd=10 MSS（约 14KB）：第一个 RTT 最多发出 14KB
 一条 200KB 的响应至少需要 5 个 RTT ≈ 1 秒，纯粹耗在窗口爬坡上
-→ 所以减少往返次数比调窗口更值钱（连接复用见 [第 3 章 · TCP 连接管理](./03-tcp-handshake/)）
+→ 所以减少往返次数比调窗口更值钱（连接复用见 [第 3 章 · TCP 连接管理](../03-tcp-handshake/)）
 → 这也是 CDN 与对象存储对首包窗口敏感、HTTP/2 多路复用收益显著的原因
 ```
 

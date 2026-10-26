@@ -1,6 +1,6 @@
 ---
 title: "第 8 章 · 表单（下）：校验与进阶"
-description: "<select name=\"city\">"
+description: ""
 series: html
 sidebar:
   order: 8

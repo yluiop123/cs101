@@ -34,7 +34,7 @@ mysql> SELECT VERSION();                -- 8.0.x / 8.4.x 均可，必须 8.0 以
 ```
 
 :::caution[8.0 与 5.7 的差距是本教程的前提]
-[第 7 章 · 子查询与 CTE](./07-subquery-cte/) 的 `WITH`、递归 CTE 与窗口函数在 MySQL 5.7
+[第 7 章 · 子查询与 CTE](../07-subquery-cte/) 的 `WITH`、递归 CTE 与窗口函数在 MySQL 5.7
 直接报语法错误。先跑 `SELECT VERSION();`，别在 5.7 上跟 8.0 的写法较劲。
 :::
 
@@ -57,7 +57,7 @@ CREATE TABLE demo (
 
 :::tip[SQLite 记得开外键]
 SQLite 出于历史原因**默认不检查外键**，每个新会话都要先手动执行
-`PRAGMA foreign_keys = ON;`，否则[第 8 章 · 数据修改与约束](./08-dml-ddl/)的级联实验会得到错误结论。
+`PRAGMA foreign_keys = ON;`，否则[第 8 章 · 数据修改与约束](../08-dml-ddl/)的级联实验会得到错误结论。
 :::
 
 ## 2.3 客户端：命令行与图形工具
@@ -252,7 +252,7 @@ SELECT total AS stored_total
 ```
 
 两句查询应给出同一个 `1728.00`。把 11 笔订单全算一遍，所有 `total` 都能由明细复现——
-这份自洽就是[第 5 章 · 聚合与分组](./05-aggregate-group/)与[第 6 章 · 多表连接](./06-joins/)
+这份自洽就是[第 5 章 · 聚合与分组](../05-aggregate-group/)与[第 6 章 · 多表连接](../06-joins/)
 结果的对照基准。若第 ③ 句居然成功了，说明你连的是 SQLite 且忘了开 `PRAGMA foreign_keys`。
 
 ## 本章小结

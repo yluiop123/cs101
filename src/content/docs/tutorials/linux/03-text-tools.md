@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 文件查看与文本处理"
-description: "cat notes.md             # 整个打到屏幕上（短文件）"
+description: "cat notes.md # 整个打到屏幕上（短文件）"
 series: linux
 sidebar:
   order: 3
@@ -60,7 +60,7 @@ tail -f access.log | grep --line-buffered ' 500 '     # 只盯 500，逐行输�
 grep ' 500 ' access.log > errors.log & tail -f errors.log  # 过滤结果落盘，另开窗口跟它
 ```
 
-管道里 grep 的输出默认按块缓冲，配合 `-f` 会"半天不出字"，`--line-buffered` 是按行刷的解药——这是 tail -f 管道组合最常见的隐形坑。若服务由 systemd 托管（[第 5 章 · 进程与服务管理](./05-process-systemd/)），`journalctl -u 服务名 -f` 天然支持过滤（`-p err` 按级别），多数场景比 tail -f 更省心。
+管道里 grep 的输出默认按块缓冲，配合 `-f` 会"半天不出字"，`--line-buffered` 是按行刷的解药——这是 tail -f 管道组合最常见的隐形坑。若服务由 systemd 托管（[第 5 章 · 进程与服务管理](../05-process-systemd/)），`journalctl -u 服务名 -f` 天然支持过滤（`-p err` 按级别），多数场景比 tail -f 更省心。
 
 ## 3.3 grep 与正则：从万行日志里捞那一行
 

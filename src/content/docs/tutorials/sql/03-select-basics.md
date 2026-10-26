@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 查询基础"
-description: "SELECT name, city            -- 取哪些列"
+description: "SELECT name, city -- 取哪些列"
 series: sql
 sidebar:
   order: 3
@@ -41,7 +41,7 @@ SELECT name, city, joined_at
 ```
 
 `WHERE` 里可以放：列、常量、比较运算符、`AND`/`OR`/`NOT`、函数调用。
-但**不能放聚合函数**（`WHERE COUNT(*) > 3` 是语法错误），那是[第 5 章 · 聚合与分组](./05-aggregate-group/)里 `HAVING` 的活。
+但**不能放聚合函数**（`WHERE COUNT(*) > 3` 是语法错误），那是[第 5 章 · 聚合与分组](../05-aggregate-group/)里 `HAVING` 的活。
 
 ## 3.2 选列、算列与列别名
 
@@ -91,7 +91,7 @@ SELECT title, price * 0.9 AS discounted
   FROM products
  WHERE price * 0.9 < 100;
 ```
-执行顺序是[第 5 章 · 聚合与分组](./05-aggregate-group/)的正式主题，先记住结论：**别名只能在 `SELECT` 与 `ORDER BY` 里用**。
+执行顺序是[第 5 章 · 聚合与分组](../05-aggregate-group/)的正式主题，先记住结论：**别名只能在 `SELECT` 与 `ORDER BY` 里用**。
 :::
 
 ## 3.3 DISTINCT：去重而不是"取不同"
@@ -165,7 +165,7 @@ SELECT order_id FROM orders LIMIT 3;
 SELECT order_id FROM orders ORDER BY created_at DESC LIMIT 3;
 ```
 没有 `ORDER BY` 时，哪 3 行由执行计划决定——今天稳定不代表升级索引后还稳定。
-分页的完整坑位在[第 4 章 · 过滤、排序与分页](./04-filter-sort-page/)。
+分页的完整坑位在[第 4 章 · 过滤、排序与分页](../04-filter-sort-page/)。
 :::
 
 ## 3.5 NULL 是"未知"，不是空也不是零
@@ -254,7 +254,7 @@ SELECT name, city, balance
 得 `UNKNOWN`——结果是 0 行。第 ④ 题补上 `OR city IS NULL` 才返回陈晨、孙芳。
 
 这组题的全部差异都来自 `NULL`。把"0 行 vs 2 行"这个差记住，
-[第 4 章 · 过滤、排序与分页](./04-filter-sort-page/)就按同样的直觉写条件。
+[第 4 章 · 过滤、排序与分页](../04-filter-sort-page/)就按同样的直觉写条件。
 
 ## 本章小结
 

@@ -115,7 +115,7 @@ docker compose --env-file prod.env config
 ```
 
 :::danger[密码会出现在 config 输出里]
-`docker compose config` 把插值结果明文打印，别把它粘进工单或聊天记录。`.env` 的文件权限设成 600，密钥传递在构建期用 secret 挂载（[第 5 章 · 多阶段构建与镜像优化](./05-multi-stage/)）、在运行期用编排平台的凭据机制。
+`docker compose config` 把插值结果明文打印，别把它粘进工单或聊天记录。`.env` 的文件权限设成 600，密钥传递在构建期用 secret 挂载（[第 5 章 · 多阶段构建与镜像优化](../05-multi-stage/)）、在运行期用编排平台的凭据机制。
 :::
 
 ## 6.5 实战：web + api + db 一起起

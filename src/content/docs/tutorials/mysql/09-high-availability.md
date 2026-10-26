@@ -1,6 +1,6 @@
 ---
 title: "第 9 章 · 高可用与备份恢复"
-description: "RPO（能丢多少数据）    由备份频率 + binlog 保留决定"
+description: "RPO（能丢多少数据） 由备份频率 + binlog 保留决定"
 series: mysql
 sidebar:
   order: 9

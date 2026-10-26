@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 安装与体系结构"
-description: "客户端敲下 SELECT  FROM orders WHERE customerid = 1001;，请求在 MySQL 内部大致这样流动："
+description: "客户端敲下 SELECT FROM orders WHERE customerid = 1001;，请求在 MySQL 内部大致这样流动："
 series: mysql
 sidebar:
   order: 1
@@ -195,7 +195,7 @@ docker exec -it mysql8 mysql -uroot -pRoot@123 shop
 `-e MYSQL_DATABASE=shop` 会自动建好一个空库，本系列所有示例都在 `shop` 库上做。
 
 :::tip[把电商四表建起来]
-SQL 基础教程里的 `customers`、`orders`、`order_items`、`products` 四张表在本系列继续使用，字段名保持一致。若本地还没有，按 [第 2 章 · 数据类型与表设计](./02-data-types-schema/) 给出的 DDL 建表即可，第 10 章的实战也从这份结构出发。
+SQL 基础教程里的 `customers`、`orders`、`order_items`、`products` 四张表在本系列继续使用，字段名保持一致。若本地还没有，按 [第 2 章 · 数据类型与表设计](../02-data-types-schema/) 给出的 DDL 建表即可，第 10 章的实战也从这份结构出发。
 :::
 
 ## 1.6 连接器与账号：常见姿势

@@ -23,7 +23,7 @@ duration: 6
 
 于是分工固定下来：`Future`/`async fn` 是语言特性，驱动它的**运行时（runtime）** 来自库。tokio 就扮演这个角色——多线程调度器、异步 `TcpListener`、定时器，以及 `#[tokio::main]`。axum 不自带 runtime，所以 Cargo.toml 里的 `tokio` 不是可选项。
 
-代价也要说清楚：同步与异步代码不互通，异步函数里不能阻塞；生态按「谁是调用方」分裂成 `foo` 与 `tokio-fork`；`.await` 点必须显式写出，跨 `.await` 的借用规则会立刻提醒你别把引用带进未来。这正是 [第 13 章 · 并发编程](./13-concurrency/)「Rust 把并发成本前移到编译期」思路的延续。
+代价也要说清楚：同步与异步代码不互通，异步函数里不能阻塞；生态按「谁是调用方」分裂成 `foo` 与 `tokio-fork`；`.await` 点必须显式写出，跨 `.await` 的借用规则会立刻提醒你别把引用带进未来。这正是 [第 13 章 · 并发编程](../13-concurrency/)「Rust 把并发成本前移到编译期」思路的延续。
 
 ## 15.2 依赖与第一个服务
 
@@ -160,11 +160,11 @@ async fn risky(Path(id): Path<u64>) -> Result<Json<u64>, StatusCode> {
 }
 ```
 
-最后一种最有意思：`Result` 本身就是合法返回值，`?` 在 handler 里照常可用，错误一路上传后由框架转成响应——[第 7 章 · 错误处理](./07-error-handling/) 的传播链直接接到了 HTTP 层。真实项目通常给自己的错误类型实现 `IntoResponse`，一次决定「业务错误 → 状态码 + JSON 结构」的映射。
+最后一种最有意思：`Result` 本身就是合法返回值，`?` 在 handler 里照常可用，错误一路上传后由框架转成响应——[第 7 章 · 错误处理](../07-error-handling/) 的传播链直接接到了 HTTP 层。真实项目通常给自己的错误类型实现 `IntoResponse`，一次决定「业务错误 → 状态码 + JSON 结构」的映射。
 
 ## 15.7 综合：todo 五件套与 curl 验证
 
-把 [第 14 章 · 综合实战：CLI 工具](./14-cli-project/) 的数据模型搬上来——存储从 `tasks.json` 换成 `Arc<Mutex<Vec<Task>>>`，进程重启即失忆，持久化留作练习：
+把 [第 14 章 · 综合实战：CLI 工具](../14-cli-project/) 的数据模型搬上来——存储从 `tasks.json` 换成 `Arc<Mutex<Vec<Task>>>`，进程重启即失忆，持久化留作练习：
 
 ```rust
 // src/main.rs

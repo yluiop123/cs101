@@ -1,6 +1,6 @@
 ---
 title: "第 14 章 · 综合实战：CLI 工具"
-description: "todo add <内容> 追加任务，todo list 列出全部，todo done <ID> 标记完成；数据存 tasks.json，错误走 stderr、退出码非零。按职责分五个文件（模块与可见性见 第 12 章 · 模块系统与测…"
+description: "todo add 追加任务，todo list 列出全部，todo done 标记完成；数据存 tasks.json，错误走 stderr、退出码非零。按职责分五个文件（模块与可见性见 第 12 章 · 模块系统与测…"
 series: rust
 sidebar:
   order: 14
@@ -17,7 +17,7 @@ duration: 6
 
 ## 14.1 项目目标与结构
 
-`todo add <内容>` 追加任务，`todo list` 列出全部，`todo done <ID>` 标记完成；数据存 `tasks.json`，错误走 stderr、退出码非零。按职责分五个文件（模块与可见性见 [第 12 章 · 模块系统与测试](./12-modules-testing/)）：
+`todo add <内容>` 追加任务，`todo list` 列出全部，`todo done <ID>` 标记完成；数据存 `tasks.json`，错误走 stderr、退出码非零。按职责分五个文件（模块与可见性见 [第 12 章 · 模块系统与测试](../12-modules-testing/)）：
 
 ```text
 todo-cli/
@@ -106,7 +106,7 @@ impl Store {
 }
 ```
 
-这一层只干一件事：**在 `Vec<Task>` 和磁盘上的 JSON 之间搬运**，不掺业务判断。`save` 收 `&[Task]` 而不是 `Vec<Task>`：调用方保留所有权，函数也不关心容量——这是 [第 4 章 · 借用与引用](./04-borrowing/) 里「输入用切片」惯例的落地。「查 ID、算新 ID」留在 14.5 的命令层，持久化层只会搬运。
+这一层只干一件事：**在 `Vec<Task>` 和磁盘上的 JSON 之间搬运**，不掺业务判断。`save` 收 `&[Task]` 而不是 `Vec<Task>`：调用方保留所有权，函数也不关心容量——这是 [第 4 章 · 借用与引用](../04-borrowing/) 里「输入用切片」惯例的落地。「查 ID、算新 ID」留在 14.5 的命令层，持久化层只会搬运。
 
 :::caution[整文件覆盖不是原子写]
 `fs::write` 直接覆盖原文件：进程中途被杀死，存档可能只剩半截。正确做法是「写 `tasks.json.tmp` → `fs::rename` 覆盖」，靠 rename 的原子性保证要么旧版本要么新版本。本章数据量小，且 `load` 对损坏内容会明确报错而非静默清空，所以先不做——但要清楚这是取舍，不是终点。
@@ -139,7 +139,7 @@ fn main() -> ExitCode {
 
 ## 14.5 命令分发：match 驱动的 cli.rs
 
-核心手法：**把字符串参数升级成有类型的枚举**——非法命令在解析阶段就被挡掉，`run` 拿到的一定是合法意图。穷尽性与解构的规则见 [第 6 章 · 模式匹配](./06-pattern-matching/)。
+核心手法：**把字符串参数升级成有类型的枚举**——非法命令在解析阶段就被挡掉，`run` 拿到的一定是合法意图。穷尽性与解构的规则见 [第 6 章 · 模式匹配](../06-pattern-matching/)。
 
 ```rust
 // src/cli.rs
@@ -209,7 +209,7 @@ pub fn run(cmd: Command, store: &Store) -> Result<(), AppError> {
 
 ## 14.6 错误处理：自定义 error enum + `?`
 
-`?` 一路往上抛时，中间层要能说出「这是哪类失败」，出口才能决定措辞与退出码（详见 [第 7 章 · 错误处理](./07-error-handling/)）。错误流向：`task.rs` 不产生错误；`store.rs` 的 `io::Error`/`serde_json::Error` 经 `From` 变成 `AppError`；`cli.rs` 新增 `Usage` 与 `NotFound`；`main.rs` 是唯一打印和定退出码的地方。
+`?` 一路往上抛时，中间层要能说出「这是哪类失败」，出口才能决定措辞与退出码（详见 [第 7 章 · 错误处理](../07-error-handling/)）。错误流向：`task.rs` 不产生错误；`store.rs` 的 `io::Error`/`serde_json::Error` 经 `From` 变成 `AppError`；`cli.rs` 新增 `Usage` 与 `NotFound`；`main.rs` 是唯一打印和定退出码的地方。
 
 ```rust
 // src/error.rs

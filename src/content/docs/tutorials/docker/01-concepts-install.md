@@ -74,7 +74,7 @@ docker pull nginx:alpine     # 从仓库拉到本地
 docker images                # 列出本地镜像（含 SIZE 与 IMAGE ID）
 ```
 
-`nginx:alpine` 由「镜像名 + 冒号 + 标签（tag）」组成。省略 tag 时默认 `latest`，这是很多线上事故的源头，[第 7 章 · 镜像仓库与 CI 发布](./07-registry-ci/) 会专门拆它。完整引用形式是：
+`nginx:alpine` 由「镜像名 + 冒号 + 标签（tag）」组成。省略 tag 时默认 `latest`，这是很多线上事故的源头，[第 7 章 · 镜像仓库与 CI 发布](../07-registry-ci/) 会专门拆它。完整引用形式是：
 
 ```text
 [仓库主机名[:端口]/][命名空间/]镜像名[:tag][@sha256:摘要]
@@ -99,7 +99,7 @@ CONTAINER ID   IMAGE          STATUS         PORTS                              
 两个容器共用同一份镜像层，各自只多占一层薄可写层。
 
 :::caution[容器默认可写层随容器一起消失]
-`docker rm` 之后，写在容器里的文件（上传目录、SQLite 文件、日志）全没了。持久化必须走数据卷或 bind mount——见 [第 4 章 · 数据卷与网络](./04-volumes-networks/)。
+`docker rm` 之后，写在容器里的文件（上传目录、SQLite 文件、日志）全没了。持久化必须走数据卷或 bind mount——见 [第 4 章 · 数据卷与网络](../04-volumes-networks/)。
 :::
 
 ## 1.4 namespaces 与 cgroups 点到为止
@@ -154,7 +154,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
   docker-buildx-plugin docker-compose-plugin
 ```
 
-`docker-ce` 是引擎本体，`docker-compose-plugin` 提供 `docker compose` 子命令（[第 6 章 · Docker Compose 编排](./06-compose/) 全程要用它）。CentOS/RHEL 把上面命令里的 apt 换成 yum/dnf，仓库 URL 里的 ubuntu 换成 centos 或 rhel 即可。
+`docker-ce` 是引擎本体，`docker-compose-plugin` 提供 `docker compose` 子命令（[第 6 章 · Docker Compose 编排](../06-compose/) 全程要用它）。CentOS/RHEL 把上面命令里的 apt 换成 yum/dnf，仓库 URL 里的 ubuntu 换成 centos 或 rhel 即可。
 
 ```bash
 sudo systemctl enable --now docker

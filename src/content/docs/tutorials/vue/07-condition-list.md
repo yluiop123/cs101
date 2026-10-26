@@ -1,6 +1,6 @@
 ---
 title: "第 7 章 · 条件与列表渲染"
-description: "<script setup>"
+description: ""
 series: vue
 sidebar:
   order: 7

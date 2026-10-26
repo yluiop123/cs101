@@ -1,6 +1,6 @@
 ---
 title: "第 8 章 · 泛型与 trait"
-description: "fn largest<T: PartialOrd>(list: &[T]) -> &T {     // T: PartialOrd 是约束"
+description: "fn largest(list: &[T]) -> &T { // T: PartialOrd 是约束"
 series: rust
 sidebar:
   order: 8

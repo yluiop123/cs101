@@ -1,6 +1,6 @@
 ---
 title: "第 6 章 · 多媒体与 iframe"
-description: "在 HTML5 之前，网页播放视频要依赖 Flash 插件；如今 <video> 是原生标准："
+description: "在 HTML5 之前，网页播放视频要依赖 Flash 插件；如今 是原生标准："
 series: html
 sidebar:
   order: 6

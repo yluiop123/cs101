@@ -94,7 +94,7 @@ sudo apt update
 sudo apt install 某包
 ```
 
-RHEL 系还有 COPR（社区版 PPA），用法类似，以项目主页给的命令为准。[第 5 章 · 进程与服务管理](./05-process-systemd/) 里推荐的 htop，在 CentOS 上就是这么来的：`dnf install epel-release` 之后才有。
+RHEL 系还有 COPR（社区版 PPA），用法类似，以项目主页给的命令为准。[第 5 章 · 进程与服务管理](../05-process-systemd/) 里推荐的 htop，在 CentOS 上就是这么来的：`dnf install epel-release` 之后才有。
 
 :::caution[第三方源的安全边界]
 PPA/COPR/手工 repo 意味着"把陌生人的签名软件以 root 装进系统"。三条自保规则：① 只添加软件**官方网站**列出的源；② 优先发行版官方源，其次才是第三方；③ 定期 `apt list --installed` / `dnf repoquery` 盘点来历不明的包。

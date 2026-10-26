@@ -208,7 +208,7 @@ zset-max-listpack-value 64
 :::
 
 :::danger[反例：一个大 Hash 装全站配置]
-`HSET config:all <三万个字段>` 变成典型的**大 key**：编码早早从 listpack 退化、`HGETALL` 一次吐出几十 MB、`UNLINK` 删除时阻塞主线程。正确做法是按模块拆分多个小 Hash（`config:pay`、`config:search`），详见 [第 3 章 · key 设计与过期淘汰](./03-keys-expiry/)。
+`HSET config:all <三万个字段>` 变成典型的**大 key**：编码早早从 listpack 退化、`HGETALL` 一次吐出几十 MB、`UNLINK` 删除时阻塞主线程。正确做法是按模块拆分多个小 Hash（`config:pay`、`config:search`），详见 [第 3 章 · key 设计与过期淘汰](../03-keys-expiry/)。
 :::
 
 选类型的口诀：**按访问模式选，不按数据长相选**。

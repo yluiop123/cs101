@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 运算符与流程控制"
-description: "10 + 3    // 13"
+description: "10 + 3 // 13"
 series: javascript
 sidebar:
   order: 3

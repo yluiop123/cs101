@@ -81,23 +81,35 @@ function extractDescription(body) {
   return '';
 }
 
-function toRelative(fromUrl, rawTarget) {
+function dirOf(url) {
+  return url.endsWith('/') ? url : `${url.slice(0, url.lastIndexOf('/') + 1)}`;
+}
+
+/**
+ * @param linkBase  生成链接时的基准（站点实际 URL，章节带尾斜杠）
+ * @param resolveBase 解析旧站相对链接时的基准（旧站章节 URL 无尾斜杠，相当于文件）
+ */
+function toRelative(linkBase, resolveBase, rawTarget, available) {
   if (/^[a-z]+:/i.test(rawTarget) || rawTarget.startsWith('//') || rawTarget.startsWith('#')) return rawTarget;
 
   const [rawPath, hash] = rawTarget.split('#');
-  const fromDir = fromUrl.endsWith('/') ? fromUrl : `${fromUrl.slice(0, fromUrl.lastIndexOf('/') + 1)}`;
-  const targetPath = rawPath.startsWith('/') ? rawPath : posix.join(fromDir, rawPath);
+  const resolveDir = dirOf(resolveBase);
+  const linkDir = dirOf(linkBase);
+  const targetPath = rawPath.startsWith('/') ? rawPath : posix.join(resolveDir, rawPath);
 
   let normalized = targetPath;
   if (!normalized.endsWith('/') && !/\.[a-z0-9]{2,5}$/i.test(normalized)) normalized += '/';
 
-  let rel = posix.relative(fromDir, normalized || '/') || './';
+  // 目标页面/资源不存在（未迁移的章节、示例里的假文件等）：去掉链接保留文字
+  if (normalized.startsWith('/') && !available.has(normalized)) return null;
+
+  let rel = posix.relative(linkDir, normalized || '/') || './';
   if (normalized.endsWith('/') && rel !== './' && !rel.endsWith('/')) rel += '/';
   if (!rel.startsWith('.')) rel = `./${rel}`;
   return hash ? `${rel}#${hash}` : rel;
 }
 
-function normalizeBody(body, pageUrl) {
+function normalizeBody(body, pageUrl, baseUrl, available) {
   const lines = body.split(/\r?\n/);
   const out = [];
   let removedH1 = false;
@@ -113,7 +125,12 @@ function normalizeBody(body, pageUrl) {
       out.push(title ? `:::${kind}[${title}]` : `:::${kind}`);
       continue;
     }
-    out.push(line.replace(/\]\(([^)\s]+)\)/g, (match, url) => `](${toRelative(pageUrl, url)})`));
+    out.push(
+      line.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (match, text, url) => {
+        const relative = toRelative(pageUrl, baseUrl, url, available);
+        return relative === null ? text : `[${text}](${relative})`;
+      }),
+    );
   }
   return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
 }
@@ -133,6 +150,14 @@ async function walk(directory) {
 }
 
 const allFiles = await walk(SRC);
+const available = new Set(
+  allFiles
+    .filter((file) => !relative(SRC, file).replace(/\\/g, '/').startsWith('.vitepress/'))
+    .map((file) => {
+      const rel = relative(SRC, file).replace(/\\/g, '/');
+      return `/${rel.replace(/index\.md$/, '').replace(/\.md$/, '/').replace(/\/+/g, '/')}`;
+    }),
+);
 const selected = allFiles.filter((file) => {
   const rel = relative(SRC, file).replace(/\\/g, '/');
   if (rel === 'index.md' || rel.startsWith('.vitepress/')) return false;
@@ -149,6 +174,8 @@ for (const file of selected) {
   if (isSeriesIndex) continue;
   const urlPath = `/${rel.replace(/index\.md$/, '').replace(/\.md$/, '/').replace(/\/+/g, '/')}`;
   const pageUrl = urlPath.endsWith('/') ? urlPath : `${urlPath}/`;
+  // 旧站章节 URL 无尾斜杠，相对链接（如 ./02-basic）以章节所在目录为基准
+  const baseUrl = rel.endsWith('/index.md') ? pageUrl : `/${rel.replace(/\.md$/, '')}`;
 
   const h1 = body.match(/^#\s+(.+)$/m);
   const h1Text = h1 ? h1[1].trim() : '';
@@ -159,8 +186,11 @@ for (const file of selected) {
   const orderMatch = rel.match(/\/(\d{2})-/);
   const order = isSeriesIndex ? 0 : orderMatch ? Number(orderMatch[1]) : 99;
 
-  const normalized = normalizeBody(body, pageUrl);
-  const description = data.description || extractDescription(normalized);
+  const normalized = normalizeBody(body, pageUrl, baseUrl, available);
+  const description = (data.description || extractDescription(normalized))
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
   const duration = Math.max(3, Math.round(countCjk(normalized) / 300));
 
   const frontmatter = ['---', `title: ${yamlString(title)}`, `description: ${yamlString(description)}`];

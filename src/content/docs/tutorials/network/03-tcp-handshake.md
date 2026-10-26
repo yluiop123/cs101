@@ -187,7 +187,7 @@ sudo sysctl -w net.ipv4.tcp_max_tw_buckets=20000
 
 ## 3.6 连接复用与长连接
 
-建连的成本不只是三个包：还要付 TCP 慢启动（初始窗口小，见 [第 4 章 · 可靠传输与拥塞控制](./04-tcp-reliability/)）、TLS 握手、可能的路由与 ARP 查询。
+建连的成本不只是三个包：还要付 TCP 慢启动（初始窗口小，见 [第 4 章 · 可靠传输与拥塞控制](../04-tcp-reliability/)）、TLS 握手、可能的路由与 ARP 查询。
 
 ```bash
 # 分别计时：DNS、TCP 建连、TLS、首字节 —— 建连成本一眼可见（选项名以 curl --help 为准）

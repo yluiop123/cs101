@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 布局与盒模型工具类"
-description: "<div class=\"block\">块级</div>"
+description: "块级"
 series: tailwind
 sidebar:
   order: 3

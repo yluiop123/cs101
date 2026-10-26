@@ -1,6 +1,6 @@
 ---
 title: "第 9 章 · 工程化配置"
-description: "npx tsc --init     # 生成带注释的完整默认配置"
+description: "npx tsc --init # 生成带注释的完整默认配置"
 series: typescript
 sidebar:
   order: 9

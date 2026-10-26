@@ -1,6 +1,6 @@
 ---
 title: "第 7 章 · 错误处理"
-description: "enum Option<T> {                  // 表达\"可能没有值\"（第 5 章）"
+description: "enum Option { // 表达\"可能没有值\"（第 5 章）"
 series: rust
 sidebar:
   order: 7

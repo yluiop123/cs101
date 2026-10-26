@@ -205,7 +205,7 @@ while (line := input("> ").strip()):
     parts = line.split(maxsplit=1)
     entry = COMMANDS.get(parts[0])
     if entry:
-        entry[0](./*parts[1:]/)
+        entry0
     else:
         cmd_help()
 ```

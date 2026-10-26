@@ -1,6 +1,6 @@
 ---
 title: "第 2 章 · 变量与数据类型"
-description: "let score = 90;        // 可变：之后可以重新赋值"
+description: "let score = 90; // 可变：之后可以重新赋值"
 series: javascript
 sidebar:
   order: 2

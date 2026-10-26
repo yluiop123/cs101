@@ -82,6 +82,7 @@ const tutorialDirs = (await readdir(join(LEGACY, 'tutorials'), { withFileTypes: 
   .map((entry) => entry.name);
 
 let seriesGenerated = 0;
+const tutorialSlugs = new Set(tutorialDirs);
 for (const slug of tutorialDirs) {
   const legacyIndex = join(LEGACY, 'tutorials', slug, 'index.md');
   let source;
@@ -97,10 +98,21 @@ for (const slug of tutorialDirs) {
 
   let content = stripChapterList(body)
     .replace(/^#\s+.+$/m, '')
-    .replace(/\]\(([^)\s]+)\)/g, (match, url) => `](${toRelative(pageUrl, url)})`)
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (match, text, url) => {
+      let targetSlug = null;
+      const absolute = url.match(/^\/tutorials\/([^/)#]+)/);
+      const relativeMatch = url.match(/^\.\.\/([^/)#]+)\/?$/);
+      if (absolute) targetSlug = absolute[1];
+      else if (relativeMatch) targetSlug = relativeMatch[1];
+      if (targetSlug && !tutorialSlugs.has(targetSlug)) return text;
+      return `[${text}](${toRelative(pageUrl, url)})`;
+    })
     .trim();
 
-  const description = firstParagraph(content) || data.description || '';
+  const description = firstParagraph(content)
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim() || data.description || '';
 
   // 把「章节目录」放到正文开头（前置知识/你将学到之前），方便直接开始学习
   const headingIndex = content.search(/\n##\s/);

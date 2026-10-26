@@ -204,7 +204,7 @@ SELECT c.customer_id, c.name, COUNT(o.order_id) AS n
 把 `orders` 连 `order_items` 后再 `SUM(o.total)`：订单 1 有两条明细，`488.00` 被加了两次，
 全库结果变成 `12577.00`，而真实营业额是 `7038.00`。
 修法有两种：① 只连一层，明细金额用 `SUM(it.quantity * it.unit_price)` 求（同样得 7038.00）；
-② 先在子查询里按订单聚合，再连接（[第 7 章 · 子查询与 CTE](./07-subquery-cte/)）。
+② 先在子查询里按订单聚合，再连接（[第 7 章 · 子查询与 CTE](../07-subquery-cte/)）。
 :::
 
 ## 6.7 综合练习：订单明细报表

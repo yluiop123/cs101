@@ -70,7 +70,7 @@ pwdRe.test('abcdefgh')  // false —— 无数字
 ```js
 const url = 'https://example.com/search?q=vue&page=2'
 const params = {}
-for (const m of url.matchAll(/[?&](./\w+/)=([^&]+)/g)) {
+for (const m of url.matchAll(/?&=([^&]+)/g)) {
   params[m[1]] = m[2]
 }
 // { q: 'vue', page: '2' }

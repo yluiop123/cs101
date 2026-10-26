@@ -35,7 +35,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 关闭:    close()；shutdown() 可只关读或写方向（半关闭，见 10.3）
 ```
 
-关键心智模型：**`accept` 返回的是另一个 fd**。监听 fd 只负责排队接客，每个已建立的连接各自一个 fd——「一个服务器同时有几万个连接」物理上就是「进程持有几万个连接 fd」。这也是[第 9 章 · 抓包与网络排障实战](./09-debug-toolkit/)的 `ss` 里看到大量 ESTAB 时，它们分散在不同 fd 上的原因。
+关键心智模型：**`accept` 返回的是另一个 fd**。监听 fd 只负责排队接客，每个已建立的连接各自一个 fd——「一个服务器同时有几万个连接」物理上就是「进程持有几万个连接 fd」。这也是[第 9 章 · 抓包与网络排障实战](../09-debug-toolkit/)的 `ss` 里看到大量 ESTAB 时，它们分散在不同 fd 上的原因。
 
 :::tip[fd 的上限是真实的墙]
 每个进程默认 fd 上限常见 1024（`ulimit -n` 查看调整）。第 1 万条连接如果 accept 返回 -1 报 Too many open files，先调上限再怪代码——这是 C10K 的第一关（10.6）。
@@ -110,7 +110,7 @@ def recv_msg(conn) -> bytes:
 ```
 
 :::caution[shutdown 与 close 不是一回事]
-`close(fd)` 直接全关；想「我说完了但还能听你说」时要用 `conn.shutdown(socket.SHUT_WR)` 先发 FIN 半边关闭——做「请求-响应后由发送方先关」类协议时，半关闭是给对方留确认窗口的手段，也是 `CLOSE-WAIT` 堆积类故障（[第 9 章 · 抓包与网络排障实战](./09-debug-toolkit/)）的解药。
+`close(fd)` 直接全关；想「我说完了但还能听你说」时要用 `conn.shutdown(socket.SHUT_WR)` 先发 FIN 半边关闭——做「请求-响应后由发送方先关」类协议时，半关闭是给对方留确认窗口的手段，也是 `CLOSE-WAIT` 堆积类故障（[第 9 章 · 抓包与网络排障实战](../09-debug-toolkit/)）的解药。
 :::
 
 ## 10.4 阻塞与非阻塞
@@ -212,7 +212,7 @@ print("all sent")
 自查要点：
 
 1. 服务端 accept 出的新 fd 有没有 `setblocking(False)`？忘了它会退化回串行。
-2. `recv` 返回空字节时是否注销该 fd 并 close？漏关就是 [第 9 章](./09-debug-toolkit/)里 CLOSE-WAIT 堆积的源头。
+2. `recv` 返回空字节时是否注销该 fd 并 close？漏关就是 [第 9 章](../09-debug-toolkit/)里 CLOSE-WAIT 堆积的源头。
 3. 半包：客户端把一条消息分两次 send，服务端能否正确拼回？用 `recv_exact` 的循环验证。
 4. 用 `ss -tulnp | grep 9000` 确认监听，再用两个终端同时连——两台都能收到回显才算并发成立。
 

@@ -144,7 +144,7 @@ USER job
 CMD ["node", "src/consumer.js"]                # 从 redis 拉任务、写库
 ```
 
-数据库首次初始化靠 MySQL 镜像的入口脚本（[第 4 章 · 数据卷与网络](./04-volumes-networks/)）：`db/init/01-schema.sql` 挂到 `/docker-entrypoint-initdb.d`，只在数据卷为空时按文件名顺序执行。之后的 schema 变更一律走一次性迁移任务，它与 api 共用镜像、只换 `command`，定义见下面的 compose——注意它不设 `ports`、不进 `edge` 网络，且 `restart` 写作带引号的 `"no"`（YAML 裸写 `no` 会被解析成布尔 `false`）。
+数据库首次初始化靠 MySQL 镜像的入口脚本（[第 4 章 · 数据卷与网络](../04-volumes-networks/)）：`db/init/01-schema.sql` 挂到 `/docker-entrypoint-initdb.d`，只在数据卷为空时按文件名顺序执行。之后的 schema 变更一律走一次性迁移任务，它与 api 共用镜像、只换 `command`，定义见下面的 compose——注意它不设 `ports`、不进 `edge` 网络，且 `restart` 写作带引号的 `"no"`（YAML 裸写 `no` 会被解析成布尔 `false`）。
 
 ## 8.6 compose.yaml：一次起整套
 
@@ -242,12 +242,12 @@ gunzip -c /backup/todo-db-2026-09-01.sql.gz | docker compose exec -T db mysql -u
 ```
 
 :::danger[上线前必查的四件事]
-1）`MYSQL_ROOT_PASSWORD` 只在权限 600 的 `.env` 里且不在 git；2）`db` 与 `queue` 确实没有 `ports`；3）数据卷有备份且成功恢复过一次；4）镜像用明确 tag，生产覆盖文件里不出现 `build`（详见 [第 7 章 · 镜像仓库与 CI 发布](./07-registry-ci/)）。
+1）`MYSQL_ROOT_PASSWORD` 只在权限 600 的 `.env` 里且不在 git；2）`db` 与 `queue` 确实没有 `ports`；3）数据卷有备份且成功恢复过一次；4）镜像用明确 tag，生产覆盖文件里不出现 `build`（详见 [第 7 章 · 镜像仓库与 CI 发布](../07-registry-ci/)）。
 :::
 
 **上线自查清单**
 
-- [ ] 四个镜像都能独立构建成功，后端体积在百 MB 量级（用 [第 5 章 · 多阶段构建与镜像优化](./05-multi-stage/) 的方法核对）
+- [ ] 四个镜像都能独立构建成功，后端体积在百 MB 量级（用 [第 5 章 · 多阶段构建与镜像优化](../05-multi-stage/) 的方法核对）
 - [ ] 所有 `FROM` 用明确 tag，版本号已与 Docker Hub 当前 tag 核对
 - [ ] 网络分层生效：`docker network inspect todo_backend` 里不该出现 gateway；只有 gateway 发布端口，开发环境进一步只绑 `127.0.0.1`
 - [ ] 长期服务都有 `HEALTHCHECK`，一次性任务是 `restart: "no"`

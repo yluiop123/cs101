@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 函数与错误处理"
-description: "func add(a, b int) int {            // 同类型参数可简写"
+description: "func add(a, b int) int { // 同类型参数可简写"
 series: go
 sidebar:
   order: 4

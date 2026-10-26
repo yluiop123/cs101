@@ -1,6 +1,6 @@
 ---
 title: "第 7 章 · 锁与死锁"
-description: "按粒度   全局锁 → 表级锁（含 MDL、意向锁）→ 行级锁（记录/间隙/next-key）"
+description: "按粒度 全局锁 → 表级锁（含 MDL、意向锁）→ 行级锁（记录/间隙/next-key）"
 series: mysql
 sidebar:
   order: 7

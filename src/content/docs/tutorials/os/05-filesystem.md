@@ -35,7 +35,7 @@ struct inode_operations     lookup / create / link / unlink / rename / getattr
 struct address_space        页缓存：inode → 一组缓存页（第 4 章的映射页由此供页）
 ```
 
-好处立刻显现：`grep` 不需要知道自己在读 ext4 还是 NFS；而代价也在这里 —— 每层抽象都有开销，网络文件系统上一次 `stat` 可能是一次 RPC（[第 6 章 · 输入输出与中断](./06-io-interrupt/) 讨论 IO 栈时还会碰到）。
+好处立刻显现：`grep` 不需要知道自己在读 ext4 还是 NFS；而代价也在这里 —— 每层抽象都有开销，网络文件系统上一次 `stat` 可能是一次 RPC（[第 6 章 · 输入输出与中断](../06-io-interrupt/) 讨论 IO 栈时还会碰到）。
 
 ## 5.2 inode、目录项，以及权限位从哪来
 
@@ -115,7 +115,7 @@ pwrite(fd, buf, n, off);
 
 ## 5.4 块缓存、预读与回写
 
-Linux 的文件缓存就是[第 4 章 · 内存管理与虚拟内存](./04-memory/)里的**页缓存**：以页为单位缓存文件内容，且与进程地址空间共用同一份物理页（`mmap` 因此能做到零拷贝）。
+Linux 的文件缓存就是[第 4 章 · 内存管理与虚拟内存](../04-memory/)里的**页缓存**：以页为单位缓存文件内容，且与进程地址空间共用同一份物理页（`mmap` 因此能做到零拷贝）。
 
 ```text
 读路径   read → VFS → 文件系统 → 查 address_space → 命中：拷给用户缓冲（不碰盘）

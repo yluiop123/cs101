@@ -195,7 +195,7 @@ trap 'warn "脚本在第 $LINENO 行附近异常退出（exit=$?）"' ERR   # se
 
 ## 9.7 综合练习：数据库目录每日备份脚本
 
-把本章全部零件组装成可用的 `db-backup.sh`（承接 [第 10 章 · 综合实战](./10-deploy-project/) 的定时化）：
+把本章全部零件组装成可用的 `db-backup.sh`（承接 [第 10 章 · 综合实战](../10-deploy-project/) 的定时化）：
 
 ```bash
 #!/usr/bin/env bash

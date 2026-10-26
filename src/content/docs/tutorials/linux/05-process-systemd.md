@@ -56,7 +56,7 @@ CPU行:   %Cpu(s): 12.3 us, 3.1 sy, 0.0 ni, 84.0 id, 0.6 wa
 `us` 用户态、`sy` 内核态、`wa` 等 IO 的时间——`wa` 高说明瓶颈在磁盘/网络而不在 CPU。load average 三个数的读法与"多少算高"在第 8 章专门讲。
 
 :::tip[htop 值得装]
-鼠标可点、树状视图、F9 直接杀进程。安装：`sudo apt install htop` 或 `sudo dnf install htop`（CentOS 不在基础源时先装 EPEL，见 [第 6 章 · 软件安装与包管理](./06-packages/)）。资源消耗的解读方法两厂一致。
+鼠标可点、树状视图、F9 直接杀进程。安装：`sudo apt install htop` 或 `sudo dnf install htop`（CentOS 不在基础源时先装 EPEL，见 [第 6 章 · 软件安装与包管理](../06-packages/)）。资源消耗的解读方法两厂一致。
 :::
 
 ## 5.3 进程树、父子与僵尸

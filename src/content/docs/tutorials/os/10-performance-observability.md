@@ -197,7 +197,7 @@ perf record -g -e sched:sched_switch   # 采 off-CPU 事件，看睡眠栈
 # 或 bpftrace 的 offcputime，产出 off-CPU 火焰图（宽=等得久，不是跑得多）
 ```
 
-结论模板：CPU 40% 却 P99 爆炸，八成不是算力问题。若 `iostat` 的 `await` 高且 PSI io 上爬 → 卡在磁盘 IO，回到 [第 6 章 · 输入输出与中断](./06-io-interrupt/) 看缓冲/零拷贝；若 `vmstat` 自愿切换（cswch）高、off-CPU 火焰图栈顶是 `futex`/`__lll_lock_wait` → 卡在锁，回到 [第 8 章 · 死锁与同步原语](./08-deadlock-sync/) 的 8.6 观测手段。反过来，若 CPU 真打满且火焰图有宽平顶，才轮到优化那个函数本身。
+结论模板：CPU 40% 却 P99 爆炸，八成不是算力问题。若 `iostat` 的 `await` 高且 PSI io 上爬 → 卡在磁盘 IO，回到 [第 6 章 · 输入输出与中断](../06-io-interrupt/) 看缓冲/零拷贝；若 `vmstat` 自愿切换（cswch）高、off-CPU 火焰图栈顶是 `futex`/`__lll_lock_wait` → 卡在锁，回到 [第 8 章 · 死锁与同步原语](../08-deadlock-sync/) 的 8.6 观测手段。反过来，若 CPU 真打满且火焰图有宽平顶，才轮到优化那个函数本身。
 
 ## 本章小结
 

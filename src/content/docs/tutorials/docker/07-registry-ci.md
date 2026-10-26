@@ -91,7 +91,7 @@ sha256 摘要不可变     → 永远指向那一次构建，回滚可精确复�
 正确姿势是把「谁决定版本」交还给人：文件里写 `myapp:1.4.2`，升级 = 明确改一次版本号 + 走一次发布流程。真要「最新」语义，用带时间的标签（`1.4.2-20260901`）而不是 `latest`。涉及具体版本号时，先去 Docker Hub 的 Tags 页确认当前真实存在的标签，别照着记忆写。
 
 :::danger[本地缓存让 latest 更难懂]
-本地已存在同名镜像时 `docker run` 不会去仓库核对——于是不同机器上的「同一个 latest」内容不同。开发机上「代码明明改了、容器行为没变」多半就是这条；构建期层缓存的取舍见 [第 3 章 · 编写 Dockerfile](./03-dockerfile/)。
+本地已存在同名镜像时 `docker run` 不会去仓库核对——于是不同机器上的「同一个 latest」内容不同。开发机上「代码明明改了、容器行为没变」多半就是这条；构建期层缓存的取舍见 [第 3 章 · 编写 Dockerfile](../03-dockerfile/)。
 :::
 
 ## 7.4 GitHub Actions：构建并推送
@@ -182,7 +182,7 @@ docker buildx prune                             # 清理
 docker buildx build --no-cache -t myapp:1.4.2 --push .   # 发布前的干净验证
 ```
 
-配合 Dockerfile 里的 `--mount=type=cache`（[第 5 章 · 多阶段构建与镜像优化](./05-multi-stage/)），常见效果是依赖未变的构建从几分钟降到几十秒。缓存命中率要定期验证：故意改一行 lockfile，看 `npm ci` 那层是否重建，就能确认分层是否合理。`mode=max` 会把中间阶段的层也缓存下来，命中更好但占用更多空间。
+配合 Dockerfile 里的 `--mount=type=cache`（[第 5 章 · 多阶段构建与镜像优化](../05-multi-stage/)），常见效果是依赖未变的构建从几分钟降到几十秒。缓存命中率要定期验证：故意改一行 lockfile，看 `npm ci` 那层是否重建，就能确认分层是否合理。`mode=max` 会把中间阶段的层也缓存下来，命中更好但占用更多空间。
 
 ## 7.6 镜像扫描与安全基线
 
@@ -246,7 +246,7 @@ docker run -d --name api registry.example.com/team/todo-api@sha256:9d32a3...
 - **滚动（逐实例替换）**：compose 里 `--scale` 加反代摘流；Kubernetes 的默认形态
 
 :::danger[回滚常常卡在数据库迁移]
-应用镜像能退回 1.4.2，但迁移脚本已经把 schema 改了。原则：**迁移只向前、且新旧版本都能跑**（先加列 → 改代码 → 下个版本再清理旧列）。破坏性变更留到独立窗口。[第 6 章 · Docker Compose 编排](./06-compose/) 里的 `service_completed_successfully` 正好用来把迁移纳入发布顺序。
+应用镜像能退回 1.4.2，但迁移脚本已经把 schema 改了。原则：**迁移只向前、且新旧版本都能跑**（先加列 → 改代码 → 下个版本再清理旧列）。破坏性变更留到独立窗口。[第 6 章 · Docker Compose 编排](../06-compose/) 里的 `service_completed_successfully` 正好用来把迁移纳入发布顺序。
 :::
 
 **练习**

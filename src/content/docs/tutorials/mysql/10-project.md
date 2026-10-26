@@ -17,7 +17,7 @@ duration: 5
 
 ## 10.1 场景与目标表结构
 
-背景：单实例 MySQL 8，`shop` 库，`orders` 1200 万行、`order_items` 三千万行。近期三类问题集中爆发：商家后台列表页超时、财务对账报表跑不完、磁盘被数据与 binlog 撑满。四表结构与 SQL 基础教程及 [第 2 章 · 数据类型与表设计](./02-data-types-schema/) 一致，本章主角是 `orders`：
+背景：单实例 MySQL 8，`shop` 库，`orders` 1200 万行、`order_items` 三千万行。近期三类问题集中爆发：商家后台列表页超时、财务对账报表跑不完、磁盘被数据与 binlog 撑满。四表结构与 SQL 基础教程及 [第 2 章 · 数据类型与表设计](../02-data-types-schema/) 一致，本章主角是 `orders`：
 
 ```sql
 CREATE TABLE orders (

@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 复合类型：数组、切片、map"
-description: "var a [3]int              // [0 0 0] —— 长度是类型的一部分！"
+description: "var a [3]int // [0 0 0] —— 长度是类型的一部分！"
 series: go
 sidebar:
   order: 3

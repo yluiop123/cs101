@@ -200,7 +200,7 @@ sudo cgexec -g cpu:tryme yes > /dev/null &
 top -H                             # 该进程占用的 CPU 被压在 ~50%
 ```
 
-对照本章：`unshare` 演示了 9.4 的 namespace 视图隔离，`cpu.max` 演示了 9.5 的配额；如果这台机器再叠上 seccomp 与 cap drop，就是 9.6 的完整链路。理解"容器 = 进程 + 视野限制 + 配额 + 系统调用过滤"，就理解了它为什么轻、也理解了它为什么不如 VM 硬。锁与调度如何影响容器内多核表现，回到 [第 7 章 · 并发与锁](./07-concurrency-locks/) 与 [第 10 章 · 性能观测](./10-performance-observability/)。
+对照本章：`unshare` 演示了 9.4 的 namespace 视图隔离，`cpu.max` 演示了 9.5 的配额；如果这台机器再叠上 seccomp 与 cap drop，就是 9.6 的完整链路。理解"容器 = 进程 + 视野限制 + 配额 + 系统调用过滤"，就理解了它为什么轻、也理解了它为什么不如 VM 硬。锁与调度如何影响容器内多核表现，回到 [第 7 章 · 并发与锁](../07-concurrency-locks/) 与 [第 10 章 · 性能观测](../10-performance-observability/)。
 
 ## 本章小结
 

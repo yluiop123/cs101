@@ -39,7 +39,7 @@ ps -eo pid,ni,pri,psr,stat,time,comm --sort=-time | head   # ni=nice, pri, psr=�
 cat /proc/loadavg                         # 前三个数字 + 运行/总任务数
 ```
 
-`loadavg` 在 Linux 上把「等待 CPU」和「等待 IO 且不可中断」两类任务混在一起计数，所以磁盘打满时它会飙高而 CPU 其实很闲 —— 这是最常见的误读（归因方法见 [第 10 章 · 性能观测：从 top 到火焰图](./10-performance-observability/)）。
+`loadavg` 在 Linux 上把「等待 CPU」和「等待 IO 且不可中断」两类任务混在一起计数，所以磁盘打满时它会飙高而 CPU 其实很闲 —— 这是最常见的误读（归因方法见 [第 10 章 · 性能观测：从 top 到火焰图](../10-performance-observability/)）。
 
 :::tip[先分类再谈调度]
 CPU 密集（编译、压缩、矩阵）：切来切去只会毁掉缓存，倾向长时间独占。
@@ -130,7 +130,7 @@ cat /proc/self/sched | head -12     # 需要 CONFIG_SCHED_DEBUG，缺此文件�
 ```
 
 :::caution[别把 nice 当「绝对优先级」]
-nice 只改变**同一调度类内**的权重比例。一个 nice 19 的 CPU 型任务在系统空闲时照样能跑满所有核；反过来，任何实时类任务都会无条件压过 nice 为 -20 的普通任务。想让后台任务「真不抢前台」，得配合 cgroup 的 CPU 权重（[第 9 章 · 虚拟化与容器的内核基础](./09-virtualization-container/)）。
+nice 只改变**同一调度类内**的权重比例。一个 nice 19 的 CPU 型任务在系统空闲时照样能跑满所有核；反过来，任何实时类任务都会无条件压过 nice 为 -20 的普通任务。想让后台任务「真不抢前台」，得配合 cgroup 的 CPU 权重（[第 9 章 · 虚拟化与容器的内核基础](../09-virtualization-container/)）。
 :::
 
 关于版本：Linux 6.6 起主线用 **EEVDF** 替换了 CFS 的调度路径（引入「延迟容忍 deadline」与可运行时间片），但 vruntime/权重/红黑树这套直觉仍然是理解调度行为的有效模型。判断自己的机器：`uname -r`，再看 `dmesg | grep -i -E 'EEVDF|CFS'` 与内核 config（`zcat /proc/config.gz | grep -i SCHED`，部分发行版不导出该文件，则以 `man 7 sched` 为准）。

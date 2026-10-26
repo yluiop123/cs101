@@ -46,7 +46,7 @@ ls -lh           # 大小用 K/M/G 人类可读
 ls -lt           # 按修改时间倒序，最新在前
 ```
 
-`ls -l` 每列的含义先眼熟，权限列在 [第 4 章 · 权限、用户与组](./04-permission-user/) 细拆：
+`ls -l` 每列的含义先眼熟，权限列在 [第 4 章 · 权限、用户与组](../04-permission-user/) 细拆：
 
 ```text
 -rw-r--r-- 1 devops devops  4.2K Jun  3 10:12 notes.md

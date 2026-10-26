@@ -98,7 +98,7 @@ ORDER BY created_at DESC
 LIMIT 10;
 ```
 
-`EXPLAIN` 的 `Extra` 出现 `Using index` 就说明覆盖成功（详见 [第 4 章 · 执行计划与查询优化](./04-explain-optimization/)）。
+`EXPLAIN` 的 `Extra` 出现 `Using index` 就说明覆盖成功（详见 [第 4 章 · 执行计划与查询优化](../04-explain-optimization/)）。
 
 :::caution[`SELECT *` 是覆盖索引的头号敌人]
 加了 `idx_customer_created`，只要还写着 `SELECT *`，优化器就必须回表取那些没用到的列。把查询列表收紧到真正要用的字段，是成本最低、收益最快的一次改写；写报表 SQL 时尤其明显。

@@ -1,6 +1,6 @@
 ---
 title: "第 13 章 · 并发编程"
-description: "Rust 标准库直接给出操作系统线程（1:1 模型），入口只有一个；spawn 返回 JoinHandle<T>，T 就是闭包返回值类型："
+description: "Rust 标准库直接给出操作系统线程（1:1 模型），入口只有一个；spawn 返回 JoinHandle，T 就是闭包返回值类型："
 series: rust
 sidebar:
   order: 13
@@ -34,7 +34,7 @@ fn main() {
 }
 ```
 
-`join()` 返回 `Result`（子线程 panic 时是 Err，[第 7 章 · 错误处理](./07-error-handling/)的 unwrap/expect 规则同样适用）。为什么非 `move` 不可？**子线程可能比创建它的函数活得久**——借来的引用那时会悬空。所以 `spawn` 要求闭包 `Send + 'static`：自带全部数据，不引用局部变量。这条约束正是[第 3 章 · 所有权](./03-ownership/)"值有唯一主人"在线程边界的延长线。
+`join()` 返回 `Result`（子线程 panic 时是 Err，[第 7 章 · 错误处理](../07-error-handling/)的 unwrap/expect 规则同样适用）。为什么非 `move` 不可？**子线程可能比创建它的函数活得久**——借来的引用那时会悬空。所以 `spawn` 要求闭包 `Send + 'static`：自带全部数据，不引用局部变量。这条约束正是[第 3 章 · 所有权](../03-ownership/)"值有唯一主人"在线程边界的延长线。
 
 :::caution[数据竞争的三个条件]
 多个指针访问同一数据 + 至少一个在写 + 无同步。Rust 不是运行时崩给你看，而是让这种程序**编译不过**（见 13.4）。
@@ -104,7 +104,7 @@ fn main() {
 }
 ```
 
-**为什么 `Mutex<T>` 要配 `Arc`**——三个需求各由一个机制满足，缺一不可（内部可变性见[第 11 章 · 智能指针与内部可变性](./11-smart-pointers/)）：
+**为什么 `Mutex<T>` 要配 `Arc`**——三个需求各由一个机制满足，缺一不可（内部可变性见[第 11 章 · 智能指针与内部可变性](../11-smart-pointers/)）：
 
 ```text
 多线程访问同一份数据 → 借用 & 不行（'static）、Rc 不行（非 Send） → Arc 提供共享所有权
@@ -127,7 +127,7 @@ let total = { let nums = data.lock().unwrap(); nums.iter().sum::<i64>() };
 
 ## 13.4 Send / Sync：编译器消灭数据竞争
 
-两个 marker trait（没有方法的 trait，见[第 8 章 · 泛型与 trait](./08-generics-traits/)），由标准库**自动实现**，你几乎不用手写：
+两个 marker trait（没有方法的 trait，见[第 8 章 · 泛型与 trait](../08-generics-traits/)），由标准库**自动实现**，你几乎不用手写：
 
 | trait | 含义 | 例子 |
 | --- | --- | --- |
@@ -152,7 +152,7 @@ fn main() {
 
 ## 13.5 scoped threads 与"忙等"反例
 
-`move` 有时太笨重——想按[第 4 章 · 借用与引用](./04-borrowing/)的方式"只借不拿"，就用作用域线程（1.63 起稳定）。`scope` 结束前保证所有子线程已 join，所以借用局部数据是安全的：
+`move` 有时太笨重——想按[第 4 章 · 借用与引用](../04-borrowing/)的方式"只借不拿"，就用作用域线程（1.63 起稳定）。`scope` 结束前保证所有子线程已 join，所以借用局部数据是安全的：
 
 ```rust
 use std::thread;

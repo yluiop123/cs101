@@ -1,6 +1,6 @@
 ---
 title: "第 5 章 · Flex 与 Grid 工具类"
-description: "<!-- 水平垂直居中：使用率最高的组合之一 -->"
+description: ""
 series: tailwind
 sidebar:
   order: 5

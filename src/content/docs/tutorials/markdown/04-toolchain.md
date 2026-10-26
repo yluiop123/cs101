@@ -66,7 +66,7 @@ my-project/
 ├── docs/
 │   ├── images/        # 图片统一放这里
 │   │   └── architecture.png
-│   └── readme.md      # 引用：![架构](./images/architecture.png)
+│   └── readme.md      # 引用：!架构
 ```
 
 优点：图片与文档同仓库版本管理，永不失效。

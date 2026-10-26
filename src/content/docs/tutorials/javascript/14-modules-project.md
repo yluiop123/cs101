@@ -1,6 +1,6 @@
 ---
 title: "第 14 章 · 模块化与综合实战"
-description: "脚本多了以后，<script src=\"a.js\"><script src=\"b.js\"> 的问题："
+description: "脚本多了以后， 的问题："
 series: javascript
 sidebar:
   order: 14

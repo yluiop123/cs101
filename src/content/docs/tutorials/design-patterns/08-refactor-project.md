@@ -123,7 +123,7 @@ class OrderFactory:
                 "status": "pending", "total": total, "items": items}
 ```
 
-`create_order` 现在只调 `OrderFactory.make(...)`，测试造 fixture 也用它——**构造口径唯一**。状态默认 `pending` 集中一处，将来改初始状态或加字段，只碰工厂。这正是[第 5 章 · 行为型模式（上）](./05-behavioral-a/)「工厂管造哪个、上下文只管用」的落地。
+`create_order` 现在只调 `OrderFactory.make(...)`，测试造 fixture 也用它——**构造口径唯一**。状态默认 `pending` 集中一处，将来改初始状态或加字段，只碰工厂。这正是[第 5 章 · 行为型模式（上）](../05-behavioral-a/)「工厂管造哪个、上下文只管用」的落地。
 
 ```text
 改造前：dict 字面量散在 create_order 与每个测试里，加字段要全改
@@ -132,7 +132,7 @@ class OrderFactory:
 
 ## 8.5 用观察者解耦副作用
 
-发邮件、推库存、记审计是「订单创建了，谁关心谁响应」——典型的观察者场景（[第 5 章 · 行为型模式（上）](./05-behavioral-a/)）。把它们从主流程摘出去：
+发邮件、推库存、记审计是「订单创建了，谁关心谁响应」——典型的观察者场景（[第 5 章 · 行为型模式（上）](../05-behavioral-a/)）。把它们从主流程摘出去：
 
 ```python
 # 重构前（副作用焊死在主流程）
@@ -154,12 +154,12 @@ def create_order(raw):
 收益：**测试 `create_order` 时不订阅任何东西，就不会真发邮件**——副作用可插拔。想加「推送 App 通知」只加一个订阅者，`create_order` 零改动。
 
 :::caution[别忘了退订]
-若下游是对象绑定方法且总线是进程级长生命周期，按[第 5 章 · 行为型模式（上）](./05-behavioral-a/)用 `unsubscribe` 配对或弱引用总线，否则每建一个处理器就泄漏一个。
+若下游是对象绑定方法且总线是进程级长生命周期，按[第 5 章 · 行为型模式（上）](../05-behavioral-a/)用 `unsubscribe` 配对或弱引用总线，否则每建一个处理器就泄漏一个。
 :::
 
 ## 8.6 用责任链做校验
 
-把 8.1 顶部堆叠的校验拆成一条条可短路的责任（[第 6 章 · 行为型模式（下）](./06-behavioral-b/)的平链）：
+把 8.1 顶部堆叠的校验拆成一条条可短路的责任（[第 6 章 · 行为型模式（下）](../06-behavioral-b/)的平链）：
 
 ```python
 def check_not_empty(ctx):        return bool(ctx["items"])

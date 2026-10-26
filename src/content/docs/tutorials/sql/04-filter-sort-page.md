@@ -71,7 +71,7 @@ SELECT name, city, balance
 WHERE city = '上海' OR city = '北京' OR city = '广州'   -- 三遍同名列，易漏
 WHERE city IN ('上海', '北京', '广州')                   -- 等价且好读
 ```
-`IN` 还能直接换成子查询（[第 7 章 · 子查询与 CTE](./07-subquery-cte/)），`OR =` 不能。
+`IN` 还能直接换成子查询（[第 7 章 · 子查询与 CTE](../07-subquery-cte/)），`OR =` 不能。
 :::
 
 ## 4.3 BETWEEN、IN 与 LIKE
@@ -113,7 +113,7 @@ WHERE created_at >= '2025-03-01' AND created_at < '2025-04-01'
 
 ## 4.4 把"未知"显式写出来
 
-[第 3 章 · 查询基础](./03-select-basics/)的结论在这里正式使用：任何比较运算碰到 `NULL`
+[第 3 章 · 查询基础](../03-select-basics/)的结论在这里正式使用：任何比较运算碰到 `NULL`
 都得 `UNKNOWN`，`WHERE` 一律丢弃。
 
 ```sql

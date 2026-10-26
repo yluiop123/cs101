@@ -1,6 +1,6 @@
 ---
 title: "第 2 章 · 表格、代码块与链接图片"
-description: "用一对反引号    包裹，用于标注代码、命令、文件名、按键等："
+description: "用一对反引号 包裹，用于标注代码、命令、文件名、按键等："
 series: markdown
 sidebar:
   order: 2
@@ -102,7 +102,7 @@ console.log('用四个反引号包住三反引号');
 写文档站、项目内部文档时用相对路径：
 
 ```markdown
-详见[第 3 章](./03-gfm.md)
+详见第 3 章
 ```
 
 ### 参考式链接（Reference）
@@ -122,7 +122,7 @@ console.log('用四个反引号包住三反引号');
 
 ```markdown
 ![图片描述（替代文字）](https://example.com/cover.png)
-![本地图片](./images/logo.png)
+!本地图片
 ```
 
 - **alt 描述必写**：图片加载失败时显示，也是无障碍（Accessibility）与 SEO 的要求

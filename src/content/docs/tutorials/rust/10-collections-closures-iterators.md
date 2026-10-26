@@ -1,6 +1,6 @@
 ---
 title: "第 10 章 · 集合、闭包与迭代器"
-description: "第 3 章 · 所有权 说明 String、Vec<T>、HashMap 都是堆上、拥有所有权、可增长的容器。这一节把操作补齐。"
+description: "第 3 章 · 所有权 说明 String、Vec、HashMap 都是堆上、拥有所有权、可增长的容器。这一节把操作补齐。"
 series: rust
 sidebar:
   order: 10
@@ -17,7 +17,7 @@ duration: 5
 
 ## 10.1 三个常用集合
 
-[第 3 章 · 所有权](./03-ownership/) 说明 `String`、`Vec<T>`、`HashMap` 都是堆上、拥有所有权、可增长的容器。这一节把操作补齐。
+[第 3 章 · 所有权](../03-ownership/) 说明 `String`、`Vec<T>`、`HashMap` 都是堆上、拥有所有权、可增长的容器。这一节把操作补齐。
 
 ```rust
 let mut v: Vec<i32> = Vec::new();
@@ -78,7 +78,7 @@ println!("{:?} 总分 {}", names, total);
 ```
 
 :::caution[HashMap 两个老问题]
-① 键必须同时实现 `Eq + Hash`（[第 5 章 · derive](./05-structs-enums/) 里给自定义类型 derive 过），所以 `f64` 不能直接做键；
+① 键必须同时实现 `Eq + Hash`（[第 5 章 · derive](../05-structs-enums/) 里给自定义类型 derive 过），所以 `f64` 不能直接做键；
 ② 拿着 `keys()`/`values()` 的迭代器时不能再 `insert`，不可变借用与可变借用打架，编译器直接拒收。
 :::
 
@@ -151,7 +151,7 @@ fn main() {
 ```
 
 :::tip[何时必须写 move]
-闭包要被**转移出当前作用域**时：从函数返回、交给 `thread::spawn`（[第 13 章 · 并发](./13-concurrency/)）、
+闭包要被**转移出当前作用域**时：从函数返回、交给 `thread::spawn`（[第 13 章 · 并发](../13-concurrency/)）、
 存进结构体字段。这三类报错的措辞几乎都含 `closure may outlive the current function`，看到就先试 `move`。
 :::
 
@@ -167,7 +167,7 @@ for x in v.iter_mut() { }        // Item = &mut i32，需要 mut v，可原地�
 for x in v.into_iter() { }       // Item = i32，夺走所有权，v 到此结束
 ```
 
-`Iterator` trait 本身只有一个必须实现的方法（关联类型见 [第 8 章](./08-generics-traits/)）：
+`Iterator` trait 本身只有一个必须实现的方法（关联类型见 [第 8 章](../08-generics-traits/)）：
 
 ```rust
 pub trait Iterator {
@@ -270,7 +270,7 @@ println!("{}", joined.trim());
 ```
 
 `collect` 是最特殊的消费器：目标类型靠推断决定，可以收进 `Vec`、`HashMap`、`String`，
-甚至 `Result<Vec<T>, E>`——[第 7 章 · 错误处理](./07-error-handling/) 里 `collect::<Result<Vec<_>, _>>()`
+甚至 `Result<Vec<T>, E>`——[第 7 章 · 错误处理](../07-error-handling/) 里 `collect::<Result<Vec<_>, _>>()`
 的"任一失败就短路"就来自这个 impl。
 
 自己实现迭代器只需要写 `next`，`map`/`filter`/`fold` 全部白送：

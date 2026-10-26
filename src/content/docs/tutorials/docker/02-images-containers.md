@@ -174,7 +174,7 @@ docker commit web web-snapshot:v1    # 把可写层固化成新镜像（应急�
 ```
 
 :::danger[commit 不是构建方式]
-`docker commit` 会丢失 Dockerfile 的可复现性和分层优势，产物无法审计。它可以用来抢救一次性现场，正式镜像一律回到 Dockerfile 构建（[第 3 章 · 编写 Dockerfile](./03-dockerfile/)）。
+`docker commit` 会丢失 Dockerfile 的可复现性和分层优势，产物无法审计。它可以用来抢救一次性现场，正式镜像一律回到 Dockerfile 构建（[第 3 章 · 编写 Dockerfile](../03-dockerfile/)）。
 :::
 
 ## 2.6 清理命令与磁盘占用
@@ -200,7 +200,7 @@ docker system prune -a --volumes    # 核弹级清理，跑之前先想清楚
 `docker images` 里出现的 `<none>:<none>` 通常是被新构建顶替掉的旧镜像，或构建中断留下的悬空层——用 `docker image prune` 清掉即可。
 
 :::danger[volume prune 会删库]
-只要数据卷没被任何容器引用（比如 compose 项目改名了、容器已删），`docker volume prune` 就会连数据一起删。生产机上执行任何 prune 之前，先 `docker volume ls` 和 `docker system df -v` 确认，并保留备份（备份做法见 [第 4 章 · 数据卷与网络](./04-volumes-networks/)）。
+只要数据卷没被任何容器引用（比如 compose 项目改名了、容器已删），`docker volume prune` 就会连数据一起删。生产机上执行任何 prune 之前，先 `docker volume ls` 和 `docker system df -v` 确认，并保留备份（备份做法见 [第 4 章 · 数据卷与网络](../04-volumes-networks/)）。
 :::
 
 ## 2.7 常见报错的读法 · 自查清单
