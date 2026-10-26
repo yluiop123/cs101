@@ -187,7 +187,7 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '全栈与服务端', items: ['nodejs', 'express', 'nestjs', 'rest-api', 'bun', 'deno'] },
     { name: '桌面端', items: ['electron', 'tauri'] },
     { name: '跨端与小程序', items: ['flutter', 'react-native', 'uniapp'] },
-    { name: '原生移动', items: ['kotlin', 'android-sdk', 'jetpack-compose', 'swift', 'swiftui', 'mobile-network', 'push-location', 'mobile-testing', 'mobile-release'] },
+    { name: '原生移动', items: ['kotlin', 'android-sdk', 'jetpack-compose', 'swift', 'swiftui'] },
   ],
   'sql-database': [
     { name: '入门 · SQL 与环境', items: ['sql', 'mysql', 'postgresql'] },
