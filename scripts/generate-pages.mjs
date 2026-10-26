@@ -166,7 +166,7 @@ const DOMAIN_TITLES = {
 };
 
 // 站点侧已删除的领域页：重跑脚本时不再生成
-const DOMAIN_SKIP = new Set(['enterprise-erp', 'software-testing']);
+const DOMAIN_SKIP = new Set(['enterprise-erp', 'software-testing', 'network-distributed']);
 
 async function generateRoutePages(dirName, keyPrefix) {
   const dir = join(LEGACY, dirName);

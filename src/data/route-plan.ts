@@ -332,12 +332,6 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '精通 · 图形与可视化', items: ['opengl', 'vtk', 'geometry'] },
     { name: '实战 · 工程软件与集成', items: ['cad-dev', 'cae', 'bim', 'plugin-dev'] },
   ],
-  'domain-network-distributed': [
-    { name: '入门 · 网络基础', items: ['network', 'tcp-udp', 'http', 'dns'] },
-    { name: '进阶 · 服务通信', items: ['rpc', 'grpc', 'websocket', 'mqtt'] },
-    { name: '精通 · 分布式理论', items: ['consistency', 'raft', 'load-balancing', 'service-mesh'] },
-    { name: '实战 · 消息与实时', items: ['kafka', 'redis', 'streaming', 'realtime-media'] },
-  ],
   'domain-os-system': [
     { name: '入门 · 系统原理', items: ['os', 'linux', 'shell'] },
     { name: '进阶 · 内核与驱动', items: ['kernel', 'drivers', 'syscall', 'memory-management'] },

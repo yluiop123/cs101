@@ -34,7 +34,6 @@ export const domains: DomainEntry[] = [
 
   // 平台、基础设施与质量工程
   { slug: 'devops-cloud', name: '云计算、云原生与 DevOps', category: 'platform' },
-  { slug: 'network-distributed', name: '网络编程与分布式系统', category: 'platform' },
   { slug: 'cybersecurity', name: '网络安全与应用安全', category: 'platform' },
   { slug: 'os-system', name: '操作系统与系统软件', category: 'platform' },
   { slug: 'software-engineering', name: '软件工程与质量工程', category: 'platform' },
