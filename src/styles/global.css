@@ -255,8 +255,6 @@ main h1.cs-page-title {
   :is(
     .cs-btn,
     .cs-tut-card,
-    .cs-lang-tutorials a,
-    .cs-lang-roadmap,
     .cs-section-more,
     .cs-series-list a,
     .cs-chapter-item a,
@@ -267,7 +265,7 @@ main h1.cs-page-title {
 }
 
 .sl-markdown-content
-  :is(.cs-series-list a, .cs-chapter-item a, .cs-tut-card, .cs-lang-tutorials a, .cs-series-card) {
+  :is(.cs-series-list a, .cs-chapter-item a, .cs-tut-card, .cs-series-card) {
   color: var(--cs-text);
 }
 
@@ -781,94 +779,7 @@ main h1.cs-page-title {
   text-decoration: underline;
 }
 
-/* ---- 首页：语言卡片（语言 → 教程） ---- */
-.cs-home .cs-lang-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-  gap: 1rem;
-  align-items: stretch;
-}
-
-.cs-home .cs-lang-card {
-  border: 1px solid var(--cs-border);
-  border-top: 3px solid var(--cs-accent);
-  border-radius: var(--cs-radius);
-  background: var(--cs-bg);
-  padding: 0.9rem 1.1rem 0.6rem;
-  scroll-margin-top: 0;
-}
-
-.cs-home .cs-lang-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem;
-  border-bottom: 1px solid var(--cs-border);
-  padding-bottom: 0.45rem;
-  margin-bottom: 0.35rem;
-}
-
-.cs-home .cs-lang-name {
-  margin: 0;
-  font-size: 1.02rem;
-  line-height: 1.5;
-}
-
-.cs-home .cs-lang-roadmap {
-  font-size: 0.75rem;
-  color: var(--cs-muted);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.cs-home .cs-lang-roadmap:hover {
-  color: var(--cs-accent-dark);
-}
-
-.cs-home .cs-lang-tutorials {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cs-home .cs-lang-tutorials li {
-  margin: 0;
-  border-bottom: 1px dashed var(--cs-border);
-}
-
-.cs-home .cs-lang-tutorials li:last-child {
-  border-bottom: 0;
-}
-
-.cs-home .cs-lang-tutorials a,
-.cs-home .cs-lang-tutorials .is-planned {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.6rem;
-  padding: 0.3rem 0.15rem;
-  font-size: 0.9rem;
-  color: var(--cs-text);
-  text-decoration: none;
-}
-
-.cs-home .cs-lang-tutorials a:hover {
-  background: color-mix(in srgb, var(--cs-accent) 8%, transparent);
-  color: var(--cs-accent-dark);
-}
-
-.cs-home .cs-lang-tutorials .is-planned {
-  color: var(--cs-muted);
-  opacity: 0.7;
-}
-
-.cs-home .cs-lang-meta {
-  font-size: 0.72rem;
-  color: var(--cs-muted);
-  flex-shrink: 0;
-}
-
-/* ---- 首页：其他技术分组的教程卡片 ---- */
+/* ---- 首页：教程卡片（每个分组下的具体教程） ---- */
 .cs-home .cs-tut-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));

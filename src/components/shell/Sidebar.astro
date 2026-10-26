@@ -79,26 +79,38 @@ const catalog = currentSeries || isHome ? [] : await getSeries();
     }
 
     const idOf = (link: HTMLAnchorElement) => link.dataset.csLangLink ?? '';
-    const targets = links
-      .map((link) => document.getElementById(`lang-${idOf(link)}`))
-      .filter((target): target is HTMLElement => Boolean(target));
-
-    if (targets.length > 0) {
-      const activate = (id: string) => {
-        for (const link of links) link.classList.toggle('is-active', idOf(link) === id);
-      };
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
-            activate(entry.target.id.replace(/^lang-/, ''));
-          }
-        },
-        { rootMargin: '-70px 0px -65% 0px', threshold: 0 },
+    const items = links
+      .map((link) => ({ link, target: document.getElementById(`lang-${idOf(link)}`) }))
+      .filter((item): item is { link: HTMLAnchorElement; target: HTMLElement } =>
+        Boolean(item.target),
       );
 
-      for (const target of targets) observer.observe(target);
+    if (items.length > 0) {
+      // 高亮「当前滚动到的那个语言分组」：取最后一个已越过顶部偏移线的分组
+      const update = () => {
+        const offset = 120;
+        let current: (typeof items)[number] | null = null;
+        for (const item of items) {
+          if (item.target.getBoundingClientRect().top - offset <= 0) current = item;
+        }
+        for (const item of items) item.link.classList.toggle('is-active', item === current);
+      };
+
+      update();
+      let ticking = false;
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            ticking = false;
+            update();
+          });
+        },
+        { passive: true },
+      );
+      window.addEventListener('resize', update, { passive: true });
     }
   }
 </script>

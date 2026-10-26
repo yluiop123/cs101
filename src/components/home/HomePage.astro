@@ -7,8 +7,9 @@ import { languageGroups, techGroups, type CatalogGroup, type CatalogTutorial } f
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
 
-const resolve = (group: CatalogGroup) => ({
+const resolve = (group: CatalogGroup, anchorPrefix: string) => ({
   ...group,
+  anchor: `${anchorPrefix}-${group.id}`,
   tutorials: group.tutorials.map((tutorial: CatalogTutorial) => {
     const found = bySlug.get(tutorial.slug);
     return {
@@ -19,11 +20,14 @@ const resolve = (group: CatalogGroup) => ({
   }),
 });
 
-const languages = languageGroups.map(resolve);
-const techs = techGroups.map(resolve);
+// 每个编程语言与数据库 / 中间件 / 运维与云 / 工具与基础同级成组
+const sections = [
+  ...languageGroups.map((group) => resolve(group, 'lang')),
+  ...techGroups.map((group) => resolve(group, 'tech')),
+];
 
-const availableCount = [...languages, ...techs]
-  .flatMap((group) => group.tutorials)
+const availableCount = sections
+  .flatMap((section) => section.tutorials)
   .filter((tutorial) => tutorial.available).length;
 ---
 
@@ -39,66 +43,26 @@ const availableCount = [...languages, ...techs]
       <kbd>⌘K</kbd>
     </button>
     <div class="cs-hero-actions">
-      <a class="cs-btn cs-btn-primary" href="#languages">浏览教程目录</a>
+      <a class="cs-btn cs-btn-primary" href="#lang-java">浏览教程目录</a>
       <a class="cs-btn" href={withBase('/domain/')}>按应用领域选</a>
     </div>
   </section>
 
   <ContinueCard client:visible series={series} />
 
-  <section id="languages" class="cs-home-section">
-    <div class="cs-section-head">
-      <h2 class="cs-section-title">编程语言</h2>
-      <a class="cs-section-more" href={withBase('/tech-stack/')}>全部技术路线 →</a>
-    </div>
-    <div class="cs-lang-grid">
-      {
-        languages.map((group) => (
-          <article class="cs-lang-card" id={`lang-${group.id}`} data-cs-lang={group.id}>
-            <header class="cs-lang-head">
-              <h3 class="cs-lang-name">{group.name}</h3>
-              {group.roadmap && (
-                <a class="cs-lang-roadmap" href={withBase(group.roadmap)}>
-                  技术路线 →
-                </a>
-              )}
-            </header>
-            <ul class="cs-lang-tutorials">
-              {group.tutorials.map((tutorial) => (
-                <li>
-                  {tutorial.available ? (
-                    <a href={withBase(`/tutorials/${tutorial.slug}/`)}>
-                      <span>{tutorial.title}</span>
-                      <span class="cs-lang-meta">{tutorial.chapters} 章</span>
-                    </a>
-                  ) : (
-                    <span class="is-planned">
-                      <span>{tutorial.title}</span>
-                      <span class="cs-lang-meta">敬请期待</span>
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
   {
-    techs.map((group) => (
-      <section id={`tech-${group.id}`} class="cs-home-section">
+    sections.map((section) => (
+      <section id={section.anchor} class="cs-home-section">
         <div class="cs-section-head">
-          <h2 class="cs-section-title">{group.name}</h2>
-          {group.roadmap && (
-            <a class="cs-section-more" href={withBase(group.roadmap)}>
+          <h2 class="cs-section-title">{section.name}</h2>
+          {section.roadmap && (
+            <a class="cs-section-more" href={withBase(section.roadmap)}>
               技术路线 →
             </a>
           )}
         </div>
         <ul class="cs-tut-grid">
-          {group.tutorials.map((tutorial) => (
+          {section.tutorials.map((tutorial) => (
             <li>
               {tutorial.available ? (
                 <a class="cs-tut-card" href={withBase(`/tutorials/${tutorial.slug}/`)}>
