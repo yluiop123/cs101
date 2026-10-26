@@ -12,7 +12,11 @@ const currentId = entry.id;
 const isHome = !entry.id || entry.id === 'index';
 const isDomainIndex = path === '/domain/' || path === '/domain';
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
-const catalog = currentSeries || isHome || isDomainIndex || currentDomain ? [] : await getSeries();
+const isComputerScience = path.startsWith('/computer-science');
+const catalog =
+  currentSeries || isHome || isDomainIndex || currentDomain || isComputerScience
+    ? []
+    : await getSeries();
 ---
 
 {
@@ -49,6 +53,36 @@ const catalog = currentSeries || isHome || isDomainIndex || currentDomain ? [] :
             )}
           </li>
         ))}
+      </ul>
+    </div>
+  ) : isComputerScience ? (
+    <div class="cs-sidebar">
+      <p class="cs-sidebar-kicker">计算机科学</p>
+      <ul class="cs-sidebar-sections">
+        <li>
+          <a
+            href={withBase('/computer-science/')}
+            aria-current={path === '/computer-science/' ? 'page' : undefined}
+          >
+            学习路线总览
+          </a>
+        </li>
+        <li>
+          <a
+            href={withBase('/computer-science/zh/')}
+            aria-current={path.startsWith('/computer-science/zh') ? 'page' : undefined}
+          >
+            国内版教程
+          </a>
+        </li>
+        <li>
+          <a
+            href={withBase('/computer-science/ossu/')}
+            aria-current={path.startsWith('/computer-science/ossu') ? 'page' : undefined}
+          >
+            OSSU 国际教程
+          </a>
+        </li>
       </ul>
     </div>
   ) : currentSeries ? (

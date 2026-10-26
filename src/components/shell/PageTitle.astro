@@ -8,14 +8,14 @@ const segments = entry.id.split('/').filter(Boolean);
 
 // 首页（content/docs/index.mdx）不显示页面标题与面包屑
 const isHomePage = !entry.id || entry.id === 'index';
-const isSplash = data.template === 'splash' || isHomePage;
+const isSplash = data.template === 'splash';
 const isChapter = Boolean(data.series);
 const isSectionIndex = segments.length === 1;
 
 type Crumb = { label: string; href?: string };
 const crumbs: Crumb[] = [{ label: '首页', href: withBase('/') }];
 
-if (!isSplash) {
+if (!isSplash && !isHomePage) {
   if (segments[0] === 'tutorials') {
     if (segments[1]) {
       crumbs.push({
@@ -49,37 +49,45 @@ const hasMeta = Boolean(seriesLabel || data.duration || difficulty || data.tags?
 ---
 
 {
-  !isSplash && (
-    <>
-      <nav class="cs-breadcrumbs" aria-label="面包屑">
-        {crumbs.map((crumb, index) => (
-          <>
-            {index > 0 && (
-              <span class="cs-breadcrumb-sep" aria-hidden="true">
-                ›
-              </span>
-            )}
-            {crumb.href ? (
-              <a href={crumb.href}>{crumb.label}</a>
-            ) : (
-              <span aria-current="page">{crumb.label}</span>
-            )}
-          </>
-        ))}
-      </nav>
-
+  !isHomePage && (
+    isSplash ? (
       <h1 id="_top" class="cs-page-title">
         {data.title}
       </h1>
+    ) : (
+      <>
+        <nav class="cs-breadcrumbs" aria-label="面包屑">
+          {crumbs.map((crumb, index) => (
+            <>
+              {index > 0 && (
+                <span class="cs-breadcrumb-sep" aria-hidden="true">
+                  ›
+                </span>
+              )}
+              {crumb.href ? (
+                <a href={crumb.href}>{crumb.label}</a>
+              ) : (
+                <span aria-current="page">{crumb.label}</span>
+              )}
+            </>
+          ))}
+        </nav>
 
-      {hasMeta && (
-        <p class="cs-page-meta">
-          {seriesLabel && <span class="cs-meta-item">{seriesLabel}</span>}
-          {data.duration && <span class="cs-meta-item">约 {data.duration} 分钟</span>}
-          {difficulty && <span class="cs-meta-item">难度：{difficulty}</span>}
-          {data.tags?.length > 0 && <span class="cs-meta-item">标签：{data.tags.join(' / ')}</span>}
-        </p>
-      )}
-    </>
+        <h1 id="_top" class="cs-page-title">
+          {data.title}
+        </h1>
+
+        {hasMeta && (
+          <p class="cs-page-meta">
+            {seriesLabel && <span class="cs-meta-item">{seriesLabel}</span>}
+            {data.duration && <span class="cs-meta-item">约 {data.duration} 分钟</span>}
+            {difficulty && <span class="cs-meta-item">难度：{difficulty}</span>}
+            {data.tags?.length > 0 && (
+              <span class="cs-meta-item">标签：{data.tags.join(' / ')}</span>
+            )}
+          </p>
+        )}
+      </>
+    )
   )
 }
