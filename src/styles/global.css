@@ -49,6 +49,8 @@
 
 html {
   background: var(--cs-bg);
+  /* 始终为滚动条预留位置：避免切换页面时（有无滚动条）页面整体左右晃动 */
+  scrollbar-gutter: stable;
 }
 
 /* ============ 顶部栏 ============ */
