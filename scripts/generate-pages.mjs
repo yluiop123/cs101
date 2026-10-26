@@ -166,6 +166,11 @@ const DOMAIN_TITLES = {
   'web-saas': 'Web 开发 / SaaS 应用',
 };
 
+// 站点侧已调整的技术路线标题：重跑生成脚本时保留，不被旧站标题覆盖
+const TECH_TITLES = {
+  frontend: '大前端技术路线',
+};
+
 // 站点侧已删除的领域页：重跑脚本时不再生成
 const DOMAIN_SKIP = new Set(['enterprise-erp', 'software-testing', 'network-distributed']);
 
@@ -180,7 +185,11 @@ async function generateRoutePages(dirName, keyPrefix) {
     if (dirName === 'domain' && DOMAIN_SKIP.has(slug)) continue;
     const source = (await readFile(join(dir, file.name), 'utf8')).replace(/^\uFEFF/, '');
     const { data, body } = readFrontmatter(source);
-    const title = (dirName === 'domain' && DOMAIN_TITLES[slug]) || data.title || slug;
+    const title =
+      (dirName === 'tech-stack' && TECH_TITLES[slug]) ||
+      (dirName === 'domain' && DOMAIN_TITLES[slug]) ||
+      data.title ||
+      slug;
     const description = firstParagraph(body);
     const key = keyPrefix ? `${keyPrefix}${slug}` : slug;
     const mdx = [
