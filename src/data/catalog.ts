@@ -1,5 +1,6 @@
-// 首页教程目录：编程语言按「语言 → 具体教程」组织，其他技术按分组列教程。
+// 首页教程目录：工具与基础、大前端、各编程语言、数据库 / 中间件 / 运维与云 同级成组。
 // slug 对应 src/content/docs/tutorials/<slug>；有内容自动点亮，没有内容显示「敬请期待」。
+// 数组顺序即首页分组顺序，左侧栏同步使用。
 
 export interface CatalogTutorial {
   /** 教程系列 slug（尚未写成也先占位，写好即自动点亮） */
@@ -8,7 +9,7 @@ export interface CatalogTutorial {
 }
 
 export interface CatalogGroup {
-  /** 页内锚点 id（首页语言卡片 → #lang-<id>） */
+  /** 页内锚点 id（首页分组 → #<id>） */
   id: string;
   name: string;
   /** 该分组对应 /tech-stack/ 下的技术路线页 */
@@ -16,8 +17,39 @@ export interface CatalogGroup {
   tutorials: CatalogTutorial[];
 }
 
-/** 编程语言（首页左侧栏也用它） */
-export const languageGroups: CatalogGroup[] = [
+export const homeSections: CatalogGroup[] = [
+  {
+    id: 'basics',
+    name: '工具与基础',
+    tutorials: [
+      { slug: 'vscode', title: 'VS Code 教程' },
+      { slug: 'git', title: 'Git 教程' },
+      { slug: 'markdown', title: 'Markdown 教程' },
+      { slug: 'regex', title: '正则表达式教程' },
+      { slug: 'design-patterns', title: '设计模式教程' },
+      { slug: 'dsa', title: '数据结构与算法教程' },
+      { slug: 'network', title: '计算机网络教程' },
+      { slug: 'os', title: '操作系统教程' },
+    ],
+  },
+  {
+    id: 'frontend',
+    name: '大前端',
+    roadmap: '/tech-stack/frontend/',
+    tutorials: [
+      { slug: 'html', title: 'HTML 教程' },
+      { slug: 'css', title: 'CSS 教程' },
+      { slug: 'javascript', title: 'JavaScript 教程' },
+      { slug: 'typescript', title: 'TypeScript 教程' },
+      { slug: 'tailwind', title: 'Tailwind CSS 教程' },
+      { slug: 'vue', title: 'Vue 3 教程' },
+      { slug: 'react', title: 'React 教程' },
+      { slug: 'angular', title: 'Angular 教程' },
+      { slug: 'vite', title: 'Vite 教程' },
+      { slug: 'nodejs', title: 'Node.js 与包管理教程' },
+      { slug: 'node-backend', title: 'Node.js 后端教程' },
+    ],
+  },
   {
     id: 'java',
     name: 'Java',
@@ -61,31 +93,6 @@ export const languageGroups: CatalogGroup[] = [
     ],
   },
   {
-    id: 'javascript-typescript',
-    name: 'JavaScript / TypeScript',
-    roadmap: '/tech-stack/javascript-typescript/',
-    tutorials: [
-      { slug: 'javascript', title: 'JavaScript 教程' },
-      { slug: 'typescript', title: 'TypeScript 教程' },
-      { slug: 'nodejs', title: 'Node.js 与包管理教程' },
-      { slug: 'node-backend', title: 'Node.js 后端教程' },
-    ],
-  },
-  {
-    id: 'frontend',
-    name: 'Web 前端',
-    roadmap: '/tech-stack/frontend/',
-    tutorials: [
-      { slug: 'html', title: 'HTML 教程' },
-      { slug: 'css', title: 'CSS 教程' },
-      { slug: 'tailwind', title: 'Tailwind CSS 教程' },
-      { slug: 'vue', title: 'Vue 3 教程' },
-      { slug: 'react', title: 'React 教程' },
-      { slug: 'angular', title: 'Angular 教程' },
-      { slug: 'vite', title: 'Vite 教程' },
-    ],
-  },
-  {
     id: 'c-cpp',
     name: 'C / C++',
     roadmap: '/tech-stack/c-cpp/',
@@ -112,10 +119,6 @@ export const languageGroups: CatalogGroup[] = [
       { slug: 'react-native', title: 'React Native 教程' },
     ],
   },
-];
-
-/** 数据库 / 中间件 / 运维 / 工具基础：直接列教程 */
-export const techGroups: CatalogGroup[] = [
   {
     id: 'database',
     name: '数据库',
@@ -146,20 +149,6 @@ export const techGroups: CatalogGroup[] = [
       { slug: 'linux', title: 'Linux 教程' },
       { slug: 'docker', title: 'Docker 教程' },
       { slug: 'kubernetes', title: 'Kubernetes 教程' },
-    ],
-  },
-  {
-    id: 'basics',
-    name: '工具与基础',
-    tutorials: [
-      { slug: 'vscode', title: 'VS Code 教程' },
-      { slug: 'git', title: 'Git 教程' },
-      { slug: 'markdown', title: 'Markdown 教程' },
-      { slug: 'regex', title: '正则表达式教程' },
-      { slug: 'design-patterns', title: '设计模式教程' },
-      { slug: 'dsa', title: '数据结构与算法教程' },
-      { slug: 'network', title: '计算机网络教程' },
-      { slug: 'os', title: '操作系统教程' },
     ],
   },
 ];

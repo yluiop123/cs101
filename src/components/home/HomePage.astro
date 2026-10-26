@@ -2,14 +2,13 @@
 import { getSeries } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
-import { languageGroups, techGroups, type CatalogGroup, type CatalogTutorial } from '@/data/catalog';
+import { homeSections, type CatalogTutorial } from '@/data/catalog';
 
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
 
-const resolve = (group: CatalogGroup, anchorPrefix: string) => ({
+const sections = homeSections.map((group) => ({
   ...group,
-  anchor: `${anchorPrefix}-${group.id}`,
   tutorials: group.tutorials.map((tutorial: CatalogTutorial) => {
     const found = bySlug.get(tutorial.slug);
     return {
@@ -18,13 +17,7 @@ const resolve = (group: CatalogGroup, anchorPrefix: string) => ({
       chapters: found?.chapters.length ?? 0,
     };
   }),
-});
-
-// 每个编程语言与数据库 / 中间件 / 运维与云 / 工具与基础同级成组
-const sections = [
-  ...languageGroups.map((group) => resolve(group, 'lang')),
-  ...techGroups.map((group) => resolve(group, 'tech')),
-];
+}));
 ---
 
 <div class="cs-home">
@@ -34,7 +27,7 @@ const sections = [
 
   {
     sections.map((section) => (
-      <section id={section.anchor} class="cs-home-section">
+      <section id={section.id} class="cs-home-section">
         <div class="cs-section-head">
           <h2 class="cs-section-title">{section.name}</h2>
           {section.roadmap && (

@@ -1223,17 +1223,17 @@ main h1.cs-page-title {
   color: var(--cs-muted);
 }
 
-.cs-sidebar-langs {
+.cs-sidebar-sections {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.cs-sidebar-langs li {
+.cs-sidebar-sections li {
   border-bottom: 1px solid var(--cs-border);
 }
 
-.cs-sidebar-langs a {
+.cs-sidebar-sections a {
   display: block;
   padding: 0.5rem 0.75rem;
   border-inline-start: 3px solid transparent;
@@ -1243,12 +1243,12 @@ main h1.cs-page-title {
   text-decoration: none;
 }
 
-.cs-sidebar-langs a:hover {
+.cs-sidebar-sections a:hover {
   background: color-mix(in srgb, var(--cs-accent) 10%, transparent);
   color: var(--cs-accent-dark);
 }
 
-.cs-sidebar-langs a.is-active {
+.cs-sidebar-sections a.is-active {
   background: var(--cs-bg);
   border-inline-start-color: var(--cs-accent);
   color: var(--cs-accent-dark);

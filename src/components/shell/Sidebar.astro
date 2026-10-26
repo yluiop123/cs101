@@ -1,7 +1,7 @@
 ---
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
-import { languageGroups } from '@/data/catalog';
+import { homeSections } from '@/data/catalog';
 
 const { entry } = Astro.locals.starlightRoute;
 const path = Astro.url.pathname.replace(/^\/cs101/, '');
@@ -15,11 +15,11 @@ const catalog = currentSeries || isHome ? [] : await getSeries();
 {
   isHome ? (
     <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">编程语言</p>
-      <ul class="cs-sidebar-langs">
-        {languageGroups.map((group) => (
+      <p class="cs-sidebar-kicker">教程目录</p>
+      <ul class="cs-sidebar-sections">
+        {homeSections.map((group) => (
           <li>
-            <a href={`#lang-${group.id}`} data-cs-lang-link={group.id}>
+            <a href={`#${group.id}`} data-cs-section-link={group.id}>
               {group.name}
             </a>
           </li>
@@ -62,13 +62,13 @@ const catalog = currentSeries || isHome ? [] : await getSeries();
 }
 
 <script>
-  // 首页左侧语言列表：滚动时高亮当前语言卡片
+  // 首页左侧目录：点击定位到分组，滚动时高亮当前分组
   const links = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>('[data-cs-lang-link]'),
+    document.querySelectorAll<HTMLAnchorElement>('[data-cs-section-link]'),
   );
 
   if (links.length > 0) {
-    // 移动端：点击语言后收起抽屉（同页锚点不会触发导航，需手动关闭 popover）
+    // 移动端：点击后收起抽屉（同页锚点不会触发导航，需手动关闭 popover）
     for (const link of links) {
       link.addEventListener('click', () => {
         const sidebar = document.getElementById('starlight__sidebar') as
@@ -78,21 +78,24 @@ const catalog = currentSeries || isHome ? [] : await getSeries();
       });
     }
 
-    const idOf = (link: HTMLAnchorElement) => link.dataset.csLangLink ?? '';
+    const idOf = (link: HTMLAnchorElement) => link.dataset.csSectionLink ?? '';
     const items = links
-      .map((link) => ({ link, target: document.getElementById(`lang-${idOf(link)}`) }))
+      .map((link) => ({ link, target: document.getElementById(idOf(link)) }))
       .filter((item): item is { link: HTMLAnchorElement; target: HTMLElement } =>
         Boolean(item.target),
       );
 
     if (items.length > 0) {
-      // 高亮「当前滚动到的那个语言分组」：取最后一个已越过顶部偏移线的分组
       const update = () => {
         const offset = 120;
         let current: (typeof items)[number] | null = null;
         for (const item of items) {
           if (item.target.getBoundingClientRect().top - offset <= 0) current = item;
         }
+        // 滚到底时高亮最后一个分组（末尾分组无法顶到视口顶部）
+        const atBottom =
+          window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        if (atBottom) current = items[items.length - 1];
         for (const item of items) item.link.classList.toggle('is-active', item === current);
       };
 
