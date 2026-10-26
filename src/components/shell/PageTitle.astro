@@ -6,7 +6,9 @@ const { entry } = Astro.locals.starlightRoute;
 const data = entry.data as Record<string, any>;
 const segments = entry.id.split('/').filter(Boolean);
 
-const isSplash = data.template === 'splash' || entry.id === 'index';
+// 首页（content/docs/index.mdx）不显示页面标题与面包屑
+const isHomePage = !entry.id || entry.id === 'index';
+const isSplash = data.template === 'splash' || isHomePage;
 const isChapter = Boolean(data.series);
 const isSectionIndex = segments.length === 1;
 

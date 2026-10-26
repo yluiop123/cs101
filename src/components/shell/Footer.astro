@@ -6,6 +6,7 @@ import { withBase } from '@/lib/utils';
 
 const { entry } = Astro.locals.starlightRoute;
 const isChapter = Boolean((entry.data as Record<string, unknown>).series);
+const isHome = entry.id === 'index';
 ---
 
 {
@@ -18,7 +19,7 @@ const isChapter = Boolean((entry.data as Record<string, unknown>).series);
   )
 }
 
-<Pagination />
+{!isHome && <Pagination />}
 
 <footer class="cs-site-footer">
   <div class="cs-footer-col">
