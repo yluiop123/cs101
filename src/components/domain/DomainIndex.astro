@@ -24,7 +24,7 @@ const sections = domainCategories.map((category) => ({
 <div class="cs-domain">
   {
     sections.map((section) => (
-      <section class="cs-domain-section">
+      <section id={`cat-${section.id}`} class="cs-domain-section">
         <div class="cs-section-head">
           <h2 class="cs-section-title">{section.name}</h2>
         </div>

@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import { homeSections } from '@/data/catalog';
-import { domains } from '@/data/domains';
+import { domainCategories } from '@/data/domains';
 import { routeTitles, routePlan } from '@/data/route-plan';
 
 const { entry } = Astro.locals.starlightRoute;
@@ -55,27 +55,36 @@ const catalog =
         ))}
       </ul>
     </div>
-  ) : isDomainIndex || currentDomain ? (
+  ) : isDomainIndex ? (
+    // 领域总览页：左侧栏与正文一致，列出 4 个分类
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">应用领域</p>
       <ul class="cs-sidebar-sections">
-        {domains.map((domain) => (
+        {domainCategories.map((category) => (
           <li>
-            {isDomainIndex ? (
-              <a href={`#domain-${domain.slug}`} data-cs-section-link={`domain-${domain.slug}`}>
-                {domain.name}
-              </a>
-            ) : (
-              <a
-                href={withBase(`/domain/${domain.slug}/`)}
-                aria-current={domain.slug === currentDomain ? 'page' : undefined}
-              >
-                {domain.name}
-              </a>
-            )}
+            <a href={`#cat-${category.id}`} data-cs-section-link={`cat-${category.id}`}>
+              {category.name}
+            </a>
           </li>
         ))}
       </ul>
+    </div>
+  ) : currentDomain ? (
+    // 具体领域页：左侧栏显示这条领域路线自己的阶段（与正文板块锚点联动）
+    <div class="cs-sidebar">
+      <p class="cs-sidebar-kicker">应用领域</p>
+      <ul class="cs-sidebar-sections">
+        {(routePlan[`domain-${currentDomain}`] ?? []).map((tier, index) => (
+          <li>
+            <a href={`#tier-${index}`} data-cs-section-link={`tier-${index}`}>
+              {tier.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="cs-sidebar-back" href={withBase('/domain/')}>
+        全部应用领域 →
+      </a>
     </div>
   ) : isComputerScience ? (
     <div class="cs-sidebar">
