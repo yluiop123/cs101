@@ -1210,15 +1210,22 @@ main:has(.cs-playground) .sl-container {
 
 .cs-playground-tabs {
   display: flex;
+  align-items: center;
   gap: 0.25rem;
 }
 
 .cs-playground-tabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6rem;
+  height: 30px;
   border: 1px solid var(--cs-border);
   background: transparent;
   color: var(--cs-text);
   font-size: 0.78rem;
-  padding: 0.3rem 0.6rem;
+  line-height: 1;
+  padding: 0 0.6rem;
   cursor: pointer;
 }
 
@@ -1231,7 +1238,25 @@ main:has(.cs-playground) .sl-container {
 
 .cs-playground-actions {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+}
+
+/* Starlight 会给 markdown 里非首个子项加 margin-top，工具栏内必须清零 */
+.cs-playground-toolbar > *,
+.cs-playground-tabs > *,
+.cs-playground-actions > * {
+  margin-top: 0;
+}
+
+.cs-playground-actions .cs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1;
 }
 
 .cs-playground-grid {
