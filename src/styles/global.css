@@ -337,6 +337,7 @@ main h1.cs-page-title {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  height: 100%;
   border: 1px solid var(--cs-border);
   border-inline-start: 3px solid var(--tier-color, var(--cs-accent));
   border-radius: var(--cs-radius);
@@ -377,6 +378,19 @@ main h1.cs-page-title {
   color: var(--cs-muted);
 }
 
+/* ============ 抵消 Starlight markdown 段落节奏 ============ */
+/* Starlight 会给 markdown 内容里“非首个子元素”补 margin-top，
+   组件内部的卡片、列表项因此高低不齐，这里统一清零，由组件自己控制间距。 */
+.cs-course-grid > *,
+.cs-tier-grid > *,
+.cs-series-grid > *,
+.cs-series-list > *,
+.cs-chapter-list > *,
+.cs-pager > * {
+  margin-top: 0;
+  min-width: 0;
+}
+
 /* ============ 计算机科学课程 ============ */
 .cs-course-section {
   margin-bottom: 2.5rem;
@@ -399,9 +413,12 @@ main h1.cs-page-title {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
   gap: 1rem;
+  align-items: stretch;
 }
 
 .cs-course-card {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--cs-border);
   border-top: 3px solid var(--cs-accent);
   border-radius: var(--cs-radius);
@@ -410,13 +427,17 @@ main h1.cs-page-title {
 }
 
 .cs-course-card h3 {
-  margin: 0 0 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0 0 0.45rem;
   font-size: 1rem;
   line-height: 1.5;
 }
 
 .cs-course-card p {
-  margin: 0 0 0.6rem;
+  margin: 0;
   font-size: 0.88rem;
   color: var(--cs-muted);
   line-height: 1.65;
@@ -424,33 +445,78 @@ main h1.cs-page-title {
 
 .cs-badge {
   display: inline-block;
-  margin-inline-start: 0.4rem;
   border: 1px solid var(--cs-border);
   background: var(--cs-sidebar-bg);
   color: var(--cs-muted);
   font-size: 0.7rem;
   font-weight: 500;
+  line-height: 1.6;
   padding: 0 0.35rem;
-  vertical-align: middle;
 }
 
+/* 卡片底部操作行：贴着卡片底部，保证同一行卡片的「学习资源」行对齐 */
 .cs-resource-details {
+  margin-top: auto;
+  padding: 0.85rem 0 0;
+  border-inline-start: 0;
   font-size: 0.85rem;
 }
 
 .cs-resource-details summary {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
   color: var(--cs-accent-dark);
   font-weight: 600;
+  list-style: none;
+}
+
+.cs-resource-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.cs-resource-details summary::marker {
+  content: '';
+}
+
+.cs-resource-details summary::before {
+  content: '›';
+  display: inline-block;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.cs-resource-details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.cs-resource-details summary:hover {
+  color: var(--cs-accent);
 }
 
 .cs-resource-group {
-  margin-top: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.cs-resource-group strong {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cs-muted);
 }
 
 .cs-resource-group ul {
   margin: 0.2rem 0 0;
   padding-inline-start: 1.1rem;
+}
+
+.cs-resource-group li {
+  margin-top: 0.25rem;
+  line-height: 1.6;
 }
 
 .cs-resource-group a {

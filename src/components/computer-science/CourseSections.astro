@@ -29,7 +29,9 @@ interface Props {
 }
 
 const { source } = Astro.props as Props;
-const categories = ((source === 'ossu' ? ossuCourses : zhCourses) ?? []) as Category[];
+const categories = (((source === 'ossu' ? ossuCourses : zhCourses) ?? []) as Category[]).filter(
+  (category) => (category.items ?? []).length > 0,
+);
 
 function resourceCount(item: CourseItem) {
   return (item.resources ?? []).reduce((sum, group) => sum + (group.items?.length ?? 0), 0);
