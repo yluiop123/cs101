@@ -312,6 +312,51 @@ main h1.cs-page-title {
   border-bottom-color: var(--cs-accent);
 }
 
+/* ---- 主题选择：与搜索按钮一致的方角小胶囊，去掉默认焦点黑框 ---- */
+starlight-theme-select label {
+  height: 30px;
+  padding-inline: 0.1rem;
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  background: var(--cs-sidebar-bg);
+  color: var(--cs-muted);
+}
+
+starlight-theme-select label:hover {
+  border-color: var(--cs-accent);
+  color: var(--cs-accent-dark);
+}
+
+starlight-theme-select:focus-within label {
+  border-color: var(--cs-accent);
+}
+
+starlight-theme-select select {
+  padding-block: 0.3rem;
+  padding-inline: 1.9rem 1.4rem;
+  font-size: 0.82rem;
+  color: inherit;
+  outline: none;
+}
+
+starlight-theme-select select:focus,
+starlight-theme-select select:focus-visible {
+  outline: none;
+}
+
+starlight-theme-select .label-icon {
+  inset-inline-start: 0.4rem;
+}
+
+starlight-theme-select .caret {
+  inset-inline-end: 0.3rem;
+}
+
+starlight-theme-select option {
+  background: var(--cs-bg);
+  color: var(--cs-text);
+}
+
 .cs-header-actions {
   display: flex;
   align-items: center;
@@ -679,12 +724,17 @@ main h1.cs-page-title {
   font-size: 0.88rem;
 }
 
-/* ---- 首页分组标题 ---- */
+/* ---- 分组标题（首页 / 应用领域共用） ---- */
+.cs-home > *,
+.cs-domain > * {
+  margin-top: 0;
+}
+
 .cs-home .cs-home-section {
   scroll-margin-top: 0;
 }
 
-.cs-home .cs-section-head {
+.cs-section-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -694,7 +744,7 @@ main h1.cs-page-title {
   margin-bottom: 1.1rem;
 }
 
-.cs-home .cs-section-title {
+.cs-section-head .cs-section-title {
   margin: 0;
   padding: 0;
   border: 0;
@@ -702,7 +752,7 @@ main h1.cs-page-title {
   line-height: 1.4;
 }
 
-.cs-home .cs-section-more {
+.cs-section-more {
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--cs-accent-dark);
@@ -710,7 +760,7 @@ main h1.cs-page-title {
   white-space: nowrap;
 }
 
-.cs-home .cs-section-more:hover {
+.cs-section-more:hover {
   color: var(--cs-accent);
   text-decoration: underline;
 }
@@ -760,6 +810,68 @@ main h1.cs-page-title {
   font-size: 0.72rem;
   color: var(--cs-muted);
   flex-shrink: 0;
+}
+
+/* ============ 应用领域 ============ */
+.cs-domain {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cs-domain-section {
+  scroll-margin-top: 0;
+}
+
+.cs-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-domain-grid li {
+  margin: 0;
+  scroll-margin-top: 88px;
+}
+
+.cs-domain-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  height: 100%;
+  border: 1px solid var(--cs-border);
+  border-top: 3px solid var(--cs-accent);
+  border-radius: var(--cs-radius);
+  background: var(--cs-bg);
+  padding: 0.8rem 1rem;
+  color: var(--cs-text);
+  text-decoration: none;
+}
+
+.cs-domain-card:hover {
+  border-color: var(--cs-accent);
+  background: var(--cs-sidebar-bg);
+}
+
+.cs-domain-name {
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.cs-domain-meta {
+  font-size: 0.78rem;
+  color: var(--cs-muted);
+}
+
+.cs-domain-go {
+  margin-top: auto;
+  padding-top: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cs-accent-dark);
 }
 
 .cs-series-list {

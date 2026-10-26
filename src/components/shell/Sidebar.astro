@@ -2,6 +2,7 @@
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import { homeSections } from '@/data/catalog';
+import { domains } from '@/data/domains';
 
 const { entry } = Astro.locals.starlightRoute;
 const path = Astro.url.pathname.replace(/^\/cs101/, '');
@@ -9,7 +10,9 @@ const match = path.match(/^\/tutorials\/([^/]+)\//);
 const currentSeries = match ? await getSeriesBySlug(match[1]) : null;
 const currentId = entry.id;
 const isHome = !entry.id || entry.id === 'index';
-const catalog = currentSeries || isHome ? [] : await getSeries();
+const isDomainIndex = path === '/domain/' || path === '/domain';
+const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
+const catalog = currentSeries || isHome || isDomainIndex || currentDomain ? [] : await getSeries();
 ---
 
 {
@@ -22,6 +25,28 @@ const catalog = currentSeries || isHome ? [] : await getSeries();
             <a href={`#${group.id}`} data-cs-section-link={group.id}>
               {group.name}
             </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : isDomainIndex || currentDomain ? (
+    <div class="cs-sidebar">
+      <p class="cs-sidebar-kicker">应用领域</p>
+      <ul class="cs-sidebar-sections">
+        {domains.map((domain) => (
+          <li>
+            {isDomainIndex ? (
+              <a href={`#domain-${domain.slug}`} data-cs-section-link={`domain-${domain.slug}`}>
+                {domain.name}
+              </a>
+            ) : (
+              <a
+                href={withBase(`/domain/${domain.slug}/`)}
+                aria-current={domain.slug === currentDomain ? 'page' : undefined}
+              >
+                {domain.name}
+              </a>
+            )}
           </li>
         ))}
       </ul>

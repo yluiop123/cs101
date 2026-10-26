@@ -1,0 +1,47 @@
+---
+import { getSeries } from '@/lib/content';
+import { withBase } from '@/lib/utils';
+import { routePlan } from '@/data/route-plan';
+import { domains, domainCategories } from '@/data/domains';
+
+const series = await getSeries();
+const available = new Set(series.map((item) => item.slug));
+
+const cards = domains.map((domain) => {
+  const tiers = routePlan[`domain-${domain.slug}`] ?? [];
+  // 每条路线的技术项去重后统计：已上线 = 站内已有该教程内容
+  const items = [...new Set(tiers.flatMap((tier) => tier.items))];
+  const learnable = items.filter((slug) => available.has(slug)).length;
+  return { ...domain, tiers: tiers.length, total: items.length, learnable };
+});
+
+const sections = domainCategories.map((category) => ({
+  ...category,
+  cards: cards.filter((card) => card.category === category.id),
+}));
+---
+
+<div class="cs-domain">
+  {
+    sections.map((section) => (
+      <section class="cs-domain-section">
+        <div class="cs-section-head">
+          <h2 class="cs-section-title">{section.name}</h2>
+        </div>
+        <ul class="cs-domain-grid">
+          {section.cards.map((card) => (
+            <li id={`domain-${card.slug}`}>
+              <a class="cs-domain-card" href={withBase(`/domain/${card.slug}/`)}>
+                <span class="cs-domain-name">{card.name}</span>
+                <span class="cs-domain-meta">
+                  {card.tiers} 阶段 · {card.total} 项技术 · 已有 {card.learnable} 门教程
+                </span>
+                <span class="cs-domain-go">查看路线 →</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>
