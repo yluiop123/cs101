@@ -1,19 +1,13 @@
-docs/.vitepress/cache/
-docs/.vitepress/dist/
-docs/.vitepress/**/*.js
-node_modules/
-/.vitepress/
-
-# Node.js
+﻿node_modules/
 dist/
-build/
+.astro/
+.legacy/
+.vitepress/
 *.log
 .env*
-
-# IDE/editor
-.vscode/
-.idea/
-
-# OS
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+playwright-report/
+test-results/
