@@ -369,6 +369,7 @@ starlight-theme-select option {
 /* ============ 路线页（TechNodes / TechStackGrid） ============ */
 .cs-tier {
   margin-bottom: 2rem;
+  scroll-margin-top: 80px;
 }
 
 .cs-tier-title {
@@ -1365,6 +1366,19 @@ main:has(.cs-playground) .sl-container {
   background: var(--cs-bg);
   border-inline-start-color: var(--cs-accent);
   color: var(--cs-accent-dark);
+}
+
+.cs-sidebar-back {
+  display: block;
+  margin: 0.75rem 0.75rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cs-accent-dark);
+  text-decoration: none;
+}
+
+.cs-sidebar-back:hover {
+  text-decoration: underline;
 }
 
 .cs-sidebar-catalog {

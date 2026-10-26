@@ -4,7 +4,7 @@ import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import { homeSections } from '@/data/catalog';
 import { domains } from '@/data/domains';
-import { routeTitles } from '@/data/route-plan';
+import { routeTitles, routePlan } from '@/data/route-plan';
 
 const { entry } = Astro.locals.starlightRoute;
 const path = Astro.url.pathname.replace(/^\/cs101/, '');
@@ -16,6 +16,10 @@ const isDomainIndex = path === '/domain/' || path === '/domain';
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
 const isComputerScience = path.startsWith('/computer-science');
 const isTechStack = path.startsWith('/tech-stack');
+// 具体路线页：左侧栏显示这条路线自己的板块（与正文各板块锚点联动）
+const techRouteSlug = path.match(/^\/tech-stack\/([^/]+)\//)?.[1];
+const routeTiers = techRouteSlug ? (routePlan[techRouteSlug] ?? []) : [];
+const isTechRoutePage = isTechStack && routeTiers.length > 0;
 
 // 学习路线页的左侧栏：按路线顺序列出全部技术路线
 const routeOrder = Object.keys(routeTitles);
@@ -102,6 +106,22 @@ const catalog =
           </a>
         </li>
       </ul>
+    </div>
+  ) : isTechRoutePage ? (
+    <div class="cs-sidebar">
+      <p class="cs-sidebar-kicker">学习路线</p>
+      <ul class="cs-sidebar-sections">
+        {routeTiers.map((tier, index) => (
+          <li>
+            <a href={`#tier-${index}`} data-cs-section-link={`tier-${index}`}>
+              {tier.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="cs-sidebar-back" href={withBase('/tech-stack/')}>
+        全部技术路线 →
+      </a>
     </div>
   ) : isTechStack ? (
     <div class="cs-sidebar">

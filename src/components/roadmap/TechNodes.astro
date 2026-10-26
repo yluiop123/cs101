@@ -21,7 +21,7 @@ const colors = ['#2563eb', '#0ea5e9', '#9333ea', '#d97706'];
   tiers.map((tier, index) => {
     const color = colors[index % colors.length];
     return (
-      <section class="cs-tier" style={`--tier-color:${color}`}>
+      <section id={`tier-${index}`} class="cs-tier" style={`--tier-color:${color}`}>
         <h2 class="cs-tier-title">{tier.name}</h2>
         <ul class="cs-tier-grid">
           {tier.items.map((slug) => {
