@@ -1,0 +1,91 @@
+---
+import { getSeries } from '@/lib/content';
+import { withBase } from '@/lib/utils';
+import { routePlan } from '@/data/route-plan';
+
+const series = await getSeries();
+const totalChapters = series.reduce((sum, item) => sum + item.chapters.length, 0);
+const routeKeys = Object.keys(routePlan);
+const techRoutes = routeKeys.filter((key) => !key.startsWith('domain-')).length;
+const domainRoutes = routeKeys.filter((key) => key.startsWith('domain-')).length;
+const firstSeries = series[0];
+---
+
+<div class="cs-home">
+  <section class="cs-hero">
+    <p class="cs-hero-kicker">CS101</p>
+    <h1 class="cs-hero-title">中文计算机学习路径</h1>
+    <p class="cs-hero-sub">从「学什么」到「学到哪」：计算机科学 · 技术栈 · 应用领域</p>
+    <a class="cs-search-entry" href={withBase('/tutorials/')}>
+      <span>搜索教程、章节、小节…</span>
+      <kbd>⌘K</kbd>
+    </a>
+    <div class="cs-hero-actions">
+      <a class="cs-btn cs-btn-primary" href={withBase('/tutorials/')}>开始学习</a>
+      <a class="cs-btn" href={withBase('/tech-stack/')}>看技术栈路线</a>
+    </div>
+  </section>
+
+  {
+    firstSeries && (
+      <section class="cs-continue">
+        <div class="cs-continue-main">
+          <p class="cs-continue-kicker">继续学习</p>
+          <h2>
+            <a href={withBase(`/tutorials/${firstSeries.slug}/`)}>{firstSeries.title}</a>
+          </h2>
+          <p>
+            共 {firstSeries.chapters.length} 章 · 约 {firstSeries.totalDuration} 分钟 · 当前进度 0%
+          </p>
+        </div>
+        <a class="cs-btn cs-btn-primary" href={withBase(`/tutorials/${firstSeries.slug}/`)}>
+          开始第一章
+        </a>
+      </section>
+    )
+  }
+
+  <section>
+    <h2 class="cs-section-title">按方向开始</h2>
+    <div class="cs-cat-grid">
+      <a class="cs-cat-card" href={withBase('/computer-science/')}>
+        <h3>计算机科学</h3>
+        <p>国内课程与 OSSU 国际路线，打牢底层基础。</p>
+        <span class="cs-cat-link">进入 →</span>
+      </a>
+      <a class="cs-cat-card" href={withBase('/tech-stack/')}>
+        <h3>技术栈路线</h3>
+        <p>{techRoutes} 条路线：语言 / 数据库 / 中间件 / 运维云。</p>
+        <span class="cs-cat-link">进入 →</span>
+      </a>
+      <a class="cs-cat-card" href={withBase('/domain/')}>
+        <h3>应用领域</h3>
+        <p>{domainRoutes} 个领域：Web / 大数据 / AI / 安全 …</p>
+        <span class="cs-cat-link">进入 →</span>
+      </a>
+      <a class="cs-cat-card" href={withBase('/tutorials/')}>
+        <h3>教程</h3>
+        <p>{series.length} 个系列 · {totalChapters} 章（持续迁移中）。</p>
+        <span class="cs-cat-link">进入 →</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="cs-section-title">热门教程</h2>
+    <ul class="cs-series-list">
+      {
+        series.slice(0, 8).map((item) => (
+          <li>
+            <a href={withBase(`/tutorials/${item.slug}/`)}>
+              <span class="cs-series-name">{item.title}</span>
+              <span class="cs-series-meta">
+                {item.chapters.length} 章 · 约 {item.totalDuration} 分钟
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</div>

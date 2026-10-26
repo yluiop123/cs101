@@ -1,0 +1,27 @@
+---
+import { getSeriesBySlug } from '@/lib/content';
+import { withBase } from '@/lib/utils';
+
+interface Props {
+  series: string;
+}
+
+const { series } = Astro.props as Props;
+const data = await getSeriesBySlug(series);
+---
+
+{
+  data && (
+    <ol class="cs-chapter-list">
+      {data.chapters.map((chapter, index) => (
+        <li class="cs-chapter-item">
+          <a href={withBase(`/${chapter.id}/`)}>
+            <span class="cs-chapter-num">{String(index + 1).padStart(2, '0')}</span>
+            <span class="cs-chapter-title">{chapter.title}</span>
+            <span class="cs-chapter-meta">{chapter.duration ? `约 ${chapter.duration} 分钟` : ''}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  )
+}

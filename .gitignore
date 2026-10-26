@@ -11,3 +11,6 @@ Thumbs.db
 .idea/
 playwright-report/
 test-results/
+
+screenshots/
+

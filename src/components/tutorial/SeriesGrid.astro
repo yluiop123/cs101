@@ -1,0 +1,22 @@
+---
+import { getSeries } from '@/lib/content';
+import { withBase } from '@/lib/utils';
+
+const series = await getSeries();
+---
+
+<ul class="cs-series-grid">
+  {
+    series.map((item) => (
+      <li>
+        <a class="cs-series-card" href={withBase(`/tutorials/${item.slug}/`)}>
+          <h3>{item.title}</h3>
+          <p>{item.description ?? '系列简介编写中。'}</p>
+          <span class="cs-series-card-meta">
+            {item.chapters.length} 章 · 约 {item.totalDuration} 分钟
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

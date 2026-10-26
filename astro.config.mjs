@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
@@ -33,27 +34,65 @@ export default defineConfig({
       credits: false,
       lastUpdated: false,
       pagination: true,
-      tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
+      // D7 默认值：隐藏右侧「本页内容」目录，保持教程站版式
+      tableOfContents: false,
       pagefind: true,
+      expressiveCode: {
+        themes: ['github-dark'],
+        styleOverrides: {
+          borderRadius: '0px',
+          codeFontSize: '0.9rem',
+        },
+      },
+      components: {
+        PageTitle: './src/components/shell/PageTitle.astro',
+        Pagination: './src/components/shell/Pagination.astro',
+        Footer: './src/components/shell/Footer.astro',
+      },
       sidebar: [
+        {
+          label: '开始',
+          items: [
+            { label: '首页', link: '/' },
+            { label: '教程总览', link: '/tutorials/' },
+          ],
+        },
         {
           label: '教程',
           items: [
             {
-              label: '测试系列',
-              items: [{ label: '第 1 章 · 演示', link: '/tutorials/test/01-demo/' }],
+              label: 'Git 教程',
+              items: [
+                { label: '系列首页', link: '/tutorials/git/' },
+                { label: '第 1 章 · 版本控制与 Git 入门', link: '/tutorials/git/01-introduction/' },
+                { label: '第 2 章 · 基础操作', link: '/tutorials/git/02-basic/' },
+                { label: '第 3 章 · 分支管理', link: '/tutorials/git/03-branch/' },
+                { label: '第 4 章 · 远程仓库与 GitHub', link: '/tutorials/git/04-remote/' },
+                { label: '第 5 章 · 团队协作流程', link: '/tutorials/git/05-collaboration/' },
+                { label: '第 6 章 · 进阶技巧', link: '/tutorials/git/06-advanced/' },
+                { label: '第 7 章 · 实战场景与最佳实践', link: '/tutorials/git/07-best-practices/' },
+              ],
             },
           ],
         },
         {
           label: '路线',
-          items: [{ label: '技术栈路线', link: '/tech-stack/' }],
+          items: [
+            { label: '技术栈路线', link: '/tech-stack/' },
+            { label: '应用领域', link: '/domain/' },
+            { label: '计算机科学', link: '/computer-science/' },
+          ],
         },
       ],
     }),
     sitemap(),
   ],
   vite: {
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
+    },
     plugins: [tailwindcss()],
   },
 });
