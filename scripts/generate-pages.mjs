@@ -171,7 +171,7 @@ const TECH_TITLES = {
   frontend: '大前端技术路线',
   'sql-database': '数据库技术路线',
   kafka: '中间件技术路线',
-  docker: 'DevOps 与工程工具技术路线',
+  docker: 'DevOps 与工程工具',
   'c-sharp': 'C# 与 .NET 技术路线',
 };
 

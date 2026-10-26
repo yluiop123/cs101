@@ -373,5 +373,5 @@ export const routeTitles: Record<string, string> = {
   desktop: '桌面端技术路线', mobile: '移动端技术路线',
   'sql-database': '数据库技术路线', mysql: 'MySQL', postgresql: 'PostgreSQL', redis: 'Redis',
   mongodb: 'MongoDB', elasticsearch: 'Elasticsearch', kafka: '中间件技术路线', nginx: 'Nginx',
-  docker: 'DevOps 与工程工具技术路线', kubernetes: 'Kubernetes',
+  docker: 'DevOps 与工程工具', kubernetes: 'Kubernetes',
 }

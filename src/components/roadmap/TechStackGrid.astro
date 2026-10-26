@@ -1,69 +1,74 @@
 ---
 import { withBase } from '@/lib/utils';
+import { routePlan } from '@/data/route-plan';
 
 interface TechGroup {
   name: string;
-  color: string;
-  items: { title: string; url: string }[];
+  items: { title: string; slug: string }[];
 }
 
 const groups: TechGroup[] = [
   {
     name: '编程语言',
-    color: '#2563eb',
     items: [
-      { title: 'Java', url: '/tech-stack/java/' },
-      { title: 'Python', url: '/tech-stack/python/' },
-      { title: 'Go', url: '/tech-stack/go/' },
-      { title: 'Rust', url: '/tech-stack/rust/' },
-      { title: 'JavaScript / TypeScript', url: '/tech-stack/javascript-typescript/' },
-      { title: '大前端', url: '/tech-stack/frontend/' },
-      { title: 'C / C++', url: '/tech-stack/c-cpp/' },
-      { title: 'C# 与 .NET', url: '/tech-stack/c-sharp/' },
-      { title: 'Kotlin / Swift / Dart', url: '/tech-stack/kotlin-swift-dart/' },
+      { title: 'Java', slug: 'java' },
+      { title: 'Python', slug: 'python' },
+      { title: 'Go', slug: 'go' },
+      { title: 'Rust', slug: 'rust' },
+      { title: 'JavaScript / TypeScript', slug: 'javascript-typescript' },
+      { title: '大前端', slug: 'frontend' },
+      { title: 'C / C++', slug: 'c-cpp' },
+      { title: 'C# 与 .NET', slug: 'c-sharp' },
+      { title: 'Kotlin / Swift / Dart', slug: 'kotlin-swift-dart' },
     ],
   },
   {
     name: '数据库',
-    color: '#336791',
     items: [
-      { title: '数据库技术路线', url: '/tech-stack/sql-database/' },
-      { title: 'MySQL', url: '/tech-stack/mysql/' },
-      { title: 'PostgreSQL', url: '/tech-stack/postgresql/' },
-      { title: 'Redis', url: '/tech-stack/redis/' },
-      { title: 'MongoDB', url: '/tech-stack/mongodb/' },
-      { title: 'Elasticsearch', url: '/tech-stack/elasticsearch/' },
+      { title: '数据库技术路线', slug: 'sql-database' },
+      { title: 'MySQL', slug: 'mysql' },
+      { title: 'PostgreSQL', slug: 'postgresql' },
+      { title: 'Redis', slug: 'redis' },
+      { title: 'MongoDB', slug: 'mongodb' },
+      { title: 'Elasticsearch', slug: 'elasticsearch' },
     ],
   },
   {
     name: '中间件',
-    color: '#d97706',
     items: [
-      { title: '中间件技术路线', url: '/tech-stack/kafka/' },
-      { title: 'Nginx', url: '/tech-stack/nginx/' },
+      { title: '中间件技术路线', slug: 'kafka' },
+      { title: 'Nginx', slug: 'nginx' },
     ],
   },
   {
     name: '运维与云',
-    color: '#0ea5e9',
     items: [
-      { title: 'DevOps 与工程工具技术路线', url: '/tech-stack/docker/' },
-      { title: 'Kubernetes', url: '/tech-stack/kubernetes/' },
+      { title: 'DevOps 与工程工具', slug: 'docker' },
+      { title: 'Kubernetes', slug: 'kubernetes' },
     ],
   },
 ];
+
+// 卡片右侧的规模提示，与首页 / 领域卡片同样式
+const scaleOf = (slug: string) => {
+  const tiers = routePlan[slug] ?? [];
+  const count = new Set(tiers.flatMap((tier) => tier.items)).size;
+  return `${tiers.length} 阶段 · ${count} 项`;
+};
 ---
 
 {
   groups.map((group) => (
-    <section class="cs-tier" style={`--tier-color:${group.color}`}>
-      <h2 class="cs-tier-title">{group.name}</h2>
-      <ul class="cs-tier-grid">
+    <section class="cs-tier">
+      <div class="cs-section-head">
+        <h2 class="cs-section-title">{group.name}</h2>
+      </div>
+      <ul class="cs-tut-grid">
         {group.items.map((item) => (
           <li>
-            <a class="cs-tier-card" href={withBase(item.url)}>
-              <span class="cs-tier-name">{item.title}</span>
-              <span class="cs-tier-dot" aria-hidden="true" />
+            <a class="cs-tut-card" href={withBase(`/tech-stack/${item.slug}/`)}>
+              <span>{item.title}</span>
+              <span class="cs-tut-meta">{scaleOf(item.slug)}</span>
             </a>
           </li>
         ))}
