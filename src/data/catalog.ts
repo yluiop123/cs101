@@ -136,7 +136,7 @@ export const homeSections: CatalogGroup[] = [
   },
   {
     id: 'ops',
-    name: '运维与云',
+    name: 'DevOps',
     roadmap: '/tech-stack/docker/',
     tutorials: [
       { slug: 'linux', title: 'Linux 教程' },
