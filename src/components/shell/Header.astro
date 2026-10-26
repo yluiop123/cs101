@@ -1,8 +1,8 @@
 ---
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import Search from '@astrojs/starlight/components/Search.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
+import SearchLauncher from '@/components/search/SearchLauncher.tsx';
 import { withBase } from '@/lib/utils';
 ---
 
@@ -17,9 +17,10 @@ import { withBase } from '@/lib/utils';
       <a href={withBase('/tech-stack/')}>技术栈</a>
       <a href={withBase('/domain/')}>应用领域</a>
       <a href={withBase('/computer-science/')}>计算机科学</a>
+      <a href={withBase('/playground/')}>演练场</a>
     </nav>
     <div class="cs-header-actions">
-      <Search />
+      <SearchLauncher client:idle />
       <ThemeSelect />
     </div>
   </div>

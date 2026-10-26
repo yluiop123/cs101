@@ -29,6 +29,8 @@ if (!isSplash) {
   } else if (segments[0] === 'computer-science') {
     crumbs.push({ label: '计算机科学', href: withBase('/computer-science/') });
     if (!isSectionIndex) crumbs.push({ label: data.title });
+  } else if (segments[0] === 'playground') {
+    crumbs.push({ label: '代码演练场' });
   }
 }
 

@@ -1,4 +1,6 @@
 ---
+import CompleteButton from '@/components/progress/CompleteButton.tsx';
+import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import Pagination from './Pagination.astro';
 import { withBase } from '@/lib/utils';
 
@@ -9,13 +11,9 @@ const isChapter = Boolean((entry.data as Record<string, unknown>).series);
 {
   isChapter && (
     <div class="cs-chapter-actions">
-      <button type="button" class="cs-btn cs-btn-primary" data-cs-action="complete">
-        标记本章完成
-      </button>
-      <button type="button" class="cs-btn" data-cs-action="favorite">
-        收藏本章
-      </button>
-      <span class="cs-action-hint">进度与收藏将在 M5 接入本地存储</span>
+      <CompleteButton client:visible slug={entry.id} />
+      <FavoriteButton client:visible slug={entry.id} />
+      <span class="cs-action-hint">进度与收藏保存在本机浏览器，无需登录</span>
     </div>
   )
 }
@@ -32,9 +30,47 @@ const isChapter = Boolean((entry.data as Record<string, unknown>).series);
     <a href={withBase('/tutorials/')}>教程总览</a>
     <a href={withBase('/tech-stack/')}>技术栈路线</a>
     <a href={withBase('/computer-science/')}>计算机科学</a>
+    <a href={withBase('/playground/')}>代码演练场</a>
   </div>
   <div class="cs-footer-col">
     <h3>关于</h3>
     <p>内容仅供学习参考。</p>
   </div>
 </footer>
+
+<script>
+  const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const SUPPORTED = new Set(['js', 'javascript', 'ts', 'typescript', 'html', 'css']);
+
+  const decorate = () => {
+    document.querySelectorAll<HTMLElement>('figure.frame').forEach((figure) => {
+      if (figure.querySelector('.cs-code-run')) return;
+      const pre = figure.querySelector('pre');
+      const codeEl = figure.querySelector('pre code');
+      if (!pre || !codeEl) return;
+      const rawLang = (pre.getAttribute('data-language') ?? '').toLowerCase();
+      const classLang = (codeEl.className.match(/language-([\w-]+)/)?.[1] ?? '').toLowerCase();
+      const lang = rawLang || classLang;
+      if (!SUPPORTED.has(lang)) return;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'cs-code-run';
+      button.textContent = '▷ 运行实例';
+      button.addEventListener('click', () => {
+        try {
+          sessionStorage.setItem(
+            'cs101:playground',
+            JSON.stringify({ code: codeEl.textContent ?? '', lang }),
+          );
+        } catch {
+          /* ignore */
+        }
+        window.location.href = `${BASE}/playground/?from=session`;
+      });
+      figure.appendChild(button);
+    });
+  };
+
+  decorate();
+</script>

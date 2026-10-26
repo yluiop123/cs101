@@ -59,7 +59,8 @@ export default defineConfig({
       pagination: true,
       // D7 默认值：隐藏右侧「本页内容」目录，保持教程站版式
       tableOfContents: false,
-      pagefind: true,
+      // 使用自建 ⌘K 中文搜索（MiniSearch + Intl.Segmenter），关闭 Pagefind
+      pagefind: false,
       expressiveCode: {
         themes: ['github-dark'],
         styleOverrides: {
