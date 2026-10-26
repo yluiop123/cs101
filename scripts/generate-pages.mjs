@@ -169,6 +169,10 @@ const DOMAIN_TITLES = {
 // 站点侧已调整的技术路线标题：重跑生成脚本时保留，不被旧站标题覆盖
 const TECH_TITLES = {
   frontend: '大前端技术路线',
+  'sql-database': '数据库技术路线',
+  kafka: '中间件技术路线',
+  docker: 'DevOps 与工程工具技术路线',
+  'c-sharp': 'C# 与 .NET 技术路线',
 };
 
 // 站点侧已删除的领域页：重跑脚本时不再生成

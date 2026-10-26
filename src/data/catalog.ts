@@ -50,5 +50,5 @@ export const homeSections: CatalogGroup[] = [
   { id: 'c-sharp', name: 'C# 与 .NET', roadmap: '/tech-stack/c-sharp/' },
   { id: 'database', name: '数据库', roadmap: '/tech-stack/sql-database/' },
   { id: 'middleware', name: '中间件', roadmap: '/tech-stack/kafka/' },
-  { id: 'devops', name: '工程工具与 DevOps', roadmap: '/tech-stack/docker/' },
+  { id: 'devops', name: 'DevOps 与工程工具', roadmap: '/tech-stack/docker/' },
 ];

@@ -166,10 +166,10 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '实战与生态 · .NET 与上位机', items: ['aspnet', 'wpf', 'maui', 'industrial-comms'] },
   ],
   'kotlin-swift-dart': [
-    { name: '入门 · 选择方向与基础', items: ['flutter', 'react-native'] },
-    { name: '进阶 · UI 体系与组件', items: ['html', 'css', 'javascript'] },
-    { name: '精通 · 架构、状态与数据', items: ['sql', 'network', 'design-patterns'] },
-    { name: '实战与生态 · 工程化与发布', items: ['testing', 'docker', 'nginx'] },
+    { name: '入门 · 语言与平台', items: ['kotlin', 'swift', 'android-sdk'] },
+    { name: '进阶 · 原生 UI 框架', items: ['jetpack-compose', 'swiftui'] },
+    { name: '精通 · 架构与跨端', items: ['mobile-arch', 'flutter', 'react-native'] },
+    { name: '实战 · 测试与发布', items: ['mobile-testing', 'mobile-release'] },
   ],
   'javascript-typescript': [
     { name: '入门 · 语言与工具', items: ['javascript', 'typescript', 'markdown', 'regex'] },
@@ -185,7 +185,8 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '前端工程与测试', items: ['vite', 'webpack', 'pnpm', 'eslint', 'vitest', 'playwright', 'perf-web', 'a11y', 'i18n', 'svelte', 'astro'] },
     { name: '全栈与服务端', items: ['nodejs', 'bun', 'deno', 'express', 'nestjs', 'node-backend', 'rest-api'] },
     { name: '桌面端', items: ['electron', 'tauri', 'auto-update', 'packaging'] },
-    { name: '移动端', items: ['flutter', 'react-native', 'uniapp', 'mini-program', 'mobile-arch', 'mobile-testing', 'mobile-release'] },
+    { name: '跨端与小程序', items: ['flutter', 'react-native', 'uniapp', 'mini-program', 'mobile-arch'] },
+    { name: '原生移动', items: ['kotlin', 'android-sdk', 'jetpack-compose', 'swift', 'swiftui', 'mobile-network', 'push-location', 'mobile-testing', 'mobile-release'] },
   ],
   'sql-database': [
     { name: '入门 · SQL 与环境', items: ['sql', 'mysql', 'postgresql'] },
@@ -366,11 +367,11 @@ export const routePlan: Record<string, RouteTier[]> = {
 // 顺序即「学习路线」左侧栏顺序
 export const routeTitles: Record<string, string> = {
   java: 'Java 技术路线', python: 'Python 技术路线', go: 'Go 技术路线', rust: 'Rust 技术路线',
-  'c-cpp': 'C / C++ 技术路线', 'c-sharp': 'C# 技术路线', 'kotlin-swift-dart': '移动与跨平台技术路线',
+  'c-cpp': 'C / C++ 技术路线', 'c-sharp': 'C# 与 .NET 技术路线', 'kotlin-swift-dart': '移动与跨平台技术路线',
   'javascript-typescript': 'JavaScript / TypeScript 技术路线',
   frontend: '大前端技术路线',
   desktop: '桌面端技术路线', mobile: '移动端技术路线',
-  'sql-database': 'SQL 与关系型数据库', mysql: 'MySQL', postgresql: 'PostgreSQL', redis: 'Redis',
-  mongodb: 'MongoDB', elasticsearch: 'Elasticsearch', kafka: 'Kafka / 消息队列', nginx: 'Nginx',
-  docker: 'Docker', kubernetes: 'Kubernetes',
+  'sql-database': '数据库技术路线', mysql: 'MySQL', postgresql: 'PostgreSQL', redis: 'Redis',
+  mongodb: 'MongoDB', elasticsearch: 'Elasticsearch', kafka: '中间件技术路线', nginx: 'Nginx',
+  docker: 'DevOps 与工程工具技术路线', kubernetes: 'Kubernetes',
 }
