@@ -18,10 +18,15 @@ interface CourseItem {
   optional?: boolean;
   resources?: ResourceGroup[];
 }
+interface CourseGroup {
+  title?: string;
+  items?: CourseItem[];
+}
 interface Category {
   id?: string;
   title?: string;
   items?: CourseItem[];
+  groups?: CourseGroup[];
 }
 
 interface Props {
@@ -29,13 +34,17 @@ interface Props {
 }
 
 const { source } = Astro.props as Props;
-const categories = (((source === 'ossu' ? ossuCourses : zhCourses) ?? []) as Category[]).filter(
-  (category) => (category.items ?? []).length > 0,
-);
+const all = ((source === 'ossu' ? ossuCourses : zhCourses) ?? []) as Category[];
 
-function resourceCount(item: CourseItem) {
-  return (item.resources ?? []).reduce((sum, group) => sum + (group.items?.length ?? 0), 0);
-}
+const resourceCount = (item: CourseItem) =>
+  (item.resources ?? []).reduce((sum, group) => sum + (group.items?.length ?? 0), 0);
+
+const itemCount = (category: Category) =>
+  (category.items?.length ?? 0) +
+  (category.groups ?? []).reduce((sum, group) => sum + (group.items?.length ?? 0), 0);
+
+// 分组下没有课程的分类不展示
+const categories = all.filter((category) => itemCount(category) > 0);
 ---
 
 {
@@ -43,43 +52,92 @@ function resourceCount(item: CourseItem) {
     <section class="cs-course-section" id={category.id}>
       <h2>
         {category.title}
-        <span class="cs-course-count">{(category.items ?? []).length} 门</span>
+        <span class="cs-course-count">{itemCount(category)} 门</span>
       </h2>
-      <div class="cs-course-grid">
-        {(category.items ?? []).map((item) => (
-          <article class="cs-course-card">
-            <h3>
-              {item.title}
-              {item.optional && <span class="cs-badge">选修</span>}
-            </h3>
-            {item.description && <p>{item.description}</p>}
-            {resourceCount(item) > 0 && (
-              <details class="cs-resource-details">
-                <summary>学习资源（{resourceCount(item)}）</summary>
-                {(item.resources ?? []).map((group) => (
-                  <div class="cs-resource-group">
-                    <strong>{group.name}</strong>
-                    <ul>
-                      {(group.items ?? []).map((resource) => (
-                        <li>
-                          {resource.url ? (
-                            <a href={resource.url} target="_blank" rel="noreferrer">
-                              {resource.title}
-                              {resource.lang === 'en' && <span class="cs-resource-lang">EN</span>}
-                            </a>
-                          ) : (
-                            resource.title
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </details>
-            )}
-          </article>
-        ))}
-      </div>
+
+      {(category.items ?? []).length > 0 && (
+        <div class="cs-course-grid">
+          {(category.items ?? []).map((item) => (
+            <article class="cs-course-card">
+              <h3>
+                {item.title}
+                {item.optional && <span class="cs-badge">选修</span>}
+              </h3>
+              {item.description && <p>{item.description}</p>}
+              {resourceCount(item) > 0 && (
+                <details class="cs-resource-details">
+                  <summary>学习资源（{resourceCount(item)}）</summary>
+                  {(item.resources ?? []).map((group) => (
+                    <div class="cs-resource-group">
+                      <strong>{group.name}</strong>
+                      <ul>
+                        {(group.items ?? []).map((resource) => (
+                          <li>
+                            {resource.url ? (
+                              <a href={resource.url} target="_blank" rel="noreferrer">
+                                {resource.title}
+                                {resource.lang === 'en' && <span class="cs-resource-lang">EN</span>}
+                              </a>
+                            ) : (
+                              resource.title
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </details>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
+
+      {(category.groups ?? []).map((group) => (
+        <div class="cs-course-group">
+          <h3 class="cs-course-group-title">
+            {group.title}
+            <span class="cs-course-count">{(group.items ?? []).length} 门</span>
+          </h3>
+          <div class="cs-course-grid">
+            {(group.items ?? []).map((item) => (
+              <article class="cs-course-card">
+                <h3>
+                  {item.title}
+                  {item.optional && <span class="cs-badge">选修</span>}
+                </h3>
+                {item.description && <p>{item.description}</p>}
+                {resourceCount(item) > 0 && (
+                  <details class="cs-resource-details">
+                    <summary>学习资源（{resourceCount(item)}）</summary>
+                    {(item.resources ?? []).map((resourceGroup) => (
+                      <div class="cs-resource-group">
+                        <strong>{resourceGroup.name}</strong>
+                        <ul>
+                          {(resourceGroup.items ?? []).map((resource) => (
+                            <li>
+                              {resource.url ? (
+                                <a href={resource.url} target="_blank" rel="noreferrer">
+                                  {resource.title}
+                                  {resource.lang === 'en' && (
+                                    <span class="cs-resource-lang">EN</span>
+                                  )}
+                                </a>
+                              ) : (
+                                resource.title
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </details>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
     </section>
   ))
 }

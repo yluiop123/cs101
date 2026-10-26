@@ -13,10 +13,18 @@ const isChapter = Boolean(data.series);
 const isSectionIndex = segments.length === 1;
 
 type Crumb = { label: string; href?: string };
-const crumbs: Crumb[] = [{ label: '首页', href: withBase('/') }];
 
+// 顶部四个板块是同级：应用领域 / 计算机科学 的页面不再以「首页」为上级
+const sectionRoot: Record<string, { label: string; href: string }> = {
+  domain: { label: '应用领域', href: '/domain/' },
+  'computer-science': { label: '计算机科学', href: '/computer-science/' },
+};
+const root = sectionRoot[segments[0] ?? ''] ?? { label: '首页', href: '/' };
+
+const crumbs: Crumb[] = [];
 if (!isSplash && !isHomePage) {
   if (segments[0] === 'tutorials') {
+    crumbs.push({ label: '首页', href: withBase('/') });
     if (segments[1]) {
       crumbs.push({
         label: seriesMeta[segments[1]] ?? segments[1],
@@ -25,16 +33,21 @@ if (!isSplash && !isHomePage) {
     }
     if (isChapter) crumbs.push({ label: data.title });
   } else if (segments[0] === 'tech-stack') {
+    crumbs.push({ label: '首页', href: withBase('/') });
     crumbs.push({ label: '技术路线', href: withBase('/tech-stack/') });
     if (!isSectionIndex) crumbs.push({ label: data.title });
-  } else if (segments[0] === 'domain') {
-    crumbs.push({ label: '应用领域', href: withBase('/domain/') });
-    if (!isSectionIndex) crumbs.push({ label: data.title });
-  } else if (segments[0] === 'computer-science') {
-    crumbs.push({ label: '计算机科学', href: withBase('/computer-science/') });
+  } else if (segments[0] === 'domain' || segments[0] === 'computer-science') {
+    crumbs.push(
+      isSectionIndex
+        ? { label: root.label }
+        : { label: root.label, href: withBase(root.href) },
+    );
     if (!isSectionIndex) crumbs.push({ label: data.title });
   } else if (segments[0] === 'playground') {
+    crumbs.push({ label: '首页', href: withBase('/') });
     crumbs.push({ label: '代码演练场' });
+  } else {
+    crumbs.push({ label: '首页', href: withBase('/') });
   }
 }
 
