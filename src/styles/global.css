@@ -765,69 +765,6 @@ starlight-theme-select option {
   text-decoration: underline;
 }
 
-.cs-home-more {
-  margin: 0;
-  text-align: end;
-  font-size: 0.85rem;
-}
-
-.cs-home-more a {
-  color: var(--cs-accent-dark);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.cs-home-more a:hover {
-  text-decoration: underline;
-}
-
-/* ---- 首页：教程卡片（每个分组下的具体教程） ---- */
-.cs-home .cs-tut-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-  gap: 0.6rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cs-home .cs-tut-grid li {
-  margin: 0;
-}
-
-.cs-home .cs-tut-card {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem;
-  height: 100%;
-  border: 1px solid var(--cs-border);
-  border-radius: var(--cs-radius);
-  background: var(--cs-bg);
-  padding: 0.55rem 0.75rem;
-  font-size: 0.92rem;
-  color: var(--cs-text);
-  text-decoration: none;
-}
-
-.cs-home .cs-tut-card:hover {
-  border-color: var(--cs-accent);
-  background: var(--cs-sidebar-bg);
-  color: var(--cs-accent-dark);
-}
-
-.cs-home .cs-tut-card.is-planned {
-  border-style: dashed;
-  color: var(--cs-muted);
-  opacity: 0.7;
-}
-
-.cs-home .cs-tut-meta {
-  font-size: 0.72rem;
-  color: var(--cs-muted);
-  flex-shrink: 0;
-}
-
 /* ============ 应用领域 ============ */
 .cs-domain {
   display: flex;
