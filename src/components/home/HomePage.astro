@@ -3,21 +3,32 @@ import { getSeries } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
 import { homeSections, type CatalogTutorial } from '@/data/catalog';
+import { routePlan, seriesMeta } from '@/data/route-plan';
 
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
 
-const sections = homeSections.map((group) => ({
-  ...group,
-  tutorials: group.tutorials.map((tutorial: CatalogTutorial) => {
-    const found = bySlug.get(tutorial.slug);
-    return {
-      ...tutorial,
-      available: Boolean(found),
-      chapters: found?.chapters.length ?? 0,
-    };
-  }),
-}));
+// 有学习路线的分组：内容直接取该路线的全部技术项，保证首页与「学习路线 →」一致
+const routeTutorials = (roadmap?: string): CatalogTutorial[] => {
+  if (!roadmap) return [];
+  const key = roadmap.replace(/^\/tech-stack\//, '').replace(/\/$/, '');
+  const slugs = [...new Set((routePlan[key] ?? []).flatMap((tier) => tier.items))];
+  return slugs.map((slug) => ({ slug, title: seriesMeta[slug] ?? slug }));
+};
+
+const sections = homeSections.map((group) => {
+  const tutorials = (group.tutorials ?? routeTutorials(group.roadmap)).map(
+    (tutorial: CatalogTutorial) => {
+      const found = bySlug.get(tutorial.slug);
+      return {
+        ...tutorial,
+        available: Boolean(found),
+        chapters: found?.chapters.length ?? 0,
+      };
+    },
+  );
+  return { ...group, tutorials };
+});
 ---
 
 <div class="cs-home">

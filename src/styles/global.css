@@ -1171,6 +1171,11 @@ starlight-theme-select option {
 }
 
 /* ============ 演练场 ============ */
+/* 演练场用 splash 版式（无左侧栏），内容宽度与其它页面保持一致（splash 默认 67.5rem 太宽） */
+main:has(.cs-playground) .sl-container {
+  max-width: 54rem;
+}
+
 .cs-playground {
   border: 1px solid var(--cs-border);
   background: var(--cs-bg);

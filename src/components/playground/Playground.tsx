@@ -30,6 +30,14 @@ function buildPreview(lang: Lang, code: string) {
   return '';
 }
 
+/** 跟随站点主题（html[data-theme]，auto 时看系统偏好） */
+function siteTheme() {
+  const attr = document.documentElement.dataset.theme;
+  const dark =
+    attr === 'dark' || (attr !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  return dark ? 'vs-dark' : 'vs';
+}
+
 export default function Playground() {
   const [lang, setLang] = useState<Lang>('js');
   const [code, setCode] = useState<string>(TEMPLATES.js);
@@ -46,11 +54,27 @@ export default function Playground() {
     import('./monaco-setup').then(({ monaco }) => {
       if (cancelled) return;
       loader.config({ monaco });
-      setTheme(document.documentElement.dataset.theme === 'dark' ? 'vs-dark' : 'vs');
+      setTheme(siteTheme());
       setReady(true);
     });
     return () => {
       cancelled = true;
+    };
+  }, []);
+
+  // 站点切换深浅色时，编辑器主题同步
+  useEffect(() => {
+    const observer = new MutationObserver(() => setTheme(siteTheme()));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const onChange = () => setTheme(siteTheme());
+    media.addEventListener('change', onChange);
+    return () => {
+      observer.disconnect();
+      media.removeEventListener('change', onChange);
     };
   }, []);
 
