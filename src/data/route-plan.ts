@@ -33,6 +33,8 @@ export const seriesMeta: Record<string, string> = {
   'test-tools': '测试工具与框架', 'ci-cd': 'CI/CD 与自动化',
   // 大前端
   'api-testing': 'API 测试', 'perf-testing': '性能测试',
+  express: 'Express 教程', nestjs: 'NestJS 教程',
+  'mini-program': '微信小程序开发', uniapp: 'uni-app 跨端开发',
   'media-basics': '音视频基础', ffmpeg: 'FFmpeg 音视频处理', 'h264-codec': 'H.264 编解码',
   'rtmp-rtsp': 'RTMP / RTSP 协议', 'hls-dash': 'HLS / DASH 流媒体协议', webrtc: 'WebRTC 实时通信',
   'media-server': '流媒体服务器', transcoding: '转码与打包', 'cdn-delivery': 'CDN 分发',
@@ -174,8 +176,26 @@ export const routePlan: Record<string, RouteTier[]> = {
   'frontend': [
     { name: '入门 · Web 基础与语言', items: ['html', 'css', 'javascript', 'typescript', 'dom'] },
     { name: '进阶 · 框架与样式体系', items: ['tailwind', 'component-library', 'vue', 'vue-router', 'state-management', 'react', 'angular', 'svelte'] },
-    { name: '精通 · 工程化与服务端', items: ['vite', 'webpack', 'nextjs', 'nuxt', 'astro', 'nodejs', 'pnpm', 'bun', 'deno', 'express', 'nestjs', 'node-backend'] },
-    { name: '实战 · 测试、桌面与移动端', items: ['eslint', 'vitest', 'playwright', 'perf-web', 'a11y', 'i18n', 'electron', 'tauri', 'mini-program', 'uniapp', 'flutter', 'react-native', 'kotlin', 'android-sdk', 'jetpack-compose', 'swift', 'swiftui', 'mobile-arch', 'mobile-testing', 'mobile-release'] },
+    { name: '精通 · 工程化与渲染框架', items: ['vite', 'webpack', 'nextjs', 'nuxt', 'astro', 'pnpm', 'perf-web', 'a11y', 'i18n'] },
+    { name: '实战 · 测试与质量', items: ['eslint', 'vitest', 'playwright', 'testing'] },
+  ],
+  'fullstack': [
+    { name: '入门 · JavaScript 运行时', items: ['nodejs', 'typescript', 'pnpm', 'bun', 'deno'] },
+    { name: '进阶 · 服务端框架与 API', items: ['express', 'nestjs', 'node-backend', 'rest-api'] },
+    { name: '精通 · 数据、缓存与消息', items: ['sql', 'mysql', 'postgresql', 'redis', 'mongodb', 'kafka'] },
+    { name: '实战 · 部署与质量', items: ['docker', 'nginx', 'testing', 'security', 'ci-cd', 'ai-coding'] },
+  ],
+  'desktop': [
+    { name: '入门 · 桌面技术选型', items: ['electron', 'tauri', 'winui', 'maui'] },
+    { name: '进阶 · 原生界面框架', items: ['wpf', 'qt', 'csharp', 'cpp'] },
+    { name: '精通 · 系统能力与数据', items: ['nodejs', 'sql', 'network', 'design-patterns'] },
+    { name: '实战 · 打包、更新与发布', items: ['packaging', 'auto-update', 'testing', 'security'] },
+  ],
+  'mobile': [
+    { name: '入门 · 跨端框架', items: ['flutter', 'react-native', 'uniapp', 'mini-program'] },
+    { name: '进阶 · 原生开发', items: ['kotlin', 'android-sdk', 'jetpack-compose', 'swift', 'swiftui'] },
+    { name: '精通 · 架构、网络与数据', items: ['mobile-arch', 'mobile-network', 'push-location', 'sql'] },
+    { name: '实战 · 测试与发布', items: ['mobile-testing', 'mobile-release', 'testing', 'docker'] },
   ],
   'sql-database': [
     { name: '入门 · SQL 与环境', items: ['sql', 'mysql', 'postgresql'] },
@@ -353,10 +373,13 @@ export const routePlan: Record<string, RouteTier[]> = {
 }
 
 // 路线页 → 概览卡片用的技术名（与 tech-stack/index.md 的入口保持一致）
+// 顺序即「学习路线」左侧栏顺序
 export const routeTitles: Record<string, string> = {
   java: 'Java 技术路线', python: 'Python 技术路线', go: 'Go 技术路线', rust: 'Rust 技术路线',
   'c-cpp': 'C / C++ 技术路线', 'c-sharp': 'C# 技术路线', 'kotlin-swift-dart': '移动与跨平台技术路线',
-  'javascript-typescript': 'JavaScript / TypeScript 技术路线', frontend: 'Web 前端技术路线',
+  'javascript-typescript': 'JavaScript / TypeScript 技术路线',
+  frontend: 'Web 前端技术路线', fullstack: '全栈与服务端技术路线',
+  desktop: '桌面端技术路线', mobile: '移动端技术路线',
   'sql-database': 'SQL 与关系型数据库', mysql: 'MySQL', postgresql: 'PostgreSQL', redis: 'Redis',
   mongodb: 'MongoDB', elasticsearch: 'Elasticsearch', kafka: 'Kafka / 消息队列', nginx: 'Nginx',
   docker: 'Docker', kubernetes: 'Kubernetes',

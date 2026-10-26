@@ -1,8 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import { homeSections } from '@/data/catalog';
 import { domains } from '@/data/domains';
+import { routeTitles } from '@/data/route-plan';
 
 const { entry } = Astro.locals.starlightRoute;
 const path = Astro.url.pathname.replace(/^\/cs101/, '');
@@ -13,8 +15,24 @@ const isHome = !entry.id || entry.id === 'index';
 const isDomainIndex = path === '/domain/' || path === '/domain';
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
 const isComputerScience = path.startsWith('/computer-science');
+const isTechStack = path.startsWith('/tech-stack');
+
+// 学习路线页的左侧栏：按路线顺序列出全部技术路线
+const routeOrder = Object.keys(routeTitles);
+const techRoutes = isTechStack
+  ? (await getCollection('docs'))
+      .filter((item) => item.id.startsWith('tech-stack/') && item.id !== 'tech-stack/index')
+      .map((item) => ({ slug: item.id.slice('tech-stack/'.length), name: item.data.title }))
+      .sort((a, b) => {
+        const ai = routeOrder.indexOf(a.slug);
+        const bi = routeOrder.indexOf(b.slug);
+        if (ai !== -1 || bi !== -1) return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+        return a.slug.localeCompare(b.slug);
+      })
+  : [];
+
 const catalog =
-  currentSeries || isHome || isDomainIndex || currentDomain || isComputerScience
+  currentSeries || isHome || isDomainIndex || currentDomain || isComputerScience || isTechStack
     ? []
     : await getSeries();
 ---
@@ -83,6 +101,22 @@ const catalog =
             OSSU 国际教程
           </a>
         </li>
+      </ul>
+    </div>
+  ) : isTechStack ? (
+    <div class="cs-sidebar">
+      <p class="cs-sidebar-kicker">学习路线</p>
+      <ul class="cs-sidebar-sections">
+        {techRoutes.map((route) => (
+          <li>
+            <a
+              href={withBase(`/tech-stack/${route.slug}/`)}
+              aria-current={path === `/tech-stack/${route.slug}/` ? 'page' : undefined}
+            >
+              {route.name}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   ) : currentSeries ? (

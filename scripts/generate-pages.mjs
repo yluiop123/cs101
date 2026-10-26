@@ -3,6 +3,7 @@
  * 生成新站页面（M3）：
  * 1) 26 个教程系列的系列首页（Git 已有手写版，跳过）
  * 2) 技术栈路线页 19 篇 + 领域路线页 14 篇（挂 TechNodes 组件）
+ *    注：frontend 拆出的 fullstack / desktop / mobile 与 desktop-app、industrial-hmi 是手写页，不在本脚本生成范围内
  * 3) 计算机科学数据（zh / ossu）抽取为 JSON
  *
  * 输入：.legacy/docs/（旧站内容快照）
