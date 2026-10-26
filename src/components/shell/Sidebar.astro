@@ -1,17 +1,32 @@
 ---
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
+import { languageGroups } from '@/data/catalog';
 
 const { entry } = Astro.locals.starlightRoute;
 const path = Astro.url.pathname.replace(/^\/cs101/, '');
 const match = path.match(/^\/tutorials\/([^/]+)\//);
 const currentSeries = match ? await getSeriesBySlug(match[1]) : null;
 const currentId = entry.id;
-const catalog = currentSeries ? [] : await getSeries();
+const isHome = !entry.id || entry.id === 'index';
+const catalog = currentSeries || isHome ? [] : await getSeries();
 ---
 
 {
-  currentSeries ? (
+  isHome ? (
+    <div class="cs-sidebar">
+      <p class="cs-sidebar-kicker">编程语言</p>
+      <ul class="cs-sidebar-langs">
+        {languageGroups.map((group) => (
+          <li>
+            <a href={`#lang-${group.id}`} data-cs-lang-link={group.id}>
+              {group.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : currentSeries ? (
     <div class="cs-sidebar">
       <a class="cs-sidebar-series-title" href={withBase(`/tutorials/${currentSeries.slug}/`)}>
         {currentSeries.title}
@@ -45,3 +60,45 @@ const catalog = currentSeries ? [] : await getSeries();
     </div>
   )
 }
+
+<script>
+  // 首页左侧语言列表：滚动时高亮当前语言卡片
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('[data-cs-lang-link]'),
+  );
+
+  if (links.length > 0) {
+    // 移动端：点击语言后收起抽屉（同页锚点不会触发导航，需手动关闭 popover）
+    for (const link of links) {
+      link.addEventListener('click', () => {
+        const sidebar = document.getElementById('starlight__sidebar') as
+          | (HTMLElement & { hidePopover?: () => void })
+          | null;
+        if (sidebar?.matches(':popover-open')) sidebar.hidePopover?.();
+      });
+    }
+
+    const idOf = (link: HTMLAnchorElement) => link.dataset.csLangLink ?? '';
+    const targets = links
+      .map((link) => document.getElementById(`lang-${idOf(link)}`))
+      .filter((target): target is HTMLElement => Boolean(target));
+
+    if (targets.length > 0) {
+      const activate = (id: string) => {
+        for (const link of links) link.classList.toggle('is-active', idOf(link) === id);
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            activate(entry.target.id.replace(/^lang-/, ''));
+          }
+        },
+        { rootMargin: '-70px 0px -65% 0px', threshold: 0 },
+      );
+
+      for (const target of targets) observer.observe(target);
+    }
+  }
+</script>

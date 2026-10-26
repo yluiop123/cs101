@@ -4,6 +4,29 @@ import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
 import SearchLauncher from '@/components/search/SearchLauncher.tsx';
 import { withBase } from '@/lib/utils';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.slice(base.length) || '/';
+
+const navItems = [
+  {
+    label: '首页',
+    href: '/',
+    // 教程页与技术路线页都属于「首页」板块
+    matches: (value: string) =>
+      value === '/' ||
+      value === '' ||
+      value.startsWith('/tutorials') ||
+      value.startsWith('/tech-stack'),
+  },
+  { label: '应用领域', href: '/domain/', matches: (value: string) => value.startsWith('/domain') },
+  {
+    label: '计算机科学',
+    href: '/computer-science/',
+    matches: (value: string) => value.startsWith('/computer-science'),
+  },
+  { label: '演练场', href: '/playground/', matches: (value: string) => value.startsWith('/playground') },
+];
 ---
 
 <header class="header cs-header">
@@ -13,10 +36,13 @@ import { withBase } from '@/lib/utils';
       <SiteTitle />
     </div>
     <nav class="cs-topnav" aria-label="主导航">
-      <a href={withBase('/tech-stack/')}>技术栈</a>
-      <a href={withBase('/domain/')}>应用领域</a>
-      <a href={withBase('/computer-science/')}>计算机科学</a>
-      <a href={withBase('/playground/')}>演练场</a>
+      {
+        navItems.map((item) => (
+          <a href={withBase(item.href)} aria-current={item.matches(path) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
     </nav>
     <div class="cs-header-actions">
       <SearchLauncher client:idle />

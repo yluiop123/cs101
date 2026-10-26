@@ -1,0 +1,165 @@
+// 首页教程目录：编程语言按「语言 → 具体教程」组织，其他技术按分组列教程。
+// slug 对应 src/content/docs/tutorials/<slug>；有内容自动点亮，没有内容显示「敬请期待」。
+
+export interface CatalogTutorial {
+  /** 教程系列 slug（尚未写成也先占位，写好即自动点亮） */
+  slug: string;
+  title: string;
+}
+
+export interface CatalogGroup {
+  /** 页内锚点 id（首页语言卡片 → #lang-<id>） */
+  id: string;
+  name: string;
+  /** 该分组对应 /tech-stack/ 下的技术路线页 */
+  roadmap?: string;
+  tutorials: CatalogTutorial[];
+}
+
+/** 编程语言（首页左侧栏也用它） */
+export const languageGroups: CatalogGroup[] = [
+  {
+    id: 'java',
+    name: 'Java',
+    roadmap: '/tech-stack/java/',
+    tutorials: [
+      { slug: 'java', title: 'Java 教程' },
+      { slug: 'spring-boot', title: 'Spring Boot 教程' },
+      { slug: 'spring-data', title: 'Spring Data 教程' },
+      { slug: 'mybatis', title: 'MyBatis 教程' },
+      { slug: 'maven', title: 'Maven 教程' },
+    ],
+  },
+  {
+    id: 'python',
+    name: 'Python',
+    roadmap: '/tech-stack/python/',
+    tutorials: [
+      { slug: 'python', title: 'Python 教程' },
+      { slug: 'django', title: 'Django 教程' },
+      { slug: 'fastapi', title: 'FastAPI 教程' },
+      { slug: 'data-science', title: 'Python 数据科学教程' },
+      { slug: 'machine-learning', title: '机器学习教程' },
+    ],
+  },
+  {
+    id: 'go',
+    name: 'Go',
+    roadmap: '/tech-stack/go/',
+    tutorials: [
+      { slug: 'go', title: 'Go 教程' },
+      { slug: 'grpc', title: 'gRPC 教程' },
+    ],
+  },
+  {
+    id: 'rust',
+    name: 'Rust',
+    roadmap: '/tech-stack/rust/',
+    tutorials: [
+      { slug: 'rust', title: 'Rust 教程' },
+      { slug: 'webassembly', title: 'WebAssembly 教程' },
+    ],
+  },
+  {
+    id: 'javascript-typescript',
+    name: 'JavaScript / TypeScript',
+    roadmap: '/tech-stack/javascript-typescript/',
+    tutorials: [
+      { slug: 'javascript', title: 'JavaScript 教程' },
+      { slug: 'typescript', title: 'TypeScript 教程' },
+      { slug: 'nodejs', title: 'Node.js 与包管理教程' },
+      { slug: 'node-backend', title: 'Node.js 后端教程' },
+    ],
+  },
+  {
+    id: 'frontend',
+    name: 'Web 前端',
+    roadmap: '/tech-stack/frontend/',
+    tutorials: [
+      { slug: 'html', title: 'HTML 教程' },
+      { slug: 'css', title: 'CSS 教程' },
+      { slug: 'tailwind', title: 'Tailwind CSS 教程' },
+      { slug: 'vue', title: 'Vue 3 教程' },
+      { slug: 'react', title: 'React 教程' },
+      { slug: 'angular', title: 'Angular 教程' },
+      { slug: 'vite', title: 'Vite 教程' },
+    ],
+  },
+  {
+    id: 'c-cpp',
+    name: 'C / C++',
+    roadmap: '/tech-stack/c-cpp/',
+    tutorials: [
+      { slug: 'c', title: 'C 语言教程' },
+      { slug: 'cpp', title: 'C++ 教程' },
+    ],
+  },
+  {
+    id: 'c-sharp',
+    name: 'C#',
+    roadmap: '/tech-stack/c-sharp/',
+    tutorials: [
+      { slug: 'csharp', title: 'C# 教程' },
+      { slug: 'aspnet', title: 'ASP.NET Core 教程' },
+    ],
+  },
+  {
+    id: 'kotlin-swift-dart',
+    name: 'Kotlin / Swift / Dart',
+    roadmap: '/tech-stack/kotlin-swift-dart/',
+    tutorials: [
+      { slug: 'flutter', title: 'Flutter 教程' },
+      { slug: 'react-native', title: 'React Native 教程' },
+    ],
+  },
+];
+
+/** 数据库 / 中间件 / 运维 / 工具基础：直接列教程 */
+export const techGroups: CatalogGroup[] = [
+  {
+    id: 'database',
+    name: '数据库',
+    roadmap: '/tech-stack/sql-database/',
+    tutorials: [
+      { slug: 'sql', title: 'SQL 基础教程' },
+      { slug: 'mysql', title: 'MySQL 教程' },
+      { slug: 'postgresql', title: 'PostgreSQL 教程' },
+      { slug: 'redis', title: 'Redis 教程' },
+      { slug: 'mongodb', title: 'MongoDB 教程' },
+      { slug: 'elasticsearch', title: 'Elasticsearch 教程' },
+    ],
+  },
+  {
+    id: 'middleware',
+    name: '中间件',
+    roadmap: '/tech-stack/kafka/',
+    tutorials: [
+      { slug: 'kafka', title: 'Kafka 与消息队列教程' },
+      { slug: 'nginx', title: 'Nginx 教程' },
+    ],
+  },
+  {
+    id: 'ops',
+    name: '运维与云',
+    roadmap: '/tech-stack/docker/',
+    tutorials: [
+      { slug: 'linux', title: 'Linux 教程' },
+      { slug: 'docker', title: 'Docker 教程' },
+      { slug: 'kubernetes', title: 'Kubernetes 教程' },
+    ],
+  },
+  {
+    id: 'basics',
+    name: '工具与基础',
+    tutorials: [
+      { slug: 'vscode', title: 'VS Code 教程' },
+      { slug: 'git', title: 'Git 教程' },
+      { slug: 'markdown', title: 'Markdown 教程' },
+      { slug: 'regex', title: '正则表达式教程' },
+      { slug: 'design-patterns', title: '设计模式教程' },
+      { slug: 'dsa', title: '数据结构与算法教程' },
+      { slug: 'network', title: '计算机网络教程' },
+      { slug: 'os', title: '操作系统教程' },
+    ],
+  },
+];

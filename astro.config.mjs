@@ -24,7 +24,7 @@ export default defineConfig({
     react(),
     starlight({
       title: 'CS101',
-      description: '中文计算机学习路径：技术栈 / 应用领域 / 计算机科学',
+      description: '中文计算机学习路径：首页教程目录 / 应用领域 / 计算机科学',
       favicon: '/icon.svg',
       defaultLocale: 'root',
       locales: {
@@ -52,12 +52,12 @@ export default defineConfig({
         Pagination: './src/components/shell/Pagination.astro',
         Footer: './src/components/shell/Footer.astro',
       },
-      // 四个主题（教程不再作为独立主题；系列页通过技术栈等路线进入）
+      // 四个板块：首页（教程目录）+ 应用领域 + 计算机科学 + 演练场
       sidebar: [
         {
-          label: '主题',
+          label: '板块',
           items: [
-            { label: '技术栈', link: '/tech-stack/' },
+            { label: '首页', link: '/' },
             { label: '应用领域', link: '/domain/' },
             { label: '计算机科学', link: '/computer-science/' },
             { label: '演练场', link: '/playground/' },

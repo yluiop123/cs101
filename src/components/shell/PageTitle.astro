@@ -25,7 +25,7 @@ if (!isSplash) {
     }
     if (isChapter) crumbs.push({ label: data.title });
   } else if (segments[0] === 'tech-stack') {
-    crumbs.push({ label: '技术栈路线', href: withBase('/tech-stack/') });
+    crumbs.push({ label: '技术路线', href: withBase('/tech-stack/') });
     if (!isSectionIndex) crumbs.push({ label: data.title });
   } else if (segments[0] === 'domain') {
     crumbs.push({ label: '应用领域', href: withBase('/domain/') });

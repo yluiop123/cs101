@@ -2,50 +2,119 @@
 import { getSeries } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
+import { languageGroups, techGroups, type CatalogGroup, type CatalogTutorial } from '@/data/catalog';
 
 const series = await getSeries();
+const bySlug = new Map(series.map((item) => [item.slug, item]));
+
+const resolve = (group: CatalogGroup) => ({
+  ...group,
+  tutorials: group.tutorials.map((tutorial: CatalogTutorial) => {
+    const found = bySlug.get(tutorial.slug);
+    return {
+      ...tutorial,
+      available: Boolean(found),
+      chapters: found?.chapters.length ?? 0,
+    };
+  }),
+});
+
+const languages = languageGroups.map(resolve);
+const techs = techGroups.map(resolve);
+
+const availableCount = [...languages, ...techs]
+  .flatMap((group) => group.tutorials)
+  .filter((tutorial) => tutorial.available).length;
 ---
 
 <div class="cs-home">
   <section class="cs-hero">
     <p class="cs-hero-kicker">CS101</p>
     <h1 class="cs-hero-title">中文计算机学习路径</h1>
-    <p class="cs-hero-sub">技术栈 · 应用领域 · 计算机科学 —— 找到属于你的学习路径</p>
+    <p class="cs-hero-sub">
+      {availableCount} 门中文教程，按编程语言与技术整理；另有 应用领域 · 计算机科学 · 演练场
+    </p>
     <button type="button" class="cs-search-entry" data-search-open>
-      <span>搜索技术栈、路线、章节…</span>
+      <span>搜索教程、章节、技术路线…</span>
       <kbd>⌘K</kbd>
     </button>
     <div class="cs-hero-actions">
-      <a class="cs-btn cs-btn-primary" href={withBase('/tech-stack/')}>看技术栈路线</a>
+      <a class="cs-btn cs-btn-primary" href="#languages">浏览教程目录</a>
       <a class="cs-btn" href={withBase('/domain/')}>按应用领域选</a>
     </div>
   </section>
 
   <ContinueCard client:visible series={series} />
 
-  <section>
-    <h2 class="cs-section-title">按主题开始</h2>
-    <div class="cs-cat-grid">
-      <a class="cs-cat-card" href={withBase('/tech-stack/')}>
-        <h3>技术栈</h3>
-        <p>以语言或技术为核心，规划从入门到实战的路线。</p>
-        <span class="cs-cat-link">进入 →</span>
-      </a>
-      <a class="cs-cat-card" href={withBase('/domain/')}>
-        <h3>应用领域</h3>
-        <p>从业务与行业出发，匹配完整技术栈。</p>
-        <span class="cs-cat-link">进入 →</span>
-      </a>
-      <a class="cs-cat-card" href={withBase('/computer-science/')}>
-        <h3>计算机科学</h3>
-        <p>国内课程与 OSSU 国际路线，打牢底层基础。</p>
-        <span class="cs-cat-link">进入 →</span>
-      </a>
-      <a class="cs-cat-card" href={withBase('/playground/')}>
-        <h3>演练场</h3>
-        <p>在浏览器里编辑并运行 JavaScript / HTML / CSS 示例。</p>
-        <span class="cs-cat-link">进入 →</span>
-      </a>
+  <section id="languages" class="cs-home-section">
+    <div class="cs-section-head">
+      <h2 class="cs-section-title">编程语言</h2>
+      <a class="cs-section-more" href={withBase('/tech-stack/')}>全部技术路线 →</a>
+    </div>
+    <div class="cs-lang-grid">
+      {
+        languages.map((group) => (
+          <article class="cs-lang-card" id={`lang-${group.id}`} data-cs-lang={group.id}>
+            <header class="cs-lang-head">
+              <h3 class="cs-lang-name">{group.name}</h3>
+              {group.roadmap && (
+                <a class="cs-lang-roadmap" href={withBase(group.roadmap)}>
+                  技术路线 →
+                </a>
+              )}
+            </header>
+            <ul class="cs-lang-tutorials">
+              {group.tutorials.map((tutorial) => (
+                <li>
+                  {tutorial.available ? (
+                    <a href={withBase(`/tutorials/${tutorial.slug}/`)}>
+                      <span>{tutorial.title}</span>
+                      <span class="cs-lang-meta">{tutorial.chapters} 章</span>
+                    </a>
+                  ) : (
+                    <span class="is-planned">
+                      <span>{tutorial.title}</span>
+                      <span class="cs-lang-meta">敬请期待</span>
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
     </div>
   </section>
+
+  {
+    techs.map((group) => (
+      <section id={`tech-${group.id}`} class="cs-home-section">
+        <div class="cs-section-head">
+          <h2 class="cs-section-title">{group.name}</h2>
+          {group.roadmap && (
+            <a class="cs-section-more" href={withBase(group.roadmap)}>
+              技术路线 →
+            </a>
+          )}
+        </div>
+        <ul class="cs-tut-grid">
+          {group.tutorials.map((tutorial) => (
+            <li>
+              {tutorial.available ? (
+                <a class="cs-tut-card" href={withBase(`/tutorials/${tutorial.slug}/`)}>
+                  <span>{tutorial.title}</span>
+                  <span class="cs-tut-meta">{tutorial.chapters} 章</span>
+                </a>
+              ) : (
+                <span class="cs-tut-card is-planned">
+                  <span>{tutorial.title}</span>
+                  <span class="cs-tut-meta">敬请期待</span>
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
 </div>

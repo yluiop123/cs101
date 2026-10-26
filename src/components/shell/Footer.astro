@@ -6,7 +6,7 @@ import { withBase } from '@/lib/utils';
 
 const { entry } = Astro.locals.starlightRoute;
 const isChapter = Boolean((entry.data as Record<string, unknown>).series);
-const isHome = entry.id === 'index';
+const isHome = !entry.id || entry.id === 'index';
 ---
 
 {
@@ -24,11 +24,12 @@ const isHome = entry.id === 'index';
 <footer class="cs-site-footer">
   <div class="cs-footer-col">
     <h3>CS101</h3>
-    <p>中文计算机学习路径：计算机科学 / 技术栈 / 应用领域。</p>
+    <p>中文计算机学习路径：编程语言 / 数据库 / 应用领域 / 计算机科学。</p>
   </div>
   <div class="cs-footer-col">
     <h3>学习</h3>
-    <a href={withBase('/tech-stack/')}>技术栈路线</a>
+    <a href={withBase('/')}>首页</a>
+    <a href={withBase('/tech-stack/')}>全部技术路线</a>
     <a href={withBase('/domain/')}>应用领域</a>
     <a href={withBase('/computer-science/')}>计算机科学</a>
     <a href={withBase('/playground/')}>代码演练场</a>
