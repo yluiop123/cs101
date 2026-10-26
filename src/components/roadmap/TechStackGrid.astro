@@ -1,0 +1,73 @@
+---
+import { withBase } from '@/lib/utils';
+
+interface TechGroup {
+  name: string;
+  color: string;
+  items: { title: string; url: string }[];
+}
+
+const groups: TechGroup[] = [
+  {
+    name: '编程语言',
+    color: '#2563eb',
+    items: [
+      { title: 'Java', url: '/tech-stack/java/' },
+      { title: 'Python', url: '/tech-stack/python/' },
+      { title: 'Go', url: '/tech-stack/go/' },
+      { title: 'Rust', url: '/tech-stack/rust/' },
+      { title: 'JavaScript / TypeScript', url: '/tech-stack/javascript-typescript/' },
+      { title: 'Web 前端', url: '/tech-stack/frontend/' },
+      { title: 'C / C++', url: '/tech-stack/c-cpp/' },
+      { title: 'C#', url: '/tech-stack/c-sharp/' },
+      { title: 'Kotlin / Swift / Dart', url: '/tech-stack/kotlin-swift-dart/' },
+    ],
+  },
+  {
+    name: '数据库',
+    color: '#336791',
+    items: [
+      { title: 'SQL 与关系型数据库', url: '/tech-stack/sql-database/' },
+      { title: 'MySQL', url: '/tech-stack/mysql/' },
+      { title: 'PostgreSQL', url: '/tech-stack/postgresql/' },
+      { title: 'Redis', url: '/tech-stack/redis/' },
+      { title: 'MongoDB', url: '/tech-stack/mongodb/' },
+      { title: 'Elasticsearch', url: '/tech-stack/elasticsearch/' },
+    ],
+  },
+  {
+    name: '中间件',
+    color: '#d97706',
+    items: [
+      { title: 'Kafka / 消息队列', url: '/tech-stack/kafka/' },
+      { title: 'Nginx', url: '/tech-stack/nginx/' },
+    ],
+  },
+  {
+    name: '运维与云',
+    color: '#0ea5e9',
+    items: [
+      { title: 'Docker', url: '/tech-stack/docker/' },
+      { title: 'Kubernetes', url: '/tech-stack/kubernetes/' },
+    ],
+  },
+];
+---
+
+{
+  groups.map((group) => (
+    <section class="cs-tier" style={`--tier-color:${group.color}`}>
+      <h2 class="cs-tier-title">{group.name}</h2>
+      <ul class="cs-tier-grid">
+        {group.items.map((item) => (
+          <li>
+            <a class="cs-tier-card" href={withBase(item.url)}>
+              <span class="cs-tier-name">{item.title}</span>
+              <span class="cs-tier-dot" aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))
+}

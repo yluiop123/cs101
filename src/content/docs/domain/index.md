@@ -1,10 +1,23 @@
 ---
 title: 应用领域路线
-description: 从业务/行业出发，匹配完整的技术栈
+description: 从业务 / 行业出发，匹配完整的技术栈
 ---
 
 从业务与行业出发，匹配一套完整的技术栈，解决「做这个方向需要学什么」的问题。
 
-覆盖方向包括：Web 开发 / SaaS、大数据、人工智能、网络安全、移动开发、DevOps / 云、GIS、可视化、游戏 / VR / AR、嵌入式 / IoT、区块链 / Web3、软件测试、金融科技等。
+## 领域路线
 
-> 各领域路线页正在从旧站迁移，路线卡片组件将在 M3 完成。
+- [Web 开发 / SaaS 应用](./web-saas/)
+- [大数据 / 数据工程](./big-data/)
+- [人工智能 / 机器学习](./ai-ml/)
+- [网络安全](./cybersecurity/)
+- [移动开发](./mobile-dev/)
+- [DevOps / 云计算 / 运维](./devops-cloud/)
+- [GIS 技术路线](./gis/)
+- [可视化技术路线](./visualization/)
+- [游戏开发 / VR / AR](./game-vr-ar/)
+- [嵌入式 / IoT](./embedded-iot/)
+- [区块链 / Web3](./blockchain-web3/)
+- [软件测试 / QA](./software-testing/)
+- [金融科技 / 风控系统](./fintech/)
+- [企业系统（ERP/CRM/OA）](./enterprise-erp/)

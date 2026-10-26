@@ -1,3 +1,5 @@
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -7,8 +9,29 @@ import tailwindcss from '@tailwindcss/vite';
 import baseLinks from './src/integrations/base-links.mjs';
 
 const BASE = '/cs101';
+const docsRoot = fileURLToPath(new URL('./src/content/docs', import.meta.url));
 
-// 部署在 GitHub Pages 项目路径下：https://<user>.github.io/cs101/
+/** 从系列首页 frontmatter 读取标题（配置加载时执行，纯文件读取）。 */
+function seriesTitle(slug) {
+  try {
+    const source = readFileSync(join(docsRoot, 'tutorials', slug, 'index.mdx'), 'utf8').replace(/^\uFEFF/, '');
+    const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    const title = frontmatter?.[1].match(/^title:\s*(.+)$/m);
+    return title ? title[1].trim().replace(/^["']|["']$/g, '') : slug;
+  } catch {
+    return slug;
+  }
+}
+
+const tutorialGroups = readdirSync(join(docsRoot, 'tutorials'), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && existsSync(join(docsRoot, 'tutorials', entry.name, 'index.mdx')))
+  .map((entry) => ({
+    label: seriesTitle(entry.name),
+    collapsed: true,
+    items: [{ autogenerate: { directory: `tutorials/${entry.name}` } }],
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label, 'zh-CN'));
+
 export default defineConfig({
   site: 'https://yluiop123.github.io',
   base: BASE,
@@ -45,6 +68,7 @@ export default defineConfig({
         },
       },
       components: {
+        Header: './src/components/shell/Header.astro',
         PageTitle: './src/components/shell/PageTitle.astro',
         Pagination: './src/components/shell/Pagination.astro',
         Footer: './src/components/shell/Footer.astro',
@@ -59,21 +83,7 @@ export default defineConfig({
         },
         {
           label: '教程',
-          items: [
-            {
-              label: 'Git 教程',
-              items: [
-                { label: '系列首页', link: '/tutorials/git/' },
-                { label: '第 1 章 · 版本控制与 Git 入门', link: '/tutorials/git/01-introduction/' },
-                { label: '第 2 章 · 基础操作', link: '/tutorials/git/02-basic/' },
-                { label: '第 3 章 · 分支管理', link: '/tutorials/git/03-branch/' },
-                { label: '第 4 章 · 远程仓库与 GitHub', link: '/tutorials/git/04-remote/' },
-                { label: '第 5 章 · 团队协作流程', link: '/tutorials/git/05-collaboration/' },
-                { label: '第 6 章 · 进阶技巧', link: '/tutorials/git/06-advanced/' },
-                { label: '第 7 章 · 实战场景与最佳实践', link: '/tutorials/git/07-best-practices/' },
-              ],
-            },
-          ],
+          items: tutorialGroups,
         },
         {
           label: '路线',

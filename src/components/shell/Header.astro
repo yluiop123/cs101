@@ -1,0 +1,26 @@
+---
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
+import { withBase } from '@/lib/utils';
+---
+
+<header class="header cs-header">
+  <div class="cs-header-inner">
+    <MobileMenuToggle />
+    <div class="cs-header-brand">
+      <SiteTitle />
+    </div>
+    <nav class="cs-topnav" aria-label="主导航">
+      <a href={withBase('/tutorials/')}>教程</a>
+      <a href={withBase('/tech-stack/')}>技术栈</a>
+      <a href={withBase('/domain/')}>应用领域</a>
+      <a href={withBase('/computer-science/')}>计算机科学</a>
+    </nav>
+    <div class="cs-header-actions">
+      <Search />
+      <ThemeSelect />
+    </div>
+  </div>
+</header>

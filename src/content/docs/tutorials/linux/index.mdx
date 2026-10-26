@@ -1,0 +1,31 @@
+---
+title: "Linux 教程"
+description: "Linux 是服务器世界的底座：从一条 ssh 登录命令，到包管理、权限模型、systemd 服务、网络排查，再到把一台裸机一步步配置成可上线的服务器。本教程以 Ubuntu 22.04/24.04 与 CentOS Stream 双发…"
+sidebar:
+  order: 0
+  hidden: true
+---
+
+import SeriesChapters from '../../../../components/tutorial/SeriesChapters.astro';
+
+> 状态：可学习 · 共 10 章 · 预计 10 小时
+
+Linux 是服务器世界的底座：从一条 `ssh` 登录命令，到包管理、权限模型、systemd 服务、网络排查，再到把一台裸机一步步配置成可上线的服务器。本教程以 **Ubuntu 22.04/24.04 与 CentOS Stream 双发行版**为参照，所有有差异的命令并列给出，带你建立一套可直接用于生产环境的 Linux 操作能力。
+
+## 章节目录
+
+<SeriesChapters series="linux" />
+
+## 前置教程
+
+- [VS Code 教程](../vscode/)：终端使用与远程编辑
+- [Git 教程](../git/)：把代码拉到服务器上
+
+## 你将学到
+
+- 区分发行版生态：apt 与 dnf 两套包管理体系的日常用法
+- 路径、通配符、权限模型与用户组，看懂并改对 `ls -l` 的每一列
+- grep/sed/awk 管道三板斧，从日志里几秒钟捞出关键行
+- 用 systemctl 与 journalctl 管理、观测乃至编写自己的服务
+- ip/ss/curl/防火墙组成的网络排查链路，SSH 密钥登录与端口转发
+- 写出健壮可维护的备份脚本，并完成一台裸机的上线全流程

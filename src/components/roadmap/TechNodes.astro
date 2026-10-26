@@ -1,0 +1,50 @@
+---
+import { getSeries } from '@/lib/content';
+import { routePlan, seriesMeta } from '@/data/route-plan';
+import { withBase } from '@/lib/utils';
+
+interface Props {
+  page: string;
+}
+
+const { page } = Astro.props as Props;
+const tiers = (routePlan as Record<string, { name: string; items: string[] }[]>)[page] ?? [];
+const available = new Set((await getSeries()).map((series) => series.slug));
+const colors = ['#2563eb', '#0ea5e9', '#9333ea', '#d97706'];
+---
+
+{
+  tiers.length === 0 && <p class="cs-empty">这条路线正在整理中。</p>
+}
+
+{
+  tiers.map((tier, index) => {
+    const color = colors[index % colors.length];
+    return (
+      <section class="cs-tier" style={`--tier-color:${color}`}>
+        <h2 class="cs-tier-title">{tier.name}</h2>
+        <ul class="cs-tier-grid">
+          {tier.items.map((slug) => {
+            const title = seriesMeta[slug] ?? slug;
+            const href = available.has(slug) ? withBase(`/tutorials/${slug}/`) : undefined;
+            return (
+              <li>
+                {href ? (
+                  <a class="cs-tier-card" href={href}>
+                    <span class="cs-tier-name">{title}</span>
+                    <span class="cs-tier-dot" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <span class="cs-tier-card cs-tier-card-muted">
+                    <span class="cs-tier-name">{title}</span>
+                    <span class="cs-tier-hint">敬请期待</span>
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    );
+  })
+}
