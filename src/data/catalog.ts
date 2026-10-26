@@ -48,6 +48,8 @@ export const homeSections: CatalogGroup[] = [
       { slug: 'vite', title: 'Vite 教程' },
       { slug: 'nodejs', title: 'Node.js 与包管理教程' },
       { slug: 'node-backend', title: 'Node.js 后端教程' },
+      { slug: 'flutter', title: 'Flutter 教程' },
+      { slug: 'react-native', title: 'React Native 教程' },
     ],
   },
   {
@@ -108,15 +110,6 @@ export const homeSections: CatalogGroup[] = [
     tutorials: [
       { slug: 'csharp', title: 'C# 教程' },
       { slug: 'aspnet', title: 'ASP.NET Core 教程' },
-    ],
-  },
-  {
-    id: 'kotlin-swift-dart',
-    name: 'Kotlin / Swift / Dart',
-    roadmap: '/tech-stack/kotlin-swift-dart/',
-    tutorials: [
-      { slug: 'flutter', title: 'Flutter 教程' },
-      { slug: 'react-native', title: 'React Native 教程' },
     ],
   },
   {
