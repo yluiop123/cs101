@@ -156,7 +156,6 @@ const DOMAIN_TITLES = {
   cybersecurity: '网络安全与应用安全',
   'devops-cloud': '云计算、云原生与 DevOps',
   'embedded-iot': '嵌入式软件与机器人软件',
-  'enterprise-erp': '企业软件与业务系统',
   fintech: '金融科技与量化交易',
   'game-vr-ar': '游戏开发与实时图形',
   gis: 'GIS 与空间软件',
@@ -166,6 +165,9 @@ const DOMAIN_TITLES = {
   'web-saas': 'Web 开发 / SaaS 应用',
 };
 
+// 站点侧已删除的领域页：重跑脚本时不再生成
+const DOMAIN_SKIP = new Set(['enterprise-erp', 'software-testing']);
+
 async function generateRoutePages(dirName, keyPrefix) {
   const dir = join(LEGACY, dirName);
   const files = (await readdir(dir, { withFileTypes: true })).filter(
@@ -174,6 +176,7 @@ async function generateRoutePages(dirName, keyPrefix) {
   let count = 0;
   for (const file of files) {
     const slug = file.name.replace(/\.md$/, '');
+    if (dirName === 'domain' && DOMAIN_SKIP.has(slug)) continue;
     const source = (await readFile(join(dir, file.name), 'utf8')).replace(/^\uFEFF/, '');
     const { data, body } = readFrontmatter(source);
     const title = (dirName === 'domain' && DOMAIN_TITLES[slug]) || data.title || slug;

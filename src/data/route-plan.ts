@@ -269,12 +269,6 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '精通 · 机器人与算法', items: ['ros2', 'motion-planning', 'sensor-fusion', 'rust'] },
     { name: '实战与生态 · 联网、云与安全', items: ['iot-gateway', 'mqtt', 'docker', 'security'] },
   ],
-  'domain-enterprise-erp': [
-    { name: '入门 · 语言与数据', items: ['java', 'sql', 'mysql'] },
-    { name: '进阶 · 框架与集成', items: ['spring-boot', 'mybatis', 'redis'] },
-    { name: '精通 · 架构与建模', items: ['design-patterns', 'os', 'network'] },
-    { name: '实战与生态 · 交付与运维', items: ['docker', 'kubernetes', 'nginx', 'security'] },
-  ],
   'domain-fintech': [
     { name: '入门 · 语言与数据', items: ['python', 'sql', 'mysql'] },
     { name: '进阶 · 系统与网络', items: ['c', 'network', 'os'] },

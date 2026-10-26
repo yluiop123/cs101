@@ -24,8 +24,6 @@ export const domains: DomainEntry[] = [
   { slug: 'web-saas', name: 'Web 开发 / SaaS 应用', category: 'product' },
   { slug: 'desktop-app', name: '桌面软件与上位机开发', category: 'product' },
   { slug: 'mobile-dev', name: '移动应用开发', category: 'product' },
-  { slug: 'game-vr-ar', name: '游戏开发与实时图形', category: 'product' },
-  { slug: 'enterprise-erp', name: '企业软件与业务系统', category: 'product' },
 
   // AI、数据与空间软件
   { slug: 'ai-ml', name: '人工智能与大模型应用', category: 'data-ai' },
@@ -46,5 +44,6 @@ export const domains: DomainEntry[] = [
   { slug: 'fintech', name: '金融科技与量化交易', category: 'industry' },
   { slug: 'blockchain-web3', name: '区块链与 Web3', category: 'industry' },
   { slug: 'visualization', name: '数据可视化与大屏', category: 'industry' },
+  { slug: 'game-vr-ar', name: '游戏开发与实时图形', category: 'industry' },
   { slug: 'media-streaming', name: '音视频与流媒体', category: 'industry' },
 ];
