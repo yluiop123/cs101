@@ -12,8 +12,8 @@ export interface CatalogGroup {
   /** 页内锚点 id（首页分组 → #<id>） */
   id: string;
   name: string;
-  /** 该分组对应 /tech-stack/ 下的技术路线页 */
-  roadmap?: string;
+  /** 该分组下的技术路线页（/tech-stack/<slug>/），首页会全部列出 */
+  routes?: string[];
   tutorials: CatalogTutorial[];
 }
 
@@ -35,7 +35,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'frontend',
     name: '大前端',
-    roadmap: '/tech-stack/frontend/',
+    routes: ['frontend', 'javascript-typescript', 'kotlin-swift-dart'],
     tutorials: [
       { slug: 'html', title: 'HTML 教程' },
       { slug: 'css', title: 'CSS 教程' },
@@ -55,7 +55,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'java',
     name: 'Java',
-    roadmap: '/tech-stack/java/',
+    routes: ['java'],
     tutorials: [
       { slug: 'java', title: 'Java 教程' },
       { slug: 'spring-boot', title: 'Spring Boot 教程' },
@@ -67,7 +67,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'python',
     name: 'Python',
-    roadmap: '/tech-stack/python/',
+    routes: ['python'],
     tutorials: [
       { slug: 'python', title: 'Python 教程' },
       { slug: 'django', title: 'Django 教程' },
@@ -79,7 +79,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'go',
     name: 'Go',
-    roadmap: '/tech-stack/go/',
+    routes: ['go'],
     tutorials: [
       { slug: 'go', title: 'Go 教程' },
       { slug: 'grpc', title: 'gRPC 教程' },
@@ -88,7 +88,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'rust',
     name: 'Rust',
-    roadmap: '/tech-stack/rust/',
+    routes: ['rust'],
     tutorials: [
       { slug: 'rust', title: 'Rust 教程' },
       { slug: 'webassembly', title: 'WebAssembly 教程' },
@@ -97,7 +97,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'c-cpp',
     name: 'C / C++',
-    roadmap: '/tech-stack/c-cpp/',
+    routes: ['c-cpp'],
     tutorials: [
       { slug: 'c', title: 'C 语言教程' },
       { slug: 'cpp', title: 'C++ 教程' },
@@ -106,7 +106,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'c-sharp',
     name: 'C#',
-    roadmap: '/tech-stack/c-sharp/',
+    routes: ['c-sharp'],
     tutorials: [
       { slug: 'csharp', title: 'C# 教程' },
       { slug: 'aspnet', title: 'ASP.NET Core 教程' },
@@ -115,7 +115,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'database',
     name: '数据库',
-    roadmap: '/tech-stack/sql-database/',
+    routes: ['sql-database', 'mysql', 'postgresql', 'redis', 'mongodb', 'elasticsearch'],
     tutorials: [
       { slug: 'sql', title: 'SQL 基础教程' },
       { slug: 'mysql', title: 'MySQL 教程' },
@@ -128,7 +128,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'middleware',
     name: '中间件',
-    roadmap: '/tech-stack/kafka/',
+    routes: ['kafka', 'nginx'],
     tutorials: [
       { slug: 'kafka', title: 'Kafka 与消息队列教程' },
       { slug: 'nginx', title: 'Nginx 教程' },
@@ -137,7 +137,7 @@ export const homeSections: CatalogGroup[] = [
   {
     id: 'ops',
     name: 'DevOps',
-    roadmap: '/tech-stack/docker/',
+    routes: ['docker', 'kubernetes'],
     tutorials: [
       { slug: 'linux', title: 'Linux 教程' },
       { slug: 'docker', title: 'Docker 教程' },
