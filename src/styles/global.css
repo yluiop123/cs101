@@ -1,0 +1,38 @@
+@layer base, starlight, theme, components, utilities;
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC',
+    'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
+/* 品牌主色：w3schools 式绿色（后续可在 M2 样张中切换） */
+:root {
+  --cs-accent: #04aa6d;
+  --cs-border: #d9d9d9;
+  --cs-sidebar-bg: #f1f1f1;
+  --cs-code-bg: #282a35;
+  --cs-radius: 2px;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #d1fae5;
+  --sl-color-accent: #04aa6d;
+  --sl-color-accent-high: #065f46;
+}
+
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #065f46;
+  --sl-color-accent: #34d399;
+  --sl-color-accent-high: #a7f3d0;
+}
+
+/* 教程站风格：方角 */
+.sl-markdown-content :where(img, video, iframe, table) {
+  border-radius: 0;
+}
