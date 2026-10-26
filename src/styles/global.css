@@ -1195,6 +1195,46 @@ main h1.cs-page-title {
 }
 
 /* ============ 侧边栏（四主题 / 当前系列） ============ */
+.cs-sidebar-kicker {
+  margin: 0.35rem 0.75rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--cs-muted);
+}
+
+.cs-sidebar-catalog {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-sidebar-catalog li {
+  border-bottom: 1px solid var(--cs-border);
+}
+
+.cs-sidebar-catalog a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.88rem;
+  color: var(--cs-text);
+  text-decoration: none;
+}
+
+.cs-sidebar-catalog a:hover {
+  background: color-mix(in srgb, var(--cs-accent) 10%, transparent);
+  color: var(--cs-accent-dark);
+}
+
+.cs-sidebar-count {
+  font-size: 0.7rem;
+  color: var(--cs-muted);
+  flex-shrink: 0;
+}
+
 .cs-sidebar-topics {
   display: flex;
   flex-direction: column;
