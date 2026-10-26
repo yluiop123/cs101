@@ -27,14 +27,9 @@ export const homeSections: CatalogGroup[] = [
       { slug: 'jetbrains', title: 'JetBrains IDE 教程' },
       { slug: 'git', title: 'Git 教程' },
       { slug: 'github', title: 'GitHub / GitLab 协作教程' },
-      { slug: 'linux', title: 'Linux 教程' },
-      { slug: 'shell', title: 'Shell 脚本教程' },
       { slug: 'terminal', title: '终端与环境配置' },
       { slug: 'docker', title: 'Docker 教程' },
-      { slug: 'build-tools', title: '构建工具（Make / CMake）' },
-      { slug: 'code-quality', title: '代码质量与静态分析' },
-      { slug: 'test-tools', title: '测试工具与框架' },
-      // 基础知识
+      // 基础常识
       { slug: 'json', title: 'JSON 数据格式' },
       { slug: 'http', title: 'HTTP 协议基础' },
       { slug: 'markdown', title: 'Markdown 教程' },
@@ -249,9 +244,16 @@ export const homeSections: CatalogGroup[] = [
   },
   {
     id: 'devops',
-    name: 'DevOps',
+    name: '工程工具与 DevOps',
     roadmap: '/tech-stack/docker/',
     tutorials: [
+      // 工程工具与基础设施
+      { slug: 'linux', title: 'Linux 教程' },
+      { slug: 'shell', title: 'Shell 脚本教程' },
+      { slug: 'build-tools', title: '构建工具（Make / CMake）' },
+      { slug: 'code-quality', title: '代码质量与静态分析' },
+      { slug: 'test-tools', title: '测试工具与框架' },
+      // 容器、交付与运维
       { slug: 'docker-compose', title: 'Docker Compose' },
       { slug: 'kubernetes', title: 'Kubernetes 教程' },
       { slug: 'ci-cd', title: 'CI/CD 与自动化' },
