@@ -32,6 +32,11 @@ export const seriesMeta: Record<string, string> = {
   terminal: '终端与环境配置', 'build-tools': '构建工具（Make / CMake）', 'code-quality': '代码质量与静态分析',
   'test-tools': '测试工具与框架', 'ci-cd': 'CI/CD 与自动化',
   // 大前端
+  'api-testing': 'API 测试', 'perf-testing': '性能测试',
+  'media-basics': '音视频基础', ffmpeg: 'FFmpeg 音视频处理', 'h264-codec': 'H.264 编解码',
+  'rtmp-rtsp': 'RTMP / RTSP 协议', 'hls-dash': 'HLS / DASH 流媒体协议', webrtc: 'WebRTC 实时通信',
+  'media-server': '流媒体服务器', transcoding: '转码与打包', 'cdn-delivery': 'CDN 分发',
+  'live-streaming': '直播系统', 'video-conference': '视频会议',
   dom: 'DOM 与浏览器 API', 'component-library': '组件库与设计系统', 'vue-router': '前端路由教程',
   'state-management': '状态管理教程', svelte: 'Svelte 教程', webpack: 'Webpack 教程', nextjs: 'Next.js 教程',
   nuxt: 'Nuxt 教程', astro: 'Astro 教程', pnpm: 'pnpm 与包管理进阶', bun: 'Bun 教程', deno: 'Deno 教程',
@@ -294,12 +299,6 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '精通 · 网络与架构', items: ['network', 'design-patterns', 'sql'] },
     { name: '实战与生态 · 质量与发布', items: ['testing', 'docker', 'nginx'] },
   ],
-  'domain-software-testing': [
-    { name: '入门 · 基础与工具', items: ['linux', 'python'] },
-    { name: '进阶 · 自动化测试', items: ['testing', 'javascript', 'nodejs'] },
-    { name: '精通 · 原理与结构', items: ['dsa', 'design-patterns', 'os'] },
-    { name: '实战与生态 · 平台与质量', items: ['docker', 'kubernetes', 'security', 'nginx'] },
-  ],
   'domain-visualization': [
     { name: '入门 · 前端与数据', items: ['html', 'css', 'javascript'] },
     { name: '进阶 · 数据处理', items: ['data-science', 'sql', 'typescript'] },
@@ -342,11 +341,17 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '精通 · 编译与运行时', items: ['compiler', 'interpreter', 'vm', 'linker'] },
     { name: '实战 · 性能与调试', items: ['perf-analysis', 'debugging', 'tracing', 'ebpf'] },
   ],
+  'domain-media-streaming': [
+    { name: '入门 · 音视频基础', items: ['media-basics', 'ffmpeg', 'h264-codec'] },
+    { name: '进阶 · 协议与传输', items: ['rtmp-rtsp', 'hls-dash', 'webrtc'] },
+    { name: '精通 · 流媒体服务', items: ['media-server', 'transcoding', 'cdn-delivery'] },
+    { name: '实战 · 实时音视频应用', items: ['live-streaming', 'video-conference', 'realtime-media'] },
+  ],
   'domain-software-engineering': [
     { name: '入门 · 工程基础', items: ['code-quality', 'unit-testing'] },
     { name: '进阶 · 设计与架构', items: ['design-patterns', 'architecture', 'refactoring', 'uml'] },
-    { name: '精通 · 测试与质量', items: ['integration-testing', 'e2e-testing', 'static-analysis', 'code-review'] },
-    { name: '实战 · 协作与交付', items: ['ci-cd', 'agile', 'tech-writing', 'ai-coding'] },
+    { name: '精通 · 测试与质量', items: ['integration-testing', 'e2e-testing', 'api-testing', 'perf-testing', 'static-analysis', 'code-review'] },
+    { name: '实战 · 协作与交付', items: ['ci-cd', 'testing', 'agile', 'tech-writing', 'ai-coding'] },
   ],
 }
 

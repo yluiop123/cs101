@@ -148,6 +148,24 @@ for (const slug of tutorialDirs) {
 }
 
 /* ---------- 2. 技术栈 / 领域路线页 ---------- */
+// 站点侧已调整的领域标题：重跑生成脚本时保留，不被旧站标题覆盖
+const DOMAIN_TITLES = {
+  'ai-ml': '人工智能与大模型应用',
+  'big-data': '数据分析与数据工程',
+  'blockchain-web3': '区块链与 Web3',
+  cybersecurity: '网络安全与应用安全',
+  'devops-cloud': '云计算、云原生与 DevOps',
+  'embedded-iot': '嵌入式软件与机器人软件',
+  'enterprise-erp': '企业软件与业务系统',
+  fintech: '金融科技与量化交易',
+  'game-vr-ar': '游戏开发与实时图形',
+  gis: 'GIS 与空间软件',
+  'mobile-dev': '移动应用开发',
+  'software-engineering': '软件工程与质量工程',
+  visualization: '数据可视化与大屏',
+  'web-saas': 'Web 开发 / SaaS 应用',
+};
+
 async function generateRoutePages(dirName, keyPrefix) {
   const dir = join(LEGACY, dirName);
   const files = (await readdir(dir, { withFileTypes: true })).filter(
@@ -158,7 +176,7 @@ async function generateRoutePages(dirName, keyPrefix) {
     const slug = file.name.replace(/\.md$/, '');
     const source = (await readFile(join(dir, file.name), 'utf8')).replace(/^\uFEFF/, '');
     const { data, body } = readFrontmatter(source);
-    const title = data.title || slug;
+    const title = (dirName === 'domain' && DOMAIN_TITLES[slug]) || data.title || slug;
     const description = firstParagraph(body);
     const key = keyPrefix ? `${keyPrefix}${slug}` : slug;
     const mdx = [
