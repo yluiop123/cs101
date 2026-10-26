@@ -1,6 +1,30 @@
 ---
-const { pagination } = Astro.locals.starlightRoute;
-const { prev, next } = pagination;
+import { getSeriesBySlug } from '@/lib/content';
+import { withBase } from '@/lib/utils';
+
+const { entry, pagination } = Astro.locals.starlightRoute;
+let prev: { href: string; label: string } | undefined = pagination.prev
+  ? { href: pagination.prev.href, label: pagination.prev.label }
+  : undefined;
+let next: { href: string; label: string } | undefined = pagination.next
+  ? { href: pagination.next.href, label: pagination.next.label }
+  : undefined;
+
+// 系列章节不在全局侧栏里，Pagination 需要从内容集合自行推导上一章/下一章
+if (!prev && !next && entry.data.series) {
+  const series = await getSeriesBySlug(entry.data.series);
+  if (series) {
+    const index = series.chapters.findIndex((chapter) => chapter.id === entry.id);
+    if (index > 0) {
+      const chapter = series.chapters[index - 1]!;
+      prev = { href: withBase(`/${chapter.id}/`), label: chapter.title };
+    }
+    if (index >= 0 && index < series.chapters.length - 1) {
+      const chapter = series.chapters[index + 1]!;
+      next = { href: withBase(`/${chapter.id}/`), label: chapter.title };
+    }
+  }
+}
 ---
 
 <nav class="cs-pager" aria-label="章节导航">

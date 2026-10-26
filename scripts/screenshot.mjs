@@ -10,7 +10,7 @@ const OUT = 'screenshots';
 
 const shots = [
   { name: 'home-desktop', path: '', width: 1440, height: 900 },
-  { name: 'tutorials-desktop', path: 'tutorials/', width: 1440, height: 900 },
+  { name: 'tech-stack-desktop', path: 'tech-stack/', width: 1440, height: 900 },
   { name: 'series-desktop', path: 'tutorials/java/', width: 1440, height: 900 },
   { name: 'chapter-desktop', path: 'tutorials/java/01-intro/', width: 1440, height: 900 },
   { name: 'route-desktop', path: 'tech-stack/java/', width: 1440, height: 900 },

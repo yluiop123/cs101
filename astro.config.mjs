@@ -1,5 +1,3 @@
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -9,29 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 import baseLinks from './src/integrations/base-links.mjs';
 
 const BASE = '/cs101';
-const docsRoot = fileURLToPath(new URL('./src/content/docs', import.meta.url));
 
-/** 从系列首页 frontmatter 读取标题（配置加载时执行，纯文件读取）。 */
-function seriesTitle(slug) {
-  try {
-    const source = readFileSync(join(docsRoot, 'tutorials', slug, 'index.mdx'), 'utf8').replace(/^\uFEFF/, '');
-    const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-    const title = frontmatter?.[1].match(/^title:\s*(.+)$/m);
-    return title ? title[1].trim().replace(/^["']|["']$/g, '') : slug;
-  } catch {
-    return slug;
-  }
-}
-
-const tutorialGroups = readdirSync(join(docsRoot, 'tutorials'), { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && existsSync(join(docsRoot, 'tutorials', entry.name, 'index.mdx')))
-  .map((entry) => ({
-    label: seriesTitle(entry.name),
-    collapsed: true,
-    items: [{ autogenerate: { directory: `tutorials/${entry.name}` } }],
-  }))
-  .sort((a, b) => a.label.localeCompare(b.label, 'zh-CN'));
-
+// 部署在 GitHub Pages 项目路径下：https://<user>.github.io/cs101/
 export default defineConfig({
   site: 'https://yluiop123.github.io',
   base: BASE,
@@ -47,7 +24,7 @@ export default defineConfig({
     react(),
     starlight({
       title: 'CS101',
-      description: '中文计算机学习路径：计算机科学 / 技术栈 / 应用领域',
+      description: '中文计算机学习路径：技术栈 / 应用领域 / 计算机科学',
       favicon: '/icon.svg',
       defaultLocale: 'root',
       locales: {
@@ -70,28 +47,20 @@ export default defineConfig({
       },
       components: {
         Header: './src/components/shell/Header.astro',
+        Sidebar: './src/components/shell/Sidebar.astro',
         PageTitle: './src/components/shell/PageTitle.astro',
         Pagination: './src/components/shell/Pagination.astro',
         Footer: './src/components/shell/Footer.astro',
       },
+      // 四个主题（教程不再作为独立主题；系列页通过技术栈等路线进入）
       sidebar: [
         {
-          label: '开始',
+          label: '主题',
           items: [
-            { label: '首页', link: '/' },
-            { label: '教程总览', link: '/tutorials/' },
-          ],
-        },
-        {
-          label: '教程',
-          items: tutorialGroups,
-        },
-        {
-          label: '路线',
-          items: [
-            { label: '技术栈路线', link: '/tech-stack/' },
+            { label: '技术栈', link: '/tech-stack/' },
             { label: '应用领域', link: '/domain/' },
             { label: '计算机科学', link: '/computer-science/' },
+            { label: '演练场', link: '/playground/' },
           ],
         },
       ],

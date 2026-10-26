@@ -1194,6 +1194,68 @@ main h1.cs-page-title {
   }
 }
 
+/* ============ 侧边栏（四主题 / 当前系列） ============ */
+.cs-sidebar-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.25rem 0;
+}
+
+.cs-sidebar-topics a {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--cs-text);
+  text-decoration: none;
+}
+
+.cs-sidebar-topics a[aria-current='page'] {
+  background: var(--cs-bg);
+  box-shadow: inset 3px 0 0 var(--cs-accent);
+  color: var(--cs-accent-dark);
+}
+
+.cs-sidebar-series-title {
+  display: block;
+  padding: 0.45rem 0.75rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--cs-text);
+  text-decoration: none;
+}
+
+.cs-sidebar-series-title:hover {
+  color: var(--cs-accent-dark);
+}
+
+.cs-sidebar-chapters {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+}
+
+.cs-sidebar-chapters a {
+  display: block;
+  padding: 0.3rem 0.75rem 0.3rem 1rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--cs-muted);
+  text-decoration: none;
+}
+
+.cs-sidebar-chapters a:hover {
+  background: color-mix(in srgb, var(--cs-accent) 10%, transparent);
+  color: var(--cs-text);
+}
+
+.cs-sidebar-chapters a[aria-current='page'] {
+  background: var(--cs-bg);
+  box-shadow: inset 3px 0 0 var(--cs-accent);
+  color: var(--cs-accent-dark);
+  font-weight: 700;
+}
+
 /* ============ 响应式 ============ */
 @media (max-width: 900px) {
   .cs-topnav {

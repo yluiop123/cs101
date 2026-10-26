@@ -1,0 +1,48 @@
+---
+import { getSeriesBySlug } from '@/lib/content';
+import { withBase } from '@/lib/utils';
+
+const { entry } = Astro.locals.starlightRoute;
+const path = Astro.url.pathname.replace(/^\/cs101/, '');
+const match = path.match(/^\/tutorials\/([^/]+)\//);
+const series = match ? await getSeriesBySlug(match[1]) : null;
+const currentId = entry.id;
+
+const topics = [
+  { label: '技术栈', href: '/tech-stack/' },
+  { label: '应用领域', href: '/domain/' },
+  { label: '计算机科学', href: '/computer-science/' },
+  { label: '演练场', href: '/playground/' },
+];
+const isActive = (href: string) => path.startsWith(href.replace(/\/$/, ''));
+---
+
+{
+  series ? (
+    <div class="cs-sidebar">
+      <a class="cs-sidebar-series-title" href={withBase(`/tutorials/${series.slug}/`)}>
+        {series.title}
+      </a>
+      <ol class="cs-sidebar-chapters">
+        {series.chapters.map((chapter) => (
+          <li>
+            <a
+              href={withBase(`/${chapter.id}/`)}
+              aria-current={chapter.id === currentId ? 'page' : undefined}
+            >
+              {chapter.title}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  ) : (
+    <nav class="cs-sidebar-topics" aria-label="主题">
+      {topics.map((topic) => (
+        <a href={withBase(topic.href)} aria-current={isActive(topic.href) ? 'page' : undefined}>
+          {topic.label}
+        </a>
+      ))}
+    </nav>
+  )
+}
