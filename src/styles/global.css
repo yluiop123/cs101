@@ -258,8 +258,7 @@ main h1.cs-page-title {
     .cs-section-more,
     .cs-series-list a,
     .cs-chapter-item a,
-    .cs-series-card,
-    .cs-search-entry
+    .cs-series-card
   ) {
   text-decoration: none;
 }
@@ -271,10 +270,6 @@ main h1.cs-page-title {
 
 .sl-markdown-content .cs-btn-primary {
   color: #ffffff;
-}
-
-.sl-markdown-content .cs-search-entry {
-  color: var(--cs-muted);
 }
 
 /* ============ 顶部导航 ============ */
@@ -650,65 +645,6 @@ main h1.cs-page-title {
   display: block;
 }
 
-.cs-hero {
-  border-bottom: 1px solid var(--cs-border);
-  padding-bottom: 1.5rem;
-}
-
-.cs-hero-kicker {
-  color: var(--cs-accent-dark);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  font-size: 0.78rem;
-  margin: 0;
-}
-
-.cs-hero-title {
-  font-size: 2.3rem;
-  line-height: 1.25;
-  font-weight: 900;
-  margin: 0.5rem 0 0.6rem;
-}
-
-.cs-hero-sub {
-  color: var(--cs-muted);
-  margin: 0 0 1.25rem;
-}
-
-.cs-search-entry {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  border: 1px solid var(--cs-border);
-  border-radius: var(--cs-radius);
-  background: var(--cs-sidebar-bg);
-  padding: 0.65rem 0.9rem;
-  color: var(--cs-muted);
-  text-decoration: none;
-  max-width: 34rem;
-}
-
-.cs-search-entry:hover {
-  border-color: var(--cs-accent);
-}
-
-.cs-search-entry kbd {
-  border: 1px solid var(--cs-border);
-  border-radius: var(--cs-radius);
-  background: var(--cs-bg);
-  padding: 0.1rem 0.35rem;
-  font-size: 0.75rem;
-  color: var(--cs-muted);
-}
-
-.cs-hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.1rem;
-}
-
 .cs-continue {
   display: flex;
   align-items: center;
@@ -947,39 +883,7 @@ main h1.cs-page-title {
   color: var(--cs-muted);
 }
 
-/* ============ 页脚 ============ */
-.cs-site-footer {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 1.5rem;
-  border-top: 1px solid var(--cs-border);
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  font-size: 0.85rem;
-  color: var(--cs-muted);
-}
-
-.cs-footer-col h3 {
-  font-size: 0.9rem;
-  margin: 0 0 0.5rem;
-  color: var(--cs-text);
-}
-
-.cs-footer-col a {
-  display: block;
-  color: var(--cs-accent-dark);
-  text-decoration: none;
-  padding: 0.1rem 0;
-}
-
-.cs-footer-col a:hover {
-  text-decoration: underline;
-}
-
-.cs-footer-col p {
-  margin: 0;
-  line-height: 1.7;
-}
+/* ============ 页脚（已移除） ============ */
 
 /* ============ ⌘K 搜索 ============ */
 .cs-search-trigger {
@@ -1150,12 +1054,6 @@ main h1.cs-page-title {
   padding: 0.45rem 0.9rem;
   font-size: 0.72rem;
   color: var(--cs-muted);
-}
-
-.cs-search-entry {
-  font: inherit;
-  text-align: start;
-  cursor: pointer;
 }
 
 /* ============ 进度 / 收藏 ============ */
@@ -1461,12 +1359,7 @@ main h1.cs-page-title {
 }
 
 @media (max-width: 720px) {
-  .cs-hero-title {
-    font-size: 1.75rem;
-  }
-
-  .cs-pager,
-  .cs-site-footer {
+  .cs-pager {
     grid-template-columns: 1fr;
   }
 

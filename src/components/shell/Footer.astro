@@ -2,7 +2,6 @@
 import CompleteButton from '@/components/progress/CompleteButton.tsx';
 import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import Pagination from './Pagination.astro';
-import { withBase } from '@/lib/utils';
 
 const { entry } = Astro.locals.starlightRoute;
 const isChapter = Boolean((entry.data as Record<string, unknown>).series);
@@ -20,25 +19,6 @@ const isHome = !entry.id || entry.id === 'index';
 }
 
 {!isHome && <Pagination />}
-
-<footer class="cs-site-footer">
-  <div class="cs-footer-col">
-    <h3>CS101</h3>
-    <p>中文计算机学习路径：编程语言 / 数据库 / 应用领域 / 计算机科学。</p>
-  </div>
-  <div class="cs-footer-col">
-    <h3>学习</h3>
-    <a href={withBase('/')}>首页</a>
-    <a href={withBase('/tech-stack/')}>全部技术路线</a>
-    <a href={withBase('/domain/')}>应用领域</a>
-    <a href={withBase('/computer-science/')}>计算机科学</a>
-    <a href={withBase('/playground/')}>代码演练场</a>
-  </div>
-  <div class="cs-footer-col">
-    <h3>关于</h3>
-    <p>内容仅供学习参考。</p>
-  </div>
-</footer>
 
 <script>
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
