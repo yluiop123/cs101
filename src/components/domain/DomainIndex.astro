@@ -28,15 +28,14 @@ const sections = domainCategories.map((category) => ({
         <div class="cs-section-head">
           <h2 class="cs-section-title">{section.name}</h2>
         </div>
-        <ul class="cs-domain-grid">
+        <ul class="cs-tut-grid">
           {section.cards.map((card) => (
             <li id={`domain-${card.slug}`}>
-              <a class="cs-domain-card" href={withBase(`/domain/${card.slug}/`)}>
-                <span class="cs-domain-name">{card.name}</span>
-                <span class="cs-domain-meta">
-                  {card.tiers} 阶段 · {card.total} 项技术 · 已有 {card.learnable} 门教程
+              <a class="cs-tut-card" href={withBase(`/domain/${card.slug}/`)}>
+                <span>{card.name}</span>
+                <span class="cs-tut-meta">
+                  {card.tiers} 阶段 · {card.total} 项
                 </span>
-                <span class="cs-domain-go">查看路线 →</span>
               </a>
             </li>
           ))}

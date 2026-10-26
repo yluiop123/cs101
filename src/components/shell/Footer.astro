@@ -6,6 +6,8 @@ import Pagination from './Pagination.astro';
 const { entry } = Astro.locals.starlightRoute;
 const isChapter = Boolean((entry.data as Record<string, unknown>).series);
 const isHome = !entry.id || entry.id === 'index';
+// 应用领域首页与首页同版式，不显示章节翻页
+const isDomainIndex = entry.id === 'domain/index';
 ---
 
 {
@@ -18,7 +20,7 @@ const isHome = !entry.id || entry.id === 'index';
   )
 }
 
-{!isHome && <Pagination />}
+{!isHome && !isDomainIndex && <Pagination />}
 
 <script>
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');

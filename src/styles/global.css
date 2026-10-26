@@ -765,8 +765,8 @@ starlight-theme-select option {
   text-decoration: underline;
 }
 
-/* ---- 首页：教程卡片（每个分组下的具体教程） ---- */
-.cs-home .cs-tut-grid {
+/* ---- 教程 / 领域卡片（首页、应用领域共用） ---- */
+.cs-tut-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   gap: 0.6rem;
@@ -775,11 +775,11 @@ starlight-theme-select option {
   padding: 0;
 }
 
-.cs-home .cs-tut-grid li {
+.cs-tut-grid li {
   margin: 0;
 }
 
-.cs-home .cs-tut-card {
+.cs-tut-card {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -794,25 +794,25 @@ starlight-theme-select option {
   text-decoration: none;
 }
 
-.cs-home .cs-tut-card:hover {
+.cs-tut-card:hover {
   border-color: var(--cs-accent);
   background: var(--cs-sidebar-bg);
   color: var(--cs-accent-dark);
 }
 
-.cs-home .cs-tut-card.is-planned {
+.cs-tut-card.is-planned {
   border-style: dashed;
   color: var(--cs-muted);
   opacity: 0.7;
 }
 
-.cs-home .cs-tut-meta {
+.cs-tut-meta {
   font-size: 0.72rem;
   color: var(--cs-muted);
   flex-shrink: 0;
 }
 
-/* ============ 应用领域 ============ */
+/* ============ 应用领域（版式与首页一致，仅标题无「学习路线」链接） ============ */
 .cs-domain {
   display: flex;
   flex-direction: column;
@@ -823,55 +823,8 @@ starlight-theme-select option {
   scroll-margin-top: 0;
 }
 
-.cs-domain-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  gap: 0.75rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cs-domain-grid li {
-  margin: 0;
+.cs-domain .cs-tut-grid li {
   scroll-margin-top: 88px;
-}
-
-.cs-domain-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  height: 100%;
-  border: 1px solid var(--cs-border);
-  border-top: 3px solid var(--cs-accent);
-  border-radius: var(--cs-radius);
-  background: var(--cs-bg);
-  padding: 0.8rem 1rem;
-  color: var(--cs-text);
-  text-decoration: none;
-}
-
-.cs-domain-card:hover {
-  border-color: var(--cs-accent);
-  background: var(--cs-sidebar-bg);
-}
-
-.cs-domain-name {
-  font-size: 0.98rem;
-  font-weight: 700;
-}
-
-.cs-domain-meta {
-  font-size: 0.78rem;
-  color: var(--cs-muted);
-}
-
-.cs-domain-go {
-  margin-top: auto;
-  padding-top: 0.2rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--cs-accent-dark);
 }
 
 .cs-series-list {
