@@ -765,52 +765,6 @@ starlight-theme-select option {
   text-decoration: underline;
 }
 
-/* ---- 分组下的全部技术路线入口 ---- */
-.cs-route-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.4rem;
-  margin: -0.55rem 0 1rem;
-  font-size: 0.82rem;
-}
-
-.cs-route-label {
-  flex-shrink: 0;
-  color: var(--cs-muted);
-}
-
-.cs-route-links ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.4rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cs-route-links li {
-  display: flex;
-  align-items: baseline;
-  margin: 0;
-}
-
-.cs-route-links li:not(:first-child)::before {
-  content: '·';
-  margin-inline-end: 0.4rem;
-  color: var(--cs-border-strong);
-}
-
-.cs-route-links a {
-  color: var(--cs-accent-dark);
-  text-decoration: none;
-}
-
-.cs-route-links a:hover {
-  text-decoration: underline;
-}
-
 .cs-home-more {
   margin: 0;
   text-align: end;

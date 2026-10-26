@@ -3,14 +3,12 @@ import { getSeries } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
 import { homeSections, type CatalogTutorial } from '@/data/catalog';
-import { routeTitles } from '@/data/route-plan';
 
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
 
 const sections = homeSections.map((group) => ({
   ...group,
-  routes: (group.routes ?? []).map((slug) => ({ slug, title: routeTitles[slug] ?? slug })),
   tutorials: group.tutorials.map((tutorial: CatalogTutorial) => {
     const found = bySlug.get(tutorial.slug);
     return {
@@ -33,19 +31,6 @@ const sections = homeSections.map((group) => ({
         <div class="cs-section-head">
           <h2 class="cs-section-title">{section.name}</h2>
         </div>
-
-        {section.routes.length > 0 && (
-          <div class="cs-route-links">
-            <span class="cs-route-label">技术路线</span>
-            <ul>
-              {section.routes.map((route) => (
-                <li>
-                  <a href={withBase(`/tech-stack/${route.slug}/`)}>{route.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
 
         <ul class="cs-tut-grid">
           {section.tutorials.map((tutorial) => (
