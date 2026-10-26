@@ -86,7 +86,17 @@ const catalog = currentSeries || isHome ? [] : await getSeries();
       );
 
     if (items.length > 0) {
+      // 点击后先锁定被点中的分组，避免「点 数据库 却高亮 DevOps」这类错位
+      let lockedId: string | null = null;
+
+      const setActive = (id: string | null) => {
+        for (const item of items) {
+          item.link.classList.toggle('is-active', id !== null && idOf(item.link) === id);
+        }
+      };
+
       const update = () => {
+        if (lockedId !== null) return;
         const offset = 120;
         let current: (typeof items)[number] | null = null;
         for (const item of items) {
@@ -98,6 +108,41 @@ const catalog = currentSeries || isHome ? [] : await getSeries();
         if (atBottom) current = items[items.length - 1];
         for (const item of items) item.link.classList.toggle('is-active', item === current);
       };
+
+      const release = () => {
+        if (lockedId === null) return;
+        lockedId = null;
+        update();
+      };
+
+      for (const item of items) {
+        item.link.addEventListener('click', () => {
+          lockedId = idOf(item.link);
+          setActive(lockedId);
+        });
+      }
+
+      // 带锚点进入页面时，先高亮锚点对应的分组
+      const initial = decodeURIComponent(window.location.hash.slice(1));
+      if (initial && items.some((item) => idOf(item.link) === initial)) {
+        lockedId = initial;
+        setActive(initial);
+      }
+
+      // 用户自己滚动 / 按键浏览时解除锁定，回到按位置高亮
+      window.addEventListener('wheel', release, { passive: true });
+      window.addEventListener('touchstart', release, { passive: true });
+      window.addEventListener(
+        'keydown',
+        (event) => {
+          if (
+            ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)
+          ) {
+            release();
+          }
+        },
+        { passive: true },
+      );
 
       update();
       let ticking = false;
