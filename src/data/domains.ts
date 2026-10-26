@@ -22,7 +22,7 @@ export const domainCategories: DomainCategory[] = [
 export const domains: DomainEntry[] = [
   // 产品与应用开发
   { slug: 'web-saas', name: 'Web 开发 / SaaS 应用', category: 'product' },
-  { slug: 'desktop-app', name: '桌面软件与上位机开发', category: 'product' },
+  { slug: 'desktop-app', name: '桌面软件开发', category: 'product' },
   { slug: 'mobile-dev', name: '移动应用开发', category: 'product' },
 
   // AI、数据与空间软件
@@ -46,4 +46,5 @@ export const domains: DomainEntry[] = [
   { slug: 'visualization', name: '数据可视化与大屏', category: 'industry' },
   { slug: 'game-vr-ar', name: '游戏开发与实时图形', category: 'industry' },
   { slug: 'media-streaming', name: '音视频与流媒体', category: 'industry' },
+  { slug: 'industrial-hmi', name: '上位机与 PLC', category: 'industry' },
 ];

@@ -84,11 +84,14 @@ export const seriesMeta: Record<string, string> = {
   'docker-compose': 'Docker Compose', jenkins: 'Jenkins 教程', 'gitlab-ci': 'GitLab CI 教程',
   'github-actions': 'GitHub Actions 教程', terraform: 'Terraform 教程', ansible: 'Ansible 教程',
   argocd: 'Argo CD 教程', grafana: 'Grafana 可视化', 'cloud-basics': '云服务基础',
-  // 桌面与上位机
+  // 桌面软件
   qt: 'Qt 教程', electron: 'Electron 教程', tauri: 'Tauri 教程', winui: 'WinUI 教程',
+  'auto-update': '自动更新',
+  // 上位机与 PLC
   'serial-port': '串口通信教程', 'tcp-udp': 'TCP / UDP 通信', modbus: 'Modbus 协议',
   'opc-ua': 'OPC UA 协议', 'realtime-chart': '实时曲线与图表', 'report-export': '报表与导出',
-  'auto-update': '自动更新',
+  'plc-programming': 'PLC 编程（梯形图与 ST）', 'ladder-logic': '梯形图与顺序控制',
+  scada: 'SCADA 组态与监控', 'servo-motion': '运动控制与伺服', 'hmi-design': 'HMI 触摸屏组态',
   // 科学计算与工程软件
   scipy: 'SciPy 教程', matlab: 'MATLAB 教程', 'numerical-methods': '数值计算方法', simulation: '建模仿真',
   fem: '有限元分析', mesh: '网格处理', opengl: 'OpenGL 图形编程', vtk: 'VTK 可视化',
@@ -308,8 +311,14 @@ export const routePlan: Record<string, RouteTier[]> = {
   'domain-desktop-app': [
     { name: '入门 · 语言与桌面 GUI', items: ['csharp', 'cpp', 'wpf', 'qt'] },
     { name: '进阶 · 跨平台桌面框架', items: ['electron', 'tauri', 'maui', 'winui'] },
-    { name: '精通 · 设备通信与数据采集', items: ['serial-port', 'tcp-udp', 'modbus', 'opc-ua'] },
-    { name: '实战与生态 · 界面、报表与发布', items: ['realtime-chart', 'report-export', 'auto-update', 'packaging'] },
+    { name: '精通 · 架构与系统集成', items: ['design-patterns', 'sql', 'network', 'security'] },
+    { name: '实战与生态 · 打包、更新与质量', items: ['packaging', 'auto-update', 'testing'] },
+  ],
+  'domain-industrial-hmi': [
+    { name: '入门 · 语言与界面基础', items: ['csharp', 'wpf', 'qt', 'python'] },
+    { name: '进阶 · 工业通信协议', items: ['serial-port', 'tcp-udp', 'modbus', 'opc-ua', 'mqtt'] },
+    { name: '精通 · PLC、组态与运动控制', items: ['plc-programming', 'ladder-logic', 'scada', 'hmi-design', 'servo-motion'] },
+    { name: '实战与生态 · 采集、报表与部署', items: ['industrial-comms', 'realtime-chart', 'report-export', 'packaging', 'auto-update'] },
   ],
   'domain-database-systems': [
     { name: '入门 · 关系型与 SQL', items: ['sql', 'mysql', 'postgresql'] },
