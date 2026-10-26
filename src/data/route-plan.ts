@@ -185,7 +185,7 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: 'Angular 生态', items: ['angular', 'rxjs', 'ngrx', 'angular-material'] },
     { name: '前端工程与测试', items: ['frontend-bundler', 'eslint', 'vitest', 'playwright', 'perf-web', 'a11y', 'i18n', 'svelte', 'astro'] },
     { name: '全栈与服务端', items: ['nodejs', 'express', 'nestjs', 'rest-api', 'bun', 'deno'] },
-    { name: '桌面端', items: ['electron', 'tauri', 'auto-update', 'packaging'] },
+    { name: '桌面端', items: ['electron', 'tauri'] },
     { name: '跨端与小程序', items: ['flutter', 'react-native', 'uniapp', 'mini-program', 'mobile-arch'] },
     { name: '原生移动', items: ['kotlin', 'android-sdk', 'jetpack-compose', 'swift', 'swiftui', 'mobile-network', 'push-location', 'mobile-testing', 'mobile-release'] },
   ],
