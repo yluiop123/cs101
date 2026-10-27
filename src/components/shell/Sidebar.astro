@@ -125,6 +125,20 @@ const catalog =
             <a href={`#tier-${index}`} data-cs-section-link={`tier-${index}`}>
               {tier.name}
             </a>
+            {tier.options?.length ? (
+              <ul class="cs-sidebar-sub">
+                {tier.options.map((option, optionIndex) => (
+                  <li>
+                    <a
+                      href={`#tier-${index}-${optionIndex}`}
+                      data-cs-section-link={`tier-${index}-${optionIndex}`}
+                    >
+                      {option.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </li>
         ))}
       </ul>

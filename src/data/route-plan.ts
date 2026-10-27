@@ -139,6 +139,14 @@ export interface RouteItem {
   role?: RouteItemRole;
 }
 
+/** 选型组里的一个选项：一个框架/方向，下面是一系列教程 */
+export interface RouteChoiceOption {
+  /** 选项名，如 React */
+  name: string;
+  role?: RouteItemRole;
+  items: (string | RouteItem)[];
+}
+
 export interface RouteTier {
   name: string;
   /** sequence = 顺序学习（默认）；choice = 多选一 */
@@ -146,12 +154,18 @@ export interface RouteTier {
   /** 选型组的说明文字 */
   note?: string;
   items: (string | RouteItem)[];
+  /** choice 组专用：每个选项代表一个可选的框架/方向，各含一系列教程 */
+  options?: RouteChoiceOption[];
 }
 
 export const normalizeItem = (item: string | RouteItem): RouteItem =>
   typeof item === 'string' ? { slug: item } : item;
 
-export const tierSlugs = (tier: RouteTier): string[] => tier.items.map((item) => normalizeItem(item).slug);
+/** 把一组教程（含选型组各选项）摊平成 slug 列表 */
+export const tierSlugs = (tier: RouteTier): string[] =>
+  tier.options?.length
+    ? tier.options.flatMap((option) => option.items.map((item) => normalizeItem(item).slug))
+    : tier.items.map((item) => normalizeItem(item).slug);
 
 export const routePlan: Record<string, RouteTier[]> = {
   'java': [
@@ -207,13 +221,14 @@ export const routePlan: Record<string, RouteTier[]> = {
     {
       name: '框架选型',
       kind: 'choice',
-      note: '五个框架任选其一即可，学完再继续下面的公共模块；推荐项适合大多数人，可选项按目标或团队技术栈选择。',
-      items: [
-        { slug: 'react', role: 'recommended' },
-        { slug: 'vue', role: 'optional' },
-        { slug: 'angular', role: 'optional' },
-        { slug: 'svelte', role: 'optional' },
-        { slug: 'solid', role: 'optional' },
+      note: '五个框架任选其一即可，每个框架下是一系列配套教程；学完再继续下面的公共模块。推荐项适合大多数人，可选项按目标或团队技术栈选择。',
+      items: [],
+      options: [
+        { name: 'React', role: 'recommended', items: ['react', 'react-router', 'react-state', 'ant-design', 'nextjs'] },
+        { name: 'Vue', role: 'optional', items: ['vue', 'vue-router', 'pinia', 'element-plus', 'nuxt'] },
+        { name: 'Angular', role: 'optional', items: ['angular', 'rxjs', 'ngrx', 'angular-material'] },
+        { name: 'Svelte', role: 'optional', items: ['svelte'] },
+        { name: 'Solid', role: 'optional', items: ['solid'] },
       ],
     },
     { name: '前端工程化与质量', items: ['frontend-bundler', 'eslint', 'vitest', 'playwright', 'a11y', 'i18n', 'perf-web'] },

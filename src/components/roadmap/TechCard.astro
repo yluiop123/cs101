@@ -1,0 +1,55 @@
+---
+import { withBase } from '@/lib/utils';
+import { seriesMeta, normalizeItem, routePlan, tierSlugs, type RouteItem } from '@/data/route-plan';
+
+interface Props {
+  item: string | RouteItem;
+  /** 教程已有章节数；不传表示教程还没上线 */
+  chapters?: number;
+}
+
+const { item, chapters } = Astro.props as Props;
+const normalized = normalizeItem(item);
+const title = seriesMeta[normalized.slug] ?? normalized.slug;
+const role = normalized.role;
+const roleLabel = role === 'recommended' ? '推荐' : role === 'optional' ? '可选' : null;
+
+// kind: 'route' 的卡片跳到另一条学习路线
+const routeTiers = routePlan[normalized.slug] ?? [];
+const routeScale =
+  normalized.kind === 'route'
+    ? `${routeTiers.length} 板块 · ${new Set(routeTiers.flatMap((tier) => tierSlugs(tier))).size} 项`
+    : '';
+---
+
+{
+  normalized.kind === 'route' ? (
+    <a
+      class="cs-tut-card cs-tut-card--route"
+      href={withBase(`/tech-stack/${normalized.slug}/`)}
+      aria-label={`进入${title}路线`}
+    >
+      <span class="cs-tut-name">
+        {title}
+        <span class="cs-badge cs-badge--route">路线</span>
+      </span>
+      <span class="cs-tut-meta">{routeScale} →</span>
+    </a>
+  ) : typeof chapters === 'number' ? (
+    <a class="cs-tut-card" href={withBase(`/tutorials/${normalized.slug}/`)}>
+      <span class="cs-tut-name">
+        {title}
+        {roleLabel && <span class:list={['cs-badge', `cs-badge--${role}`]}>{roleLabel}</span>}
+      </span>
+      <span class="cs-tut-meta">{chapters} 章</span>
+    </a>
+  ) : (
+    <span class="cs-tut-card is-planned">
+      <span class="cs-tut-name">
+        {title}
+        {roleLabel && <span class:list={['cs-badge', `cs-badge--${role}`]}>{roleLabel}</span>}
+      </span>
+      <span class="cs-tut-meta">敬请期待</span>
+    </span>
+  )
+}

@@ -1,7 +1,7 @@
 ---
 import { getSeries } from '@/lib/content';
-import { routePlan, seriesMeta, normalizeItem, tierSlugs } from '@/data/route-plan';
-import { withBase } from '@/lib/utils';
+import { routePlan } from '@/data/route-plan';
+import TechCard from '@/components/roadmap/TechCard.astro';
 
 interface Props {
   page: string;
@@ -13,12 +13,7 @@ const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
 const hasChoice = tiers.some((tier) => tier.kind === 'choice');
 
-// 路线卡右侧的规模提示：N 板块 · M 项
-const routeScale = (slug: string) => {
-  const routeTiers = routePlan[slug] ?? [];
-  const count = new Set(routeTiers.flatMap((tier) => tierSlugs(tier))).size;
-  return `${routeTiers.length} 板块 · ${count} 项`;
-};
+const chaptersOf = (slug: string) => bySlug.get(slug)?.chapters.length;
 ---
 
 {
@@ -44,62 +39,50 @@ const routeScale = (slug: string) => {
       <div class="cs-section-head">
         <h2 class="cs-section-title">
           {tier.name}
-          {tier.kind === 'choice' && <span class="cs-choice-badge">{tier.items.length} 选 1</span>}
+          {tier.kind === 'choice' && tier.options?.length && (
+            <span class="cs-choice-badge">{tier.options.length} 选 1</span>
+          )}
         </h2>
       </div>
       {tier.note && <p class="cs-tier-note">{tier.note}</p>}
-      <ul class="cs-tut-grid">
-        {tier.items.map((raw) => {
-          const item = normalizeItem(raw);
-          const title = seriesMeta[item.slug] ?? item.slug;
-          const roleBadge = item.role && (
-            <span class:list={['cs-badge', `cs-badge--${item.role}`]}>
-              {item.role === 'recommended' ? '推荐' : '可选'}
-            </span>
-          );
 
-          if (item.kind === 'route') {
-            return (
-              <li>
-                <a
-                  class="cs-tut-card cs-tut-card--route"
-                  href={withBase(`/tech-stack/${item.slug}/`)}
-                  aria-label={`进入${title}路线`}
-                >
-                  <span class="cs-tut-name">
-                    {title}
-                    <span class="cs-badge cs-badge--route">路线</span>
+      {tier.options?.length ? (
+        <div class="cs-choice-grid">
+          {tier.options.map((option, optionIndex) => (
+            <div
+              id={`tier-${index}-${optionIndex}`}
+              class:list={[
+                'cs-choice-option',
+                option.role === 'recommended' && 'cs-choice-option--recommended',
+              ]}
+            >
+              <h3 class="cs-choice-title">
+                {option.name}
+                {option.role && (
+                  <span class:list={['cs-badge', `cs-badge--${option.role}`]}>
+                    {option.role === 'recommended' ? '推荐' : '可选'}
                   </span>
-                  <span class="cs-tut-meta">{routeScale(item.slug)} →</span>
-                </a>
-              </li>
-            );
-          }
-
-          const found = bySlug.get(item.slug);
-          return (
+                )}
+              </h3>
+              <ul class="cs-tut-grid cs-tut-grid--stack">
+                {option.items.map((item) => (
+                  <li>
+                    <TechCard item={item} chapters={chaptersOf(typeof item === 'string' ? item : item.slug)} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ul class="cs-tut-grid">
+          {tier.items.map((item) => (
             <li>
-              {found ? (
-                <a class="cs-tut-card" href={withBase(`/tutorials/${item.slug}/`)}>
-                  <span class="cs-tut-name">
-                    {title}
-                    {roleBadge}
-                  </span>
-                  <span class="cs-tut-meta">{found.chapters.length} 章</span>
-                </a>
-              ) : (
-                <span class="cs-tut-card is-planned">
-                  <span class="cs-tut-name">
-                    {title}
-                    {roleBadge}
-                  </span>
-                  <span class="cs-tut-meta">敬请期待</span>
-                </span>
-              )}
+              <TechCard item={item} chapters={chaptersOf(typeof item === 'string' ? item : item.slug)} />
             </li>
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+      )}
     </section>
   ))
 }

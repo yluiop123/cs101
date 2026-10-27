@@ -858,6 +858,66 @@ starlight-theme-select option {
   font-size: 0.85rem;
 }
 
+/* 选型组内部：每个选项是一组教程 */
+.cs-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.cs-choice-option {
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  background: var(--cs-bg);
+  padding: 0.75rem 0.8rem 0.85rem;
+  scroll-margin-top: 80px;
+}
+
+.cs-choice-option--recommended {
+  border-color: var(--cs-accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cs-accent) 35%, transparent);
+}
+
+.cs-choice-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin: 0 0 0.65rem;
+  padding: 0;
+  border: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cs-tut-grid--stack {
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+}
+
+.cs-tut-grid--stack .cs-tut-card {
+  font-size: 0.87rem;
+  padding: 0.45rem 0.65rem;
+}
+
+/* 左侧栏里的选型子项 */
+.cs-sidebar-sub {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.3rem;
+}
+
+.cs-sidebar-sections .cs-sidebar-sub li {
+  border-bottom: 0;
+}
+
+.cs-sidebar-sections .cs-sidebar-sub a {
+  padding: 0.28rem 0.75rem 0.28rem 1.65rem;
+  font-size: 0.83rem;
+  font-weight: 500;
+}
+
 .cs-legend {
   display: flex;
   flex-wrap: wrap;
