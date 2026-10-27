@@ -697,6 +697,11 @@ starlight-theme-select option {
   scroll-margin-top: 0;
 }
 
+/* 首页 / 应用领域共用的分组区块 */
+.cs-card-section {
+  scroll-margin-top: 88px;
+}
+
 .cs-section-head {
   display: flex;
   align-items: baseline;
@@ -795,6 +800,12 @@ starlight-theme-select option {
   white-space: nowrap;
 }
 
+.cs-badge--required {
+  background: var(--cs-accent-dark);
+  border-color: var(--cs-accent-dark);
+  color: #fff;
+}
+
 .cs-badge--recommended {
   background: var(--cs-accent);
   border-color: var(--cs-accent);
@@ -840,7 +851,7 @@ starlight-theme-select option {
   margin-bottom: 0.7rem;
 }
 
-.cs-choice-badge {
+.cs-tier-badge {
   margin-inline-start: 0.55rem;
   padding: 0.05rem 0.5rem;
   border: 1px solid var(--cs-accent);
@@ -850,6 +861,17 @@ starlight-theme-select option {
   font-weight: 700;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+.cs-tier-badge--choice {
+  border-style: dashed;
+  color: var(--cs-muted);
+}
+
+.cs-tier-badge--required {
+  background: var(--cs-accent-dark);
+  border-color: var(--cs-accent-dark);
+  color: #fff;
 }
 
 .cs-tier-note {
@@ -937,14 +959,6 @@ starlight-theme-select option {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-}
-
-.cs-domain-section {
-  scroll-margin-top: 0;
-}
-
-.cs-domain .cs-tut-grid li {
-  scroll-margin-top: 88px;
 }
 
 .cs-series-list {

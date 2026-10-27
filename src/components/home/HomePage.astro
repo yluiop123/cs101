@@ -1,9 +1,10 @@
 ---
 import { getSeries } from '@/lib/content';
-import { withBase } from '@/lib/utils';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
+import CardSection from '@/components/shared/CardSection.astro';
 import { homeSections, type CatalogTutorial } from '@/data/catalog';
 import { routePlan, seriesMeta, tierSlugs } from '@/data/route-plan';
+import type { CardSectionData } from '@/data/cards';
 
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
@@ -16,18 +17,21 @@ const routeTutorials = (roadmap?: string): CatalogTutorial[] => {
   return slugs.map((slug) => ({ slug, title: seriesMeta[slug] ?? slug }));
 };
 
-const sections = homeSections.map((group) => {
-  const tutorials = (group.tutorials ?? routeTutorials(group.roadmap)).map(
-    (tutorial: CatalogTutorial) => {
+const sections: CardSectionData[] = homeSections.map((group) => {
+  const tutorials = group.tutorials ?? routeTutorials(group.roadmap);
+  return {
+    id: group.id,
+    title: group.name,
+    more: group.roadmap ? { href: group.roadmap } : undefined,
+    items: tutorials.map((tutorial) => {
       const found = bySlug.get(tutorial.slug);
       return {
-        ...tutorial,
-        available: Boolean(found),
-        chapters: found?.chapters.length ?? 0,
+        title: tutorial.title,
+        href: found ? `/tutorials/${tutorial.slug}/` : undefined,
+        meta: found ? `${found.chapters.length} 章` : '敬请期待',
       };
-    },
-  );
-  return { ...group, tutorials };
+    }),
+  };
 });
 ---
 
@@ -36,36 +40,5 @@ const sections = homeSections.map((group) => {
 
   <ContinueCard client:visible series={series} />
 
-  {
-    sections.map((section) => (
-      <section id={section.id} class="cs-home-section">
-        <div class="cs-section-head">
-          <h2 class="cs-section-title">{section.name}</h2>
-          {section.roadmap && (
-            <a class="cs-section-more" href={withBase(section.roadmap)}>
-              学习路线 →
-            </a>
-          )}
-        </div>
-
-        <ul class="cs-tut-grid">
-          {section.tutorials.map((tutorial) => (
-            <li>
-              {tutorial.available ? (
-                <a class="cs-tut-card" href={withBase(`/tutorials/${tutorial.slug}/`)}>
-                  <span>{tutorial.title}</span>
-                  <span class="cs-tut-meta">{tutorial.chapters} 章</span>
-                </a>
-              ) : (
-                <span class="cs-tut-card is-planned">
-                  <span>{tutorial.title}</span>
-                  <span class="cs-tut-meta">敬请期待</span>
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+  {sections.map((section) => <CardSection {...section} />)}
 </div>

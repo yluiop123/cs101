@@ -1,8 +1,9 @@
 ---
 import { getSeries } from '@/lib/content';
-import { withBase } from '@/lib/utils';
+import CardSection from '@/components/shared/CardSection.astro';
 import { routePlan, tierSlugs } from '@/data/route-plan';
 import { domains, domainCategories } from '@/data/domains';
+import type { CardSectionData } from '@/data/cards';
 
 const series = await getSeries();
 const available = new Set(series.map((item) => item.slug));
@@ -15,32 +16,19 @@ const cards = domains.map((domain) => {
   return { ...domain, tiers: tiers.length, total: items.length, learnable };
 });
 
-const sections = domainCategories.map((category) => ({
-  ...category,
-  cards: cards.filter((card) => card.category === category.id),
+const sections: CardSectionData[] = domainCategories.map((category) => ({
+  id: `cat-${category.id}`,
+  title: category.name,
+  items: cards
+    .filter((card) => card.category === category.id)
+    .map((card) => ({
+      title: card.name,
+      href: `/domain/${card.slug}/`,
+      meta: `${card.tiers} 阶段 · ${card.total} 项`,
+    })),
 }));
 ---
 
 <div class="cs-domain">
-  {
-    sections.map((section) => (
-      <section id={`cat-${section.id}`} class="cs-domain-section">
-        <div class="cs-section-head">
-          <h2 class="cs-section-title">{section.name}</h2>
-        </div>
-        <ul class="cs-tut-grid">
-          {section.cards.map((card) => (
-            <li id={`domain-${card.slug}`}>
-              <a class="cs-tut-card" href={withBase(`/domain/${card.slug}/`)}>
-                <span>{card.name}</span>
-                <span class="cs-tut-meta">
-                  {card.tiers} 阶段 · {card.total} 项
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+  {sections.map((section) => <CardSection {...section} />)}
 </div>

@@ -12,6 +12,7 @@ const tiers = routePlan[page] ?? [];
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
 const hasChoice = tiers.some((tier) => tier.kind === 'choice');
+const hasRequired = tiers.some((tier) => tier.required);
 
 const chaptersOf = (slug: string) => bySlug.get(slug)?.chapters.length;
 ---
@@ -21,8 +22,10 @@ const chaptersOf = (slug: string) => bySlug.get(slug)?.chapters.length;
 }
 
 {
-  hasChoice && (
+  (hasChoice || hasRequired) && (
     <p class="cs-legend">
+      <span class="cs-badge cs-badge--required">必学</span>
+      <span class="cs-legend-text">所有路线都要学</span>
       <span class="cs-badge cs-badge--recommended">推荐</span>
       <span class="cs-legend-text">优先选择</span>
       <span class="cs-badge cs-badge--optional">可选</span>
@@ -39,8 +42,9 @@ const chaptersOf = (slug: string) => bySlug.get(slug)?.chapters.length;
       <div class="cs-section-head">
         <h2 class="cs-section-title">
           {tier.name}
+          {tier.required && <span class="cs-tier-badge cs-tier-badge--required">必学</span>}
           {tier.kind === 'choice' && tier.options?.length && (
-            <span class="cs-choice-badge">{tier.options.length} 选 1</span>
+            <span class="cs-tier-badge cs-tier-badge--choice">{tier.options.length} 选 1</span>
           )}
         </h2>
       </div>

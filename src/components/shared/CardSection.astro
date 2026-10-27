@@ -1,0 +1,47 @@
+---
+import { withBase } from '@/lib/utils';
+import type { CardSectionData } from '@/data/cards';
+
+type Props = CardSectionData;
+
+const { id, title, more, items } = Astro.props as Props;
+---
+
+<section id={id} class="cs-card-section">
+  <div class="cs-section-head">
+    <h2 class="cs-section-title">{title}</h2>
+    {more && <a class="cs-section-more" href={withBase(more.href)}>{more.label ?? '学习路线 →'}</a>}
+  </div>
+
+  <ul class="cs-tut-grid">
+    {items.map((item) => (
+      <li>
+        {item.href ? (
+          <a class="cs-tut-card" href={withBase(item.href)}>
+            <span class="cs-tut-name">
+              {item.title}
+              {item.badges?.map((badge) => (
+                <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
+                  {badge.label}
+                </span>
+              ))}
+            </span>
+            <span class="cs-tut-meta">{item.meta}</span>
+          </a>
+        ) : (
+          <span class="cs-tut-card is-planned">
+            <span class="cs-tut-name">
+              {item.title}
+              {item.badges?.map((badge) => (
+                <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
+                  {badge.label}
+                </span>
+              ))}
+            </span>
+            <span class="cs-tut-meta">{item.meta ?? '敬请期待'}</span>
+          </span>
+        )}
+      </li>
+    ))}
+  </ul>
+</section>

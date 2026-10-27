@@ -129,8 +129,8 @@ export const seriesMeta: Record<string, string> = {
   bi: 'BI 与数据可视化',
 }
 
-/** 路线卡片的可选角色：选型组里用于标记推荐项 / 可选项 */
-export type RouteItemRole = 'recommended' | 'optional';
+/** 路线条目的学习要求：必学 / 推荐 / 可选 */
+export type RouteItemRole = 'required' | 'recommended' | 'optional';
 
 /** 路线里的一项：默认是教程；kind: 'route' 表示跳到另一条学习路线 */
 export interface RouteItem {
@@ -151,6 +151,8 @@ export interface RouteTier {
   name: string;
   /** sequence = 顺序学习（默认）；choice = 多选一 */
   kind?: 'sequence' | 'choice';
+  /** 必学模块：标题旁显示「必学」 */
+  required?: boolean;
   /** 选型组的说明文字 */
   note?: string;
   items: (string | RouteItem)[];
@@ -217,7 +219,7 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '实战与生态 · 框架与测试', items: ['vue', 'react', 'angular', 'svelte', 'vite', 'vitest', 'playwright', 'docker'] },
   ],
   'frontend': [
-    { name: 'Web 公共基础', items: ['html', 'css', 'javascript', 'typescript', 'dom', 'tailwind'] },
+    { name: 'Web 公共基础', required: true, items: ['html', 'css', 'javascript', 'typescript', 'dom', 'tailwind'] },
     {
       name: '框架选型',
       kind: 'choice',
@@ -231,7 +233,7 @@ export const routePlan: Record<string, RouteTier[]> = {
         { name: 'Solid', role: 'optional', items: ['solid'] },
       ],
     },
-    { name: '前端工程化与质量', items: ['frontend-bundler', 'eslint', 'vitest', 'playwright', 'a11y', 'i18n', 'perf-web'] },
+    { name: '前端工程化与质量', required: true, items: ['frontend-bundler', 'eslint', 'vitest', 'playwright', 'a11y', 'i18n', 'perf-web'] },
     { name: '全栈与服务端', items: ['nodejs', 'rest-api', 'express', 'nestjs', 'bun', 'deno'] },
     { name: '桌面端开发', items: ['electron', 'tauri'] },
     { name: '跨端与小程序', items: ['flutter', 'react-native', 'uniapp'] },

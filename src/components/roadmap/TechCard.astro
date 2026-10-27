@@ -12,7 +12,8 @@ const { item, chapters } = Astro.props as Props;
 const normalized = normalizeItem(item);
 const title = seriesMeta[normalized.slug] ?? normalized.slug;
 const role = normalized.role;
-const roleLabel = role === 'recommended' ? '推荐' : role === 'optional' ? '可选' : null;
+const roleLabel =
+  role === 'required' ? '必学' : role === 'recommended' ? '推荐' : role === 'optional' ? '可选' : null;
 
 // kind: 'route' 的卡片跳到另一条学习路线
 const routeTiers = routePlan[normalized.slug] ?? [];
