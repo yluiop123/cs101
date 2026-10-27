@@ -384,6 +384,7 @@ starlight-theme-select option {
 /* Starlight 会给 markdown 内容里“非首个子元素”补 margin-top，
    组件内部的卡片、列表项因此高低不齐，这里统一清零，由组件自己控制间距。 */
 .cs-course-grid > *,
+.cs-card-section > *,
 .cs-series-grid > *,
 .cs-series-list > *,
 .cs-chapter-list > *,
@@ -885,10 +886,18 @@ starlight-theme-select option {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 0.9rem;
-  align-items: start;
+  align-items: stretch;
+}
+
+/* 抵消 Starlight 给兄弟节点加的 16px 上间距，否则选型面板会逐个往下错位 */
+.cs-choice-grid > *,
+.cs-choice-option > * {
+  margin-top: 0;
 }
 
 .cs-choice-option {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--cs-border);
   border-radius: var(--cs-radius);
   background: var(--cs-bg);
