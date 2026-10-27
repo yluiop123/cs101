@@ -28,7 +28,6 @@ const sections: CardSectionData[] = homeSections.map((group) => {
       return {
         title: tutorial.title,
         href: found ? `/tutorials/${tutorial.slug}/` : undefined,
-        meta: found ? `${found.chapters.length} 章` : '敬请期待',
       };
     }),
   };

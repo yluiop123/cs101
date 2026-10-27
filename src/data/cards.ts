@@ -15,7 +15,7 @@ export interface CardItem {
   title: string;
   /** 有 href = 可点击卡片；没有 = 规划中（虚线） */
   href?: string;
-  /** 卡片右侧的提示文字，如 “12 章”“4 阶段 · 19 项” */
+  /** 卡片右侧的补充文字（可选），如“4 阶段 · 19 项” */
   meta?: string;
   badges?: CardBadge[];
 }

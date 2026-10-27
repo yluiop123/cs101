@@ -121,7 +121,7 @@ interface CardBadge { label: string; tone?: CardBadgeTone }
 interface CardItem {
   title: string;
   href?: string;   // 有 = 可点击；没有 = 规划中（虚线卡）
-  meta?: string;   // 右侧提示：「12 章」「4 阶段 · 19 项」
+  meta?: string;   // 右侧补充文字（可选），如「4 阶段 · 19 项」
   badges?: CardBadge[];
 }
 
@@ -159,7 +159,7 @@ interface ChapterInfo { id: string; title: string; order: number; duration?: num
 interface SeriesInfo  { slug: string; title: string; description?: string; chapters: ChapterInfo[]; totalDuration: number }
 ```
 
-`getSeries()` 决定：卡片上的「N 章」、教程有没有上线（没有章节 → 卡片显示「敬请期待」并变虚线）、
+`getSeries()` 决定：教程有没有上线（没有章节 → 卡片变虚线、不可点）、
 左侧栏章节列表、继续学习卡。**写完章节页面，卡片自动点亮，不需要额外登记。**
 
 ## 6. 运行时状态（浏览器本地）
@@ -192,7 +192,7 @@ interface ProgressState {
 | `homeSections` | 首页分组顺序、名称、右侧「学习路线 →」入口 |
 | `domainCategories` / `domains` | `/domain/` 的 4 个分类与卡片、左侧栏分类锚点 |
 | `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
-| docs 集合 | 教程页 / 章节页 / 章数 / 进度 / 搜索索引 |
+| docs 集合 | 教程页 / 章节页 / 是否上线 / 进度 / 搜索索引 |
 
 ## 8. 常见改动怎么改
 
@@ -214,4 +214,4 @@ interface ProgressState {
 - `dist/` 与 `public/search-index.json` 是构建产物，不要手改。
 - 已知重复：`TechStackGrid.astro` 里 19 条路线分组是手写的，新增路线需要同时改它和 `routeTitles`；
   `routeTitles` / `routePlan` 里还留着 `desktop`、`mobile` 两条没有页面的预留条目。
-- 大前端 49 项里目前只有 9 个教程有正文（html / css / javascript / typescript / tailwind / react / vue / angular / nodejs），其余显示「整理中」。
+- 大前端 49 项里目前只有 9 个教程有正文（html / css / javascript / typescript / tailwind / react / vue / angular / nodejs），其余是虚线占位卡。

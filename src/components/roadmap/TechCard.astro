@@ -48,18 +48,20 @@ const routeScale =
   ) : typeof chapters === 'number' ? (
     <a class="cs-tut-card" href={withBase(`/tutorials/${normalized.slug}/`)}>
       <span class="cs-tut-name">{title}</span>
-      <span class="cs-tut-tail">
-        {roleLabel && <span class:list={['cs-badge', `cs-badge--${role}`]}>{roleLabel}</span>}
-        <span class="cs-tut-meta">{chapters} 章</span>
-      </span>
+      {roleLabel && (
+        <span class="cs-tut-tail">
+          <span class:list={['cs-badge', `cs-badge--${role}`]}>{roleLabel}</span>
+        </span>
+      )}
     </a>
   ) : (
     <span class="cs-tut-card is-planned">
       <span class="cs-tut-name">{title}</span>
-      <span class="cs-tut-tail">
-        {roleLabel && <span class:list={['cs-badge', `cs-badge--${role}`]}>{roleLabel}</span>}
-        <span class="cs-tut-meta">敬请期待</span>
-      </span>
+      {roleLabel && (
+        <span class="cs-tut-tail">
+          <span class:list={['cs-badge', `cs-badge--${role}`]}>{roleLabel}</span>
+        </span>
+      )}
     </span>
   )
 }

@@ -19,26 +19,30 @@ const { id, title, more, items } = Astro.props as Props;
         {item.href ? (
           <a class="cs-tut-card" href={withBase(item.href)}>
             <span class="cs-tut-name">{item.title}</span>
-            <span class="cs-tut-tail">
-              {item.badges?.map((badge) => (
-                <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
-                  {badge.label}
-                </span>
-              ))}
-              <span class="cs-tut-meta">{item.meta}</span>
-            </span>
+            {(item.badges?.length || item.meta) && (
+              <span class="cs-tut-tail">
+                {item.badges?.map((badge) => (
+                  <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
+                    {badge.label}
+                  </span>
+                ))}
+                {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
+              </span>
+            )}
           </a>
         ) : (
           <span class="cs-tut-card is-planned">
             <span class="cs-tut-name">{item.title}</span>
-            <span class="cs-tut-tail">
-              {item.badges?.map((badge) => (
-                <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
-                  {badge.label}
-                </span>
-              ))}
-              <span class="cs-tut-meta">{item.meta ?? '敬请期待'}</span>
-            </span>
+            {(item.badges?.length || item.meta) && (
+              <span class="cs-tut-tail">
+                {item.badges?.map((badge) => (
+                  <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
+                    {badge.label}
+                  </span>
+                ))}
+                {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
+              </span>
+            )}
           </span>
         )}
       </li>
