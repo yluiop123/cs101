@@ -3,7 +3,7 @@ import { getSeries } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
 import { homeSections, type CatalogTutorial } from '@/data/catalog';
-import { routePlan, seriesMeta } from '@/data/route-plan';
+import { routePlan, seriesMeta, tierSlugs } from '@/data/route-plan';
 
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
@@ -12,7 +12,7 @@ const bySlug = new Map(series.map((item) => [item.slug, item]));
 const routeTutorials = (roadmap?: string): CatalogTutorial[] => {
   if (!roadmap) return [];
   const key = roadmap.replace(/^\/tech-stack\//, '').replace(/\/$/, '');
-  const slugs = [...new Set((routePlan[key] ?? []).flatMap((tier) => tier.items))];
+  const slugs = [...new Set((routePlan[key] ?? []).flatMap((tier) => tierSlugs(tier)))];
   return slugs.map((slug) => ({ slug, title: seriesMeta[slug] ?? slug }));
 };
 

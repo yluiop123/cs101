@@ -46,7 +46,7 @@ export const seriesMeta: Record<string, string> = {
   'media-server': '流媒体服务器', transcoding: '转码与打包', 'cdn-delivery': 'CDN 分发',
   'live-streaming': '直播系统', 'video-conference': '视频会议',
   dom: 'DOM 与浏览器 API', 'component-library': '组件库与设计系统', 'vue-router': 'Vue Router 路由',
-  'state-management': '状态管理教程', svelte: 'Svelte 教程', webpack: 'Webpack 教程', nextjs: 'Next.js 教程',
+  'state-management': '状态管理教程', svelte: 'Svelte 教程', solid: 'Solid 教程', webpack: 'Webpack 教程', nextjs: 'Next.js 教程',
   nuxt: 'Nuxt 教程', astro: 'Astro 教程', pnpm: 'pnpm 与包管理进阶', bun: 'Bun 教程', deno: 'Deno 教程',
   eslint: 'ESLint 与代码规范', vitest: 'Vitest 单元测试', playwright: 'Playwright 端到端测试',
   'perf-web': '前端性能优化', a11y: 'Web 可访问性', i18n: 'Web 国际化',
@@ -129,7 +129,30 @@ export const seriesMeta: Record<string, string> = {
   bi: 'BI 与数据可视化',
 }
 
-export interface RouteTier { name: string; items: string[] }
+/** 路线卡片的可选角色：选型组里用于标记推荐项 / 可选项 */
+export type RouteItemRole = 'recommended' | 'optional';
+
+/** 路线里的一项：默认是教程；kind: 'route' 表示跳到另一条学习路线 */
+export interface RouteItem {
+  slug: string;
+  kind?: 'tutorial' | 'route';
+  role?: RouteItemRole;
+}
+
+export interface RouteTier {
+  name: string;
+  /** sequence = 顺序学习（默认）；choice = 多选一 */
+  kind?: 'sequence' | 'choice';
+  /** 选型组的说明文字 */
+  note?: string;
+  items: (string | RouteItem)[];
+}
+
+export const normalizeItem = (item: string | RouteItem): RouteItem =>
+  typeof item === 'string' ? { slug: item } : item;
+
+export const tierSlugs = (tier: RouteTier): string[] => tier.items.map((item) => normalizeItem(item).slug);
+
 export const routePlan: Record<string, RouteTier[]> = {
   'java': [
     { name: '入门 · 语言与工具', items: ['java', 'maven', 'gradle'] },
@@ -181,16 +204,24 @@ export const routePlan: Record<string, RouteTier[]> = {
   ],
   'frontend': [
     { name: 'Web 公共基础', items: ['html', 'css', 'javascript', 'typescript', 'dom', 'tailwind'] },
-    { name: 'React 技术栈', items: ['react', 'react-router', 'react-state', 'ant-design', 'nextjs'] },
-    { name: 'Vue 技术栈', items: ['vue', 'vue-router', 'pinia', 'element-plus', 'nuxt'] },
-    { name: 'Angular 技术栈', items: ['angular', 'rxjs', 'ngrx', 'angular-material'] },
-    { name: '其他前端框架与内容开发', items: ['svelte', 'astro'] },
-    { name: '文档站点与静态站点生成', items: ['vitepress', 'docusaurus', 'starlight'] },
+    {
+      name: '框架选型',
+      kind: 'choice',
+      note: '五个框架任选其一即可，学完再继续下面的公共模块；推荐项适合大多数人，可选项按目标或团队技术栈选择。',
+      items: [
+        { slug: 'react', role: 'recommended' },
+        { slug: 'vue', role: 'optional' },
+        { slug: 'angular', role: 'optional' },
+        { slug: 'svelte', role: 'optional' },
+        { slug: 'solid', role: 'optional' },
+      ],
+    },
     { name: '前端工程化与质量', items: ['frontend-bundler', 'eslint', 'vitest', 'playwright', 'a11y', 'i18n', 'perf-web'] },
     { name: '全栈与服务端', items: ['nodejs', 'rest-api', 'express', 'nestjs', 'bun', 'deno'] },
     { name: '桌面端开发', items: ['electron', 'tauri'] },
     { name: '跨端与小程序', items: ['flutter', 'react-native', 'uniapp'] },
     { name: '原生移动开发', items: ['kotlin', 'android-sdk', 'jetpack-compose', 'swift', 'swiftui'] },
+    { name: '文档站点与静态站点生成', items: ['vitepress', 'docusaurus', 'starlight', 'astro'] },
   ],
   'sql-database': [
     { name: '入门 · SQL 与环境', items: ['sql', 'mysql', 'postgresql'] },

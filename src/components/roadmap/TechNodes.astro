@@ -1,6 +1,6 @@
 ---
 import { getSeries } from '@/lib/content';
-import { routePlan, seriesMeta } from '@/data/route-plan';
+import { routePlan, seriesMeta, normalizeItem, tierSlugs } from '@/data/route-plan';
 import { withBase } from '@/lib/utils';
 
 interface Props {
@@ -8,9 +8,17 @@ interface Props {
 }
 
 const { page } = Astro.props as Props;
-const tiers = (routePlan as Record<string, { name: string; items: string[] }[]>)[page] ?? [];
+const tiers = routePlan[page] ?? [];
 const series = await getSeries();
 const bySlug = new Map(series.map((item) => [item.slug, item]));
+const hasChoice = tiers.some((tier) => tier.kind === 'choice');
+
+// 路线卡右侧的规模提示：N 板块 · M 项
+const routeScale = (slug: string) => {
+  const routeTiers = routePlan[slug] ?? [];
+  const count = new Set(routeTiers.flatMap((tier) => tierSlugs(tier))).size;
+  return `${routeTiers.length} 板块 · ${count} 项`;
+};
 ---
 
 {
@@ -18,25 +26,73 @@ const bySlug = new Map(series.map((item) => [item.slug, item]));
 }
 
 {
+  hasChoice && (
+    <p class="cs-legend">
+      <span class="cs-badge cs-badge--recommended">推荐</span>
+      <span class="cs-legend-text">优先选择</span>
+      <span class="cs-badge cs-badge--optional">可选</span>
+      <span class="cs-legend-text">按目标或团队技术栈选</span>
+      <span class="cs-badge cs-badge--planned">整理中</span>
+      <span class="cs-legend-text">教程待上线</span>
+    </p>
+  )
+}
+
+{
   tiers.map((tier, index) => (
-    <section id={`tier-${index}`} class="cs-tier">
+    <section id={`tier-${index}`} class:list={['cs-tier', tier.kind === 'choice' && 'cs-tier--choice']}>
       <div class="cs-section-head">
-        <h2 class="cs-section-title">{tier.name}</h2>
+        <h2 class="cs-section-title">
+          {tier.name}
+          {tier.kind === 'choice' && <span class="cs-choice-badge">{tier.items.length} 选 1</span>}
+        </h2>
       </div>
+      {tier.note && <p class="cs-tier-note">{tier.note}</p>}
       <ul class="cs-tut-grid">
-        {tier.items.map((slug) => {
-          const found = bySlug.get(slug);
-          const title = seriesMeta[slug] ?? slug;
+        {tier.items.map((raw) => {
+          const item = normalizeItem(raw);
+          const title = seriesMeta[item.slug] ?? item.slug;
+          const roleBadge = item.role && (
+            <span class:list={['cs-badge', `cs-badge--${item.role}`]}>
+              {item.role === 'recommended' ? '推荐' : '可选'}
+            </span>
+          );
+
+          if (item.kind === 'route') {
+            return (
+              <li>
+                <a
+                  class="cs-tut-card cs-tut-card--route"
+                  href={withBase(`/tech-stack/${item.slug}/`)}
+                  aria-label={`进入${title}路线`}
+                >
+                  <span class="cs-tut-name">
+                    {title}
+                    <span class="cs-badge cs-badge--route">路线</span>
+                  </span>
+                  <span class="cs-tut-meta">{routeScale(item.slug)} →</span>
+                </a>
+              </li>
+            );
+          }
+
+          const found = bySlug.get(item.slug);
           return (
             <li>
               {found ? (
-                <a class="cs-tut-card" href={withBase(`/tutorials/${slug}/`)}>
-                  <span>{title}</span>
+                <a class="cs-tut-card" href={withBase(`/tutorials/${item.slug}/`)}>
+                  <span class="cs-tut-name">
+                    {title}
+                    {roleBadge}
+                  </span>
                   <span class="cs-tut-meta">{found.chapters.length} 章</span>
                 </a>
               ) : (
                 <span class="cs-tut-card is-planned">
-                  <span>{title}</span>
+                  <span class="cs-tut-name">
+                    {title}
+                    {roleBadge}
+                  </span>
                   <span class="cs-tut-meta">敬请期待</span>
                 </span>
               )}

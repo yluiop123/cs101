@@ -1,6 +1,6 @@
 ---
 import { withBase } from '@/lib/utils';
-import { routePlan } from '@/data/route-plan';
+import { routePlan, tierSlugs } from '@/data/route-plan';
 
 interface TechGroup {
   name: string;
@@ -52,7 +52,7 @@ const groups: TechGroup[] = [
 // 卡片右侧的规模提示，与首页 / 领域卡片同样式
 const scaleOf = (slug: string) => {
   const tiers = routePlan[slug] ?? [];
-  const count = new Set(tiers.flatMap((tier) => tier.items)).size;
+  const count = new Set(tiers.flatMap((tier) => tierSlugs(tier))).size;
   return `${tiers.length} 阶段 · ${count} 项`;
 };
 ---

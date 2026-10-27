@@ -1,7 +1,7 @@
 ---
 import { getSeries } from '@/lib/content';
 import { withBase } from '@/lib/utils';
-import { routePlan } from '@/data/route-plan';
+import { routePlan, tierSlugs } from '@/data/route-plan';
 import { domains, domainCategories } from '@/data/domains';
 
 const series = await getSeries();
@@ -10,7 +10,7 @@ const available = new Set(series.map((item) => item.slug));
 const cards = domains.map((domain) => {
   const tiers = routePlan[`domain-${domain.slug}`] ?? [];
   // 每条路线的技术项去重后统计：已上线 = 站内已有该教程内容
-  const items = [...new Set(tiers.flatMap((tier) => tier.items))];
+  const items = [...new Set(tiers.flatMap((tier) => tierSlugs(tier)))];
   const learnable = items.filter((slug) => available.has(slug)).length;
   return { ...domain, tiers: tiers.length, total: items.length, learnable };
 });
