@@ -1,7 +1,10 @@
 // 分组 + 卡片的数据结构：首页、应用领域共用同一套渲染组件（CardSection）
 // 新增内容时只改数据（catalog.ts / domains.ts / route-plan.ts），不需要动组件。
 
-export type CardBadgeTone = 'required' | 'recommended' | 'optional' | 'route';
+import type { RouteItemRole } from '@/data/route-plan';
+
+/** 徽标色调：与学习状态同名，另加「route」表示跳转到另一条路线 */
+export type CardBadgeTone = RouteItemRole | 'route';
 
 export interface CardBadge {
   label: string;

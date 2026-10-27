@@ -73,6 +73,8 @@ scripts/                     # 内容规范化、页面生成、搜索索引、�
 .github/workflows/deploy.yml # 构建并部署到 GitHub Pages
 ```
 
+数据结构（内容由哪些数据驱动、新增内容改哪里）见 [DATA-MODEL.md](DATA-MODEL.md)。
+
 ## 部署约定
 
 - 站点部署在 GitHub Pages 项目路径：`https://yluiop123.github.io/cs101/`
