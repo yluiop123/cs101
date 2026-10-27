@@ -790,6 +790,15 @@ starlight-theme-select option {
   min-width: 0;
 }
 
+/* 卡片右侧：状态标签 + 章节数/状态文字，标题再长也只会自己换行 */
+.cs-tut-tail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
 .cs-badge {
   display: inline-block;
   padding: 0.02rem 0.4rem;
@@ -827,6 +836,17 @@ starlight-theme-select option {
   border-style: dashed;
   border-color: var(--cs-border-strong, var(--cs-border));
   color: var(--cs-muted);
+}
+
+/* 暗色主题里强调色会变亮：实心标签与绿色按钮改用深色文字，避免白字压在浅绿上 */
+:root[data-theme='dark'] .cs-badge--required,
+:root[data-theme='dark'] .cs-badge--recommended,
+:root[data-theme='dark'] .cs-tier-badge--required,
+:root[data-theme='dark'] .cs-btn-primary,
+:root[data-theme='dark'] .cs-btn-primary:hover,
+:root[data-theme='dark'] .cs-code-run,
+:root[data-theme='dark'] .cs-code-run:hover {
+  color: #04241a;
 }
 
 /* ---- 路线卡（点击进入另一条学习路线） ---- */
@@ -930,6 +950,25 @@ starlight-theme-select option {
 .cs-tut-grid--stack .cs-tut-card {
   font-size: 0.87rem;
   padding: 0.45rem 0.65rem;
+}
+
+/* 路线页卡片自带状态标签：收紧字号与间距，避免长标题被标签顶到第二行 */
+.cs-tier .cs-tut-card {
+  font-size: 0.88rem;
+  padding: 0.5rem 0.7rem;
+}
+
+.cs-tier .cs-tut-name {
+  gap: 0.35rem;
+}
+
+.cs-tier .cs-tut-card .cs-badge {
+  padding: 0.02rem 0.32rem;
+  font-size: 0.62rem;
+}
+
+.cs-tier .cs-tut-card .cs-tut-meta {
+  font-size: 0.7rem;
 }
 
 /* 左侧栏里的选型子项 */

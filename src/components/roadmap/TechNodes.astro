@@ -82,7 +82,11 @@ const chaptersOf = (slug: string) => bySlug.get(slug)?.chapters.length;
         <ul class="cs-tut-grid">
           {tier.items.map((item) => (
             <li>
-              <TechCard item={item} chapters={chaptersOf(typeof item === 'string' ? item : item.slug)} />
+              <TechCard
+                item={item}
+                role={tier.required ? 'required' : undefined}
+                chapters={chaptersOf(typeof item === 'string' ? item : item.slug)}
+              />
             </li>
           ))}
         </ul>

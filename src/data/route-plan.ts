@@ -34,7 +34,7 @@ export const seriesMeta: Record<string, string> = {
   // 大前端
   'api-testing': 'API 测试', 'perf-testing': '性能测试',
   express: 'Express 教程', nestjs: 'NestJS 教程',
-  'frontend-bundler': '构建工具（Vite / Webpack）',
+  'frontend-bundler': '构建工具 Vite/Webpack',
   vitepress: 'VitePress 文档站', docusaurus: 'Docusaurus 文档站', starlight: 'Starlight 文档站',
   'mini-program': '微信小程序开发', uniapp: 'uni-app 跨端开发',
   'react-router': 'React Router 路由', 'react-state': 'React 状态管理',
@@ -168,6 +168,10 @@ export const tierSlugs = (tier: RouteTier): string[] =>
   tier.options?.length
     ? tier.options.flatMap((option) => option.items.map((item) => normalizeItem(item).slug))
     : tier.items.map((item) => normalizeItem(item).slug);
+
+/** 单项状态：自己标的优先，否则继承所属分组/选型项的默认状态 */
+export const itemRole = (item: string | RouteItem, fallback?: RouteItemRole): RouteItemRole | undefined =>
+  normalizeItem(item).role ?? fallback;
 
 export const routePlan: Record<string, RouteTier[]> = {
   'java': [
