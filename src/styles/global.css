@@ -822,6 +822,20 @@ starlight-theme-select option {
   color: #fff;
 }
 
+/* 主流：常用、生态成熟，比「推荐」弱一档，比「可选」强一档 */
+.cs-badge--popular {
+  border-color: var(--cs-accent);
+  background: color-mix(in srgb, var(--cs-accent) 12%, var(--cs-bg));
+  color: var(--cs-accent-dark);
+}
+
+/* 小众：生态较小，用虚边区分 */
+.cs-badge--niche {
+  border-style: dashed;
+  border-color: var(--cs-border-strong, var(--cs-border));
+  color: var(--cs-muted);
+}
+
 .cs-badge--optional {
   border-color: var(--cs-border-strong, var(--cs-border));
   color: var(--cs-muted);
@@ -868,7 +882,7 @@ starlight-theme-select option {
 }
 
 .cs-tier--choice .cs-section-head {
-  border-bottom-color: var(--cs-border);
+  border-bottom-color: var(--cs-accent);
   margin-bottom: 0.7rem;
 }
 
@@ -930,6 +944,17 @@ starlight-theme-select option {
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cs-accent) 35%, transparent);
 }
 
+/* 主流：绿色描边，强度低于「推荐」的加粗边框 */
+.cs-choice-option--popular {
+  border-color: color-mix(in srgb, var(--cs-accent) 45%, var(--cs-border));
+}
+
+/* 小众：虚线边框 + 更淡的底色，一眼看出不是主线选择 */
+.cs-choice-option--niche {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--cs-border) 12%, var(--cs-bg));
+}
+
 .cs-choice-title {
   display: flex;
   align-items: center;
@@ -972,21 +997,6 @@ starlight-theme-select option {
 }
 
 /* 左侧栏里的选型子项 */
-.cs-sidebar-sub {
-  list-style: none;
-  margin: 0;
-  padding: 0 0 0.3rem;
-}
-
-.cs-sidebar-sections .cs-sidebar-sub li {
-  border-bottom: 0;
-}
-
-.cs-sidebar-sections .cs-sidebar-sub a {
-  padding: 0.28rem 0.75rem 0.28rem 1.65rem;
-  font-size: 0.83rem;
-  font-weight: 500;
-}
 
 .cs-legend {
   display: flex;

@@ -6,6 +6,7 @@ import {
   routePlan,
   tierSlugs,
   itemRole,
+  roleLabels,
   type RouteItem,
   type RouteItemRole,
 } from '@/data/route-plan';
@@ -22,8 +23,7 @@ const { item, chapters, role: inheritedRole } = Astro.props as Props;
 const normalized = normalizeItem(item);
 const title = seriesMeta[normalized.slug] ?? normalized.slug;
 const role = itemRole(item, inheritedRole);
-const roleLabel =
-  role === 'required' ? '必学' : role === 'recommended' ? '推荐' : role === 'optional' ? '可选' : null;
+const roleLabel = role ? roleLabels[role] : null;
 
 // kind: 'route' 的卡片跳到另一条学习路线
 const routeTiers = routePlan[normalized.slug] ?? [];

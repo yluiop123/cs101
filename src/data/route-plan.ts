@@ -129,8 +129,26 @@ export const seriesMeta: Record<string, string> = {
   bi: 'BI 与数据可视化',
 }
 
-/** 路线条目的学习要求：必学 / 推荐 / 可选 */
-export type RouteItemRole = 'required' | 'recommended' | 'optional';
+/** 路线条目的学习要求：必学 / 推荐 / 主流 / 可选 / 小众 */
+export type RouteItemRole = 'required' | 'recommended' | 'popular' | 'optional' | 'niche';
+
+/** 状态标签文案，卡片与分组标题共用 */
+export const roleLabels: Record<RouteItemRole, string> = {
+  required: '必学',
+  recommended: '推荐',
+  popular: '主流',
+  optional: '可选',
+  niche: '小众',
+};
+
+/** 图例里每个状态的解释 */
+export const roleNotes: Record<RouteItemRole, string> = {
+  required: '所有路线都要学',
+  recommended: '优先选择',
+  popular: '常用、生态成熟',
+  optional: '按目标或团队技术栈选',
+  niche: '生态较小，按兴趣选',
+};
 
 /** 路线里的一项：默认是教程；kind: 'route' 表示跳到另一条学习路线 */
 export interface RouteItem {
@@ -227,14 +245,14 @@ export const routePlan: Record<string, RouteTier[]> = {
     {
       name: '框架选型',
       kind: 'choice',
-      note: '五个框架任选其一即可，每个框架下是一系列配套教程；学完再继续下面的公共模块。推荐项适合大多数人，可选项按目标或团队技术栈选择。',
+      note: '五个框架任选其一即可，每个框架下是一系列配套教程；学完再继续下面的公共模块。React 生态与岗位需求最大，Vue / Angular 同样常用，Svelte / Solid 生态较小、适合按兴趣尝试或团队已有积累时选择。',
       items: [],
       options: [
         { name: 'React', role: 'recommended', items: ['react', 'react-router', 'react-state', 'ant-design', 'nextjs'] },
-        { name: 'Vue', role: 'optional', items: ['vue', 'vue-router', 'pinia', 'element-plus', 'nuxt'] },
-        { name: 'Angular', role: 'optional', items: ['angular', 'rxjs', 'ngrx', 'angular-material'] },
-        { name: 'Svelte', role: 'optional', items: ['svelte'] },
-        { name: 'Solid', role: 'optional', items: ['solid'] },
+        { name: 'Vue', role: 'popular', items: ['vue', 'vue-router', 'pinia', 'element-plus', 'nuxt'] },
+        { name: 'Angular', role: 'popular', items: ['angular', 'rxjs', 'ngrx', 'angular-material'] },
+        { name: 'Svelte', role: 'niche', items: ['svelte'] },
+        { name: 'Solid', role: 'niche', items: ['solid'] },
       ],
     },
     { name: '前端工程化与质量', required: true, items: ['frontend-bundler', 'eslint', 'vitest', 'playwright', 'a11y', 'i18n', 'perf-web'] },
