@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
-import { homeSections } from '@/data/catalog';
+import { homeCategories } from '@/data/catalog';
 import { domainCategories } from '@/data/domains';
 import { routeTitles, routePlan } from '@/data/route-plan';
 
@@ -44,12 +44,12 @@ const catalog =
 {
   isHome ? (
     <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">教程目录</p>
+      <p class="cs-sidebar-kicker">技术分类</p>
       <ul class="cs-sidebar-sections">
-        {homeSections.map((group) => (
+        {homeCategories.map((category) => (
           <li>
-            <a href={`#${group.id}`} data-cs-section-link={group.id}>
-              {group.name}
+            <a href={`#${category.id}`} data-cs-section-link={category.id}>
+              {category.name}
             </a>
           </li>
         ))}

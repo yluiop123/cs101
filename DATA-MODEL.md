@@ -6,7 +6,7 @@
 ```
 src/data/route-plan.ts   ← 学习路线（技术路线 + 应用领域路线）   ┐
 src/data/domains.ts      ← 应用领域目录（分类 + 领域清单）        │ 手写数据
-src/data/catalog.ts      ← 首页分组                             │
+src/data/catalog.ts      ← 首页技术分类（9 类 + 卡片跳转）      │
 src/data/cards.ts        ← 分组/卡片渲染结构（类型定义）          ┘
 src/content/docs/**      ← 教程正文、章节（Astro content collection）
         ↓ 构建期
@@ -91,23 +91,27 @@ const domains: DomainEntry[]
 领域详情页的板块内容不在这个文件里，而在 `routePlan['domain-<slug>']`。
 `domains.ts` 只负责「有哪些领域、叫什么、归哪一类」。
 
-## 3. 首页分组：`src/data/catalog.ts`
+## 3. 首页技术分类：`src/data/catalog.ts`
+
+首页按《编程教程网站技术分类体系》的 9 大分类组织，一个分类 = 一个分节，一张卡片 = 一个方向/技术：
 
 ```ts
-interface CatalogTutorial { slug: string; title: string }
-
-interface CatalogGroup {
-  id: string;            // 页内锚点 #<id>，左侧栏也用它
-  name: string;
-  roadmap?: string;      // 有路线：卡片自动取该路线全部教程（与路线页一致）
-  tutorials?: CatalogTutorial[];  // 无路线：手写清单（目前只有「工具与基础」）
+interface HomeItem {
+  title: string;
+  href?: string;   // 有 = 点击进入该方向的学习路线/教程；没有 = 规划中（虚线卡）
 }
 
-const homeSections: CatalogGroup[]   // 顺序 = 首页分组顺序
+interface HomeCategory {
+  id: string;      // 页内锚点 #<id>，左侧栏「技术分类」也用它
+  name: string;    // 如「编程语言与运行时」
+  items: HomeItem[];
+}
+
+const homeCategories: HomeCategory[]   // 顺序 = 首页分节顺序、左侧栏顺序
 ```
 
-有 `roadmap` 的分组（大前端 / Java / 数据库 …）**不写卡片清单**，构建期从 `routePlan` 摊平得到，
-所以首页和路线页永远不会对不上；只有「工具与基础」因为暂时没有路线页，才手写 `tutorials`。
+卡片**直接指向路线页或教程页**（如 `Java` → `/tech-stack/java/`、`Git 与版本控制` → `/tutorials/git/`），
+所以首页各分节标题旁不再有「学习路线 →」入口。
 
 ## 4. 分组 + 卡片的通用结构：`src/data/cards.ts`
 
@@ -184,12 +188,12 @@ interface ProgressState {
 
 | 数据 | 决定什么 |
 | --- | --- |
-| `routePlan[key]` | 路线页板块顺序 / 卡片 / 图例；首页对应分组卡片；tech-stack 索引卡与领域索引卡的「N 阶段 · M 项」 |
+| `routePlan[key]` | 路线页板块顺序 / 卡片 / 图例；tech-stack 索引卡与领域索引卡的「N 阶段 · M 项」 |
 | `tier.name` | 板块标题、左侧栏一级项、`#tier-N` 锚点 |
 | `option.name` / `option.role` | 选型面板标题与状态徽标 |
 | `seriesMeta[slug]` | 所有卡片标题 |
 | `routeTitles` | 路线页标题、「学习路线」左侧栏顺序、面包屑末级 |
-| `homeSections` | 首页分组顺序、名称、右侧「学习路线 →」入口 |
+| `homeCategories` | 首页 9 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
 | `domainCategories` / `domains` | `/domain/` 的 4 个分类与卡片、左侧栏分类锚点 |
 | `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
 | docs 集合 | 教程页 / 章节页 / 是否上线 / 进度 / 搜索索引 |
@@ -204,7 +208,7 @@ interface ProgressState {
 | 改教程在卡片上的名字 | `seriesMeta` |
 | 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx` + `routeTitles` + `TechStackGrid` 分组 |
 | 新增一个应用领域 | `domains.ts` + `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
-| 首页加一个分组 | `catalog.ts`（有路线就只写 `roadmap`） |
+| 首页加/调整分类或卡片 | `catalog.ts`（卡片 `href` 指向已有路线或教程，没做就留空显示虚线卡） |
 
 ## 9. 约定与已知重复点
 

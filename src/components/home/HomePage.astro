@@ -2,36 +2,17 @@
 import { getSeries } from '@/lib/content';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
 import CardSection from '@/components/shared/CardSection.astro';
-import { homeSections, type CatalogTutorial } from '@/data/catalog';
-import { routePlan, seriesMeta, tierSlugs } from '@/data/route-plan';
+import { homeCategories } from '@/data/catalog';
 import type { CardSectionData } from '@/data/cards';
 
 const series = await getSeries();
-const bySlug = new Map(series.map((item) => [item.slug, item]));
 
-// 有学习路线的分组：内容直接取该路线的全部技术项，保证首页与「学习路线 →」一致
-const routeTutorials = (roadmap?: string): CatalogTutorial[] => {
-  if (!roadmap) return [];
-  const key = roadmap.replace(/^\/tech-stack\//, '').replace(/\/$/, '');
-  const slugs = [...new Set((routePlan[key] ?? []).flatMap((tier) => tierSlugs(tier)))];
-  return slugs.map((slug) => ({ slug, title: seriesMeta[slug] ?? slug }));
-};
-
-const sections: CardSectionData[] = homeSections.map((group) => {
-  const tutorials = group.tutorials ?? routeTutorials(group.roadmap);
-  return {
-    id: group.id,
-    title: group.name,
-    more: group.roadmap ? { href: group.roadmap } : undefined,
-    items: tutorials.map((tutorial) => {
-      const found = bySlug.get(tutorial.slug);
-      return {
-        title: tutorial.title,
-        href: found ? `/tutorials/${tutorial.slug}/` : undefined,
-      };
-    }),
-  };
-});
+// 首页 = 9 个技术分类，每张卡片直接指向该方向的学习路线或教程
+const sections: CardSectionData[] = homeCategories.map((category) => ({
+  id: category.id,
+  title: category.name,
+  items: category.items.map((item) => ({ title: item.title, href: item.href })),
+}));
 ---
 
 <div class="cs-home">
