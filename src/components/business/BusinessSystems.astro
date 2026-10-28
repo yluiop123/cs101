@@ -8,7 +8,7 @@ const sections: CardSectionData[] = bizCategories.map((category) => ({
   id: category.id,
   title: category.name,
   items: category.systems.map((system) => ({
-    title: system.abbr ? `${system.abbr} · ${system.name}` : system.name,
+    title: system.abbr ? `${system.abbr} ${system.name}` : system.name,
     href: `/business-systems/${system.slug}/`,
     kind: 'system',
   })),

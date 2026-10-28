@@ -846,15 +846,27 @@ starlight-theme-select option {
   color: var(--cs-accent-dark);
 }
 
-/* 教程：灰描边，与「路线」（绿描边）区分 */
-.cs-badge--tutorial {
-  border-color: var(--cs-border-strong, var(--cs-border));
+/* 卡片类型标记：图标 + 文字，刻意不用胶囊徽标，避免和「推荐 / 可选」这类状态徽标混淆 */
+.cs-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22rem;
+  font-size: 0.72rem;
+  line-height: 1;
   color: var(--cs-muted);
+  white-space: nowrap;
 }
 
-/* 业务系统：介于绿与灰之间的独立色调 */
-.cs-badge--system {
-  border-color: color-mix(in srgb, var(--cs-accent) 35%, var(--cs-border));
+.cs-kind svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.cs-kind--route {
+  color: var(--cs-accent-dark);
+}
+
+.cs-kind--system {
   color: var(--cs-text);
 }
 

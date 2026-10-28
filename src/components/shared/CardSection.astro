@@ -6,7 +6,7 @@ type Props = CardSectionData;
 
 const { id, title, more, items } = Astro.props as Props;
 
-// 卡片类型标签：教程 / 路线 / 系统（未写 kind 时按链接推断）
+// 卡片类型标记：教程 / 路线 / 系统（未写 kind 时按链接推断）
 const kindOf = (item: CardItem) => item.kind ?? kindOfHref(item.href);
 ---
 
@@ -19,25 +19,50 @@ const kindOf = (item: CardItem) => item.kind ?? kindOfHref(item.href);
   <ul class="cs-tut-grid">
     {items.map((item) => {
       const kind = item.href ? kindOf(item) : undefined;
-      const hasTail = Boolean(kind || item.badges?.length || item.meta);
+      const hasTail = Boolean(item.badges?.length || item.meta);
       return (
         <li>
           {item.href ? (
             <a class="cs-tut-card" href={withBase(item.href)}>
               <span class="cs-tut-name">{item.title}</span>
-              {hasTail && (
-                <span class="cs-tut-tail">
-                  {kind && (
-                    <span class:list={['cs-badge', `cs-badge--${kind}`]}>{kindLabels[kind]}</span>
-                  )}
-                  {item.badges?.map((badge) => (
-                    <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
-                      {badge.label}
-                    </span>
-                  ))}
-                  {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
-                </span>
-              )}
+              <span class="cs-tut-tail">
+                {kind && (
+                  <span class:list={['cs-kind', `cs-kind--${kind}`]}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      {kind === 'tutorial' ? (
+                        <>
+                          <path d="M12 7v14" />
+                          <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+                        </>
+                      ) : kind === 'route' ? (
+                        <>
+                          <circle cx="6" cy="19" r="3" />
+                          <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
+                          <circle cx="18" cy="5" r="3" />
+                        </>
+                      ) : (
+                        <>
+                          <rect width="7" height="7" x="3" y="3" rx="1" />
+                          <rect width="7" height="7" x="14" y="3" rx="1" />
+                          <rect width="7" height="7" x="14" y="14" rx="1" />
+                          <rect width="7" height="7" x="3" y="14" rx="1" />
+                        </>
+                      )}
+                    </svg>
+                    {kindLabels[kind]}
+                  </span>
+                )}
+                {hasTail && (
+                  <>
+                    {item.badges?.map((badge) => (
+                      <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
+                        {badge.label}
+                      </span>
+                    ))}
+                    {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
+                  </>
+                )}
+              </span>
             </a>
           ) : (
             <span class="cs-tut-card is-planned">
