@@ -1,0 +1,27 @@
+---
+import { bizCategories } from '@/data/business-systems';
+---
+
+<div class="cs-biz">
+  {
+    bizCategories.map((category) => (
+      <section id={category.id} class="cs-biz-section">
+        <div class="cs-section-head">
+          <h2 class="cs-section-title">{category.name}</h2>
+          <span class="cs-section-count">{category.systems.length} 个系统</span>
+        </div>
+        <ul class="cs-biz-list">
+          {category.systems.map((system) => (
+            <li class="cs-biz-row">
+              <div class:list={['cs-biz-head', !system.abbr && 'cs-biz-head--plain']}>
+                {system.abbr && <span class="cs-biz-abbr">{system.abbr}</span>}
+                <span class="cs-biz-name">{system.name}</span>
+              </div>
+              <p class="cs-biz-desc">{system.summary}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>

@@ -5,7 +5,8 @@
 
 ```
 src/data/route-plan.ts   ← 学习路线（技术路线 + 应用领域路线）   ┐
-src/data/domains.ts      ← 应用领域目录（分类 + 领域清单）        │ 手写数据
+src/data/domains.ts      ← 应用领域目录（8 分类 + 47 方向）      │ 手写数据
+src/data/business-systems.ts ← 业务系统分类（14 类 + 71 个系统）  │
 src/data/catalog.ts      ← 首页技术分类（9 类 + 卡片跳转）      │
 src/data/cards.ts        ← 分组/卡片渲染结构（类型定义）          ┘
 src/content/docs/**      ← 教程正文、章节（Astro content collection）
@@ -94,7 +95,29 @@ const domains: DomainEntry[]
 `domains.ts` 只负责「有哪些方向、叫什么、归哪一类」；**有 `routePlan['domain-<slug>']` 的方向才可点**，
 没有的（目前 28 个）在 `/domain/` 里显示为虚线占位卡。
 
-## 3. 首页技术分类：`src/data/catalog.ts`
+## 3. 业务系统分类：`src/data/business-systems.ts`
+
+`/business-systems/` 页面用，按业务场景说明各类系统是干什么的：
+
+```ts
+interface BizSystem {
+  abbr?: string;   // 系统缩写，如 ERP；没有通用缩写时省略
+  name: string;    // 中文名
+  summary: string; // 核心作用
+}
+
+interface BizCategory {
+  id: string;      // 页内锚点，左侧栏「业务系统」也用它
+  name: string;    // 如「制造与工业系统」
+  systems: BizSystem[];
+}
+
+const bizCategories: BizCategory[]  // 14 类 / 71 个系统；顺序 = 页面分节与左侧栏顺序
+```
+
+页面本身只做「标题 + 系统名 + 核心作用」的逐条罗列，不做跳转；新增/修改条目只改这个文件。
+
+## 4. 首页技术分类：`src/data/catalog.ts`
 
 首页按《编程教程网站技术分类体系》的 9 大分类组织，一个分类 = 一个分节，一张卡片 = 一个方向/技术：
 
@@ -116,7 +139,7 @@ const homeCategories: HomeCategory[]   // 顺序 = 首页分节顺序、左侧�
 卡片**直接指向路线页或教程页**（如 `Java` → `/tech-stack/java/`、`Git 与版本控制` → `/tutorials/git/`），
 所以首页各分节标题旁不再有「学习路线 →」入口。
 
-## 4. 分组 + 卡片的通用结构：`src/data/cards.ts`
+## 5. 分组 + 卡片的通用结构：`src/data/cards.ts`
 
 首页与应用领域共用 `CardSection.astro`，它的入参就是这两个类型：
 
@@ -140,7 +163,7 @@ interface CardSectionData {
 }
 ```
 
-## 5. 教程与章节：`src/content/docs/**`
+## 6. 教程与章节：`src/content/docs/**`
 
 一个目录 = 一个 URL。`docsSchema` 上额外扩展了这些字段（`src/content.config.ts`）：
 
@@ -169,7 +192,7 @@ interface SeriesInfo  { slug: string; title: string; description?: string; chapt
 `getSeries()` 决定：教程有没有上线（没有章节 → 卡片变虚线、不可点）、
 左侧栏章节列表、继续学习卡。**写完章节页面，卡片自动点亮，不需要额外登记。**
 
-## 6. 运行时状态（浏览器本地）
+## 7. 运行时状态（浏览器本地）
 
 `src/lib/progress.ts`，localStorage 键 `cs101:progress:v1`：
 
@@ -187,7 +210,7 @@ interface ProgressState {
 { generatedAt: string, records: { u: url, t: 页面标题, s: 系列, h: 小节标题, a: 小节锚点, x: 正文片段 }[] }
 ```
 
-## 7. 数据 → 界面 对照表
+## 8. 数据 → 界面 对照表
 
 | 数据 | 决定什么 |
 | --- | --- |
@@ -197,11 +220,12 @@ interface ProgressState {
 | `seriesMeta[slug]` | 所有卡片标题 |
 | `routeTitles` | 路线页标题、「学习路线」左侧栏顺序、面包屑末级 |
 | `homeCategories` | 首页 9 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
-| `domainCategories` / `domains` | `/domain/` 的 4 个分类与卡片、左侧栏分类锚点 |
+| `domainCategories` / `domains` | `/domain/` 的 8 个分类与方向卡片、左侧栏分类锚点（无路线的方向显示虚线卡） |
 | `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
+| `bizCategories` | `/business-systems/` 的 14 个分类分节、系统条目与左侧栏锚点 |
 | docs 集合 | 教程页 / 章节页 / 是否上线 / 进度 / 搜索索引 |
 
-## 8. 常见改动怎么改
+## 9. 常见改动怎么改
 
 | 想做的事 | 改哪里 |
 | --- | --- |
@@ -212,8 +236,9 @@ interface ProgressState {
 | 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx` + `routeTitles` + `TechStackGrid` 分组 |
 | 新增一个应用领域 | 只加 `domains.ts` 条目即可显示（虚线占位）；要可点再加 `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
 | 首页加/调整分类或卡片 | `catalog.ts`（卡片 `href` 指向已有路线或教程，没做就留空显示虚线卡） |
+| 业务系统加/改条目 | `business-systems.ts`（缩写、中文名、核心作用） |
 
-## 9. 约定与已知重复点
+## 10. 约定与已知重复点
 
 - **slug 是唯一主键**：`seriesMeta` 的键、路线里的项、`docs/tutorials/<slug>/` 目录名必须一致；
   对不上时卡片会显示 slug 原文，链接会 404（`pnpm check:links` 会抓出来）。

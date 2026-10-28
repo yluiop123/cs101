@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import { homeCategories } from '@/data/catalog';
+import { bizCategories } from '@/data/business-systems';
 import { domainCategories } from '@/data/domains';
 import { routeTitles, routePlan } from '@/data/route-plan';
 
@@ -15,6 +16,7 @@ const isHome = !entry.id || entry.id === 'index';
 const isDomainIndex = path === '/domain/' || path === '/domain';
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
 const isComputerScience = path.startsWith('/computer-science');
+const isBusinessSystems = path.startsWith('/business-systems');
 const isTechStack = path.startsWith('/tech-stack');
 // 具体路线页：左侧栏显示这条路线自己的板块（与正文各板块锚点联动）
 const techRouteSlug = path.match(/^\/tech-stack\/([^/]+)\//)?.[1];
@@ -114,6 +116,20 @@ const catalog =
             OSSU 国际教程
           </a>
         </li>
+      </ul>
+    </div>
+  ) : isBusinessSystems ? (
+    // 业务系统页：左侧栏按 14 个分类锚点联动
+    <div class="cs-sidebar">
+      <p class="cs-sidebar-kicker">业务系统</p>
+      <ul class="cs-sidebar-sections">
+        {bizCategories.map((category) => (
+          <li>
+            <a href={`#${category.id}`} data-cs-section-link={category.id}>
+              {category.name}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   ) : isTechRoutePage ? (
