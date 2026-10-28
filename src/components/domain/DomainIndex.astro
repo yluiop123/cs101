@@ -23,8 +23,9 @@ const sections: CardSectionData[] = domainCategories.map((category) => ({
     .filter((card) => card.category === category.id)
     .map((card) => ({
       title: card.name,
-      href: `/domain/${card.slug}/`,
-      meta: `${card.tiers} 阶段 · ${card.total} 项`,
+      // 还没做路线的领域显示为虚线占位卡（不可点）
+      href: card.tiers > 0 ? `/domain/${card.slug}/` : undefined,
+      meta: card.tiers > 0 ? `${card.tiers} 阶段 · ${card.total} 项` : undefined,
     })),
 }));
 ---

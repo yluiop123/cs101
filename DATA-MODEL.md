@@ -80,16 +80,19 @@ const routePlan: Record<string, RouteTier[]>   // 键：路线 slug
 
 ## 2. 应用领域目录：`src/data/domains.ts`
 
+按《编程教程网站技术分类体系》的「领域方向」分成 8 大分类：
+
 ```ts
-interface DomainCategory { id: string; name: string }          // 4 个分类
-interface DomainEntry   { slug: string; name: string; category: string }  // 19 个领域
+interface DomainCategory { id: string; name: string }          // 8 个分类
+interface DomainEntry   { slug: string; name: string; category: string }  // 47 个方向
 
 const domainCategories: DomainCategory[]  // 顺序 = /domain/ 页分组与左侧栏顺序
 const domains: DomainEntry[]
 ```
 
 领域详情页的板块内容不在这个文件里，而在 `routePlan['domain-<slug>']`。
-`domains.ts` 只负责「有哪些领域、叫什么、归哪一类」。
+`domains.ts` 只负责「有哪些方向、叫什么、归哪一类」；**有 `routePlan['domain-<slug>']` 的方向才可点**，
+没有的（目前 28 个）在 `/domain/` 里显示为虚线占位卡。
 
 ## 3. 首页技术分类：`src/data/catalog.ts`
 
@@ -207,7 +210,7 @@ interface ProgressState {
 | 标记必学、推荐、主流、小众 | `tier.required` / `option.role` / `item.role` |
 | 改教程在卡片上的名字 | `seriesMeta` |
 | 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx` + `routeTitles` + `TechStackGrid` 分组 |
-| 新增一个应用领域 | `domains.ts` + `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
+| 新增一个应用领域 | 只加 `domains.ts` 条目即可显示（虚线占位）；要可点再加 `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
 | 首页加/调整分类或卡片 | `catalog.ts`（卡片 `href` 指向已有路线或教程，没做就留空显示虚线卡） |
 
 ## 9. 约定与已知重复点
