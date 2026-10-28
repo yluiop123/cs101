@@ -15,6 +15,8 @@ export interface CardItem {
   title: string;
   /** 有 href = 可点击卡片；没有 = 规划中（虚线） */
   href?: string;
+  /** 标题后的浅色说明（可选），如「自动化测试 · 性能优化 · 图形与可视化」 */
+  note?: string;
   /** 卡片右侧的补充文字（可选），如“4 阶段 · 19 项” */
   meta?: string;
   badges?: CardBadge[];

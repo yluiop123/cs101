@@ -790,6 +790,13 @@ starlight-theme-select option {
   min-width: 0;
 }
 
+/* 卡片标题后的浅色说明（如分类下的代表内容） */
+.cs-tut-note {
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--cs-muted);
+}
+
 /* 卡片右侧：状态标签 + 章节数/状态文字，标题再长也只会自己换行 */
 .cs-tut-tail {
   display: inline-flex;

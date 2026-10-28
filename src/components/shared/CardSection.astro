@@ -18,7 +18,7 @@ const { id, title, more, items } = Astro.props as Props;
       <li>
         {item.href ? (
           <a class="cs-tut-card" href={withBase(item.href)}>
-            <span class="cs-tut-name">{item.title}</span>
+            <span class="cs-tut-name">{item.title}{item.note && <span class="cs-tut-note">{item.note}</span>}</span>
             {(item.badges?.length || item.meta) && (
               <span class="cs-tut-tail">
                 {item.badges?.map((badge) => (
@@ -32,7 +32,7 @@ const { id, title, more, items } = Astro.props as Props;
           </a>
         ) : (
           <span class="cs-tut-card is-planned">
-            <span class="cs-tut-name">{item.title}</span>
+            <span class="cs-tut-name">{item.title}{item.note && <span class="cs-tut-note">{item.note}</span>}</span>
             {(item.badges?.length || item.meta) && (
               <span class="cs-tut-tail">
                 {item.badges?.map((badge) => (

@@ -6,6 +6,8 @@ export interface HomeItem {
   title: string;
   /** 有 href = 可点击（学习路线页 / 教程页）；没有 = 规划中（虚线卡片） */
   href?: string;
+  /** 标题后的浅色说明，如「自动化测试 · 性能优化 · 图形与可视化」 */
+  note?: string;
 }
 
 export interface HomeCategory {
@@ -46,12 +48,13 @@ export const homeCategories: HomeCategory[] = [
   },
   {
     id: 'frontend',
-    name: '客户端与大前端',
+    name: '大前端',
     items: [
-      { title: 'Web 前端基础与框架', href: '/tech-stack/frontend/' },
-      { title: '小程序与轻应用' },
-      { title: '桌面端应用' },
-      { title: '渲染与图形技术' },
+      { title: '前端', href: '/tech-stack/frontend/' },
+      { title: '移动端与跨端', href: '/tech-stack/kotlin-swift-dart/' },
+      { title: '桌面端', href: '/domain/desktop-app/' },
+      { title: '内容平台' },
+      { title: '进阶', note: '自动化测试 · 性能优化 · 图形与可视化' },
     ],
   },
   {

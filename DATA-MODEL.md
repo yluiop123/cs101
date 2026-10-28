@@ -125,6 +125,7 @@ interface CardBadge { label: string; tone?: CardBadgeTone }
 interface CardItem {
   title: string;
   href?: string;   // 有 = 可点击；没有 = 规划中（虚线卡）
+  note?: string;   // 标题后的浅色说明，如「自动化测试 · 性能优化 · 图形与可视化」
   meta?: string;   // 右侧补充文字（可选），如「4 阶段 · 19 项」
   badges?: CardBadge[];
 }

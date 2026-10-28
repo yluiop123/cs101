@@ -11,7 +11,7 @@ const series = await getSeries();
 const sections: CardSectionData[] = homeCategories.map((category) => ({
   id: category.id,
   title: category.name,
-  items: category.items.map((item) => ({ title: item.title, href: item.href })),
+  items: category.items.map((item) => ({ title: item.title, href: item.href, note: item.note })),
 }));
 ---
 
