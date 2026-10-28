@@ -48,14 +48,14 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'HRM / HCM',
         slug: 'hrm',
-        name: '人力资源管理系统',
+        name: '人力资源管理',
         summary:
           '覆盖组织编制、入转调离、薪酬核算、考勤排班、绩效评估、招聘与人才发展。它既处理高频事务性人事工作，也承载战略性人力规划；对权限隔离、敏感字段脱敏、跨法人多组织支持有较高要求。',
       },
       {
         abbr: 'FMS',
         slug: 'fms',
-        name: '财务管理系统',
+        name: '财务管理',
         summary:
           '负责总账、应收应付、资金管理、税务、财务报表与合规。它是企业财务治理与审计追踪的底座，强调职责分离、凭证可追溯、账务强一致；对外通过 API 或事件与业务系统对账，确保「业务发生即财务可见」。',
       },
@@ -69,7 +69,7 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'PPM',
         slug: 'ppm',
-        name: '项目管理 / 项目组合管理',
+        name: '项目与项目组合管理',
         summary:
           '覆盖项目立项、计划、任务分解、资源分配、工时、成本与组合优先级。它回答「做什么项目、谁来做、花多少、什么时候完成」，并与 HRM 的工时、FMS 的成本形成闭环。',
       },
@@ -140,7 +140,7 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'PLC',
         slug: 'plc',
-        name: '可编程逻辑控制器 / 工业控制',
+        name: '可编程逻辑控制器',
         summary:
           '执行逻辑控制、顺序控制和运动控制，直接驱动现场设备。它是工业自动化最底层的控制单元，通过工业协议与 SCADA/MES 网关通信，向上汇报状态、向下执行动作。',
       },
@@ -154,7 +154,7 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'QMS',
         slug: 'qms',
-        name: '质量管理系统',
+        name: '质量管理',
         summary:
           '覆盖来料检验、过程检验、成品检验、不合格品处理与质量追溯。它把质量标准、抽样方案、检验记录和 SPC 统计过程控制串起来，支撑持续改进与客诉追溯。',
       },
@@ -168,14 +168,14 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'WMS',
         slug: 'wms',
-        name: '仓储管理系统',
+        name: '仓储管理',
         summary:
           '统筹入库收货、上架、库存实时监控、拣货、包装到出库的全流程物理作业与信息流。它不只是记录库存，而是驱动仓储作业有序运转：WMS 做决策，WCS 驱动传送带、堆垛机、AGV 等设备执行。',
       },
       {
         abbr: 'TMS',
         slug: 'tms',
-        name: '运输管理系统',
+        name: '运输管理',
         summary:
           '管理运输计划、承运商、路径优化、运费结算与轨迹跟踪。核心是让「货从哪里来、到哪里去、谁在运、花了多少、现在到哪」全程可见、可算、可优化。',
       },
@@ -189,7 +189,7 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'LIMS',
         slug: 'lims',
-        name: '实验室信息管理系统',
+        name: '实验室信息管理',
         summary:
           '管理样品接收、检测任务、仪器数据、报告生成与全流程质量追溯。适用于检测/校准、制药、科研等实验室场景，核心是让样品、仪器、人员、方法、结果形成可追溯的闭环。',
       },
@@ -337,19 +337,19 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'PACS',
         slug: 'pacs',
-        name: '影像归档与通信系统',
+        name: '影像归档与通信',
         summary:
           '完成医学影像的采集、存储、传输与诊断阅片。核心是 DICOM 协议、影像归档存储和阅片工作站；AI 辅助诊断作为后处理模块接入。',
       },
       {
         slug: 'internet-hospital',
-        name: '互联网医院 / 预约挂号',
+        name: '互联网医院与预约挂号',
         summary:
           '提供在线复诊、处方流转、预约挂号与患者服务。核心是公网服务与院内系统的安全隔离交换，处方流转需对接监管平台。',
       },
       {
         slug: 'medical-insurance',
-        name: '医保结算系统',
+        name: '医保结算',
         summary:
           '完成医保费用计算、结算与基金监管接口对接。核心是医保规则库、与医保局接口和对账批处理；政策变动频繁，规则可配置性是关键。',
       },
@@ -366,25 +366,25 @@ export const bizCategories: BizCategory[] = [
     systems: [
       {
         slug: 'government-service',
-        name: '一网通办 / 政务服务平台',
+        name: '一网通办与政务服务平台',
         summary:
           '实现跨部门事项统一受理、流转、办结与好差评。核心是统一身份认证、事项库、工作流引擎和电子证照共享，让群众「进一扇门、办多件事」。',
       },
       {
         slug: 'approval-supervision',
-        name: '行政审批与监管系统',
+        name: '行政审批与监管',
         summary:
           '覆盖行政许可审批、事中事后监管与执法协同。核心是流程引擎、规则引擎和监管对象库，移动执法端与后台通过 API 同步。',
       },
       {
         slug: 'city-operation',
-        name: '城市运行管理中心 / 网格化治理',
+        name: '城市运行与网格化治理',
         summary:
           '实现城市事件的发现、分拨、处置与闭环，支撑基层治理。核心是 GIS 地图底座、事件工单流和视频/物联感知接入，大屏可视化常用于指挥调度。',
       },
       {
         slug: 'public-resource-trading',
-        name: '公共资源交易系统',
+        name: '公共资源交易',
         summary:
           '完成招投标、政府采购、土地/产权交易的电子化与全程留痕。核心是电子开评标、CA 认证和围串标分析，对过程存证和不可篡改有较高要求。',
       },
@@ -402,19 +402,19 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'WMS / TMS',
         slug: 'logistics-wms-tms',
-        name: '仓储与运输管理系统',
+        name: '仓储与运输管理',
         summary:
           '仓储侧管理入库、上架、库存、拣货、出库；运输侧管理计划、承运商、路径、运费与轨迹。两者共同构成物流执行的核心闭环。',
       },
       {
         slug: 'fleet-dispatch',
-        name: '车队管理与调度系统',
+        name: '车队管理与调度',
         summary:
           '统一管理车辆、司机、任务与实时调度。核心是 GPS/北斗轨迹接入、调度规则引擎和司机 App，与 TMS 的运输订单形成闭环。',
       },
       {
         slug: 'route-pricing',
-        name: '路径规划与计价系统',
+        name: '路径规划与计价',
         summary:
           '基于路网和约束生成最优路径，并完成运费/票价计算。核心是 GIS 路网服务、路径规划算法和计价规则引擎，实时路况作为动态输入。',
       },
@@ -438,13 +438,13 @@ export const bizCategories: BizCategory[] = [
       },
       {
         slug: 'power-dispatch',
-        name: '电力调度系统',
+        name: '电力调度',
         summary:
           '实现电网实时监控、调度计划与安全分析。核心是 SCADA/EMS 一体化、状态估计和安全约束调度，对实时性和可靠性要求极高。',
       },
       {
         slug: 'billing-revenue',
-        name: '计费与营收系统',
+        name: '计费与营收',
         summary:
           '完成水/电/气/热的计量计费、账单、收费与营收对账。核心是计费规则引擎、批量出账和多渠道支付对账，与计量采集系统通过文件/API 交换数据。',
       },
@@ -468,13 +468,13 @@ export const bizCategories: BizCategory[] = [
       },
       {
         slug: 'engineering-project',
-        name: '工程项目管理系统',
+        name: '工程项目管理',
         summary:
           '覆盖进度、成本、合同、质量、安全与文档的项目全过程管理。核心是 WBS、甘特图、成本台账和工作流，并与 BIM 和财务系统对接。',
       },
       {
         slug: 'smart-site',
-        name: '智慧工地系统',
+        name: '智慧工地',
         summary:
           '实现人员实名制、视频监控、环境监测、塔吊/升降机安全监控。核心是 IoT 网关、视频 AI 分析和实名制闸机数据接入，边缘侧常需本地预处理。',
       },
@@ -491,7 +491,7 @@ export const bizCategories: BizCategory[] = [
     systems: [
       {
         slug: 'academic-affairs',
-        name: '教务管理系统',
+        name: '教务管理',
         summary:
           '管理学籍、课程、排课、选课、成绩与教学计划。核心是排课算法和工作流；高并发选课场景需要缓存与队列削峰。',
       },
@@ -504,7 +504,7 @@ export const bizCategories: BizCategory[] = [
       },
       {
         slug: 'exam-system',
-        name: '题库与考试系统',
+        name: '题库与考试',
         summary:
           '完成题目管理、组卷、在线考试与自动阅卷。核心是题库模型、组卷策略和防作弊（人脸/切屏检测）；主观题 AI 辅助评阅逐步成熟。',
       },
@@ -522,26 +522,26 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'CMS',
         slug: 'cms',
-        name: '内容管理系统',
+        name: '内容管理',
         summary:
           '完成内容的创建、审核、发布与多渠道分发。核心是内容模型、工作流和静态化/SSG；Headless CMS 通过 API 向多端供数。',
       },
       {
         abbr: 'DAM',
         slug: 'dam',
-        name: '数字资产管理系统',
+        name: '数字资产管理',
         summary:
           '集中存储、检索与管理图片、视频、文档等数字资产。核心是对象存储、元数据检索和转码/缩略图服务，并与 CMS、营销系统通过 API 集成。',
       },
       {
         slug: 'marketing-automation',
-        name: '营销自动化系统',
+        name: '营销自动化',
         summary:
           '基于用户行为触发营销、编排客户旅程并做效果归因。核心是事件流（Kafka）、规则引擎和用户分群，与 CRM、推荐系统共享客户标签。',
       },
       {
         slug: 'content-review',
-        name: '内容审核与推荐系统',
+        name: '内容审核与推荐',
         summary:
           '对 UGC/PGC 内容做合规审核，并进行个性化分发。审核侧用规则 + AI 多模态模型；推荐侧用召回—排序架构；两者常共享内容特征。',
       },
@@ -559,14 +559,14 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'BSS',
         slug: 'bss',
-        name: '业务支撑系统',
+        name: '业务支撑',
         summary:
           '管理产品、订单、计费、账务与客户。核心是计费引擎、订单流程和客户主数据；传统 BSS 体量大，向云化和微服务改造是长期过程。',
       },
       {
         abbr: 'OSS',
         slug: 'oss',
-        name: '运营支撑系统',
+        name: '运营支撑',
         summary:
           '管理网络资源、故障、性能与运维工单。核心是资源模型、网管接口和工单流，并与 BSS 通过客户/订单数据关联。',
       },
@@ -604,7 +604,7 @@ export const bizCategories: BizCategory[] = [
       },
       {
         slug: 'audit-compliance',
-        name: '审计与合规系统',
+        name: '审计与合规',
         summary:
           '实现操作留痕、合规检查与审计追溯。核心是不可篡改日志存储、审计规则和报表，常与 IAM、SIEM 联动。',
       },
@@ -622,25 +622,25 @@ export const bizCategories: BizCategory[] = [
       {
         abbr: 'PMS',
         slug: 'hotel-pms',
-        name: '酒店管理系统',
+        name: '酒店管理',
         summary:
           '管理预订、入住、房态、收银与夜审。核心是房态中心、预订引擎和 OTA 渠道对接，并与 POS、门锁系统集成。',
       },
       {
         slug: 'restaurant-pos',
-        name: '餐饮收银与后厨系统',
+        name: '餐饮收银与后厨',
         summary:
           '完成点餐、收银、厨打、桌台与外卖聚合。核心是收银前端、后厨 KDS 和外卖平台 API；弱网离线可用是关键。',
       },
       {
         slug: 'case-management',
-        name: '案件管理系统',
+        name: '案件管理',
         summary:
           '管理立案、流转、文书、期限与归档。核心是案件模型、工作流、文书模板和期限提醒，电子卷宗与归档存储集成。',
       },
       {
         slug: 'agriculture-management',
-        name: '农业种植 / 养殖管理系统',
+        name: '农业种植与养殖',
         summary:
           '管理农事计划、投入品、生长监测与溯源。核心是 IoT 传感数据、农事记录和溯源链；田间移动端离线采集在农业场景中常见。',
       },

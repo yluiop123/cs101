@@ -17,15 +17,6 @@ const isDomainIndex = path === '/domain/' || path === '/domain';
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
 const isComputerScience = path.startsWith('/computer-science');
 const isBusinessSystems = path.startsWith('/business-systems');
-// 业务系统详情页：/business-systems/<slug>/ 时左侧栏列出所属分类的系统
-const bizSlug = path.match(/^\/business-systems\/([^/]+)\//)?.[1];
-const bizSystem = bizSlug
-  ? (() => {
-      const category = bizCategories.find((item) => item.systems.some((s) => s.slug === bizSlug));
-      const system = category?.systems.find((s) => s.slug === bizSlug);
-      return category && system ? { category, system } : undefined;
-    })()
-  : undefined;
 const isTechStack = path.startsWith('/tech-stack');
 // 具体路线页：左侧栏显示这条路线自己的板块（与正文各板块锚点联动）
 const techRouteSlug = path.match(/^\/tech-stack\/([^/]+)\//)?.[1];
@@ -126,28 +117,6 @@ const catalog =
           </a>
         </li>
       </ul>
-    </div>
-  ) : isBusinessSystems && bizSystem ? (
-    // 业务系统详情页：左侧栏列出所属分类的全部系统
-    <div class="cs-sidebar">
-      <a class="cs-sidebar-series-title" href={withBase(`/business-systems/#${bizSystem.category.id}`)}>
-        {bizSystem.category.name}
-      </a>
-      <ol class="cs-sidebar-chapters">
-        {bizSystem.category.systems.map((system) => (
-          <li>
-            <a
-              href={withBase(`/business-systems/${system.slug}/`)}
-              aria-current={system.slug === bizSystem.system.slug ? 'page' : undefined}
-            >
-              {system.abbr ? `${system.abbr} · ${system.name}` : system.name}
-            </a>
-          </li>
-        ))}
-      </ol>
-      <a class="cs-sidebar-back" href={withBase('/business-systems/')}>
-        全部业务系统 →
-      </a>
     </div>
   ) : isBusinessSystems ? (
     // 业务系统总览页：左侧栏按 14 个分类锚点联动

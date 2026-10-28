@@ -3,16 +3,16 @@
 
 import type { RouteItemRole } from '@/data/route-plan';
 
-/** 徽标色调：与学习状态同名，另加「route」「tutorial」「system」表示卡片类型 */
-export type CardBadgeTone = RouteItemRole | 'route' | 'tutorial' | 'system';
+/** 徽标色调：与学习状态同名，另加「route」「tutorial」表示卡片类型 */
+export type CardBadgeTone = RouteItemRole | 'route' | 'tutorial';
 
 export interface CardBadge {
   label: string;
   tone?: CardBadgeTone;
 }
 
-/** 卡片类型：教程 / 技术路线 / 业务系统；决定卡片上的类型标签 */
-export type CardKind = 'tutorial' | 'route' | 'system';
+/** 卡片类型：教程 / 技术路线；决定卡片上的类型标记 */
+export type CardKind = 'tutorial' | 'route';
 
 export interface CardItem {
   title: string;
@@ -38,7 +38,6 @@ export interface CardSectionData {
 export const kindLabels: Record<CardKind, string> = {
   tutorial: '教程',
   route: '路线',
-  system: '系统',
 };
 
 /** 由链接推断卡片类型（/tutorials/** 是教程页，其余是路线/专题页） */

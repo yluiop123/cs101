@@ -3,14 +3,14 @@ import CardSection from '@/components/shared/CardSection.astro';
 import { bizCategories } from '@/data/business-systems';
 import type { CardSectionData } from '@/data/cards';
 
-// 一个分类 = 一个卡片分节；一张卡片 = 一个业务系统，点进去是该系统的介绍页
+// 一个分类 = 一个卡片分节；一张卡片 = 一个业务系统，点进去是该系统的专属教程（目录只含这个系统的章节）
 const sections: CardSectionData[] = bizCategories.map((category) => ({
   id: category.id,
   title: category.name,
   items: category.systems.map((system) => ({
     title: system.abbr ? `${system.abbr} ${system.name}` : system.name,
-    href: `/business-systems/${system.slug}/`,
-    kind: 'system',
+    href: `/tutorials/business-${system.slug}/`,
+    kind: 'tutorial',
   })),
 }));
 ---

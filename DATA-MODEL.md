@@ -95,31 +95,32 @@ const domains: DomainEntry[]
 `domains.ts` 只负责「有哪些方向、叫什么、归哪一类」；**有 `routePlan['domain-<slug>']` 的方向才可点**，
 没有的（目前 23 个）在 `/domain/` 里显示为虚线占位卡。
 
-## 3. 业务系统分类：`src/data/business-systems.ts`
+## 3. 业务系统：`src/data/business-systems.ts`
 
-`/business-systems/` 页面用，按业务场景说明各类系统是干什么的：
+`/business-systems/` 是业务系统的目录页，卡片点进去是**这套系统自己的教程**：`/tutorials/business-<slug>/`。
 
 ```ts
 interface BizSystem {
-  slug: string;    // 详情页 /business-systems/<slug>/
+  slug: string;    // 教程 slug：/tutorials/business-<slug>/
   abbr?: string;   // 系统缩写，如 ERP；没有通用缩写时省略
   name: string;    // 中文名
-  summary: string; // 核心作用
+  summary: string; // 核心作用（由章节组件渲染成「系统概述」正文）
 }
 
 interface BizCategory {
-  id: string;      // 页内锚点，左侧栏「业务系统」也用它
+  id: string;      // 目录页锚点，左侧栏「业务系统」也用它
   name: string;    // 如「制造与工业系统」
   related: { title: string; href: string }[];  // 这类系统常用的技术栈链接
   systems: BizSystem[];
 }
 
-const bizCategories: BizCategory[]  // 14 类 / 72 个系统；顺序 = 页面分节与左侧栏顺序
+const bizCategories: BizCategory[]  // 14 类 / 72 个系统；顺序 = 目录页分节顺序
 ```
 
-`/business-systems/` 用统一的 `CardSection` 渲染（一分类一节、一行三张卡），
-每个系统另有一个由 `src/pages/business-systems/[slug].astro` 生成的详情页：
-核心作用 + 这类系统常用的技术栈。新增/修改条目只改这个文件，页面与详情页都自动跟着变。
+- 目录页用统一的 `CardSection` 渲染（一分类一节、一行三张卡，类型标记为「教程」）；
+- 每个系统一套教程：`docs/tutorials/business-<slug>/`（`index.mdx` + `01-overview.mdx` + `02-tech.mdx`），
+  章节正文由 `BizSystemChapter.astro` 按本文件的数据渲染，**系统文字只在这里维护一份**；
+- 教程左侧栏只列这套教程自己的章节（系统概述 / 相关技术栈），右侧是章节正文。
 
 ## 4. 首页技术分类：`src/data/catalog.ts`
 
@@ -148,7 +149,7 @@ const homeCategories: HomeCategory[]   // 顺序 = 首页分节顺序、左侧�
 首页、应用领域、业务系统三个页面共用 `CardSection.astro`，它的入参就是这两个类型：
 
 ```ts
-type CardKind = 'tutorial' | 'route' | 'system';        // 卡片类型：教程 / 路线 / 系统
+type CardKind = 'tutorial' | 'route';   // 卡片类型：教程 / 技术路线
 type CardBadgeTone = RouteItemRole | CardKind;
 
 interface CardBadge { label: string; tone?: CardBadgeTone }
@@ -228,7 +229,7 @@ interface ProgressState {
 | `homeCategories` | 首页 9 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
 | `domainCategories` / `domains` | `/domain/` 的 8 个分类与方向卡片、左侧栏分类锚点（无路线的方向显示虚线卡） |
 | `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
-| `bizCategories` | `/business-systems/` 的 14 个分类分节与系统卡片；每个系统自动生成 `/business-systems/<slug>/` 详情页 |
+| `bizCategories` | `/business-systems/` 的 14 个分类分节与系统卡片（链接到业务系统教程对应章节锚点） |
 | docs 集合 | 教程页 / 章节页 / 是否上线 / 进度 / 搜索索引 |
 
 ## 9. 常见改动怎么改

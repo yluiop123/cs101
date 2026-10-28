@@ -1,0 +1,40 @@
+---
+import { withBase } from '@/lib/utils';
+import { bizCategories } from '@/data/business-systems';
+
+interface Props {
+  /** 业务系统 slug，对应 src/data/business-systems.ts */
+  slug: string;
+  /** overview = 系统概述；tech = 相关技术栈 */
+  part: 'overview' | 'tech';
+}
+
+const { slug, part } = Astro.props as Props;
+const category = bizCategories.find((item) => item.systems.some((system) => system.slug === slug))!;
+const system = category.systems.find((item) => item.slug === slug)!;
+---
+
+{
+  part === 'overview' ? (
+    <>
+      <p>
+        属于
+        <a href={withBase(`/business-systems/#${category.id}`)}>{category.name}</a>
+        ，下面是它的核心作用与在整体架构里的位置。
+      </p>
+      <p>{system.summary}</p>
+    </>
+  ) : (
+    <>
+      <p>做这类系统通常绕不开下面这些技术栈，先把它们学通，再看这个系统的具体业务。</p>
+      <ul class="cs-biz-related">
+        {category.related.map((item) => (
+          <li>
+            <a href={withBase(item.href)}>{item.title}</a>
+          </li>
+        ))}
+      </ul>
+      <p class="cs-biz-note">更细的开发教程还在整理中。</p>
+    </>
+  )
+}

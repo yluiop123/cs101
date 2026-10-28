@@ -1,5 +1,6 @@
 ---
 import { withBase } from '@/lib/utils';
+import { getSeriesBySlug } from '@/lib/content';
 import { seriesMeta } from '@/data/route-plan';
 
 const { entry } = Astro.locals.starlightRoute;
@@ -26,8 +27,9 @@ if (!isSplash && !isHomePage) {
   if (segments[0] === 'tutorials') {
     crumbs.push({ label: '首页', href: withBase('/') });
     if (segments[1]) {
+      const series = await getSeriesBySlug(segments[1]);
       crumbs.push({
-        label: seriesMeta[segments[1]] ?? segments[1],
+        label: series?.title ?? seriesMeta[segments[1]] ?? segments[1],
         href: withBase(`/tutorials/${segments[1]}/`),
       });
     }

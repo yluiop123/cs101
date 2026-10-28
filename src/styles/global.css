@@ -786,8 +786,14 @@ starlight-theme-select option {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  flex-wrap: wrap;
   min-width: 0;
+}
+
+/* 标题单行显示、超长省略（完整名称见卡片 title 提示），避免卡片换行把整行撑高 */
+.cs-tut-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* 卡片右侧：状态标签 + 章节数/状态文字，标题再长也只会自己换行 */
@@ -864,10 +870,6 @@ starlight-theme-select option {
 
 .cs-kind--route {
   color: var(--cs-accent-dark);
-}
-
-.cs-kind--system {
-  color: var(--cs-text);
 }
 
 .cs-badge--planned {
