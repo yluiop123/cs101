@@ -6,8 +6,6 @@ export interface HomeItem {
   title: string;
   /** 有 href = 可点击（学习路线页 / 教程页）；没有 = 规划中（虚线卡片） */
   href?: string;
-  /** 标题后的浅色说明，如「自动化测试 · 性能优化 · 图形与可视化」 */
-  note?: string;
 }
 
 export interface HomeCategory {
@@ -54,7 +52,7 @@ export const homeCategories: HomeCategory[] = [
       { title: '移动端与跨端', href: '/tech-stack/kotlin-swift-dart/' },
       { title: '桌面端', href: '/domain/desktop-app/' },
       { title: '内容平台' },
-      { title: '进阶', note: '自动化测试 · 性能优化 · 图形与可视化' },
+      { title: '进阶' },
     ],
   },
   {
