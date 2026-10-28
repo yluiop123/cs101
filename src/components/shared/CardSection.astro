@@ -1,10 +1,13 @@
 ---
 import { withBase } from '@/lib/utils';
-import type { CardSectionData } from '@/data/cards';
+import { kindLabels, kindOfHref, type CardSectionData, type CardItem } from '@/data/cards';
 
 type Props = CardSectionData;
 
 const { id, title, more, items } = Astro.props as Props;
+
+// 卡片类型标签：教程 / 路线 / 系统（未写 kind 时按链接推断）
+const kindOf = (item: CardItem) => item.kind ?? kindOfHref(item.href);
 ---
 
 <section id={id} class="cs-card-section">
@@ -14,38 +17,45 @@ const { id, title, more, items } = Astro.props as Props;
   </div>
 
   <ul class="cs-tut-grid">
-    {items.map((item) => (
-      <li>
-        {item.href ? (
-          <a class="cs-tut-card" href={withBase(item.href)}>
-            <span class="cs-tut-name">{item.title}</span>
-            {(item.badges?.length || item.meta) && (
-              <span class="cs-tut-tail">
-                {item.badges?.map((badge) => (
-                  <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
-                    {badge.label}
-                  </span>
-                ))}
-                {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
-              </span>
-            )}
-          </a>
-        ) : (
-          <span class="cs-tut-card is-planned">
-            <span class="cs-tut-name">{item.title}</span>
-            {(item.badges?.length || item.meta) && (
-              <span class="cs-tut-tail">
-                {item.badges?.map((badge) => (
-                  <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
-                    {badge.label}
-                  </span>
-                ))}
-                {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
-              </span>
-            )}
-          </span>
-        )}
-      </li>
-    ))}
+    {items.map((item) => {
+      const kind = item.href ? kindOf(item) : undefined;
+      const hasTail = Boolean(kind || item.badges?.length || item.meta);
+      return (
+        <li>
+          {item.href ? (
+            <a class="cs-tut-card" href={withBase(item.href)}>
+              <span class="cs-tut-name">{item.title}</span>
+              {hasTail && (
+                <span class="cs-tut-tail">
+                  {kind && (
+                    <span class:list={['cs-badge', `cs-badge--${kind}`]}>{kindLabels[kind]}</span>
+                  )}
+                  {item.badges?.map((badge) => (
+                    <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
+                      {badge.label}
+                    </span>
+                  ))}
+                  {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
+                </span>
+              )}
+            </a>
+          ) : (
+            <span class="cs-tut-card is-planned">
+              <span class="cs-tut-name">{item.title}</span>
+              {hasTail && (
+                <span class="cs-tut-tail">
+                  {item.badges?.map((badge) => (
+                    <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
+                      {badge.label}
+                    </span>
+                  ))}
+                  {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
+                </span>
+              )}
+            </span>
+          )}
+        </li>
+      );
+    })}
   </ul>
 </section>

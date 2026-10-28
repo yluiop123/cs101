@@ -846,6 +846,18 @@ starlight-theme-select option {
   color: var(--cs-accent-dark);
 }
 
+/* 教程：灰描边，与「路线」（绿描边）区分 */
+.cs-badge--tutorial {
+  border-color: var(--cs-border-strong, var(--cs-border));
+  color: var(--cs-muted);
+}
+
+/* 业务系统：介于绿与灰之间的独立色调 */
+.cs-badge--system {
+  border-color: color-mix(in srgb, var(--cs-accent) 35%, var(--cs-border));
+  color: var(--cs-text);
+}
+
 .cs-badge--planned {
   border-style: dashed;
   border-color: var(--cs-border-strong, var(--cs-border));
@@ -1053,87 +1065,35 @@ starlight-theme-select option {
   color: var(--cs-muted);
 }
 
-/* ============ 业务系统（按分类列出系统 + 核心作用） ============ */
-.cs-biz-section {
-  margin: 0 0 2.25rem;
-  scroll-margin-top: 80px;
-}
-
-.cs-biz-section > * {
-  margin-top: 0;
-}
-
-.cs-section-count {
-  margin-inline-start: auto;
-  font-size: 0.78rem;
-  font-weight: 400;
+/* ============ 业务系统详情页 ============ */
+.cs-biz-owner {
+  margin: 0 0 1.25rem;
+  font-size: 0.86rem;
   color: var(--cs-muted);
 }
 
-.cs-biz-list {
+.cs-biz-related {
   list-style: none;
-  margin: 0;
+  margin: 0 0 1.5rem;
   padding: 0;
-  border: 1px solid var(--cs-border);
-  border-radius: var(--cs-radius);
-  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
-.cs-biz-row {
-  display: grid;
-  grid-template-columns: 12.5rem minmax(0, 1fr);
-  gap: 1.1rem;
-  margin: 0;
-  padding: 0.85rem 1rem;
+.cs-biz-related a {
+  display: inline-block;
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.86rem;
   background: var(--cs-bg);
 }
 
-.cs-biz-row + .cs-biz-row {
-  border-top: 1px solid var(--cs-border);
-}
-
-.cs-biz-row:hover {
-  background: var(--cs-sidebar-bg);
-}
-
-.cs-biz-head {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
-
-.cs-biz-abbr {
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--cs-accent-dark);
-}
-
-.cs-biz-name {
-  font-size: 0.86rem;
-  font-weight: 500;
-  color: var(--cs-text);
-}
-
-/* 没有英文缩写的系统：中文名直接当标题用 */
-.cs-biz-head--plain .cs-biz-name {
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.cs-biz-desc {
-  margin: 0;
-  font-size: 0.86rem;
-  line-height: 1.75;
+.cs-biz-note {
+  margin: 1.5rem 0 0;
+  font-size: 0.82rem;
   color: var(--cs-muted);
-}
-
-@media (max-width: 768px) {
-  .cs-biz-row {
-    grid-template-columns: 1fr;
-    gap: 0.3rem;
-  }
 }
 
 /* ============ 系列页 / 章节列表 ============ */

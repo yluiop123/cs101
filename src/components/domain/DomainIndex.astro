@@ -1,20 +1,14 @@
 ---
-import { getSeries } from '@/lib/content';
 import CardSection from '@/components/shared/CardSection.astro';
-import { routePlan, tierSlugs } from '@/data/route-plan';
+import { routePlan } from '@/data/route-plan';
 import { domains, domainCategories } from '@/data/domains';
 import type { CardSectionData } from '@/data/cards';
 
-const series = await getSeries();
-const available = new Set(series.map((item) => item.slug));
-
-const cards = domains.map((domain) => {
-  const tiers = routePlan[`domain-${domain.slug}`] ?? [];
-  // 每条路线的技术项去重后统计：已上线 = 站内已有该教程内容
-  const items = [...new Set(tiers.flatMap((tier) => tierSlugs(tier)))];
-  const learnable = items.filter((slug) => available.has(slug)).length;
-  return { ...domain, tiers: tiers.length, total: items.length, learnable };
-});
+// 有领域路线的方向才可点（routePlan['domain-<slug>'] 存在），其余显示为虚线占位卡
+const cards = domains.map((domain) => ({
+  ...domain,
+  hasRoute: (routePlan[`domain-${domain.slug}`] ?? []).length > 0,
+}));
 
 const sections: CardSectionData[] = domainCategories.map((category) => ({
   id: `cat-${category.id}`,
@@ -23,9 +17,8 @@ const sections: CardSectionData[] = domainCategories.map((category) => ({
     .filter((card) => card.category === category.id)
     .map((card) => ({
       title: card.name,
-      // 还没做路线的领域显示为虚线占位卡（不可点）
-      href: card.tiers > 0 ? `/domain/${card.slug}/` : undefined,
-      meta: card.tiers > 0 ? `${card.tiers} 阶段 · ${card.total} 项` : undefined,
+      href: card.hasRoute ? `/domain/${card.slug}/` : undefined,
+      kind: 'route' as const,
     })),
 }));
 ---

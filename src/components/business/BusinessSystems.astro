@@ -1,27 +1,20 @@
 ---
+import CardSection from '@/components/shared/CardSection.astro';
 import { bizCategories } from '@/data/business-systems';
+import type { CardSectionData } from '@/data/cards';
+
+// 一个分类 = 一个卡片分节；一张卡片 = 一个业务系统，点进去是该系统的介绍页
+const sections: CardSectionData[] = bizCategories.map((category) => ({
+  id: category.id,
+  title: category.name,
+  items: category.systems.map((system) => ({
+    title: system.abbr ? `${system.abbr} · ${system.name}` : system.name,
+    href: `/business-systems/${system.slug}/`,
+    kind: 'system',
+  })),
+}));
 ---
 
 <div class="cs-biz">
-  {
-    bizCategories.map((category) => (
-      <section id={category.id} class="cs-biz-section">
-        <div class="cs-section-head">
-          <h2 class="cs-section-title">{category.name}</h2>
-          <span class="cs-section-count">{category.systems.length} 个系统</span>
-        </div>
-        <ul class="cs-biz-list">
-          {category.systems.map((system) => (
-            <li class="cs-biz-row">
-              <div class:list={['cs-biz-head', !system.abbr && 'cs-biz-head--plain']}>
-                {system.abbr && <span class="cs-biz-abbr">{system.abbr}</span>}
-                <span class="cs-biz-name">{system.name}</span>
-              </div>
-              <p class="cs-biz-desc">{system.summary}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+  {sections.map((section) => <CardSection {...section} />)}
 </div>

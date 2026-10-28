@@ -6,7 +6,7 @@
 ```
 src/data/route-plan.ts   ← 学习路线（技术路线 + 应用领域路线）   ┐
 src/data/domains.ts      ← 应用领域目录（8 分类 + 47 方向）      │ 手写数据
-src/data/business-systems.ts ← 业务系统分类（14 类 + 71 个系统）  │
+src/data/business-systems.ts ← 业务系统（14 类 + 72 个系统）      │
 src/data/catalog.ts      ← 首页技术分类（9 类 + 卡片跳转）      │
 src/data/cards.ts        ← 分组/卡片渲染结构（类型定义）          ┘
 src/content/docs/**      ← 教程正文、章节（Astro content collection）
@@ -101,6 +101,7 @@ const domains: DomainEntry[]
 
 ```ts
 interface BizSystem {
+  slug: string;    // 详情页 /business-systems/<slug>/
   abbr?: string;   // 系统缩写，如 ERP；没有通用缩写时省略
   name: string;    // 中文名
   summary: string; // 核心作用
@@ -109,13 +110,16 @@ interface BizSystem {
 interface BizCategory {
   id: string;      // 页内锚点，左侧栏「业务系统」也用它
   name: string;    // 如「制造与工业系统」
+  related: { title: string; href: string }[];  // 这类系统常用的技术栈链接
   systems: BizSystem[];
 }
 
-const bizCategories: BizCategory[]  // 14 类 / 71 个系统；顺序 = 页面分节与左侧栏顺序
+const bizCategories: BizCategory[]  // 14 类 / 72 个系统；顺序 = 页面分节与左侧栏顺序
 ```
 
-页面本身只做「标题 + 系统名 + 核心作用」的逐条罗列，不做跳转；新增/修改条目只改这个文件。
+`/business-systems/` 用统一的 `CardSection` 渲染（一分类一节、一行三张卡），
+每个系统另有一个由 `src/pages/business-systems/[slug].astro` 生成的详情页：
+核心作用 + 这类系统常用的技术栈。新增/修改条目只改这个文件，页面与详情页都自动跟着变。
 
 ## 4. 首页技术分类：`src/data/catalog.ts`
 
@@ -141,17 +145,19 @@ const homeCategories: HomeCategory[]   // 顺序 = 首页分节顺序、左侧�
 
 ## 5. 分组 + 卡片的通用结构：`src/data/cards.ts`
 
-首页与应用领域共用 `CardSection.astro`，它的入参就是这两个类型：
+首页、应用领域、业务系统三个页面共用 `CardSection.astro`，它的入参就是这两个类型：
 
 ```ts
-type CardBadgeTone = RouteItemRole | 'route';
+type CardKind = 'tutorial' | 'route' | 'system';        // 卡片类型：教程 / 路线 / 系统
+type CardBadgeTone = RouteItemRole | CardKind;
 
 interface CardBadge { label: string; tone?: CardBadgeTone }
 
 interface CardItem {
   title: string;
   href?: string;   // 有 = 可点击；没有 = 规划中（虚线卡）
-  meta?: string;   // 右侧补充文字（可选），如「4 阶段 · 19 项」
+  kind?: CardKind; // 卡片类型标签；省略时按 href 推断（/tutorials/ 为教程，其余为路线）
+  meta?: string;   // 右侧补充文字（可选）
   badges?: CardBadge[];
 }
 
@@ -222,7 +228,7 @@ interface ProgressState {
 | `homeCategories` | 首页 9 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
 | `domainCategories` / `domains` | `/domain/` 的 8 个分类与方向卡片、左侧栏分类锚点（无路线的方向显示虚线卡） |
 | `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
-| `bizCategories` | `/business-systems/` 的 14 个分类分节、系统条目与左侧栏锚点 |
+| `bizCategories` | `/business-systems/` 的 14 个分类分节与系统卡片；每个系统自动生成 `/business-systems/<slug>/` 详情页 |
 | docs 集合 | 教程页 / 章节页 / 是否上线 / 进度 / 搜索索引 |
 
 ## 9. 常见改动怎么改
