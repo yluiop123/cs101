@@ -119,7 +119,7 @@ const bizCategories: BizCategory[]  // 14 类 / 71 个系统；顺序 = 页面�
 
 ## 4. 首页技术分类：`src/data/catalog.ts`
 
-首页按《编程教程网站技术分类体系》的 9 大分类组织，一个分类 = 一个分节，一张卡片 = 一个方向/技术：
+首页按《软件技术知识库·最终分类方案》的 12 个分类组织，一个分类 = 一个分节，一张卡片 = 一个可直接进入的技术路线/专题页面（不把路线内部章节拆到首页）：
 
 ```ts
 interface HomeItem {
@@ -129,7 +129,7 @@ interface HomeItem {
 
 interface HomeCategory {
   id: string;      // 页内锚点 #<id>，左侧栏「技术分类」也用它
-  name: string;    // 如「编程语言与运行时」
+  name: string;    // 如「后端开发」
   items: HomeItem[];
 }
 
