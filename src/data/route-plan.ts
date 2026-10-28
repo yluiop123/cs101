@@ -435,6 +435,36 @@ export const routePlan: Record<string, RouteTier[]> = {
     { name: '精通 · 测试与质量', items: ['integration-testing', 'e2e-testing', 'api-testing', 'perf-testing', 'static-analysis', 'code-review'] },
     { name: '实战 · 协作与交付', items: ['ci-cd', 'testing', 'agile', 'tech-writing', 'ai-coding'] },
   ],
+  'domain-robotics': [
+    { name: '入门 · 软件与数学基础', items: ['python', 'cpp', 'linux'] },
+    { name: '进阶 · ROS 2 与感知', items: ['ros2', 'sensor-fusion', 'motion-planning'] },
+    { name: '精通 · 实时与嵌入式', items: ['embedded-linux', 'rtos', 'iot-gateway'] },
+    { name: '实战与生态 · 仿真与部署', items: ['simulation', 'docker', 'kubernetes'] },
+  ],
+  'domain-industrial-comms': [
+    { name: '入门 · 通信基础', items: ['serial-port', 'tcp-udp', 'network'] },
+    { name: '进阶 · 现场总线与工业协议', items: ['modbus', 'opc-ua', 'mqtt'] },
+    { name: '精通 · 设备联网与数据采集', items: ['industrial-comms', 'iot-gateway', 'plc-programming'] },
+    { name: '实战与生态 · 上位机与可视化', items: ['realtime-chart', 'report-export', 'scada'] },
+  ],
+  'domain-scada-hmi': [
+    { name: '入门 · 组态与监控基础', items: ['hmi-design', 'scada', 'realtime-chart'] },
+    { name: '进阶 · 数据与报警', items: ['report-export', 'opc-ua', 'modbus'] },
+    { name: '精通 · 上位机开发', items: ['csharp', 'wpf', 'qt'] },
+    { name: '实战与生态 · 系统集成', items: ['industrial-comms', 'plc-programming', 'docker'] },
+  ],
+  'domain-motion-control': [
+    { name: '入门 · 运动控制基础', items: ['servo-motion', 'plc-programming', 'ladder-logic'] },
+    { name: '进阶 · 现场总线与协议', items: ['modbus', 'opc-ua', 'industrial-comms'] },
+    { name: '精通 · 轨迹规划与算法', items: ['motion-planning', 'sensor-fusion', 'cpp'] },
+    { name: '实战与生态 · 上位机与调试', items: ['csharp', 'realtime-chart', 'qt'] },
+  ],
+  'domain-data-engineering': [
+    { name: '入门 · SQL 与数据建模', items: ['sql', 'data-modeling', 'python'] },
+    { name: '进阶 · 采集与传输', items: ['etl', 'kafka', 'flink'] },
+    { name: '精通 · 数仓与计算引擎', items: ['data-warehouse', 'spark', 'big-data'] },
+    { name: '实战与生态 · 平台与优化', items: ['docker', 'kubernetes', 'query-optimization'] },
+  ],
 }
 
 // 路线页 → 概览卡片用的技术名（与 tech-stack/index.md 的入口保持一致）

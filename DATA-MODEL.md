@@ -55,7 +55,7 @@ const routePlan: Record<string, RouteTier[]>   // 键：路线 slug
 | 键 | 页面 | 数量 |
 | --- | --- | --- |
 | `java` / `frontend` / `sql-database` … | `/tech-stack/<key>/` 技术路线页 | 19 |
-| `domain-ai-ml` / `domain-web-saas` … | `/domain/<slug>/` 应用领域页 | 19 |
+| `domain-ai-ml` / `domain-web-saas` … | `/domain/<slug>/` 应用领域页 | 24 |
 
 同一个文件还导出：
 
@@ -93,7 +93,7 @@ const domains: DomainEntry[]
 
 领域详情页的板块内容不在这个文件里，而在 `routePlan['domain-<slug>']`。
 `domains.ts` 只负责「有哪些方向、叫什么、归哪一类」；**有 `routePlan['domain-<slug>']` 的方向才可点**，
-没有的（目前 28 个）在 `/domain/` 里显示为虚线占位卡。
+没有的（目前 23 个）在 `/domain/` 里显示为虚线占位卡。
 
 ## 3. 业务系统分类：`src/data/business-systems.ts`
 

@@ -27,25 +27,25 @@ if (!prev && !next && entry.data.series) {
 }
 ---
 
-<nav class="cs-pager" aria-label="章节导航">
-  {
-    prev ? (
-      <a class="cs-pager-item" href={prev.href} rel="prev">
-        <span class="cs-pager-dir">← 上一章</span>
-        <span class="cs-pager-title">{prev.label}</span>
-      </a>
-    ) : (
-      <span class="cs-pager-item cs-pager-empty" aria-hidden="true" />
-    )
-  }
-  {
-    next ? (
-      <a class="cs-pager-item cs-pager-next" href={next.href} rel="next">
-        <span class="cs-pager-dir">下一章 →</span>
-        <span class="cs-pager-title">{next.label}</span>
-      </a>
-    ) : (
-      <span class="cs-pager-item cs-pager-empty" aria-hidden="true" />
-    )
-  }
-</nav>
+{
+  (prev || next) && (
+    <nav class="cs-pager" aria-label="章节导航">
+      {prev ? (
+        <a class="cs-pager-item" href={prev.href} rel="prev">
+          <span class="cs-pager-dir">← 上一章</span>
+          <span class="cs-pager-title">{prev.label}</span>
+        </a>
+      ) : (
+        <span class="cs-pager-item cs-pager-empty" aria-hidden="true" />
+      )}
+      {next ? (
+        <a class="cs-pager-item cs-pager-next" href={next.href} rel="next">
+          <span class="cs-pager-dir">下一章 →</span>
+          <span class="cs-pager-title">{next.label}</span>
+        </a>
+      ) : (
+        <span class="cs-pager-item cs-pager-empty" aria-hidden="true" />
+      )}
+    </nav>
+  )
+}
