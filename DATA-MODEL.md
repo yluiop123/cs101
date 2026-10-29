@@ -30,6 +30,7 @@ interface RouteItem {
   role?: RouteItemRole;  // 必学 / 推荐 / 主流 / 可选 / 小众
   title?: string;        // 卡片标题；省略时用 seriesMeta[slug]，再退化到 slug
   planned?: boolean;     // 规划中：虚线卡、不可点
+  summary?: string;      // 一句话说明（业务系统：核心作用）
 }
 
 /** 一条路线 = 若干分节（板块） */
@@ -39,6 +40,7 @@ interface RouteTier {
   kind?: 'sequence' | 'choice';// 顺序学习 | 多选一
   required?: boolean;          // 必学：标题旁标「必学」，分节内卡片继承该状态
   note?: string;               // 说明文字（选型规则等）
+  related?: { title: string; href: string }[];  // 这组路线共用的相关入口（业务系统的常用技术栈）
   items: (string | RouteItem)[];
   options?: RouteChoiceOption[]; // choice 专用：每个选项 = 一个框架 + 它的一整套教程
 }
@@ -105,26 +107,38 @@ const routePlan: Record<string, RouteTier[]>   // 键：路线 key
 也就是说：**首页就是一条路线（12 个分节），业务系统也是一条路线（14 个分节）**，
 和「Java 技术路线（4 个分节）」没有任何结构差别。左侧栏的分节锚点也直接读这些分节。
 
-## 4. 业务系统：目录 + 系统说明
+## 4. 业务系统：也是 `RouteTier[]`
+
+业务系统没有自己的类型，**直接写成一个路线**：
 
 ```ts
-interface BizSystem {
-  slug: string;    // 教程 slug：/tutorials/business-<slug>/
-  abbr?: string;   // 系统缩写，如 ERP
-  name: string;    // 中文名
-  summary: string; // 核心作用
-}
-
-interface BizCategory {
-  id: string;      // 分节锚点
-  name: string;
-  related: { title: string; href: string }[];  // 这类系统常用的技术栈
-  systems: BizSystem[];
-}
+export const businessCatalog: RouteTier[] = [
+  {
+    id: 'erp',
+    name: '通用企业管理系统',
+    related: [                                    // 分节级：这类系统常用的技术栈
+      { title: 'Java 技术路线', href: '/tech-stack/java/' },
+      { title: '数据库技术路线', href: '/tech-stack/sql-database/' },
+    ],
+    items: [
+      {
+        slug: 'erp',
+        kind: 'business',
+        title: 'ERP 企业资源计划',                 // 卡片标题 = 缩写 + 中文名
+        summary: '把财务、采购、库存、生产、人力等核心资源…',  // 系统概述正文
+      },
+      // …其余 71 个系统
+    ],
+  },
+  // …其余 13 个分类
+];
 ```
 
-`businessCatalog` 由 `bizCategories` 派生（卡片标题 = `缩写 + 中文名`），
-系统说明只在 `bizCategories` 维护一份，教程章节正文由 `BizSystemChapter.astro` 渲染。
+- 14 个分节 / 72 条，没有 `BizSystem`、`BizCategory` 这类目录模型；
+- 系统说明（`summary`）挂在条目上，分类共用的技术栈入口（`related`）挂在分节上；
+- 教程章节正文由 `BizSystemChapter.astro` 调 `findBusinessSystem(slug)` 读取这两处数据渲染，
+  系统文字只维护这一份；
+- 左侧栏、目录卡片、卡片标题都直接读 `businessCatalog`，和别的路线完全一样。
 
 ## 5. 渲染管线
 
@@ -200,8 +214,7 @@ interface ProgressState {
 | `option.name` / `option.role` | 选型面板标题与状态徽标 |
 | `item.*` | 卡片标题、入口、类型标记、状态徽标 |
 | `seriesMeta[slug]` | 教程卡片的默认标题 |
-| `homeCatalog` / `domainCatalog` / `businessCatalog` / `techCatalog` | 四个目录页的分节、卡片与左侧栏 |
-| `bizCategories` | 业务系统卡片标题、系统概述正文、相关技术栈 |
+| `homeCatalog` / `domainCatalog` / `businessCatalog` / `techCatalog` | 四个目录页的分节、卡片与左侧栏（业务系统的 `summary` / `related` 也在这里） |
 | docs 集合 | 教程页 / 章节页 / 是否上线 / 进度 / 搜索索引 |
 
 ## 9. 常见改动怎么改
@@ -215,7 +228,7 @@ interface ProgressState {
 | 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称）+ 把 slug 加进 `techCatalog` 的某个分节 |
 | 新增一个应用领域 | 在 `domainCatalog` 对应分类加 `{ slug: 'domain-<slug>', kind: 'domain', title }`；要可点再补 `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
 | 首页加/调整分类或卡片 | `catalog.ts`（`planned: true` = 虚线占位） |
-| 业务系统加/改条目 | `business-systems.ts`（缩写、中文名、核心作用；目录自动派生） |
+| 业务系统加/改条目 | `business-systems.ts` 的 `businessCatalog`（分节里加 `{ slug, kind: 'business', title, summary }`） |
 
 ## 10. 约定与已知点
 
@@ -225,5 +238,6 @@ interface ProgressState {
 - `dist/` 与 `public/search-index.json` 是构建产物，不要手改。
 - **卡片只有一套实现**：`RouteSections → CardSection → Card`，目录页与路线页共用，「多选一」由
   `RouteTier.options` 表达。
-- **目录即路线**：四个目录页的数据都是 `RouteTier[]`，新增目录页只需再写一个 `RouteTier[]`。
+- **目录即路线**：四个目录页的数据都是 `RouteTier[]`，新增目录页只需再写一个 `RouteTier[]`；
+  业务系统也没有 `BizSystem` / `BizCategory` 之类的独立模型，就是 `businessCatalog` 这一条路线。
 - 技术路线名称只写在 `docs/tech-stack/<slug>.mdx` 的 `title` 里（总览页、左侧栏、面包屑同源）。

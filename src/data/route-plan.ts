@@ -167,6 +167,8 @@ export interface RouteItem {
   title?: string;
   /** 规划中：卡片虚线、不可点 */
   planned?: boolean;
+  /** 一句话说明（业务系统：核心作用；领域：方向简介） */
+  summary?: string;
 }
 
 /** 选型组里的一个选项：一个框架/方向，下面是一系列教程 */
@@ -187,6 +189,8 @@ export interface RouteTier {
   required?: boolean;
   /** 选型组的说明文字 */
   note?: string;
+  /** 这一组路线共用的相关入口（业务系统：这类系统常用的技术栈） */
+  related?: { title: string; href: string }[];
   items: (string | RouteItem)[];
   /** choice 组专用：每个选项代表一个可选的框架/方向，各含一系列教程 */
   options?: RouteChoiceOption[];
