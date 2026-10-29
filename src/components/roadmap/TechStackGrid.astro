@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import { routePlan, tierSlugs, techRouteGroups } from '@/data/route-plan';
-import CardSection from '@/components/shared/CardSection.astro';
-import type { CardSectionData } from '@/data/cards';
+import RouteSections from '@/components/shared/RouteSections.astro';
+import { techCatalog } from '@/data/route-plan';
 
 // 卡片标题直接取 docs/tech-stack/<slug>.mdx 的 title，和左侧栏、页面标题同源
 const titles = new Map(
@@ -11,27 +10,14 @@ const titles = new Map(
     .map((entry) => [entry.id.slice('tech-stack/'.length), entry.data.title]),
 );
 
-// 卡片右侧的规模提示，与首页 / 领域卡片同样式
-const scaleOf = (slug: string) => {
-  const tiers = routePlan[slug] ?? [];
-  const count = new Set(tiers.flatMap((tier) => tierSlugs(tier))).size;
-  return `${tiers.length} 阶段 · ${count} 项`;
-};
-
-// 分组与顺序来自 route-plan.ts 的 techRouteGroups，一张卡 = 一条技术路线
-const sections: CardSectionData[] = techRouteGroups.map((group) => ({
-  title: group.name,
-  density: 'compact',
-  showKind: false,
-  columns: 2,
-  items: group.slugs.map((slug) => ({
-    title: titles.get(slug) ?? slug,
-    href: `/tech-stack/${slug}/`,
-    meta: scaleOf(slug),
-  })),
-}));
+// 全部技术路线 = 一条路线：4 个分组分节，一张卡片 = 一条技术路线（右侧显示规模）
 ---
 
-<div class="cs-card-page">
-  {sections.map((section) => <CardSection {...section} />)}
-</div>
+<RouteSections
+  tiers={techCatalog}
+  titleOf={(item) => titles.get(item.slug) ?? item.slug}
+  markKind="none"
+  density="compact"
+  columns={2}
+  routeScale
+/>

@@ -1,20 +1,9 @@
 ---
-import CardSection from '@/components/shared/CardSection.astro';
-import { bizCategories } from '@/data/business-systems';
-import type { CardSectionData } from '@/data/cards';
+import RouteSections from '@/components/shared/RouteSections.astro';
+import { businessCatalog } from '@/data/business-systems';
 
-// 一个分类 = 一个卡片分节；一张卡片 = 一个业务系统，点进去是该系统的专属教程（目录只含这个系统的章节）
-const sections: CardSectionData[] = bizCategories.map((category) => ({
-  id: category.id,
-  title: category.name,
-  items: category.systems.map((system) => ({
-    title: system.abbr ? `${system.abbr} ${system.name}` : system.name,
-    href: `/tutorials/business-${system.slug}/`,
-    kind: 'tutorial',
-  })),
-}));
+// 业务系统 = 一条路线：14 个分类分节，一张卡片 = 一套业务系统教程；
+// 系统说明（缩写、中文名、核心作用）只在 business-systems.ts 维护一份，章节正文由 BizSystemChapter 渲染。
 ---
 
-<div class="cs-card-page">
-  {sections.map((section) => <CardSection {...section} />)}
-</div>
+<RouteSections tiers={businessCatalog} />

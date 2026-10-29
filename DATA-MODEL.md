@@ -1,215 +1,166 @@
 # 数据结构说明
 
-本站的内容完全由「数据 + 组件」驱动：页面结构写死在组件里，**内容、顺序、状态、名称全部来自数据**。
-新增内容时只改数据文件，不动组件。
+本站只有一种内容模型：**一切都视为路线（Route）**。
+「首页 / 应用领域 / 业务系统 / 全部技术路线」四个目录页，和点进去的路线页，用的是同一个
+`RouteTier[]`；**一张卡片永远是一个 `RouteItem`**，点进去的目标由它的 `kind` 决定。
+所以新增内容只改数据，不动组件。
 
 ```
-src/data/route-plan.ts   ← 学习路线（技术路线 + 应用领域路线）   ┐
-src/data/domains.ts      ← 应用领域目录（8 分类 + 47 方向）      │ 手写数据
-src/data/business-systems.ts ← 业务系统（14 类 + 72 个系统）      │
-src/data/catalog.ts      ← 首页技术分类（12 类 + 卡片跳转）     │
-src/data/cards.ts        ← 分组/卡片渲染结构（类型定义）          ┘
-src/content/docs/**      ← 教程正文、章节（Astro content collection）
+src/data/route-plan.ts        ← 路线模型 + 路线表（技术路线 / 领域路线）+ 全部技术路线目录
+src/data/catalog.ts           ← 首页目录（12 个分类）
+src/data/domains.ts           ← 应用领域目录（8 个分类 / 47 个方向）
+src/data/business-systems.ts  ← 业务系统目录（14 类 / 72 个系统）+ 系统说明
+src/data/cards.ts             ← RouteTier[] → CardSectionData[]（tierSections 转换）
+src/content/docs/**           ← 教程正文、章节（Astro content collection）
         ↓ 构建期
-src/lib/content.ts       ← 扫描 docs 推导系列/章节/章数
+src/lib/content.ts            ← 扫描 docs 得到系列 / 章节 / 是否上线
         ↓
-组件（HomePage / TechNodes / DomainIndex / BusinessSystems / CardSection / Card / Sidebar …）
+components/shared/RouteSections.astro → CardSection.astro → Card.astro
 ```
 
-## 1. 学习路线：`src/data/route-plan.ts`
-
-一条路线 = 若干「板块（tier）」，一个板块 = 若干「教程（item）」或若干「选型项（option）」。
+## 1. 模型：一个条目 = 一条路线
 
 ```ts
-/** 状态：必学 / 推荐 / 主流 / 可选 / 小众 */
-type RouteItemRole = 'required' | 'recommended' | 'popular' | 'optional' | 'niche';
+/** 路线类型：决定点击后去哪、卡片上标「教程」还是「路线」 */
+type RouteKind = 'tutorial' | 'tech' | 'domain' | 'business' | 'page';
 
-/** 路线里的一项：默认是教程；kind:'route' 表示跳到另一条学习路线 */
 interface RouteItem {
-  slug: string;                     // 对应 /tutorials/<slug>/，也是 seriesMeta 的键
-  kind?: 'tutorial' | 'route';
-  role?: RouteItemRole;             // 单项状态，优先级最高
+  slug: string;          // 主键：教程 slug / 路线 key（如 domain-ai-ml）/ 业务系统 slug
+  kind?: RouteKind;      // 省略 = tutorial
+  role?: RouteItemRole;  // 必学 / 推荐 / 主流 / 可选 / 小众
+  title?: string;        // 卡片标题；省略时用 seriesMeta[slug]，再退化到 slug
+  planned?: boolean;     // 规划中：虚线卡、不可点
 }
 
-/** 选型组里的一个选项：一个框架 + 它的一整套教程 */
-interface RouteChoiceOption {
-  name: string;                     // 「React」「Vue」
-  role?: RouteItemRole;             // 推荐 / 主流 / 小众 → 标在面板标题上
-  items: (string | RouteItem)[];
-}
-
+/** 一条路线 = 若干分节（板块） */
 interface RouteTier {
-  name: string;                     // 板块名，如「Web 公共基础」
-  kind?: 'sequence' | 'choice';     // 顺序学习 | 多选一
-  required?: boolean;               // 必学板块 → 板块内每张卡继承「必学」
-  note?: string;                    // 选型组的说明文字
-  items: (string | RouteItem)[];    // 顺序板块用
-  options?: RouteChoiceOption[];    // 选型板块用
+  id?: string;                 // 目录页的锚点（路线页用 #tier-N）
+  name: string;                // 分节标题
+  kind?: 'sequence' | 'choice';// 顺序学习 | 多选一
+  required?: boolean;          // 必学：标题旁标「必学」，分节内卡片继承该状态
+  note?: string;               // 说明文字（选型规则等）
+  items: (string | RouteItem)[];
+  options?: RouteChoiceOption[]; // choice 专用：每个选项 = 一个框架 + 它的一整套教程
 }
-
-const routePlan: Record<string, RouteTier[]>   // 键：路线 slug
 ```
 
-`routePlan` 的键分两类：
+`kind` 决定入口地址（`itemHref()`）与卡片标记（`itemCardKind()`）：
+
+| kind | 入口 | 卡片标记 |
+| --- | --- | --- |
+| `tutorial`（默认） | `/tutorials/<slug>/` | 教程 |
+| `tech` | `/tech-stack/<slug>/` | 路线 |
+| `domain` | `/domain/<slug 去掉 domain- 前缀>/` | 路线 |
+| `business` | `/tutorials/business-<slug>/` | 教程 |
+| `page` | `/<slug>/` | 路线 |
+
+- `planned: true` → 没有入口，渲染虚线占位卡；
+- `kind: 'domain'` 但 `routePlan` 里没这条领域路线 → 同样自动变成虚线卡；
+- 标题：`item.title` → `seriesMeta[slug]` → `slug`；
+- 状态继承：`item.role` → 所属 `tier.required` → 所属 `option.role`。
+
+## 2. 路线表：`routePlan`
+
+```ts
+const routePlan: Record<string, RouteTier[]>   // 键：路线 key
+```
 
 | 键 | 页面 | 数量 |
 | --- | --- | --- |
-| `java` / `frontend` / `sql-database` … | `/tech-stack/<key>/` 技术路线页 | 19 |
-| `domain-ai-ml` / `domain-web-saas` … | `/domain/<slug>/` 应用领域页 | 24 |
+| `java` / `frontend` / `sql-database` … | `/tech-stack/<key>/` | 19 条技术路线 |
+| `domain-ai-ml` / `domain-web-saas` … | `/domain/<slug>/` | 24 条领域路线 |
 
-同一个文件还导出：
+共 43 条路线 / 175 个分节。其中只有大前端路线里的「框架选型」是 `kind: 'choice'`：
+
+```ts
+{ name: '框架选型', kind: 'choice', note: '五个框架任选其一即可…',
+  items: [],
+  options: [
+    { name: 'React', role: 'recommended', items: ['react', 'react-router', …] },
+    …
+  ] }
+```
+
+同一文件还导出：
 
 | 导出 | 作用 |
 | --- | --- |
-| `seriesMeta` | slug → 中文名（`react` → `React 教程`）；卡片标题全来自这里 |
-| `techRouteGroups` | 技术路线总览页（`/tech-stack/`）的分组与顺序；顺序即「学习路线」左侧栏顺序 |
-| 路线页 MDX `title` | 路线页标题、左侧栏「学习路线」名称、总览卡片标题（三者同源，不再单独登记） |
-| `roleLabels` | 状态 → 文案（必学 / 推荐 / 主流 / 可选 / 小众） |
-| `roleNotes` | 状态 → 图例解释文字 |
-| `normalizeItem(item)` | 字符串项转成 `RouteItem` |
-| `tierSlugs(tier)` | 板块内所有教程 slug（含选型组各选项） |
-| `itemRole(item, fallback)` | 单项状态，自己没标就继承所属板块/选型项 |
+| `seriesMeta` | 教程 slug → 中文名；卡片标题的兜底来源 |
+| `roleLabels` / `roleNotes` | 状态文案与图例解释 |
+| `techCatalog` / `techRouteOrder` | 全部技术路线目录（见下）及其左侧栏顺序 |
+| `itemTitle` / `itemHref` / `itemCardKind` | 卡片标题、入口、类型标记 |
+| `tierSlugs` / `itemRole` / `normalizeItem` | 摊平、状态继承、字符串项归一 |
 
-### 状态的生效规则
+## 3. 四个目录页 = 四条路线
 
-| 写在哪 | 显示在哪 |
-| --- | --- |
-| `tier.required: true` | 板块标题「必学」+ **板块内每张教程卡**「必学」 |
-| `option.role`（选型组） | 该框架**面板标题**「推荐 / 主流 / 小众」（不在卡上重复） |
-| `item.role` | 该卡片自己的状态，覆盖上面两种继承 |
+四个目录页的数据**结构完全一样**，都是一个 `RouteTier[]`：
 
-图例（`TechNodes`）只渲染**这条路线实际用到的状态**，所以不同路线图例条目不同。
+| 页面 | 数据 | 规模 | 渲染开关 |
+| --- | --- | --- | --- |
+| 首页 `/` | `homeCatalog`（catalog.ts） | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind="auto"`（教程/路线混排） |
+| 应用领域 `/domain/` | `domainCatalog`（domains.ts） | 8 分节 / 47 条（24 有路线，23 虚线） | 默认 |
+| 业务系统 `/business-systems/` | `businessCatalog`（business-systems.ts） | 14 分节 / 72 条 | 默认 |
+| 全部技术路线 `/tech-stack/` | `techCatalog`（route-plan.ts） | 4 分节 / 19 条 | `markKind="none"` + `columns={2}` + `routeScale` |
 
-## 2. 应用领域目录：`src/data/domains.ts`
+也就是说：**首页就是一条路线（12 个分节），业务系统也是一条路线（14 个分节）**，
+和「Java 技术路线（4 个分节）」没有任何结构差别。左侧栏的分节锚点也直接读这些分节。
 
-按《编程教程网站技术分类体系》的「领域方向」分成 8 大分类：
-
-```ts
-interface DomainCategory { id: string; name: string }          // 8 个分类
-interface DomainEntry   { slug: string; name: string; category: string }  // 47 个方向
-
-const domainCategories: DomainCategory[]  // 顺序 = /domain/ 页分组与左侧栏顺序
-const domains: DomainEntry[]
-```
-
-领域详情页的板块内容不在这个文件里，而在 `routePlan['domain-<slug>']`。
-`domains.ts` 只负责「有哪些方向、叫什么、归哪一类」；**有 `routePlan['domain-<slug>']` 的方向才可点**，
-没有的（目前 23 个）在 `/domain/` 里显示为虚线占位卡。
-
-## 3. 业务系统：`src/data/business-systems.ts`
-
-`/business-systems/` 是业务系统的目录页，卡片点进去是**这套系统自己的教程**：`/tutorials/business-<slug>/`。
+## 4. 业务系统：目录 + 系统说明
 
 ```ts
 interface BizSystem {
   slug: string;    // 教程 slug：/tutorials/business-<slug>/
-  abbr?: string;   // 系统缩写，如 ERP；没有通用缩写时省略
+  abbr?: string;   // 系统缩写，如 ERP
   name: string;    // 中文名
-  summary: string; // 核心作用（由章节组件渲染成「系统概述」正文）
+  summary: string; // 核心作用
 }
 
 interface BizCategory {
-  id: string;      // 目录页锚点，左侧栏「业务系统」也用它
-  name: string;    // 如「制造与工业系统」
-  related: { title: string; href: string }[];  // 这类系统常用的技术栈链接
+  id: string;      // 分节锚点
+  name: string;
+  related: { title: string; href: string }[];  // 这类系统常用的技术栈
   systems: BizSystem[];
 }
-
-const bizCategories: BizCategory[]  // 14 类 / 72 个系统；顺序 = 目录页分节顺序
 ```
 
-- 目录页用统一的 `CardSection` 渲染（一分类一节、一行三张卡，类型标记为「教程」）；
-- 每个系统一套教程：`docs/tutorials/business-<slug>/`（`index.mdx` + `01-overview.mdx` + `02-tech.mdx`），
-  章节正文由 `BizSystemChapter.astro` 按本文件的数据渲染，**系统文字只在这里维护一份**；
-- 教程左侧栏只列这套教程自己的章节（系统概述 / 相关技术栈），右侧是章节正文。
+`businessCatalog` 由 `bizCategories` 派生（卡片标题 = `缩写 + 中文名`），
+系统说明只在 `bizCategories` 维护一份，教程章节正文由 `BizSystemChapter.astro` 渲染。
 
-## 4. 首页技术分类：`src/data/catalog.ts`
-
-首页按《软件技术知识库·最终分类方案》的 12 个分类组织，一个分类 = 一个分节，一张卡片 = 一个可直接进入的技术路线/专题页面（不把路线内部章节拆到首页）：
+## 5. 渲染管线
 
 ```ts
-interface HomeItem {
-  title: string;
-  href?: string;   // 有 = 点击进入该方向的学习路线/教程；没有 = 规划中（虚线卡）
-}
-
-interface HomeCategory {
-  id: string;      // 页内锚点 #<id>，左侧栏「技术分类」也用它
-  name: string;    // 如「后端开发」
-  items: HomeItem[];
-}
-
-const homeCategories: HomeCategory[]   // 顺序 = 首页分节顺序、左侧栏顺序
+tierSections(tiers: RouteTier[], options?) : CardSectionData[]
 ```
 
-卡片**直接指向路线页或教程页**（如 `Java` → `/tech-stack/java/`、`Git 与版本控制` → `/tutorials/git/`），
-所以首页各分节标题旁不再有「学习路线 →」入口。
+一个分节 → 一个 `CardSectionData`（标题 + 可选标记/说明 + `items` 或 `groups`），
+再由 `CardSection.astro` 渲染分节、`Card.astro` 渲染一张卡。
 
-## 5. 分组 + 卡片的通用结构：`src/data/cards.ts`
-
-**五种页面（首页、应用领域、业务系统、技术路线、领域详情）共用同一套卡片渲染**：
-`CardSection.astro` 负责分节（标题 + 可选标记/说明 + 网格），`Card.astro` 负责一张卡片。
-数据不同、组件只有一份，所以改动只需改数据文件。
-
-```ts
-type CardKind = 'tutorial' | 'route';         // 卡片类型：教程 / 技术路线
-type CardBadgeTone = RouteItemRole | 'choice';// 状态徽标色调 + 「多选一」分节标记
-
-interface CardBadge { label: string; tone?: CardBadgeTone }
-
-interface CardItem {
-  title: string;
-  href?: string;   // 有 = 可点击；没有 = 规划中（虚线卡）
-  kind?: CardKind; // 省略时按 href 推断（/tutorials/ 为教程，其余为路线）
-  meta?: string;   // 右侧补充文字（如「4 阶段 · 12 项」）
-  badges?: CardBadge[];
-}
-
-// 二级分组：一个选项 = 一组卡片（「多选一」分节专用）
-interface CardGroup {
-  title: string;         // 如 React / Vue / Angular
-  role?: RouteItemRole;  // 推荐 / 主流 / 小众，决定面板描边与徽标
-  items: CardItem[];
-}
-
-interface CardSectionData {
-  id?: string;                              // 锚点（路线页为 #tier-N）
-  title: string;
-  more?: { href: string; label?: string };  // 标题右侧「学习路线 →」
-  tag?: CardBadge;                          // 标题旁标记：「必学」「5 选 1」
-  note?: string;                            // 分节说明（选型规则等）
-  items?: CardItem[];                       // 平铺网格（与 groups 二选一）
-  groups?: CardGroup[];                     // 二级「多选一」面板（与 items 二选一）
-  showKind?: boolean;   // 是否按 href 推断类型标记；路线页设 false，只给显式 kind 的卡片标
-  density?: 'default' | 'compact';  // compact = 路线页/技术栈总览（卡片更紧凑）
-}
-```
-
-渲染规则：
-
-- `items` → 一行三张卡（响应式）：标题 + 类型标记（图标+文字，不用胶囊，避免和状态徽标混淆）+ 状态徽标 + `meta`；
-- `groups` → 外层虚线框分组，每个选项一个面板（标题 + 状态徽标 + 竖排卡片），
-  即大前端 → 「框架选型」这种**多选一**版式；面板锚点为 `#<分节 id>-<序号>`；
-- 没有 `href` 的卡片渲染为虚线占位卡（教程还没写）；
-- 卡片标题单行省略，完整名称放在 `title` 提示里。
+| option | 作用 |
+| --- | --- |
+| `markKind` | `explicit`（默认，只有写了 kind 的条目才标）/ `auto`（没写 kind 时按链接推断，首页用）/ `none`（一律不标，全部技术路线页用） |
+| `density` | `compact` = 路线页 / 总览页的紧凑卡片 |
+| `columns` | 一行几张卡（宽屏），默认 3；标题长的总览页用 2 |
+| `routeScale` | 给指向技术路线的卡片加「N 阶段 · M 项」提示 |
+| `titleOf` | 覆盖卡片标题（技术路线总览页从 MDX `title` 取） |
+| `available` | 条目是否已上线（路线页用它把没写正文的教程显示成虚线卡） |
+| `idOf` | 分节锚点规则（默认 `tier-<序号>`，目录页直接用自己的 `tier.id`） |
 
 ## 6. 教程与章节：`src/content/docs/**`
 
-一个目录 = 一个 URL。`docsSchema` 上额外扩展了这些字段（`src/content.config.ts`）：
+一个目录 = 一个 URL。`docsSchema` 额外扩展了这些字段（`src/content.config.ts`）：
 
 ```ts
 series?, difficulty?: 'beginner'|'intermediate'|'advanced', duration?: number,
 tags?: string[], prerequisites?: string[], estMinutes?: number
 ```
 
-实际用到的 frontmatter：
-
 | 页面 | 路径 | 关键字段 |
 | --- | --- | --- |
 | 教程系列首页 | `docs/tutorials/<slug>/index.mdx` | `title`、`description`、`sidebar.order: 0`、`sidebar.hidden: true`；正文用 `<SeriesChapters series="<slug>" />` |
-| 教程章节 | `docs/tutorials/<slug>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order`（章节顺序） |
-| 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`、`description`；正文只有 `<TechNodes page="<route-slug>" />` |
+| 教程章节 | `docs/tutorials/<slug>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order` |
+| 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`（卡片与左侧栏都用它）、`description`；正文只有 `<TechNodes page="<route-slug>" />` |
 | 应用领域页 | `docs/domain/<slug>.mdx` | 同上，`page="domain-<slug>"` |
+| 业务系统教程 | `docs/tutorials/business-<slug>/` | 2 章；正文由 `BizSystemChapter.astro` 按数据渲染 |
 | 计算机科学 | `docs/computer-science/**` | 由 `src/data/computer-science/{zh,ossu}.json` 生成 |
 
 构建期 `src/lib/content.ts` 扫描 docs 得到：
@@ -219,16 +170,16 @@ interface ChapterInfo { id: string; title: string; order: number; duration?: num
 interface SeriesInfo  { slug: string; title: string; description?: string; chapters: ChapterInfo[]; totalDuration: number }
 ```
 
-`getSeries()` 决定：教程有没有上线（没有章节 → 卡片变虚线、不可点）、
-左侧栏章节列表、继续学习卡。**写完章节页面，卡片自动点亮，不需要额外登记。**
+`getSeries()` 决定：教程有没有上线（没有章节 → 卡片变虚线）、左侧栏章节列表、继续学习卡。
+**写完章节页面，卡片自动点亮，不需要额外登记。**
 
-## 7. 运行时状态（浏览器本地）
+## 7. 运行时状态
 
 `src/lib/progress.ts`，localStorage 键 `cs101:progress:v1`：
 
 ```ts
 interface ProgressState {
-  completed: Record<string, number>;              // 章节 id → 完成时间戳
+  completed: Record<string, number>;   // 章节 id → 完成时间戳
   favorites: string[];
   recent: { id: string; at: number }[];
 }
@@ -244,38 +195,35 @@ interface ProgressState {
 
 | 数据 | 决定什么 |
 | --- | --- |
-| `routePlan[key]` | 路线页板块顺序 / 卡片 / 图例；tech-stack 索引卡与领域索引卡的「N 阶段 · M 项」 |
-| `tier.name` / `tier.required` / `tier.kind` | 分节标题、「必学」标记、「N 选 1」标记；左侧栏一级项与 `#tier-N` 锚点 |
-| `option.name` / `option.role` | 选型面板标题与状态徽标（渲染成 `groups`） |
-| `seriesMeta[slug]` | 教程卡片标题 |
-| `techRouteGroups` | 全部技术路线页的分组与「学习路线」左侧栏顺序；路线标题取各自 MDX 的 `title` |
-| `homeCategories` | 首页 12 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
-| `domainCategories` / `domains` | `/domain/` 的 8 个分类与方向卡片、左侧栏分类锚点（无路线的方向显示虚线卡） |
-| `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
-| `bizCategories` | `/business-systems/` 的 14 个分类分节与系统卡片（链接到业务系统教程对应章节锚点） |
+| `routePlan[key]` | 路线页的分节与卡片；领域索引卡的「是否虚线」 |
+| `tier.name` / `tier.required` / `tier.kind` | 分节标题、「必学」「N 选 1」标记；左侧栏分节项与锚点 |
+| `option.name` / `option.role` | 选型面板标题与状态徽标 |
+| `item.*` | 卡片标题、入口、类型标记、状态徽标 |
+| `seriesMeta[slug]` | 教程卡片的默认标题 |
+| `homeCatalog` / `domainCatalog` / `businessCatalog` / `techCatalog` | 四个目录页的分节、卡片与左侧栏 |
+| `bizCategories` | 业务系统卡片标题、系统概述正文、相关技术栈 |
 | docs 集合 | 教程页 / 章节页 / 是否上线 / 进度 / 搜索索引 |
 
 ## 9. 常见改动怎么改
 
 | 想做的事 | 改哪里 |
 | --- | --- |
-| 新增一篇教程 | `docs/tutorials/<slug>/index.mdx` + 章节文件；再把 `<slug>` 写进路线里的某个板块 |
-| 调整路线顺序 / 增删板块 | `src/data/route-plan.ts` |
+| 新增一篇教程 | `docs/tutorials/<slug>/index.mdx` + 章节文件；再把 `<slug>` 写进路线里的某个分节 |
+| 调整路线顺序 / 增删分节 | `src/data/route-plan.ts` 的 `routePlan` |
 | 标记必学、推荐、主流、小众 | `tier.required` / `option.role` / `item.role` |
-| 改教程在卡片上的名字 | `seriesMeta` |
-| 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称）+ 把 slug 加进 `techRouteGroups` 的某个分组 |
-| 新增一个应用领域 | 只加 `domains.ts` 条目即可显示（虚线占位）；要可点再加 `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
-| 首页加/调整分类或卡片 | `catalog.ts`（卡片 `href` 指向已有路线或教程，没做就留空显示虚线卡） |
-| 业务系统加/改条目 | `business-systems.ts`（缩写、中文名、核心作用） |
+| 改教程在卡片上的名字 | `seriesMeta`（跨页面统一）或条目的 `title`（只在某个目录页覆盖） |
+| 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称）+ 把 slug 加进 `techCatalog` 的某个分节 |
+| 新增一个应用领域 | 在 `domainCatalog` 对应分类加 `{ slug: 'domain-<slug>', kind: 'domain', title }`；要可点再补 `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
+| 首页加/调整分类或卡片 | `catalog.ts`（`planned: true` = 虚线占位） |
+| 业务系统加/改条目 | `business-systems.ts`（缩写、中文名、核心作用；目录自动派生） |
 
-## 10. 约定与已知重复点
+## 10. 约定与已知点
 
-- **slug 是唯一主键**：`seriesMeta` 的键、路线里的项、`docs/tutorials/<slug>/` 目录名必须一致；
+- **slug 是唯一主键**：`seriesMeta` 的键、路线里的条目、`docs/tutorials/<slug>/` 目录名必须一致；
   对不上时卡片会显示 slug 原文，链接会 404（`pnpm check:links` 会抓出来）。
 - 站内链接一律用 `withBase()` / 相对路径，构建期 `base-links` 集成兜底 `/cs101` 前缀。
 - `dist/` 与 `public/search-index.json` 是构建产物，不要手改。
-- **卡片只有一套实现**：`CardSection.astro`（分节）+ `Card.astro`（一张卡）覆盖首页、应用领域、业务系统、
-  技术路线、领域详情；路线页的「多选一」由 `CardSectionData.groups` 表达，不再有单独的路线卡片组件。
-- **技术路线只有一份登记**：`techRouteGroups` 决定分组与顺序，路线名称只写在 `docs/tech-stack/<slug>.mdx`
-  的 `title` 里，总览页、左侧栏、面包屑都从这里取，新增路线不需要再改组件。
-- 大前端 49 项里目前只有 9 个教程有正文（html / css / javascript / typescript / tailwind / react / vue / angular / nodejs），其余是虚线占位卡。
+- **卡片只有一套实现**：`RouteSections → CardSection → Card`，目录页与路线页共用，「多选一」由
+  `RouteTier.options` 表达。
+- **目录即路线**：四个目录页的数据都是 `RouteTier[]`，新增目录页只需再写一个 `RouteTier[]`。
+- 技术路线名称只写在 `docs/tech-stack/<slug>.mdx` 的 `title` 里（总览页、左侧栏、面包屑同源）。

@@ -4,15 +4,11 @@ import {
   routePlan,
   roleLabels,
   roleNotes,
-  seriesMeta,
   normalizeItem,
-  itemRole,
-  tierSlugs,
   type RouteItem,
   type RouteItemRole,
 } from '@/data/route-plan';
-import CardSection from '@/components/shared/CardSection.astro';
-import type { CardItem, CardSectionData } from '@/data/cards';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 interface Props {
   page: string;
@@ -21,7 +17,7 @@ interface Props {
 const { page } = Astro.props as Props;
 const tiers = routePlan[page] ?? [];
 const series = await getSeries();
-const bySlug = new Map(series.map((item) => [item.slug, item]));
+const online = new Set(series.map((item) => item.slug));
 
 // 图例只展示这条路线实际用到的状态（必学 / 推荐 / 主流 / 可选 / 小众）
 const legendOrder: RouteItemRole[] = ['required', 'recommended', 'popular', 'optional', 'niche'];
@@ -42,60 +38,9 @@ for (const tier of tiers) {
 }
 const legendRoles = legendOrder.filter((role) => usedRoles.has(role));
 
-// 路线里的一个条目 → 一张卡片：教程已有章节才可点，否则是规划中的虚线卡；
-// 「跳到另一条路线」的条目额外带上规模提示和「路线」标记。
-const toCard = (item: string | RouteItem, inheritedRole?: RouteItemRole): CardItem => {
-  const normalized = normalizeItem(item);
-  const title = seriesMeta[normalized.slug] ?? normalized.slug;
-  const role = itemRole(item, inheritedRole);
-  const badges = role ? [{ label: roleLabels[role], tone: role }] : [];
-
-  if (normalized.kind === 'route') {
-    const targetTiers = routePlan[normalized.slug] ?? [];
-    const count = new Set(targetTiers.flatMap((tier) => tierSlugs(tier))).size;
-    return {
-      title,
-      href: `/tech-stack/${normalized.slug}/`,
-      kind: 'route',
-      meta: `${targetTiers.length} 板块 · ${count} 项`,
-      badges,
-    };
-  }
-
-  const chapters = bySlug.get(normalized.slug)?.chapters.length ?? 0;
-  return {
-    title,
-    href: chapters > 0 ? `/tutorials/${normalized.slug}/` : undefined,
-    badges,
-  };
-};
-
-// 一个阶段 = 一个卡片分节；选型阶段用 groups 渲染成「多选一」的面板
-const sections: CardSectionData[] = tiers.map((tier, index) => {
-  const choice = Boolean(tier.options?.length);
-  return {
-    id: `tier-${index}`,
-    title: tier.name,
-    tag: tier.required
-      ? { label: roleLabels.required, tone: 'required' }
-      : choice
-        ? { label: `${tier.options?.length} 选 1`, tone: 'choice' }
-        : undefined,
-    note: tier.note,
-    showKind: false,
-    density: 'compact',
-    items: choice
-      ? undefined
-      : tier.items.map((item) => toCard(item, tier.required ? 'required' : undefined)),
-    groups: choice
-      ? tier.options?.map((option) => ({
-          title: option.name,
-          role: option.role,
-          items: option.items.map((item) => toCard(item, option.role)),
-        }))
-      : undefined,
-  };
-});
+// 教程类条目没写正文时显示虚线卡；跨路线跳转的条目不受影响
+const available = (item: RouteItem) =>
+  item.kind && item.kind !== 'tutorial' ? true : online.has(item.slug);
 ---
 
 {tiers.length === 0 && <p class="cs-empty">这条路线正在整理中。</p>}
@@ -114,6 +59,4 @@ const sections: CardSectionData[] = tiers.map((tier, index) => {
   )
 }
 
-<div class="cs-card-page">
-  {sections.map((section) => <CardSection {...section} />)}
-</div>
+<RouteSections tiers={tiers} density="compact" available={available} />

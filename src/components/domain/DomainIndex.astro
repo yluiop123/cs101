@@ -1,28 +1,8 @@
 ---
-import CardSection from '@/components/shared/CardSection.astro';
-import { routePlan } from '@/data/route-plan';
-import { domains, domainCategories } from '@/data/domains';
-import type { CardSectionData } from '@/data/cards';
+import RouteSections from '@/components/shared/RouteSections.astro';
+import { domainCatalog } from '@/data/domains';
 
-// 有领域路线的方向才可点（routePlan['domain-<slug>'] 存在），其余显示为虚线占位卡
-const cards = domains.map((domain) => ({
-  ...domain,
-  hasRoute: (routePlan[`domain-${domain.slug}`] ?? []).length > 0,
-}));
-
-const sections: CardSectionData[] = domainCategories.map((category) => ({
-  id: `cat-${category.id}`,
-  title: category.name,
-  items: cards
-    .filter((card) => card.category === category.id)
-    .map((card) => ({
-      title: card.name,
-      href: card.hasRoute ? `/domain/${card.slug}/` : undefined,
-      kind: 'route' as const,
-    })),
-}));
+// 应用领域 = 一条路线：8 个分类分节，卡片是各条领域路线；没配 routePlan 的方向自动渲染成虚线卡
 ---
 
-<div class="cs-card-page">
-  {sections.map((section) => <CardSection {...section} />)}
-</div>
+<RouteSections tiers={domainCatalog} />

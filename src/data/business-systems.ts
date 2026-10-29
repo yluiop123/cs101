@@ -1,5 +1,8 @@
 // 业务系统分类：按《编程教程网站技术分类体系》的「业务系统分类」整理，用于了解各类业务系统是干什么的。
 // 一个分类 = 页内一个分节；一条 = 一个业务系统（缩写 + 中文名 + 核心作用）。
+// 目录页同样是统一的 RouteTier[]（见文件末尾的 businessCatalog），一张卡片 = 一套业务系统教程。
+
+import type { RouteTier } from '@/data/route-plan';
 
 export interface BizSystem {
   /** 详情页 slug（/business-systems/<slug>/） */
@@ -647,3 +650,14 @@ export const bizCategories: BizCategory[] = [
     ],
   },
 ];
+
+/** 业务系统目录：一个分类 = 一个分节，一张卡片 = 一套业务系统教程（kind: 'business'） */
+export const businessCatalog: RouteTier[] = bizCategories.map((category) => ({
+  id: category.id,
+  name: category.name,
+  items: category.systems.map((system) => ({
+    slug: system.slug,
+    kind: 'business' as const,
+    title: system.abbr ? `${system.abbr} ${system.name}` : system.name,
+  })),
+}));

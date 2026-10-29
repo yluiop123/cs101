@@ -150,11 +150,23 @@ export const roleNotes: Record<RouteItemRole, string> = {
   niche: '生态较小，按兴趣选',
 };
 
-/** 路线里的一项：默认是教程；kind: 'route' 表示跳到另一条学习路线 */
+/** 路线类型：决定点击后去哪、卡片上标「教程」还是「路线」 */
+export type RouteKind = 'tutorial' | 'tech' | 'domain' | 'business' | 'page';
+
+/**
+ * 路线里的一项（也用于首页 / 应用领域 / 业务系统 / 全部技术路线 四个目录页的卡片）：
+ * 目录页与路线页共用同一个模型，所以「一个条目」永远是一条路线。
+ */
 export interface RouteItem {
+  /** 主键：教程 slug、路线 key（如 domain-ai-ml）或业务系统 slug */
   slug: string;
-  kind?: 'tutorial' | 'route';
+  /** 省略 = tutorial */
+  kind?: RouteKind;
   role?: RouteItemRole;
+  /** 卡片标题；省略时用 seriesMeta[slug]，再退化到 slug */
+  title?: string;
+  /** 规划中：卡片虚线、不可点 */
+  planned?: boolean;
 }
 
 /** 选型组里的一个选项：一个框架/方向，下面是一系列教程 */
@@ -166,6 +178,8 @@ export interface RouteChoiceOption {
 }
 
 export interface RouteTier {
+  /** 目录页的分节锚点（路线页用 #tier-N） */
+  id?: string;
   name: string;
   /** sequence = 顺序学习（默认）；choice = 多选一 */
   kind?: 'sequence' | 'choice';
@@ -190,6 +204,41 @@ export const tierSlugs = (tier: RouteTier): string[] =>
 /** 单项状态：自己标的优先，否则继承所属分组/选型项的默认状态 */
 export const itemRole = (item: string | RouteItem, fallback?: RouteItemRole): RouteItemRole | undefined =>
   normalizeItem(item).role ?? fallback;
+
+/** 卡片 / 面包屑标题 */
+export const itemTitle = (item: string | RouteItem): string => {
+  const normalized = normalizeItem(item);
+  return normalized.title ?? seriesMeta[normalized.slug] ?? normalized.slug;
+};
+
+/** 条目的入口地址；规划中的返回 undefined（渲染成虚线占位卡） */
+export const itemHref = (item: string | RouteItem): string | undefined => {
+  const normalized = normalizeItem(item);
+  if (normalized.planned) return undefined;
+  switch (normalized.kind ?? 'tutorial') {
+    case 'tech':
+      return `/tech-stack/${normalized.slug}/`;
+    case 'domain': {
+      // 领域路线：只有配了 routePlan['domain-<slug>'] 的领域才有页面
+      const key = normalized.slug.startsWith('domain-')
+        ? normalized.slug
+        : `domain-${normalized.slug}`;
+      return (routePlan[key] ?? []).length > 0 ? `/domain/${key.slice('domain-'.length)}/` : undefined;
+    }
+    case 'business':
+      return `/tutorials/business-${normalized.slug.replace(/^business-/, '')}/`;
+    case 'page':
+      return `/${normalized.slug}/`;
+    default:
+      return `/tutorials/${normalized.slug}/`;
+  }
+};
+
+/** 卡片类型标记：教程类（教程 / 业务系统教程）还是路线类（技术路线 / 领域路线 / 专题页） */
+export const itemCardKind = (item: string | RouteItem): 'tutorial' | 'route' => {
+  const kind = normalizeItem(item).kind ?? 'tutorial';
+  return kind === 'tutorial' || kind === 'business' ? 'tutorial' : 'route';
+};
 
 export const routePlan: Record<string, RouteTier[]> = {
   'java': [
@@ -467,17 +516,12 @@ export const routePlan: Record<string, RouteTier[]> = {
   ],
 }
 
-/** 技术路线总览页（/tech-stack/）的分组：一组 = 一个分节，数组顺序 = 左侧栏「学习路线」顺序。
- *  卡片与页面标题都取自 docs/tech-stack/<slug>.mdx 的 title，这里只维护「有哪些路线、怎么分组」。 */
-export interface TechRouteGroup {
-  name: string;
-  slugs: string[];
-}
-
-export const techRouteGroups: TechRouteGroup[] = [
+/** 全部技术路线（`/tech-stack/`）：一组 = 一个分节，顺序即「学习路线」左侧栏顺序。
+ *  路线名称取各自 `docs/tech-stack/<slug>.mdx` 的 title，这里只维护「有哪些路线、怎么分组」。 */
+export const techCatalog: RouteTier[] = [
   {
     name: '编程语言',
-    slugs: [
+    items: [
       'java',
       'python',
       'go',
@@ -487,21 +531,23 @@ export const techRouteGroups: TechRouteGroup[] = [
       'c-cpp',
       'c-sharp',
       'kotlin-swift-dart',
-    ],
+    ].map((slug) => ({ slug, kind: 'tech' as const })),
   },
   {
     name: '数据库',
-    slugs: ['sql-database', 'mysql', 'postgresql', 'redis', 'mongodb', 'elasticsearch'],
+    items: ['sql-database', 'mysql', 'postgresql', 'redis', 'mongodb', 'elasticsearch'].map(
+      (slug) => ({ slug, kind: 'tech' as const }),
+    ),
   },
   {
     name: '中间件',
-    slugs: ['kafka', 'nginx'],
+    items: ['kafka', 'nginx'].map((slug) => ({ slug, kind: 'tech' as const })),
   },
   {
     name: '运维与云',
-    slugs: ['docker', 'kubernetes'],
+    items: ['docker', 'kubernetes'].map((slug) => ({ slug, kind: 'tech' as const })),
   },
 ];
 
 /** 全部技术路线的 slug，按左侧栏顺序摊平 */
-export const techRouteOrder: string[] = techRouteGroups.flatMap((group) => group.slugs);
+export const techRouteOrder: string[] = techCatalog.flatMap((tier) => tierSlugs(tier));

@@ -2,9 +2,9 @@
 import { getCollection } from 'astro:content';
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
-import { homeCategories } from '@/data/catalog';
-import { bizCategories } from '@/data/business-systems';
-import { domainCategories } from '@/data/domains';
+import { homeCatalog } from '@/data/catalog';
+import { businessCatalog } from '@/data/business-systems';
+import { domainCatalog } from '@/data/domains';
 import { techRouteOrder, routePlan } from '@/data/route-plan';
 
 const { entry } = Astro.locals.starlightRoute;
@@ -48,7 +48,7 @@ const catalog =
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">技术分类</p>
       <ul class="cs-sidebar-sections">
-        {homeCategories.map((category) => (
+        {homeCatalog.map((category) => (
           <li>
             <a href={`#${category.id}`} data-cs-section-link={category.id}>
               {category.name}
@@ -62,9 +62,9 @@ const catalog =
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">应用领域</p>
       <ul class="cs-sidebar-sections">
-        {domainCategories.map((category) => (
+        {domainCatalog.map((category) => (
           <li>
-            <a href={`#cat-${category.id}`} data-cs-section-link={`cat-${category.id}`}>
+            <a href={`#${category.id}`} data-cs-section-link={category.id}>
               {category.name}
             </a>
           </li>
@@ -123,7 +123,7 @@ const catalog =
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">业务系统</p>
       <ul class="cs-sidebar-sections">
-        {bizCategories.map((category) => (
+        {businessCatalog.map((category) => (
           <li>
             <a href={`#${category.id}`} data-cs-section-link={category.id}>
               {category.name}

@@ -1,18 +1,10 @@
 ---
 import { getSeries } from '@/lib/content';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
-import CardSection from '@/components/shared/CardSection.astro';
-import { homeCategories } from '@/data/catalog';
-import type { CardSectionData } from '@/data/cards';
+import RouteSections from '@/components/shared/RouteSections.astro';
+import { homeCatalog } from '@/data/catalog';
 
 const series = await getSeries();
-
-// 首页 = 12 个技术分类，每张卡片直接指向该方向的学习路线或教程
-const sections: CardSectionData[] = homeCategories.map((category) => ({
-  id: category.id,
-  title: category.name,
-  items: category.items.map((item) => ({ title: item.title, href: item.href })),
-}));
 ---
 
 <div class="cs-home">
@@ -20,5 +12,6 @@ const sections: CardSectionData[] = homeCategories.map((category) => ({
 
   <ContinueCard client:visible series={series} />
 
-  {sections.map((section) => <CardSection {...section} />)}
+  <!-- 首页 = 一条路线：12 个分类分节，卡片是通往各条路线的条目 -->
+  <RouteSections tiers={homeCatalog} markKind="auto" />
 </div>

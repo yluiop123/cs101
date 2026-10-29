@@ -1,0 +1,18 @@
+---
+import CardSection from '@/components/shared/CardSection.astro';
+import { tierSections, type TierSectionOptions } from '@/data/cards';
+import type { RouteTier } from '@/data/route-plan';
+
+// 统一渲染入口：RouteTier[] → 分节卡片。
+// 首页 / 应用领域 / 业务系统 / 全部技术路线 / 技术路线页 / 领域详情页都用它，只有数据与几个开关不同。
+interface Props extends TierSectionOptions {
+  tiers: RouteTier[];
+}
+
+const { tiers, ...options } = Astro.props as Props;
+const sections = tierSections(tiers, options);
+---
+
+<div class="cs-card-page">
+  {sections.map((section) => <CardSection {...section} />)}
+</div>

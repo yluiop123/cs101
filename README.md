@@ -60,28 +60,30 @@ pnpm versions         # 重新生成 VERSIONS.md 版本台账
 ```text
 src/
   content.config.ts          # 内容集合 schema（series/order/difficulty/duration/tags）
-  content/docs/              # 335 页内容（md/mdx，目录即 URL）
+  content/docs/              # 560 个内容文件（md/mdx，目录即 URL）
   components/
     shell/                   # 覆盖 Starlight：Header/PageTitle/Pagination/Footer
     search/                  # ⌘K 搜索岛
     progress/                # 完成/收藏/继续学习岛
     playground/              # Monaco 编辑器、Worker 执行器
-    roadmap|tutorial|home|computer-science/
-  data/                      # 首页教程目录（catalog.ts）、路线表、系列元信息、计算机科学课程 JSON
+    shared/                  # RouteSections / CardSection / Card（全站唯一卡片实现）
+    roadmap|tutorial|home|domain|business|computer-science/
+  data/                      # 统一路线模型：路线表 + 首页/应用领域/业务系统/技术路线四个目录
   lib/                       # 内容索引、搜索、进度、工具函数
   integrations/base-links    # 构建期补 base 前缀（兜底）
   styles/global.css          # Tailwind + Starlight 层序 + 教程站设计令牌
-scripts/                     # 内容规范化、页面生成、搜索索引、链接检查、冒烟、版本台账
+scripts/                     # 搜索索引、链接检查、冒烟、截图、版本台账
 .github/workflows/deploy.yml # 构建并部署到 GitHub Pages
 ```
 
-数据结构（内容由哪些数据驱动、新增内容改哪里）见 [DATA-MODEL.md](DATA-MODEL.md)。
+数据结构（内容由哪些数据驱动、新增内容改哪里）见 [DATA-MODEL.md](DATA-MODEL.md)：
+**首页、应用领域、业务系统、全部技术路线与路线页共用同一个 `RouteTier[]` 模型**。
 
 ## 部署约定
 
 - 站点部署在 GitHub Pages 项目路径：`https://yluiop123.github.io/cs101/`
 - `astro.config.mjs` 中 `base: '/cs101'`；内容链接统一使用**相对路径**，构建期 `base-links` 集成兜底，链接检查保证 0 缺失。
-- 推送 `main` 后由 GitHub Actions 构建并发布 `dist/`（当前**尚未 push**，等待验收后执行）。
+- 推送 `main` 后由 GitHub Actions 构建并发布 `dist/`（站点已上线，`main` 每次推送自动部署）。
 
 ## 版本策略
 
