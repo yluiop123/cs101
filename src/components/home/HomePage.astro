@@ -7,7 +7,7 @@ import type { CardSectionData } from '@/data/cards';
 
 const series = await getSeries();
 
-// 首页 = 9 个技术分类，每张卡片直接指向该方向的学习路线或教程
+// 首页 = 12 个技术分类，每张卡片直接指向该方向的学习路线或教程
 const sections: CardSectionData[] = homeCategories.map((category) => ({
   id: category.id,
   title: category.name,

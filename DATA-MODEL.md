@@ -7,13 +7,13 @@
 src/data/route-plan.ts   ← 学习路线（技术路线 + 应用领域路线）   ┐
 src/data/domains.ts      ← 应用领域目录（8 分类 + 47 方向）      │ 手写数据
 src/data/business-systems.ts ← 业务系统（14 类 + 72 个系统）      │
-src/data/catalog.ts      ← 首页技术分类（9 类 + 卡片跳转）      │
+src/data/catalog.ts      ← 首页技术分类（12 类 + 卡片跳转）     │
 src/data/cards.ts        ← 分组/卡片渲染结构（类型定义）          ┘
 src/content/docs/**      ← 教程正文、章节（Astro content collection）
         ↓ 构建期
 src/lib/content.ts       ← 扫描 docs 推导系列/章节/章数
         ↓
-组件（HomePage / TechNodes / DomainIndex / Sidebar / PageTitle …）
+组件（HomePage / TechNodes / DomainIndex / BusinessSystems / CardSection / Card / Sidebar …）
 ```
 
 ## 1. 学习路线：`src/data/route-plan.ts`
@@ -146,29 +146,51 @@ const homeCategories: HomeCategory[]   // 顺序 = 首页分节顺序、左侧�
 
 ## 5. 分组 + 卡片的通用结构：`src/data/cards.ts`
 
-首页、应用领域、业务系统三个页面共用 `CardSection.astro`，它的入参就是这两个类型：
+**五种页面（首页、应用领域、业务系统、技术路线、领域详情）共用同一套卡片渲染**：
+`CardSection.astro` 负责分节（标题 + 可选标记/说明 + 网格），`Card.astro` 负责一张卡片。
+数据不同、组件只有一份，所以改动只需改数据文件。
 
 ```ts
-type CardKind = 'tutorial' | 'route';   // 卡片类型：教程 / 技术路线
-type CardBadgeTone = RouteItemRole | CardKind;
+type CardKind = 'tutorial' | 'route';         // 卡片类型：教程 / 技术路线
+type CardBadgeTone = RouteItemRole | 'choice';// 状态徽标色调 + 「多选一」分节标记
 
 interface CardBadge { label: string; tone?: CardBadgeTone }
 
 interface CardItem {
   title: string;
   href?: string;   // 有 = 可点击；没有 = 规划中（虚线卡）
-  kind?: CardKind; // 卡片类型标签；省略时按 href 推断（/tutorials/ 为教程，其余为路线）
-  meta?: string;   // 右侧补充文字（可选）
+  kind?: CardKind; // 省略时按 href 推断（/tutorials/ 为教程，其余为路线）
+  meta?: string;   // 右侧补充文字（如「4 阶段 · 12 项」）
   badges?: CardBadge[];
 }
 
-interface CardSectionData {
-  id?: string;                       // 锚点
-  title: string;
-  more?: { href: string; label?: string };  // 标题右侧「学习路线 →」
+// 二级分组：一个选项 = 一组卡片（「多选一」分节专用）
+interface CardGroup {
+  title: string;         // 如 React / Vue / Angular
+  role?: RouteItemRole;  // 推荐 / 主流 / 小众，决定面板描边与徽标
   items: CardItem[];
 }
+
+interface CardSectionData {
+  id?: string;                              // 锚点（路线页为 #tier-N）
+  title: string;
+  more?: { href: string; label?: string };  // 标题右侧「学习路线 →」
+  tag?: CardBadge;                          // 标题旁标记：「必学」「5 选 1」
+  note?: string;                            // 分节说明（选型规则等）
+  items?: CardItem[];                       // 平铺网格（与 groups 二选一）
+  groups?: CardGroup[];                     // 二级「多选一」面板（与 items 二选一）
+  showKind?: boolean;   // 是否按 href 推断类型标记；路线页设 false，只给显式 kind 的卡片标
+  density?: 'default' | 'compact';  // compact = 路线页/技术栈总览（卡片更紧凑）
+}
 ```
+
+渲染规则：
+
+- `items` → 一行三张卡（响应式）：标题 + 类型标记（图标+文字，不用胶囊，避免和状态徽标混淆）+ 状态徽标 + `meta`；
+- `groups` → 外层虚线框分组，每个选项一个面板（标题 + 状态徽标 + 竖排卡片），
+  即大前端 → 「框架选型」这种**多选一**版式；面板锚点为 `#<分节 id>-<序号>`；
+- 没有 `href` 的卡片渲染为虚线占位卡（教程还没写）；
+- 卡片标题单行省略，完整名称放在 `title` 提示里。
 
 ## 6. 教程与章节：`src/content/docs/**`
 
@@ -222,11 +244,11 @@ interface ProgressState {
 | 数据 | 决定什么 |
 | --- | --- |
 | `routePlan[key]` | 路线页板块顺序 / 卡片 / 图例；tech-stack 索引卡与领域索引卡的「N 阶段 · M 项」 |
-| `tier.name` | 板块标题、左侧栏一级项、`#tier-N` 锚点 |
-| `option.name` / `option.role` | 选型面板标题与状态徽标 |
+| `tier.name` / `tier.required` / `tier.kind` | 分节标题、「必学」标记、「N 选 1」标记；左侧栏一级项与 `#tier-N` 锚点 |
+| `option.name` / `option.role` | 选型面板标题与状态徽标（渲染成 `groups`） |
 | `seriesMeta[slug]` | 所有卡片标题 |
 | `routeTitles` | 路线页标题、「学习路线」左侧栏顺序、面包屑末级 |
-| `homeCategories` | 首页 9 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
+| `homeCategories` | 首页 12 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
 | `domainCategories` / `domains` | `/domain/` 的 8 个分类与方向卡片、左侧栏分类锚点（无路线的方向显示虚线卡） |
 | `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
 | `bizCategories` | `/business-systems/` 的 14 个分类分节与系统卡片（链接到业务系统教程对应章节锚点） |
@@ -251,6 +273,8 @@ interface ProgressState {
   对不上时卡片会显示 slug 原文，链接会 404（`pnpm check:links` 会抓出来）。
 - 站内链接一律用 `withBase()` / 相对路径，构建期 `base-links` 集成兜底 `/cs101` 前缀。
 - `dist/` 与 `public/search-index.json` 是构建产物，不要手改。
+- **卡片只有一套实现**：`CardSection.astro`（分节）+ `Card.astro`（一张卡）覆盖首页、应用领域、业务系统、
+  技术路线、领域详情；路线页的「多选一」由 `CardSectionData.groups` 表达，不再有单独的路线卡片组件。
 - 已知重复：`TechStackGrid.astro` 里 19 条路线分组是手写的，新增路线需要同时改它和 `routeTitles`；
   `routeTitles` / `routePlan` 里还留着 `desktop`、`mobile` 两条没有页面的预留条目。
 - 大前端 49 项里目前只有 9 个教程有正文（html / css / javascript / typescript / tailwind / react / vue / angular / nodejs），其余是虚线占位卡。

@@ -1,6 +1,7 @@
 ---
-import { withBase } from '@/lib/utils';
 import { routePlan, tierSlugs } from '@/data/route-plan';
+import CardSection from '@/components/shared/CardSection.astro';
+import type { CardSectionData } from '@/data/cards';
 
 interface TechGroup {
   name: string;
@@ -55,24 +56,21 @@ const scaleOf = (slug: string) => {
   const count = new Set(tiers.flatMap((tier) => tierSlugs(tier))).size;
   return `${tiers.length} 阶段 · ${count} 项`;
 };
+
+// 一张卡 = 一条技术路线，点进去是该路线的分节教程；
+// 这一页全是路线，卡片不再重复「路线」标记，只留规模提示（标题太长会被挤断行）
+const sections: CardSectionData[] = groups.map((group) => ({
+  title: group.name,
+  density: 'compact',
+  showKind: false,
+  items: group.items.map((item) => ({
+    title: item.title,
+    href: `/tech-stack/${item.slug}/`,
+    meta: scaleOf(item.slug),
+  })),
+}));
 ---
 
-{
-  groups.map((group) => (
-    <section class="cs-tier">
-      <div class="cs-section-head">
-        <h2 class="cs-section-title">{group.name}</h2>
-      </div>
-      <ul class="cs-tut-grid">
-        {group.items.map((item) => (
-          <li>
-            <a class="cs-tut-card" href={withBase(`/tech-stack/${item.slug}/`)}>
-              <span>{item.title}</span>
-              <span class="cs-tut-meta">{scaleOf(item.slug)}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  ))
-}
+<div class="cs-card-page">
+  {sections.map((section) => <CardSection {...section} />)}
+</div>

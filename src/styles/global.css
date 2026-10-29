@@ -366,14 +366,15 @@ starlight-theme-select option {
   margin-inline-start: auto;
 }
 
-/* ============ 路线页（TechNodes / TechStackGrid） ============ */
-/* 版式与首页 / 应用领域一致：绿色分组标题 + 教程卡片 */
-.cs-tier {
-  margin: 0 0 2.25rem;
-  scroll-margin-top: 80px;
+/* ============ 卡片分节页（应用领域 / 业务系统 / 技术路线 / 领域详情） ============ */
+/* 版式与首页一致：绿色分组标题 + 卡片网格；分节之间统一间距，不依赖 Starlight 的段落节奏 */
+.cs-card-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.cs-tier > * {
+.cs-card-page > * {
   margin-top: 0;
 }
 
@@ -688,14 +689,9 @@ starlight-theme-select option {
   font-size: 0.88rem;
 }
 
-/* ---- 分组标题（首页 / 应用领域共用） ---- */
-.cs-home > *,
-.cs-domain > * {
+/* ---- 分组标题（首页 / 各卡片分节页共用） ---- */
+.cs-home > * {
   margin-top: 0;
-}
-
-.cs-home .cs-home-section {
-  scroll-margin-top: 0;
 }
 
 /* 首页 / 应用领域共用的分组区块 */
@@ -847,11 +843,6 @@ starlight-theme-select option {
   color: var(--cs-muted);
 }
 
-.cs-badge--route {
-  border-color: var(--cs-accent);
-  color: var(--cs-accent-dark);
-}
-
 /* 卡片类型标记：图标 + 文字，刻意不用胶囊徽标，避免和「推荐 / 可选」这类状态徽标混淆 */
 .cs-kind {
   display: inline-flex;
@@ -881,7 +872,7 @@ starlight-theme-select option {
 /* 暗色主题里强调色会变亮：实心标签与绿色按钮改用深色文字，避免白字压在浅绿上 */
 :root[data-theme='dark'] .cs-badge--required,
 :root[data-theme='dark'] .cs-badge--recommended,
-:root[data-theme='dark'] .cs-tier-badge--required,
+:root[data-theme='dark'] .cs-section-tag--required,
 :root[data-theme='dark'] .cs-btn-primary,
 :root[data-theme='dark'] .cs-btn-primary:hover,
 :root[data-theme='dark'] .cs-code-run,
@@ -889,30 +880,21 @@ starlight-theme-select option {
   color: #04241a;
 }
 
-/* ---- 路线卡（点击进入另一条学习路线） ---- */
-.cs-tut-card--route {
-  border-inline-start: 3px solid var(--cs-accent);
-  background: color-mix(in srgb, var(--cs-accent) 5%, var(--cs-bg));
-}
-
-.cs-tut-card--route .cs-tut-meta {
-  color: var(--cs-accent-dark);
-}
-
-/* ---- 选型组（多选一） ---- */
-.cs-tier--choice {
+/* ---- 选型组（多选一）：整节虚线外框 + 浅绿底 ---- */
+.cs-card-section--choice {
   border: 1px dashed var(--cs-border-strong, var(--cs-border));
   border-radius: var(--cs-radius);
   background: color-mix(in srgb, var(--cs-accent) 4%, var(--cs-bg));
   padding: 0.9rem 1rem 1.1rem;
 }
 
-.cs-tier--choice .cs-section-head {
+.cs-card-section--choice .cs-section-head {
   border-bottom-color: var(--cs-accent);
   margin-bottom: 0.7rem;
 }
 
-.cs-tier-badge {
+/* 分节标题旁的小标记：必学 / 5 选 1 */
+.cs-section-tag {
   margin-inline-start: 0.55rem;
   padding: 0.05rem 0.5rem;
   border: 1px solid var(--cs-accent);
@@ -924,18 +906,18 @@ starlight-theme-select option {
   white-space: nowrap;
 }
 
-.cs-tier-badge--choice {
+.cs-section-tag--choice {
   border-style: dashed;
   color: var(--cs-muted);
 }
 
-.cs-tier-badge--required {
+.cs-section-tag--required {
   background: var(--cs-accent-dark);
   border-color: var(--cs-accent-dark);
   color: #fff;
 }
 
-.cs-tier-note {
+.cs-section-note {
   margin: 0 0 0.9rem;
   color: var(--cs-muted);
   font-size: 0.85rem;
@@ -1003,26 +985,24 @@ starlight-theme-select option {
   padding: 0.45rem 0.65rem;
 }
 
-/* 路线页卡片自带状态标签：收紧字号与间距，避免长标题被标签顶到第二行 */
-.cs-tier .cs-tut-card {
+/* 路线页 / 技术栈总览：卡片密集且带状态标签，收紧字号与间距，避免长标题被标签顶到第二行 */
+.cs-card-section--compact .cs-tut-card {
   font-size: 0.88rem;
   padding: 0.5rem 0.7rem;
 }
 
-.cs-tier .cs-tut-name {
+.cs-card-section--compact .cs-tut-name {
   gap: 0.35rem;
 }
 
-.cs-tier .cs-tut-card .cs-badge {
+.cs-card-section--compact .cs-tut-card .cs-badge {
   padding: 0.02rem 0.32rem;
   font-size: 0.62rem;
 }
 
-.cs-tier .cs-tut-card .cs-tut-meta {
+.cs-card-section--compact .cs-tut-card .cs-tut-meta {
   font-size: 0.7rem;
 }
-
-/* 左侧栏里的选型子项 */
 
 .cs-legend {
   display: flex;
@@ -1036,13 +1016,6 @@ starlight-theme-select option {
 
 .cs-legend-text {
   margin-inline-end: 0.5rem;
-}
-
-/* ============ 应用领域（版式与首页一致，仅标题无「学习路线」链接） ============ */
-.cs-domain {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 }
 
 .cs-series-list {
