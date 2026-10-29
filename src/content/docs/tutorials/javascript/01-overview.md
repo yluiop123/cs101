@@ -7,6 +7,7 @@ sidebar:
   label: "初识 JavaScript"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

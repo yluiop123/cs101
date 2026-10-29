@@ -7,6 +7,7 @@ sidebar:
   label: "常用场景实战"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

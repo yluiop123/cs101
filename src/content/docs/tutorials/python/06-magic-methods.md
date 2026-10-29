@@ -7,6 +7,7 @@ sidebar:
   label: "魔术方法与迭代器生成器"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

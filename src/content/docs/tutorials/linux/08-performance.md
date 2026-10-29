@@ -7,6 +7,7 @@ sidebar:
   label: "磁盘、内存与性能观测"
 difficulty: beginner
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "工程化与综合实战"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

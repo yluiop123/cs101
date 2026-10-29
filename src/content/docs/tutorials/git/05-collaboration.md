@@ -7,6 +7,7 @@ sidebar:
   label: "团队协作流程"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

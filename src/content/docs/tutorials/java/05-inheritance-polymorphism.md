@@ -7,6 +7,7 @@ sidebar:
   label: "继承、多态与抽象类"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

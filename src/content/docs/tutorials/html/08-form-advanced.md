@@ -7,6 +7,7 @@ sidebar:
   label: "表单（下）：校验与进阶"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

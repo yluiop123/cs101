@@ -7,6 +7,7 @@ sidebar:
   label: "递归与分治"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

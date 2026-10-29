@@ -7,6 +7,7 @@ sidebar:
   label: "查询基础"
 difficulty: beginner
 duration: 4
+tableOfContents: true
 ---
 
 **本章目标：**

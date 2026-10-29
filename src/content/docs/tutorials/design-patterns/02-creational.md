@@ -7,6 +7,7 @@ sidebar:
   label: "创建型模式"
 difficulty: advanced
 duration: 8
+tableOfContents: true
 ---
 
 **本章目标：**

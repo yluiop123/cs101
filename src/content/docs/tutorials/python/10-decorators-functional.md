@@ -7,6 +7,7 @@ sidebar:
   label: "装饰器与函数式特性"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

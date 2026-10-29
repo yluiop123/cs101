@@ -7,6 +7,7 @@ sidebar:
   label: "表单（上）：基础控件"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

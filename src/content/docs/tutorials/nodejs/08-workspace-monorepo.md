@@ -7,6 +7,7 @@ sidebar:
   label: "workspace 与 monorepo"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

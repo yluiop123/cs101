@@ -7,6 +7,7 @@ sidebar:
   label: "各语言中的正则"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

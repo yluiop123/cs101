@@ -7,6 +7,7 @@ sidebar:
   label: "侦听与生命周期"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

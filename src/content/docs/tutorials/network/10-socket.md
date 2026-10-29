@@ -7,6 +7,7 @@ sidebar:
   label: "网络编程：从 socket 到 epoll"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

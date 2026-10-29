@@ -7,6 +7,7 @@ sidebar:
   label: "盒子模型"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

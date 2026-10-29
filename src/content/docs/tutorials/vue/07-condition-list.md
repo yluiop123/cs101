@@ -7,6 +7,7 @@ sidebar:
   label: "条件与列表渲染"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "安装与基础配置"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

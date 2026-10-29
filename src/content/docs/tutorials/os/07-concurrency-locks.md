@@ -7,6 +7,7 @@ sidebar:
   label: "并发与锁"
 difficulty: advanced
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

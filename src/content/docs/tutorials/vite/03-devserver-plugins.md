@@ -7,6 +7,7 @@ sidebar:
   label: "开发服务器与插件"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

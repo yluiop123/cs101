@@ -7,6 +7,7 @@ sidebar:
   label: "初识正则表达式"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

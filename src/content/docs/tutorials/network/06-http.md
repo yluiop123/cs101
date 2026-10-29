@@ -7,6 +7,7 @@ sidebar:
   label: "HTTP/1.1、HTTP/2 与缓存"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

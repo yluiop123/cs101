@@ -7,6 +7,7 @@ sidebar:
   label: "深入函数：闭包与递归"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

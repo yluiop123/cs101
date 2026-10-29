@@ -7,6 +7,7 @@ sidebar:
   label: "死锁与同步原语"
 difficulty: advanced
 duration: 8
+tableOfContents: true
 ---
 
 **本章目标：**

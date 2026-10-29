@@ -7,6 +7,7 @@ sidebar:
   label: "npm 基础：package.json 与依赖安装"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

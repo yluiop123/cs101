@@ -7,6 +7,7 @@ sidebar:
   label: "Flexbox 布局（下）"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "项目结构与配置文件"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "文件系统与路径"
 difficulty: beginner
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

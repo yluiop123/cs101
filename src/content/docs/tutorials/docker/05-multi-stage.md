@@ -7,6 +7,7 @@ sidebar:
   label: "多阶段构建与镜像优化"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "枚举与类型编程入门"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

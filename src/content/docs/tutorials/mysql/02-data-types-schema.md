@@ -7,6 +7,7 @@ sidebar:
   label: "数据类型与表设计"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "主从复制与读写分离"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "综合实战：CLI 工具"
 difficulty: advanced
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

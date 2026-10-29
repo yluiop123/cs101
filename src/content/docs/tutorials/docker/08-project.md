@@ -7,6 +7,7 @@ sidebar:
   label: "综合实战：整套应用容器化"
 difficulty: intermediate
 duration: 4
+tableOfContents: true
 ---
 
 **本章目标：**

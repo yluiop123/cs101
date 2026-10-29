@@ -7,6 +7,7 @@ sidebar:
   label: "权限、用户与组"
 difficulty: beginner
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

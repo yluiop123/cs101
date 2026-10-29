@@ -7,6 +7,7 @@ sidebar:
   label: "查找与二分"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

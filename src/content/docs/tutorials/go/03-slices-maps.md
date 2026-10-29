@@ -7,6 +7,7 @@ sidebar:
   label: "复合类型：数组、切片、map"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "Maven、JVM 入门与综合实战"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

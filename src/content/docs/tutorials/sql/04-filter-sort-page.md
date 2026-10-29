@@ -7,6 +7,7 @@ sidebar:
   label: "过滤、排序与分页"
 difficulty: beginner
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

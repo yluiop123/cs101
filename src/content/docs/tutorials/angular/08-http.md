@@ -7,6 +7,7 @@ sidebar:
   label: "HTTP 与服务端交互"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

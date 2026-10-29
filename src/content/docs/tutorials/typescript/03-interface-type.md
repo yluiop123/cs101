@@ -7,6 +7,7 @@ sidebar:
   label: "接口与类型别名"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

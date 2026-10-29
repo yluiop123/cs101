@@ -7,6 +7,7 @@ sidebar:
   label: "性能观测：从 top 到火焰图"
 difficulty: advanced
 duration: 8
+tableOfContents: true
 ---
 
 **本章目标：**

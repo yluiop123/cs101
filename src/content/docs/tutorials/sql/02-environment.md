@@ -7,6 +7,7 @@ sidebar:
   label: "环境与客户端"
 difficulty: beginner
 duration: 4
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "镜像仓库与 CI 发布"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

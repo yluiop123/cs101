@@ -7,6 +7,7 @@ sidebar:
   label: "组件基础"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

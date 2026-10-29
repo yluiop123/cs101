@@ -7,6 +7,7 @@ sidebar:
   label: "函数与作用域"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

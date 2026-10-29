@@ -7,6 +7,7 @@ sidebar:
   label: "颜色与文本样式"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

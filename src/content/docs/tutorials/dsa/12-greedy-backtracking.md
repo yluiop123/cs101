@@ -7,6 +7,7 @@ sidebar:
   label: "贪心、回溯与搜索"
 difficulty: intermediate
 duration: 8
+tableOfContents: true
 ---
 
 **本章目标：**

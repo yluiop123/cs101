@@ -7,6 +7,7 @@ sidebar:
   label: "生命周期"
 difficulty: advanced
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "网络与排查"
 difficulty: beginner
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

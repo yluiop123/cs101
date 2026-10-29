@@ -7,6 +7,7 @@ sidebar:
   label: "CPU 调度"
 difficulty: advanced
 duration: 10
+tableOfContents: true
 ---
 
 **本章目标：**

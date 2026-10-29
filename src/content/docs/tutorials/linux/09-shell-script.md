@@ -7,6 +7,7 @@ sidebar:
   label: "Shell 脚本编程"
 difficulty: beginner
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

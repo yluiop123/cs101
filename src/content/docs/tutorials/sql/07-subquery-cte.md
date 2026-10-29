@@ -7,6 +7,7 @@ sidebar:
   label: "子查询与 CTE"
 difficulty: beginner
 duration: 4
+tableOfContents: true
 ---
 
 **本章目标：**

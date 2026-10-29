@@ -7,6 +7,7 @@ sidebar:
   label: "基础语法与文档结构"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

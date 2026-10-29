@@ -7,6 +7,7 @@ sidebar:
   label: "net/http 与 Web 基础"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

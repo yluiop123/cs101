@@ -7,6 +7,7 @@ sidebar:
   label: "主从、哨兵与集群"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

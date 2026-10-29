@@ -7,6 +7,7 @@ sidebar:
   label: "文件查看与文本处理"
 difficulty: beginner
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

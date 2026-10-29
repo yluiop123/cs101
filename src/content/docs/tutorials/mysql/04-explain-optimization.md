@@ -7,6 +7,7 @@ sidebar:
   label: "执行计划与查询优化"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

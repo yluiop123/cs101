@@ -7,6 +7,7 @@ sidebar:
   label: "为什么用 Redis 与安装"
 difficulty: intermediate
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

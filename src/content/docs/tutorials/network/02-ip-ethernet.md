@@ -7,6 +7,7 @@ sidebar:
   label: "IP 与以太网"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

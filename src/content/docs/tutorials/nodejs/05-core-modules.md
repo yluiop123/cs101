@@ -7,6 +7,7 @@ sidebar:
   label: "核心模块：path / fs / http"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

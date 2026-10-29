@@ -7,6 +7,7 @@ sidebar:
   label: "输入输出与中断"
 difficulty: advanced
 duration: 9
+tableOfContents: true
 ---
 
 **本章目标：**

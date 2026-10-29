@@ -7,6 +7,7 @@ sidebar:
   label: "并发编程"
 difficulty: advanced
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

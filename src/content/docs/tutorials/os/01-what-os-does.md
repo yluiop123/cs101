@@ -7,6 +7,7 @@ sidebar:
   label: "操作系统到底在做什么"
 difficulty: advanced
 duration: 9
+tableOfContents: true
 ---
 
 **本章目标：**

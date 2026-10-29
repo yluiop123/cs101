@@ -7,6 +7,7 @@ sidebar:
   label: "状态与事件"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

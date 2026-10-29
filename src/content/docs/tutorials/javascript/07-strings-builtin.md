@@ -7,6 +7,7 @@ sidebar:
   label: "字符串与内置对象"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

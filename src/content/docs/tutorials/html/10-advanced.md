@@ -7,6 +7,7 @@ sidebar:
   label: "HTML5 进阶与综合实战"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

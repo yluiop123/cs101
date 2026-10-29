@@ -7,6 +7,7 @@ sidebar:
   label: "基础操作"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

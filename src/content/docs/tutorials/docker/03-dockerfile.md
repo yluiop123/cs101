@@ -7,6 +7,7 @@ sidebar:
   label: "编写 Dockerfile"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "核心数据结构：list / tuple / dict / set"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

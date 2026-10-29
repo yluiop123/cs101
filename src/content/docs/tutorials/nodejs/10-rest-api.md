@@ -7,6 +7,7 @@ sidebar:
   label: "REST API 实战"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

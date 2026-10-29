@@ -7,6 +7,7 @@ sidebar:
   label: "线程池与并发工具"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

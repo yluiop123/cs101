@@ -7,6 +7,7 @@ sidebar:
   label: "综合实战：一个订单库的优化全过程"
 difficulty: intermediate
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

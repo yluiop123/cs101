@@ -7,6 +7,7 @@ sidebar:
   label: "借用与引用"
 difficulty: advanced
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

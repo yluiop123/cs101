@@ -7,6 +7,7 @@ sidebar:
   label: "进程与服务管理"
 difficulty: beginner
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

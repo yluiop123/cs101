@@ -7,6 +7,7 @@ sidebar:
   label: "复杂度分析与数据结构全景"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

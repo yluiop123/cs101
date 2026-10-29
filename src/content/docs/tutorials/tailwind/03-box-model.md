@@ -7,6 +7,7 @@ sidebar:
   label: "布局与盒模型工具类"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

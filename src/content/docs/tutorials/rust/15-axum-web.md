@@ -7,6 +7,7 @@ sidebar:
   label: "Axum 初见：Web 服务"
 difficulty: advanced
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

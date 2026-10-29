@@ -7,6 +7,7 @@ sidebar:
   label: "goroutine 与 channel"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

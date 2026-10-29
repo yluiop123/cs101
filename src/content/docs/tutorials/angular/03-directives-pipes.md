@@ -7,6 +7,7 @@ sidebar:
   label: "指令与管道"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

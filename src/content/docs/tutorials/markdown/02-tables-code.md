@@ -7,6 +7,7 @@ sidebar:
   label: "表格、代码块与链接图片"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

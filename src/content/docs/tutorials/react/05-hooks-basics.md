@@ -7,6 +7,7 @@ sidebar:
   label: "Hooks 入门：useState 与 useEffect"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

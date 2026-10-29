@@ -7,6 +7,7 @@ sidebar:
   label: "背景边框与阴影"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

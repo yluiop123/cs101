@@ -7,6 +7,7 @@ sidebar:
   label: "发布订阅与 Stream"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

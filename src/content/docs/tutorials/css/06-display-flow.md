@@ -7,6 +7,7 @@ sidebar:
   label: "显示模式与文档流"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

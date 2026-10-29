@@ -7,6 +7,7 @@ sidebar:
   label: "文件与异常"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

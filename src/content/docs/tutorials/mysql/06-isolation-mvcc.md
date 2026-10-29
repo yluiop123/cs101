@@ -7,6 +7,7 @@ sidebar:
   label: "隔离级别与 MVCC"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

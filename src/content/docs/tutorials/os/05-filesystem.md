@@ -7,6 +7,7 @@ sidebar:
   label: "文件系统"
 difficulty: advanced
 duration: 10
+tableOfContents: true
 ---
 
 **本章目标：**

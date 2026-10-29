@@ -7,6 +7,7 @@ sidebar:
   label: "并发初见：线程与异步"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

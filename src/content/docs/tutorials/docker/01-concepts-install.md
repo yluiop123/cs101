@@ -7,6 +7,7 @@ sidebar:
   label: "容器概念与安装"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

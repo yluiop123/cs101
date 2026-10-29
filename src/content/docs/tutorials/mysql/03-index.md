@@ -7,6 +7,7 @@ sidebar:
   label: "索引与 B+ 树"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

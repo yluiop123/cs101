@@ -7,6 +7,7 @@ sidebar:
   label: "Flex 与 Grid 工具类"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

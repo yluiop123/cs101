@@ -7,6 +7,7 @@ sidebar:
   label: "Node 中的异步与事件循环"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

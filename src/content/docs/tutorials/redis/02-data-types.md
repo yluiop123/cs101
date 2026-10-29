@@ -7,6 +7,7 @@ sidebar:
   label: "五大数据类型实战"
 difficulty: intermediate
 duration: 4
+tableOfContents: true
 ---
 
 **本章目标：**

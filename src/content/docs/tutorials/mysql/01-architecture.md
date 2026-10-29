@@ -7,6 +7,7 @@ sidebar:
   label: "安装与体系结构"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

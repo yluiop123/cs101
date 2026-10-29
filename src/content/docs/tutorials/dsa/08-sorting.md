@@ -7,6 +7,7 @@ sidebar:
   label: "排序算法全解"
 difficulty: intermediate
 duration: 8
+tableOfContents: true
 ---
 
 **本章目标：**

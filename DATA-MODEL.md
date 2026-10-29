@@ -171,7 +171,7 @@ tags?: string[], prerequisites?: string[], estMinutes?: number
 | 页面 | 路径 | 关键字段 |
 | --- | --- | --- |
 | 教程系列首页 | `docs/tutorials/<slug>/index.mdx` | `title`、`description`、`sidebar.order: 0`、`sidebar.hidden: true`；正文用 `<SeriesChapters series="<slug>" />` |
-| 教程章节 | `docs/tutorials/<slug>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order` |
+| 教程章节 | `docs/tutorials/<slug>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order`、`tableOfContents: true`（有 `##` 小节时右侧显示「本页内容」目录） |
 | 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`（卡片与左侧栏都用它）、`description`；正文只有 `<TechNodes page="<route-slug>" />` |
 | 应用领域页 | `docs/domain/<slug>.mdx` | 同上，`page="domain-<slug>"` |
 | 业务系统教程 | `docs/tutorials/business-<slug>/` | 2 章；正文由 `BizSystemChapter.astro` 按数据渲染 |
@@ -221,7 +221,7 @@ interface ProgressState {
 
 | 想做的事 | 改哪里 |
 | --- | --- |
-| 新增一篇教程 | `docs/tutorials/<slug>/index.mdx` + 章节文件；再把 `<slug>` 写进路线里的某个分节 |
+| 新增一篇教程 | `docs/tutorials/<slug>/index.mdx` + 章节文件（有 `##` 小节的加 `tableOfContents: true`）；再把 `<slug>` 写进路线里的某个分节 |
 | 调整路线顺序 / 增删分节 | `src/data/route-plan.ts` 的 `routePlan` |
 | 标记必学、推荐、主流、小众 | `tier.required` / `option.role` / `item.role` |
 | 改教程在卡片上的名字 | `seriesMeta`（跨页面统一）或条目的 `title`（只在某个目录页覆盖） |

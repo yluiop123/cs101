@@ -7,6 +7,7 @@ sidebar:
   label: "常用 API 与工具类"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

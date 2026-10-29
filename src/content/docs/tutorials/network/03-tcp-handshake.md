@@ -7,6 +7,7 @@ sidebar:
   label: "TCP 连接管理"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "pnpm 与现代包管理"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

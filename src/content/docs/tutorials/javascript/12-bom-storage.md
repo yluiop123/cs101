@@ -7,6 +7,7 @@ sidebar:
   label: "BOM 与浏览器存储"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

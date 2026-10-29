@@ -7,6 +7,7 @@ sidebar:
   label: "标准库精选与测试"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

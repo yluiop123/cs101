@@ -7,6 +7,7 @@ sidebar:
   label: "模块系统：CommonJS 与 ESM"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

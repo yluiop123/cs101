@@ -7,6 +7,7 @@ sidebar:
   label: "选择器与优先级"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

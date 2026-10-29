@@ -7,6 +7,7 @@ sidebar:
   label: "版本控制与 Git 入门"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "软件安装与包管理"
 difficulty: beginner
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

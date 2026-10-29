@@ -7,6 +7,7 @@ sidebar:
   label: "服务与 RxJS 入门"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

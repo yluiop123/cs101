@@ -7,6 +7,7 @@ sidebar:
   label: "泛型与 trait"
 difficulty: advanced
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

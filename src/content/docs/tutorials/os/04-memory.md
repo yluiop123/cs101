@@ -7,6 +7,7 @@ sidebar:
   label: "内存管理与虚拟内存"
 difficulty: advanced
 duration: 8
+tableOfContents: true
 ---
 
 **本章目标：**

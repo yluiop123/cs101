@@ -7,6 +7,7 @@ sidebar:
   label: "行为型模式（下）"
 difficulty: advanced
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

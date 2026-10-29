@@ -7,6 +7,7 @@ sidebar:
   label: "虚拟化与容器的内核基础"
 difficulty: advanced
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

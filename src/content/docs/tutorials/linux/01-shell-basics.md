@@ -7,6 +7,7 @@ sidebar:
   label: "发行版、终端与 shell 基础"
 difficulty: beginner
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

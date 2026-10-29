@@ -7,6 +7,7 @@ sidebar:
   label: "综合实战：缓存三兄弟与一个商品详情缓存"
 difficulty: intermediate
 duration: 8
+tableOfContents: true
 ---
 
 **本章目标：**

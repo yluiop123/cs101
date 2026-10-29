@@ -7,6 +7,7 @@ sidebar:
   label: "定位与层级"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

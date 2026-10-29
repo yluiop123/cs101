@@ -7,6 +7,7 @@ sidebar:
   label: "DNS、CDN 与负载均衡"
 difficulty: intermediate
 duration: 9
+tableOfContents: true
 ---
 
 **本章目标：**

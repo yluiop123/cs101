@@ -7,6 +7,7 @@ sidebar:
   label: "关系模型与 SQL 方言"
 difficulty: beginner
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

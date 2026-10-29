@@ -7,6 +7,7 @@ sidebar:
   label: "变量与数据类型"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "语义化与页面结构"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

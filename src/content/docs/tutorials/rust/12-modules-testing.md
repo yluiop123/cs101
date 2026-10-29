@@ -7,6 +7,7 @@ sidebar:
   label: "模块系统与测试"
 difficulty: advanced
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

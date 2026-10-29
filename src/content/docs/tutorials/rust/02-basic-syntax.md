@@ -7,6 +7,7 @@ sidebar:
   label: "变量、类型与流程控制"
 difficulty: advanced
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

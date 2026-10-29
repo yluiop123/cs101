@@ -7,6 +7,7 @@ sidebar:
   label: "可靠传输与拥塞控制"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

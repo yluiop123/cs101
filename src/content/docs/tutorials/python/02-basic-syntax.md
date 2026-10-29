@@ -7,6 +7,7 @@ sidebar:
   label: "基础语法与流程控制"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

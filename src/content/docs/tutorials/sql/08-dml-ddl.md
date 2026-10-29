@@ -7,6 +7,7 @@ sidebar:
   label: "数据修改与约束"
 difficulty: beginner
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

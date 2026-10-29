@@ -7,6 +7,7 @@ sidebar:
   label: "结构型模式（下）"
 difficulty: advanced
 duration: 9
+tableOfContents: true
 ---
 
 **本章目标：**

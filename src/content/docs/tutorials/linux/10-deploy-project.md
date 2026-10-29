@@ -7,6 +7,7 @@ sidebar:
   label: "综合实战：把一台裸机变成可上线的服务器"
 difficulty: beginner
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

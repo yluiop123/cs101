@@ -7,6 +7,7 @@ sidebar:
   label: "必备插件推荐"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

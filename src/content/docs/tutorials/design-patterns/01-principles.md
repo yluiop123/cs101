@@ -7,6 +7,7 @@ sidebar:
   label: "面向对象原则与模式的语言"
 difficulty: advanced
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

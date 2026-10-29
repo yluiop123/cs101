@@ -7,6 +7,7 @@ sidebar:
   label: "响应式与状态变体"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

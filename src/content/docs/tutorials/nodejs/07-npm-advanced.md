@@ -7,6 +7,7 @@ sidebar:
   label: "npm 进阶：脚本、发布与依赖治理"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

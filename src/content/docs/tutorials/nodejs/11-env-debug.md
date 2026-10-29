@@ -7,6 +7,7 @@ sidebar:
   label: "环境变量与调试"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "key 设计与过期淘汰"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

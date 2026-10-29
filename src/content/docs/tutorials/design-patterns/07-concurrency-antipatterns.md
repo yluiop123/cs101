@@ -7,6 +7,7 @@ sidebar:
   label: "并发模式与常见反模式"
 difficulty: advanced
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

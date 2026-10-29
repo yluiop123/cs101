@@ -7,6 +7,7 @@ sidebar:
   label: "智能指针与内部可变性"
 difficulty: advanced
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

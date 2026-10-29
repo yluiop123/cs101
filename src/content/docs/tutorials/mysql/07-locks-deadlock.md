@@ -7,6 +7,7 @@ sidebar:
   label: "锁与死锁"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

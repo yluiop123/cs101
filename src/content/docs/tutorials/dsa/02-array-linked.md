@@ -7,6 +7,7 @@ sidebar:
   label: "数组与链表"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

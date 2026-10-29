@@ -7,6 +7,7 @@ sidebar:
   label: "进程与线程"
 difficulty: advanced
 duration: 9
+tableOfContents: true
 ---
 
 **本章目标：**

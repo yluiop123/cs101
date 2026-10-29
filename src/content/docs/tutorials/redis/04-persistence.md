@@ -7,6 +7,7 @@ sidebar:
   label: "持久化：RDB 与 AOF"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

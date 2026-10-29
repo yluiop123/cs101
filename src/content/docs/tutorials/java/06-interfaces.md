@@ -7,6 +7,7 @@ sidebar:
   label: "接口与内部类"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

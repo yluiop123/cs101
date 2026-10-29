@@ -7,6 +7,7 @@ sidebar:
   label: "GFM 扩展语法"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

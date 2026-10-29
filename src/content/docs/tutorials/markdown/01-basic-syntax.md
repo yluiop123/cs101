@@ -7,6 +7,7 @@ sidebar:
   label: "Markdown 基础语法"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

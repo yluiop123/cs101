@@ -7,6 +7,7 @@ sidebar:
   label: "抓包与网络排障实战"
 difficulty: intermediate
 duration: 6
+tableOfContents: true
 ---
 
 **本章目标：**

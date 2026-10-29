@@ -7,6 +7,7 @@ sidebar:
   label: "量词、分组与引用"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

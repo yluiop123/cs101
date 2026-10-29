@@ -7,6 +7,7 @@ sidebar:
   label: "Grid 布局"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

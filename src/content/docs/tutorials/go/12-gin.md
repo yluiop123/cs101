@@ -7,6 +7,7 @@ sidebar:
   label: "Gin 路由与中间件"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "综合实战：重构面条代码"
 difficulty: advanced
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "高可用与备份恢复"
 difficulty: intermediate
 duration: 7
+tableOfContents: true
 ---
 
 **本章目标：**

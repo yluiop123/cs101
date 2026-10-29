@@ -7,6 +7,7 @@ sidebar:
   label: "状态管理：Zustand"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

@@ -7,6 +7,7 @@ sidebar:
   label: "面向对象：类与对象"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

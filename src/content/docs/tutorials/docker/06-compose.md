@@ -7,6 +7,7 @@ sidebar:
   label: "Docker Compose 编排"
 difficulty: intermediate
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

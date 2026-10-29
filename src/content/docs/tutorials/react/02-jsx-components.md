@@ -7,6 +7,7 @@ sidebar:
   label: "JSX 与组件"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

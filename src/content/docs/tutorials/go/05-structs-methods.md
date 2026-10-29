@@ -7,6 +7,7 @@ sidebar:
   label: "结构体与方法"
 difficulty: intermediate
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

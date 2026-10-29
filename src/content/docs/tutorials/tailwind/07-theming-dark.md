@@ -7,6 +7,7 @@ sidebar:
   label: "主题定制与暗色模式"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

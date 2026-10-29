@@ -7,6 +7,7 @@ sidebar:
   label: "错误处理"
 difficulty: advanced
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

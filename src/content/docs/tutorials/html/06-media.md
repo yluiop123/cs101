@@ -7,6 +7,7 @@ sidebar:
   label: "多媒体与 iframe"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**

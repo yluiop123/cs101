@@ -7,6 +7,7 @@ sidebar:
   label: "集合、闭包与迭代器"
 difficulty: advanced
 duration: 5
+tableOfContents: true
 ---
 
 **本章目标：**

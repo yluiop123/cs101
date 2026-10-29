@@ -7,6 +7,7 @@ sidebar:
   label: "列表与表格"
 difficulty: beginner
 duration: 3
+tableOfContents: true
 ---
 
 **本章目标：**
