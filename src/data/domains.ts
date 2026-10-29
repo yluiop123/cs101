@@ -1,13 +1,22 @@
 // 应用领域目录：参照《编程教程网站技术分类体系》的「领域方向」8 大分类。
 //
 // 统一模型：和首页、技术路线一样是一个 RouteTier[]——一个分类 = 一个分节，一张卡片 = 一条领域路线
-// （kind: 'domain'，slug 用 routePlan 里的 domain-<名字> 键）。
-// 有 routePlan['domain-<slug>'] 的领域点进去是路线页；还没做的显示为虚线占位卡。
+// （kind: 'domain'，slug 用 routes/domain.ts 里的 domain-<名字> 键）。
+// 配了领域路线（routes/domain.ts 里有这个键）的领域点进去是路线页；还没做的标 planned，显示为虚线占位卡。
 
-import type { RouteTier } from '@/data/route-plan';
+import type { RouteTier } from '@/data/route-model';
+import { domainRoutes } from '@/data/routes/domain';
 
-const domain = (slug: string, title: string) =>
-  ({ slug: `domain-${slug}`, kind: 'domain' as const, title });
+// 有没有对应的领域路线，是数据层面的事实，在这里一次性标好，模型层不读数据
+const domain = (slug: string, title: string) => {
+  const key = `domain-${slug}`;
+  return {
+    slug: key,
+    kind: 'domain' as const,
+    title,
+    ...(domainRoutes[key]?.length ? {} : { planned: true }),
+  };
+};
 
 export const domainCatalog: RouteTier[] = [
   {

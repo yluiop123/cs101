@@ -2,7 +2,7 @@
 // 系统说明（summary）写在条目上，分类共用的技术栈入口（related）写在分节上；
 // 章节正文由 BizSystemChapter.astro 按这里的数据渲染，系统文字只维护这一份。
 
-import { normalizeItem, type RouteItem, type RouteTier } from '@/data/route-plan';
+import { normalizeItem, type RouteItem, type RouteTier } from '@/data/route-model';
 
 export const businessCatalog: RouteTier[] = [
   {

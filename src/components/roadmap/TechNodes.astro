@@ -1,13 +1,13 @@
 ---
 import { getSeries } from '@/lib/content';
 import {
-  routePlan,
+  normalizeItem,
   roleLabels,
   roleNotes,
-  normalizeItem,
   type RouteItem,
   type RouteItemRole,
-} from '@/data/route-plan';
+} from '@/data/route-model';
+import { routePlan, seriesMeta } from '@/data/routes';
 import RouteSections from '@/components/shared/RouteSections.astro';
 
 interface Props {
@@ -18,6 +18,9 @@ const { page } = Astro.props as Props;
 const tiers = routePlan[page] ?? [];
 const series = await getSeries();
 const online = new Set(series.map((item) => item.slug));
+
+// 路线里的教程条目只写 slug，卡片标题统一从 seriesMeta 取
+const titleOf = (item: RouteItem) => seriesMeta[item.slug] ?? item.slug;
 
 // 图例只展示这条路线实际用到的状态（必学 / 推荐 / 主流 / 可选 / 小众）
 const legendOrder: RouteItemRole[] = ['required', 'recommended', 'popular', 'optional', 'niche'];
@@ -59,4 +62,4 @@ const available = (item: RouteItem) =>
   )
 }
 
-<RouteSections tiers={tiers} density="compact" available={available} />
+<RouteSections tiers={tiers} density="compact" available={available} titleOf={titleOf} />

@@ -1,0 +1,130 @@
+// 教程 slug → 中文名（卡片标题兜底、面包屑、章节 meta 都用它）
+// 纯数据文件：只放配置，不放逻辑。
+
+export const seriesMeta: Record<string, string> = {
+  java: 'Java 教程', python: 'Python 教程', go: 'Go 教程', rust: 'Rust 教程',
+  c: 'C 语言教程', cpp: 'C++ 教程', csharp: 'C# 教程',
+  javascript: 'JavaScript 教程', typescript: 'TypeScript 教程',
+  html: 'HTML 教程', css: 'CSS 教程', tailwind: 'Tailwind CSS 教程', vite: 'Vite 教程',
+  vue: 'Vue 3 教程', react: 'React 教程', angular: 'Angular 教程',
+  nodejs: 'Node.js 与包管理教程', 'node-backend': 'Node.js 后端教程',
+  vscode: 'VS Code 教程', git: 'Git 教程', markdown: 'Markdown 教程', regex: '正则表达式教程',
+  sql: 'SQL 基础教程', mysql: 'MySQL 教程', postgresql: 'PostgreSQL 教程',
+  redis: 'Redis 教程', mongodb: 'MongoDB 教程', elasticsearch: 'Elasticsearch 教程',
+  'spring-boot': 'Spring Boot 教程', mybatis: 'MyBatis 教程', jvm: 'JVM 原理与调优教程',
+  maven: 'Maven 教程',
+  'spring-cloud': 'Spring Cloud 微服务教程', django: 'Django 教程', fastapi: 'FastAPI 教程',
+  aspnet: 'ASP.NET Core 教程',
+  linux: 'Linux 教程', docker: 'Docker 教程', kubernetes: 'Kubernetes 教程',
+  nginx: 'Nginx 教程', kafka: 'Kafka 与消息队列教程',
+  network: '计算机网络教程', dsa: '数据结构与算法教程', os: '操作系统教程',
+  'design-patterns': '设计模式教程',
+  'data-science': 'Python 数据科学教程', 'machine-learning': '机器学习教程',
+  'deep-learning': '深度学习教程',
+  flutter: 'Flutter 教程', 'react-native': 'React Native 教程',
+  security: '网络安全教程', 'big-data': '大数据教程', embedded: '嵌入式开发教程',
+  'game-dev': '游戏开发教程', testing: '软件测试教程', blockchain: '区块链开发教程',
+  quant: '量化金融教程',
+  prometheus: 'Prometheus 与可观测性教程', grpc: 'gRPC 教程', webassembly: 'WebAssembly 教程',
+  // 工程工具与基础
+  github: 'GitHub / GitLab 协作教程', jetbrains: 'JetBrains IDE 教程', shell: 'Shell 脚本教程',
+  terminal: '终端与环境配置', 'build-tools': '构建工具（Make / CMake）', 'code-quality': '代码质量与静态分析',
+  'test-tools': '测试工具与框架', 'ci-cd': 'CI/CD 与自动化',
+  // 大前端
+  'api-testing': 'API 测试', 'perf-testing': '性能测试',
+  express: 'Express 教程', nestjs: 'NestJS 教程',
+  'frontend-bundler': '构建工具 Vite/Webpack',
+  vitepress: 'VitePress 文档站', docusaurus: 'Docusaurus 文档站', starlight: 'Starlight 文档站',
+  'mini-program': '微信小程序开发', uniapp: 'uni-app 跨端开发',
+  'react-router': 'React Router 路由', 'react-state': 'React 状态管理',
+  'react-testing': 'React 组件测试', 'ant-design': 'Ant Design 组件库',
+  pinia: 'Pinia 状态管理', 'element-plus': 'Element Plus 组件库',
+  rxjs: 'RxJS 响应式编程', ngrx: 'NgRx 状态管理', 'angular-material': 'Angular Material',
+  'media-basics': '音视频基础', ffmpeg: 'FFmpeg 音视频处理', 'h264-codec': 'H.264 编解码',
+  'rtmp-rtsp': 'RTMP / RTSP 协议', 'hls-dash': 'HLS / DASH 流媒体协议', webrtc: 'WebRTC 实时通信',
+  'media-server': '流媒体服务器', transcoding: '转码与打包', 'cdn-delivery': 'CDN 分发',
+  'live-streaming': '直播系统', 'video-conference': '视频会议',
+  dom: 'DOM 与浏览器 API', 'component-library': '组件库与设计系统', 'vue-router': 'Vue Router 路由',
+  'state-management': '状态管理教程', svelte: 'Svelte 教程', solid: 'Solid 教程', webpack: 'Webpack 教程', nextjs: 'Next.js 教程',
+  nuxt: 'Nuxt 教程', astro: 'Astro 教程', pnpm: 'pnpm 与包管理进阶', bun: 'Bun 教程', deno: 'Deno 教程',
+  eslint: 'ESLint 与代码规范', vitest: 'Vitest 单元测试', playwright: 'Playwright 端到端测试',
+  'perf-web': '前端性能优化', a11y: 'Web 可访问性', i18n: 'Web 国际化',
+  // Java
+  collections: 'Java 集合与泛型', concurrency: 'Java 并发编程', gradle: 'Gradle 教程',
+  'spring-data': 'Spring Data 教程', 'rest-api': 'REST API 设计', junit: 'JUnit 与测试',
+  logging: '日志与可观测性', microservices: '微服务架构',
+  // Python
+  'python-typing': '类型标注与工程化', packaging: '打包与发布', flask: 'Flask 教程',
+  automation: '自动化脚本', cli: '命令行程序', scraping: '爬虫与数据采集', numpy: 'NumPy 教程',
+  pandas: 'Pandas 教程', pytest: 'pytest 与调试', profiling: '性能分析与优化',
+  // Go
+  'go-concurrency': 'Goroutine 与 Channel', 'go-generics': 'Go 泛型', 'go-network': 'Go 网络编程',
+  'go-modules': 'Go Modules 与工程化', 'go-testing': 'Go 测试与基准', 'go-microservices': 'Go 微服务',
+  'go-deploy': '部署与可观测',
+  // Rust
+  'rust-ownership': '所有权与借用', 'rust-async': 'Rust 异步编程', 'rust-macros': '宏与元编程',
+  'rust-ffi': 'FFI 与 C 互操作', 'rust-cli': 'Rust 命令行工具', 'rust-network': 'Rust 网络服务',
+  'rust-testing': 'Rust 测试与文档',
+  // C / C++
+  'c-pointers': '指针与内存布局', 'modern-cpp': '现代 C++', stl: 'STL 标准库',
+  'cpp-templates': '模板与泛型', raii: 'RAII 与智能指针', cmake: 'CMake 与编译链接',
+  'cpp-debugging': '调试与性能分析', 'cross-platform': '跨平台开发', 'systems-programming': '系统编程',
+  // C# / .NET
+  dotnet: '.NET 平台教程', linq: 'LINQ 数据查询', 'csharp-async': '异步与并发编程',
+  di: '依赖注入与配置', 'ef-core': 'Entity Framework Core', wpf: 'WPF 桌面开发',
+  maui: '.NET MAUI 跨平台', 'industrial-comms': '上位机与设备通信',
+  // 移动端
+  kotlin: 'Kotlin 教程', 'android-sdk': 'Android SDK 教程', 'jetpack-compose': 'Jetpack Compose',
+  swift: 'Swift 教程', swiftui: 'SwiftUI 教程', 'mobile-arch': '移动架构与状态管理',
+  'mobile-network': '移动网络与本地存储', 'push-location': '推送、定位与传感器',
+  'mobile-testing': '移动端测试', 'mobile-release': '签名打包与发布',
+  // 数据库
+  transactions: '事务与锁', indexing: '索引原理', 'query-optimization': '查询优化与执行计划',
+  'data-modeling': '数据建模与范式', 'sql-server': 'SQL Server 教程', sqlite: 'SQLite 教程',
+  oracle: 'Oracle 教程', clickhouse: 'ClickHouse 教程', tsdb: '时序数据库', neo4j: '图数据库',
+  'vector-db': '向量数据库', 'database-internals': '数据库内核原理', replication: '主从复制',
+  sharding: '分库分表', 'backup-recovery': '备份与恢复',
+  // 中间件
+  rabbitmq: 'RabbitMQ 教程', rocketmq: 'RocketMQ 教程', 'api-gateway': 'API 网关',
+  nacos: 'Nacos 与服务发现', zookeeper: 'ZooKeeper 教程',
+  // DevOps
+  'docker-compose': 'Docker Compose', jenkins: 'Jenkins 教程', 'gitlab-ci': 'GitLab CI 教程',
+  'github-actions': 'GitHub Actions 教程', terraform: 'Terraform 教程', ansible: 'Ansible 教程',
+  argocd: 'Argo CD 教程', grafana: 'Grafana 可视化', 'cloud-basics': '云服务基础',
+  // 桌面软件
+  qt: 'Qt 教程', electron: 'Electron 教程', tauri: 'Tauri 教程', winui: 'WinUI 教程',
+  'auto-update': '自动更新',
+  // 上位机与 PLC
+  'serial-port': '串口通信教程', 'tcp-udp': 'TCP / UDP 通信', modbus: 'Modbus 协议',
+  'opc-ua': 'OPC UA 协议', 'realtime-chart': '实时曲线与图表', 'report-export': '报表与导出',
+  'plc-programming': 'PLC 编程（梯形图与 ST）', 'ladder-logic': '梯形图与顺序控制',
+  scada: 'SCADA 组态与监控', 'servo-motion': '运动控制与伺服', 'hmi-design': 'HMI 触摸屏组态',
+  // 科学计算与工程软件
+  scipy: 'SciPy 教程', matlab: 'MATLAB 教程', 'numerical-methods': '数值计算方法', simulation: '建模仿真',
+  fem: '有限元分析', mesh: '网格处理', opengl: 'OpenGL 图形编程', vtk: 'VTK 可视化',
+  geometry: '几何建模', 'cad-dev': 'CAD 软件二次开发', cae: 'CAE 前后处理', bim: 'BIM 数据与开发',
+  'plugin-dev': '专业软件插件开发',
+  // 网络与分布式
+  http: 'HTTP 协议', dns: 'DNS 与解析', rpc: 'RPC 与服务调用', websocket: 'WebSocket 实时通信',
+  mqtt: 'MQTT 协议', consistency: '分布式一致性', raft: 'Raft 与共识算法',
+  'load-balancing': '负载均衡', 'service-mesh': '服务网格', streaming: '流处理与实时计算',
+  'realtime-media': '流媒体与实时音视频',
+  // 操作系统与系统软件
+  kernel: 'Linux 内核基础', drivers: '驱动与内核模块', syscall: '系统调用', 'memory-management': '内存管理',
+  compiler: '编译原理', interpreter: '解释器', vm: '虚拟机与运行时', linker: '链接与加载',
+  'perf-analysis': '性能分析', debugging: '调试技术', tracing: '追踪与诊断', ebpf: 'eBPF 观测',
+  // 软件工程
+  architecture: '软件架构与模式', refactoring: '重构', uml: 'UML 与建模', 'unit-testing': '单元测试',
+  'integration-testing': '集成测试', 'e2e-testing': '端到端测试', 'static-analysis': '静态分析',
+  'code-review': '代码评审', agile: '敏捷与项目管理', 'tech-writing': '技术文档写作', 'ai-coding': 'AI 辅助编程',
+  // 嵌入式与机器人
+  'embedded-linux': '嵌入式 Linux', rtos: 'RTOS 实时系统', ros2: 'ROS 2 机器人开发',
+  'motion-planning': '运动规划', 'sensor-fusion': '传感器融合', 'iot-gateway': 'IoT 网关开发',
+  // AI 与大模型
+  nlp: '自然语言处理', 'llm-app': '大模型应用开发', 'prompt-engineering': 'Prompt 工程',
+  rag: 'RAG 与向量检索', agent: 'Agent 与工具调用', 'model-deploy': '模型部署与推理', eval: '模型评测与监控',
+  // 数据工程
+  spark: 'Spark 大数据处理', flink: 'Flink 流处理', etl: 'ETL 与数据管道', 'data-warehouse': '数据仓库',
+  bi: 'BI 与数据可视化',
+}
+

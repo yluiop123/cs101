@@ -6,17 +6,25 @@
 所以新增内容只改数据，不动组件。
 
 ```
-src/data/route-plan.ts        ← 路线模型 + 路线表（技术路线 / 领域路线）+ 全部技术路线目录
+src/data/route-model.ts       ← 只有类型与纯函数，不含任何站点数据
+src/data/routes/
+  tech.ts                     ← 19 条技术路线的板块 + 全部技术路线目录
+  domain.ts                   ← 24 条领域路线的板块
+  series-meta.ts              ← 教程 slug → 中文名
+  index.ts                    ← 数据汇总：routePlan / techCatalog / techRouteOrder / seriesMeta
 src/data/catalog.ts           ← 首页目录（12 个分类）
 src/data/domains.ts           ← 应用领域目录（8 个分类 / 47 个方向）
 src/data/business-systems.ts  ← 业务系统目录（14 类 / 72 个系统）+ 系统说明
-src/data/cards.ts             ← RouteTier[] → CardSectionData[]（tierSections 转换）
+src/data/cards.ts             ← 卡片/分节结构 + RouteTier[] → CardSectionData[]（tierSections）
 src/content/docs/**           ← 教程正文、章节（Astro content collection）
         ↓ 构建期
 src/lib/content.ts            ← 扫描 docs 得到系列 / 章节 / 是否上线
         ↓
 components/shared/RouteSections.astro → CardSection.astro → Card.astro
 ```
+
+原则：**模型（类型 + 函数）与数据分开**。`route-model.ts`、`cards.ts` 只放逻辑；路线、目录、教程名等
+配置全在 `routes/*.ts`、`catalog.ts`、`domains.ts`、`business-systems.ts` 里，加内容只改这些数据文件。
 
 ## 1. 模型：一个条目 = 一条路线
 
@@ -56,16 +64,23 @@ interface RouteTier {
 | `business` | `/tutorials/business-<slug>/` | 教程 |
 | `page` | `/<slug>/` | 路线 |
 
-- `planned: true` → 没有入口，渲染虚线占位卡；
-- `kind: 'domain'` 但 `routePlan` 里没这条领域路线 → 同样自动变成虚线卡；
-- 标题：`item.title` → `seriesMeta[slug]` → `slug`；
+- `planned: true` → 没有入口，渲染虚线占位卡（应用领域目录里没有对应路线的方向就是这样标的）；
+- 标题：卡片上的标题由 `item.title` 提供；路线页里只写 slug 的教程，由页面用 `seriesMeta` 补；
 - 状态继承：`item.role` → 所属 `tier.required` → 所属 `option.role`。
 
-## 2. 路线表：`routePlan`
+## 2. 路线数据：`src/data/routes/`
 
 ```ts
-const routePlan: Record<string, RouteTier[]>   // 键：路线 key
+// routes/index.ts —— 数据汇总入口
+const routePlan: Record<string, RouteTier[]>; // 键：路线 key
 ```
+
+| 文件 | 内容 |
+| --- | --- |
+| `routes/tech.ts` | `techRoutes`（19 条技术路线）+ `techCatalog`（全部技术路线目录，4 个分组） |
+| `routes/domain.ts` | `domainRoutes`（24 条领域路线，键为 `domain-<slug>`） |
+| `routes/series-meta.ts` | `seriesMeta`：教程 slug → 中文名 |
+| `routes/index.ts` | 汇总导出：`routePlan`、`techCatalog`、`techRouteOrder`、`seriesMeta` |
 
 | 键 | 页面 | 数量 |
 | --- | --- | --- |
@@ -83,13 +98,11 @@ const routePlan: Record<string, RouteTier[]>   // 键：路线 key
   ] }
 ```
 
-同一文件还导出：
+模型层（`route-model.ts`）提供的纯函数：
 
 | 导出 | 作用 |
 | --- | --- |
-| `seriesMeta` | 教程 slug → 中文名；卡片标题的兜底来源 |
 | `roleLabels` / `roleNotes` | 状态文案与图例解释 |
-| `techCatalog` / `techRouteOrder` | 全部技术路线目录（见下）及其左侧栏顺序 |
 | `itemTitle` / `itemHref` / `itemCardKind` | 卡片标题、入口、类型标记 |
 | `tierSlugs` / `itemRole` / `normalizeItem` | 摊平、状态继承、字符串项归一 |
 
@@ -102,7 +115,7 @@ const routePlan: Record<string, RouteTier[]>   // 键：路线 key
 | 首页 `/` | `homeCatalog`（catalog.ts） | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind="auto"`（教程/路线混排） |
 | 应用领域 `/domain/` | `domainCatalog`（domains.ts） | 8 分节 / 47 条（24 有路线，23 虚线） | 默认 |
 | 业务系统 `/business-systems/` | `businessCatalog`（business-systems.ts） | 14 分节 / 72 条 | 默认 |
-| 全部技术路线 `/tech-stack/` | `techCatalog`（route-plan.ts） | 4 分节 / 19 条 | `markKind="none"` + `columns={2}` + `routeScale` |
+| 全部技术路线 `/tech-stack/` | `techCatalog`（routes/tech.ts） | 4 分节 / 19 条 | `markKind="none"` + `columns={2}` + `metaOf`（规模提示） |
 
 也就是说：**首页就是一条路线（12 个分节），业务系统也是一条路线（14 个分节）**，
 和「Java 技术路线（4 个分节）」没有任何结构差别。左侧栏的分节锚点也直接读这些分节。
@@ -222,11 +235,11 @@ interface ProgressState {
 | 想做的事 | 改哪里 |
 | --- | --- |
 | 新增一篇教程 | `docs/tutorials/<slug>/index.mdx` + 章节文件（有 `##` 小节的加 `tableOfContents: true`）；再把 `<slug>` 写进路线里的某个分节 |
-| 调整路线顺序 / 增删分节 | `src/data/route-plan.ts` 的 `routePlan` |
+| 调整路线顺序 / 增删分节 | `src/data/routes/tech.ts` / `routes/domain.ts`（数据文件） |
 | 标记必学、推荐、主流、小众 | `tier.required` / `option.role` / `item.role` |
-| 改教程在卡片上的名字 | `seriesMeta`（跨页面统一）或条目的 `title`（只在某个目录页覆盖） |
-| 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称）+ 把 slug 加进 `techCatalog` 的某个分节 |
-| 新增一个应用领域 | 在 `domainCatalog` 对应分类加 `{ slug: 'domain-<slug>', kind: 'domain', title }`；要可点再补 `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
+| 改教程在卡片上的名字 | `routes/series-meta.ts` 的 `seriesMeta`（跨页面统一）或条目的 `title`（只覆盖某个目录页） |
+| 新增一条技术路线 | `routes/tech.ts` 的 `techRoutes` + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称）+ 把 slug 加进 `techCatalog` 的某个分节 |
+| 新增一个应用领域 | 在 `domainCatalog` 对应分类加 `{ slug: 'domain-<slug>', kind: 'domain', title }`；要可点再补 `routes/domain.ts` 的 `domainRoutes['domain-<slug>']` + `docs/domain/<slug>.mdx` |
 | 首页加/调整分类或卡片 | `catalog.ts`（`planned: true` = 虚线占位） |
 | 业务系统加/改条目 | `business-systems.ts` 的 `businessCatalog`（分节里加 `{ slug, kind: 'business', title, summary }`） |
 
@@ -240,4 +253,6 @@ interface ProgressState {
   `RouteTier.options` 表达。
 - **目录即路线**：四个目录页的数据都是 `RouteTier[]`，新增目录页只需再写一个 `RouteTier[]`；
   业务系统也没有 `BizSystem` / `BizCategory` 之类的独立模型，就是 `businessCatalog` 这一条路线。
+- **模型与数据分离**：`src/data/route-model.ts` 与 `cards.ts` 只有类型和纯函数，不含站点数据；
+  路线、目录、教程名等配置都在 `src/data/routes/**`、`catalog.ts`、`domains.ts`、`business-systems.ts`。
 - 技术路线名称只写在 `docs/tech-stack/<slug>.mdx` 的 `title` 里（总览页、左侧栏、面包屑同源）。

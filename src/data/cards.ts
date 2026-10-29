@@ -1,8 +1,9 @@
 // 卡片 + 分节的数据结构：首页、应用领域、业务系统、技术路线、领域详情页共用同一套模型与渲染组件。
 //
-// 统一模型：一个条目 = 一条路线（route-plan.ts 的 RouteItem），一个分节 = 一组路线（RouteTier）。
+// 统一模型：一个条目 = 一条路线（route-model.ts 的 RouteItem），一个分节 = 一组路线（RouteTier）。
 // 四个目录页（首页 / 应用领域 / 业务系统 / 全部技术路线）与路线页用的是同一个 RouteTier[]，
 // `tierSections()` 把它转成 CardSectionData，再由 CardSection + Card 渲染。
+// 本文件只有结构与纯函数，不含站点数据。
 
 import {
   itemCardKind,
@@ -11,12 +12,10 @@ import {
   itemTitle,
   normalizeItem,
   roleLabels,
-  routePlan,
-  tierSlugs,
   type RouteItem,
   type RouteItemRole,
   type RouteTier,
-} from '@/data/route-plan';
+} from '@/data/route-model';
 
 /** 徽标色调：与学习状态同名，另加「choice」表示多选一分节 */
 export type CardBadgeTone = RouteItemRole | 'choice';
@@ -105,8 +104,8 @@ export interface TierSectionOptions {
   markKind?: MarkKindMode;
   density?: 'default' | 'compact';
   columns?: 2 | 3;
-  /** 给指向另一条技术路线的卡片加「N 阶段 · M 项」规模提示 */
-  routeScale?: boolean;
+  /** 给指向另一条技术路线的卡片加规模提示（由调用方提供文案，模型层不读数据） */
+  metaOf?: (item: RouteItem) => string | undefined;
   /** 条目是否已上线（路线页用它把没写正文的教程显示成虚线卡） */
   available?: (item: RouteItem) => boolean;
 }
@@ -134,11 +133,8 @@ export const tierSections = (
         badges: role ? [{ label: roleLabels[role], tone: role }] : [],
       };
 
-      if (options.routeScale && normalized.kind === 'tech') {
-        const targetTiers = routePlan[normalized.slug] ?? [];
-        const count = new Set(targetTiers.flatMap((targetTier) => tierSlugs(targetTier))).size;
-        card.meta = `${targetTiers.length} 阶段 · ${count} 项`;
-      }
+      const meta = options.metaOf?.(normalized);
+      if (meta) card.meta = meta;
       return card;
     };
 

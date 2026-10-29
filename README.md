@@ -68,7 +68,7 @@ src/
     playground/              # Monaco 编辑器、Worker 执行器
     shared/                  # RouteSections / CardSection / Card（全站唯一卡片实现）
     roadmap|tutorial|home|domain|business|computer-science/
-  data/                      # 统一路线模型：路线表 + 首页/应用领域/业务系统/技术路线四个目录
+  data/                      # route-model.ts（类型与纯函数）+ routes/*.ts（路线数据）+ 四个目录数据
   lib/                       # 内容索引、搜索、进度、工具函数
   integrations/base-links    # 构建期补 base 前缀（兜底）
   styles/global.css          # Tailwind + Starlight 层序 + 教程站设计令牌

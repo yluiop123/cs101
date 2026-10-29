@@ -5,7 +5,7 @@
 // domain → /domain/<slug>/、business → /tutorials/business-<slug>/、page → /<slug>/。
 // 还没做的方向写 planned: true，渲染成虚线占位卡。
 
-import type { RouteTier } from '@/data/route-plan';
+import type { RouteTier } from '@/data/route-model';
 
 export const homeCatalog: RouteTier[] = [
   {
