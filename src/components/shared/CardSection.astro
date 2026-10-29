@@ -16,6 +16,7 @@ const {
   groups,
   showKind = true,
   density = 'default',
+  columns,
 } = Astro.props as Props;
 
 // 有 groups = 二级「多选一」分节（如大前端 → 框架选型 → 各框架教程）
@@ -29,6 +30,7 @@ const tagSuffix = tagVariant(tag);
     'cs-card-section',
     choice && 'cs-card-section--choice',
     density === 'compact' && 'cs-card-section--compact',
+    columns === 2 && 'cs-card-section--cols-2',
   ]}
 >
   <div class="cs-section-head">

@@ -467,15 +467,41 @@ export const routePlan: Record<string, RouteTier[]> = {
   ],
 }
 
-// 路线页 → 概览卡片用的技术名（与 tech-stack/index.md 的入口保持一致）
-// 顺序即「学习路线」左侧栏顺序
-export const routeTitles: Record<string, string> = {
-  java: 'Java 技术路线', python: 'Python 技术路线', go: 'Go 技术路线', rust: 'Rust 技术路线',
-  'c-cpp': 'C / C++ 技术路线', 'c-sharp': 'C# 与 .NET 技术路线', 'kotlin-swift-dart': '移动与跨平台技术路线',
-  'javascript-typescript': 'JavaScript / TypeScript 技术路线',
-  frontend: '大前端技术路线',
-  desktop: '桌面端技术路线', mobile: '移动端技术路线',
-  'sql-database': '数据库技术路线', mysql: 'MySQL', postgresql: 'PostgreSQL', redis: 'Redis',
-  mongodb: 'MongoDB', elasticsearch: 'Elasticsearch', kafka: '中间件技术路线', nginx: 'Nginx',
-  docker: 'DevOps 与工程工具', kubernetes: 'Kubernetes',
+/** 技术路线总览页（/tech-stack/）的分组：一组 = 一个分节，数组顺序 = 左侧栏「学习路线」顺序。
+ *  卡片与页面标题都取自 docs/tech-stack/<slug>.mdx 的 title，这里只维护「有哪些路线、怎么分组」。 */
+export interface TechRouteGroup {
+  name: string;
+  slugs: string[];
 }
+
+export const techRouteGroups: TechRouteGroup[] = [
+  {
+    name: '编程语言',
+    slugs: [
+      'java',
+      'python',
+      'go',
+      'rust',
+      'javascript-typescript',
+      'frontend',
+      'c-cpp',
+      'c-sharp',
+      'kotlin-swift-dart',
+    ],
+  },
+  {
+    name: '数据库',
+    slugs: ['sql-database', 'mysql', 'postgresql', 'redis', 'mongodb', 'elasticsearch'],
+  },
+  {
+    name: '中间件',
+    slugs: ['kafka', 'nginx'],
+  },
+  {
+    name: '运维与云',
+    slugs: ['docker', 'kubernetes'],
+  },
+];
+
+/** 全部技术路线的 slug，按左侧栏顺序摊平 */
+export const techRouteOrder: string[] = techRouteGroups.flatMap((group) => group.slugs);

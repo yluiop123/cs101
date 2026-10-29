@@ -717,6 +717,11 @@ starlight-theme-select option {
   line-height: 1.4;
 }
 
+/* 标题较长的总览页（全部技术路线）：一行两张卡，避免长标题被右侧规模提示挤断 */
+.cs-card-section--cols-2 .cs-tut-grid {
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
 .cs-section-more {
   font-size: 0.82rem;
   font-weight: 600;

@@ -62,7 +62,8 @@ const routePlan: Record<string, RouteTier[]>   // 键：路线 slug
 | 导出 | 作用 |
 | --- | --- |
 | `seriesMeta` | slug → 中文名（`react` → `React 教程`）；卡片标题全来自这里 |
-| `routeTitles` | 路线 slug → 路线页标题，**顺序即「学习路线」左侧栏顺序** |
+| `techRouteGroups` | 技术路线总览页（`/tech-stack/`）的分组与顺序；顺序即「学习路线」左侧栏顺序 |
+| 路线页 MDX `title` | 路线页标题、左侧栏「学习路线」名称、总览卡片标题（三者同源，不再单独登记） |
 | `roleLabels` | 状态 → 文案（必学 / 推荐 / 主流 / 可选 / 小众） |
 | `roleNotes` | 状态 → 图例解释文字 |
 | `normalizeItem(item)` | 字符串项转成 `RouteItem` |
@@ -246,8 +247,8 @@ interface ProgressState {
 | `routePlan[key]` | 路线页板块顺序 / 卡片 / 图例；tech-stack 索引卡与领域索引卡的「N 阶段 · M 项」 |
 | `tier.name` / `tier.required` / `tier.kind` | 分节标题、「必学」标记、「N 选 1」标记；左侧栏一级项与 `#tier-N` 锚点 |
 | `option.name` / `option.role` | 选型面板标题与状态徽标（渲染成 `groups`） |
-| `seriesMeta[slug]` | 所有卡片标题 |
-| `routeTitles` | 路线页标题、「学习路线」左侧栏顺序、面包屑末级 |
+| `seriesMeta[slug]` | 教程卡片标题 |
+| `techRouteGroups` | 全部技术路线页的分组与「学习路线」左侧栏顺序；路线标题取各自 MDX 的 `title` |
 | `homeCategories` | 首页 12 个技术分类的分节与卡片、左侧栏「技术分类」、卡片跳转目标 |
 | `domainCategories` / `domains` | `/domain/` 的 8 个分类与方向卡片、左侧栏分类锚点（无路线的方向显示虚线卡） |
 | `routePlan['domain-<slug>']` | 领域详情页板块与左侧栏 |
@@ -262,7 +263,7 @@ interface ProgressState {
 | 调整路线顺序 / 增删板块 | `src/data/route-plan.ts` |
 | 标记必学、推荐、主流、小众 | `tier.required` / `option.role` / `item.role` |
 | 改教程在卡片上的名字 | `seriesMeta` |
-| 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx` + `routeTitles` + `TechStackGrid` 分组 |
+| 新增一条技术路线 | `routePlan` + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称）+ 把 slug 加进 `techRouteGroups` 的某个分组 |
 | 新增一个应用领域 | 只加 `domains.ts` 条目即可显示（虚线占位）；要可点再加 `routePlan['domain-<slug>']` + `docs/domain/<slug>.mdx` |
 | 首页加/调整分类或卡片 | `catalog.ts`（卡片 `href` 指向已有路线或教程，没做就留空显示虚线卡） |
 | 业务系统加/改条目 | `business-systems.ts`（缩写、中文名、核心作用） |
@@ -275,6 +276,6 @@ interface ProgressState {
 - `dist/` 与 `public/search-index.json` 是构建产物，不要手改。
 - **卡片只有一套实现**：`CardSection.astro`（分节）+ `Card.astro`（一张卡）覆盖首页、应用领域、业务系统、
   技术路线、领域详情；路线页的「多选一」由 `CardSectionData.groups` 表达，不再有单独的路线卡片组件。
-- 已知重复：`TechStackGrid.astro` 里 19 条路线分组是手写的，新增路线需要同时改它和 `routeTitles`；
-  `routeTitles` / `routePlan` 里还留着 `desktop`、`mobile` 两条没有页面的预留条目。
+- **技术路线只有一份登记**：`techRouteGroups` 决定分组与顺序，路线名称只写在 `docs/tech-stack/<slug>.mdx`
+  的 `title` 里，总览页、左侧栏、面包屑都从这里取，新增路线不需要再改组件。
 - 大前端 49 项里目前只有 9 个教程有正文（html / css / javascript / typescript / tailwind / react / vue / angular / nodejs），其余是虚线占位卡。

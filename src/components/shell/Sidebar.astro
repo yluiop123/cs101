@@ -5,7 +5,7 @@ import { withBase } from '@/lib/utils';
 import { homeCategories } from '@/data/catalog';
 import { bizCategories } from '@/data/business-systems';
 import { domainCategories } from '@/data/domains';
-import { routeTitles, routePlan } from '@/data/route-plan';
+import { techRouteOrder, routePlan } from '@/data/route-plan';
 
 const { entry } = Astro.locals.starlightRoute;
 const path = Astro.url.pathname.replace(/^\/cs101/, '');
@@ -24,7 +24,7 @@ const routeTiers = techRouteSlug ? (routePlan[techRouteSlug] ?? []) : [];
 const isTechRoutePage = isTechStack && routeTiers.length > 0;
 
 // 学习路线页的左侧栏：按路线顺序列出全部技术路线
-const routeOrder = Object.keys(routeTitles);
+const routeOrder = techRouteOrder;
 const techRoutes = isTechStack
   ? (await getCollection('docs'))
       .filter((item) => item.id.startsWith('tech-stack/') && item.id !== 'tech-stack/index')

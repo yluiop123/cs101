@@ -55,6 +55,8 @@ export interface CardSectionData {
   showKind?: boolean;
   /** 卡片密度：compact 用于路线页（卡片多、带状态徽标） */
   density?: 'default' | 'compact';
+  /** 一行几张卡（宽屏）；默认 3，标题较长的总览页可用 2 */
+  columns?: 2 | 3;
 }
 
 /** 卡片类型文案 */

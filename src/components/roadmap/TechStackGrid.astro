@@ -1,54 +1,15 @@
 ---
-import { routePlan, tierSlugs } from '@/data/route-plan';
+import { getCollection } from 'astro:content';
+import { routePlan, tierSlugs, techRouteGroups } from '@/data/route-plan';
 import CardSection from '@/components/shared/CardSection.astro';
 import type { CardSectionData } from '@/data/cards';
 
-interface TechGroup {
-  name: string;
-  items: { title: string; slug: string }[];
-}
-
-const groups: TechGroup[] = [
-  {
-    name: '编程语言',
-    items: [
-      { title: 'Java', slug: 'java' },
-      { title: 'Python', slug: 'python' },
-      { title: 'Go', slug: 'go' },
-      { title: 'Rust', slug: 'rust' },
-      { title: 'JavaScript / TypeScript', slug: 'javascript-typescript' },
-      { title: '大前端', slug: 'frontend' },
-      { title: 'C / C++', slug: 'c-cpp' },
-      { title: 'C# 与 .NET', slug: 'c-sharp' },
-      { title: 'Kotlin / Swift / Dart', slug: 'kotlin-swift-dart' },
-    ],
-  },
-  {
-    name: '数据库',
-    items: [
-      { title: '数据库技术路线', slug: 'sql-database' },
-      { title: 'MySQL', slug: 'mysql' },
-      { title: 'PostgreSQL', slug: 'postgresql' },
-      { title: 'Redis', slug: 'redis' },
-      { title: 'MongoDB', slug: 'mongodb' },
-      { title: 'Elasticsearch', slug: 'elasticsearch' },
-    ],
-  },
-  {
-    name: '中间件',
-    items: [
-      { title: '中间件技术路线', slug: 'kafka' },
-      { title: 'Nginx', slug: 'nginx' },
-    ],
-  },
-  {
-    name: '运维与云',
-    items: [
-      { title: 'DevOps 与工程工具', slug: 'docker' },
-      { title: 'Kubernetes', slug: 'kubernetes' },
-    ],
-  },
-];
+// 卡片标题直接取 docs/tech-stack/<slug>.mdx 的 title，和左侧栏、页面标题同源
+const titles = new Map(
+  (await getCollection('docs'))
+    .filter((entry) => entry.id.startsWith('tech-stack/') && entry.id !== 'tech-stack/index')
+    .map((entry) => [entry.id.slice('tech-stack/'.length), entry.data.title]),
+);
 
 // 卡片右侧的规模提示，与首页 / 领域卡片同样式
 const scaleOf = (slug: string) => {
@@ -57,16 +18,16 @@ const scaleOf = (slug: string) => {
   return `${tiers.length} 阶段 · ${count} 项`;
 };
 
-// 一张卡 = 一条技术路线，点进去是该路线的分节教程；
-// 这一页全是路线，卡片不再重复「路线」标记，只留规模提示（标题太长会被挤断行）
-const sections: CardSectionData[] = groups.map((group) => ({
+// 分组与顺序来自 route-plan.ts 的 techRouteGroups，一张卡 = 一条技术路线
+const sections: CardSectionData[] = techRouteGroups.map((group) => ({
   title: group.name,
   density: 'compact',
   showKind: false,
-  items: group.items.map((item) => ({
-    title: item.title,
-    href: `/tech-stack/${item.slug}/`,
-    meta: scaleOf(item.slug),
+  columns: 2,
+  items: group.slugs.map((slug) => ({
+    title: titles.get(slug) ?? slug,
+    href: `/tech-stack/${slug}/`,
+    meta: scaleOf(slug),
   })),
 }));
 ---
