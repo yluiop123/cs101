@@ -7,17 +7,17 @@ import {
   roleNotes,
   type RouteItem,
   type RouteItemRole,
+  type RouteTier,
 } from '@/data/model/route-model';
-import { routePlan } from '@/data/routes';
 import { seriesMeta } from '@/data/tutorials';
 import RouteSections from '@/components/shared/RouteSections.astro';
 
 interface Props {
-  page: string;
+  /** 这条路线自己的分节数据：由页面 MDX 直接 import 路线数据后传入 */
+  tiers: RouteTier[];
 }
 
-const { page } = Astro.props as Props;
-const tiers = routePlan[page] ?? [];
+const { tiers } = Astro.props as Props;
 const series = await getSeries();
 const online = new Set(series.map((item) => item.slug));
 const hrefOf = await tutorialEntryHref();

@@ -194,8 +194,8 @@ tags?: string[], prerequisites?: string[], estMinutes?: number
 | --- | --- | --- |
 | 教程系列首页 | `docs/tutorials/<slug>/index.mdx` | `title`、`description`、`sidebar.order: 0`、`sidebar.hidden: true`；正文用 `<SeriesChapters series="<slug>" />` |
 | 教程章节 | `docs/tutorials/<slug>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order`、`tableOfContents: true`（有 `##` 小节时右侧显示「本页内容」目录） |
-| 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`（卡片与左侧栏都用它）、`description`；正文只有 `<TechNodes page="<route-slug>" />` |
-| 应用领域页 | `docs/domain/<slug>.mdx` | 同上，`page="domain-<slug>"` |
+| 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`（卡片与左侧栏都用它）、`description`；正文显式 import 这条路线的数据：`import { techRoutes } from '@/data/routes/tech'; <TechNodes tiers={techRoutes['<route-slug>']} />` |
+| 应用领域页 | `docs/domain/<slug>.mdx` | 同上：`import { domainRoutes } from '@/data/routes/domain'; <TechNodes tiers={domainRoutes['domain-<slug>']} />` |
 | 业务系统教程 | `docs/business-systems/<slug>/` | 2 章；与普通教程分开存放；正文由 `BizSystemChapter.astro` 按数据渲染 |
 | 计算机科学 | `docs/computer-science/**` | 由 `src/data/computer-science/{zh,ossu}.json` 生成 |
 
@@ -276,4 +276,8 @@ interface ProgressState {
   教程元信息（`src/data/tutorials/**`）；模型与纯函数在 `src/data/model/**`，都不含站点数据。
 - **教程内容一套一个文件夹**：普通教程在 `src/content/docs/tutorials/<slug>/`，
   业务系统教程在 `src/content/docs/business-systems/<slug>/`；入口链接由 `lib/entry-links.ts` 统一指向第一章。
+- **MDX 里引用组件一律用 `@/` 别名**：如 `import TechNodes from '@/components/roadmap/TechNodes.astro'`，
+  不写 `../../../components/...`；别名由 `astro.config.mjs` 的 Vite `resolve.alias` 提供，构建期解析。
+- **路线页的数据依赖写在 MDX 里**：`<TechNodes tiers={techRoutes['java']} />` 而不是传字符串 key，
+  这样"这个页面用了哪条路线的数据"一眼可见，数据仍只维护在 `src/data/routes/**` 一份。
 - 技术路线名称只写在 `docs/tech-stack/<slug>.mdx` 的 `title` 里（总览页、左侧栏、面包屑同源）。

@@ -3,6 +3,7 @@ title: "网络安全与应用安全"
 description: "「网络安全与应用安全」方向的路线：从入门到实战的分阶段教程与选型建议。"
 ---
 
-import TechNodes from '../../../components/roadmap/TechNodes.astro';
+import TechNodes from '@/components/roadmap/TechNodes.astro';
+import { domainRoutes } from '@/data/routes/domain';
 
-<TechNodes page="domain-cybersecurity" />
+<TechNodes tiers={domainRoutes['domain-cybersecurity']} />

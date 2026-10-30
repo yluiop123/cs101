@@ -3,8 +3,7 @@ title: "机器人开发"
 description: "从软件与数学基础到 ROS 2、感知与运动规划，再到嵌入式实时控制与仿真部署，构建机器人软件栈。"
 ---
 
-import TechNodes from '../../../components/roadmap/TechNodes.astro';
+import TechNodes from '@/components/roadmap/TechNodes.astro';
+import { domainRoutes } from '@/data/routes/domain';
 
-从软件与数学基础到 ROS 2、感知与运动规划，再到嵌入式实时控制与仿真部署，构建机器人软件栈。
-
-<TechNodes page="domain-robotics" />
+<TechNodes tiers={domainRoutes['domain-robotics']} />

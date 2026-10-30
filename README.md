@@ -83,6 +83,8 @@ scripts/                     # 搜索索引、链接检查、冒烟、截图、�
 
 数据结构（内容由哪些数据驱动、新增内容改哪里）见 [DATA-MODEL.md](DATA-MODEL.md)：
 **首页、应用领域、业务系统、全部技术路线与路线页共用同一个 `RouteTier[]` 模型**。
+内容 MDX 里引用组件统一用 `@/` 别名（如 `@/components/tutorial/SeriesChapters.astro`）；
+路线页在 MDX 里直接 import 路线数据并把 `tiers` 传给 `<TechNodes>`，不传字符串 key。
 
 ## 部署约定
 

@@ -3,8 +3,7 @@ title: "工业通信协议"
 description: "串口、TCP/UDP 打底，掌握 Modbus、OPC UA、MQTT 等工业协议，做设备联网、数据采集与上位机可视化。"
 ---
 
-import TechNodes from '../../../components/roadmap/TechNodes.astro';
+import TechNodes from '@/components/roadmap/TechNodes.astro';
+import { domainRoutes } from '@/data/routes/domain';
 
-串口、TCP/UDP 打底，掌握 Modbus、OPC UA、MQTT 等工业协议，做设备联网、数据采集与上位机可视化。
-
-<TechNodes page="domain-industrial-comms" />
+<TechNodes tiers={domainRoutes['domain-industrial-comms']} />

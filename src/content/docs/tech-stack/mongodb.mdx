@@ -3,6 +3,7 @@ title: "MongoDB"
 description: "「MongoDB」的分阶段学习路线：按顺序学完即可覆盖这个方向的核心技术与工程实践。"
 ---
 
-import TechNodes from '../../../components/roadmap/TechNodes.astro';
+import TechNodes from '@/components/roadmap/TechNodes.astro';
+import { techRoutes } from '@/data/routes/tech';
 
-<TechNodes page="mongodb" />
+<TechNodes tiers={techRoutes['mongodb']} />

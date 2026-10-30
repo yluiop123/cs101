@@ -3,6 +3,7 @@ title: "游戏开发与实时图形"
 description: "「游戏开发与实时图形」方向的路线：从入门到实战的分阶段教程与选型建议。"
 ---
 
-import TechNodes from '../../../components/roadmap/TechNodes.astro';
+import TechNodes from '@/components/roadmap/TechNodes.astro';
+import { domainRoutes } from '@/data/routes/domain';
 
-<TechNodes page="domain-game-vr-ar" />
+<TechNodes tiers={domainRoutes['domain-game-vr-ar']} />
