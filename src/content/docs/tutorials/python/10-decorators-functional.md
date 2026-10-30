@@ -1,6 +1,6 @@
 ---
 title: "第 10 章 · 装饰器与函数式特性"
-description: "装饰器（decorator）= 接收函数、返回新函数的高阶函数——给函数\"套壳\"增强，调用方无感："
+description: "装饰器（decorator）= 接收函数、返回新函数的高阶函数——给函数“套壳”增强，调用方无感："
 series: python
 sidebar:
   order: 10

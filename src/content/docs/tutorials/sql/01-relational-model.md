@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 关系模型与 SQL 方言"
-description: "一张订单表用 Excel 也能存，但一到多人协作、数据量上百万、要\"按客户统计消费\"时，表格就开始崩："
+description: "一张订单表用 Excel 也能存，但一到多人协作、数据量上百万、要“按客户统计消费”时，表格就开始崩："
 series: sql
 sidebar:
   order: 1

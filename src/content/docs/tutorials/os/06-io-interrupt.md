@@ -1,6 +1,6 @@
 ---
 title: "第 6 章 · 输入输出与中断"
-description: "在 Linux 眼里，一切外设都被抽象成一个可以 open/read/write/close/ioctl 的文件。应用不需要知道网卡型号或磁盘是 SSD 还是机械盘，它只面对同一套系统调用；把请求翻译成设备能听懂的指令，是驱动（driv…"
+description: "在 Linux 眼里，一切外设都被抽象成一个可以 / / / / 的文件。"
 series: os
 sidebar:
   order: 6

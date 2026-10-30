@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 模块系统：CommonJS 与 ESM"
-description: "Node 诞生（2009）时 ES 还没有模块标准，社区发明了 CommonJS（CJS）：require / module.exports。2015 年 ES6 正式推出 ES Module（ESM）：import / export。…"
+description: "Node 诞生（2009）时 ES 还没有模块标准，社区发明了 CommonJS（CJS）： / 。"
 series: nodejs
 sidebar:
   order: 4

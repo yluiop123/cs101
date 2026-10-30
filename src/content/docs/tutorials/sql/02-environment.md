@@ -1,6 +1,6 @@
 ---
 title: "第 2 章 · 环境与客户端"
-description: "docker run -d --name mysql8 -e MYSQLROOTPASSWORD=123456 \\"
+description: "docker run -d --name mysql8 -e MYSQLROOTPASSWORD=123456 \"
 series: sql
 sidebar:
   order: 2

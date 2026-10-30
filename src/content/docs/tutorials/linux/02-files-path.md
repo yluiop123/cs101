@@ -1,6 +1,6 @@
 ---
 title: "第 2 章 · 文件系统与路径"
-description: "Linux 里定位一个文件有两条路：绝对路径从根 / 出发，相对路径从\"当前工作目录\"出发。"
+description: "Linux 里定位一个文件有两条路：绝对路径从根 / 出发，相对路径从“当前工作目录”出发。"
 series: linux
 sidebar:
   order: 2

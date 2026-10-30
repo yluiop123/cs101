@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 核心功能详解"
-description: "推荐用\"打开文件夹\"（Ctrl+K Ctrl+O）把整个项目目录作为工作区打开，而不是单开文件——这样资源管理器、全局搜索、Git 功能都以项目为根。"
+description: "推荐用“打开文件夹”（Ctrl+K Ctrl+O）把整个项目目录作为工作区打开，而不是单开文件——这样资源管理器、全局搜索、Git 功能都以项目为根。"
 series: vscode
 sidebar:
   order: 4

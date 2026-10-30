@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 初识 React"
-description: "React 是 Meta 开源的声明式 UI 库（framework 还是 library？——React 只管 UI 渲染层，路由/请求等生态自行组合，所以常被称作\"库\"）。核心理念一句话："
+description: "React 是 Meta 开源的声明式 UI 库（framework 还是 library？——React 只管 UI 渲染层，路由/请求等生态自行组合，所以常被称作“库”）。核心理念一句话："
 series: react
 sidebar:
   order: 1

@@ -1,6 +1,6 @@
 ---
 title: "第 10 章 · 综合实战：把一台裸机变成可上线的服务器"
-description: "场景设定：一台刚装好 Ubuntu 24.04（或 CentOS Stream）的云主机，只有 root 密码可登录。目标应用是一个跑在 8080 端口的 Web 服务（语言不限，本章以 Node 演示）。密钥登录按 第 7 章 · 网…"
+description: "场景设定：一台刚装好 Ubuntu 24.04（或 CentOS Stream）的云主机，只有 root 密码可登录。"
 series: linux
 sidebar:
   order: 10

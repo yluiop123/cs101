@@ -1,0 +1,29 @@
+---
+// 覆盖 Starlight 的 Head：
+// 1) 章节页标题追加所属教程名（避免 java/go/python 的「第 2 章 · 基础语法」这类同名标题）；
+// 2) 404 页去掉指向 /404/ 的 canonical，并加 noindex。
+import { seriesMeta } from '@/data/tutorials';
+
+const route = Astro.locals.starlightRoute;
+const path = Astro.url.pathname.replace(/\/+$/, '');
+const is404 = path.endsWith('/404');
+const data = route.entry?.data as { title?: string; series?: string } | undefined;
+const series = data?.series;
+const titleOverride =
+  series && data?.title
+    ? `${data.title} · ${seriesMeta[series] ?? series} | ${route.siteTitle}`
+    : null;
+const head = (route.head ?? []).filter(
+  ({ tag, attrs }) => !(is404 && tag === 'link' && attrs?.['rel'] === 'canonical'),
+);
+---
+
+{
+  head.map(({ tag: Tag, attrs, content }) => (
+    <Tag
+      {...attrs}
+      set:html={String(Tag) === 'title' && titleOverride ? titleOverride : content}
+    />
+  ))
+}
+{is404 && <meta name="robots" content="noindex" />}

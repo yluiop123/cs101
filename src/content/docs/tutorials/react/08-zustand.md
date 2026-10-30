@@ -1,6 +1,6 @@
 ---
 title: "第 8 章 · 状态管理：Zustand"
-description: "状态提升会让父组件变厚；Context 滥用会引发大范围重渲染。Zustand（德语\"状态\"）用最小的 API 提供\"组件外的全局状态\"："
+description: "状态提升会让父组件变厚；Context 滥用会引发大范围重渲染。Zustand（德语“状态”）用最小的 API 提供“组件外的全局状态”："
 series: react
 sidebar:
   order: 8

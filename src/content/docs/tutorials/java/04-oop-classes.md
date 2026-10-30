@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 面向对象：类与对象"
-description: "面向对象（Object-Oriented Programming，OOP）的核心思想：把\"数据\"和\"操作数据的行为\"打包在一起。"
+description: "面向对象（Object-Oriented Programming，OOP）的核心思想：把“数据”和“操作数据的行为”打包在一起。"
 series: java
 sidebar:
   order: 4

@@ -1,6 +1,6 @@
 ---
 title: "第 7 章 · 异常处理"
-description: "Java 用异常（exception）统一表达\"运行中出了问题\"，全部继承自 Throwable："
+description: "Java 用异常（exception）统一表达“运行中出了问题”，全部继承自 Throwable："
 series: java
 sidebar:
   order: 7

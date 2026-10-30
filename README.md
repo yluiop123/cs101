@@ -9,7 +9,7 @@
 - `legacy-vitepress` 分支：旧 VitePress + Vue + Vuetify 站点完整备份（提交 `3be873a`，就在 `main` 历史里；
   需要旧正文时 `git checkout 3be873a -- docs` 即可取回，迁移用的内容快照与转换脚本已清理）
 
-站点规模：**559 页**（构建产物 560 个 HTML，另含 404 页）——12 个技术分类 / 99 套教程：27 套常规教程 266 章 + 72 套业务系统教程 144 章、19 条技术路线、8 大领域方向（47 个方向，24 个已有路线）、计算机科学（国内 26 门 + OSSU 60 门课程）。首页按《软件技术知识库·最终分类方案》的 12 个分类组织，应用领域按其「领域方向」的 8 大分类组织；在线演练不在站内实现，统一外链 CodePen / StackBlitz。
+站点规模：**562 页**（构建产物 563 个 HTML，另含 404 页）——12 个技术分类 / 99 套教程：27 套常规教程 269 章 + 72 套业务系统教程 144 章、19 条技术路线、8 大领域方向（47 个方向，24 个已有路线）、计算机科学（国内 26 门 + OSSU 60 门课程）。首页按《软件技术知识库·最终分类方案》的 12 个分类组织，应用领域按其「领域方向」的 8 大分类组织；在线演练不在站内实现，统一外链 CodePen / StackBlitz。
 
 ## 信息架构
 
@@ -27,7 +27,7 @@
 
 | 能力 | 实现 |
 | --- | --- |
-| ⌘K 中文搜索 | 构建期 section 级索引（2947 小节）+ MiniSearch + `Intl.Segmenter` 分词，键盘导航、最近搜索、直达小节锚点 |
+| ⌘K 中文搜索 | 构建期 section 级索引（2977 小节）+ MiniSearch + `Intl.Segmenter` 分词，键盘导航、最近搜索、直达小节锚点 |
 | 学习进度 | 本地 localStorage 记录完成/收藏/最近阅读；章节完成按钮、系列进度、首页「继续学习」 |
 | 文档内运行实例 | HTML / CSS / JavaScript 代码块右上角「运行实例」，一键把代码带到 CodePen 新标签页；TypeScript 等去官方 Playground |
 | 教程站版式 | w3schools/菜鸟式方角排版、面包屑、章节元信息（时长/难度）、底部大翻页、深浅色 |
@@ -59,7 +59,7 @@ pnpm versions         # 重新生成 VERSIONS.md 版本台账
 ```text
 src/
   content.config.ts          # 内容集合 schema（series/order/difficulty/duration/tags）
-  content/docs/              # 559 个内容文件（md/mdx，目录即 URL）
+  content/docs/              # 562 个内容文件（md/mdx，目录即 URL）
   components/
     shell/                   # 覆盖 Starlight：Header/PageTitle/Pagination/Footer
     search/                  # ⌘K 搜索岛

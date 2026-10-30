@@ -1,6 +1,6 @@
 ---
 title: "第 15 章 · Axum 初见：Web 服务"
-description: "一个 HTTP 服务大部分时间在等：等数据库、等下游接口。传统「一个请求一个线程」在并发上万时会被内存和上下文切换拖垮。Go 的答案是 goroutine——每请求几千字节栈、由运行时调度、语言内置；Rust 的答案是 async fn…"
+description: "一个 HTTP 服务大部分时间在等：等数据库、等下游接口。"
 series: rust
 sidebar:
   order: 15

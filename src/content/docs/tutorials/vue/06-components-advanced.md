@@ -1,6 +1,6 @@
 ---
 title: "第 6 章 · 组件进阶"
-description: "props 传数据，slot 传模板片段——弹窗、卡片这类\"外壳固定、内容多变\"的组件全靠它："
+description: "props 传数据，slot 传模板片段——弹窗、卡片这类“外壳固定、内容多变”的组件全靠它："
 series: vue
 sidebar:
   order: 6

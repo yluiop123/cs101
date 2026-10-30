@@ -1,6 +1,6 @@
 ---
 title: "第 12 章 · BOM 与浏览器存储"
-description: "DOM 管\"页面内容\"，BOM（Browser Object Model，浏览器对象模型）管\"浏览器本身\"——地址栏、历史记录、窗口尺寸、定时器都由它提供，核心入口是全局对象 window。"
+description: "DOM 管“页面内容”，BOM（Browser Object Model，浏览器对象模型）管“浏览器本身”——地址栏、历史记录、窗口尺寸、定时器都由它提供，核心入口是全局对象 window。"
 series: javascript
 sidebar:
   order: 12

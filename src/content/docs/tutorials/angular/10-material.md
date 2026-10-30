@@ -1,6 +1,6 @@
 ---
 title: "第 10 章 · Angular Material"
-description: "Angular Material 是 Angular 官方团队维护的组件库（Google Material Design 规范实现）——与 Vuetify 之于 Vue、Ant Design 之于 React 同位。Angular 项目…"
+description: "Angular Material 是 Angular 官方团队维护的组件库（Google Material Design 规范实现）——与 Vuetify 之于 Vue、Ant Design 之于 React 同位。"
 series: angular
 sidebar:
   order: 10

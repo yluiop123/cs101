@@ -1,6 +1,6 @@
 ---
 title: "第 11 章 · 状态管理 Pinia"
-description: "props/emit 治理\"父子\"，但跨组件共享会变味："
+description: "props/emit 治理“父子”，但跨组件共享会变味："
 series: vue
 sidebar:
   order: 11

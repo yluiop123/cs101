@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 必备插件推荐"
-description: "VS Code 的插件在官方语境中称为扩展（Extension），二者在中文社区里混用，本教程统一叫\"插件\"。"
+description: "VS Code 的插件在官方语境中称为扩展（Extension），二者在中文社区里混用，本教程统一叫“插件”。"
 series: vscode
 sidebar:
   order: 3

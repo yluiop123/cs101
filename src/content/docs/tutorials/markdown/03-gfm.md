@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · GFM 扩展语法"
-description: "最早的标准 Markdown 功能有限，各平台纷纷自行增强，其中影响力最大的是 GitHub 推出的 GFM（GitHub Flavored Markdown）。如今 GFM 的大部分特性已成为事实标准，被 GitHub、掘金、Vite…"
+description: "最早的标准 Markdown 功能有限，各平台纷纷自行增强，其中影响力最大的是 GitHub 推出的 GFM（GitHub Flavored Markdown）。"
 series: markdown
 sidebar:
   order: 3

@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 发行版、终端与 shell 基础"
-description: "严格地说，Linux 只是内核——那个管理 CPU、内存、磁盘与网络的程序。你装到电脑上的\"Linux\"其实是发行版（distribution）：内核 + 基础工具链 + 包管理器 + 一套默认配置的完整组合。"
+description: "严格地说，Linux 只是内核——那个管理 CPU、内存、磁盘与网络的程序。你装到电脑上的“Linux”其实是发行版（distribution）：内核 + 基础工具链 + 包管理器 + 一套默认配置的完整组合。"
 series: linux
 sidebar:
   order: 1

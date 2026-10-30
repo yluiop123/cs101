@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 开发服务器与插件"
-description: "npm run dev 启动的 dev 服务器是一个\"按需编译的静态文件服务\"："
+description: "npm run dev 启动的 dev 服务器是一个“按需编译的静态文件服务”："
 series: vite
 sidebar:
   order: 3

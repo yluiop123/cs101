@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 初识 Rust"
-description: "Rust 由 Mozilla 主导开发，2015 年发布 1.0。它同时做到了两件\"不可能\"的事："
+description: "Rust 由 Mozilla 主导开发，2015 年发布 1.0。它同时做到了两件“不可能”的事："
 series: rust
 sidebar:
   order: 1

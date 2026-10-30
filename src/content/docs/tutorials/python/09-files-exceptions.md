@@ -1,6 +1,6 @@
 ---
 title: "第 9 章 · 文件与异常"
-description: "with open(\"notes.txt\", \"w\", encoding=\"utf-8\") as f:"
+description: "with open(“notes.txt”, “w”, encoding=“utf-8”) as f:"
 series: python
 sidebar:
   order: 9

@@ -1,6 +1,6 @@
 ---
 title: "第 10 章 · 综合实战：一个订单库的优化全过程"
-description: "背景：单实例 MySQL 8，shop 库，orders 1200 万行、orderitems 三千万行。近期三类问题集中爆发：商家后台列表页超时、财务对账报表跑不完、磁盘被数据与 binlog 撑满。四表结构与 SQL 基础教程及 第…"
+description: "背景：单实例 MySQL 8， 库， 1200 万行、 三千万行。"
 series: mysql
 sidebar:
   order: 10

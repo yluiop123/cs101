@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 响应式基础"
-description: "普通 JS 对象变了，页面不会自己变（要手动改 DOM）。响应式（reactivity）= 给数据装上\"变更广播\"："
+description: "普通 JS 对象变了，页面不会自己变（要手动改 DOM）。响应式（reactivity）= 给数据装上“变更广播”："
 series: vue
 sidebar:
   order: 3

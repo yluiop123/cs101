@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 初识 JavaScript"
-description: "JavaScript（简称 JS）是网页的行为层：HTML 提供结构、CSS 提供外观、JS 让页面\"动起来\"——响应点击、请求服务器、读写数据。"
+description: "JavaScript（简称 JS）是网页的行为层：HTML 提供结构、CSS 提供外观、JS 让页面“动起来”——响应点击、请求服务器、读写数据。"
 series: javascript
 sidebar:
   order: 1

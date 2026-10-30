@@ -1,6 +1,6 @@
 ---
 title: "第 9 章 · Shell 脚本编程"
-description: "脚本 = 把命令写进文件。第一行的 shebang 告诉系统\"用哪个解释器执行我\"："
+description: "脚本 = 把命令写进文件。第一行的 shebang 告诉系统“用哪个解释器执行我”："
 series: linux
 sidebar:
   order: 9

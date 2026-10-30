@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 函数基础"
-description: "函数（function）把一段可复用的逻辑打包成\"积木\"："
+description: "函数（function）把一段可复用的逻辑打包成“积木”："
 series: javascript
 sidebar:
   order: 4

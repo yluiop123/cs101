@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 结构型模式（下）"
-description: "不用它：报表要支持\"普通/汇总/明细\"三种抽象 × \"MySQL/Postgres\"两种数据后端，用继承表达就是 3 × 2 = 6 个类；再加一种后端，六个抽象全要多写一层。"
+description: "不用它：报表要支持“普通/汇总/明细”三种抽象 × “MySQL/Postgres”两种数据后端，用继承表达就是 3 × 2 = 6 个类；再加一种后端，六个抽象全要多写一层。"
 series: design-patterns
 sidebar:
   order: 4

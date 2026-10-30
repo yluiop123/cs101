@@ -1,6 +1,6 @@
 ---
 title: "第 9 章 · 语义化与页面结构"
-description: "语义化 = 用\"含义正确\"的标签描述内容："
+description: "语义化 = 用“含义正确”的标签描述内容："
 series: html
 sidebar:
   order: 9

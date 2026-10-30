@@ -1,6 +1,6 @@
 ---
 title: "第 5 章 · 结构体与方法"
-description: "Go 没有 class——结构体（struct） + 方法就是它的\"面向对象\"："
+description: "Go 没有 class——结构体（struct） + 方法就是它的“面向对象”："
 series: go
 sidebar:
   order: 5

@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 侦听与生命周期"
-description: "computed（计算属性）：由现有数据\"派生\"出新数据，带缓存："
+description: "computed（计算属性）：由现有数据“派生”出新数据，带缓存："
 series: vue
 sidebar:
   order: 4

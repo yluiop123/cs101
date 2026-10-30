@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 接口与类型别名"
-description: "接口（interface）给\"对象长什么样\"起个名字："
+description: "接口（interface）给“对象长什么样”起个名字："
 series: typescript
 sidebar:
   order: 3

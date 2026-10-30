@@ -1,6 +1,6 @@
 ---
 title: "第 9 章 · Express 入门"
-description: "第 5 章用原生 http 模块写路由，路径一多就陷入 if-else 泥潭。Express（expressjs.com）把\"路由、中间件、参数解析\"标准化："
+description: "第 5 章用原生 http 模块写路由，路径一多就陷入 if-else 泥潭。Express（expressjs.com）把“路由、中间件、参数解析”标准化："
 series: nodejs
 sidebar:
   order: 9

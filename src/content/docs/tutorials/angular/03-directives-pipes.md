@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 指令与管道"
-description: "v17+ 推荐的内置控制流（built-in control flow）——模板里的\"迷你 JS\"："
+description: "v17+ 推荐的内置控制流（built-in control flow）——模板里的“迷你 JS”："
 series: angular
 sidebar:
   order: 3

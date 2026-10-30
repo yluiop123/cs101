@@ -1,6 +1,6 @@
 ---
 title: "第 6 章 · 接口与内部类"
-description: "接口（interface）只声明\"能做什么\"，不关心\"谁做、怎么做\"："
+description: "接口（interface）只声明“能做什么”，不关心“谁做、怎么做”："
 series: java
 sidebar:
   order: 6

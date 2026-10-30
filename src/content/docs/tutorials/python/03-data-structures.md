@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 核心数据结构：list / tuple / dict / set"
-description: "Python 的\"万能数组\"（对应 JS 数组 / Java 的 ArrayList，但元素类型可以混搭）："
+description: "Python 的“万能数组”（对应 JS 数组 / Java 的 ArrayList，但元素类型可以混搭）："
 series: python
 sidebar:
   order: 3

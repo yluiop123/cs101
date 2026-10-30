@@ -1,6 +1,6 @@
 ---
 title: "第 7 章 · goroutine 与 channel"
-description: "goroutine = Go 的用户级\"线程\"，由运行时调度（非操作系统线程）："
+description: "goroutine = Go 的用户级“线程”，由运行时调度（非操作系统线程）："
 series: go
 sidebar:
   order: 7

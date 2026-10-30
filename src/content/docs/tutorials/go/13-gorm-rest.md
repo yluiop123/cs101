@@ -1,6 +1,6 @@
 ---
 title: "第 13 章 · GORM 数据库与 REST 实战"
-description: "docker run -d --name mysql -p 3306:3306 \\"
+description: "docker run -d --name mysql -p 3306:3306 \"
 series: go
 sidebar:
   order: 13

@@ -1,6 +1,6 @@
 ---
 title: "第 3 章 · 状态与事件"
-description: "函数组件每次渲染都会\"重新执行\"——普通变量一刷新就丢。useState 让值跨渲染存活："
+description: "函数组件每次渲染都会“重新执行”——普通变量一刷新就丢。useState 让值跨渲染存活："
 series: react
 sidebar:
   order: 3

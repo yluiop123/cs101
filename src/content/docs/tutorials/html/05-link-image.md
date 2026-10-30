@@ -1,6 +1,6 @@
 ---
 title: "第 5 章 · 链接与图片"
-description: "（anchor，锚）是 Web 的灵魂——正是它把一个个网页连成了\"网\"："
+description: "（anchor，锚）是 Web 的灵魂——正是它把一个个网页连成了“网”："
 series: html
 sidebar:
   order: 5

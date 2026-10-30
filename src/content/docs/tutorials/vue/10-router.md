@@ -1,6 +1,6 @@
 ---
 title: "第 10 章 · 路由 Vue Router"
-description: "多页传统站点：每次跳转整页刷新。单页应用（SPA）用前端路由（router）在不刷新的前提下切换\"页面\"："
+description: "多页传统站点：每次跳转整页刷新。单页应用（SPA）用前端路由（router）在不刷新的前提下切换“页面”："
 series: vue
 sidebar:
   order: 10

@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 初识 VS Code"
-description: "Visual Studio Code 是微软在 2015 年发布的免费、开源、跨平台代码编辑器。注意它和\"Visual Studio\"是两个不同的产品——VS Code 是轻量编辑器，Visual Studio 是重型集成开发环境（ID…"
+description: "Visual Studio Code 是微软在 2015 年发布的免费、开源、跨平台代码编辑器。"
 series: vscode
 sidebar:
   order: 1

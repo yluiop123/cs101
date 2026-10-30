@@ -1,6 +1,6 @@
 ---
 title: "第 14 章 · 综合实战：CLI 工具"
-description: "todo add 追加任务，todo list 列出全部，todo done 标记完成；数据存 tasks.json，错误走 stderr、退出码非零。按职责分五个文件（模块与可见性见 第 12 章 · 模块系统与测…"
+description: "追加任务， 列出全部， 标记完成；数据存 ，错误走 stderr、退出码非零。"
 series: rust
 sidebar:
   order: 14

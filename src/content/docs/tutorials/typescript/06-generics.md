@@ -1,6 +1,6 @@
 ---
 title: "第 6 章 · 泛型"
-description: "不用泛型，\"相同逻辑、不同类型\"只能二选一："
+description: "不用泛型，“相同逻辑、不同类型”只能二选一："
 series: typescript
 sidebar:
   order: 6

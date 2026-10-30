@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 为什么用 Redis 与安装"
-description: "Redis 的全称是 REmote DIctionary Server，名字已经把本质说完了：远端（Remote）+ 字典（Dictionary）。进程内维护一张巨大的哈希表，key 是字符串，value 支持五种主体结构（第 2 章 …"
+description: "Redis 的全称是 REmote DIctionary Server，名字已经把本质说完了：远端（Remote）+ 字典（Dictionary）。"
 series: redis
 sidebar:
   order: 1

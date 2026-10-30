@@ -1,6 +1,6 @@
 ---
 title: "第 2 章 · JSX 与组件"
-description: "JSX（JavaScript XML）= JS 里写\"HTML\"。它不是模板字符串，而是语法糖——构建时被转译成函数调用："
+description: "JSX（JavaScript XML）= JS 里写“HTML”。它不是模板字符串，而是语法糖——构建时被转译成函数调用："
 series: react
 sidebar:
   order: 2

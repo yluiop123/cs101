@@ -30,6 +30,32 @@ function slugify(text, slugger) {
   return slugger.slug(text);
 }
 
+/**
+ * 从 markdown 标题源码推导 Astro 渲染后的标题文本：
+ * - 行内代码保留原文（Astro 不对代码内做排版转换）
+ * - 其余文本经过与 Astro typographer 相同的转换（-- → –、--- → —、... → …）
+ * 然后再交给 github-slugger，保证与页面上的 id 一致。
+ */
+function headingText(raw) {
+  const codes = [];
+  let text = raw.replace(/`([^`]*)`/g, (_, code) => {
+    codes.push(code);
+    return `\u0000${codes.length - 1}\u0000`;
+  });
+  text = text
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\*\*|\*|~~/g, '')
+    .replace(/---/g, '—')
+    .replace(/--/g, '–')
+    .replace(/\.\.\./g, '…');
+  return text
+    .replace(/\u0000(\d+)\u0000/g, (_, index) => codes[Number(index)])
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function clean(text) {
   return text
     .replace(/<[^>]+>/g, ' ')
@@ -64,6 +90,7 @@ for (const file of files) {
 
   const sections = [];
   let heading = '';
+  let rawHeading = '';
   let buffer = [];
   let inCode = false;
   // 与 Astro/rehype-slug 一致：每个页面一个 slugger，重复标题会自动加 -1
@@ -81,15 +108,17 @@ for (const file of files) {
     const match = rawLine.match(/^(#{2,3})\s+(.+)$/);
     if (match) {
       if (heading || buffer.join(' ').trim()) {
-        sections.push({ heading, text: clean(buffer.join(' ')) });
+        sections.push({ heading, rawHeading, text: clean(buffer.join(' ')) });
       }
-      heading = clean(match[2]);
+      rawHeading = match[2].trim();
+      heading = clean(rawHeading);
       buffer = [];
       continue;
     }
     buffer.push(rawLine);
   }
-  if (heading || buffer.join(' ').trim()) sections.push({ heading, text: clean(buffer.join(' ')) });
+  if (heading || buffer.join(' ').trim())
+    sections.push({ heading, rawHeading, text: clean(buffer.join(' ')) });
 
   for (const section of sections) {
     if (!section.text && !section.heading) continue;
@@ -98,7 +127,7 @@ for (const file of files) {
       t: pageTitle,
       s: series ?? '',
       h: section.heading,
-      a: section.heading ? slugify(section.heading, slugger) : '',
+      a: section.rawHeading ? slugify(headingText(section.rawHeading), slugger) : '',
       x: section.text.slice(0, 600),
     });
   }

@@ -1,6 +1,6 @@
 ---
 title: "第 5 章 · 团队协作流程"
-description: "Pull Request（简称 PR；GitLab 中叫 Merge Request，MR）是\"请求把我的分支合并进目标分支\"的正式流程，它让代码合并从\"个人行为\"升级为\"团队审核行为\"："
+description: "Pull Request（简称 PR；GitLab 中叫 Merge Request，MR）是“请求把我的分支合并进目标分支”的正式流程，它让代码合并从“个人行为”升级为“团队审核行为”："
 series: git
 sidebar:
   order: 5

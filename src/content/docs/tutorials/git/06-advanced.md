@@ -1,6 +1,6 @@
 ---
 title: "第 6 章 · 进阶技巧"
-description: "变基（rebase）把当前分支的提交\"搬到\"另一条分支的最新提交之后，让历史呈现为一条直线："
+description: "变基（rebase）把当前分支的提交“搬到”另一条分支的最新提交之后，让历史呈现为一条直线："
 series: git
 sidebar:
   order: 6

@@ -1,6 +1,6 @@
 ---
 title: "第 4 章 · 依赖注入"
-description: "不用 DI，组件自己\"new\"依赖："
+description: "不用 DI，组件自己“new”依赖："
 series: angular
 sidebar:
   order: 4

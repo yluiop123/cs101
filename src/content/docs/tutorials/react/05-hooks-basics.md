@@ -1,6 +1,6 @@
 ---
 title: "第 5 章 · Hooks 入门：useState 与 useEffect"
-description: "Hook = \"钩住\" React 能力的函数，统一 use 前缀："
+description: "Hook = “钩住” React 能力的函数，统一 use 前缀："
 series: react
 sidebar:
   order: 5

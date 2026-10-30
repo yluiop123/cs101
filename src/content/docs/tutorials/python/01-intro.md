@@ -1,6 +1,6 @@
 ---
 title: "第 1 章 · 初识 Python"
-description: "Python 是一门解释执行的高级语言（不用编译），以\"代码即伪代码\"的极简语法著称："
+description: "Python 是一门解释执行的高级语言（不用编译），以“代码即伪代码”的极简语法著称："
 series: python
 sidebar:
   order: 1

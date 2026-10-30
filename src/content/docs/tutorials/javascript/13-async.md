@@ -1,6 +1,6 @@
 ---
 title: "第 13 章 · 异步编程"
-description: "JS 是单线程语言——同一时刻只做一件事。如果\"请求服务器\"这样的慢操作同步执行，页面会卡死等待。异步（asynchronous）让慢操作\"先挂起、完成后再回来处理\"："
+description: "JS 是单线程语言——同一时刻只做一件事。如果“请求服务器”这样的慢操作同步执行，页面会卡死等待。异步（asynchronous）让慢操作“先挂起、完成后再回来处理”："
 series: javascript
 sidebar:
   order: 13

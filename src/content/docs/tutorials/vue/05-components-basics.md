@@ -1,6 +1,6 @@
 ---
 title: "第 5 章 · 组件基础"
-description: "把\"头像 + 名字 + 描述\"的组合抽成组件，任何地方一行复用："
+description: "把“头像 + 名字 + 描述”的组合抽成组件，任何地方一行复用："
 series: vue
 sidebar:
   order: 5

@@ -1,6 +1,6 @@
 ---
 title: "第 8 章 · 综合实战：整套应用容器化"
-description: "示例项目 todo-app：Vue 单页应用 + Node API + MySQL + Redis 队列 + 后台 worker。源码分三坨（web/、server/、worker/，各自带 lockfile），Dockerfile 与…"
+description: "示例项目 ：Vue 单页应用 + Node API + MySQL + Redis 队列 + 后台 worker。"
 series: docker
 sidebar:
   order: 8
