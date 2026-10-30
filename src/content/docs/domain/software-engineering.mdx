@@ -3,7 +3,7 @@ title: "软件工程与质量工程"
 description: "设计模式与架构、重构、测试体系（单元/集成/E2E/API/性能）、代码质量、代码评审、项目管理与 AI 辅助编程。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 工程基础', items: ['code-quality', 'unit-testing'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战 · 协作与交付', items: ['ci-cd', 'testing', 'agile', 'tech-writing', 'ai-coding'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

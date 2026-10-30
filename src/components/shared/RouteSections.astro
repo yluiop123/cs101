@@ -1,18 +1,235 @@
 ---
-import CardSection from '@/components/shared/CardSection.astro';
-import { tierSections, type TierSectionOptions } from '@/data/model/cards';
-import type { RouteTier } from '@/data/model/route-model';
+import Card from '@/components/shared/Card.astro';
+import ReferenceDrawer from '@/components/shared/ReferenceDrawer.astro';
+import {
+  allTierItems,
+  itemHref,
+  itemTag,
+  normalizeItem,
+  tagLabels,
+  tagNotes,
+  type RouteItem,
+  type RouteKind,
+  type RouteTag,
+  type RouteTier,
+} from '@/data/model/route-model';
+import { getSeries } from '@/lib/content';
+import { tutorialEntryHref } from '@/lib/entry-links';
+import { seriesMeta } from '@/data/tutorials';
 
-// 统一渲染入口：RouteTier[] → 分节卡片。
-// 首页 / 应用领域 / 业务系统 / 全部技术路线 / 技术路线页 / 领域详情页都用它，只有数据与几个开关不同。
-interface Props extends TierSectionOptions {
+// 全站唯一的路线渲染入口：
+// 技术路线页 / 领域路线页 / 计算机科学课程页 / 首页 / 应用领域 / 业务系统 / 全部技术路线
+// 都走这一个组件，页面之间的差别只在传入的 RouteTier[]（数据 / JSON 配置）与少量显示选项。
+interface Props {
   tiers: RouteTier[];
+  /** 卡片标题覆盖（技术路线总览页从 MDX title 取） */
+  titleOf?: (item: RouteItem) => string;
+  /** 卡片类型标记：explicit（默认，只标写了 kind 的）/ auto（没写时按 href 补）/ none（一律不标） */
+  markKind?: 'explicit' | 'auto' | 'none';
+  /** 卡片密度：compact 用于路线页（卡片多、带状态徽标）；路线页 / 课程页默认自动 compact */
+  density?: 'default' | 'compact';
+  /** 一行几张卡（宽屏）；默认 3，标题较长的总览页用 2 */
+  columns?: 2 | 3;
+  /** 是否显示图例；默认按数据自动（用到了学习状态标签才出现） */
+  legend?: boolean;
 }
 
-const { tiers, ...options } = Astro.props as Props;
-const sections = tierSections(tiers, options);
+const {
+  tiers,
+  titleOf,
+  markKind = 'explicit',
+  density,
+  columns,
+  legend = true,
+} = Astro.props as Props;
+
+type CardView = {
+  item: RouteItem;
+  title: string;
+  href?: string;
+  kind?: RouteKind;
+  tag?: RouteTag;
+};
+
+type Badge = { label: string; tone: 'tag' | 'choice' };
+
+const items = allTierItems(tiers);
+const isTutorial = (item: RouteItem) => (item.kind ?? 'tutorial') === 'tutorial';
+const hasExternal = items.some((item) => item.kind === 'external');
+// 教程条目的入口要补成「第一章」（业务系统条目也是 tutorial kind + /business-systems/ 入口）
+const hasTutorialEntry = items.some(isTutorial);
+
+// 路线页只写 id：教程标题、是否上线、直达第一章都要从内容集合补全；
+// 目录页的条目自带 title / tag，不需要这套补全。
+const needsSeries = items.some((item) => isTutorial(item) && !item.title);
+
+const series = needsSeries ? await getSeries() : [];
+// 业务系统教程的系列 id 带 business- 前缀，而路线条目里写的是业务系统 id，两边对齐一下
+const routeIdOf = (seriesId: string) =>
+  seriesId.startsWith('business-') ? seriesId.slice('business-'.length) : seriesId;
+const online = new Set(series.map((item) => routeIdOf(item.slug)));
+const seriesTitles = new Map(series.map((item) => [routeIdOf(item.slug), item.title]));
+const firstChapter = hasTutorialEntry ? await tutorialEntryHref() : undefined;
+
+const titleFor =
+  titleOf ??
+  ((item: RouteItem) =>
+    item.title ?? seriesMeta[item.id] ?? seriesTitles.get(item.id) ?? item.id);
+const inferKind = (href?: string): RouteKind =>
+  href?.startsWith('/tutorials/') || /^\/business-systems\/[^/]+\//.test(href ?? '')
+    ? 'tutorial'
+    : 'route';
+
+// 解析一张卡片：标题 / 入口 / 类型标记 / 状态，把策略都收在这一处
+const toCard = (item: string | RouteItem, inheritedTag?: RouteTag): CardView => {
+  const routeItem = normalizeItem(item);
+  const tag = itemTag(item, inheritedTag);
+  const external = routeItem.kind === 'external';
+  const href =
+    external || tag === 'planned'
+      ? undefined
+      : (firstChapter?.(routeItem) ?? routeItem.href ?? itemHref(routeItem));
+  let resolvedHref = href;
+  if (resolvedHref && needsSeries && isTutorial(routeItem) && !online.has(routeItem.id)) {
+    resolvedHref = undefined;
+  }
+  const kind =
+    markKind === 'none'
+      ? undefined
+      : markKind === 'auto'
+        ? (routeItem.kind ?? inferKind(resolvedHref))
+        : routeItem.kind;
+  return { item: routeItem, title: titleFor(routeItem), href: resolvedHref, kind, tag };
+};
+
+const compact = (density ?? (needsSeries || hasExternal ? 'compact' : 'default')) === 'compact';
+
+const sections = tiers.map((tier, index) => {
+  const groups = tier.groups?.map((group, groupIndex) => ({
+    id: `${tier.id ?? `tier-${index}`}-${groupIndex}`,
+    title: group.name,
+    tag: group.tag,
+    cards: group.items.map((item) => toCard(item, group.tag ?? tier.tag)),
+  }));
+  const choice = Boolean(groups?.length);
+  const title = tier.name ?? (tier.tag ? tagLabels[tier.tag] : '');
+  const badges: Badge[] = [];
+  if (tier.tag && tier.name) badges.push({ label: tagLabels[tier.tag], tone: 'tag' });
+  if (groups && choice) badges.push({ label: `${groups.length} 选 1`, tone: 'choice' });
+  return {
+    id: tier.id ?? `tier-${index}`,
+    title,
+    badges,
+    choice,
+    groups,
+    cards: tier.items.map((item) => toCard(item, tier.tag)),
+  };
+});
+
+// 图例只展示这条路线实际用到的学习状态（必学 / 推荐 / 主流 / 可选 / 小众）；
+// 规划中与外部引用不解释——卡片上的徽标/类型标记已经说明，图例里不再重复一行。
+const legendOrder: Exclude<RouteTag, 'planned'>[] = [
+  'required',
+  'recommended',
+  'popular',
+  'optional',
+  'niche',
+];
+const usedTags = new Set<RouteTag>();
+for (const tier of tiers) {
+  if (tier.tag) usedTags.add(tier.tag);
+  for (const group of tier.groups ?? []) if (group.tag) usedTags.add(group.tag);
+  for (const item of allTierItems([tier])) if (item.tag) usedTags.add(item.tag);
+}
+const legendTags = legendOrder.filter((tag) => usedTags.has(tag));
+const showLegend = legend && legendTags.length > 0;
 ---
 
+{tiers.length === 0 && <p class="cs-empty">这条路线正在整理中。</p>}
+
+{
+  showLegend && (
+    <p class="cs-legend">
+      {legendTags.map((tag) => (
+        <>
+          <span class:list={['cs-badge', `cs-badge--${tag}`]}>{tagLabels[tag]}</span>
+          <span class="cs-legend-text">{tagNotes[tag]}</span>
+        </>
+      ))}
+    </p>
+  )
+}
+
 <div class="cs-card-page">
-  {sections.map((section) => <CardSection {...section} />)}
+  {
+    sections.map((section) => (
+      <section
+        id={section.id}
+        data-cs-title={section.title}
+        class:list={[
+          'cs-card-section',
+          section.choice && 'cs-card-section--choice',
+          compact && 'cs-card-section--compact',
+          columns === 2 && 'cs-card-section--cols-2',
+        ]}
+      >
+        {(section.title || section.badges.length > 0) && (
+          <div class="cs-section-head">
+            <h2 class="cs-section-title">
+              {section.title}
+              {section.badges.map((badge) => (
+                <span
+                  class:list={[
+                    'cs-section-tag',
+                    badge.tone === 'choice' ? 'cs-section-tag--choice' : 'cs-section-tag--tag',
+                  ]}
+                >
+                  {badge.label}
+                </span>
+              ))}
+            </h2>
+          </div>
+        )}
+
+        {section.cards.length > 0 && (
+          <ul class="cs-tut-grid">
+            {section.cards.map((card) => (
+              <li>
+                <Card {...card} />
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {section.choice && (
+          <div class="cs-choice-grid">
+            {section.groups?.map((group) => (
+              <div
+                id={group.id}
+                class:list={['cs-choice-option', group.tag && 'cs-choice-option--tag']}
+              >
+                <h3 class="cs-choice-title">
+                  {group.title}
+                  {group.tag && (
+                    <span class:list={['cs-badge', `cs-badge--${group.tag}`]}>
+                      {tagLabels[group.tag]}
+                    </span>
+                  )}
+                </h3>
+                <ul class="cs-tut-grid cs-tut-grid--stack">
+                  {group.cards.map((card) => (
+                    <li>
+                      <Card {...card} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    ))
+  }
 </div>
+
+{hasExternal && <ReferenceDrawer items={items} />}

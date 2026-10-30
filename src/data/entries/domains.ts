@@ -1,17 +1,14 @@
 // 应用领域目录：参照《编程教程网站技术分类体系》的「领域方向」8 大分类。
 //
 // 统一模型：和首页、技术路线一样是一个 RouteTier[]——一个分类 = 一个分节，一张卡片 = 一条领域路线
-// （kind: 'domain'，slug 为 domain-<名字>；对应页面是 content/docs/domain/<名字>.mdx）。
+// （卡片类型「路线」，slug 为 domain-<名字>，入口 /domain/<名字>/）。
 // 是否已经有路线页属于"内容事实"，由 DomainIndex 在渲染时扫描 docs 集合决定（没有就显示虚线占位卡），
 // 这样新增一个领域页时只加页面文件，不需要回来改这里。
 
 import type { RouteTier } from '@/data/model/route-model';
+import { domainRoute } from '@/data/routes/links';
 
-const domain = (slug: string, title: string) => ({
-  slug: `domain-${slug}`,
-  kind: 'domain' as const,
-  title,
-});
+const domain = (slug: string, title: string) => domainRoute(slug, title);
 
 export const domainCatalog: RouteTier[] = [
   {

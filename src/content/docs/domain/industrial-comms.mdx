@@ -3,7 +3,7 @@ title: "工业通信协议"
 description: "串口、TCP/UDP 打底，掌握 Modbus、OPC UA、MQTT 等工业协议，做设备联网、数据采集与上位机可视化。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 通信基础', items: ['serial-port', 'tcp-udp', 'network'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战与生态 · 上位机与可视化', items: ['realtime-chart', 'report-export', 'scada'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

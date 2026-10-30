@@ -3,7 +3,7 @@ title: "音视频与流媒体"
 description: "音视频基础、编解码、流媒体协议、直播与实时音视频：FFmpeg、WebRTC、HLS/DASH、转码与分发。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 音视频基础', items: ['media-basics', 'ffmpeg', 'h264-codec'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战 · 实时音视频应用', items: ['live-streaming', 'video-conference', 'realtime-media'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

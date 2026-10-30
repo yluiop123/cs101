@@ -3,7 +3,7 @@ title: "游戏开发与实时图形"
 description: "「游戏开发与实时图形」方向的路线：从入门到实战的分阶段教程与选型建议。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 语言与数学', items: ['c', 'cpp', 'dsa'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战与生态 · 上线与运维', items: ['docker', 'nginx', 'embedded'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

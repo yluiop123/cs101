@@ -3,7 +3,7 @@ title: "上位机与 PLC"
 description: "工业上位机与 PLC 开发：串口 / Modbus / OPC UA / MQTT 通信、PLC 梯形图与 ST 编程、SCADA 组态、运动控制、数据采集与报表。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 语言与界面基础', items: ['csharp', 'wpf', 'qt', 'python'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战与生态 · 采集、报表与部署', items: ['industrial-comms', 'realtime-chart', 'report-export', 'packaging', 'auto-update'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

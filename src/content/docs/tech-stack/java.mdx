@@ -3,7 +3,7 @@ title: "Java 技术路线"
 description: "「Java 技术路线」的分阶段学习路线：按顺序学完即可覆盖这个方向的核心技术与工程实践。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 语言与工具', items: ['java', 'maven', 'gradle'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战与生态 · 框架与架构', items: ['spring-boot', 'spring-data', 'mybatis', 'spring-cloud', 'microservices'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

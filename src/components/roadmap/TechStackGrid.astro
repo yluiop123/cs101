@@ -15,7 +15,7 @@ const titles = new Map(
 
 <RouteSections
   tiers={techCatalog}
-  titleOf={(item) => titles.get(item.slug) ?? item.slug}
+  titleOf={(item) => titles.get(item.id) ?? item.id}
   markKind="none"
   density="compact"
   columns={2}

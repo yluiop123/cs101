@@ -3,7 +3,7 @@ title: "科学计算与工程软件"
 description: "数值计算、建模仿真、CAD/CAE/CAM 开发与二次开发、几何建模、网格处理、BIM 与工程数据。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '基础 · 数学与编程', items: ['python', 'numpy', 'scipy', 'matlab'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战 · 工程软件与集成', items: ['cad-dev', 'cae', 'bim', 'plugin-dev'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

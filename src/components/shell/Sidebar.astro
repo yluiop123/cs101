@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
-import { businessCatalog, domainCatalog, homeCatalog } from '@/data/entries';
+import { businessSystems, domainCatalog, homeCatalog } from '@/data/entries';
 import { techRouteOrder } from '@/data/routes';
 
 const { entry } = Astro.locals.starlightRoute;
@@ -21,14 +21,25 @@ const currentId = entry.id;
 const isHome = !entry.id || entry.id === 'index';
 const isDomainIndex = path === '/domain/' || path === '/domain';
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
-const isComputerScience = path.startsWith('/computer-science');
+const isComputerScienceRoute = /^\/computer-science\/(zh|en)\//.test(path);
 // 业务系统总览页（系列页由 currentSeries 分支处理）
 const isBusinessSystems = path === '/business-systems/' || path === '/business-systems';
-const isTechStack = path.startsWith('/tech-stack');
+const isTechStackIndex = path === '/tech-stack/' || path === '/tech-stack';
+const isTechRoute = path.startsWith('/tech-stack/') && !isTechStackIndex;
 
-// 学习路线页的左侧栏：按路线顺序列出全部技术路线
+// 四条目录页 = 直接列出分节/分类；单条路线页 = 列出本页分节锚点（数据在页面 MDX 里，侧栏读不到，
+// 由页面底部的脚本从 .cs-card-section 采集）。
+const routePage = isTechRoute
+  ? { kicker: '学习路线', back: '/tech-stack/', backLabel: '全部技术路线' }
+  : currentDomain
+    ? { kicker: '应用领域', back: '/domain/', backLabel: '全部应用领域' }
+    : isComputerScienceRoute
+      ? { kicker: path.includes('/en') ? '国际教程' : '国内教程' }
+      : undefined;
+
+// 技术路线总览页的左侧栏：按路线顺序列出全部技术路线
 const routeOrder = techRouteOrder;
-const techRoutes = isTechStack
+const techRoutes = isTechStackIndex
   ? (await getCollection('docs'))
       .filter((item) => item.id.startsWith('tech-stack/') && item.id !== 'tech-stack/index')
       .map((item) => ({ slug: item.id.slice('tech-stack/'.length), name: item.data.title }))
@@ -40,21 +51,14 @@ const techRoutes = isTechStack
       })
   : [];
 
-// 领域路线页的左侧栏：列出所有已有路线页的领域（顺序沿用目录里的顺序）
-const domainDocTitles = new Map(
-  (await getCollection('docs'))
-    .filter((item) => item.id.startsWith('domain/') && item.id !== 'domain/index')
-    .map((item) => [item.id.slice('domain/'.length), item.data.title]),
-);
-const domainRouteLinks = domainCatalog
-  .flatMap((tier) => tier.items)
-  .map((item) => (typeof item === 'string' ? item : item.slug))
-  .map((slug) => slug.replace(/^domain-/, ''))
-  .filter((slug) => domainDocTitles.has(slug))
-  .map((slug) => ({ slug, name: domainDocTitles.get(slug)! }));
-
 const catalog =
-  currentSeries || isHome || isDomainIndex || currentDomain || isComputerScience || isTechStack
+  currentSeries ||
+  isHome ||
+  isDomainIndex ||
+  currentDomain ||
+  isComputerScienceRoute ||
+  isTechStackIndex ||
+  isTechRoute
     ? []
     : await getSeries();
 ---
@@ -74,7 +78,7 @@ const catalog =
       </ul>
     </div>
   ) : isDomainIndex ? (
-    // 领域总览页：左侧栏与正文一致，列出 4 个分类
+    // 领域总览页：左侧栏与正文一致，列出 8 个分类
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">应用领域</p>
       <ul class="cs-sidebar-sections">
@@ -87,62 +91,23 @@ const catalog =
         ))}
       </ul>
     </div>
-  ) : currentDomain ? (
-    // 具体领域页：左侧栏列出所有领域路线，当前页高亮
+  ) : routePage ? (
+    // 单条路线页（技术路线 / 领域路线 / 计算机科学）：列出本页分节，锚点由页面脚本采集
     <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">应用领域</p>
-      <ul class="cs-sidebar-sections">
-        {domainRouteLinks.map((route) => (
-          <li>
-            <a
-              href={withBase(`/domain/${route.slug}/`)}
-              aria-current={path === `/domain/${route.slug}/` ? 'page' : undefined}
-            >
-              {route.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <a class="cs-sidebar-back" href={withBase('/domain/')}>
-        全部应用领域 →
-      </a>
-    </div>
-  ) : isComputerScience ? (
-    <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">计算机科学</p>
-      <ul class="cs-sidebar-sections">
-        <li>
-          <a
-            href={withBase('/computer-science/')}
-            aria-current={path === '/computer-science/' ? 'page' : undefined}
-          >
-            学习路线总览
-          </a>
-        </li>
-        <li>
-          <a
-            href={withBase('/computer-science/zh/')}
-            aria-current={path.startsWith('/computer-science/zh') ? 'page' : undefined}
-          >
-            国内版教程
-          </a>
-        </li>
-        <li>
-          <a
-            href={withBase('/computer-science/ossu/')}
-            aria-current={path.startsWith('/computer-science/ossu') ? 'page' : undefined}
-          >
-            OSSU 国际教程
-          </a>
-        </li>
-      </ul>
+      <p class="cs-sidebar-kicker">{routePage.kicker}</p>
+      <ul class="cs-sidebar-sections" data-cs-sections-auto></ul>
+      {routePage.back && (
+        <a class="cs-sidebar-back" href={withBase(routePage.back)}>
+          {routePage.backLabel} →
+        </a>
+      )}
     </div>
   ) : isBusinessSystems ? (
     // 业务系统总览页：左侧栏按 14 个分类锚点联动
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">业务系统</p>
       <ul class="cs-sidebar-sections">
-        {businessCatalog.map((category) => (
+        {businessSystems.map((category) => (
           <li>
             <a href={`#${category.id}`} data-cs-section-link={category.id}>
               {category.name}
@@ -151,18 +116,13 @@ const catalog =
         ))}
       </ul>
     </div>
-  ) : isTechStack ? (
+  ) : isTechStackIndex ? (
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">学习路线</p>
       <ul class="cs-sidebar-sections">
         {techRoutes.map((route) => (
           <li>
-            <a
-              href={withBase(`/tech-stack/${route.slug}/`)}
-              aria-current={path === `/tech-stack/${route.slug}/` ? 'page' : undefined}
-            >
-              {route.name}
-            </a>
+            <a href={withBase(`/tech-stack/${route.slug}/`)}>{route.name}</a>
           </li>
         ))}
       </ul>
@@ -208,7 +168,24 @@ const catalog =
 }
 
 <script>
-  // 首页左侧目录：点击定位到分组，滚动时高亮当前分组
+  // 单条路线页：分节数据写在页面 MDX 里，左侧栏拿不到，从渲染结果里采集锚点
+  for (const list of document.querySelectorAll<HTMLElement>('[data-cs-sections-auto]')) {
+    if (list.children.length > 0) continue;
+    for (const section of document.querySelectorAll<HTMLElement>('.cs-card-section')) {
+      const id = section.id;
+      const title = section.dataset.csTitle;
+      if (!id || !title) continue;
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.dataset.csSectionLink = id;
+      link.textContent = title;
+      li.append(link);
+      list.append(li);
+    }
+  }
+
+  // 目录页 / 路线页左侧目录：点击定位到分组，滚动时高亮当前分组
   const links = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('[data-cs-section-link]'),
   );
@@ -250,6 +227,7 @@ const catalog =
         }
         // 滚到底时高亮最后一个分组（末尾分组无法顶到视口顶部）
         const atBottom =
+          document.documentElement.scrollHeight > window.innerHeight + 2 &&
           window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
         if (atBottom) current = items[items.length - 1];
         for (const item of items) item.link.classList.toggle('is-active', item === current);

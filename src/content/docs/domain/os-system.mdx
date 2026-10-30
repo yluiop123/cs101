@@ -3,7 +3,7 @@ title: "操作系统与系统软件"
 description: "操作系统原理、进程线程与内存管理、Linux 内核与驱动、编译器与运行时、性能分析与调试。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 系统原理', items: ['os', 'linux', 'shell'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战 · 性能与调试', items: ['perf-analysis', 'debugging', 'tracing', 'ebpf'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

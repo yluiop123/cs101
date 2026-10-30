@@ -1,25 +1,47 @@
 ---
 import { withBase } from '@/lib/utils';
-import { kindLabels, kindOfHref, type CardItem, type CardKind } from '@/data/model/cards';
+import {
+  kindLabels,
+  tagLabels,
+  type RouteItem,
+  type RouteKind,
+  type RouteTag,
+} from '@/data/model/route-model';
 
+// 一张卡片：只负责渲染，标题 / 入口 / 类型 / 标签都由 RouteSections 解析好后传进来。
 interface Props {
-  item: CardItem;
-  /** 省略 kind 时是否按 href 推断类型标记；路线页把它设为 false */
-  showKind?: boolean;
+  item: RouteItem;
+  /** 已解析好的标题（title / seriesMeta / 目录配置） */
+  title: string;
+  /** 已解析好的站内入口；外部引用与规划中没有 */
+  href?: string;
+  /** 卡片类型标记；由 RouteSections 按 markKind 策略决定（不传 = 不标） */
+  kind?: RouteKind;
+  /** 状态标签：必学 / 推荐 / 主流 / 可选 / 小众 / 规划中 */
+  tag?: RouteTag;
 }
 
-const { item, showKind = true } = Astro.props as Props;
+const { item, title, href, kind, tag } = Astro.props as Props;
 
-// 卡片类型标记：显式写了 kind 就用它，否则按 href 推断（教程 / 路线）
-const kind: CardKind | undefined = item.kind ?? (showKind ? kindOfHref(item.href) : undefined);
-const hasTail = Boolean(kind || item.badges?.length || item.meta);
+// 三种卡片：有 href = 站内链接；外部引用 = 按钮（点开右侧抽屉）；都没有 = 规划中虚线卡
+const refId = item.kind === 'external' ? item.id : undefined;
+const Tag = refId ? 'button' : 'a';
+const interactive = Boolean(href || refId);
+const hasTail = Boolean(kind || tag);
 ---
 
 {
-  item.href ? (
-    <a class="cs-tut-card" href={withBase(item.href)} title={item.title}>
+  interactive ? (
+    <Tag
+      class:list={['cs-tut-card', refId && 'cs-tut-card--ref']}
+      href={href ? withBase(href) : undefined}
+      type={refId ? 'button' : undefined}
+      data-cs-ref={refId}
+      aria-haspopup={refId ? 'dialog' : undefined}
+      title={title}
+    >
       <span class="cs-tut-name">
-        <span class="cs-tut-title">{item.title}</span>
+        <span class="cs-tut-title">{title}</span>
       </span>
       {hasTail && (
         <span class="cs-tut-tail">
@@ -39,6 +61,12 @@ const hasTail = Boolean(kind || item.badges?.length || item.meta);
                     <path d="M12 7v14" />
                     <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
                   </>
+                ) : kind === 'external' ? (
+                  <>
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <path d="M15 3h6v6" />
+                    <path d="M10 14 21 3" />
+                  </>
                 ) : (
                   <>
                     <circle cx="6" cy="19" r="3" />
@@ -50,28 +78,20 @@ const hasTail = Boolean(kind || item.badges?.length || item.meta);
               {kindLabels[kind]}
             </span>
           )}
-          {item.badges?.map((badge) => (
-            <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
-              {badge.label}
-            </span>
-          ))}
-          {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
+          {tag && (
+            <span class:list={['cs-badge', `cs-badge--${tag}`]}>{tagLabels[tag]}</span>
+          )}
         </span>
       )}
-    </a>
+    </Tag>
   ) : (
-    <span class="cs-tut-card is-planned" title={item.title}>
+    <span class="cs-tut-card is-planned" title={title}>
       <span class="cs-tut-name">
-        <span class="cs-tut-title">{item.title}</span>
+        <span class="cs-tut-title">{title}</span>
       </span>
-      {hasTail && (
+      {tag && (
         <span class="cs-tut-tail">
-          {item.badges?.map((badge) => (
-            <span class:list={['cs-badge', badge.tone && `cs-badge--${badge.tone}`]}>
-              {badge.label}
-            </span>
-          ))}
-          {item.meta && <span class="cs-tut-meta">{item.meta}</span>}
+          <span class:list={['cs-badge', `cs-badge--${tag}`]}>{tagLabels[tag]}</span>
         </span>
       )}
     </span>

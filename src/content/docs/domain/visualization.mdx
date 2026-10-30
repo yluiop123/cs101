@@ -3,7 +3,7 @@ title: "可视化与数据大屏"
 description: "「可视化与数据大屏」方向的路线：从入门到实战的分阶段教程与选型建议。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 前端与数据', items: ['html', 'css', 'javascript'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战与生态 · 服务与部署', items: ['node-backend', 'docker', 'nginx'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

@@ -3,7 +3,7 @@ title: "数据库与存储系统"
 description: "关系型、NoSQL、时序、图、向量数据库与缓存、搜索引擎：建模、事务、索引、查询优化、高可用与运维。"
 ---
 
-import TechNodes from '@/components/roadmap/TechNodes.astro';
+import RouteSections from '@/components/shared/RouteSections.astro';
 
 export const tiers = [
     { name: '入门 · 关系型与 SQL', items: ['sql', 'mysql', 'postgresql'] },
@@ -12,4 +12,4 @@ export const tiers = [
     { name: '实战 · 多模存储与运维', items: ['redis', 'mongodb', 'elasticsearch', 'clickhouse', 'backup-recovery'] },
 ];
 
-<TechNodes tiers={tiers} />
+<RouteSections tiers={tiers} />

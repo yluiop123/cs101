@@ -8,6 +8,8 @@ const isChapter = Boolean((entry.data as Record<string, unknown>).series);
 const isHome = !entry.id || entry.id === 'index';
 // 应用领域首页与首页同版式，不显示章节翻页
 const isDomainIndex = entry.id === 'domain/index';
+// 计算机科学的两条课程路线不是教程章节，也不显示「上一章 / 下一章」翻页
+const isComputerScience = entry.id.startsWith('computer-science/');
 ---
 
 {
@@ -20,7 +22,7 @@ const isDomainIndex = entry.id === 'domain/index';
   )
 }
 
-{!isHome && !isDomainIndex && <Pagination />}
+{!isHome && !isDomainIndex && !isComputerScience && <Pagination />}
 
 <script>
   // 文档里的「运行实例」不再跳转站内演练场，而是把代码 POST 到 CodePen 新标签页打开。

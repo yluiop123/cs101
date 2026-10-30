@@ -8,7 +8,21 @@ import { withBase } from '@/lib/utils';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.slice(base.length) || '/';
 
-const navItems = [
+interface NavMenuItem {
+  label: string;
+  href: string;
+}
+
+interface NavItem {
+  label: string;
+  /** 普通板块的入口；有 menu 的板块没有自己的页面（只展开下拉） */
+  href?: string;
+  /** 有子项 = 顶部导航渲染成下拉框（如「计算机科学 → 国内教程 / 国际教程」） */
+  menu?: NavMenuItem[];
+  matches: (value: string) => boolean;
+}
+
+const navItems: NavItem[] = [
   {
     label: '首页',
     href: '/',
@@ -27,19 +41,11 @@ const navItems = [
   },
   {
     label: '计算机科学',
-    href: '/computer-science/',
     matches: (value: string) => value.startsWith('/computer-science'),
-  },
-];
-
-// 在线演练不再自建：直接引导到成熟的在线编辑器（新标签页打开）
-const tools = [
-  { label: 'CodePen', href: 'https://codepen.io/pen/', note: 'HTML / CSS / JavaScript' },
-  { label: 'StackBlitz', href: 'https://stackblitz.com/', note: '前端工程 / Node.js 项目' },
-  {
-    label: 'TypeScript Playground',
-    href: 'https://www.typescriptlang.org/play',
-    note: 'TypeScript 类型检查',
+    menu: [
+      { label: '国内教程', href: '/computer-science/zh/' },
+      { label: '国际教程', href: '/computer-science/en/' },
+    ],
   },
 ];
 ---
@@ -52,27 +58,39 @@ const tools = [
     </div>
     <nav class="cs-topnav" aria-label="主导航">
       {
-        navItems.map((item) => (
-          <a href={withBase(item.href)} aria-current={item.matches(path) ? 'page' : undefined}>
-            {item.label}
-          </a>
-        ))
+        navItems.map((item) =>
+          item.menu ? (
+            <details
+              class="cs-topnav-menu"
+              data-active={item.matches(path) ? 'true' : undefined}
+            >
+              <summary>
+                {item.label}
+                <span class="cs-topnav-caret" aria-hidden="true">
+                  ▾
+                </span>
+              </summary>
+              <div class="cs-topnav-dropdown">
+                {item.menu.map((link) => (
+                  <a
+                    href={withBase(link.href)}
+                    aria-current={path === link.href ? 'page' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </details>
+          ) : (
+            <a
+              href={withBase(item.href ?? '/')}
+              aria-current={item.matches(path) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ),
+        )
       }
-      <details class="cs-topnav-tools">
-        <summary>
-          在线演练<span class="cs-topnav-caret" aria-hidden="true">▾</span>
-        </summary>
-        <div class="cs-topnav-tools-menu">
-          {
-            tools.map((tool) => (
-              <a href={tool.href} target="_blank" rel="noopener noreferrer">
-                <span>{tool.label}</span>
-                <small>{tool.note}</small>
-              </a>
-            ))
-          }
-        </div>
-      </details>
     </nav>
     <div class="cs-header-actions">
       <SearchLauncher client:idle />
@@ -82,14 +100,22 @@ const tools = [
 </header>
 
 <script>
-  // 「在线演练」下拉：点击外部或按 Esc 收起
-  const toolsMenu = document.querySelector<HTMLDetailsElement>('.cs-topnav-tools');
-  if (toolsMenu) {
+  // 顶部导航下拉：点击外部或按 Esc 收起，Esc 收起后焦点回到展开按钮
+  const menus = document.querySelectorAll<HTMLDetailsElement>('.cs-topnav-menu');
+  if (menus.length > 0) {
     document.addEventListener('click', (event) => {
-      if (toolsMenu.open && !toolsMenu.contains(event.target as Node)) toolsMenu.open = false;
+      const target = event.target as Node;
+      for (const menu of menus) {
+        if (menu.open && !menu.contains(target)) menu.open = false;
+      }
     });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') toolsMenu.open = false;
+      if (event.key !== 'Escape') return;
+      for (const menu of menus) {
+        if (!menu.open) continue;
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
     });
   }
 </script>

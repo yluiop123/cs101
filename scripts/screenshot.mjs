@@ -18,7 +18,7 @@ const shots = [
   { name: 'chapter-desktop', path: 'tutorials/java/01-intro/', width: 1440, height: 900 },
   { name: 'route-desktop', path: 'tech-stack/java/', width: 1440, height: 900 },
   { name: 'cs-desktop', path: 'computer-science/zh/', width: 1440, height: 1000 },
-  { name: 'cs-ossu-desktop', path: 'computer-science/ossu/', width: 1440, height: 1000 },
+  { name: 'cs-en-desktop', path: 'computer-science/en/', width: 1440, height: 1000 },
   { name: 'cs-mobile', path: 'computer-science/zh/', width: 390, height: 844 },
   { name: 'cs-dark', path: 'computer-science/zh/', width: 1440, height: 1000, colorScheme: 'dark' },
   { name: 'home-dark', path: '', width: 1440, height: 900, colorScheme: 'dark' },

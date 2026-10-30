@@ -6,7 +6,7 @@
 
 | 项 | 版本 |
 | --- | --- |
-| Node.js | 24.22.1（项目目标：最新 LTS，见 `.nvmrc`） |
+| Node.js | 24.9.0（固定版本，见 `.nvmrc`；CI 同源读取） |
 | pnpm | 12.15.0 |
 
 ## 直接依赖
@@ -43,5 +43,6 @@
 ## 说明
 
 - 依赖声明为安装时的 caret 范围，精确版本由 `pnpm-lock.yaml` 锁定，CI 使用 `--frozen-lockfile`。
+- Node.js 版本以 `.nvmrc` 为准：本地用 `nvm use`，CI 由 `actions/setup-node` 读取同一文件。
 - 升级流程：`pnpm up --latest` → `pnpm check` → `pnpm build` → 更新本台账 → 冒烟测试。
 - 例外依赖（typescript）每次升级前先复查是否已可移除。

@@ -1,0 +1,132 @@
+---
+import type { RouteItem } from '@/data/model/route-model';
+
+// 外部引用抽屉：卡片点开后从右侧滑出，展示课程简介与全部学习资源（站内不跳走）。
+// 计算机科学（国内教程 / 国际教程）整页共用这一个抽屉，面板按条目 id 切换。
+interface Props {
+  /** 课程序列（会过滤出 kind: 'external' 的条目）；面板 id 用条目 id */
+  items: RouteItem[];
+}
+
+const { items } = Astro.props as Props;
+const refs = items.filter((item) => (item.kind ?? 'tutorial') === 'external');
+---
+
+<dialog class="cs-drawer" id="cs-ref-drawer" aria-labelledby="cs-ref-drawer-kicker">
+  <div class="cs-drawer-head">
+    <p class="cs-drawer-kicker" id="cs-ref-drawer-kicker">
+      <span class="cs-drawer-dot" aria-hidden="true" />
+      外部引用 · 课程详情
+    </p>
+    <button type="button" class="cs-drawer-close" data-cs-drawer-close aria-label="关闭">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+  </div>
+  <div class="cs-drawer-body">
+    {
+      refs.map((item) => (
+        <article class="cs-ref-panel" data-cs-ref-panel={item.id} hidden>
+          <h2 class="cs-ref-title" id={`ref-${item.id}`}>
+            {item.title}
+          </h2>
+          {item.external?.description && <p class="cs-ref-desc">{item.external.description}</p>}
+          {(item.external?.resources ?? []).map((group) => (
+            <section class="cs-ref-group">
+              {group.name && <h3 class="cs-ref-group-title">{group.name}</h3>}
+              <ul class="cs-ref-list">
+                {group.items.map((resource) =>
+                  resource.url ? (
+                    <li>
+                      <a
+                        class="cs-ref-link"
+                        href={resource.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span class="cs-ref-link-text">{resource.title}</span>
+                        <svg
+                          class="cs-ref-link-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <path d="M15 3h6v6" />
+                          <path d="M10 14 21 3" />
+                        </svg>
+                      </a>
+                    </li>
+                  ) : (
+                    <li>
+                      <span class="cs-ref-link cs-ref-link--plain">{resource.title}</span>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </section>
+          ))}
+          <p class="cs-ref-hint">站外资源将在新标签页打开</p>
+        </article>
+      ))
+    }
+  </div>
+</dialog>
+
+<script>
+  const drawer = document.querySelector<HTMLDialogElement>('#cs-ref-drawer');
+  if (drawer) {
+    const panels = Array.from(drawer.querySelectorAll<HTMLElement>('[data-cs-ref-panel]'));
+    let lastTrigger: HTMLElement | null = null;
+
+    const open = (id: string, trigger: HTMLElement) => {
+      const panel = panels.find((item) => item.dataset.csRefPanel === id);
+      if (!panel) return;
+      lastTrigger = trigger;
+      for (const item of panels) item.hidden = item !== panel;
+      if (!drawer.open) drawer.showModal();
+      drawer.setAttribute('aria-labelledby', `ref-${id}`);
+      drawer.querySelector<HTMLElement>('[data-cs-drawer-close]')?.focus();
+      document.documentElement.classList.add('cs-drawer-open');
+    };
+
+    document.addEventListener('click', (event) => {
+      const target = event.target as Element | null;
+      if (target?.closest('[data-cs-drawer-close]')) {
+        drawer.close();
+        return;
+      }
+      const trigger = target?.closest<HTMLElement>('[data-cs-ref]');
+      const id = trigger?.dataset.csRef;
+      if (trigger && id) {
+        event.preventDefault();
+        open(id, trigger);
+      }
+    });
+
+    // 点遮罩（dialog 自身）关闭；按 Esc 由原生 cancel 关闭
+    drawer.addEventListener('click', (event) => {
+      if (event.target === drawer) drawer.close();
+    });
+
+    drawer.addEventListener('close', () => {
+      document.documentElement.classList.remove('cs-drawer-open');
+      drawer.setAttribute('aria-labelledby', 'cs-ref-drawer-kicker');
+      lastTrigger?.focus();
+      lastTrigger = null;
+    });
+  }
+</script>

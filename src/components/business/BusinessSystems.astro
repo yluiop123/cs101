@@ -1,12 +1,9 @@
 ---
 import RouteSections from '@/components/shared/RouteSections.astro';
-import { businessCatalog } from '@/data/entries';
-import { tutorialEntryHref } from '@/lib/entry-links';
+import { businessSystems } from '@/data/entries';
 
 // 业务系统 = 一条路线：14 个分类分节，一张卡片 = 一套业务系统教程；
-// 系统说明（缩写、中文名、核心作用）只在 business-systems.ts 维护一份，章节正文由 BizSystemChapter 渲染。
-// 卡片直接进第一章（系统概述），教程首页保留在面包屑 / 左侧栏。
-const hrefOf = await tutorialEntryHref();
+// 卡片标题与入口由 RouteSections 统一补全（标题来自教程页，入口直达第一章）。
 ---
 
-<RouteSections tiers={businessCatalog} hrefOf={hrefOf} />
+<RouteSections tiers={businessSystems} markKind="auto" />

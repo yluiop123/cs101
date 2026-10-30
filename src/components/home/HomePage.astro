@@ -1,13 +1,10 @@
 ---
 import { getSeries } from '@/lib/content';
-import { tutorialEntryHref } from '@/lib/entry-links';
 import ContinueCard from '@/components/progress/ContinueCard.tsx';
 import RouteSections from '@/components/shared/RouteSections.astro';
 import { homeCatalog } from '@/data/entries';
 
 const series = await getSeries();
-// 教程卡片直接进第一章，不落在教程首页
-const hrefOf = await tutorialEntryHref();
 ---
 
 <div class="cs-home">
@@ -16,5 +13,5 @@ const hrefOf = await tutorialEntryHref();
   <ContinueCard client:visible series={series} />
 
   <!-- 首页 = 一条路线：12 个分类分节，卡片是通往各条路线的条目 -->
-  <RouteSections tiers={homeCatalog} markKind="auto" hrefOf={hrefOf} />
+  <RouteSections tiers={homeCatalog} markKind="auto" />
 </div>
