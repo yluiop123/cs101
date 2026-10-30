@@ -136,7 +136,10 @@ const compact = (density ?? (needsSeries || hasExternal ? 'compact' : 'default')
             {section.groups?.map((group) => (
               <div
                 id={group.id}
-                class:list={['cs-choice-option', group.tag && 'cs-choice-option--tag']}
+                class:list={[
+                  'cs-choice-option',
+                  group.tag === 'recommended' && 'cs-choice-option--recommended',
+                ]}
               >
                 <h3 class="cs-choice-title">
                   {group.title}

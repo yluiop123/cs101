@@ -1100,8 +1100,8 @@ html.cs-drawer-open {
   scroll-margin-top: 80px;
 }
 
-/* 选项状态（推荐 / 主流 / 小众…）：统一强调色描边，具体状态看标题旁的徽标 */
-.cs-choice-option--tag {
+/* 多选一里只高亮推荐选项；主流 / 小众仍显示徽标，但不再描边抢视觉重心 */
+.cs-choice-option--recommended {
   border-color: var(--cs-accent);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cs-accent) 35%, transparent);
 }
