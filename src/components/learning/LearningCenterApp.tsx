@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
-import { Download, StarOff, Trash2, Upload } from 'lucide-react';
+import { ArrowRight, Download, StarOff, Trash2, Upload } from 'lucide-react';
 import {
   emptyProgress,
   PROGRESS_EVENT,
@@ -160,7 +160,7 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
       <section className="cs-me-section">
         <h2>最近学习</h2>
         {recentItems.length > 0 ? (
-          <ul className="cs-me-list">
+          <ul className="cs-me-recent-grid">
             {recentItems.map((chapter) => {
               const stats = seriesBySlug.get(chapter.seriesSlug);
               const percent = stats && stats.total ? Math.round((stats.done / stats.total) * 100) : 0;
@@ -176,9 +176,10 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
                       {state.completed[chapter.id] && ' · 已完成'}
                     </p>
                   </div>
-                  <span className="cs-me-recent-action" aria-hidden="true">
-                    继续 →
-                  </span>
+                  <a className="cs-me-recent-action" href={withBase(`/${chapter.id}/`)}>
+                    继续
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </a>
                   {stats && (
                     <div className="cs-me-bar" aria-hidden="true">
                       <span style={{ width: `${percent}%` }} />

@@ -1,5 +1,5 @@
 // 页面配置注册表：所有「目录页 / 路线页」都只差一份 JSON。
-// 页面组件 RoutePage 按当前文档 id 自动取配置，MDX 里不需要再 import 数据或写 options。
+// 页面 MDX 显式 import 同名 JSON 并传给 RoutePage；注册表本身供左侧栏与学习中心读取。
 
 import type { RouteTier } from '@/data/model/route-model';
 
@@ -12,8 +12,6 @@ export interface PageOptions {
   columns?: 2 | 3;
   /** 是否显示状态图例；默认按数据自动 */
   legend?: boolean;
-  /** 首页专用的无障碍标题 */
-  srTitle?: string;
   /** 应用领域总览：没有对应 docs 页面的方向标成「规划中」 */
   detectPlanned?: boolean;
   /** 路线页显示「收藏路线」按钮 */
@@ -56,10 +54,4 @@ export const pageConfigKey = (entryId: string) =>
 
 export function getPageConfig(entryId: string): PageConfig | undefined {
   return pageConfigs[pageConfigKey(entryId)];
-}
-
-export function requirePageConfig(entryId: string): PageConfig {
-  const config = getPageConfig(entryId);
-  if (!config) throw new Error(`缺少页面配置：${entryId}`);
-  return config;
 }

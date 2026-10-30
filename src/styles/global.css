@@ -1568,7 +1568,13 @@ html.cs-drawer-open {
 .cs-me {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 1.25rem;
+  margin-top: 0;
+}
+
+/* 学习中心是 splash 页，压缩内容面板顶部留白，避免标题和第一块内容离太远 */
+main .content-panel:has(.cs-me) {
+  padding-top: 0;
 }
 
 /* Starlight 会给正文里的子元素补上下 margin，学习中心自己控制间距 */
@@ -1615,12 +1621,21 @@ html.cs-drawer-open {
   font-size: 1.15rem;
 }
 
-/* 最近学习：沿用继续学习卡片的结构，高度更紧凑 */
+/* 最近学习：横向卡片，高度紧凑 */
+.cs-me-recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .cs-me-recent {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.35rem 1rem;
+  gap: 0.35rem 0.8rem;
   border: 1px solid var(--cs-border);
   border-inline-start: 3px solid var(--cs-accent);
   border-radius: var(--cs-radius);
@@ -1664,11 +1679,25 @@ html.cs-drawer-open {
 }
 
 .cs-me-recent-action {
+  display: inline-flex;
   flex-shrink: 0;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  background: var(--cs-bg);
   color: var(--cs-accent-dark);
+  padding: 0.25rem 0.55rem;
   font-size: 0.78rem;
   font-weight: 600;
+  text-decoration: none;
   white-space: nowrap;
+}
+
+.cs-me-recent-action:hover {
+  border-color: var(--cs-accent);
+  background: var(--cs-accent);
+  color: #ffffff;
 }
 
 .cs-me-recent .cs-me-bar {
@@ -1856,16 +1885,9 @@ html.cs-drawer-open {
 }
 
 @media (max-width: 640px) {
-  .cs-me-grid {
+  .cs-me-grid,
+  .cs-me-recent-grid {
     grid-template-columns: 1fr;
-  }
-
-  .cs-me-recent {
-    grid-template-columns: 1fr;
-  }
-
-  .cs-me-recent-action {
-    display: none;
   }
 
   .cs-me-danger {

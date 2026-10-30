@@ -8,7 +8,7 @@ const { entry } = Astro.locals.starlightRoute;
 const data = entry.data as Record<string, any>;
 const segments = entry.id.split('/').filter(Boolean);
 
-// 首页（content/docs/index.mdx）不显示页面标题与面包屑
+// 首页也显示面包屑与标题；splash 页（如学习中心）只显示标题
 const isHomePage = !entry.id || entry.id === 'index';
 const isSplash = data.template === 'splash';
 const isChapter = Boolean(data.series);
@@ -20,8 +20,10 @@ type Crumb = { label: string; href?: string };
 const root = sectionRoot[segments[0] ?? ''] ?? defaultSectionRoot;
 
 const crumbs: Crumb[] = [];
-if (!isSplash && !isHomePage) {
-  if (segments[0] === 'tutorials') {
+if (!isSplash) {
+  if (isHomePage) {
+    crumbs.push({ label: '首页' });
+  } else if (segments[0] === 'tutorials') {
     crumbs.push({ label: '首页', href: withBase('/') });
     if (segments[1]) {
       const series = await getSeriesBySlug(segments[1]);
@@ -30,7 +32,6 @@ if (!isSplash && !isHomePage) {
         href: withBase(`/tutorials/${segments[1]}/`),
       });
     }
-    if (isChapter) crumbs.push({ label: data.title });
   } else if (segments[0] === 'tech-stack') {
     // 技术路线页与教程页同级：面包屑只有「首页 › 当前路线」两层
     crumbs.push({ label: '首页', href: withBase('/') });
@@ -54,7 +55,6 @@ if (!isSplash && !isHomePage) {
         label: series?.title ?? data.title,
         href: isChapter ? withBase(`/business-systems/${segments[1]}/`) : undefined,
       });
-      if (isChapter) crumbs.push({ label: data.title });
     }
   } else {
     crumbs.push({ label: '首页', href: withBase('/') });
@@ -72,45 +72,43 @@ const hasMeta = Boolean(seriesLabel || data.duration || difficulty || data.tags?
 ---
 
 {
-  !isHomePage && (
-    isSplash ? (
+  isSplash ? (
+    <h1 id="_top" class="cs-page-title">
+      {data.title}
+    </h1>
+  ) : (
+    <>
+      <nav class="cs-breadcrumbs" aria-label="面包屑">
+        {crumbs.map((crumb, index) => (
+          <>
+            {index > 0 && (
+              <span class="cs-breadcrumb-sep" aria-hidden="true">
+                ›
+              </span>
+            )}
+            {crumb.href ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+          </>
+        ))}
+      </nav>
+
       <h1 id="_top" class="cs-page-title">
         {data.title}
       </h1>
-    ) : (
-      <>
-        <nav class="cs-breadcrumbs" aria-label="面包屑">
-          {crumbs.map((crumb, index) => (
-            <>
-              {index > 0 && (
-                <span class="cs-breadcrumb-sep" aria-hidden="true">
-                  ›
-                </span>
-              )}
-              {crumb.href ? (
-                <a href={crumb.href}>{crumb.label}</a>
-              ) : (
-                <span aria-current="page">{crumb.label}</span>
-              )}
-            </>
-          ))}
-        </nav>
 
-        <h1 id="_top" class="cs-page-title">
-          {data.title}
-        </h1>
-
-        {hasMeta && (
-          <p class="cs-page-meta">
-            {seriesLabel && <span class="cs-meta-item">{seriesLabel}</span>}
-            {data.duration && <span class="cs-meta-item">约 {data.duration} 分钟</span>}
-            {difficulty && <span class="cs-meta-item">难度：{difficulty}</span>}
-            {data.tags?.length > 0 && (
-              <span class="cs-meta-item">标签：{data.tags.join(' / ')}</span>
-            )}
-          </p>
-        )}
-      </>
-    )
+      {hasMeta && (
+        <p class="cs-page-meta">
+          {seriesLabel && <span class="cs-meta-item">{seriesLabel}</span>}
+          {data.duration && <span class="cs-meta-item">约 {data.duration} 分钟</span>}
+          {difficulty && <span class="cs-meta-item">难度：{difficulty}</span>}
+          {data.tags?.length > 0 && (
+            <span class="cs-meta-item">标签：{data.tags.join(' / ')}</span>
+          )}
+        </p>
+      )}
+    </>
   )
 }

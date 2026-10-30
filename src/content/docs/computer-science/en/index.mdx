@@ -3,7 +3,8 @@ title: "国际教程"
 description: "OSSU 是开源社区维护的计算机科学自学课程体系，汇集 MIT、Stanford、Harvard 等名校免费课程，本页按主题把它们整理成一条可执行的学习路线。"
 ---
 import RoutePage from '@/components/shared/RoutePage.astro';
+import pageConfig from '@/data/pages/computer-science/en.json';
 
 OSSU (Open Source Society University) 是一个开源社区维护的计算机科学自学课程体系，汇集了 MIT、Stanford、Harvard、UC Berkeley、Princeton 等世界顶尖大学的免费/…
 
-<RoutePage />
+<RoutePage config={pageConfig} />

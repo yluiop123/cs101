@@ -1,25 +1,29 @@
 ---
 // 全站唯一的「目录页 / 路线页」组件。
 // 首页、应用领域、业务系统、全部技术路线、各条路线、计算机科学课程页都用它；
-// 页面之间只差 src/data/pages/<page>.json 里的 tiers 与 options。
+// 页面数据由引用它的 MDX 从 src/data/pages/<page>.json 显式传入。
 import { getCollection } from 'astro:content';
 import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import RouteSections from '@/components/shared/RouteSections.astro';
 import type { RouteItem, RouteTier } from '@/data/model/route-model';
-import { pageConfigKey, requirePageConfig } from '@/data/pages';
+import { pageConfigKey, type PageConfig } from '@/data/pages';
 
+interface Props {
+  config: PageConfig;
+}
+
+const { config } = Astro.props;
 const { entry } = Astro.locals.starlightRoute;
-const config = requirePageConfig(entry.id);
 const { tiers, options = {} } = config;
 const {
   markKind = 'explicit',
   density,
   columns,
   legend = true,
-  srTitle,
   detectPlanned = false,
   favorite = false,
 } = options;
+const isHome = !entry.id || entry.id === 'index';
 
 // 应用领域总览：docs 集合里存在 domain/<slug>.mdx 才点亮，否则标成「规划中」
 let resolvedTiers: RouteTier[] = tiers;
@@ -41,8 +45,7 @@ if (detectPlanned) {
 
 ---
 
-<div class:list={[srTitle && 'cs-home']}>
-  {srTitle && <h1 id="_top" class="sr-only">{srTitle}</h1>}
+<div class:list={[isHome && 'cs-home']}>
   {favorite && (
     <div class="cs-route-actions">
       <FavoriteButton
