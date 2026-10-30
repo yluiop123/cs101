@@ -60,6 +60,8 @@ pnpm versions         # 重新生成 VERSIONS.md 版本台账
 src/
   content.config.ts          # 内容集合 schema（series/order/difficulty/duration/tags）
   content/docs/              # 562 个内容文件（md/mdx，目录即 URL）
+    tutorials/<slug>/        # 普通教程：一套教程一个文件夹
+    business-systems/<slug>/ # 业务系统教程：与普通教程分开存放，URL 为 /business-systems/<slug>/
   components/
     shell/                   # 覆盖 Starlight：Header/PageTitle/Pagination/Footer
     search/                  # ⌘K 搜索岛

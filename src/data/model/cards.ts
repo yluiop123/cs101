@@ -78,9 +78,11 @@ export const kindLabels: Record<CardKind, string> = {
   route: '路线',
 };
 
-/** 由链接推断卡片类型（/tutorials/** 是教程页，其余是路线/专题页） */
+/** 由链接推断卡片类型（/tutorials/** 与 /business-systems/<slug>/ 是教程页，其余是路线/专题页） */
 export const kindOfHref = (href?: string): CardKind =>
-  href?.startsWith('/tutorials/') ? 'tutorial' : 'route';
+  href?.startsWith('/tutorials/') || /^\/business-systems\/[^/]+\//.test(href ?? '')
+    ? 'tutorial'
+    : 'route';
 
 /** 分节标签的样式后缀：choice 用独立配色，其余沿用学习状态 */
 export const tagVariant = (tag?: CardBadge): string | undefined =>

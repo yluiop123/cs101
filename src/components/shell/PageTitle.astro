@@ -46,11 +46,19 @@ if (!isSplash && !isHomePage) {
     );
     if (!isSectionIndex) crumbs.push({ label: data.title });
   } else if (segments[0] === 'business-systems') {
-    // 业务系统是顶层板块：总览页只显示板块名，详情页多一级系统名
-    crumbs.push(
-      isSectionIndex ? { label: '业务系统' } : { label: '业务系统', href: withBase('/business-systems/') },
-    );
-    if (!isSectionIndex) crumbs.push({ label: data.title });
+    // 业务系统是顶层板块：总览页只显示板块名；系统页显示「业务系统 › 系统名 [› 章节]」
+    if (isSectionIndex) {
+      crumbs.push({ label: '业务系统' });
+    } else {
+      crumbs.push({ label: '业务系统', href: withBase('/business-systems/') });
+      const seriesSlug = `business-${segments[1]}`;
+      const series = await getSeriesBySlug(seriesSlug);
+      crumbs.push({
+        label: series?.title ?? data.title,
+        href: isChapter ? withBase(`/business-systems/${segments[1]}/`) : undefined,
+      });
+      if (isChapter) crumbs.push({ label: data.title });
+    }
   } else {
     crumbs.push({ label: '首页', href: withBase('/') });
   }

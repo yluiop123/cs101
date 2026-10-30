@@ -100,7 +100,7 @@ export const itemHref = (item: string | RouteItem): string | undefined => {
     case 'domain':
       return `/domain/${normalized.slug.replace(/^domain-/, '')}/`;
     case 'business':
-      return `/tutorials/business-${normalized.slug.replace(/^business-/, '')}/`;
+      return `/business-systems/${normalized.slug.replace(/^business-/, '')}/`;
     case 'page':
       return `/${normalized.slug}/`;
     default:

@@ -8,14 +8,22 @@ import { techRouteOrder, routePlan } from '@/data/routes';
 const { entry } = Astro.locals.starlightRoute;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.slice(base.length) || '/';
-const match = path.match(/^\/tutorials\/([^/]+)\//);
-const currentSeries = match ? await getSeriesBySlug(match[1]) : null;
+const seriesMatch =
+  path.match(/^\/tutorials\/([^/]+)\//) ?? path.match(/^\/business-systems\/([^/]+)\//);
+// 业务系统的系列 slug 带 business- 前缀（避免与普通教程重名）
+const currentSeriesSlug = seriesMatch
+  ? path.startsWith('/business-systems/')
+    ? `business-${seriesMatch[1]}`
+    : seriesMatch[1]
+  : undefined;
+const currentSeries = currentSeriesSlug ? await getSeriesBySlug(currentSeriesSlug) : null;
 const currentId = entry.id;
 const isHome = !entry.id || entry.id === 'index';
 const isDomainIndex = path === '/domain/' || path === '/domain';
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
 const isComputerScience = path.startsWith('/computer-science');
-const isBusinessSystems = path.startsWith('/business-systems');
+// 业务系统总览页（系列页由 currentSeries 分支处理）
+const isBusinessSystems = path === '/business-systems/' || path === '/business-systems';
 const isTechStack = path.startsWith('/tech-stack');
 // 具体路线页：左侧栏显示这条路线自己的板块（与正文各板块锚点联动）
 const techRouteSlug = path.match(/^\/tech-stack\/([^/]+)\//)?.[1];
@@ -165,7 +173,7 @@ const catalog =
     </div>
   ) : currentSeries ? (
     <div class="cs-sidebar">
-      <a class="cs-sidebar-series-title" href={withBase(`/tutorials/${currentSeries.slug}/`)}>
+      <a class="cs-sidebar-series-title" href={withBase(currentSeries.href)}>
         {currentSeries.title}
       </a>
       <ol class="cs-sidebar-chapters">
@@ -187,7 +195,7 @@ const catalog =
       <ul class="cs-sidebar-catalog">
         {catalog.map((item) => (
           <li>
-            <a href={withBase(`/tutorials/${item.slug}/`)}>
+            <a href={withBase(item.href)}>
               <span>{item.title}</span>
               <span class="cs-sidebar-count">{item.chapters.length}</span>
             </a>

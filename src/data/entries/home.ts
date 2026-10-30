@@ -2,7 +2,7 @@
 //
 // 统一模型：首页 = 一条路线（RouteTier[]），一个分类 = 一个分节，一张卡片 = 一条路线（RouteItem）。
 // 「点进去」的目标由 kind 决定：tutorial → /tutorials/<slug>/、tech → /tech-stack/<slug>/、
-// domain → /domain/<slug>/、business → /tutorials/business-<slug>/、page → /<slug>/。
+// domain → /domain/<slug>/、business → /business-systems/<slug>/、page → /<slug>/。
 // 还没做的方向写 planned: true，渲染成虚线占位卡。
 
 import type { RouteTier } from '@/data/model/route-model';

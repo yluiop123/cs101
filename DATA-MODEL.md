@@ -21,6 +21,8 @@ src/data/
   tutorials/series-meta.ts    ← 教程元信息：slug → 中文名（内容本体不在这里）
   computer-science/           ← 计算机科学课程数据（zh.json / ossu.json）
 src/content/docs/tutorials/<slug>/  ← 教程正文：一套教程一个文件夹，`01-xxx.md` 是章节
+src/content/docs/business-systems/index.mdx  ← 业务系统总览页（/business-systems/）
+src/content/docs/business-systems/<slug>/    ← 业务系统教程：与普通教程分开存放，URL 为 /business-systems/<slug>/
         ↓ 构建期
 src/lib/content.ts            ← 扫描 docs 得到系列 / 章节 / 是否上线
 src/lib/entry-links.ts        ← 卡片上的教程入口：直达第一章
@@ -30,7 +32,7 @@ components/shared/RouteSections.astro → CardSection.astro → Card.astro
 
 原则：**模型（类型 + 函数）、入口数据、路线数据、教程内容分开**。`model/*.ts` 只放逻辑；
 入口页配置在 `entries/**`，路线页配置在 `routes/**`，教程名在 `tutorials/**`，教程正文在
-`content/docs/tutorials/**`——加内容只改对应的那一类，不动组件。
+`content/docs/tutorials/**` 与 `content/docs/business-systems/**`——加内容只改对应的那一类，不动组件。
 
 ## 1. 模型：一个条目 = 一条路线
 
@@ -67,7 +69,7 @@ interface RouteTier {
 | `tutorial`（默认） | `/tutorials/<slug>/` | 教程 |
 | `tech` | `/tech-stack/<slug>/` | 路线 |
 | `domain` | `/domain/<slug 去掉 domain- 前缀>/` | 路线 |
-| `business` | `/tutorials/business-<slug>/` | 教程 |
+| `business` | `/business-systems/<slug>/` | 教程 |
 | `page` | `/<slug>/` | 路线 |
 
 - `planned: true` → 没有入口，渲染虚线占位卡（应用领域目录里没有对应路线的方向就是这样标的）；
@@ -194,14 +196,18 @@ tags?: string[], prerequisites?: string[], estMinutes?: number
 | 教程章节 | `docs/tutorials/<slug>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order`、`tableOfContents: true`（有 `##` 小节时右侧显示「本页内容」目录） |
 | 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`（卡片与左侧栏都用它）、`description`；正文只有 `<TechNodes page="<route-slug>" />` |
 | 应用领域页 | `docs/domain/<slug>.mdx` | 同上，`page="domain-<slug>"` |
-| 业务系统教程 | `docs/tutorials/business-<slug>/` | 2 章；正文由 `BizSystemChapter.astro` 按数据渲染 |
+| 业务系统教程 | `docs/business-systems/<slug>/` | 2 章；与普通教程分开存放；正文由 `BizSystemChapter.astro` 按数据渲染 |
 | 计算机科学 | `docs/computer-science/**` | 由 `src/data/computer-science/{zh,ossu}.json` 生成 |
+
+业务系统教程的系列 slug 是 `business-<目录名>`（如 `business-erp`），页面地址是
+`/business-systems/<目录名>/`；`getSeries()` 同时扫描 `tutorials/` 与 `business-systems/` 两个目录，
+面包屑、左侧栏、上一章/下一章、完成按钮都由它统一推导。
 
 构建期 `src/lib/content.ts` 扫描 docs 得到：
 
 ```ts
 interface ChapterInfo { id: string; title: string; order: number; duration?: number; description?: string }
-interface SeriesInfo  { slug: string; title: string; description?: string; chapters: ChapterInfo[]; totalDuration: number }
+interface SeriesInfo  { slug: string; href: string; title: string; description?: string; chapters: ChapterInfo[]; totalDuration: number }
 ```
 
 `getSeries()` 决定：教程有没有上线（没有章节 → 卡片变虚线）、左侧栏章节列表、继续学习卡。
@@ -258,7 +264,8 @@ interface ProgressState {
 
 - **slug 是唯一主键**：`seriesMeta` 的键、路线里的条目、`docs/tutorials/<slug>/` 目录名必须一致；
   对不上时卡片会显示 slug 原文，链接会 404（`pnpm check:links` 会抓出来）。
-  （业务系统例外：条目 slug 是系统名 `erp`，对应目录是 `business-erp/`。）
+  （业务系统例外：条目 slug 是系统名 `erp`，目录是 `docs/business-systems/erp/`，
+  系列 slug 为 `business-erp` 以避免与普通教程重名。）
 - 站内链接一律用 `withBase()` / 相对路径，构建期 `base-links` 集成兜底 `/cs101` 前缀。
 - `dist/` 与 `public/search-index.json` 是构建产物，不要手改。
 - **卡片只有一套实现**：`RouteSections → CardSection → Card`，目录页与路线页共用，「多选一」由
@@ -267,6 +274,6 @@ interface ProgressState {
   业务系统也没有 `BizSystem` / `BizCategory` 之类的独立模型，就是 `businessCatalog` 这一条路线。
 - **数据分三类放**：入口页（`src/data/entries/**`）、路线页（`src/data/routes/**`）、
   教程元信息（`src/data/tutorials/**`）；模型与纯函数在 `src/data/model/**`，都不含站点数据。
-- **教程内容一套一个文件夹**：`src/content/docs/tutorials/<slug>/` 下放该教程全部章节；
-  入口链接由 `lib/entry-links.ts` 统一指向第一章。
+- **教程内容一套一个文件夹**：普通教程在 `src/content/docs/tutorials/<slug>/`，
+  业务系统教程在 `src/content/docs/business-systems/<slug>/`；入口链接由 `lib/entry-links.ts` 统一指向第一章。
 - 技术路线名称只写在 `docs/tech-stack/<slug>.mdx` 的 `title` 里（总览页、左侧栏、面包屑同源）。

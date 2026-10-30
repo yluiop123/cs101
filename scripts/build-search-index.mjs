@@ -86,7 +86,13 @@ for (const file of files) {
   const { frontmatter, body } = stripFrontmatter(source);
   const pageTitle = titleFrom(frontmatter) || rel;
   const url = `/${rel.replace(/\.(md|mdx)$/, '/')}`.replace(/\/index\/$/, '/');
-  const series = rel.startsWith('tutorials/') ? rel.split('/')[1] : undefined;
+  const segments = rel.split('/');
+  const series =
+    segments[0] === 'tutorials' && segments.length > 2
+      ? segments[1]
+      : segments[0] === 'business-systems' && segments.length > 2
+        ? `business-${segments[1]}`
+        : undefined;
 
   const sections = [];
   let heading = '';
