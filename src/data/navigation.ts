@@ -47,6 +47,12 @@ export const siteSections: SiteSection[] = [
       { label: '国际教程', href: '/computer-science/en/' },
     ],
   },
+  {
+    key: 'me',
+    label: '学习中心',
+    href: '/me/',
+    matches: (path) => path.startsWith('/me'),
+  },
 ];
 
 /** 面包屑的板块根节点；没有总览页的板块不带链接 */

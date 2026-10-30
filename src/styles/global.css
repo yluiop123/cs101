@@ -1603,3 +1603,219 @@ html.cs-drawer-open {
     padding: 1rem 1rem 2rem;
   }
 }
+
+/* ============ 学习中心 /me/ ============ */
+.cs-me {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.cs-me-note,
+.cs-me-loading {
+  margin: 0;
+  color: var(--cs-muted);
+  font-size: 0.9rem;
+}
+
+.cs-me-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.8rem;
+}
+
+.cs-me-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  background: var(--cs-bg);
+  padding: 0.9rem 1rem;
+}
+
+.cs-me-stat span {
+  color: var(--cs-muted);
+  font-size: 0.8rem;
+}
+
+.cs-me-stat strong {
+  overflow: hidden;
+  font-size: 1.6rem;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cs-me-stat small {
+  overflow: hidden;
+  color: var(--cs-muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cs-me-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.cs-me-section h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1.15rem;
+}
+
+.cs-me-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cs-me-head h2 {
+  margin: 0;
+}
+
+.cs-me-list,
+.cs-me-series {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-me-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  padding: 0.6rem 0.8rem;
+}
+
+.cs-me-item a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  color: var(--cs-text);
+  text-decoration: none;
+}
+
+.cs-me-item a:hover {
+  color: var(--cs-accent-dark);
+}
+
+.cs-me-item a span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cs-me-item a small {
+  color: var(--cs-muted);
+  font-size: 0.78rem;
+}
+
+.cs-me-remove {
+  border: 0;
+  background: none;
+  color: var(--cs-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cs-me-remove:hover {
+  color: var(--cs-accent-dark);
+  text-decoration: underline;
+}
+
+.cs-me-empty {
+  margin: 0;
+  color: var(--cs-muted);
+  font-size: 0.9rem;
+}
+
+.cs-me-series li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cs-me-series-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.cs-me-series-head a {
+  color: var(--cs-text);
+  text-decoration: none;
+}
+
+.cs-me-series-head a:hover {
+  color: var(--cs-accent-dark);
+}
+
+.cs-me-series-head span {
+  color: var(--cs-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-me-bar {
+  height: 0.35rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--cs-sidebar-bg);
+}
+
+.cs-me-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--cs-accent);
+}
+
+.cs-me-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.cs-me-import {
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-me-import input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cs-me-danger {
+  border-color: color-mix(in srgb, #b42318 35%, var(--cs-border));
+  color: #b42318;
+}
+
+.cs-me-danger:hover {
+  border-color: #b42318;
+  background: #b42318;
+  color: #ffffff;
+}
+
+.cs-me-message {
+  margin: 0;
+  color: var(--cs-accent-dark);
+  font-size: 0.85rem;
+}

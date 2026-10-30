@@ -30,6 +30,7 @@
 | --- | --- |
 | ⌘K 中文搜索 | 构建期 section 级索引（2973 小节）+ MiniSearch + `Intl.Segmenter` 分词，键盘导航、最近搜索、直达小节锚点 |
 | 学习进度 | 本地 localStorage 记录完成/收藏/最近阅读；章节完成按钮、系列进度、首页「继续学习」 |
+| 学习中心 | `/me/` 集中查看继续学习、收藏、各系列进度；支持导出 / 导入 / 清空本机记录 |
 | 文档内运行实例 | HTML / CSS / JavaScript 代码块右上角「运行实例」，一键把代码带到 CodePen 新标签页；TypeScript 等去官方 Playground |
 | 教程站版式 | w3schools/菜鸟式方角排版、面包屑、章节元信息（时长/难度）、底部大翻页、深浅色 |
 | 路线与课程 | 首页 12 大技术分类目录、分阶段技术路线卡、领域路线；计算机科学课程同一套路线卡片，「外部引用」卡点开右侧抽屉看简介与学习资源 |
@@ -60,13 +61,15 @@ pnpm versions         # 重新生成 VERSIONS.md 版本台账
 ```text
 src/
   content.config.ts          # 内容集合 schema（series/order/difficulty/duration/tags）
-  content/docs/              # 561 个内容文件（md/mdx，目录即 URL）
+  content/docs/              # 内容文件（md/mdx，目录即 URL）
+    me.mdx                   # 学习中心 /me/
     tutorials/<slug>/        # 普通教程：一套教程一个文件夹
     business-systems/<slug>/ # 业务系统教程：与普通教程分开存放，URL 为 /business-systems/<slug>/
   components/
     shell/                   # 覆盖 Starlight：Header/PageTitle/Pagination/Footer
     search/                  # ⌘K 搜索岛
     progress/                # 完成/收藏/继续学习岛
+    learning/                # 学习中心 /me/ 的进度、收藏、统计与导入导出
     shared/                  # RoutePage（全站唯一页面组件）/ RouteSections / Card / ReferenceDrawer
     tutorials/               # 教程系列首页的章节目录组件
   data/

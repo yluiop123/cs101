@@ -1,0 +1,23 @@
+---
+import LearningCenterApp from '@/components/learning/LearningCenterApp.tsx';
+import { getSeries } from '@/lib/content';
+
+const series = await getSeries();
+const chapters = series.flatMap((item) =>
+  item.chapters.map((chapter) => ({
+    id: chapter.id,
+    title: chapter.title,
+    seriesSlug: item.slug,
+    seriesTitle: item.title,
+    duration: chapter.duration,
+  })),
+);
+const seriesRefs = series.map((item) => ({
+  slug: item.slug,
+  title: item.title,
+  href: item.href,
+  total: item.chapters.length,
+}));
+---
+
+<LearningCenterApp client:load chapters={chapters} series={seriesRefs} />
