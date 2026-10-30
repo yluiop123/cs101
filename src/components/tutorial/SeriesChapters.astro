@@ -13,6 +13,14 @@ const data = await getSeriesBySlug(series);
 {
   data && (
     <>
+      {data.chapters[0] && (
+        <p class="cs-series-start">
+          <a class="cs-btn cs-btn-primary" href={withBase(`/${data.chapters[0].id}/`)}>
+            开始学习 →
+          </a>
+          <span class="cs-series-start-title">{data.chapters[0].title}</span>
+        </p>
+      )}
       <p class="cs-series-progress" data-series-progress>
         已完成 0/{data.chapters.length} 章
       </p>

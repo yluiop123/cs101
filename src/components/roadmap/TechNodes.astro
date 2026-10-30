@@ -1,13 +1,15 @@
 ---
 import { getSeries } from '@/lib/content';
+import { tutorialEntryHref } from '@/lib/entry-links';
 import {
   normalizeItem,
   roleLabels,
   roleNotes,
   type RouteItem,
   type RouteItemRole,
-} from '@/data/route-model';
-import { routePlan, seriesMeta } from '@/data/routes';
+} from '@/data/model/route-model';
+import { routePlan } from '@/data/routes';
+import { seriesMeta } from '@/data/tutorials';
 import RouteSections from '@/components/shared/RouteSections.astro';
 
 interface Props {
@@ -18,6 +20,7 @@ const { page } = Astro.props as Props;
 const tiers = routePlan[page] ?? [];
 const series = await getSeries();
 const online = new Set(series.map((item) => item.slug));
+const hrefOf = await tutorialEntryHref();
 
 // 路线里的教程条目只写 slug，卡片标题统一从 seriesMeta 取
 const titleOf = (item: RouteItem) => seriesMeta[item.slug] ?? item.slug;
@@ -62,4 +65,10 @@ const available = (item: RouteItem) =>
   )
 }
 
-<RouteSections tiers={tiers} density="compact" available={available} titleOf={titleOf} />
+<RouteSections
+  tiers={tiers}
+  density="compact"
+  available={available}
+  titleOf={titleOf}
+  hrefOf={hrefOf}
+/>

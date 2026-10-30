@@ -1,9 +1,9 @@
 ---
 import { withBase } from '@/lib/utils';
-import { findBusinessSystem } from '@/data/business-systems';
+import { findBusinessSystem } from '@/data/entries';
 
 interface Props {
-  /** 业务系统 slug，对应 src/data/business-systems.ts 的 businessCatalog 条目 */
+  /** 业务系统 slug，对应 src/data/entries/business-systems.ts 的 businessCatalog 条目 */
   slug: string;
   /** overview = 系统概述；tech = 相关技术栈 */
   part: 'overview' | 'tech';

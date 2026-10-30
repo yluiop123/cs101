@@ -1,7 +1,7 @@
 // 19 条技术路线的板块（RouteTier[]）+「全部技术路线」目录。
-// 纯数据文件：只放配置，类型与逻辑在 src/data/route-model.ts。
+// 纯数据文件：只放配置，类型与逻辑在 src/data/model/route-model.ts。
 
-import type { RouteTier } from '@/data/route-model';
+import type { RouteTier } from '@/data/model/route-model';
 
 export const techRoutes: Record<string, RouteTier[]> = {
   'java': [

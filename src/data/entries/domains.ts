@@ -4,7 +4,7 @@
 // （kind: 'domain'，slug 用 routes/domain.ts 里的 domain-<名字> 键）。
 // 配了领域路线（routes/domain.ts 里有这个键）的领域点进去是路线页；还没做的标 planned，显示为虚线占位卡。
 
-import type { RouteTier } from '@/data/route-model';
+import type { RouteTier } from '@/data/model/route-model';
 import { domainRoutes } from '@/data/routes/domain';
 
 // 有没有对应的领域路线，是数据层面的事实，在这里一次性标好，模型层不读数据

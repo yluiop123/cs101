@@ -1,7 +1,7 @@
 ---
 import CardSection from '@/components/shared/CardSection.astro';
-import { tierSections, type TierSectionOptions } from '@/data/cards';
-import type { RouteTier } from '@/data/route-model';
+import { tierSections, type TierSectionOptions } from '@/data/model/cards';
+import type { RouteTier } from '@/data/model/route-model';
 
 // 统一渲染入口：RouteTier[] → 分节卡片。
 // 首页 / 应用领域 / 业务系统 / 全部技术路线 / 技术路线页 / 领域详情页都用它，只有数据与几个开关不同。
