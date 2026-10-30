@@ -1,0 +1,125 @@
+{
+  "tiers": [
+    {
+      "name": "编程语言",
+      "items": [
+        {
+          "id": "java",
+          "kind": "route",
+          "href": "/tech-stack/java/"
+        },
+        {
+          "id": "python",
+          "kind": "route",
+          "href": "/tech-stack/python/"
+        },
+        {
+          "id": "go",
+          "kind": "route",
+          "href": "/tech-stack/go/"
+        },
+        {
+          "id": "rust",
+          "kind": "route",
+          "href": "/tech-stack/rust/"
+        },
+        {
+          "id": "javascript-typescript",
+          "kind": "route",
+          "href": "/tech-stack/javascript-typescript/"
+        },
+        {
+          "id": "frontend",
+          "kind": "route",
+          "href": "/tech-stack/frontend/"
+        },
+        {
+          "id": "c-cpp",
+          "kind": "route",
+          "href": "/tech-stack/c-cpp/"
+        },
+        {
+          "id": "c-sharp",
+          "kind": "route",
+          "href": "/tech-stack/c-sharp/"
+        },
+        {
+          "id": "kotlin-swift-dart",
+          "kind": "route",
+          "href": "/tech-stack/kotlin-swift-dart/"
+        }
+      ]
+    },
+    {
+      "name": "数据库",
+      "items": [
+        {
+          "id": "sql-database",
+          "kind": "route",
+          "href": "/tech-stack/sql-database/"
+        },
+        {
+          "id": "mysql",
+          "kind": "route",
+          "href": "/tech-stack/mysql/"
+        },
+        {
+          "id": "postgresql",
+          "kind": "route",
+          "href": "/tech-stack/postgresql/"
+        },
+        {
+          "id": "redis",
+          "kind": "route",
+          "href": "/tech-stack/redis/"
+        },
+        {
+          "id": "mongodb",
+          "kind": "route",
+          "href": "/tech-stack/mongodb/"
+        },
+        {
+          "id": "elasticsearch",
+          "kind": "route",
+          "href": "/tech-stack/elasticsearch/"
+        }
+      ]
+    },
+    {
+      "name": "中间件",
+      "items": [
+        {
+          "id": "kafka",
+          "kind": "route",
+          "href": "/tech-stack/kafka/"
+        },
+        {
+          "id": "nginx",
+          "kind": "route",
+          "href": "/tech-stack/nginx/"
+        }
+      ]
+    },
+    {
+      "name": "运维与云",
+      "items": [
+        {
+          "id": "docker",
+          "kind": "route",
+          "href": "/tech-stack/docker/"
+        },
+        {
+          "id": "kubernetes",
+          "kind": "route",
+          "href": "/tech-stack/kubernetes/"
+        }
+      ]
+    }
+  ],
+  "options": {
+    "markKind": "none",
+    "density": "compact",
+    "columns": 2,
+    "titleFromContent": true
+  }
+}

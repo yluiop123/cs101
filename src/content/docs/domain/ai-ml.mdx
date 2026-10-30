@@ -2,14 +2,6 @@
 title: "人工智能与大模型应用"
 description: "「人工智能与大模型应用」方向的路线：从入门到实战的分阶段教程与选型建议。"
 ---
+import RoutePage from '@/components/shared/RoutePage.astro';
 
-import RouteSections from '@/components/shared/RouteSections.astro';
-
-export const tiers = [
-    { name: '入门 · 数学与编程基础', items: ['python', 'data-science', 'dsa'] },
-    { name: '进阶 · 机器学习与深度学习', items: ['machine-learning', 'deep-learning', 'nlp'] },
-    { name: '精通 · 大模型应用', items: ['llm-app', 'prompt-engineering', 'rag', 'agent'] },
-    { name: '实战与生态 · 部署、评测与运维', items: ['model-deploy', 'eval', 'fastapi', 'docker', 'kubernetes'] },
-];
-
-<RouteSections tiers={tiers} />
+<RoutePage />

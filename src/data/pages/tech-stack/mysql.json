@@ -1,0 +1,38 @@
+{
+  "tiers": [
+    {
+      "name": "入门 · 关系型与 SQL",
+      "items": [
+        "sql",
+        "mysql",
+        "linux"
+      ]
+    },
+    {
+      "name": "进阶 · 索引与事务",
+      "items": [
+        "postgresql",
+        "redis",
+        "dsa"
+      ]
+    },
+    {
+      "name": "精通 · 存储引擎与优化",
+      "items": [
+        "os",
+        "network"
+      ]
+    },
+    {
+      "name": "实战与生态 · 高可用与生态",
+      "items": [
+        "mongodb",
+        "elasticsearch",
+        "kafka",
+        "docker",
+        "big-data"
+      ]
+    }
+  ],
+  "options": {}
+}

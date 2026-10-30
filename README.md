@@ -20,7 +20,7 @@
 - 业务系统 `/business-systems/`：按业务场景分 14 类（通用企业管理、制造与工业、零售与电商、金融、医疗、政务、物流、能源、建筑、教育、内容营销、通信、安全合规、行业专用），一行三张系统卡（类型为「教程」），点进去是该系统自己的教程（左侧只列这套教程的章节，右侧是章节正文）
 - `/tech-stack/`：19 条学习路线总览；进入某条路线后，左侧栏切换为该路线的分节锚点（入门/进阶/精通/实战），底部「全部技术路线 →」回到总览
 - 应用领域路线页 `/domain/<slug>/`：左侧栏同样列出本页分节锚点，底部「全部应用领域 →」
-- 计算机科学：顶部导航「计算机科学」是下拉框（点文字或箭头展开），直接进入国内教程 `/computer-science/zh/` 与国际教程 `/computer-science/en/`（没有板块总览页）；两页与其他技术路线同一套卡片版式（分类 = 分节、课程 = 卡片），课程数据直接写在页面 MDX 的 `export const tiers` 里；课程卡类型为「外部引用」，点卡片在右侧抽屉查看课程简介与学习资源；左侧栏列出本页课程分类锚点，点击定位、滚动高亮
+- 计算机科学：顶部导航「计算机科学」是下拉框（点文字或箭头展开），直接进入国内教程 `/computer-science/zh/` 与国际教程 `/computer-science/en/`（没有板块总览页）；两页与其他技术路线同一套卡片版式（分类 = 分节、课程 = 卡片），课程数据在 `src/data/pages/computer-science/{zh,en}.json`；课程卡类型为「外部引用」，点卡片在右侧抽屉查看课程简介与学习资源；左侧栏列出本页课程分类锚点，点击定位、滚动高亮
 - 代码块「运行实例」：文档内 HTML / CSS / JavaScript 代码块右上角「运行实例」，一键把代码 POST 到 CodePen 新标签页打开；站内不跑 IDE（不引入 Monaco）
 - 尚未编写的内容先占位：卡片显示为虚线且不可点，内容写完自动点亮
 
@@ -67,12 +67,19 @@ src/
     shell/                   # 覆盖 Starlight：Header/PageTitle/Pagination/Footer
     search/                  # ⌘K 搜索岛
     progress/                # 完成/收藏/继续学习岛
-    shared/                  # RouteSections（全站唯一路线渲染入口）/ Card / ReferenceDrawer
-    home|domain|business-systems|tech-stack|tutorials/  # 页面业务组件（与路由同名）
+    shared/                  # RoutePage（全站唯一页面组件）/ RouteSections / Card / ReferenceDrawer
+    tutorials/               # 教程系列首页的章节目录组件
   data/
     model/                   # 路线模型（类型 + 纯函数，不含数据）
-    entries/                 # 入口页配置：首页 / 应用领域 / 业务系统
-    routes/                  # 只有「全部技术路线」目录（tech-catalog.ts）与路线条目构造器（links.ts）
+    pages/                   # 所有目录页 / 路线页的 JSON 配置（一个页面一份）
+      index.ts               #   注册表：按文档 id 自动取配置
+      home.json              #   首页
+      domain.json            #   应用领域总览
+      business-systems.json  #   业务系统总览
+      tech-stack.json        #   全部技术路线总览
+      domain/<slug>.json     #   单条领域路线
+      tech-stack/<slug>.json #   单条技术路线
+      computer-science/      #   计算机科学课程（zh / en）
     tutorials/               # 教程元信息：id → 中文名
   lib/                       # 内容索引、教程入口、搜索、进度、工具函数
   integrations/base-links    # 构建期补 base 前缀（兜底）
@@ -82,10 +89,10 @@ scripts/                     # 搜索索引、链接检查、冒烟、截图、�
 ```
 
 数据结构（内容由哪些数据驱动、新增内容改哪里）见 [DATA-MODEL.md](DATA-MODEL.md)：
-**首页、应用领域、业务系统、全部技术路线与路线页共用同一个 `RouteTier[]` 模型**。
+**首页、应用领域、业务系统、全部技术路线与路线页共用同一个 `RoutePage` 组件和同一个 `RouteTier[]` 模型**。
 内容 MDX 里引用组件统一用 `@/` 别名（如 `@/components/tutorials/SeriesChapters.astro`）；
-技术路线 / 应用领域 / 计算机科学页都把分节数据直接写在本页的 `export const tiers` 里，再传给统一的 `<RouteSections>`；
-计算机科学的课程（标题、简介、学习资源）也在页面 MDX 里，不再有中间 JSON 与适配层。
+所有目录页 / 路线页正文只写 `<RoutePage />`，页面之间只差 `src/data/pages/**` 里的一份 JSON；
+新增页面 = 新建 MDX + 同名 JSON，不需要改组件。
 
 ## 部署约定
 

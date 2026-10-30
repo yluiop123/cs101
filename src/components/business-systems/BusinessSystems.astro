@@ -1,9 +1,0 @@
----
-import RouteSections from '@/components/shared/RouteSections.astro';
-import { businessSystems } from '@/data/entries';
-
-// 业务系统 = 一条路线：14 个分类分节，一张卡片 = 一套业务系统教程；
-// 卡片标题与入口由 RouteSections 统一补全（标题来自教程页，入口直达第一章）。
----
-
-<RouteSections tiers={businessSystems} markKind="auto" />

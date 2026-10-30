@@ -2,14 +2,6 @@
 title: "C# 与 .NET 技术路线"
 description: "「C# 与 .NET 技术路线」的分阶段学习路线：按顺序学完即可覆盖这个方向的核心技术与工程实践。"
 ---
+import RoutePage from '@/components/shared/RoutePage.astro';
 
-import RouteSections from '@/components/shared/RouteSections.astro';
-
-export const tiers = [
-    { name: '入门 · 语言与工具', items: ['csharp', 'dotnet'] },
-    { name: '进阶 · 类型系统与数据', items: ['linq', 'csharp-async', 'di'] },
-    { name: '精通 · 框架与架构', items: ['ef-core'] },
-    { name: '实战与生态 · .NET 与上位机', items: ['aspnet', 'wpf', 'maui', 'industrial-comms'] },
-];
-
-<RouteSections tiers={tiers} />
+<RoutePage />

@@ -8,10 +8,15 @@ import {
   isTechStackIndexPath,
   isTechStackRoutePath,
 } from '@/data/navigation';
-import { businessSystems, domainCatalog, homeCatalog } from '@/data/entries';
-import { techRouteOrder } from '@/data/routes';
+import { tierIds } from '@/data/model/route-model';
+import { requirePageConfig } from '@/data/pages';
 import { getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
+
+const homeCatalog = requirePageConfig('index').tiers;
+const domainCatalog = requirePageConfig('domain').tiers;
+const businessSystems = requirePageConfig('business-systems').tiers;
+const techRouteOrder = requirePageConfig('tech-stack').tiers.flatMap((tier) => tierIds(tier));
 
 const { entry } = Astro.locals.starlightRoute;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');

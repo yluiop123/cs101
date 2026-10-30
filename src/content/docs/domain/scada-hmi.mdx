@@ -2,14 +2,6 @@
 title: "SCADA 与 HMI 组态"
 description: "组态监控、实时曲线与报警报表，配 C#/WPF、Qt 上位机开发，最终与 PLC、工业协议做系统集成。"
 ---
+import RoutePage from '@/components/shared/RoutePage.astro';
 
-import RouteSections from '@/components/shared/RouteSections.astro';
-
-export const tiers = [
-    { name: '入门 · 组态与监控基础', items: ['hmi-design', 'scada', 'realtime-chart'] },
-    { name: '进阶 · 数据与报警', items: ['report-export', 'opc-ua', 'modbus'] },
-    { name: '精通 · 上位机开发', items: ['csharp', 'wpf', 'qt'] },
-    { name: '实战与生态 · 系统集成', items: ['industrial-comms', 'plc-programming', 'docker'] },
-];
-
-<RouteSections tiers={tiers} />
+<RoutePage />

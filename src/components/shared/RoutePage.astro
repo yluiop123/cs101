@@ -1,0 +1,69 @@
+---
+// 全站唯一的「目录页 / 路线页」组件。
+// 首页、应用领域、业务系统、全部技术路线、各条路线、计算机科学课程页都用它；
+// 页面之间只差 src/data/pages/<page>.json 里的 tiers 与 options。
+import { getCollection } from 'astro:content';
+import ContinueCard from '@/components/progress/ContinueCard.tsx';
+import RouteSections from '@/components/shared/RouteSections.astro';
+import type { RouteItem, RouteTier } from '@/data/model/route-model';
+import { requirePageConfig } from '@/data/pages';
+import { getSeries } from '@/lib/content';
+
+const { entry } = Astro.locals.starlightRoute;
+const config = requirePageConfig(entry.id);
+const { tiers, options = {} } = config;
+const {
+  markKind = 'explicit',
+  density,
+  columns,
+  legend = true,
+  srTitle,
+  showContinueCard = false,
+  detectPlanned = false,
+  titleFromContent = false,
+} = options;
+
+// 应用领域总览：docs 集合里存在 domain/<slug>.mdx 才点亮，否则标成「规划中」
+let resolvedTiers: RouteTier[] = tiers;
+if (detectPlanned) {
+  const existing = new Set(
+    (await getCollection('docs'))
+      .filter((item) => item.id.startsWith('domain/') && item.id !== 'domain/index')
+      .map((item) => item.id.slice('domain/'.length)),
+  );
+  resolvedTiers = tiers.map((tier) => ({
+    ...tier,
+    items: tier.items.map((item) => {
+      const routeItem: RouteItem = typeof item === 'string' ? { id: item } : item;
+      const slug = routeItem.id.replace(/^domain-/, '');
+      return existing.has(slug) ? routeItem : { ...routeItem, tag: 'planned' as const };
+    }),
+  }));
+}
+
+// 技术路线总览：卡片标题与左侧栏、页面标题同源，取内容集合的 title
+let titleOf: ((item: RouteItem) => string) | undefined;
+if (titleFromContent) {
+  const titles = new Map(
+    (await getCollection('docs'))
+      .filter((item) => item.id.startsWith('tech-stack/') && item.id !== 'tech-stack/index')
+      .map((item) => [item.id.slice('tech-stack/'.length), item.data.title]),
+  );
+  titleOf = (item) => titles.get(item.id) ?? item.title ?? item.id;
+}
+
+const series = showContinueCard ? await getSeries() : [];
+---
+
+<div class:list={[showContinueCard && 'cs-home']}>
+  {srTitle && <h1 id="_top" class="sr-only">{srTitle}</h1>}
+  {showContinueCard && <ContinueCard client:visible series={series} />}
+  <RouteSections
+    tiers={resolvedTiers}
+    markKind={markKind}
+    density={density}
+    columns={columns}
+    legend={legend}
+    titleOf={titleOf}
+  />
+</div>
