@@ -12,7 +12,6 @@
     "build": "node scripts/build-search-index.mjs && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "playwright test",
     "versions": "node scripts/versions.mjs",
     "index:search": "node scripts/build-search-index.mjs",
     "check:links": "node scripts/check-links.mjs",
@@ -28,7 +27,6 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.2",
     "clsx": "^2.1.1",
-    "lucide-react": "^1.61.0",
     "minisearch": "^7.2.0",
     "monaco-editor": "^0.57.0",
     "react": "^19.3.1",
@@ -41,6 +39,7 @@
     "@playwright/test": "^1.64.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "github-slugger": "2.0.0",
     "typescript": "^6.0.3"
   }
 }

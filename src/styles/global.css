@@ -254,19 +254,11 @@ main h1.cs-page-title {
 
 /* 组件类链接覆盖正文默认链接样式（提高优先级，避免绿字+下划线） */
 .sl-markdown-content
-  :is(
-    .cs-btn,
-    .cs-tut-card,
-    .cs-section-more,
-    .cs-series-list a,
-    .cs-chapter-item a,
-    .cs-series-card
-  ) {
+  :is(.cs-btn, .cs-tut-card, .cs-section-more, .cs-chapter-item a) {
   text-decoration: none;
 }
 
-.sl-markdown-content
-  :is(.cs-series-list a, .cs-chapter-item a, .cs-tut-card, .cs-series-card) {
+.sl-markdown-content :is(.cs-chapter-item a, .cs-tut-card) {
   color: var(--cs-text);
 }
 
@@ -386,8 +378,6 @@ starlight-theme-select option {
    组件内部的卡片、列表项因此高低不齐，这里统一清零，由组件自己控制间距。 */
 .cs-course-grid > *,
 .cs-card-section > *,
-.cs-series-grid > *,
-.cs-series-list > *,
 .cs-chapter-list > *,
 .cs-pager > * {
   margin-top: 0;
@@ -868,12 +858,6 @@ starlight-theme-select option {
   color: var(--cs-accent-dark);
 }
 
-.cs-badge--planned {
-  border-style: dashed;
-  border-color: var(--cs-border-strong, var(--cs-border));
-  color: var(--cs-muted);
-}
-
 /* 暗色主题里强调色会变亮：实心标签与绿色按钮改用深色文字，避免白字压在浅绿上 */
 :root[data-theme='dark'] .cs-badge--required,
 :root[data-theme='dark'] .cs-badge--recommended,
@@ -1023,47 +1007,7 @@ starlight-theme-select option {
   margin-inline-end: 0.5rem;
 }
 
-.cs-series-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--cs-border);
-}
-
-.cs-series-list li {
-  border-bottom: 1px solid var(--cs-border);
-}
-
-.cs-series-list a {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.75rem 0.5rem;
-  color: var(--cs-text);
-  text-decoration: none;
-}
-
-.cs-series-list a:hover {
-  background: var(--cs-sidebar-bg);
-}
-
-.cs-series-name {
-  font-weight: 700;
-}
-
-.cs-series-meta {
-  font-size: 0.82rem;
-  color: var(--cs-muted);
-}
-
 /* ============ 业务系统详情页 ============ */
-.cs-biz-owner {
-  margin: 0 0 1.25rem;
-  font-size: 0.86rem;
-  color: var(--cs-muted);
-}
-
 .cs-biz-related {
   list-style: none;
   margin: 0 0 1.5rem;
@@ -1126,52 +1070,6 @@ starlight-theme-select option {
 
 .cs-chapter-meta {
   font-size: 0.8rem;
-  color: var(--cs-muted);
-}
-
-.cs-series-grid {
-  list-style: none;
-  margin: 1.5rem 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-  gap: 1rem;
-}
-
-.cs-series-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  height: 100%;
-  border: 1px solid var(--cs-border);
-  border-top: 3px solid var(--cs-accent);
-  border-radius: var(--cs-radius);
-  padding: 1rem 1.15rem;
-  color: var(--cs-text);
-  text-decoration: none;
-  background: var(--cs-bg);
-}
-
-.cs-series-card:hover {
-  background: var(--cs-sidebar-bg);
-}
-
-.cs-series-card h3 {
-  margin: 0;
-  font-size: 1.05rem;
-  color: var(--cs-accent-dark);
-}
-
-.cs-series-card p {
-  margin: 0;
-  color: var(--cs-muted);
-  font-size: 0.88rem;
-  line-height: 1.6;
-}
-
-.cs-series-card-meta {
-  margin-top: auto;
-  font-size: 0.78rem;
   color: var(--cs-muted);
 }
 
@@ -1633,27 +1531,6 @@ main:has(.cs-playground) .sl-container {
   font-size: 0.7rem;
   color: var(--cs-muted);
   flex-shrink: 0;
-}
-
-.cs-sidebar-topics {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  padding: 0.25rem 0;
-}
-
-.cs-sidebar-topics a {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--cs-text);
-  text-decoration: none;
-}
-
-.cs-sidebar-topics a[aria-current='page'] {
-  background: var(--cs-bg);
-  box-shadow: inset 3px 0 0 var(--cs-accent);
-  color: var(--cs-accent-dark);
 }
 
 .cs-sidebar-series-title {

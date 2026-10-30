@@ -6,6 +6,7 @@
  */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import GithubSlugger from 'github-slugger';
 
 const DOCS = 'src/content/docs';
 const OUT = 'public/search-index.json';
@@ -20,18 +21,13 @@ function titleFrom(frontmatter) {
   return match ? match[1].trim().replace(/^["']|["']$/g, '') : '';
 }
 
-function slugify(text, used) {
-  let slug = text
-    .trim()
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}\s-]/gu, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-  if (!slug) slug = 'section';
-  const count = used.get(slug) ?? 0;
-  used.set(slug, count + 1);
-  return count === 0 ? slug : `${slug}-${count + 1}`;
+function descriptionFrom(frontmatter) {
+  const match = frontmatter.match(/^description:\s*(.+)$/m);
+  return match ? match[1].trim().replace(/^["']|["']$/g, '') : '';
+}
+
+function slugify(text, slugger) {
+  return slugger.slug(text);
 }
 
 function clean(text) {
@@ -63,14 +59,15 @@ for (const file of files) {
   const source = (await readFile(file, 'utf8')).replace(/^\uFEFF/, '');
   const { frontmatter, body } = stripFrontmatter(source);
   const pageTitle = titleFrom(frontmatter) || rel;
-  const url = `/${rel.replace(/\/index\.(md|mdx)$/, '/').replace(/\.(md|mdx)$/, '/')}`;
+  const url = `/${rel.replace(/\.(md|mdx)$/, '/')}`.replace(/\/index\/$/, '/');
   const series = rel.startsWith('tutorials/') ? rel.split('/')[1] : undefined;
 
   const sections = [];
   let heading = '';
   let buffer = [];
   let inCode = false;
-  const used = new Map();
+  // 与 Astro/rehype-slug 一致：每个页面一个 slugger，重复标题会自动加 -1
+  const slugger = new GithubSlugger();
 
   for (const rawLine of body.split(/\r?\n/)) {
     if (/^\s*```/.test(rawLine)) {
@@ -101,8 +98,22 @@ for (const file of files) {
       t: pageTitle,
       s: series ?? '',
       h: section.heading,
-      a: section.heading ? slugify(section.heading, used) : '',
+      a: section.heading ? slugify(section.heading, slugger) : '',
       x: section.text.slice(0, 600),
+    });
+  }
+
+  // 纯组件渲染的页面（首页、路线页、业务系统章节）正文里没有 markdown 小节，
+  // 用 frontmatter 的 description 补一条记录，保证每个页面都能被搜到。
+  if (sections.length === 0) {
+    const description = descriptionFrom(frontmatter);
+    records.push({
+      u: url,
+      t: pageTitle,
+      s: series ?? '',
+      h: '',
+      a: '',
+      x: description.slice(0, 600),
     });
   }
 }
