@@ -167,7 +167,7 @@ tierSections(tiers: RouteTier[], options?) : CardSectionData[]
 | `markKind` | `explicit`（默认，只有写了 kind 的条目才标）/ `auto`（没写 kind 时按链接推断，首页用）/ `none`（一律不标，全部技术路线页用） |
 | `density` | `compact` = 路线页 / 总览页的紧凑卡片 |
 | `columns` | 一行几张卡（宽屏），默认 3；标题长的总览页用 2 |
-| `routeScale` | 给指向技术路线的卡片加「N 阶段 · M 项」提示 |
+| `metaOf` | 给指向技术路线的卡片加「N 阶段 · M 项」提示（文案由调用方提供） |
 | `titleOf` | 覆盖卡片标题（技术路线总览页从 MDX `title` 取） |
 | `available` | 条目是否已上线（路线页用它把没写正文的教程显示成虚线卡） |
 | `idOf` | 分节锚点规则（默认 `tier-<序号>`，目录页直接用自己的 `tier.id`） |
