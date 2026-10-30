@@ -30,6 +30,9 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -38,6 +41,9 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Check internal links
+        run: pnpm check:links
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

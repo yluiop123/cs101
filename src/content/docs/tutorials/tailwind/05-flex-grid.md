@@ -1,6 +1,6 @@
 ---
 title: "第 5 章 · Flex 与 Grid 工具类"
-description: ""
+description: "用 Flex 与 Grid 工具类搭布局：主轴与交叉轴、间距对齐、响应式栅格与页面骨架。"
 series: tailwind
 sidebar:
   order: 5

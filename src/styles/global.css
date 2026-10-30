@@ -15,6 +15,9 @@
 :root {
   --cs-accent: #04aa6d;
   --cs-accent-dark: #03885a;
+  /* 实心绿底 + 白字时用更深的一档，保证对比度 ≥ 4.5:1（#04aa6d 只有 3.01） */
+  --cs-accent-strong: #037a52;
+  --cs-accent-strong-hover: #026b46;
   --cs-border: #d9d9d9;
   --cs-border-strong: #bdbdbd;
   --cs-sidebar-bg: #f1f1f1;
@@ -25,6 +28,12 @@
   --cs-radius: 2px;
   --sl-content-width: 54rem;
   --sl-sidebar-width: 16rem;
+}
+
+/* 键盘可达性：全局可见焦点环（鼠标点击不显示） */
+:focus-visible {
+  outline: 2px solid var(--cs-accent);
+  outline-offset: 2px;
 }
 
 :root[data-theme='light'] {
@@ -42,6 +51,9 @@
   --cs-muted: #b4b4b4;
   --cs-accent: #34d399;
   --cs-accent-dark: #6ee7b7;
+  /* 暗色下实心绿底配深色文字（见下方 dark 覆盖），对比度 7.7:1 */
+  --cs-accent-strong: #34d399;
+  --cs-accent-strong-hover: #6ee7b7;
   --sl-color-accent-low: #065f46;
   --sl-color-accent: var(--cs-accent);
   --sl-color-accent-high: #a7f3d0;
@@ -391,6 +403,7 @@ starlight-theme-select label:hover {
 
 starlight-theme-select:focus-within label {
   border-color: var(--cs-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--cs-accent) 35%, transparent);
 }
 
 starlight-theme-select select {
@@ -520,17 +533,6 @@ starlight-theme-select option {
   line-height: 1.65;
 }
 
-.cs-badge {
-  display: inline-block;
-  border: 1px solid var(--cs-border);
-  background: var(--cs-sidebar-bg);
-  color: var(--cs-muted);
-  font-size: 0.7rem;
-  font-weight: 500;
-  line-height: 1.6;
-  padding: 0 0.35rem;
-}
-
 /* 卡片底部操作行：贴着卡片底部，保证同一行卡片的「学习资源」行对齐 */
 .cs-resource-details {
   margin-top: auto;
@@ -644,15 +646,15 @@ starlight-theme-select option {
 }
 
 .cs-btn-primary {
-  background: var(--cs-accent);
-  border-color: var(--cs-accent);
+  background: var(--cs-accent-strong);
+  border-color: var(--cs-accent-strong);
   color: #ffffff;
   font-weight: 700;
 }
 
 .cs-btn-primary:hover {
-  background: var(--cs-accent-dark);
-  border-color: var(--cs-accent-dark);
+  background: var(--cs-accent-strong-hover);
+  border-color: var(--cs-accent-strong-hover);
   color: #ffffff;
 }
 
@@ -869,6 +871,8 @@ starlight-theme-select option {
   padding: 0.02rem 0.4rem;
   border: 1px solid transparent;
   border-radius: 999px;
+  background: var(--cs-sidebar-bg);
+  color: var(--cs-muted);
   font-size: 0.68rem;
   font-weight: 700;
   line-height: 1.6;
@@ -876,14 +880,14 @@ starlight-theme-select option {
 }
 
 .cs-badge--required {
-  background: var(--cs-accent-dark);
-  border-color: var(--cs-accent-dark);
+  background: var(--cs-accent-strong);
+  border-color: var(--cs-accent-strong);
   color: #fff;
 }
 
 .cs-badge--recommended {
-  background: var(--cs-accent);
-  border-color: var(--cs-accent);
+  background: var(--cs-accent-strong);
+  border-color: var(--cs-accent-strong);
   color: #fff;
 }
 
@@ -969,8 +973,8 @@ starlight-theme-select option {
 }
 
 .cs-section-tag--required {
-  background: var(--cs-accent-dark);
-  border-color: var(--cs-accent-dark);
+  background: var(--cs-accent-strong);
+  border-color: var(--cs-accent-strong);
   color: #fff;
 }
 
@@ -1208,6 +1212,11 @@ starlight-theme-select option {
   padding: 0.35rem 0.5rem 0.35rem 0.9rem;
 }
 
+.cs-search-field:focus-within {
+  border-bottom-color: var(--cs-accent);
+  box-shadow: 0 1px 0 0 var(--cs-accent);
+}
+
 .cs-search-field input {
   flex: 1;
   border: 0;
@@ -1363,7 +1372,7 @@ starlight-theme-select option {
   right: 0.5rem;
   z-index: 3;
   border: 0;
-  background: var(--cs-accent);
+  background: var(--cs-accent-strong);
   color: #ffffff;
   font-size: 0.72rem;
   line-height: 1.4;
@@ -1372,7 +1381,7 @@ starlight-theme-select option {
 }
 
 .cs-code-run:hover {
-  background: var(--cs-accent-dark);
+  background: var(--cs-accent-strong-hover);
 }
 
 /* ============ 侧边栏（四主题 / 当前系列） ============ */

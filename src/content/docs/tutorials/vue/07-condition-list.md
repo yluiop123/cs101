@@ -1,6 +1,6 @@
 ---
 title: "第 7 章 · 条件与列表渲染"
-description: ""
+description: "v-if 与 v-show 的取舍、v-for 与 key 的正确用法、列表增删改与过渡动画。"
 series: vue
 sidebar:
   order: 7

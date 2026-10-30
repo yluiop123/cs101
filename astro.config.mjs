@@ -14,8 +14,9 @@ export default defineConfig({
   base: BASE,
   trailingSlash: 'always',
   prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'viewport',
+    // 站内 559 个页面：只在 hover 时预取，避免首页大量卡片触发整页预取
+    prefetchAll: false,
+    defaultStrategy: 'hover',
   },
   integrations: [
     // 安全网：内容统一写相对链接；万一残留根路径链接，构建期补上 base。
@@ -24,7 +25,7 @@ export default defineConfig({
     react(),
     starlight({
       title: 'CS101',
-      description: '中文计算机学习路径：首页教程目录 / 应用领域 / 计算机科学',
+      description: '中文计算机学习路径：教程目录 / 应用领域 / 业务系统 / 计算机科学',
       favicon: '/icon.svg',
       defaultLocale: 'root',
       locales: {

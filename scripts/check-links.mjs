@@ -8,7 +8,8 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, relative } from 'node:path';
 
 const DIST = 'dist';
-const BASE = '/cs101';
+// 与 astro.config.mjs 的 base 保持同一来源，避免两处硬编码不同步
+const BASE = (readFileSync('astro.config.mjs', 'utf8').match(/const BASE = '([^']+)'/) ?? [])[1] ?? '';
 const broken = [];
 let checked = 0;
 

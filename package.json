@@ -15,10 +15,10 @@
     "versions": "node scripts/versions.mjs",
     "index:search": "node scripts/build-search-index.mjs",
     "check:links": "node scripts/check-links.mjs",
-    "smoke": "node scripts/smoke-m5.mjs"
+    "smoke": "node scripts/smoke-m5.mjs",
+    "screenshot": "node scripts/screenshot.mjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^8.1.1",
     "@astrojs/react": "^7.1.1",
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/starlight": "^0.42.7",

@@ -1,6 +1,6 @@
 ---
 title: "第 8 章 · 表单（下）：校验与进阶"
-description: ""
+description: "表单进阶：客户端校验、约束验证 API、自定义错误提示与无障碍提交体验。"
 series: html
 sidebar:
   order: 8

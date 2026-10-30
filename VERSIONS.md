@@ -13,7 +13,6 @@
 
 | 类型 | 包 | 实际版本 |
 | --- | --- | --- |
-| prod | `@astrojs/mdx` | 8.1.1 |
 | prod | `@astrojs/react` | 7.1.1 |
 | prod | `@astrojs/sitemap` | 3.7.4 |
 | prod | `@astrojs/starlight` | 0.42.7 |
