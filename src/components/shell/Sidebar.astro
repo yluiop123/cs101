@@ -35,6 +35,15 @@ const isBusinessSystems = isBusinessSystemsIndexPath(path);
 const isTechStackIndex = isTechStackIndexPath(path);
 const isTechRoute = isTechStackRoutePath(path);
 
+// 三个分类总览页（首页 / 应用领域 / 业务系统）版式相同：标题 + 分类锚点，只是数据源不同
+const sectionCatalog = isHome
+  ? { kicker: '技术分类', items: homeCatalog }
+  : isDomainIndex
+    ? { kicker: '应用领域', items: domainCatalog }
+    : isBusinessSystems
+      ? { kicker: '业务系统', items: businessSystems }
+      : null;
+
 // 四条目录页 = 直接列出分节/分类；单条路线页 = 列出本页分节锚点（数据在页面 MDX 里，侧栏读不到，
 // 由页面底部的脚本从 .cs-card-section 采集）。
 const routePage = isTechRoute
@@ -58,25 +67,12 @@ if (isTechStackIndex) {
 ---
 
 {
-  isHome ? (
+  sectionCatalog ? (
+    // 首页 / 应用领域 / 业务系统：左侧栏与正文一致，列出分类锚点
     <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">技术分类</p>
+      <p class="cs-sidebar-kicker">{sectionCatalog.kicker}</p>
       <ul class="cs-sidebar-sections">
-        {homeCatalog.map((category) => (
-          <li>
-            <a href={`#${category.id}`} data-cs-section-link={category.id}>
-              {category.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  ) : isDomainIndex ? (
-    // 领域总览页：左侧栏与正文一致，列出 8 个分类
-    <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">应用领域</p>
-      <ul class="cs-sidebar-sections">
-        {domainCatalog.map((category) => (
+        {sectionCatalog.items.map((category) => (
           <li>
             <a href={`#${category.id}`} data-cs-section-link={category.id}>
               {category.name}
@@ -95,20 +91,6 @@ if (isTechStackIndex) {
           {routePage.backLabel} →
         </a>
       )}
-    </div>
-  ) : isBusinessSystems ? (
-    // 业务系统总览页：左侧栏按 14 个分类锚点联动
-    <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">业务系统</p>
-      <ul class="cs-sidebar-sections">
-        {businessSystems.map((category) => (
-          <li>
-            <a href={`#${category.id}`} data-cs-section-link={category.id}>
-              {category.name}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   ) : isTechStackIndex ? (
     <div class="cs-sidebar">
