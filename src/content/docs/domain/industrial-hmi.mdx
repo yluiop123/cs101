@@ -4,6 +4,12 @@ description: "工业上位机与 PLC 开发：串口 / Modbus / OPC UA / MQTT �
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import industrialHmiRoute from '@/data/routes/domain/industrial-hmi';
 
-<TechNodes tiers={industrialHmiRoute} />
+export const tiers = [
+    { name: '入门 · 语言与界面基础', items: ['csharp', 'wpf', 'qt', 'python'] },
+    { name: '进阶 · 工业通信协议', items: ['serial-port', 'tcp-udp', 'modbus', 'opc-ua', 'mqtt'] },
+    { name: '精通 · PLC、组态与运动控制', items: ['plc-programming', 'ladder-logic', 'scada', 'hmi-design', 'servo-motion'] },
+    { name: '实战与生态 · 采集、报表与部署', items: ['industrial-comms', 'realtime-chart', 'report-export', 'packaging', 'auto-update'] },
+];
+
+<TechNodes tiers={tiers} />

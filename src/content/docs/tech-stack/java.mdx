@@ -4,6 +4,12 @@ description: "「Java 技术路线」的分阶段学习路线：按顺序学完�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import javaRoute from '@/data/routes/tech/java';
 
-<TechNodes tiers={javaRoute} />
+export const tiers = [
+    { name: '入门 · 语言与工具', items: ['java', 'maven', 'gradle'] },
+    { name: '进阶 · 核心机制', items: ['collections', 'concurrency', 'rest-api', 'junit'] },
+    { name: '精通 · 虚拟机与原理', items: ['jvm', 'logging'] },
+    { name: '实战与生态 · 框架与架构', items: ['spring-boot', 'spring-data', 'mybatis', 'spring-cloud', 'microservices'] },
+];
+
+<TechNodes tiers={tiers} />

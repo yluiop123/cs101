@@ -4,6 +4,12 @@ description: "「GIS 与空间软件」方向的路线：从入门到实战的�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import gisRoute from '@/data/routes/domain/gis';
 
-<TechNodes tiers={gisRoute} />
+export const tiers = [
+    { name: '入门 · 前端与数据基础', items: ['javascript', 'html', 'css'] },
+    { name: '进阶 · 空间数据与数据库', items: ['sql', 'postgresql', 'mongodb'] },
+    { name: '精通 · 算法与系统', items: ['dsa', 'os', 'network'] },
+    { name: '实战与生态 · 服务与部署', items: ['docker', 'nginx', 'node-backend'] },
+];
+
+<TechNodes tiers={tiers} />

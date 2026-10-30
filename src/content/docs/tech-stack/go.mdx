@@ -4,6 +4,12 @@ description: "「Go 技术路线」的分阶段学习路线：按顺序学完即
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import goRoute from '@/data/routes/tech/go';
 
-<TechNodes tiers={goRoute} />
+export const tiers = [
+    { name: '入门 · 语言与工具', items: ['go', 'go-modules'] },
+    { name: '进阶 · 并发与泛型', items: ['go-concurrency', 'go-generics', 'go-testing'] },
+    { name: '精通 · 网络与原理', items: ['go-network'] },
+    { name: '实战与生态 · 服务与部署', items: ['grpc', 'go-microservices', 'go-deploy'] },
+];
+
+<TechNodes tiers={tiers} />

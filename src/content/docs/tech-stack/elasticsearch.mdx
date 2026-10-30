@@ -4,6 +4,12 @@ description: "「Elasticsearch」的分阶段学习路线：按顺序学完即�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import elasticsearchRoute from '@/data/routes/tech/elasticsearch';
 
-<TechNodes tiers={elasticsearchRoute} />
+export const tiers = [
+    { name: '入门 · 核心概念与查询', items: ['elasticsearch', 'linux', 'docker'] },
+    { name: '进阶 · 索引与文本', items: ['dsa', 'mongodb', 'redis'] },
+    { name: '精通 · 分布式与性能', items: ['os', 'network'] },
+    { name: '实战与生态 · 集群与生态', items: ['kafka', 'big-data', 'kubernetes'] },
+];
+
+<TechNodes tiers={tiers} />

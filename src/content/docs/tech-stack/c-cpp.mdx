@@ -4,6 +4,12 @@ description: "「C / C++ 技术路线」的分阶段学习路线：按顺序学�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import cCppRoute from '@/data/routes/tech/c-cpp';
 
-<TechNodes tiers={cCppRoute} />
+export const tiers = [
+    { name: '入门 · C 语言与编译基础', items: ['c', 'c-pointers', 'cmake'] },
+    { name: '进阶 · C++ 核心与标准库', items: ['cpp', 'modern-cpp', 'stl', 'cpp-templates'] },
+    { name: '精通 · 内存与底层', items: ['raii', 'cpp-debugging', 'systems-programming'] },
+    { name: '实战与生态 · 跨平台', items: ['cross-platform'] },
+];
+
+<TechNodes tiers={tiers} />

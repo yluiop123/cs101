@@ -4,6 +4,12 @@ description: "串口、TCP/UDP 打底，掌握 Modbus、OPC UA、MQTT 等工业�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import industrialCommsRoute from '@/data/routes/domain/industrial-comms';
 
-<TechNodes tiers={industrialCommsRoute} />
+export const tiers = [
+    { name: '入门 · 通信基础', items: ['serial-port', 'tcp-udp', 'network'] },
+    { name: '进阶 · 现场总线与工业协议', items: ['modbus', 'opc-ua', 'mqtt'] },
+    { name: '精通 · 设备联网与数据采集', items: ['industrial-comms', 'iot-gateway', 'plc-programming'] },
+    { name: '实战与生态 · 上位机与可视化', items: ['realtime-chart', 'report-export', 'scada'] },
+];
+
+<TechNodes tiers={tiers} />

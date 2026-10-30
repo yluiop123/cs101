@@ -4,6 +4,12 @@ description: "金融科技与量化交易：数据、算法、风控与低延迟
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import fintechRoute from '@/data/routes/domain/fintech';
 
-<TechNodes tiers={fintechRoute} />
+export const tiers = [
+    { name: '入门 · 语言与数据', items: ['python', 'sql', 'mysql'] },
+    { name: '进阶 · 系统与网络', items: ['c', 'network', 'os'] },
+    { name: '精通 · 量化与算法', items: ['dsa', 'quant', 'machine-learning'] },
+    { name: '实战与生态 · 风控与运维', items: ['redis', 'kafka', 'docker', 'security'] },
+];
+
+<TechNodes tiers={tiers} />

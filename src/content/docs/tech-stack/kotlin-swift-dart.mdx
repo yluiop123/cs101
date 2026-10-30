@@ -4,6 +4,12 @@ description: "「Kotlin / Swift / Dart 技术路线」的分阶段学习路线�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import kotlinSwiftDartRoute from '@/data/routes/tech/kotlin-swift-dart';
 
-<TechNodes tiers={kotlinSwiftDartRoute} />
+export const tiers = [
+    { name: '入门 · 语言与平台', items: ['kotlin', 'swift', 'android-sdk'] },
+    { name: '进阶 · 原生 UI 框架', items: ['jetpack-compose', 'swiftui'] },
+    { name: '精通 · 架构与跨端', items: ['mobile-arch', 'flutter', 'react-native'] },
+    { name: '实战 · 测试与发布', items: ['mobile-testing', 'mobile-release'] },
+];
+
+<TechNodes tiers={tiers} />

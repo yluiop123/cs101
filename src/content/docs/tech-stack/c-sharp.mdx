@@ -4,6 +4,12 @@ description: "「C# 与 .NET 技术路线」的分阶段学习路线：按顺序
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import cSharpRoute from '@/data/routes/tech/c-sharp';
 
-<TechNodes tiers={cSharpRoute} />
+export const tiers = [
+    { name: '入门 · 语言与工具', items: ['csharp', 'dotnet'] },
+    { name: '进阶 · 类型系统与数据', items: ['linq', 'csharp-async', 'di'] },
+    { name: '精通 · 框架与架构', items: ['ef-core'] },
+    { name: '实战与生态 · .NET 与上位机', items: ['aspnet', 'wpf', 'maui', 'industrial-comms'] },
+];
+
+<TechNodes tiers={tiers} />

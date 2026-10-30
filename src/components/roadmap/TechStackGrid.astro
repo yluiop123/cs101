@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import RouteSections from '@/components/shared/RouteSections.astro';
-import { tierSlugs } from '@/data/model/route-model';
-import { routePlan, techCatalog } from '@/data/routes';
+import { techCatalog } from '@/data/routes';
 
 // 卡片标题直接取 docs/tech-stack/<slug>.mdx 的 title，和左侧栏、页面标题同源
 const titles = new Map(
@@ -11,19 +10,12 @@ const titles = new Map(
     .map((entry) => [entry.id.slice('tech-stack/'.length), entry.data.title]),
 );
 
-// 卡片右侧的规模提示（N 阶段 · M 项）
-const scaleOf = (slug: string) => {
-  const tiers = routePlan[slug] ?? [];
-  return `${tiers.length} 阶段 · ${new Set(tiers.flatMap((tier) => tierSlugs(tier))).size} 项`;
-};
-
 // 全部技术路线 = 一条路线：4 个分组分节，一张卡片 = 一条技术路线
 ---
 
 <RouteSections
   tiers={techCatalog}
   titleOf={(item) => titles.get(item.slug) ?? item.slug}
-  metaOf={(item) => (item.kind === 'tech' ? scaleOf(item.slug) : undefined)}
   markKind="none"
   density="compact"
   columns={2}

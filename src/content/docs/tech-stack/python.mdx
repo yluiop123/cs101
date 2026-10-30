@@ -4,6 +4,12 @@ description: "「Python 技术路线」的分阶段学习路线：按顺序学�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import pythonRoute from '@/data/routes/tech/python';
 
-<TechNodes tiers={pythonRoute} />
+export const tiers = [
+    { name: '入门 · 语言与工具', items: ['python', 'python-typing', 'packaging'] },
+    { name: '进阶 · 数据处理', items: ['numpy', 'pandas', 'data-science'] },
+    { name: '精通 · 工程化与性能', items: ['automation', 'cli', 'scraping', 'pytest', 'profiling'] },
+    { name: '实战与生态 · Web 与 AI', items: ['django', 'fastapi', 'flask', 'machine-learning'] },
+];
+
+<TechNodes tiers={tiers} />

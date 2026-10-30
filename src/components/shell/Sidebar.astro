@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { getSeries, getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 import { businessCatalog, domainCatalog, homeCatalog } from '@/data/entries';
-import { techRouteOrder, routePlan } from '@/data/routes';
+import { techRouteOrder } from '@/data/routes';
 
 const { entry } = Astro.locals.starlightRoute;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -25,10 +25,6 @@ const isComputerScience = path.startsWith('/computer-science');
 // 业务系统总览页（系列页由 currentSeries 分支处理）
 const isBusinessSystems = path === '/business-systems/' || path === '/business-systems';
 const isTechStack = path.startsWith('/tech-stack');
-// 具体路线页：左侧栏显示这条路线自己的板块（与正文各板块锚点联动）
-const techRouteSlug = path.match(/^\/tech-stack\/([^/]+)\//)?.[1];
-const routeTiers = techRouteSlug ? (routePlan[techRouteSlug] ?? []) : [];
-const isTechRoutePage = isTechStack && routeTiers.length > 0;
 
 // 学习路线页的左侧栏：按路线顺序列出全部技术路线
 const routeOrder = techRouteOrder;
@@ -43,6 +39,19 @@ const techRoutes = isTechStack
         return a.slug.localeCompare(b.slug);
       })
   : [];
+
+// 领域路线页的左侧栏：列出所有已有路线页的领域（顺序沿用目录里的顺序）
+const domainDocTitles = new Map(
+  (await getCollection('docs'))
+    .filter((item) => item.id.startsWith('domain/') && item.id !== 'domain/index')
+    .map((item) => [item.id.slice('domain/'.length), item.data.title]),
+);
+const domainRouteLinks = domainCatalog
+  .flatMap((tier) => tier.items)
+  .map((item) => (typeof item === 'string' ? item : item.slug))
+  .map((slug) => slug.replace(/^domain-/, ''))
+  .filter((slug) => domainDocTitles.has(slug))
+  .map((slug) => ({ slug, name: domainDocTitles.get(slug)! }));
 
 const catalog =
   currentSeries || isHome || isDomainIndex || currentDomain || isComputerScience || isTechStack
@@ -79,14 +88,17 @@ const catalog =
       </ul>
     </div>
   ) : currentDomain ? (
-    // 具体领域页：左侧栏显示这条领域路线自己的阶段（与正文板块锚点联动）
+    // 具体领域页：左侧栏列出所有领域路线，当前页高亮
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">应用领域</p>
       <ul class="cs-sidebar-sections">
-        {(routePlan[`domain-${currentDomain}`] ?? []).map((tier, index) => (
+        {domainRouteLinks.map((route) => (
           <li>
-            <a href={`#tier-${index}`} data-cs-section-link={`tier-${index}`}>
-              {tier.name}
+            <a
+              href={withBase(`/domain/${route.slug}/`)}
+              aria-current={path === `/domain/${route.slug}/` ? 'page' : undefined}
+            >
+              {route.name}
             </a>
           </li>
         ))}
@@ -139,22 +151,6 @@ const catalog =
         ))}
       </ul>
     </div>
-  ) : isTechRoutePage ? (
-    <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">学习路线</p>
-      <ul class="cs-sidebar-sections">
-        {routeTiers.map((tier, index) => (
-          <li>
-            <a href={`#tier-${index}`} data-cs-section-link={`tier-${index}`}>
-              {tier.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <a class="cs-sidebar-back" href={withBase('/tech-stack/')}>
-        全部技术路线 →
-      </a>
-    </div>
   ) : isTechStack ? (
     <div class="cs-sidebar">
       <p class="cs-sidebar-kicker">学习路线</p>
@@ -170,6 +166,11 @@ const catalog =
           </li>
         ))}
       </ul>
+      {path !== '/tech-stack/' && path !== '/tech-stack' && (
+        <a class="cs-sidebar-back" href={withBase('/tech-stack/')}>
+          全部技术路线 →
+        </a>
+      )}
     </div>
   ) : currentSeries ? (
     <div class="cs-sidebar">

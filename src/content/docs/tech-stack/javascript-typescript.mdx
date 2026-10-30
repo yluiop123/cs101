@@ -4,6 +4,12 @@ description: "「JavaScript / TypeScript 技术路线」的分阶段学习路线
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import javascriptTypescriptRoute from '@/data/routes/tech/javascript-typescript';
 
-<TechNodes tiers={javascriptTypescriptRoute} />
+export const tiers = [
+    { name: '入门 · 语言与工具', items: ['javascript', 'typescript', 'markdown', 'regex'] },
+    { name: '进阶 · 现代前端', items: ['dom', 'state-management', 'vue-router', 'component-library', 'html', 'css'] },
+    { name: '精通 · 运行时与性能', items: ['nodejs', 'nextjs', 'nuxt', 'astro', 'perf-web', 'a11y'] },
+    { name: '实战与生态 · 框架与测试', items: ['vue', 'react', 'angular', 'svelte', 'vite', 'vitest', 'playwright', 'docker'] },
+];
+
+<TechNodes tiers={tiers} />

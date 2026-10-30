@@ -1,8 +1,25 @@
 ---
+import { getCollection } from 'astro:content';
 import RouteSections from '@/components/shared/RouteSections.astro';
 import { domainCatalog } from '@/data/entries';
+import type { RouteItem } from '@/data/model/route-model';
 
-// 应用领域 = 一条路线：8 个分类分节，卡片是各条领域路线；没配 routePlan 的方向自动渲染成虚线卡
+// 应用领域 = 一条路线：8 个分类分节，卡片是各条领域路线。
+// 有没有路线页由 docs 集合决定：content/docs/domain/<slug>.mdx 存在就点亮，否则渲染成虚线占位卡。
+const existing = new Set(
+  (await getCollection('docs'))
+    .filter((entry) => entry.id.startsWith('domain/') && entry.id !== 'domain/index')
+    .map((entry) => entry.id.slice('domain/'.length)),
+);
+
+const tiers = domainCatalog.map((tier) => ({
+  ...tier,
+  items: tier.items.map((item) => {
+    const routeItem: RouteItem = typeof item === 'string' ? { slug: item } : item;
+    const slug = routeItem.slug.replace(/^domain-/, '');
+    return { ...routeItem, planned: !existing.has(slug) };
+  }),
+}));
 ---
 
-<RouteSections tiers={domainCatalog} />
+<RouteSections tiers={tiers} />

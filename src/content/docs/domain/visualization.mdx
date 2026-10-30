@@ -4,6 +4,12 @@ description: "「可视化与数据大屏」方向的路线：从入门到实战
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import visualizationRoute from '@/data/routes/domain/visualization';
 
-<TechNodes tiers={visualizationRoute} />
+export const tiers = [
+    { name: '入门 · 前端与数据', items: ['html', 'css', 'javascript'] },
+    { name: '进阶 · 数据处理', items: ['data-science', 'sql', 'typescript'] },
+    { name: '精通 · 算法与性能', items: ['dsa', 'os', 'network'] },
+    { name: '实战与生态 · 服务与部署', items: ['node-backend', 'docker', 'nginx'] },
+];
+
+<TechNodes tiers={tiers} />

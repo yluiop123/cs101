@@ -4,6 +4,12 @@ description: "「网络安全与应用安全」方向的路线：从入门到实
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import cybersecurityRoute from '@/data/routes/domain/cybersecurity';
 
-<TechNodes tiers={cybersecurityRoute} />
+export const tiers = [
+    { name: '入门 · 基础与工具', items: ['linux', 'network', 'python'] },
+    { name: '进阶 · 攻防技术', items: ['security', 'os', 'c'] },
+    { name: '精通 · 逆向与底层', items: ['dsa', 'design-patterns'] },
+    { name: '实战与生态 · 云与运维', items: ['docker', 'kubernetes', 'nginx', 'sql'] },
+];
+
+<TechNodes tiers={tiers} />

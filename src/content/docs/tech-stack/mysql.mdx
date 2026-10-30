@@ -4,6 +4,12 @@ description: "「MySQL」的分阶段学习路线：按顺序学完即可覆盖�
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import mysqlRoute from '@/data/routes/tech/mysql';
 
-<TechNodes tiers={mysqlRoute} />
+export const tiers = [
+    { name: '入门 · 关系型与 SQL', items: ['sql', 'mysql', 'linux'] },
+    { name: '进阶 · 索引与事务', items: ['postgresql', 'redis', 'dsa'] },
+    { name: '精通 · 存储引擎与优化', items: ['os', 'network'] },
+    { name: '实战与生态 · 高可用与生态', items: ['mongodb', 'elasticsearch', 'kafka', 'docker', 'big-data'] },
+];
+
+<TechNodes tiers={tiers} />

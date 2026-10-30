@@ -4,6 +4,12 @@ description: "「游戏开发与实时图形」方向的路线：从入门到实
 ---
 
 import TechNodes from '@/components/roadmap/TechNodes.astro';
-import gameVrArRoute from '@/data/routes/domain/game-vr-ar';
 
-<TechNodes tiers={gameVrArRoute} />
+export const tiers = [
+    { name: '入门 · 语言与数学', items: ['c', 'cpp', 'dsa'] },
+    { name: '进阶 · 引擎与图形', items: ['game-dev', 'csharp', 'design-patterns'] },
+    { name: '精通 · 性能与底层', items: ['os', 'network'] },
+    { name: '实战与生态 · 上线与运维', items: ['docker', 'nginx', 'embedded'] },
+];
+
+<TechNodes tiers={tiers} />

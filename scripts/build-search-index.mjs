@@ -99,6 +99,7 @@ for (const file of files) {
   let rawHeading = '';
   let buffer = [];
   let inCode = false;
+  let inExport = false;
   // 与 Astro/rehype-slug 一致：每个页面一个 slugger，重复标题会自动加 -1
   const slugger = new GithubSlugger();
 
@@ -108,7 +109,16 @@ for (const file of files) {
       continue;
     }
     if (inCode) continue;
-    if (/^\s*(import\s|export\s|<[A-Z])/.test(rawLine)) continue;
+    // 路线页把分节数据写在 MDX 里（export const tiers = [...]），这段整块跳过
+    if (inExport) {
+      if (/^\s*\];/.test(rawLine)) inExport = false;
+      continue;
+    }
+    if (/^\s*export\s/.test(rawLine)) {
+      inExport = true;
+      continue;
+    }
+    if (/^\s*(import\s|<[A-Z])/.test(rawLine)) continue;
     if (/^:::(tip|note|caution|danger)/.test(rawLine)) continue;
 
     const match = rawLine.match(/^(#{2,3})\s+(.+)$/);
