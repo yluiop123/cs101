@@ -98,43 +98,6 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
     .map((entry) => chapterById.get(entry.id))
     .filter((chapter): chapter is ChapterRef => Boolean(chapter))
     .slice(0, 5);
-  const recentAll = state.recent
-    .map((entry) => chapterById.get(entry.id))
-    .filter((chapter): chapter is ChapterRef => Boolean(chapter));
-
-  // 继续学习按教程聚合：同一系列只保留一条，优先最近未完成章节
-  const inProgress: {
-    slug: string;
-    title: string;
-    href: string;
-    done: number;
-    total: number;
-    percent: number;
-    chapter: ChapterRef;
-  }[] = [];
-  const seenSeries = new Set<string>();
-  for (const chapter of recentAll) {
-    if (seenSeries.has(chapter.seriesSlug)) continue;
-    seenSeries.add(chapter.seriesSlug);
-    const stats = seriesBySlug.get(chapter.seriesSlug);
-    if (!stats || stats.done >= stats.total) continue;
-    const list = chapters.filter((item) => item.seriesSlug === chapter.seriesSlug);
-    const index = list.findIndex((item) => item.id === chapter.id);
-    const next = !state.completed[chapter.id]
-      ? chapter
-      : list.slice(index + 1).find((item) => !state.completed[item.id]);
-    if (!next) continue;
-    inProgress.push({
-      slug: chapter.seriesSlug,
-      title: stats.title,
-      href: stats.href,
-      done: stats.done,
-      total: stats.total,
-      percent: stats.total ? Math.round((stats.done / stats.total) * 100) : 0,
-      chapter: next,
-    });
-    if (inProgress.length >= 3) break;
-  }
 
   const removeSeriesFavorites = (slug: string) => {
     const current = readProgress();
@@ -195,58 +158,38 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
   return (
     <div className="cs-me">
       <section className="cs-me-section">
-        <h2>继续学习</h2>
-        {inProgress.length > 0 ? (
-          <ul className="cs-me-list">
-            {inProgress.map((item) => (
-              <li key={item.slug} className="cs-me-current">
-                <div className="cs-me-current-main">
-                  <p className="cs-me-current-kicker">{item.title}</p>
-                  <h3>{item.chapter.title}</h3>
-                  <p className="cs-me-current-meta">
-                    {item.done}/{item.total} 章 · {item.percent}%
-                  </p>
-                </div>
-                <a className="cs-btn cs-btn-primary" href={withBase(`/${item.chapter.id}/`)}>
-                  继续这一章
-                </a>
-                <div className="cs-me-bar" aria-hidden="true">
-                  <span style={{ width: `${item.percent}%` }} />
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="cs-me-empty">还没有正在学习的内容。去首页挑一条路线开始吧。</p>
-        )}
-      </section>
-
-      <section className="cs-me-section">
         <h2>最近学习</h2>
         {recentItems.length > 0 ? (
           <ul className="cs-me-list">
             {recentItems.map((chapter) => {
               const stats = seriesBySlug.get(chapter.seriesSlug);
+              const percent = stats && stats.total ? Math.round((stats.done / stats.total) * 100) : 0;
               return (
-                <li key={chapter.id} className="cs-me-item">
-                  <a href={withBase(`/${chapter.id}/`)}>
-                    <span>{chapter.title}</span>
-                    <small>
-                      {chapter.seriesTitle}
-                      {state.completed[chapter.id] ? ' · 已完成' : ''}
-                    </small>
-                  </a>
+                <li key={chapter.id} className="cs-me-recent">
+                  <div className="cs-me-recent-main">
+                    <p className="cs-me-recent-kicker">{chapter.seriesTitle}</p>
+                    <a className="cs-me-recent-title" href={withBase(`/${chapter.id}/`)}>
+                      {chapter.title}
+                    </a>
+                    <p className="cs-me-recent-meta">
+                      {stats && `${stats.done}/${stats.total} 章 · ${percent}%`}
+                      {state.completed[chapter.id] && ' · 已完成'}
+                    </p>
+                  </div>
+                  <span className="cs-me-recent-action" aria-hidden="true">
+                    继续 →
+                  </span>
                   {stats && (
-                    <span className="cs-me-item-progress">
-                      {stats.done}/{stats.total}
-                    </span>
+                    <div className="cs-me-bar" aria-hidden="true">
+                      <span style={{ width: `${percent}%` }} />
+                    </div>
                   )}
                 </li>
               );
             })}
           </ul>
         ) : (
-          <p className="cs-me-empty">还没有学习记录。</p>
+          <p className="cs-me-empty">还没有学习记录。去首页挑一条路线开始吧。</p>
         )}
       </section>
 
@@ -255,29 +198,33 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
 
         <h3 className="cs-me-subtitle">教程</h3>
         {favoriteSeries.length > 0 ? (
-          <ul className="cs-me-list">
+          <ul className="cs-me-grid">
             {favoriteSeries.map((item) => {
               const percent = item.total ? Math.round((item.done / item.total) * 100) : 0;
               return (
                 <li key={item.slug} className="cs-me-favorite">
                   <div className="cs-me-favorite-head">
-                    <a href={withBase(item.href)}>
-                      <span>{item.title}</span>
+                    <div className="cs-me-favorite-main">
+                      <a className="cs-me-favorite-title" href={withBase(item.href)}>
+                        {item.title}
+                      </a>
                       <small>{item.count} 个收藏章节</small>
-                    </a>
-                    <div className="cs-me-favorite-side">
-                      <span>
-                        {item.done}/{item.total}
-                      </span>
-                      <button
-                        type="button"
-                        className="cs-me-remove"
-                        onClick={() => removeSeriesFavorites(item.slug)}
-                      >
-                        <StarOff size={14} aria-hidden="true" />
-                        取消收藏
-                      </button>
                     </div>
+                    <button
+                      type="button"
+                      className="cs-me-remove"
+                      onClick={() => removeSeriesFavorites(item.slug)}
+                      aria-label={`取消收藏 ${item.title}`}
+                      title="取消收藏"
+                    >
+                      <StarOff size={15} aria-hidden="true" />
+                    </button>
+                  </div>
+                  <div className="cs-me-favorite-meta">
+                    <span>{percent}%</span>
+                    <span>
+                      {item.done}/{item.total} 章
+                    </span>
                   </div>
                   <div className="cs-me-bar" aria-hidden="true">
                     <span style={{ width: `${percent}%` }} />
@@ -292,7 +239,7 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
 
         <h3 className="cs-me-subtitle">路线</h3>
         {favoriteRoutes.length > 0 ? (
-          <ul className="cs-me-list">
+          <ul className="cs-me-grid">
             {favoriteRoutes.map((route) => {
               const done = route.seriesSlugs.reduce(
                 (sum, slug) => sum + (seriesBySlug.get(slug)?.done ?? 0),
@@ -302,31 +249,31 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
               return (
                 <li key={route.id} className="cs-me-favorite">
                   <div className="cs-me-favorite-head">
-                    <a href={withBase(route.href)}>
-                      <span>{route.title}</span>
+                    <div className="cs-me-favorite-main">
+                      <a className="cs-me-favorite-title" href={withBase(route.href)}>
+                        {route.title}
+                      </a>
                       <small>学习路线</small>
-                    </a>
-                    <div className="cs-me-favorite-side">
-                      {route.total > 0 && (
-                        <span>
-                          {done}/{route.total}
-                        </span>
-                      )}
-                      <button
-                        type="button"
-                        className="cs-me-remove"
-                        onClick={() => toggleFavorite(route.id)}
-                      >
-                        <StarOff size={14} aria-hidden="true" />
-                        取消收藏
-                      </button>
                     </div>
+                    <button
+                      type="button"
+                      className="cs-me-remove"
+                      onClick={() => toggleFavorite(route.id)}
+                      aria-label={`取消收藏 ${route.title}`}
+                      title="取消收藏"
+                    >
+                      <StarOff size={15} aria-hidden="true" />
+                    </button>
                   </div>
-                  {route.total > 0 && (
-                    <div className="cs-me-bar" aria-hidden="true">
-                      <span style={{ width: `${percent}%` }} />
-                    </div>
-                  )}
+                  <div className="cs-me-favorite-meta">
+                    <span>{percent}%</span>
+                    <span>
+                      {done}/{route.total} 章
+                    </span>
+                  </div>
+                  <div className="cs-me-bar" aria-hidden="true">
+                    <span style={{ width: `${percent}%` }} />
+                  </div>
                 </li>
               );
             })}
