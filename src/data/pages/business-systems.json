@@ -159,5 +159,9 @@
   ],
   "options": {
     "markKind": "auto"
+  },
+  "sidebar": {
+    "mode": "sections",
+    "kicker": "业务系统"
   }
 }

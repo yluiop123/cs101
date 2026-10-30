@@ -175,7 +175,17 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 | `srTitle` | 首页专用无障碍标题 |
 | `showContinueCard` | 首页显示「继续学习」 |
 | `detectPlanned` | 应用领域总览：没有 docs 页面的方向标「规划中」 |
-| `titleFromContent` | 技术路线总览：卡片标题取内容集合的 `title` |
+
+`sidebar` 控制左侧栏，与页面数据同源：
+
+| 字段 | 作用 |
+| --- | --- |
+| `mode: "sections"` | 列出本页 `tiers` 的分节锚点（首页 / 领域 / 业务系统 / 各路线 / 计算机科学） |
+| `mode: "routes"` | 摊平 `tiers` 里的条目，渲染成路线链接（全部技术路线总览） |
+| `kicker` | 侧栏顶部标题 |
+| `back` | 侧栏底部返回链接（`{ href, label }`） |
+
+教程章节页没有页面 JSON，左侧栏仍由内容集合里的系列章节兜底。
 
 | 配置 | 页面 |
 | --- | --- |
@@ -199,7 +209,7 @@ docs 集合（`domain/<slug>.mdx` 是否存在），没有页面的方向自动�
 | 首页 `/` | `pages/home.json` | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind: "auto"`、`showContinueCard: true` |
 | 应用领域 `/domain/` | `pages/domain.json` | 8 分节 / 47 条（24 有路线，23 虚线） | `detectPlanned: true` |
 | 业务系统 `/business-systems/` | `pages/business-systems.json` | 14 分节 / 72 条 | `markKind: "auto"` |
-| 全部技术路线 `/tech-stack/` | `pages/tech-stack.json` | 4 分节 / 19 条 | `markKind: "none"`、`columns: 2`、`titleFromContent: true` |
+| 全部技术路线 `/tech-stack/` | `pages/tech-stack.json` | 4 分节 / 19 条 | `markKind: "none"`、`columns: 2`、`sidebar.mode: "routes"` |
 
 也就是说：**首页就是一条路线（12 个分节），业务系统也是一条路线（14 个分节）**，
 和「Java 技术路线（4 个分节）」没有任何结构差别。
@@ -298,8 +308,8 @@ docs 集合（`domain/<slug>.mdx` 是否存在），没有页面的方向自动�
 | 单条路线页（`/tech-stack/<key>/`、`/domain/<slug>/`、`/computer-science/*`） | **本页分节锚点**（入门 / 进阶 / 精通 / 实战…），点击定位、滚动高亮；底部回到对应总览 |
 | 教程页 | 这套教程的章节目录 |
 
-单条路线页的分节数据在 JSON 里，`Sidebar.astro` 不直接读页面配置，因此由页面脚本从渲染出的
-`.cs-card-section`（`data-cs-title`）采集锚点并复用同一套高亮逻辑。
+单条路线页的分节数据在 JSON 里，`Sidebar.astro` 直接读同一份 `tiers` 生成锚点，
+不再从 DOM 采集；脚本只负责点击定位、滚动高亮与移动端收起抽屉。
 
 ## 8. 教程与章节：`src/content/docs/**`
 

@@ -35,5 +35,13 @@
       ]
     }
   ],
-  "options": {}
+  "options": {},
+  "sidebar": {
+    "mode": "sections",
+    "kicker": "学习路线",
+    "back": {
+      "href": "/tech-stack/",
+      "label": "全部技术路线"
+    }
+  }
 }

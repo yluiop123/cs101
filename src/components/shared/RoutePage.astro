@@ -20,7 +20,6 @@ const {
   srTitle,
   showContinueCard = false,
   detectPlanned = false,
-  titleFromContent = false,
 } = options;
 
 // 应用领域总览：docs 集合里存在 domain/<slug>.mdx 才点亮，否则标成「规划中」
@@ -41,17 +40,6 @@ if (detectPlanned) {
   }));
 }
 
-// 技术路线总览：卡片标题与左侧栏、页面标题同源，取内容集合的 title
-let titleOf: ((item: RouteItem) => string) | undefined;
-if (titleFromContent) {
-  const titles = new Map(
-    (await getCollection('docs'))
-      .filter((item) => item.id.startsWith('tech-stack/') && item.id !== 'tech-stack/index')
-      .map((item) => [item.id.slice('tech-stack/'.length), item.data.title]),
-  );
-  titleOf = (item) => titles.get(item.id) ?? item.title ?? item.id;
-}
-
 const series = showContinueCard ? await getSeries() : [];
 ---
 
@@ -64,6 +52,5 @@ const series = showContinueCard ? await getSeries() : [];
     density={density}
     columns={columns}
     legend={legend}
-    titleOf={titleOf}
   />
 </div>

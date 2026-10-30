@@ -33,5 +33,13 @@
       ]
     }
   ],
-  "options": {}
+  "options": {},
+  "sidebar": {
+    "mode": "sections",
+    "kicker": "应用领域",
+    "back": {
+      "href": "/domain/",
+      "label": "全部应用领域"
+    }
+  }
 }

@@ -6,47 +6,56 @@
         {
           "id": "java",
           "kind": "route",
-          "href": "/tech-stack/java/"
+          "href": "/tech-stack/java/",
+          "title": "Java 技术路线"
         },
         {
           "id": "python",
           "kind": "route",
-          "href": "/tech-stack/python/"
+          "href": "/tech-stack/python/",
+          "title": "Python 技术路线"
         },
         {
           "id": "go",
           "kind": "route",
-          "href": "/tech-stack/go/"
+          "href": "/tech-stack/go/",
+          "title": "Go 技术路线"
         },
         {
           "id": "rust",
           "kind": "route",
-          "href": "/tech-stack/rust/"
+          "href": "/tech-stack/rust/",
+          "title": "Rust 技术路线"
         },
         {
           "id": "javascript-typescript",
           "kind": "route",
-          "href": "/tech-stack/javascript-typescript/"
+          "href": "/tech-stack/javascript-typescript/",
+          "title": "JavaScript / TypeScript 技术路线"
         },
         {
           "id": "frontend",
           "kind": "route",
-          "href": "/tech-stack/frontend/"
+          "href": "/tech-stack/frontend/",
+          "title": "大前端技术路线"
         },
         {
           "id": "c-cpp",
           "kind": "route",
-          "href": "/tech-stack/c-cpp/"
+          "href": "/tech-stack/c-cpp/",
+          "title": "C / C++ 技术路线"
         },
         {
           "id": "c-sharp",
           "kind": "route",
-          "href": "/tech-stack/c-sharp/"
+          "href": "/tech-stack/c-sharp/",
+          "title": "C# 与 .NET 技术路线"
         },
         {
           "id": "kotlin-swift-dart",
           "kind": "route",
-          "href": "/tech-stack/kotlin-swift-dart/"
+          "href": "/tech-stack/kotlin-swift-dart/",
+          "title": "Kotlin / Swift / Dart 技术路线"
         }
       ]
     },
@@ -56,32 +65,38 @@
         {
           "id": "sql-database",
           "kind": "route",
-          "href": "/tech-stack/sql-database/"
+          "href": "/tech-stack/sql-database/",
+          "title": "数据库技术路线"
         },
         {
           "id": "mysql",
           "kind": "route",
-          "href": "/tech-stack/mysql/"
+          "href": "/tech-stack/mysql/",
+          "title": "MySQL"
         },
         {
           "id": "postgresql",
           "kind": "route",
-          "href": "/tech-stack/postgresql/"
+          "href": "/tech-stack/postgresql/",
+          "title": "PostgreSQL"
         },
         {
           "id": "redis",
           "kind": "route",
-          "href": "/tech-stack/redis/"
+          "href": "/tech-stack/redis/",
+          "title": "Redis"
         },
         {
           "id": "mongodb",
           "kind": "route",
-          "href": "/tech-stack/mongodb/"
+          "href": "/tech-stack/mongodb/",
+          "title": "MongoDB"
         },
         {
           "id": "elasticsearch",
           "kind": "route",
-          "href": "/tech-stack/elasticsearch/"
+          "href": "/tech-stack/elasticsearch/",
+          "title": "Elasticsearch"
         }
       ]
     },
@@ -91,12 +106,14 @@
         {
           "id": "kafka",
           "kind": "route",
-          "href": "/tech-stack/kafka/"
+          "href": "/tech-stack/kafka/",
+          "title": "中间件技术路线"
         },
         {
           "id": "nginx",
           "kind": "route",
-          "href": "/tech-stack/nginx/"
+          "href": "/tech-stack/nginx/",
+          "title": "Nginx"
         }
       ]
     },
@@ -106,12 +123,14 @@
         {
           "id": "docker",
           "kind": "route",
-          "href": "/tech-stack/docker/"
+          "href": "/tech-stack/docker/",
+          "title": "DevOps 与工程工具"
         },
         {
           "id": "kubernetes",
           "kind": "route",
-          "href": "/tech-stack/kubernetes/"
+          "href": "/tech-stack/kubernetes/",
+          "title": "Kubernetes"
         }
       ]
     }
@@ -119,7 +138,10 @@
   "options": {
     "markKind": "none",
     "density": "compact",
-    "columns": 2,
-    "titleFromContent": true
+    "columns": 2
+  },
+  "sidebar": {
+    "mode": "routes",
+    "kicker": "学习路线"
   }
 }

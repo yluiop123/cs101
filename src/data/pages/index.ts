@@ -18,13 +18,24 @@ export interface PageOptions {
   showContinueCard?: boolean;
   /** 应用领域总览：没有对应 docs 页面的方向标成「规划中」 */
   detectPlanned?: boolean;
-  /** 技术路线总览：卡片标题取 docs/tech-stack/<slug>.mdx 的 title */
-  titleFromContent?: boolean;
+}
+
+/**
+ * 左侧栏配置：同一个 Sidebar 组件按这里的 mode 渲染。
+ * - sections：列出本页 tiers 的分节锚点
+ * - routes：摊平 tiers 里的条目，渲染成路线链接
+ * 教程章节页没有页面 JSON，仍由内容集合（系列章节）兜底。
+ */
+export interface SidebarConfig {
+  mode: 'sections' | 'routes';
+  kicker: string;
+  back?: { href: string; label: string };
 }
 
 export interface PageConfig {
   tiers: RouteTier[];
   options?: PageOptions;
+  sidebar?: SidebarConfig;
 }
 
 const modules = import.meta.glob<PageConfig>('./**/*.json', {

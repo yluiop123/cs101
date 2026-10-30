@@ -333,5 +333,9 @@
   ],
   "options": {
     "detectPlanned": true
+  },
+  "sidebar": {
+    "mode": "sections",
+    "kicker": "应用领域"
   }
 }

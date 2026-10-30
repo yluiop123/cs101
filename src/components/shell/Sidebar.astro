@@ -1,29 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
-import {
-  isBusinessSystemsIndexPath,
-  isComputerScienceRoutePath,
-  isDomainIndexPath,
-  isHomePath,
-  isTechStackIndexPath,
-  isTechStackRoutePath,
-} from '@/data/navigation';
-import { tierIds } from '@/data/model/route-model';
-import { requirePageConfig } from '@/data/pages';
+import { allTierItems, tagLabels } from '@/data/model/route-model';
+import { getPageConfig } from '@/data/pages';
 import { getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
-
-const homeCatalog = requirePageConfig('index').tiers;
-const domainCatalog = requirePageConfig('domain').tiers;
-const businessSystems = requirePageConfig('business-systems').tiers;
-const techRouteOrder = requirePageConfig('tech-stack').tiers.flatMap((tier) => tierIds(tier));
 
 const { entry } = Astro.locals.starlightRoute;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.slice(base.length) || '/';
+
+// 目录页 / 路线页：侧栏完全由页面 JSON 的 sidebar 配置决定
+const config = getPageConfig(entry.id);
+const sidebar = config?.sidebar;
+
+// 教程章节页没有页面 JSON，仍从内容集合取系列章节
 const seriesMatch =
   path.match(/^\/tutorials\/([^/]+)\//) ?? path.match(/^\/business-systems\/([^/]+)\//);
-// 业务系统的系列 slug 带 business- 前缀（避免与普通教程重名）
 const currentSeriesSlug = seriesMatch
   ? path.startsWith('/business-systems/')
     ? `business-${seriesMatch[1]}`
@@ -31,79 +22,52 @@ const currentSeriesSlug = seriesMatch
   : undefined;
 const currentSeries = currentSeriesSlug ? await getSeriesBySlug(currentSeriesSlug) : null;
 const currentId = entry.id;
-const isHome = isHomePath(path);
-const isDomainIndex = isDomainIndexPath(path);
-const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
-const isComputerScienceRoute = isComputerScienceRoutePath(path);
-// 业务系统总览页（系列页由 currentSeries 分支处理）
-const isBusinessSystems = isBusinessSystemsIndexPath(path);
-const isTechStackIndex = isTechStackIndexPath(path);
-const isTechRoute = isTechStackRoutePath(path);
 
-// 三个分类总览页（首页 / 应用领域 / 业务系统）版式相同：标题 + 分类锚点，只是数据源不同
-const sectionCatalog = isHome
-  ? { kicker: '技术分类', items: homeCatalog }
-  : isDomainIndex
-    ? { kicker: '应用领域', items: domainCatalog }
-    : isBusinessSystems
-      ? { kicker: '业务系统', items: businessSystems }
-      : null;
+// sections：本页 tiers 就是分节，直接渲染锚点（id 规则与 RouteSections 一致）
+const sectionItems =
+  sidebar?.mode === 'sections' && config
+    ? config.tiers.map((tier, index) => ({
+        id: tier.id ?? `tier-${index}`,
+        label: tier.name ?? (tier.tag ? tagLabels[tier.tag] : `第 ${index + 1} 节`),
+      }))
+    : [];
 
-// 四条目录页 = 直接列出分节/分类；单条路线页 = 列出本页分节锚点（数据在页面 MDX 里，侧栏读不到，
-// 由页面底部的脚本从 .cs-card-section 采集）。
-const routePage = isTechRoute
-  ? { kicker: '学习路线', back: '/tech-stack/', backLabel: '全部技术路线' }
-  : currentDomain
-    ? { kicker: '应用领域', back: '/domain/', backLabel: '全部应用领域' }
-    : isComputerScienceRoute
-      ? { kicker: path.startsWith('/computer-science/en/') ? '国际教程' : '国内教程' }
-      : undefined;
-
-// 技术路线总览页的左侧栏：顺序完全由 techCatalog 决定，标题取对应页面的 title
-let techRoutes: { slug: string; name: string }[] = [];
-if (isTechStackIndex) {
-  const titles = new Map(
-    (await getCollection('docs'))
-      .filter((item) => item.id.startsWith('tech-stack/') && item.id !== 'tech-stack/index')
-      .map((item) => [item.id.slice('tech-stack/'.length), item.data.title] as const),
-  );
-  techRoutes = techRouteOrder.map((slug) => ({ slug, name: titles.get(slug) ?? slug }));
-}
+// routes：摊平 tiers 里的条目，渲染成路线链接
+const routeItems =
+  sidebar?.mode === 'routes' && config
+    ? allTierItems(config.tiers).map((item) => ({
+        href: item.href ?? `/tutorials/${item.id}/`,
+        label: item.title ?? item.id,
+      }))
+    : [];
 ---
 
 {
-  sectionCatalog ? (
-    // 首页 / 应用领域 / 业务系统：左侧栏与正文一致，列出分类锚点
+  sidebar?.mode === 'sections' ? (
     <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">{sectionCatalog.kicker}</p>
+      <p class="cs-sidebar-kicker">{sidebar.kicker}</p>
       <ul class="cs-sidebar-sections">
-        {sectionCatalog.items.map((category) => (
+        {sectionItems.map((item) => (
           <li>
-            <a href={`#${category.id}`} data-cs-section-link={category.id}>
-              {category.name}
+            <a href={`#${item.id}`} data-cs-section-link={item.id}>
+              {item.label}
             </a>
           </li>
         ))}
       </ul>
-    </div>
-  ) : routePage ? (
-    // 单条路线页（技术路线 / 领域路线 / 计算机科学）：列出本页分节，锚点由页面脚本采集
-    <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">{routePage.kicker}</p>
-      <ul class="cs-sidebar-sections" data-cs-sections-auto></ul>
-      {routePage.back && (
-        <a class="cs-sidebar-back" href={withBase(routePage.back)}>
-          {routePage.backLabel} →
+      {sidebar.back && (
+        <a class="cs-sidebar-back" href={withBase(sidebar.back.href)}>
+          {sidebar.back.label} →
         </a>
       )}
     </div>
-  ) : isTechStackIndex ? (
+  ) : sidebar?.mode === 'routes' ? (
     <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">学习路线</p>
+      <p class="cs-sidebar-kicker">{sidebar.kicker}</p>
       <ul class="cs-sidebar-sections">
-        {techRoutes.map((route) => (
+        {routeItems.map((item) => (
           <li>
-            <a href={withBase(`/tech-stack/${route.slug}/`)}>{route.name}</a>
+            <a href={withBase(item.href)}>{item.label}</a>
           </li>
         ))}
       </ul>
@@ -130,23 +94,6 @@ if (isTechStackIndex) {
 }
 
 <script>
-  // 单条路线页：分节数据写在页面 MDX 里，左侧栏拿不到，从渲染结果里采集锚点
-  for (const list of document.querySelectorAll<HTMLElement>('[data-cs-sections-auto]')) {
-    if (list.children.length > 0) continue;
-    for (const section of document.querySelectorAll<HTMLElement>('.cs-card-section')) {
-      const id = section.id;
-      const title = section.dataset.csTitle;
-      if (!id || !title) continue;
-      const li = document.createElement('li');
-      const link = document.createElement('a');
-      link.href = `#${id}`;
-      link.dataset.csSectionLink = id;
-      link.textContent = title;
-      li.append(link);
-      list.append(li);
-    }
-  }
-
   // 目录页 / 路线页左侧目录：点击定位到分组，滚动时高亮当前分组
   const links = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('[data-cs-section-link]'),
