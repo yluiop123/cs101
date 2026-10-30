@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { readProgress, toggleFavorite } from '@/lib/progress';
+import { PROGRESS_EVENT, readProgress, toggleFavorite } from '@/lib/progress';
 
 export default function FavoriteButton({ slug }: { slug: string }) {
   const [favorite, setFavorite] = useState(false);
@@ -7,10 +7,10 @@ export default function FavoriteButton({ slug }: { slug: string }) {
   useEffect(() => {
     setFavorite(readProgress().favorites.includes(slug));
     const refresh = () => setFavorite(readProgress().favorites.includes(slug));
-    window.addEventListener('cs101:progress', refresh);
+    window.addEventListener(PROGRESS_EVENT, refresh);
     window.addEventListener('storage', refresh);
     return () => {
-      window.removeEventListener('cs101:progress', refresh);
+      window.removeEventListener(PROGRESS_EVENT, refresh);
       window.removeEventListener('storage', refresh);
     };
   }, [slug]);

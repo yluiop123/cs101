@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { markRecent, readProgress, toggleComplete } from '@/lib/progress';
+import { markRecent, PROGRESS_EVENT, readProgress, toggleComplete } from '@/lib/progress';
 
 export default function CompleteButton({ slug }: { slug: string }) {
   const [completed, setCompleted] = useState(false);
@@ -8,10 +8,10 @@ export default function CompleteButton({ slug }: { slug: string }) {
     markRecent(slug);
     setCompleted(Boolean(readProgress().completed[slug]));
     const refresh = () => setCompleted(Boolean(readProgress().completed[slug]));
-    window.addEventListener('cs101:progress', refresh);
+    window.addEventListener(PROGRESS_EVENT, refresh);
     window.addEventListener('storage', refresh);
     return () => {
-      window.removeEventListener('cs101:progress', refresh);
+      window.removeEventListener(PROGRESS_EVENT, refresh);
       window.removeEventListener('storage', refresh);
     };
   }, [slug]);

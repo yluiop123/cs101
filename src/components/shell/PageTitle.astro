@@ -1,7 +1,8 @@
 ---
-import { withBase } from '@/lib/utils';
-import { getSeriesBySlug } from '@/lib/content';
+import { defaultSectionRoot, sectionRoot } from '@/data/navigation';
 import { seriesMeta } from '@/data/tutorials';
+import { getSeriesBySlug } from '@/lib/content';
+import { withBase } from '@/lib/utils';
 
 const { entry } = Astro.locals.starlightRoute;
 const data = entry.data as Record<string, any>;
@@ -16,12 +17,7 @@ const isSectionIndex = segments.length === 1;
 type Crumb = { label: string; href?: string };
 
 // 顶部四个板块是同级：应用领域 / 计算机科学 的页面不再以「首页」为上级
-const sectionRoot: Record<string, { label: string; href?: string }> = {
-  domain: { label: '应用领域', href: '/domain/' },
-  // 计算机科学没有总览页（顶部导航直接下拉到两条教程），面包屑这一级不带链接
-  'computer-science': { label: '计算机科学' },
-};
-const root = sectionRoot[segments[0] ?? ''] ?? { label: '首页', href: '/' };
+const root = sectionRoot[segments[0] ?? ''] ?? defaultSectionRoot;
 
 const crumbs: Crumb[] = [];
 if (!isSplash && !isHomePage) {

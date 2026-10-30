@@ -37,32 +37,24 @@ const data = await getSeriesBySlug(series);
           </li>
         ))}
       </ol>
-      <script is:inline>
-        (() => {
-          const KEY = 'cs101:progress:v1';
-          const read = () => {
-            try {
-              return JSON.parse(localStorage.getItem(KEY) || '{}');
-            } catch {
-              return {};
-            }
-          };
-          const paint = () => {
-            const state = read();
-            const done = state.completed || {};
-            const links = [...document.querySelectorAll('[data-chapter-id]')];
-            if (!links.length) return;
-            links.forEach((link) => {
-              link.classList.toggle('is-complete', Boolean(done[link.dataset.chapterId]));
-            });
-            const completed = links.filter((link) => done[link.dataset.chapterId]).length;
-            const label = document.querySelector('[data-series-progress]');
-            if (label) label.textContent = `已完成 ${completed}/${links.length} 章`;
-          };
-          paint();
-          document.addEventListener('cs101:progress', paint);
-          window.addEventListener('storage', paint);
-        })();
+      <script>
+        import { PROGRESS_EVENT, readProgress } from '@/lib/progress';
+
+        const paint = () => {
+          const done = readProgress().completed;
+          const links = [...document.querySelectorAll<HTMLElement>('[data-chapter-id]')];
+          if (!links.length) return;
+          links.forEach((link) => {
+            link.classList.toggle('is-complete', Boolean(done[link.dataset.chapterId ?? '']));
+          });
+          const completed = links.filter((link) => done[link.dataset.chapterId ?? '']).length;
+          const label = document.querySelector('[data-series-progress]');
+          if (label) label.textContent = `已完成 ${completed}/${links.length} 章`;
+        };
+
+        paint();
+        window.addEventListener(PROGRESS_EVENT, paint);
+        window.addEventListener('storage', paint);
       </script>
     </>
   )

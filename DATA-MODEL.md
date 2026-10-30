@@ -359,7 +359,8 @@ interface ProgressState {
 - **卡片只有一套实现**：`RouteSections → Card`，目录页与路线页共用；外部引用同样走这套卡片，
   只是卡片是按钮、点开 `ReferenceDrawer` 抽屉。
 - **路线视图只有一个组件**：所有页面都用 `components/shared/RouteSections.astro`，页面之间只差传入的
-  `RouteTier[]` 与少量显示选项；`TechNodes`、`CourseRoutes`、`CardSection`、`cards.ts` 都已并入或删除。
+  `RouteTier[]` 与少量显示选项；卡片解析与分组在 `src/lib/route-view.ts`（纯函数，可单测），
+  `TechNodes`、`CourseRoutes`、`CardSection`、`cards.ts` 都已并入或删除。
 - **数据分三类放**：入口页（`src/data/entries/**`）、路线总览目录（`src/data/routes/**`）、
   教程元信息（`src/data/tutorials/**`）；模型与纯函数在 `src/data/model/**`。
   每条路线自己的分节数据写在页面 MDX 里（`export const tiers`），没有 `routePlan` 之类的查表文件。

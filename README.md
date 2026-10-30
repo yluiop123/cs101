@@ -68,7 +68,7 @@ src/
     search/                  # ⌘K 搜索岛
     progress/                # 完成/收藏/继续学习岛
     shared/                  # RouteSections（全站唯一路线渲染入口）/ Card / ReferenceDrawer
-    roadmap|tutorial|home|domain|business/
+    home|domain|business-systems|tech-stack|tutorials/  # 页面业务组件（与路由同名）
   data/
     model/                   # 路线模型（类型 + 纯函数，不含数据）
     entries/                 # 入口页配置：首页 / 应用领域 / 业务系统
@@ -83,7 +83,7 @@ scripts/                     # 搜索索引、链接检查、冒烟、截图、�
 
 数据结构（内容由哪些数据驱动、新增内容改哪里）见 [DATA-MODEL.md](DATA-MODEL.md)：
 **首页、应用领域、业务系统、全部技术路线与路线页共用同一个 `RouteTier[]` 模型**。
-内容 MDX 里引用组件统一用 `@/` 别名（如 `@/components/tutorial/SeriesChapters.astro`）；
+内容 MDX 里引用组件统一用 `@/` 别名（如 `@/components/tutorials/SeriesChapters.astro`）；
 技术路线 / 应用领域 / 计算机科学页都把分节数据直接写在本页的 `export const tiers` 里，再传给统一的 `<RouteSections>`；
 计算机科学的课程（标题、简介、学习资源）也在页面 MDX 里，不再有中间 JSON 与适配层。
 

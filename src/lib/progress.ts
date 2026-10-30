@@ -4,14 +4,19 @@ export interface ProgressState {
   recent: { id: string; at: number }[];
 }
 
-const KEY = 'cs101:progress:v1';
-const empty: ProgressState = { completed: {}, favorites: [], recent: [] };
+export const PROGRESS_KEY = 'cs101:progress:v1';
+export const PROGRESS_EVENT = 'cs101:progress';
+
+/** 每次返回新对象：避免调用方修改到共享的嵌套字段 */
+export function emptyProgress(): ProgressState {
+  return { completed: {}, favorites: [], recent: [] };
+}
 
 export function readProgress(): ProgressState {
-  if (typeof localStorage === 'undefined') return { ...empty };
+  if (typeof localStorage === 'undefined') return emptyProgress();
   try {
-    const raw = localStorage.getItem(KEY);
-    if (!raw) return { ...empty };
+    const raw = localStorage.getItem(PROGRESS_KEY);
+    if (!raw) return emptyProgress();
     const parsed = JSON.parse(raw) as Partial<ProgressState>;
     return {
       completed: parsed.completed ?? {},
@@ -19,17 +24,18 @@ export function readProgress(): ProgressState {
       recent: parsed.recent ?? [],
     };
   } catch {
-    return { ...empty };
+    return emptyProgress();
   }
 }
 
 export function writeProgress(state: ProgressState) {
+  if (typeof window === 'undefined') return;
   try {
-    localStorage.setItem(KEY, JSON.stringify(state));
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(state));
   } catch {
     /* ignore */
   }
-  window.dispatchEvent(new CustomEvent('cs101:progress'));
+  window.dispatchEvent(new CustomEvent(PROGRESS_EVENT));
 }
 
 export function toggleComplete(id: string) {

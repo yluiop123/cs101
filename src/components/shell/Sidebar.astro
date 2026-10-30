@@ -1,9 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
-import { getSeries, getSeriesBySlug } from '@/lib/content';
-import { withBase } from '@/lib/utils';
+import {
+  isBusinessSystemsIndexPath,
+  isComputerScienceRoutePath,
+  isDomainIndexPath,
+  isHomePath,
+  isTechStackIndexPath,
+  isTechStackRoutePath,
+} from '@/data/navigation';
 import { businessSystems, domainCatalog, homeCatalog } from '@/data/entries';
 import { techRouteOrder } from '@/data/routes';
+import { getSeriesBySlug } from '@/lib/content';
+import { withBase } from '@/lib/utils';
 
 const { entry } = Astro.locals.starlightRoute;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -18,14 +26,14 @@ const currentSeriesSlug = seriesMatch
   : undefined;
 const currentSeries = currentSeriesSlug ? await getSeriesBySlug(currentSeriesSlug) : null;
 const currentId = entry.id;
-const isHome = !entry.id || entry.id === 'index';
-const isDomainIndex = path === '/domain/' || path === '/domain';
+const isHome = isHomePath(path);
+const isDomainIndex = isDomainIndexPath(path);
 const currentDomain = path.match(/^\/domain\/([^/]+)\//)?.[1];
-const isComputerScienceRoute = /^\/computer-science\/(zh|en)\//.test(path);
+const isComputerScienceRoute = isComputerScienceRoutePath(path);
 // 业务系统总览页（系列页由 currentSeries 分支处理）
-const isBusinessSystems = path === '/business-systems/' || path === '/business-systems';
-const isTechStackIndex = path === '/tech-stack/' || path === '/tech-stack';
-const isTechRoute = path.startsWith('/tech-stack/') && !isTechStackIndex;
+const isBusinessSystems = isBusinessSystemsIndexPath(path);
+const isTechStackIndex = isTechStackIndexPath(path);
+const isTechRoute = isTechStackRoutePath(path);
 
 // 四条目录页 = 直接列出分节/分类；单条路线页 = 列出本页分节锚点（数据在页面 MDX 里，侧栏读不到，
 // 由页面底部的脚本从 .cs-card-section 采集）。
@@ -34,33 +42,19 @@ const routePage = isTechRoute
   : currentDomain
     ? { kicker: '应用领域', back: '/domain/', backLabel: '全部应用领域' }
     : isComputerScienceRoute
-      ? { kicker: path.includes('/en') ? '国际教程' : '国内教程' }
+      ? { kicker: path.startsWith('/computer-science/en/') ? '国际教程' : '国内教程' }
       : undefined;
 
-// 技术路线总览页的左侧栏：按路线顺序列出全部技术路线
-const routeOrder = techRouteOrder;
-const techRoutes = isTechStackIndex
-  ? (await getCollection('docs'))
+// 技术路线总览页的左侧栏：顺序完全由 techCatalog 决定，标题取对应页面的 title
+let techRoutes: { slug: string; name: string }[] = [];
+if (isTechStackIndex) {
+  const titles = new Map(
+    (await getCollection('docs'))
       .filter((item) => item.id.startsWith('tech-stack/') && item.id !== 'tech-stack/index')
-      .map((item) => ({ slug: item.id.slice('tech-stack/'.length), name: item.data.title }))
-      .sort((a, b) => {
-        const ai = routeOrder.indexOf(a.slug);
-        const bi = routeOrder.indexOf(b.slug);
-        if (ai !== -1 || bi !== -1) return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-        return a.slug.localeCompare(b.slug);
-      })
-  : [];
-
-const catalog =
-  currentSeries ||
-  isHome ||
-  isDomainIndex ||
-  currentDomain ||
-  isComputerScienceRoute ||
-  isTechStackIndex ||
-  isTechRoute
-    ? []
-    : await getSeries();
+      .map((item) => [item.id.slice('tech-stack/'.length), item.data.title] as const),
+  );
+  techRoutes = techRouteOrder.map((slug) => ({ slug, name: titles.get(slug) ?? slug }));
+}
 ---
 
 {
@@ -126,11 +120,6 @@ const catalog =
           </li>
         ))}
       </ul>
-      {path !== '/tech-stack/' && path !== '/tech-stack' && (
-        <a class="cs-sidebar-back" href={withBase('/tech-stack/')}>
-          全部技术路线 →
-        </a>
-      )}
     </div>
   ) : currentSeries ? (
     <div class="cs-sidebar">
@@ -150,21 +139,7 @@ const catalog =
         ))}
       </ol>
     </div>
-  ) : (
-    <div class="cs-sidebar">
-      <p class="cs-sidebar-kicker">教程目录</p>
-      <ul class="cs-sidebar-catalog">
-        {catalog.map((item) => (
-          <li>
-            <a href={withBase(item.href)}>
-              <span>{item.title}</span>
-              <span class="cs-sidebar-count">{item.chapters.length}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  ) : null
 }
 
 <script>

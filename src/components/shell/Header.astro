@@ -3,51 +3,11 @@ import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
 import SearchLauncher from '@/components/search/SearchLauncher.tsx';
+import { siteSections } from '@/data/navigation';
 import { withBase } from '@/lib/utils';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.slice(base.length) || '/';
-
-interface NavMenuItem {
-  label: string;
-  href: string;
-}
-
-interface NavItem {
-  label: string;
-  /** 普通板块的入口；有 menu 的板块没有自己的页面（只展开下拉） */
-  href?: string;
-  /** 有子项 = 顶部导航渲染成下拉框（如「计算机科学 → 国内教程 / 国际教程」） */
-  menu?: NavMenuItem[];
-  matches: (value: string) => boolean;
-}
-
-const navItems: NavItem[] = [
-  {
-    label: '首页',
-    href: '/',
-    // 教程页与技术路线页都属于「首页」板块
-    matches: (value: string) =>
-      value === '/' ||
-      value === '' ||
-      value.startsWith('/tutorials') ||
-      value.startsWith('/tech-stack'),
-  },
-  { label: '应用领域', href: '/domain/', matches: (value: string) => value.startsWith('/domain') },
-  {
-    label: '业务系统',
-    href: '/business-systems/',
-    matches: (value: string) => value.startsWith('/business-systems'),
-  },
-  {
-    label: '计算机科学',
-    matches: (value: string) => value.startsWith('/computer-science'),
-    menu: [
-      { label: '国内教程', href: '/computer-science/zh/' },
-      { label: '国际教程', href: '/computer-science/en/' },
-    ],
-  },
-];
 ---
 
 <header class="header cs-header">
@@ -58,7 +18,7 @@ const navItems: NavItem[] = [
     </div>
     <nav class="cs-topnav" aria-label="主导航">
       {
-        navItems.map((item) =>
+        siteSections.map((item) =>
           item.menu ? (
             <details
               class="cs-topnav-menu"

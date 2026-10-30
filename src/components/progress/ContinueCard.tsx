@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { readProgress } from '@/lib/progress';
+import { emptyProgress, PROGRESS_EVENT, readProgress } from '@/lib/progress';
+import { withBase } from '@/lib/utils';
 
 interface Chapter {
   id: string;
@@ -51,15 +52,16 @@ function pickTarget(series: Series[], state = readProgress()): Target | null {
 }
 
 export default function ContinueCard({ series }: { series: Series[] }) {
-  const [target, setTarget] = useState<Target | null>(() => pickTarget(series));
+  // 首屏用空进度：服务端与客户端初始渲染一致，挂载后再读 localStorage，避免 hydration 不匹配
+  const [target, setTarget] = useState<Target | null>(() => pickTarget(series, emptyProgress()));
 
   useEffect(() => {
     const refresh = () => setTarget(pickTarget(series));
     refresh();
-    window.addEventListener('cs101:progress', refresh);
+    window.addEventListener(PROGRESS_EVENT, refresh);
     window.addEventListener('storage', refresh);
     return () => {
-      window.removeEventListener('cs101:progress', refresh);
+      window.removeEventListener(PROGRESS_EVENT, refresh);
       window.removeEventListener('storage', refresh);
     };
   }, [series]);
@@ -72,18 +74,13 @@ export default function ContinueCard({ series }: { series: Series[] }) {
       <div className="cs-continue-main">
         <p className="cs-continue-kicker">继续学习</p>
         <h2>
-          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/${target.chapterId}/`}>
-            {target.chapterTitle}
-          </a>
+          <a href={withBase(`/${target.chapterId}/`)}>{target.chapterTitle}</a>
         </h2>
         <p>
           {target.seriesTitle} · 全站已完成 {target.done}/{target.total} 章（{percent}%）
         </p>
       </div>
-      <a
-        className="cs-btn cs-btn-primary"
-        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/${target.chapterId}/`}
-      >
+      <a className="cs-btn cs-btn-primary" href={withBase(`/${target.chapterId}/`)}>
         继续这一章
       </a>
     </section>
