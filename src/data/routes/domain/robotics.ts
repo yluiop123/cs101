@@ -1,0 +1,12 @@
+// 应用领域路线：domain-robotics
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 软件与数学基础', items: ['python', 'cpp', 'linux'] },
+    { name: '进阶 · ROS 2 与感知', items: ['ros2', 'sensor-fusion', 'motion-planning'] },
+    { name: '精通 · 实时与嵌入式', items: ['embedded-linux', 'rtos', 'iot-gateway'] },
+    { name: '实战与生态 · 仿真与部署', items: ['simulation', 'docker', 'kubernetes'] },
+];
+
+export default route;

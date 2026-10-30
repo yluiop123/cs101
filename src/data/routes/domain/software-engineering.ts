@@ -1,0 +1,12 @@
+// 应用领域路线：domain-software-engineering
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 工程基础', items: ['code-quality', 'unit-testing'] },
+    { name: '进阶 · 设计与架构', items: ['design-patterns', 'architecture', 'refactoring', 'uml'] },
+    { name: '精通 · 测试与质量', items: ['integration-testing', 'e2e-testing', 'api-testing', 'perf-testing', 'static-analysis', 'code-review'] },
+    { name: '实战 · 协作与交付', items: ['ci-cd', 'testing', 'agile', 'tech-writing', 'ai-coding'] },
+];
+
+export default route;

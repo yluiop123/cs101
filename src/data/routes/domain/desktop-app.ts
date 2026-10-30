@@ -1,0 +1,12 @@
+// 应用领域路线：domain-desktop-app
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 语言与桌面 GUI', items: ['csharp', 'cpp', 'wpf', 'qt'] },
+    { name: '进阶 · 跨平台桌面框架', items: ['electron', 'tauri', 'maui', 'winui'] },
+    { name: '精通 · 架构与系统集成', items: ['design-patterns', 'sql', 'network', 'security'] },
+    { name: '实战与生态 · 打包、更新与质量', items: ['packaging', 'auto-update', 'testing'] },
+];
+
+export default route;

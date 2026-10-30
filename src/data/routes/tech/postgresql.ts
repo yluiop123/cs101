@@ -1,0 +1,12 @@
+// 技术路线：postgresql
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 关系型与 SQL', items: ['sql', 'postgresql', 'linux'] },
+    { name: '进阶 · 索引与事务', items: ['mysql', 'redis', 'dsa'] },
+    { name: '精通 · 内核与性能', items: ['os', 'network'] },
+    { name: '实战与生态 · 部署与分析', items: ['docker', 'elasticsearch', 'big-data'] },
+];
+
+export default route;

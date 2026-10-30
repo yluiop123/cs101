@@ -16,8 +16,10 @@ src/data/
     business-systems.ts       ←   业务系统目录（14 类 / 72 个系统）+ 系统说明
   routes/                     ← 路线页配置：java / go … 与领域路线
     index.ts                  ←   汇总导出：routePlan / techCatalog / techRouteOrder
-    tech.ts                   ←   19 条技术路线的板块 + 全部技术路线目录
-    domain.ts                 ←   24 条领域路线的板块
+    tech/                     ←   19 条技术路线，一条一个文件（tech/java.ts、tech/go.ts …）
+      index.ts                ←     汇总成 techRoutes + techCatalog（全部技术路线目录）
+    domain/                   ←   24 条领域路线，一条一个文件（domain/ai-ml.ts …）
+      index.ts                ←     汇总成 domainRoutes（键为 domain-<slug>）
   tutorials/series-meta.ts    ← 教程元信息：slug → 中文名（内容本体不在这里）
   computer-science/           ← 计算机科学课程数据（zh.json / ossu.json）
 src/content/docs/tutorials/<slug>/  ← 教程正文：一套教程一个文件夹，`01-xxx.md` 是章节
@@ -85,8 +87,10 @@ const routePlan: Record<string, RouteTier[]>; // 键：路线 key
 
 | 文件 | 内容 |
 | --- | --- |
-| `routes/tech.ts` | `techRoutes`（19 条技术路线）+ `techCatalog`（全部技术路线目录，4 个分组） |
-| `routes/domain.ts` | `domainRoutes`（24 条领域路线，键为 `domain-<slug>`） |
+| `routes/tech/<slug>.ts` | 单条技术路线的分节（`RouteTier[]`，默认导出），如 `tech/java.ts` |
+| `routes/tech/index.ts` | 汇总成 `techRoutes`（19 条）+ `techCatalog`（全部技术路线目录，4 个分组） |
+| `routes/domain/<slug>.ts` | 单条领域路线的分节（默认导出），如 `domain/ai-ml.ts` |
+| `routes/domain/index.ts` | 汇总成 `domainRoutes`（24 条，键为 `domain-<slug>`） |
 | `routes/index.ts` | 汇总导出：`routePlan`、`techCatalog`、`techRouteOrder` |
 | `tutorials/series-meta.ts` | `seriesMeta`：教程 slug → 中文名（教程元信息，不在 routes 里） |
 
@@ -123,7 +127,7 @@ const routePlan: Record<string, RouteTier[]>; // 键：路线 key
 | 首页 `/` | `homeCatalog`（entries/home.ts） | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind="auto"`（教程/路线混排） |
 | 应用领域 `/domain/` | `domainCatalog`（entries/domains.ts） | 8 分节 / 47 条（24 有路线，23 虚线） | 默认 |
 | 业务系统 `/business-systems/` | `businessCatalog`（entries/business-systems.ts） | 14 分节 / 72 条 | 默认 |
-| 全部技术路线 `/tech-stack/` | `techCatalog`（routes/tech.ts） | 4 分节 / 19 条 | `markKind="none"` + `columns={2}` + `metaOf`（规模提示） |
+| 全部技术路线 `/tech-stack/` | `techCatalog`（routes/tech/index.ts） | 4 分节 / 19 条 | `markKind="none"` + `columns={2}` + `metaOf`（规模提示） |
 
 也就是说：**首页就是一条路线（12 个分节），业务系统也是一条路线（14 个分节）**，
 和「Java 技术路线（4 个分节）」没有任何结构差别。左侧栏的分节锚点也直接读这些分节。
@@ -194,8 +198,8 @@ tags?: string[], prerequisites?: string[], estMinutes?: number
 | --- | --- | --- |
 | 教程系列首页 | `docs/tutorials/<slug>/index.mdx` | `title`、`description`、`sidebar.order: 0`、`sidebar.hidden: true`；正文用 `<SeriesChapters series="<slug>" />` |
 | 教程章节 | `docs/tutorials/<slug>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order`、`tableOfContents: true`（有 `##` 小节时右侧显示「本页内容」目录） |
-| 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`（卡片与左侧栏都用它）、`description`；正文显式 import 这条路线的数据：`import { techRoutes } from '@/data/routes/tech'; <TechNodes tiers={techRoutes['<route-slug>']} />` |
-| 应用领域页 | `docs/domain/<slug>.mdx` | 同上：`import { domainRoutes } from '@/data/routes/domain'; <TechNodes tiers={domainRoutes['domain-<slug>']} />` |
+| 技术路线页 | `docs/tech-stack/<route-slug>.mdx` | `title`（卡片与左侧栏都用它）、`description`；正文直接 import 这条路线的数据文件：`import javaRoute from '@/data/routes/tech/java'; <TechNodes tiers={javaRoute} />` |
+| 应用领域页 | `docs/domain/<slug>.mdx` | 同上：`import aiMlRoute from '@/data/routes/domain/ai-ml'; <TechNodes tiers={aiMlRoute} />` |
 | 业务系统教程 | `docs/business-systems/<slug>/` | 2 章；与普通教程分开存放；正文由 `BizSystemChapter.astro` 按数据渲染 |
 | 计算机科学 | `docs/computer-science/**` | 由 `src/data/computer-science/{zh,ossu}.json` 生成 |
 
@@ -252,11 +256,11 @@ interface ProgressState {
 | 想做的事 | 改哪里 |
 | --- | --- |
 | 新增一篇教程 | `docs/tutorials/<slug>/index.mdx` + 章节文件（有 `##` 小节的加 `tableOfContents: true`）；再把 `<slug>` 写进路线里的某个分节（卡片会自动直达第一章） |
-| 调整路线顺序 / 增删分节 | `src/data/routes/tech.ts` / `routes/domain.ts`（数据文件） |
+| 调整路线顺序 / 增删分节 | `src/data/routes/tech/<slug>.ts` / `routes/domain/<slug>.ts`（一条路线一个文件） |
 | 标记必学、推荐、主流、小众 | `tier.required` / `option.role` / `item.role` |
 | 改教程在卡片上的名字 | `src/data/tutorials/series-meta.ts` 的 `seriesMeta`（跨页面统一）或条目的 `title`（只覆盖某个目录页） |
-| 新增一条技术路线 | `routes/tech.ts` 的 `techRoutes` + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称）+ 把 slug 加进 `techCatalog` 的某个分节 |
-| 新增一个应用领域 | 在 `entries/domains.ts` 的 `domainCatalog` 对应分类加 `{ slug: 'domain-<slug>', kind: 'domain', title }`；要可点再补 `routes/domain.ts` 的 `domainRoutes['domain-<slug>']` + `docs/domain/<slug>.mdx` |
+| 新增一条技术路线 | 新建 `routes/tech/<slug>.ts`（默认导出 `RouteTier[]`）+ 在 `routes/tech/index.ts` 注册 + `docs/tech-stack/<slug>.mdx`（标题即卡片/左侧栏名称，正文 import 该数据文件）+ 把 slug 加进 `techCatalog` 的某个分节 |
+| 新增一个应用领域 | 在 `entries/domains.ts` 的 `domainCatalog` 对应分类加 `{ slug: 'domain-<slug>', kind: 'domain', title }`；要可点再新建 `routes/domain/<slug>.ts` + 在 `routes/domain/index.ts` 注册 + `docs/domain/<slug>.mdx` |
 | 首页加/调整分类或卡片 | `src/data/entries/home.ts`（`planned: true` = 虚线占位） |
 | 业务系统加/改条目 | `src/data/entries/business-systems.ts` 的 `businessCatalog`（分节里加 `{ slug, kind: 'business', title, summary }`） |
 
@@ -278,6 +282,6 @@ interface ProgressState {
   业务系统教程在 `src/content/docs/business-systems/<slug>/`；入口链接由 `lib/entry-links.ts` 统一指向第一章。
 - **MDX 里引用组件一律用 `@/` 别名**：如 `import TechNodes from '@/components/roadmap/TechNodes.astro'`，
   不写 `../../../components/...`；别名由 `astro.config.mjs` 的 Vite `resolve.alias` 提供，构建期解析。
-- **路线页的数据依赖写在 MDX 里**：`<TechNodes tiers={techRoutes['java']} />` 而不是传字符串 key，
-  这样"这个页面用了哪条路线的数据"一眼可见，数据仍只维护在 `src/data/routes/**` 一份。
+- **路线页的数据依赖写在 MDX 里**：`<TechNodes tiers={javaRoute} />`（数据文件默认导出直接 import），
+  不传字符串 key；数据仍只维护在 `src/data/routes/**` 一份，汇总文件只做聚合给目录页/左侧栏用。
 - 技术路线名称只写在 `docs/tech-stack/<slug>.mdx` 的 `title` 里（总览页、左侧栏、面包屑同源）。

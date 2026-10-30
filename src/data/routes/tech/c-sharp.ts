@@ -1,0 +1,12 @@
+// 技术路线：c-sharp
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 语言与工具', items: ['csharp', 'dotnet'] },
+    { name: '进阶 · 类型系统与数据', items: ['linq', 'csharp-async', 'di'] },
+    { name: '精通 · 框架与架构', items: ['ef-core'] },
+    { name: '实战与生态 · .NET 与上位机', items: ['aspnet', 'wpf', 'maui', 'industrial-comms'] },
+];
+
+export default route;

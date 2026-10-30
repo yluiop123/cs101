@@ -1,0 +1,11 @@
+// 技术路线：kafka
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 消息队列基础', items: ['kafka', 'rabbitmq', 'rocketmq'] },
+    { name: '进阶 · 网关与服务发现', items: ['nginx', 'api-gateway', 'nacos'] },
+    { name: '精通 · 协调与一致性', items: ['zookeeper'] },
+];
+
+export default route;

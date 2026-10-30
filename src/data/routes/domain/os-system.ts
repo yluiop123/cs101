@@ -1,0 +1,12 @@
+// 应用领域路线：domain-os-system
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 系统原理', items: ['os', 'linux', 'shell'] },
+    { name: '进阶 · 内核与驱动', items: ['kernel', 'drivers', 'syscall', 'memory-management'] },
+    { name: '精通 · 编译与运行时', items: ['compiler', 'interpreter', 'vm', 'linker'] },
+    { name: '实战 · 性能与调试', items: ['perf-analysis', 'debugging', 'tracing', 'ebpf'] },
+];
+
+export default route;

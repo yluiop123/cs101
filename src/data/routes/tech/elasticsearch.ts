@@ -1,0 +1,12 @@
+// 技术路线：elasticsearch
+
+import type { RouteTier } from '@/data/model/route-model';
+
+const route: RouteTier[] = [
+    { name: '入门 · 核心概念与查询', items: ['elasticsearch', 'linux', 'docker'] },
+    { name: '进阶 · 索引与文本', items: ['dsa', 'mongodb', 'redis'] },
+    { name: '精通 · 分布式与性能', items: ['os', 'network'] },
+    { name: '实战与生态 · 集群与生态', items: ['kafka', 'big-data', 'kubernetes'] },
+];
+
+export default route;
