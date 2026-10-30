@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
+import { Download, StarOff, Trash2, Upload } from 'lucide-react';
 import {
   emptyProgress,
   PROGRESS_EVENT,
@@ -24,12 +25,21 @@ export interface SeriesRef {
   total: number;
 }
 
+export interface RouteRef {
+  id: string;
+  title: string;
+  href: string;
+  total: number;
+  seriesSlugs: string[];
+}
+
 interface Props {
   chapters: ChapterRef[];
   series: SeriesRef[];
+  routes: RouteRef[];
 }
 
-export default function LearningCenterApp({ chapters, series }: Props) {
+export default function LearningCenterApp({ chapters, series, routes }: Props) {
   const [state, setState] = useState<ProgressState>(() => emptyProgress());
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState('');
@@ -47,50 +57,92 @@ export default function LearningCenterApp({ chapters, series }: Props) {
   }, []);
 
   const chapterById = useMemo(() => new Map(chapters.map((chapter) => [chapter.id, chapter])), [chapters]);
+  const routeById = useMemo(() => new Map(routes.map((route) => [route.id, route])), [routes]);
 
-  const chaptersBySeries = useMemo(() => {
-    const map = new Map<string, ChapterRef[]>();
-    for (const chapter of chapters) {
-      const list = map.get(chapter.seriesSlug);
-      if (list) list.push(chapter);
-      else map.set(chapter.seriesSlug, [chapter]);
-    }
-    return map;
-  }, [chapters]);
+  const completedIds = Object.keys(state.completed).filter((id) => chapterById.has(id));
+  const seriesStats = series.map((item) => ({
+    ...item,
+    done: completedIds.filter((id) => chapterById.get(id)?.seriesSlug === item.slug).length,
+  }));
+  const seriesBySlug = new Map(seriesStats.map((item) => [item.slug, item]));
 
-  const completedCount = Object.keys(state.completed).filter((id) => chapterById.has(id)).length;
-  const percent = chapters.length ? Math.round((completedCount / chapters.length) * 100) : 0;
-  const percentLabel = completedCount > 0 && percent === 0 ? '<1' : String(percent);
-
-  const favorites = state.favorites
+  const favoriteChapters = state.favorites
     .map((id) => chapterById.get(id))
     .filter((chapter): chapter is ChapterRef => Boolean(chapter));
+  const favoriteRoutes = state.favorites
+    .map((id) => routeById.get(id))
+    .filter((route): route is RouteRef => Boolean(route));
 
-  const recent = state.recent
+  // 同一教程只出现一次：收藏按系列聚合
+  const favoriteSeries = (() => {
+    const groups = new Map<string, ChapterRef[]>();
+    for (const chapter of favoriteChapters) {
+      const list = groups.get(chapter.seriesSlug);
+      if (list) list.push(chapter);
+      else groups.set(chapter.seriesSlug, [chapter]);
+    }
+    return [...groups.entries()].map(([slug, list]) => {
+      const stats = seriesBySlug.get(slug);
+      return {
+        slug,
+        title: stats?.title ?? list[0].seriesTitle,
+        href: stats?.href ?? `/tutorials/${slug}/`,
+        done: stats?.done ?? 0,
+        total: stats?.total ?? list.length,
+        count: list.length,
+      };
+    });
+  })();
+
+  const recentItems = state.recent
+    .map((entry) => chapterById.get(entry.id))
+    .filter((chapter): chapter is ChapterRef => Boolean(chapter))
+    .slice(0, 5);
+  const recentAll = state.recent
     .map((entry) => chapterById.get(entry.id))
     .filter((chapter): chapter is ChapterRef => Boolean(chapter));
-  const recentIncomplete = recent.filter((chapter) => !state.completed[chapter.id]).slice(0, 5);
-  // 最近章节已完成时，优先接上同一系列的下一章；完全没有记录时不硬推一条
-  const lastRecent = recent[0];
-  const nextInRecentSeries = lastRecent
-    ? (chaptersBySeries.get(lastRecent.seriesSlug) ?? []).find(
-        (chapter) => !state.completed[chapter.id],
-      )
-    : undefined;
-  const next =
-    recentIncomplete[0] ??
-    nextInRecentSeries ??
-    (completedCount > 0 ? chapters.find((chapter) => !state.completed[chapter.id]) : undefined);
-  const continueItems = recentIncomplete.length > 0 ? recentIncomplete : next ? [next] : [];
 
-  const seriesProgress = series
-    .map((item) => {
-      const list = chaptersBySeries.get(item.slug) ?? [];
-      const done = list.filter((chapter) => state.completed[chapter.id]).length;
-      return { ...item, done, total: list.length };
-    })
-    .filter((item) => item.done > 0)
-    .sort((a, b) => b.done / b.total - a.done / a.total);
+  // 继续学习按教程聚合：同一系列只保留一条，优先最近未完成章节
+  const inProgress: {
+    slug: string;
+    title: string;
+    href: string;
+    done: number;
+    total: number;
+    percent: number;
+    chapter: ChapterRef;
+  }[] = [];
+  const seenSeries = new Set<string>();
+  for (const chapter of recentAll) {
+    if (seenSeries.has(chapter.seriesSlug)) continue;
+    seenSeries.add(chapter.seriesSlug);
+    const stats = seriesBySlug.get(chapter.seriesSlug);
+    if (!stats || stats.done >= stats.total) continue;
+    const list = chapters.filter((item) => item.seriesSlug === chapter.seriesSlug);
+    const index = list.findIndex((item) => item.id === chapter.id);
+    const next = !state.completed[chapter.id]
+      ? chapter
+      : list.slice(index + 1).find((item) => !state.completed[item.id]);
+    if (!next) continue;
+    inProgress.push({
+      slug: chapter.seriesSlug,
+      title: stats.title,
+      href: stats.href,
+      done: stats.done,
+      total: stats.total,
+      percent: stats.total ? Math.round((stats.done / stats.total) * 100) : 0,
+      chapter: next,
+    });
+    if (inProgress.length >= 3) break;
+  }
+
+  const removeSeriesFavorites = (slug: string) => {
+    const current = readProgress();
+    writeProgress({
+      ...current,
+      favorites: current.favorites.filter((id) => chapterById.get(id)?.seriesSlug !== slug),
+    });
+  };
 
   const exportData = () => {
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
@@ -142,116 +194,162 @@ export default function LearningCenterApp({ chapters, series }: Props) {
 
   return (
     <div className="cs-me">
-      <p className="cs-me-note">进度与收藏保存在本机浏览器，无需登录。</p>
-
-      <section className="cs-me-stats" aria-label="学习统计">
-        <div className="cs-me-stat">
-          <span>已完成章节</span>
-          <strong>{completedCount}</strong>
-          <small>
-            / {chapters.length} 章 · {percentLabel}%
-          </small>
-        </div>
-        <div className="cs-me-stat">
-          <span>收藏章节</span>
-          <strong>{favorites.length}</strong>
-          <small>本机收藏</small>
-        </div>
-        <div className="cs-me-stat">
-          <span>最近学习</span>
-          <strong>{recent[0]?.title ?? '—'}</strong>
-          <small>{recent[0]?.seriesTitle ?? '还没有记录'}</small>
-        </div>
-      </section>
-
       <section className="cs-me-section">
-        <div className="cs-me-head">
-          <h2>继续学习</h2>
-          {next && (
-            <a className="cs-btn cs-btn-primary" href={withBase(`/${next.id}/`)}>
-              继续这一章
-            </a>
-          )}
-        </div>
-        {continueItems.length > 0 ? (
+        <h2>继续学习</h2>
+        {inProgress.length > 0 ? (
           <ul className="cs-me-list">
-            {continueItems.map((chapter) => (
-              <li key={chapter.id} className="cs-me-item">
-                <a href={withBase(`/${chapter.id}/`)}>
-                  <span>{chapter.title}</span>
-                  <small>{chapter.seriesTitle}</small>
+            {inProgress.map((item) => (
+              <li key={item.slug} className="cs-me-current">
+                <div className="cs-me-current-main">
+                  <p className="cs-me-current-kicker">{item.title}</p>
+                  <h3>{item.chapter.title}</h3>
+                  <p className="cs-me-current-meta">
+                    {item.done}/{item.total} 章 · {item.percent}%
+                  </p>
+                </div>
+                <a className="cs-btn cs-btn-primary" href={withBase(`/${item.chapter.id}/`)}>
+                  继续这一章
                 </a>
+                <div className="cs-me-bar" aria-hidden="true">
+                  <span style={{ width: `${item.percent}%` }} />
+                </div>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="cs-me-empty">
-            {completedCount === chapters.length && chapters.length > 0
-              ? '全站章节都已完成。'
-              : '还没有学习记录。去首页挑一条路线开始吧。'}
-          </p>
+          <p className="cs-me-empty">还没有正在学习的内容。去首页挑一条路线开始吧。</p>
+        )}
+      </section>
+
+      <section className="cs-me-section">
+        <h2>最近学习</h2>
+        {recentItems.length > 0 ? (
+          <ul className="cs-me-list">
+            {recentItems.map((chapter) => {
+              const stats = seriesBySlug.get(chapter.seriesSlug);
+              return (
+                <li key={chapter.id} className="cs-me-item">
+                  <a href={withBase(`/${chapter.id}/`)}>
+                    <span>{chapter.title}</span>
+                    <small>
+                      {chapter.seriesTitle}
+                      {state.completed[chapter.id] ? ' · 已完成' : ''}
+                    </small>
+                  </a>
+                  {stats && (
+                    <span className="cs-me-item-progress">
+                      {stats.done}/{stats.total}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p className="cs-me-empty">还没有学习记录。</p>
         )}
       </section>
 
       <section className="cs-me-section">
         <h2>我的收藏</h2>
-        {favorites.length > 0 ? (
-          <ul className="cs-me-list">
-            {favorites.map((chapter) => (
-              <li key={chapter.id} className="cs-me-item">
-                <a href={withBase(`/${chapter.id}/`)}>
-                  <span>{chapter.title}</span>
-                  <small>{chapter.seriesTitle}</small>
-                </a>
-                <button
-                  type="button"
-                  className="cs-me-remove"
-                  onClick={() => toggleFavorite(chapter.id)}
-                >
-                  取消收藏
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="cs-me-empty">还没有收藏章节。章节页底部可以点「收藏本章」。</p>
-        )}
-      </section>
 
-      <section className="cs-me-section">
-        <h2>各系列进度</h2>
-        {seriesProgress.length > 0 ? (
-          <ul className="cs-me-series">
-            {seriesProgress.map((item) => (
-              <li key={item.slug}>
-                <div className="cs-me-series-head">
-                  <a href={withBase(item.href)}>{item.title}</a>
-                  <span>
-                    {item.done}/{item.total}
-                  </span>
-                </div>
-                <div className="cs-me-bar" aria-hidden="true">
-                  <span style={{ width: `${Math.round((item.done / item.total) * 100)}%` }} />
-                </div>
-              </li>
-            ))}
+        <h3 className="cs-me-subtitle">教程</h3>
+        {favoriteSeries.length > 0 ? (
+          <ul className="cs-me-list">
+            {favoriteSeries.map((item) => {
+              const percent = item.total ? Math.round((item.done / item.total) * 100) : 0;
+              return (
+                <li key={item.slug} className="cs-me-favorite">
+                  <div className="cs-me-favorite-head">
+                    <a href={withBase(item.href)}>
+                      <span>{item.title}</span>
+                      <small>{item.count} 个收藏章节</small>
+                    </a>
+                    <div className="cs-me-favorite-side">
+                      <span>
+                        {item.done}/{item.total}
+                      </span>
+                      <button
+                        type="button"
+                        className="cs-me-remove"
+                        onClick={() => removeSeriesFavorites(item.slug)}
+                      >
+                        <StarOff size={14} aria-hidden="true" />
+                        取消收藏
+                      </button>
+                    </div>
+                  </div>
+                  <div className="cs-me-bar" aria-hidden="true">
+                    <span style={{ width: `${percent}%` }} />
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         ) : (
-          <p className="cs-me-empty">开始学习后，这里会显示每个系列的完成进度。</p>
+          <p className="cs-me-empty">还没有收藏教程。</p>
+        )}
+
+        <h3 className="cs-me-subtitle">路线</h3>
+        {favoriteRoutes.length > 0 ? (
+          <ul className="cs-me-list">
+            {favoriteRoutes.map((route) => {
+              const done = route.seriesSlugs.reduce(
+                (sum, slug) => sum + (seriesBySlug.get(slug)?.done ?? 0),
+                0,
+              );
+              const percent = route.total ? Math.round((done / route.total) * 100) : 0;
+              return (
+                <li key={route.id} className="cs-me-favorite">
+                  <div className="cs-me-favorite-head">
+                    <a href={withBase(route.href)}>
+                      <span>{route.title}</span>
+                      <small>学习路线</small>
+                    </a>
+                    <div className="cs-me-favorite-side">
+                      {route.total > 0 && (
+                        <span>
+                          {done}/{route.total}
+                        </span>
+                      )}
+                      <button
+                        type="button"
+                        className="cs-me-remove"
+                        onClick={() => toggleFavorite(route.id)}
+                      >
+                        <StarOff size={14} aria-hidden="true" />
+                        取消收藏
+                      </button>
+                    </div>
+                  </div>
+                  {route.total > 0 && (
+                    <div className="cs-me-bar" aria-hidden="true">
+                      <span style={{ width: `${percent}%` }} />
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p className="cs-me-empty">还没有收藏路线。</p>
         )}
       </section>
 
       <section className="cs-me-section">
         <h2>数据管理</h2>
         <div className="cs-me-actions">
-          <button type="button" className="cs-btn" onClick={exportData}>
+          <button type="button" className="cs-btn cs-me-action" onClick={exportData}>
+            <Download size={16} aria-hidden="true" />
             导出进度
           </button>
-          <label className="cs-btn cs-me-import">
+          <label className="cs-btn cs-me-action cs-me-import">
+            <Upload size={16} aria-hidden="true" />
             导入进度
             <input type="file" accept="application/json,.json" onChange={importData} />
           </label>
-          <button type="button" className="cs-btn cs-me-danger" onClick={clearAll}>
+          <button type="button" className="cs-btn cs-me-action cs-me-danger" onClick={clearAll}>
+            <Trash2 size={16} aria-hidden="true" />
             清空记录
           </button>
         </div>

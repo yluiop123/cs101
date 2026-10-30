@@ -173,8 +173,8 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 | `columns` | `2` / `3` |
 | `legend` | 是否显示状态图例 |
 | `srTitle` | 首页专用无障碍标题 |
-| `showContinueCard` | 首页显示「继续学习」 |
 | `detectPlanned` | 应用领域总览：没有 docs 页面的方向标「规划中」 |
+| `favorite` | 路线页显示「收藏路线」按钮 |
 
 `sidebar` 控制左侧栏，与页面数据同源：
 
@@ -206,7 +206,7 @@ docs 集合（`domain/<slug>.mdx` 是否存在），没有页面的方向自动�
 
 | 页面 | 配置 | 规模 | 渲染开关 |
 | --- | --- | --- | --- |
-| 首页 `/` | `pages/home.json` | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind: "auto"`、`showContinueCard: true` |
+| 首页 `/` | `pages/home.json` | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind: "auto"` |
 | 应用领域 `/domain/` | `pages/domain.json` | 8 分节 / 47 条（24 有路线，23 虚线） | `detectPlanned: true` |
 | 业务系统 `/business-systems/` | `pages/business-systems.json` | 14 分节 / 72 条 | `markKind: "auto"` |
 | 全部技术路线 `/tech-stack/` | `pages/tech-stack.json` | 4 分节 / 19 条 | `markKind: "none"`、`columns: 2`、`sidebar.mode: "routes"` |

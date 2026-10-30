@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Check } from 'lucide-react';
 import { markRecent, PROGRESS_EVENT, readProgress, toggleComplete } from '@/lib/progress';
 
 export default function CompleteButton({ slug }: { slug: string }) {
@@ -23,7 +24,8 @@ export default function CompleteButton({ slug }: { slug: string }) {
       aria-pressed={completed}
       onClick={() => setCompleted(toggleComplete(slug))}
     >
-      {completed ? '✓ 已完成本章' : '标记本章完成'}
+      <Check size={16} aria-hidden="true" />
+      {completed ? '已完成本章' : '标记本章完成'}
     </button>
   );
 }

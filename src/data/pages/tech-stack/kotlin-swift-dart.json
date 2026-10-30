@@ -31,7 +31,9 @@
       ]
     }
   ],
-  "options": {},
+  "options": {
+    "favorite": true
+  },
   "sidebar": {
     "mode": "sections",
     "kicker": "学习路线",

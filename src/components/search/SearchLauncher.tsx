@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { Search } from 'lucide-react';
 import { search, type SearchHit } from '@/lib/search';
 
 const RECENT_KEY = 'cs101:recent-searches';
@@ -125,6 +126,7 @@ export default function SearchLauncher() {
   return (
     <>
       <button type="button" className="cs-search-trigger" onClick={openDialog} aria-label="搜索教程">
+        <Search size={16} aria-hidden="true" />
         <span className="cs-search-trigger-label">搜索</span>
         <kbd>Ctrl K</kbd>
       </button>

@@ -1251,7 +1251,9 @@
       ]
     }
   ],
-  "options": {},
+  "options": {
+    "favorite": true
+  },
   "sidebar": {
     "mode": "sections",
     "kicker": "国际教程"

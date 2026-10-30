@@ -1,8 +1,12 @@
 ---
+import { getCollection } from 'astro:content';
 import LearningCenterApp from '@/components/learning/LearningCenterApp.tsx';
+import { allTierItems } from '@/data/model/route-model';
+import { pageConfigs } from '@/data/pages';
 import { getSeries } from '@/lib/content';
 
 const series = await getSeries();
+const seriesBySlug = new Map(series.map((item) => [item.slug, item]));
 const chapters = series.flatMap((item) =>
   item.chapters.map((chapter) => ({
     id: chapter.id,
@@ -18,6 +22,37 @@ const seriesRefs = series.map((item) => ({
   href: item.href,
   total: item.chapters.length,
 }));
+
+const docs = await getCollection('docs');
+const titleById = new Map(docs.map((entry) => [entry.id, entry.data.title]));
+const routes = Object.entries(pageConfigs)
+  .filter(([, config]) => config.options?.favorite)
+  .map(([key, config]) => {
+    const slugs = new Set<string>();
+    for (const item of allTierItems(config.tiers)) {
+      if ((item.kind ?? 'tutorial') !== 'tutorial') continue;
+      let slug: string | undefined;
+      if (item.href) {
+        const match = item.href.match(/^\/(tutorials|business-systems)\/([^/]+)\/$/);
+        if (match) slug = match[1] === 'business-systems' ? `business-${match[2]}` : match[2];
+      } else {
+        slug = item.id;
+      }
+      if (slug && seriesBySlug.has(slug)) slugs.add(slug);
+    }
+    const seriesSlugs = [...slugs];
+    const total = seriesSlugs.reduce(
+      (sum, slug) => sum + (seriesBySlug.get(slug)?.chapters.length ?? 0),
+      0,
+    );
+    return {
+      id: `route:${key}`,
+      title: titleById.get(key) ?? titleById.get(`${key}/index`) ?? key,
+      href: `/${key}/`,
+      total,
+      seriesSlugs,
+    };
+  });
 ---
 
-<LearningCenterApp client:load chapters={chapters} series={seriesRefs} />
+<LearningCenterApp client:load chapters={chapters} series={seriesRefs} routes={routes} />

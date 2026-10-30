@@ -3,11 +3,10 @@
 // 首页、应用领域、业务系统、全部技术路线、各条路线、计算机科学课程页都用它；
 // 页面之间只差 src/data/pages/<page>.json 里的 tiers 与 options。
 import { getCollection } from 'astro:content';
-import ContinueCard from '@/components/progress/ContinueCard.tsx';
+import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import RouteSections from '@/components/shared/RouteSections.astro';
 import type { RouteItem, RouteTier } from '@/data/model/route-model';
-import { requirePageConfig } from '@/data/pages';
-import { getSeries } from '@/lib/content';
+import { pageConfigKey, requirePageConfig } from '@/data/pages';
 
 const { entry } = Astro.locals.starlightRoute;
 const config = requirePageConfig(entry.id);
@@ -18,8 +17,8 @@ const {
   columns,
   legend = true,
   srTitle,
-  showContinueCard = false,
   detectPlanned = false,
+  favorite = false,
 } = options;
 
 // 应用领域总览：docs 集合里存在 domain/<slug>.mdx 才点亮，否则标成「规划中」
@@ -40,12 +39,20 @@ if (detectPlanned) {
   }));
 }
 
-const series = showContinueCard ? await getSeries() : [];
 ---
 
-<div class:list={[showContinueCard && 'cs-home']}>
+<div class:list={[srTitle && 'cs-home']}>
   {srTitle && <h1 id="_top" class="sr-only">{srTitle}</h1>}
-  {showContinueCard && <ContinueCard client:visible series={series} />}
+  {favorite && (
+    <div class="cs-route-actions">
+      <FavoriteButton
+        client:visible
+        slug={`route:${pageConfigKey(entry.id)}`}
+        label="收藏路线"
+        activeLabel="已收藏路线"
+      />
+    </div>
+  )}
   <RouteSections
     tiers={resolvedTiers}
     markKind={markKind}

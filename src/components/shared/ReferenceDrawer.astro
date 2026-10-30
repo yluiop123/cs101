@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import type { RouteItem } from '@/data/model/route-model';
 
 // 外部引用抽屉：卡片点开后从右侧滑出，展示课程简介与全部学习资源（站内不跳走）。
@@ -19,17 +20,7 @@ const refs = items.filter((item) => (item.kind ?? 'tutorial') === 'external');
       外部引用 · 课程详情
     </p>
     <button type="button" class="cs-drawer-close" data-cs-drawer-close aria-label="关闭">
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        aria-hidden="true"
-      >
-        <path d="M18 6 6 18" />
-        <path d="m6 6 12 12" />
-      </svg>
+      <Icon name="lucide:x" aria-hidden="true" />
     </button>
   </div>
   <div class="cs-drawer-body">
@@ -54,20 +45,7 @@ const refs = items.filter((item) => (item.kind ?? 'tutorial') === 'external');
                         rel="noopener noreferrer"
                       >
                         <span class="cs-ref-link-text">{resource.title}</span>
-                        <svg
-                          class="cs-ref-link-icon"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                          <path d="M15 3h6v6" />
-                          <path d="M10 14 21 3" />
-                        </svg>
+                        <Icon name="lucide:external-link" class="cs-ref-link-icon" aria-hidden="true" />
                       </a>
                     </li>
                   ) : (

@@ -38,7 +38,9 @@
       ]
     }
   ],
-  "options": {},
+  "options": {
+    "favorite": true
+  },
   "sidebar": {
     "mode": "sections",
     "kicker": "应用领域",

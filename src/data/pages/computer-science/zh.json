@@ -623,7 +623,9 @@
       ]
     }
   ],
-  "options": {},
+  "options": {
+    "favorite": true
+  },
   "sidebar": {
     "mode": "sections",
     "kicker": "国内教程"

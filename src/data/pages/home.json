@@ -511,8 +511,7 @@
   ],
   "options": {
     "markKind": "auto",
-    "srTitle": "中文计算机学习路径",
-    "showContinueCard": true
+    "srTitle": "中文计算机学习路径"
   },
   "sidebar": {
     "mode": "sections",

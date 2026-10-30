@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 import baseLinks from './src/integrations/base-links.mjs';
 
@@ -22,6 +23,7 @@ export default defineConfig({
     // 安全网：内容统一写相对链接；万一残留根路径链接，构建期补上 base。
     // 必须排在 Starlight 之前，保证 Pagefind 索引到的是补全后的链接。
     baseLinks(BASE),
+    icon(),
     react(),
     starlight({
       title: 'CS101',

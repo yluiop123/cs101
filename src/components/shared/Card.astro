@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { withBase } from '@/lib/utils';
 import {
   kindLabels,
@@ -22,6 +23,12 @@ interface Props {
 }
 
 const { item, title, href, kind, tag } = Astro.props as Props;
+
+const kindIcons: Record<RouteKind, string> = {
+  tutorial: 'lucide:book-open',
+  external: 'lucide:external-link',
+  route: 'lucide:route',
+};
 
 // 三种卡片：有 href = 站内链接；外部引用 = 按钮（点开右侧抽屉）；都没有 = 规划中虚线卡
 const refId = item.kind === 'external' ? item.id : undefined;
@@ -47,34 +54,7 @@ const hasTail = Boolean(kind || tag);
         <span class="cs-tut-tail">
           {kind && (
             <span class:list={['cs-kind', `cs-kind--${kind}`]}>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                {kind === 'tutorial' ? (
-                  <>
-                    <path d="M12 7v14" />
-                    <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
-                  </>
-                ) : kind === 'external' ? (
-                  <>
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <path d="M15 3h6v6" />
-                    <path d="M10 14 21 3" />
-                  </>
-                ) : (
-                  <>
-                    <circle cx="6" cy="19" r="3" />
-                    <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
-                    <circle cx="18" cy="5" r="3" />
-                  </>
-                )}
-              </svg>
+              <Icon name={kindIcons[kind]} aria-hidden="true" />
               {kindLabels[kind]}
             </span>
           )}

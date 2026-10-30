@@ -14,10 +14,10 @@ export interface PageOptions {
   legend?: boolean;
   /** 首页专用的无障碍标题 */
   srTitle?: string;
-  /** 首页显示「继续学习」卡片 */
-  showContinueCard?: boolean;
   /** 应用领域总览：没有对应 docs 页面的方向标成「规划中」 */
   detectPlanned?: boolean;
+  /** 路线页显示「收藏路线」按钮 */
+  favorite?: boolean;
 }
 
 /**
@@ -43,7 +43,7 @@ const modules = import.meta.glob<PageConfig>('./**/*.json', {
   import: 'default',
 });
 
-const configs = Object.fromEntries(
+export const pageConfigs = Object.fromEntries(
   Object.entries(modules).map(([path, config]) => [
     path.replace(/^\.\//, '').replace(/\.json$/, ''),
     config,
@@ -55,7 +55,7 @@ export const pageConfigKey = (entryId: string) =>
   entryId === '' || entryId === 'index' ? 'home' : entryId.replace(/\/index$/, '');
 
 export function getPageConfig(entryId: string): PageConfig | undefined {
-  return configs[pageConfigKey(entryId)];
+  return pageConfigs[pageConfigKey(entryId)];
 }
 
 export function requirePageConfig(entryId: string): PageConfig {
