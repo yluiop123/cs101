@@ -1,5 +1,5 @@
 /**
- * M5 冒烟：⌘K 搜索、进度标记、Monaco 演练场。
+ * M5 冒烟：⌘K 搜索、进度标记、代码块「运行实例」（CodePen 外链）。Monaco 站内演练场已移除。
  * 前提：pnpm build && pnpm preview --port 4322
  */
 import { chromium } from '@playwright/test';
@@ -45,14 +45,18 @@ await page.waitForSelector('[data-series-progress]');
 const progressText = await page.locator('[data-series-progress]').innerText();
 check('系列页进度统计', progressText.includes('已完成 1/7'), progressText);
 
-// 4. Monaco 演练场
-await page.goto(`${BASE}playground/`, { waitUntil: 'networkidle' });
-await page.waitForSelector('.monaco-editor', { timeout: 30000 });
-await page.click('button:has-text("运行")');
-await page.waitForSelector('.cs-console-line', { timeout: 15000 });
-const consoleText = await page.locator('.cs-console').innerText();
-check('Monaco 演练场运行 JS', consoleText.includes('排序结果'), consoleText.split('\n')[0]);
-await page.screenshot({ path: 'screenshots/playground-desktop.png' });
+// 4. 代码块「运行实例」→ 新标签页打开 CodePen（不再跳转站内演练场）
+await page.goto(`${BASE}tutorials/html/01-overview/`, { waitUntil: 'networkidle' });
+const runButton = page.locator('.cs-code-run').first();
+await runButton.waitFor({ timeout: 10000 });
+const [popup] = await Promise.all([
+  page.waitForEvent('popup', { timeout: 15000 }),
+  runButton.click(),
+]);
+const popupUrl = popup ? popup.url() : '';
+check('运行实例打开 CodePen', popupUrl.startsWith('https://codepen.io/'), popupUrl.slice(0, 60));
+if (popup) await popup.close();
+await page.screenshot({ path: 'screenshots/code-run-desktop.png' });
 
 await browser.close();
 const failed = results.filter((item) => !item.ok);

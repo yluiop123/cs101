@@ -30,7 +30,17 @@ const navItems = [
     href: '/computer-science/',
     matches: (value: string) => value.startsWith('/computer-science'),
   },
-  { label: '演练场', href: '/playground/', matches: (value: string) => value.startsWith('/playground') },
+];
+
+// 在线演练不再自建：直接引导到成熟的在线编辑器（新标签页打开）
+const tools = [
+  { label: 'CodePen', href: 'https://codepen.io/pen/', note: 'HTML / CSS / JavaScript' },
+  { label: 'StackBlitz', href: 'https://stackblitz.com/', note: '前端工程 / Node.js 项目' },
+  {
+    label: 'TypeScript Playground',
+    href: 'https://www.typescriptlang.org/play',
+    note: 'TypeScript 类型检查',
+  },
 ];
 ---
 
@@ -48,6 +58,21 @@ const navItems = [
           </a>
         ))
       }
+      <details class="cs-topnav-tools">
+        <summary>
+          在线演练<span class="cs-topnav-caret" aria-hidden="true">▾</span>
+        </summary>
+        <div class="cs-topnav-tools-menu">
+          {
+            tools.map((tool) => (
+              <a href={tool.href} target="_blank" rel="noopener noreferrer">
+                <span>{tool.label}</span>
+                <small>{tool.note}</small>
+              </a>
+            ))
+          }
+        </div>
+      </details>
     </nav>
     <div class="cs-header-actions">
       <SearchLauncher client:idle />
@@ -55,3 +80,16 @@ const navItems = [
     </div>
   </div>
 </header>
+
+<script>
+  // 「在线演练」下拉：点击外部或按 Esc 收起
+  const toolsMenu = document.querySelector<HTMLDetailsElement>('.cs-topnav-tools');
+  if (toolsMenu) {
+    document.addEventListener('click', (event) => {
+      if (toolsMenu.open && !toolsMenu.contains(event.target as Node)) toolsMenu.open = false;
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') toolsMenu.open = false;
+    });
+  }
+</script>

@@ -51,9 +51,6 @@ if (!isSplash && !isHomePage) {
       isSectionIndex ? { label: '业务系统' } : { label: '业务系统', href: withBase('/business-systems/') },
     );
     if (!isSectionIndex) crumbs.push({ label: data.title });
-  } else if (segments[0] === 'playground') {
-    crumbs.push({ label: '首页', href: withBase('/') });
-    crumbs.push({ label: '代码演练场' });
   } else {
     crumbs.push({ label: '首页', href: withBase('/') });
   }

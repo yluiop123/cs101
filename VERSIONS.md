@@ -1,6 +1,6 @@
 # 版本台账（VERSIONS.md）
 
-> 自动生成，请勿手改；更新依赖后运行 `pnpm versions`。生成日期：2026-10-26
+> 自动生成，请勿手改；更新依赖后运行 `pnpm versions`。生成日期：2026-10-30
 
 ## 运行环境
 
@@ -18,13 +18,10 @@
 | prod | `@astrojs/sitemap` | 3.7.4 |
 | prod | `@astrojs/starlight` | 0.42.7 |
 | prod | `@astrojs/starlight-tailwind` | 5.0.0 |
-| prod | `@monaco-editor/react` | 4.7.0 |
 | prod | `@tailwindcss/vite` | 4.3.3 |
 | prod | `astro` | 7.4.2 |
 | prod | `clsx` | 2.1.1 |
-| prod | `lucide-react` | 1.61.0 |
 | prod | `minisearch` | 7.2.0 |
-| prod | `monaco-editor` | 0.57.0 |
 | prod | `react` | 19.3.1 |
 | prod | `react-dom` | 19.3.1 |
 | prod | `tailwind-merge` | 3.7.0 |
@@ -33,6 +30,7 @@
 | dev | `@playwright/test` | 1.64.1 |
 | dev | `@types/react` | 19.3.0 |
 | dev | `@types/react-dom` | 19.3.0 |
+| dev | `github-slugger` | 2.0.0 |
 | dev | `typescript` | 6.0.3 |
 
 ## 已批准的版本例外

@@ -23,8 +23,39 @@ const isDomainIndex = entry.id === 'domain/index';
 {!isHome && !isDomainIndex && <Pagination />}
 
 <script>
-  const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
-  const SUPPORTED = new Set(['js', 'javascript', 'ts', 'typescript', 'html', 'css']);
+  // 文档里的「运行实例」不再跳转站内演练场，而是把代码 POST 到 CodePen 新标签页打开。
+  // HTML / CSS / JavaScript 用 CodePen；TypeScript 等其它语言不显示按钮（可去官方 Playground）。
+  const SUPPORTED = new Set(['js', 'javascript', 'html', 'css']);
+  const CODEPEN = 'https://codepen.io/pen/define';
+
+  const openInCodePen = (lang: string, code: string) => {
+    const data: Record<string, string> = { title: 'CS101 示例', editors: '111' };
+    if (lang === 'html') {
+      data.html = code;
+    } else if (lang === 'css') {
+      data.html = '<div class="card"><h2>示例卡片</h2><p>修改 CSS 观察效果。</p></div>';
+      data.css = code;
+    } else {
+      data.html = '<div id="app"></div>';
+      data.js = code;
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = CODEPEN;
+    form.target = '_blank';
+    form.rel = 'noopener noreferrer';
+    form.style.display = 'none';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'data';
+    input.value = JSON.stringify(data);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
+  };
 
   const decorate = () => {
     document.querySelectorAll<HTMLElement>('figure.frame').forEach((figure) => {
@@ -41,17 +72,8 @@ const isDomainIndex = entry.id === 'domain/index';
       button.type = 'button';
       button.className = 'cs-code-run';
       button.textContent = '▷ 运行实例';
-      button.addEventListener('click', () => {
-        try {
-          sessionStorage.setItem(
-            'cs101:playground',
-            JSON.stringify({ code: codeEl.textContent ?? '', lang }),
-          );
-        } catch {
-          /* ignore */
-        }
-        window.location.href = `${BASE}/playground/?from=session`;
-      });
+      button.title = '在 CodePen 中打开（新标签页）';
+      button.addEventListener('click', () => openInCodePen(lang, codeEl.textContent ?? ''));
       figure.appendChild(button);
     });
   };

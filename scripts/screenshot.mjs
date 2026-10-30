@@ -11,8 +11,6 @@ const OUT = 'screenshots';
 const shots = [
   { name: 'home-desktop', path: '', width: 1440, height: 900 },
   { name: 'tech-stack-desktop', path: 'tech-stack/', width: 1440, height: 900 },
-  { name: 'playground-mobile', path: 'playground/', width: 390, height: 844 },
-  { name: 'playground-dark', path: 'playground/', width: 1440, height: 900, colorScheme: 'dark' },
   { name: 'domain-desktop', path: 'domain/', width: 1440, height: 1000 },
   { name: 'domain-mobile', path: 'domain/', width: 390, height: 844 },
   { name: 'domain-dark', path: 'domain/', width: 1440, height: 900, colorScheme: 'dark' },

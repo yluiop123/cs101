@@ -306,6 +306,74 @@ main h1.cs-page-title {
   border-bottom-color: var(--cs-accent);
 }
 
+/* 顶部导航里的外站菜单（在线演练：CodePen / StackBlitz / TS Playground） */
+.cs-topnav-tools {
+  position: relative;
+}
+
+.cs-topnav-tools summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  padding-block: 0.25rem;
+  border-bottom: 2px solid transparent;
+  list-style: none;
+  color: var(--cs-text);
+}
+
+.cs-topnav-tools summary::-webkit-details-marker {
+  display: none;
+}
+
+.cs-topnav-tools summary:hover,
+.cs-topnav-tools[open] summary {
+  color: var(--cs-accent-dark);
+  border-bottom-color: var(--cs-accent);
+}
+
+.cs-topnav-caret {
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.cs-topnav-tools-menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  min-width: 15rem;
+  padding: 0.4rem;
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  background: var(--cs-bg);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 12%);
+}
+
+.cs-topnav-tools-menu a {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.5rem 0.65rem;
+  border-bottom: 0;
+  border-radius: var(--cs-radius);
+}
+
+.cs-topnav-tools-menu a:hover {
+  background: color-mix(in srgb, var(--cs-accent) 10%, transparent);
+  border-bottom-color: transparent;
+}
+
+.cs-topnav-tools-menu span {
+  font-weight: 700;
+}
+
+.cs-topnav-tools-menu small {
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--cs-muted);
+}
+
 /* ---- 主题选择：与搜索按钮一致的方角小胶囊，去掉默认焦点黑框 ---- */
 starlight-theme-select label {
   height: 30px;
@@ -1305,147 +1373,6 @@ starlight-theme-select option {
 
 .cs-code-run:hover {
   background: var(--cs-accent-dark);
-}
-
-/* ============ 演练场 ============ */
-/* 演练场用 splash 版式（无左侧栏），内容宽度与其它页面保持一致（splash 默认 67.5rem 太宽） */
-main:has(.cs-playground) .sl-container {
-  max-width: 54rem;
-}
-
-.cs-playground {
-  border: 1px solid var(--cs-border);
-  background: var(--cs-bg);
-  margin: 1.2rem 0;
-}
-
-.cs-playground-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  border-bottom: 1px solid var(--cs-border);
-  padding: 0.5rem 0.75rem;
-}
-
-.cs-playground-tabs {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.cs-playground-tabs button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.6rem;
-  height: 30px;
-  border: 1px solid var(--cs-border);
-  background: transparent;
-  color: var(--cs-text);
-  font-size: 0.78rem;
-  line-height: 1;
-  padding: 0 0.6rem;
-  cursor: pointer;
-}
-
-.cs-playground-tabs button.is-active {
-  background: var(--cs-accent);
-  border-color: var(--cs-accent);
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.cs-playground-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* Starlight 会给 markdown 里非首个子项加 margin-top，工具栏内必须清零 */
-.cs-playground-toolbar > *,
-.cs-playground-tabs > *,
-.cs-playground-actions > * {
-  margin-top: 0;
-}
-
-.cs-playground-actions .cs-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  padding: 0 0.9rem;
-  font-size: 0.82rem;
-  line-height: 1;
-}
-
-.cs-playground-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 460px;
-}
-
-.cs-playground-editor {
-  min-width: 0;
-  border-inline-end: 1px solid var(--cs-border);
-}
-
-.cs-playground-output {
-  min-width: 0;
-  background: var(--cs-sidebar-bg);
-}
-
-.cs-console {
-  height: 460px;
-  overflow: auto;
-  padding: 0.75rem;
-  background: #1e1e1e;
-  color: #dddddd;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-}
-
-.cs-console-line {
-  margin: 0 0 0.3rem;
-  white-space: pre-wrap;
-}
-
-.cs-console-error {
-  color: #ff9d9d;
-}
-
-.cs-console-warn {
-  color: #ffd479;
-}
-
-.cs-console-info {
-  color: #9ecbff;
-}
-
-.cs-playground-preview {
-  width: 100%;
-  height: 460px;
-  border: 0;
-  background: #ffffff;
-}
-
-.cs-playground-hint {
-  padding: 1rem;
-  margin: 0;
-  color: var(--cs-muted);
-  font-size: 0.85rem;
-}
-
-@media (max-width: 900px) {
-  .cs-playground-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cs-playground-editor {
-    border-inline-end: 0;
-    border-bottom: 1px solid var(--cs-border);
-  }
 }
 
 /* ============ 侧边栏（四主题 / 当前系列） ============ */
