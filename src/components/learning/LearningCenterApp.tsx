@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
-import { ArrowRight, BookOpen, Check, Download, StarOff, Trash2, Upload } from 'lucide-react';
+import { ArrowRight, BookOpen, Download, StarOff, Trash2, Upload } from 'lucide-react';
 import {
   emptyProgress,
   PROGRESS_EVENT,
   readProgress,
-  toggleComplete,
   toggleFavorite,
   writeProgress,
   type ProgressState,
@@ -232,8 +231,8 @@ export default function LearningCenterApp({ chapters, series, externals, routes 
                         <BookOpen size={12} aria-hidden="true" />
                         {chapter.seriesTitle}
                       </span>
-                      {state.completed[chapter.id] && (
-                        <span className="cs-me-recent-done">已完成</span>
+                      {stats && stats.total > 0 && stats.done >= stats.total && (
+                        <span className="cs-me-recent-done">已完成教程</span>
                       )}
                     </div>
                     <a className="cs-me-recent-title" href={withBase(`/${chapter.id}/`)}>
@@ -326,15 +325,6 @@ export default function LearningCenterApp({ chapters, series, externals, routes 
                     <small>{route.marked ? '学习路线 · 已完成' : '学习路线'}</small>
                   </div>
                   <div className="cs-me-favorite-actions">
-                    <button
-                      type="button"
-                      className={`cs-me-complete${route.marked ? ' is-done' : ''}`}
-                      onClick={() => toggleComplete(route.id)}
-                      aria-label={route.marked ? `取消完成 ${route.title}` : `标记完成 ${route.title}`}
-                      title={route.marked ? '取消完成' : '标记完成'}
-                    >
-                      <Check size={15} aria-hidden="true" />
-                    </button>
                     <button
                       type="button"
                       className="cs-me-remove"

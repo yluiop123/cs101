@@ -17,6 +17,8 @@ const isSplash = data.template === 'splash';
 const isChapter = Boolean(data.series);
 const seriesSlug = data.series as string | undefined;
 const isSectionIndex = segments.length === 1;
+// 计算机科学的路线完成由外链课程进度决定，不提供手动「标记路线完成」
+const isComputerScience = segments[0] === 'computer-science';
 const routeConfig = (entry.data as { route?: PageConfig }).route;
 const isRoutePage = Boolean(routeConfig?.options?.favorite);
 const routeSlug = `route:${pageConfigKey(entry.id)}`;
@@ -117,13 +119,15 @@ if (!isSplash) {
               label="收藏路线"
               activeLabel="已收藏路线"
             />
-            <CompleteButton
-              client:visible
-              slug={routeSlug}
-              label="标记路线完成"
-              activeLabel="已完成路线"
-              trackRecent={false}
-            />
+            {!isComputerScience && (
+              <CompleteButton
+                client:visible
+                slug={routeSlug}
+                label="标记路线完成"
+                activeLabel="已完成路线"
+                trackRecent={false}
+              />
+            )}
           </div>
         ) : null}
       </div>
