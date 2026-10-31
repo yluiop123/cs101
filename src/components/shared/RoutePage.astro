@@ -2,11 +2,8 @@
 // 全站唯一的「目录页 / 路线页」组件。
 // 首页、应用领域、业务系统、全部技术路线、各条路线、计算机科学课程页都用它；
 // 页面数据写在引用它的 MDX frontmatter 的 route 字段里。
-import CompleteButton from '@/components/progress/CompleteButton.tsx';
-import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import RouteSections from '@/components/shared/RouteSections.astro';
-import { pageConfigKey, type PageConfig } from '@/data/pages';
-
+import type { PageConfig } from '@/data/pages';
 const { entry } = Astro.locals.starlightRoute;
 const config = (entry.data as { route?: PageConfig }).route;
 if (!config) throw new Error(`缺少页面配置：${entry.id}`);
@@ -16,30 +13,12 @@ const {
   density,
   columns,
   legend = true,
-  favorite = false,
 } = options;
 const isHome = !entry.id || entry.id === 'index';
 
 ---
 
 <div class:list={[isHome && 'cs-home']}>
-  {favorite && (
-    <div class="cs-route-actions">
-      <FavoriteButton
-        client:visible
-        slug={`route:${pageConfigKey(entry.id)}`}
-        label="收藏路线"
-        activeLabel="已收藏路线"
-      />
-      <CompleteButton
-        client:visible
-        slug={`route:${pageConfigKey(entry.id)}`}
-        label="标记路线完成"
-        activeLabel="已完成路线"
-        trackRecent={false}
-      />
-    </div>
-  )}
   <RouteSections
     tiers={tiers}
     markKind={markKind}

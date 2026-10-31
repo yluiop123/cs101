@@ -2,6 +2,7 @@
 import CompleteButton from '@/components/progress/CompleteButton.tsx';
 import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import { defaultSectionRoot, sectionRoot } from '@/data/navigation';
+import { pageConfigKey, type PageConfig } from '@/data/pages';
 import { seriesMeta } from '@/data/tutorials';
 import { getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
@@ -16,6 +17,9 @@ const isSplash = data.template === 'splash';
 const isChapter = Boolean(data.series);
 const seriesSlug = data.series as string | undefined;
 const isSectionIndex = segments.length === 1;
+const routeConfig = (entry.data as { route?: PageConfig }).route;
+const isRoutePage = Boolean(routeConfig?.options?.favorite);
+const routeSlug = `route:${pageConfigKey(entry.id)}`;
 
 type Crumb = { label: string; href?: string };
 
@@ -98,9 +102,39 @@ const hasMeta = Boolean(seriesLabel || data.duration || difficulty || data.tags?
         ))}
       </nav>
 
-      <h1 id="_top" class="cs-page-title">
-        {data.title}
-      </h1>
+      <div class="cs-title-row">
+        <h1 id="_top" class="cs-page-title">
+          {data.title}
+        </h1>
+
+        {isChapter && seriesSlug ? (
+          <div class="cs-title-actions">
+            <CompleteButton client:visible slug={entry.id} />
+            <FavoriteButton
+              client:visible
+              slug={`series:${seriesSlug}`}
+              label="收藏教程"
+              activeLabel="已收藏教程"
+            />
+          </div>
+        ) : isRoutePage ? (
+          <div class="cs-title-actions">
+            <FavoriteButton
+              client:visible
+              slug={routeSlug}
+              label="收藏路线"
+              activeLabel="已收藏路线"
+            />
+            <CompleteButton
+              client:visible
+              slug={routeSlug}
+              label="标记路线完成"
+              activeLabel="已完成路线"
+              trackRecent={false}
+            />
+          </div>
+        ) : null}
+      </div>
 
       {hasMeta && (
         <p class="cs-page-meta">
@@ -114,16 +148,7 @@ const hasMeta = Boolean(seriesLabel || data.duration || difficulty || data.tags?
       )}
 
       {isChapter && seriesSlug && (
-        <div class="cs-page-actions">
-          <span class="cs-action-hint">进度与收藏保存在本机浏览器，无需登录</span>
-          <CompleteButton client:visible slug={entry.id} />
-          <FavoriteButton
-            client:visible
-            slug={`series:${seriesSlug}`}
-            label="收藏教程"
-            activeLabel="已收藏教程"
-          />
-        </div>
+        <p class="cs-title-hint">进度与收藏保存在本机浏览器，无需登录</p>
       )}
     </>
   )
