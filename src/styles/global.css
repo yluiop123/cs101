@@ -422,7 +422,7 @@ starlight-theme-select option {
   margin-inline-start: auto;
 }
 
-/* ============ 卡片分节页（应用领域 / 业务系统 / 技术路线 / 领域详情） ============ */
+/* ============ 卡片分节页（业务系统 / 技术路线 / 路线详情） ============ */
 /* 版式与首页一致：绿色分组标题 + 卡片网格；分节之间统一间距，不依赖 Starlight 的段落节奏 */
 .cs-card-page {
   display: flex;
@@ -796,7 +796,7 @@ html.cs-drawer-open {
   margin-top: 0;
 }
 
-/* 首页 / 应用领域共用的分组区块 */
+/* 首页 / 业务系统共用的分组区块 */
 .cs-card-section {
   scroll-margin-top: 88px;
 }
@@ -837,7 +837,7 @@ html.cs-drawer-open {
   text-decoration: underline;
 }
 
-/* ---- 教程 / 领域卡片（首页、应用领域共用） ---- */
+/* ---- 教程 / 路线卡片（首页、业务系统共用） ---- */
 .cs-tut-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));

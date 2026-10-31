@@ -56,13 +56,12 @@ export default defineConfig({
         Pagination: './src/components/shell/Pagination.astro',
         Footer: './src/components/shell/Footer.astro',
       },
-      // 四个板块：首页（教程目录）+ 应用领域 + 业务系统 + 计算机科学（没有总览页，直接下拉到国内 / 国际教程）
+      // 三个板块：首页（教程目录）+ 业务系统 + 计算机科学（没有总览页，直接下拉到国内 / 国际教程）
       sidebar: [
         {
           label: '板块',
           items: [
             { label: '首页', link: '/' },
-            { label: '应用领域', link: '/domain/' },
             { label: '业务系统', link: '/business-systems/' },
             {
               label: '计算机科学',

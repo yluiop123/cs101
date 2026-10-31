@@ -69,9 +69,17 @@ const hasTail = Boolean(kind || tag);
       <span class="cs-tut-name">
         <span class="cs-tut-title">{title}</span>
       </span>
-      {tag && (
+      {hasTail && (
         <span class="cs-tut-tail">
-          <span class:list={['cs-badge', `cs-badge--${tag}`]}>{tagLabels[tag]}</span>
+          {kind && (
+            <span class:list={['cs-kind', `cs-kind--${kind}`]}>
+              <Icon name={kindIcons[kind]} aria-hidden="true" />
+              {kindLabels[kind]}
+            </span>
+          )}
+          {tag && (
+            <span class:list={['cs-badge', `cs-badge--${tag}`]}>{tagLabels[tag]}</span>
+          )}
         </span>
       )}
     </span>

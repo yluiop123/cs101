@@ -27,12 +27,6 @@ export const siteSections: SiteSection[] = [
       path === '/' || path === '' || path.startsWith('/tutorials') || path.startsWith('/tech-stack'),
   },
   {
-    key: 'domain',
-    label: '应用领域',
-    href: '/domain/',
-    matches: (path) => path.startsWith('/domain'),
-  },
-  {
     key: 'business-systems',
     label: '业务系统',
     href: '/business-systems/',
@@ -59,7 +53,6 @@ export const siteSections: SiteSection[] = [
 export const defaultSectionRoot: { label: string; href?: string } = { label: '首页', href: '/' };
 
 export const sectionRoot: Record<string, { label: string; href?: string }> = {
-  domain: { label: '应用领域', href: '/domain/' },
   // 计算机科学没有总览页（顶部导航直接下拉到两条教程），面包屑这一级不带链接
   'computer-science': { label: '计算机科学' },
 };
@@ -68,8 +61,6 @@ export const sectionRoot: Record<string, { label: string; href?: string }> = {
 export const sectionByPath = (path: string) => siteSections.find((section) => section.matches(path));
 
 export const isHomePath = (path: string) => path === '/' || path === '';
-
-export const isDomainIndexPath = (path: string) => path === '/domain/' || path === '/domain';
 
 export const isBusinessSystemsIndexPath = (path: string) =>
   path === '/business-systems/' || path === '/business-systems';

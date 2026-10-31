@@ -1,7 +1,7 @@
 # 数据结构说明
 
 本站只有一种内容模型：**一切都视为路线（Route）**。
-「首页 / 应用领域 / 业务系统 / 全部技术路线」四个目录页、所有技术路线 / 领域路线 / 计算机科学课程页，
+「首页 / 业务系统 / 全部技术路线」三个目录页、所有技术路线 / 计算机科学课程页，
 用的都是同一个 `RouteTier[]`；**一张卡片永远是一个 `RouteItem`**，卡片类型由 `kind` 决定、入口由 `href` 决定。
 新增内容只改数据，不动组件。
 
@@ -12,11 +12,9 @@ src/data/
   tutorials/series-meta.ts    ← 教程元信息：id → 中文名（内容本体不在这里）
 src/content/docs/
   index.mdx                   ← 首页：frontmatter 写 route，正文只有 <RoutePage />
-  domain/index.mdx            ← 应用领域总览：同上
   business-systems/index.mdx  ← 业务系统总览：同上
   tech-stack/index.mdx        ← 全部技术路线总览：同上
   tech-stack/<slug>.mdx       ← 技术路线页：同上
-  domain/<slug>.mdx           ← 应用领域页：同上
   computer-science/{zh,en}/index.mdx ← 计算机科学课程页：同上
   tutorials/<id>/             ← 教程正文：一套教程一个文件夹，`01-xxx.md` 是章节
   business-systems/<id>/      ← 业务系统教程：与普通教程分开存放，URL 为 /business-systems/<id>/
@@ -80,12 +78,11 @@ interface RouteGroup {
   | kind | 卡片标记 | 入口（`href`） |
   | --- | --- | --- |
   | `tutorial`（默认） | 教程 | 省略时 `/tutorials/<id>/`；业务系统写 `/business-systems/<id>/` |
-  | `route` | 路线 | 必填，如 `/tech-stack/java/`、`/domain/gis/`、`/computer-science/zh/` |
+  | `route` | 路线 | 必填，如 `/tech-stack/java/`、`/computer-science/zh/` |
   | `external` | 外部引用 | 不填（卡片是按钮，点开右侧抽屉） |
 
   ```json
   { "id": "java", "kind": "route", "href": "/tech-stack/java/" }
-  { "id": "domain-gis", "kind": "route", "href": "/domain/gis/", "title": "GIS" }
   { "id": "computer-science/zh", "kind": "route", "href": "/computer-science/zh/" }
   ```
 
@@ -190,28 +187,22 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 | 配置位置 | 页面 |
 | --- | --- |
 | `src/content/docs/index.mdx` 的 `route` | 首页 `/` |
-| `src/content/docs/domain/index.mdx` 的 `route` | 应用领域总览 `/domain/` |
 | `src/content/docs/business-systems/index.mdx` 的 `route` | 业务系统总览 `/business-systems/` |
 | `src/content/docs/tech-stack/index.mdx` 的 `route` | 全部技术路线 `/tech-stack/` |
 | `src/content/docs/tech-stack/<slug>.mdx` 的 `route` | 19 条技术路线 |
-| `src/content/docs/domain/<slug>.mdx` 的 `route` | 24 条领域路线 |
 | `src/content/docs/computer-science/{zh,en}/index.mdx` 的 `route` | 计算机科学课程 |
 
-应用领域总览的「是否有路线」不再查内容集合：没有页面的方向直接在条目上写 `tag: 'planned'`，
-卡片就渲染成虚线占位；是否可点完全由配置决定。
+## 3. 三个目录页 = 三条路线
 
-## 3. 四个目录页 = 四条路线
-
-四个目录页的数据**结构完全一样**，都是一个 `RouteTier[]`（分节名用 `name`，卡片标题自带）：
+三个目录页的数据**结构完全一样**，都是一个 `RouteTier[]`（分节名用 `name`，卡片标题自带）：
 
 | 页面 | 配置 | 规模 | 渲染开关 |
 | --- | --- | --- | --- |
-| 首页 `/` | `index.mdx` 的 `route` | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind: "auto"` |
-| 应用领域 `/domain/` | `domain/index.mdx` 的 `route` | 8 分节 / 47 条（24 有路线，23 规划） | 规划条目写 `tag: "planned"` |
+| 首页 `/` | `index.mdx` 的 `route` | 5 分节 / 19 条（全部为路线 / 规划中占位） | `markKind: "auto"` |
 | 业务系统 `/business-systems/` | `business-systems/index.mdx` 的 `route` | 14 分节 / 72 条 | `markKind: "auto"` |
 | 全部技术路线 `/tech-stack/` | `tech-stack/index.mdx` 的 `route` | 4 分节 / 19 条 | `markKind: "none"`、`columns: 2`、`sidebar.mode: "routes"` |
 
-也就是说：**首页就是一条路线（12 个分节），业务系统也是一条路线（14 个分节）**，
+也就是说：**首页就是一条路线（5 个分节），业务系统也是一条路线（14 个分节）**，
 和「Java 技术路线（4 个分节）」没有任何结构差别。
 
 ## 4. 业务系统：条目只写 id
@@ -301,14 +292,13 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 
 | 页面 | 左侧栏内容 |
 | --- | --- |
-| 首页 | 12 个分类，点击定位、滚动高亮 |
-| `/domain/` | 8 个分类，点击定位、滚动高亮 |
+| 首页 | 5 个分类，点击定位、滚动高亮 |
 | `/business-systems/` | 14 个分类，点击定位、滚动高亮 |
 | `/tech-stack/` | 19 条技术路线列表 |
-| 单条路线页（`/tech-stack/<key>/`、`/domain/<slug>/`、`/computer-science/*`） | **本页分节锚点**（入门 / 进阶 / 精通 / 实战…），点击定位、滚动高亮；底部回到对应总览 |
+| 单条路线页（`/tech-stack/<key>/`、`/computer-science/*`） | **本页分节锚点**（入门 / 进阶 / 精通 / 实战…），点击定位、滚动高亮；底部回到对应总览 |
 | 教程页 | 这套教程的章节目录 |
 
-单条路线页的分节数据在 JSON 里，`Sidebar.astro` 直接读同一份 `tiers` 生成锚点，
+单条路线页的分节数据在 MDX frontmatter 的 `route` 里，`Sidebar.astro` 直接读同一份 `tiers` 生成锚点，
 不再从 DOM 采集；脚本只负责点击定位、滚动高亮与移动端收起抽屉。
 
 ## 8. 教程与章节：`src/content/docs/**`
@@ -325,7 +315,6 @@ tags?: string[], prerequisites?: string[], estMinutes?: number
 | 教程系列首页 | `docs/tutorials/<id>/index.mdx` | `title`、`description`、`sidebar.order: 0`、`sidebar.hidden: true`；正文用 `<SeriesChapters series="<id>" />` |
 | 教程章节 | `docs/tutorials/<id>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order`、`tableOfContents: true` |
 | 技术路线页 | `docs/tech-stack/<route-id>.mdx` | `title`（卡片与左侧栏都用它）、`description`；frontmatter 写 `route.tiers` / `route.options` / `route.sidebar`，正文只写 `<RoutePage />` |
-| 应用领域页 | `docs/domain/<slug>.mdx` | 同上，frontmatter 写 `route`，正文只写 `<RoutePage />` |
 | 业务系统教程 | `docs/business-systems/<id>/` | 2 章静态引导语；与普通教程分开存放 |
 | 计算机科学 | `docs/computer-science/{zh,en}/index.mdx` | frontmatter 写 `route`，正文只写 `<RoutePage />`，课程条目为 `kind: 'external'` |
 
@@ -391,13 +380,12 @@ interface ProgressState {
 | 想做的事 | 改哪里 |
 | --- | --- |
 | 新增一篇教程 | `docs/tutorials/<id>/index.mdx` + 章节文件（有 `##` 小节的加 `tableOfContents: true`）；再把 `<id>` 写进路线里的某个分节（卡片会自动直达第一章） |
-| 调整路线顺序 / 增删分节 | 改 `docs/tech-stack/<slug>.mdx`（或 `docs/domain/<slug>.mdx`）里 `route.tiers` |
+| 调整路线顺序 / 增删分节 | 改 `docs/tech-stack/<slug>.mdx` 里 `route.tiers` |
 | 标记必学、推荐、主流、小众、规划中 | 在分节 / 分组 / 条目上写 `tag: 'required' | 'recommended' | 'popular' | 'optional' | 'niche' | 'planned'` |
 | 做三级「多选一」 | 分节写 `groups: [...]`（不给 `items`），面板、徽标、「N 选 1」全自动 |
 | 改教程在卡片上的名字 | 条目的 `title`（只覆盖某处）或 `seriesMeta`（跨页面统一） |
 | 新增一条技术路线 | 新建 `docs/tech-stack/<slug>.mdx`，在 frontmatter 写 `route.tiers` / `route.options` / `route.sidebar`，正文只写 `<RoutePage />`；再把 slug 加进 `docs/tech-stack/index.mdx` 的 `route.tiers` 分组 |
-| 新增一个应用领域 | 在 `docs/domain/index.mdx` 的 `route.tiers` 对应分类加条目；要可点再写 `docs/domain/<slug>.mdx` 并在 frontmatter 写 `route`（有页面就自动点亮） |
-| 首页加/调整分类或卡片 | 改 `docs/index.mdx` 的 `route.tiers`（教程写 `{ "id", "title" }` 或字符串；路线写 `kind: "route"` + `href`；`tag: "planned"` = 虚线占位） |
+| 首页加/调整分类或卡片 | 改 `docs/index.mdx` 的 `route.tiers`（当前所有卡片都是 `kind: "route"` + `tag: "planned"`；以后有入口再补 `href`） |
 | 业务系统加/改条目 | 改 `docs/business-systems/index.mdx` 的 `route.tiers` 分类，加系统 id（标题与入口来自教程页） |
 | 计算机科学加/改课程 | 改 `docs/computer-science/{zh,en}/index.mdx` 的 `route.tiers` |
 

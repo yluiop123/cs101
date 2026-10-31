@@ -1,6 +1,6 @@
 // 路线模型：类型 + 纯函数。
 // 这里不放任何站点数据 ——
-//   入口页配置：src/data/entries/**（首页 / 应用领域 / 业务系统）
+//   入口页配置：src/data/pages/**（首页 / 业务系统）
 //   路线页配置：src/data/routes/**（技术路线总览）
 //   教程元信息：src/data/tutorials/**（id → 中文名）
 
@@ -58,7 +58,7 @@ export interface ExternalRef {
   resources?: ExternalResourceGroup[];
 }
 
-/** 路线里的一项（也用于首页 / 应用领域 / 业务系统 / 全部技术路线 四个目录页的卡片） */
+/** 路线里的一项（也用于首页 / 业务系统 / 全部技术路线 三个目录页的卡片） */
 export interface RouteItem {
   /** 主键：教程 id、路线 key（如 domain-ai-ml）或业务系统 id */
   id: string;

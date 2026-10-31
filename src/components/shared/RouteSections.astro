@@ -14,7 +14,7 @@ import { tutorialEntryHref } from '@/lib/entry-links';
 import { buildSections, collectLegendTags } from '@/lib/route-view';
 
 // 全站唯一的路线渲染入口：
-// 技术路线页 / 领域路线页 / 计算机科学课程页 / 首页 / 应用领域 / 业务系统 / 全部技术路线
+// 技术路线页 / 计算机科学课程页 / 首页 / 业务系统 / 全部技术路线
 // 都走这一个组件，页面之间的差别只在传入的 RouteTier[]（数据 / JSON 配置）与少量显示选项。
 interface Props {
   tiers: RouteTier[];
