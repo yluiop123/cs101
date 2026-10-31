@@ -16,7 +16,10 @@ route: {
         "name": "进阶 · 服务端与数据",
         "items": [
           "nodejs",
-          "node-backend",
+          {
+            "id": "node-backend",
+            "tag": "planned"
+          },
           "sql",
           "mysql",
           "redis"
@@ -27,7 +30,10 @@ route: {
         "items": [
           "network",
           "os",
-          "security",
+          {
+            "id": "security",
+            "tag": "planned"
+          },
           "design-patterns"
         ]
       },
@@ -38,8 +44,14 @@ route: {
           "vue",
           "react",
           "docker",
-          "kubernetes",
-          "nginx"
+          {
+            "id": "kubernetes",
+            "tag": "planned"
+          },
+          {
+            "id": "nginx",
+            "tag": "planned"
+          }
         ]
       }
     ],
@@ -48,11 +60,7 @@ route: {
     },
     "sidebar": {
       "mode": "sections",
-      "kicker": "应用领域",
-      "back": {
-        "href": "/domain/",
-        "label": "全部应用领域"
-      }
+      "kicker": "应用领域"
     }
   }
 ---

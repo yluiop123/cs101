@@ -14,9 +14,15 @@ route: {
       {
         "name": "进阶 · 攻防技术",
         "items": [
-          "security",
+          {
+            "id": "security",
+            "tag": "planned"
+          },
           "os",
-          "c"
+          {
+            "id": "c",
+            "tag": "planned"
+          }
         ]
       },
       {
@@ -30,8 +36,14 @@ route: {
         "name": "实战与生态 · 云与运维",
         "items": [
           "docker",
-          "kubernetes",
-          "nginx",
+          {
+            "id": "kubernetes",
+            "tag": "planned"
+          },
+          {
+            "id": "nginx",
+            "tag": "planned"
+          },
           "sql"
         ]
       }
@@ -41,11 +53,7 @@ route: {
     },
     "sidebar": {
       "mode": "sections",
-      "kicker": "应用领域",
-      "back": {
-        "href": "/domain/",
-        "label": "全部应用领域"
-      }
+      "kicker": "应用领域"
     }
   }
 ---

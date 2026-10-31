@@ -2,11 +2,9 @@
 // 全站唯一的「目录页 / 路线页」组件。
 // 首页、应用领域、业务系统、全部技术路线、各条路线、计算机科学课程页都用它；
 // 页面数据写在引用它的 MDX frontmatter 的 route 字段里。
-import { getCollection } from 'astro:content';
 import CompleteButton from '@/components/progress/CompleteButton.tsx';
 import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import RouteSections from '@/components/shared/RouteSections.astro';
-import type { RouteItem, RouteTier } from '@/data/model/route-model';
 import { pageConfigKey, type PageConfig } from '@/data/pages';
 
 const { entry } = Astro.locals.starlightRoute;
@@ -18,28 +16,9 @@ const {
   density,
   columns,
   legend = true,
-  detectPlanned = false,
   favorite = false,
 } = options;
 const isHome = !entry.id || entry.id === 'index';
-
-// 应用领域总览：docs 集合里存在 domain/<slug>.mdx 才点亮，否则标成「规划中」
-let resolvedTiers: RouteTier[] = tiers;
-if (detectPlanned) {
-  const existing = new Set(
-    (await getCollection('docs'))
-      .filter((item) => item.id.startsWith('domain/') && item.id !== 'domain/index')
-      .map((item) => item.id.slice('domain/'.length)),
-  );
-  resolvedTiers = tiers.map((tier) => ({
-    ...tier,
-    items: tier.items.map((item) => {
-      const routeItem: RouteItem = typeof item === 'string' ? { id: item } : item;
-      const slug = routeItem.id.replace(/^domain-/, '');
-      return existing.has(slug) ? routeItem : { ...routeItem, tag: 'planned' as const };
-    }),
-  }));
-}
 
 ---
 
@@ -62,7 +41,7 @@ if (detectPlanned) {
     </div>
   )}
   <RouteSections
-    tiers={resolvedTiers}
+    tiers={tiers}
     markKind={markKind}
     density={density}
     columns={columns}

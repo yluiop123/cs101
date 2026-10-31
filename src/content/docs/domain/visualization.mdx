@@ -14,7 +14,10 @@ route: {
       {
         "name": "进阶 · 数据处理",
         "items": [
-          "data-science",
+          {
+            "id": "data-science",
+            "tag": "planned"
+          },
           "sql",
           "typescript"
         ]
@@ -30,9 +33,15 @@ route: {
       {
         "name": "实战与生态 · 服务与部署",
         "items": [
-          "node-backend",
+          {
+            "id": "node-backend",
+            "tag": "planned"
+          },
           "docker",
-          "nginx"
+          {
+            "id": "nginx",
+            "tag": "planned"
+          }
         ]
       }
     ],
@@ -41,11 +50,7 @@ route: {
     },
     "sidebar": {
       "mode": "sections",
-      "kicker": "应用领域",
-      "back": {
-        "href": "/domain/",
-        "label": "全部应用领域"
-      }
+      "kicker": "应用领域"
     }
   }
 ---

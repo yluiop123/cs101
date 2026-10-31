@@ -16,27 +16,54 @@ route: {
         "items": [
           "mysql",
           "redis",
-          "kafka",
-          "mongodb"
+          {
+            "id": "kafka",
+            "tag": "planned"
+          },
+          {
+            "id": "mongodb",
+            "tag": "planned"
+          }
         ]
       },
       {
         "name": "精通 · 计算引擎与数仓",
         "items": [
-          "spark",
-          "flink",
-          "etl",
-          "data-warehouse"
+          {
+            "id": "spark",
+            "tag": "planned"
+          },
+          {
+            "id": "flink",
+            "tag": "planned"
+          },
+          {
+            "id": "etl",
+            "tag": "planned"
+          },
+          {
+            "id": "data-warehouse",
+            "tag": "planned"
+          }
         ]
       },
       {
         "name": "实战与生态 · 平台、分析与运维",
         "items": [
           "docker",
-          "kubernetes",
-          "elasticsearch",
+          {
+            "id": "kubernetes",
+            "tag": "planned"
+          },
+          {
+            "id": "elasticsearch",
+            "tag": "planned"
+          },
           "bi",
-          "big-data"
+          {
+            "id": "big-data",
+            "tag": "planned"
+          }
         ]
       }
     ],
@@ -45,11 +72,7 @@ route: {
     },
     "sidebar": {
       "mode": "sections",
-      "kicker": "应用领域",
-      "back": {
-        "href": "/domain/",
-        "label": "全部应用领域"
-      }
+      "kicker": "应用领域"
     }
   }
 ---

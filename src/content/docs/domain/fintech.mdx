@@ -14,7 +14,10 @@ route: {
       {
         "name": "进阶 · 系统与网络",
         "items": [
-          "c",
+          {
+            "id": "c",
+            "tag": "planned"
+          },
           "network",
           "os"
         ]
@@ -23,17 +26,29 @@ route: {
         "name": "精通 · 量化与算法",
         "items": [
           "dsa",
-          "quant",
-          "machine-learning"
+          {
+            "id": "quant",
+            "tag": "planned"
+          },
+          {
+            "id": "machine-learning",
+            "tag": "planned"
+          }
         ]
       },
       {
         "name": "实战与生态 · 风控与运维",
         "items": [
           "redis",
-          "kafka",
+          {
+            "id": "kafka",
+            "tag": "planned"
+          },
           "docker",
-          "security"
+          {
+            "id": "security",
+            "tag": "planned"
+          }
         ]
       }
     ],
@@ -42,11 +57,7 @@ route: {
     },
     "sidebar": {
       "mode": "sections",
-      "kicker": "应用领域",
-      "back": {
-        "href": "/domain/",
-        "label": "全部应用领域"
-      }
+      "kicker": "应用领域"
     }
   }
 ---

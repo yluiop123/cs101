@@ -45,7 +45,8 @@ const hasExternal = items.some((item) => item.kind === 'external');
 // 教程条目的入口要补成「第一章」（业务系统条目也是 tutorial kind + /business-systems/ 入口）
 const hasTutorialEntry = items.some(isTutorial);
 
-// 路线页只写 id：教程标题、是否上线、直达第一章都要从内容集合补全；
+// 路线页只写 id：教程标题、直达第一章要从内容集合补全；
+// 是否「规划中」只看条目自己的 tag，不再查内容集合。
 // 目录页的条目自带 title / tag，不需要这套补全。
 const needsSeries = items.some((item) => isTutorial(item) && !item.title);
 
@@ -53,7 +54,6 @@ const series = needsSeries ? await getSeries() : [];
 // 业务系统教程的系列 id 带 business- 前缀，而路线条目里写的是业务系统 id，两边对齐一下
 const routeIdOf = (seriesId: string) =>
   seriesId.startsWith('business-') ? seriesId.slice('business-'.length) : seriesId;
-const online = new Set(series.map((item) => routeIdOf(item.slug)));
 const seriesTitles = new Map(series.map((item) => [routeIdOf(item.slug), item.title]));
 const firstChapter = hasTutorialEntry ? await tutorialEntryHref() : undefined;
 
@@ -66,8 +66,6 @@ const titleFor =
 const sections = buildSections(tiers, {
   titleOf: titleFor,
   markKind,
-  needsSeries,
-  online,
   firstChapter,
 });
 const legendTags = collectLegendTags(tiers);

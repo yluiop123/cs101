@@ -44,15 +44,9 @@ export interface RouteViewContext {
   /** 卡片标题覆盖（技术路线总览页从 MDX title 取） */
   titleOf: (item: RouteItem) => string;
   markKind: 'explicit' | 'auto' | 'none';
-  /** 教程条目需要从内容集合补全标题 / 是否上线 / 第一章入口 */
-  needsSeries: boolean;
-  /** 已有教程页的路线 id（业务系统已去掉 business- 前缀） */
-  online: Set<string>;
   /** 教程条目 → 第一章入口 */
   firstChapter?: (item: RouteItem) => string | undefined;
 }
-
-const isTutorial = (item: RouteItem) => (item.kind ?? 'tutorial') === 'tutorial';
 
 /** 没写 kind 时按入口推断卡片类型 */
 export const inferKind = (href?: string): RouteKind =>
@@ -70,24 +64,14 @@ export function buildSections(tiers: RouteTier[], context: RouteViewContext): Se
         ? undefined
         : (context.firstChapter?.(routeItem) ?? routeItem.href ?? itemHref(routeItem));
 
-    let resolvedHref = href;
-    if (
-      resolvedHref &&
-      context.needsSeries &&
-      isTutorial(routeItem) &&
-      !context.online.has(routeItem.id)
-    ) {
-      resolvedHref = undefined;
-    }
-
     const kind =
       context.markKind === 'none'
         ? undefined
         : context.markKind === 'auto'
-          ? (routeItem.kind ?? inferKind(resolvedHref))
+          ? (routeItem.kind ?? inferKind(href))
           : routeItem.kind;
 
-    return { item: routeItem, title: context.titleOf(routeItem), href: resolvedHref, kind, tag };
+    return { item: routeItem, title: context.titleOf(routeItem), href, kind, tag };
   };
 
   return tiers.map((tier, index) => {

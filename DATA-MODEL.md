@@ -174,7 +174,6 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 | `density` | `default` / `compact` |
 | `columns` | `2` / `3` |
 | `legend` | 是否显示状态图例 |
-| `detectPlanned` | 应用领域总览：没有 docs 页面的方向标「规划中」 |
 | `favorite` | 路线页显示「收藏路线」按钮 |
 
 `sidebar` 控制左侧栏，与页面数据同源：
@@ -198,8 +197,8 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 | `src/content/docs/domain/<slug>.mdx` 的 `route` | 24 条领域路线 |
 | `src/content/docs/computer-science/{zh,en}/index.mdx` 的 `route` | 计算机科学课程 |
 
-应用领域总览的「是否有路线」仍由内容事实决定：`RoutePage` 在 `detectPlanned: true` 时扫描
-docs 集合（`domain/<slug>.mdx` 是否存在），没有页面的方向自动补 `tag: 'planned'`。
+应用领域总览的「是否有路线」不再查内容集合：没有页面的方向直接在条目上写 `tag: 'planned'`，
+卡片就渲染成虚线占位；是否可点完全由配置决定。
 
 ## 3. 四个目录页 = 四条路线
 
@@ -208,7 +207,7 @@ docs 集合（`domain/<slug>.mdx` 是否存在），没有页面的方向自动�
 | 页面 | 配置 | 规模 | 渲染开关 |
 | --- | --- | --- | --- |
 | 首页 `/` | `index.mdx` 的 `route` | 12 分节 / 85 条（31 可点 + 54 规划） | `markKind: "auto"` |
-| 应用领域 `/domain/` | `domain/index.mdx` 的 `route` | 8 分节 / 47 条（24 有路线，23 虚线） | `detectPlanned: true` |
+| 应用领域 `/domain/` | `domain/index.mdx` 的 `route` | 8 分节 / 47 条（24 有路线，23 规划） | 规划条目写 `tag: "planned"` |
 | 业务系统 `/business-systems/` | `business-systems/index.mdx` 的 `route` | 14 分节 / 72 条 | `markKind: "auto"` |
 | 全部技术路线 `/tech-stack/` | `tech-stack/index.mdx` 的 `route` | 4 分节 / 19 条 | `markKind: "none"`、`columns: 2`、`sidebar.mode: "routes"` |
 

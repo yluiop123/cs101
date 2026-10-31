@@ -8,24 +8,48 @@ route: {
         "items": [
           "sql",
           "mysql",
-          "postgresql"
+          {
+            "id": "postgresql",
+            "tag": "planned"
+          }
         ]
       },
       {
         "name": "进阶 · 查询与建模",
         "items": [
-          "data-modeling",
-          "indexing",
-          "query-optimization",
-          "transactions"
+          {
+            "id": "data-modeling",
+            "tag": "planned"
+          },
+          {
+            "id": "indexing",
+            "tag": "planned"
+          },
+          {
+            "id": "query-optimization",
+            "tag": "planned"
+          },
+          {
+            "id": "transactions",
+            "tag": "planned"
+          }
         ]
       },
       {
         "name": "精通 · 内核与分布式",
         "items": [
-          "database-internals",
-          "replication",
-          "sharding",
+          {
+            "id": "database-internals",
+            "tag": "planned"
+          },
+          {
+            "id": "replication",
+            "tag": "planned"
+          },
+          {
+            "id": "sharding",
+            "tag": "planned"
+          },
           "os"
         ]
       },
@@ -33,10 +57,22 @@ route: {
         "name": "实战 · 多模存储与运维",
         "items": [
           "redis",
-          "mongodb",
-          "elasticsearch",
-          "clickhouse",
-          "backup-recovery"
+          {
+            "id": "mongodb",
+            "tag": "planned"
+          },
+          {
+            "id": "elasticsearch",
+            "tag": "planned"
+          },
+          {
+            "id": "clickhouse",
+            "tag": "planned"
+          },
+          {
+            "id": "backup-recovery",
+            "tag": "planned"
+          }
         ]
       }
     ],
@@ -45,11 +81,7 @@ route: {
     },
     "sidebar": {
       "mode": "sections",
-      "kicker": "应用领域",
-      "back": {
-        "href": "/domain/",
-        "label": "全部应用领域"
-      }
+      "kicker": "应用领域"
     }
   }
 ---

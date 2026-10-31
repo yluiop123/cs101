@@ -15,8 +15,14 @@ route: {
         "name": "进阶 · 空间数据与数据库",
         "items": [
           "sql",
-          "postgresql",
-          "mongodb"
+          {
+            "id": "postgresql",
+            "tag": "planned"
+          },
+          {
+            "id": "mongodb",
+            "tag": "planned"
+          }
         ]
       },
       {
@@ -31,8 +37,14 @@ route: {
         "name": "实战与生态 · 服务与部署",
         "items": [
           "docker",
-          "nginx",
-          "node-backend"
+          {
+            "id": "nginx",
+            "tag": "planned"
+          },
+          {
+            "id": "node-backend",
+            "tag": "planned"
+          }
         ]
       }
     ],
@@ -41,11 +53,7 @@ route: {
     },
     "sidebar": {
       "mode": "sections",
-      "kicker": "应用领域",
-      "back": {
-        "href": "/domain/",
-        "label": "全部应用领域"
-      }
+      "kicker": "应用领域"
     }
   }
 ---

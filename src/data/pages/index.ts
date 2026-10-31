@@ -11,8 +11,6 @@ export interface PageOptions {
   columns?: 2 | 3;
   /** 是否显示状态图例；默认按数据自动 */
   legend?: boolean;
-  /** 应用领域总览：没有对应 docs 页面的方向标成「规划中」 */
-  detectPlanned?: boolean;
   /** 路线页显示「收藏路线」按钮 */
   favorite?: boolean;
 }
