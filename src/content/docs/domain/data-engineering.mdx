@@ -1,7 +1,53 @@
 ---
 title: "数据工程与数据管道"
 description: "SQL 与数据建模起步，用 ETL、Kafka、Flink 搭数据管道，再进入数仓、Spark 与平台运维调优。"
-route: {"tiers":[{"name":"入门 · SQL 与数据建模","items":["sql","data-modeling","python"]},{"name":"进阶 · 采集与传输","items":["etl","kafka","flink"]},{"name":"精通 · 数仓与计算引擎","items":["data-warehouse","spark","big-data"]},{"name":"实战与生态 · 平台与优化","items":["docker","kubernetes","query-optimization"]}],"options":{"favorite":true},"sidebar":{"mode":"sections","kicker":"应用领域","back":{"href":"/domain/","label":"全部应用领域"}}}
+route: {
+    "tiers": [
+      {
+        "name": "入门 · SQL 与数据建模",
+        "items": [
+          "sql",
+          "data-modeling",
+          "python"
+        ]
+      },
+      {
+        "name": "进阶 · 采集与传输",
+        "items": [
+          "etl",
+          "kafka",
+          "flink"
+        ]
+      },
+      {
+        "name": "精通 · 数仓与计算引擎",
+        "items": [
+          "data-warehouse",
+          "spark",
+          "big-data"
+        ]
+      },
+      {
+        "name": "实战与生态 · 平台与优化",
+        "items": [
+          "docker",
+          "kubernetes",
+          "query-optimization"
+        ]
+      }
+    ],
+    "options": {
+      "favorite": true
+    },
+    "sidebar": {
+      "mode": "sections",
+      "kicker": "应用领域",
+      "back": {
+        "href": "/domain/",
+        "label": "全部应用领域"
+      }
+    }
+  }
 ---
 import RoutePage from '@/components/shared/RoutePage.astro';
 
