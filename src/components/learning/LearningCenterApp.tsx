@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
-import { ArrowRight, Download, StarOff, Trash2, Upload } from 'lucide-react';
+import { ArrowRight, BookOpen, Check, Download, StarOff, Trash2, Upload } from 'lucide-react';
 import {
   emptyProgress,
   PROGRESS_EVENT,
   readProgress,
+  toggleComplete,
   toggleFavorite,
   writeProgress,
   type ProgressState,
@@ -65,47 +66,49 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
     done: completedIds.filter((id) => chapterById.get(id)?.seriesSlug === item.slug).length,
   }));
   const seriesBySlug = new Map(seriesStats.map((item) => [item.slug, item]));
+  type SeriesStat = (typeof seriesStats)[number];
 
-  const favoriteChapters = state.favorites
-    .map((id) => chapterById.get(id))
-    .filter((chapter): chapter is ChapterRef => Boolean(chapter));
-  const favoriteRoutes = state.favorites
+  // 教程收藏是 series:<slug>，一条教程只出现一次；旧版章节收藏已在 readProgress 里归一
+  const favoriteSeries = [...new Set(state.favorites)]
+    .filter((id) => id.startsWith('series:'))
+    .map((id) => seriesBySlug.get(id.slice('series:'.length)))
+    .filter((item): item is SeriesStat => Boolean(item));
+
+  // 路线收藏是 route:<key>，一条路线只出现一次
+  const favoriteRoutes = [...new Set(state.favorites)]
+    .filter((id) => id.startsWith('route:'))
     .map((id) => routeById.get(id))
     .filter((route): route is RouteRef => Boolean(route));
 
-  // 同一教程只出现一次：收藏按系列聚合
-  const favoriteSeries = (() => {
-    const groups = new Map<string, ChapterRef[]>();
-    for (const chapter of favoriteChapters) {
-      const list = groups.get(chapter.seriesSlug);
-      if (list) list.push(chapter);
-      else groups.set(chapter.seriesSlug, [chapter]);
+  // 路线进度按「里面已完成教程数 / 教程总数」统计；手动标记完成视为全部教程完成
+  const routeStats = favoriteRoutes.map((route) => {
+    const tutorials = route.seriesSlugs
+      .map((slug) => seriesBySlug.get(slug))
+      .filter((item): item is SeriesStat => Boolean(item));
+    const doneTutorials = tutorials.filter((item) => item.done >= item.total).length;
+    const marked = Boolean(state.completed[route.id]);
+    const done = marked ? route.total : doneTutorials;
+    return {
+      ...route,
+      done,
+      percent: route.total ? Math.round((done / route.total) * 100) : 0,
+      marked,
+    };
+  });
+
+  // 最近学习：同一教程只显示一次，保留该教程最近访问的章节
+  const recentItems = (() => {
+    const seen = new Set<string>();
+    const items: ChapterRef[] = [];
+    for (const entry of state.recent) {
+      const chapter = chapterById.get(entry.id);
+      if (!chapter || seen.has(chapter.seriesSlug)) continue;
+      seen.add(chapter.seriesSlug);
+      items.push(chapter);
+      if (items.length >= 5) break;
     }
-    return [...groups.entries()].map(([slug, list]) => {
-      const stats = seriesBySlug.get(slug);
-      return {
-        slug,
-        title: stats?.title ?? list[0].seriesTitle,
-        href: stats?.href ?? `/tutorials/${slug}/`,
-        done: stats?.done ?? 0,
-        total: stats?.total ?? list.length,
-        count: list.length,
-      };
-    });
+    return items;
   })();
-
-  const recentItems = state.recent
-    .map((entry) => chapterById.get(entry.id))
-    .filter((chapter): chapter is ChapterRef => Boolean(chapter))
-    .slice(0, 5);
-
-  const removeSeriesFavorites = (slug: string) => {
-    const current = readProgress();
-    writeProgress({
-      ...current,
-      favorites: current.favorites.filter((id) => chapterById.get(id)?.seriesSlug !== slug),
-    });
-  };
 
   const exportData = () => {
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
@@ -167,14 +170,22 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
               return (
                 <li key={chapter.id} className="cs-me-recent">
                   <div className="cs-me-recent-main">
-                    <p className="cs-me-recent-kicker">{chapter.seriesTitle}</p>
+                    <div className="cs-me-recent-top">
+                      <span className="cs-me-recent-kicker">
+                        <BookOpen size={12} aria-hidden="true" />
+                        {chapter.seriesTitle}
+                      </span>
+                      {state.completed[chapter.id] && (
+                        <span className="cs-me-recent-done">已完成</span>
+                      )}
+                    </div>
                     <a className="cs-me-recent-title" href={withBase(`/${chapter.id}/`)}>
                       {chapter.title}
                     </a>
-                    <p className="cs-me-recent-meta">
-                      {stats && `${stats.done}/${stats.total} 章 · ${percent}%`}
-                      {state.completed[chapter.id] && ' · 已完成'}
-                    </p>
+                    <div className="cs-me-recent-meta">
+                      <span>{stats ? `${stats.done}/${stats.total} 章` : ''}</span>
+                      <span className="cs-me-recent-percent">{percent}%</span>
+                    </div>
                   </div>
                   <a className="cs-me-recent-action" href={withBase(`/${chapter.id}/`)}>
                     继续
@@ -209,12 +220,12 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
                       <a className="cs-me-favorite-title" href={withBase(item.href)}>
                         {item.title}
                       </a>
-                      <small>{item.count} 个收藏章节</small>
+                      <small>教程</small>
                     </div>
                     <button
                       type="button"
                       className="cs-me-remove"
-                      onClick={() => removeSeriesFavorites(item.slug)}
+                      onClick={() => toggleFavorite(`series:${item.slug}`)}
                       aria-label={`取消收藏 ${item.title}`}
                       title="取消收藏"
                     >
@@ -239,23 +250,27 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
         )}
 
         <h3 className="cs-me-subtitle">路线</h3>
-        {favoriteRoutes.length > 0 ? (
+        {routeStats.length > 0 ? (
           <ul className="cs-me-grid">
-            {favoriteRoutes.map((route) => {
-              const done = route.seriesSlugs.reduce(
-                (sum, slug) => sum + (seriesBySlug.get(slug)?.done ?? 0),
-                0,
-              );
-              const percent = route.total ? Math.round((done / route.total) * 100) : 0;
-              return (
-                <li key={route.id} className="cs-me-favorite">
-                  <div className="cs-me-favorite-head">
-                    <div className="cs-me-favorite-main">
-                      <a className="cs-me-favorite-title" href={withBase(route.href)}>
-                        {route.title}
-                      </a>
-                      <small>学习路线</small>
-                    </div>
+            {routeStats.map((route) => (
+              <li key={route.id} className="cs-me-favorite">
+                <div className="cs-me-favorite-head">
+                  <div className="cs-me-favorite-main">
+                    <a className="cs-me-favorite-title" href={withBase(route.href)}>
+                      {route.title}
+                    </a>
+                    <small>{route.marked ? '学习路线 · 已完成' : '学习路线'}</small>
+                  </div>
+                  <div className="cs-me-favorite-actions">
+                    <button
+                      type="button"
+                      className={`cs-me-complete${route.marked ? ' is-done' : ''}`}
+                      onClick={() => toggleComplete(route.id)}
+                      aria-label={route.marked ? `取消完成 ${route.title}` : `标记完成 ${route.title}`}
+                      title={route.marked ? '取消完成' : '标记完成'}
+                    >
+                      <Check size={15} aria-hidden="true" />
+                    </button>
                     <button
                       type="button"
                       className="cs-me-remove"
@@ -266,18 +281,18 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
                       <StarOff size={15} aria-hidden="true" />
                     </button>
                   </div>
-                  <div className="cs-me-favorite-meta">
-                    <span>{percent}%</span>
-                    <span>
-                      {done}/{route.total} 章
-                    </span>
-                  </div>
-                  <div className="cs-me-bar" aria-hidden="true">
-                    <span style={{ width: `${percent}%` }} />
-                  </div>
-                </li>
-              );
-            })}
+                </div>
+                <div className="cs-me-favorite-meta">
+                  <span>{route.percent}%</span>
+                  <span>
+                    {route.done}/{route.total} 个教程
+                  </span>
+                </div>
+                <div className="cs-me-bar" aria-hidden="true">
+                  <span style={{ width: `${route.percent}%` }} />
+                </div>
+              </li>
+            ))}
           </ul>
         ) : (
           <p className="cs-me-empty">还没有收藏路线。</p>

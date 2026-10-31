@@ -1,4 +1,6 @@
 ---
+import CompleteButton from '@/components/progress/CompleteButton.tsx';
+import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import { defaultSectionRoot, sectionRoot } from '@/data/navigation';
 import { seriesMeta } from '@/data/tutorials';
 import { getSeriesBySlug } from '@/lib/content';
@@ -12,6 +14,7 @@ const segments = entry.id.split('/').filter(Boolean);
 const isHomePage = !entry.id || entry.id === 'index';
 const isSplash = data.template === 'splash';
 const isChapter = Boolean(data.series);
+const seriesSlug = data.series as string | undefined;
 const isSectionIndex = segments.length === 1;
 
 type Crumb = { label: string; href?: string };
@@ -108,6 +111,19 @@ const hasMeta = Boolean(seriesLabel || data.duration || difficulty || data.tags?
             <span class="cs-meta-item">标签：{data.tags.join(' / ')}</span>
           )}
         </p>
+      )}
+
+      {isChapter && seriesSlug && (
+        <div class="cs-page-actions">
+          <span class="cs-action-hint">进度与收藏保存在本机浏览器，无需登录</span>
+          <CompleteButton client:visible slug={entry.id} />
+          <FavoriteButton
+            client:visible
+            slug={`series:${seriesSlug}`}
+            label="收藏教程"
+            activeLabel="已收藏教程"
+          />
+        </div>
       )}
     </>
   )

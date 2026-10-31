@@ -1,4 +1,5 @@
 ---
+import FavoriteButton from '@/components/progress/FavoriteButton.tsx';
 import { getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 
@@ -18,6 +19,12 @@ const data = await getSeriesBySlug(series);
           <a class="cs-btn cs-btn-primary" href={withBase(`/${data.chapters[0].id}/`)}>
             开始学习 →
           </a>
+          <FavoriteButton
+            client:visible
+            slug={`series:${series}`}
+            label="收藏教程"
+            activeLabel="已收藏教程"
+          />
           <span class="cs-series-start-title">{data.chapters[0].title}</span>
         </p>
       )}

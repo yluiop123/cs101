@@ -18,14 +18,27 @@ export function readProgress(): ProgressState {
     const raw = localStorage.getItem(PROGRESS_KEY);
     if (!raw) return emptyProgress();
     const parsed = JSON.parse(raw) as Partial<ProgressState>;
+    const favorites = Array.isArray(parsed.favorites)
+      ? [...new Set(parsed.favorites.filter((id): id is string => typeof id === 'string').map(normalizeFavorite))]
+      : [];
     return {
       completed: parsed.completed ?? {},
-      favorites: parsed.favorites ?? [],
+      favorites,
       recent: parsed.recent ?? [],
     };
   } catch {
     return emptyProgress();
   }
+}
+
+/** 兼容旧数据：章节收藏统一归到教程（series:<slug>） */
+function normalizeFavorite(id: string): string {
+  if (id.startsWith('series:') || id.startsWith('route:')) return id;
+  const tutorial = id.match(/^tutorials\/([^/]+)\//);
+  if (tutorial) return `series:${tutorial[1]}`;
+  const business = id.match(/^business-systems\/([^/]+)\//);
+  if (business) return `series:business-${business[1]}`;
+  return id;
 }
 
 export function writeProgress(state: ProgressState) {

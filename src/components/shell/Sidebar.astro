@@ -1,6 +1,6 @@
 ---
 import { allTierItems, tagLabels } from '@/data/model/route-model';
-import { getPageConfig } from '@/data/pages';
+import type { PageConfig } from '@/data/pages';
 import { getSeriesBySlug } from '@/lib/content';
 import { withBase } from '@/lib/utils';
 
@@ -8,8 +8,8 @@ const { entry } = Astro.locals.starlightRoute;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.slice(base.length) || '/';
 
-// 目录页 / 路线页：侧栏完全由页面 JSON 的 sidebar 配置决定
-const config = getPageConfig(entry.id);
+// 目录页 / 路线页：侧栏由页面 MDX frontmatter 的 route.sidebar 决定
+const config = (entry.data as { route?: PageConfig }).route;
 const sidebar = config?.sidebar;
 
 // 教程章节页没有页面 JSON，仍从内容集合取系列章节

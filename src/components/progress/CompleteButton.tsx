@@ -2,11 +2,24 @@ import { useEffect, useState } from 'react';
 import { Check } from 'lucide-react';
 import { markRecent, PROGRESS_EVENT, readProgress, toggleComplete } from '@/lib/progress';
 
-export default function CompleteButton({ slug }: { slug: string }) {
+interface Props {
+  slug: string;
+  label?: string;
+  activeLabel?: string;
+  /** 章节页需要写入最近学习；路线级完成不需要 */
+  trackRecent?: boolean;
+}
+
+export default function CompleteButton({
+  slug,
+  label = '标记本章完成',
+  activeLabel = '已完成本章',
+  trackRecent = true,
+}: Props) {
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    markRecent(slug);
+    if (trackRecent) markRecent(slug);
     setCompleted(Boolean(readProgress().completed[slug]));
     const refresh = () => setCompleted(Boolean(readProgress().completed[slug]));
     window.addEventListener(PROGRESS_EVENT, refresh);
@@ -15,7 +28,7 @@ export default function CompleteButton({ slug }: { slug: string }) {
       window.removeEventListener(PROGRESS_EVENT, refresh);
       window.removeEventListener('storage', refresh);
     };
-  }, [slug]);
+  }, [slug, trackRecent]);
 
   return (
     <button
@@ -25,7 +38,7 @@ export default function CompleteButton({ slug }: { slug: string }) {
       onClick={() => setCompleted(toggleComplete(slug))}
     >
       <Check size={16} aria-hidden="true" />
-      {completed ? '已完成本章' : '标记本章完成'}
+      {completed ? activeLabel : label}
     </button>
   );
 }

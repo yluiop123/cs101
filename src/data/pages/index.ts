@@ -1,5 +1,4 @@
-// 页面配置注册表：所有「目录页 / 路线页」都只差一份 JSON。
-// 页面 MDX 显式 import 同名 JSON 并传给 RoutePage；注册表本身供左侧栏与学习中心读取。
+// 目录页 / 路线页的配置类型。具体 tiers / options / sidebar 写在各自 MDX 的 frontmatter 里。
 
 import type { RouteTier } from '@/data/model/route-model';
 
@@ -22,7 +21,7 @@ export interface PageOptions {
  * 左侧栏配置：同一个 Sidebar 组件按这里的 mode 渲染。
  * - sections：列出本页 tiers 的分节锚点
  * - routes：摊平 tiers 里的条目，渲染成路线链接
- * 教程章节页没有页面 JSON，仍由内容集合（系列章节）兜底。
+ * 教程章节页没有 route 配置，仍由内容集合（系列章节）兜底。
  */
 export interface SidebarConfig {
   mode: 'sections' | 'routes';
@@ -36,22 +35,6 @@ export interface PageConfig {
   sidebar?: SidebarConfig;
 }
 
-const modules = import.meta.glob<PageConfig>('./**/*.json', {
-  eager: true,
-  import: 'default',
-});
-
-export const pageConfigs = Object.fromEntries(
-  Object.entries(modules).map(([path, config]) => [
-    path.replace(/^\.\//, '').replace(/\.json$/, ''),
-    config,
-  ]),
-) as Record<string, PageConfig>;
-
 /** 文档 id → 配置 key：index → home，xxx/index → xxx */
 export const pageConfigKey = (entryId: string) =>
   entryId === '' || entryId === 'index' ? 'home' : entryId.replace(/\/index$/, '');
-
-export function getPageConfig(entryId: string): PageConfig | undefined {
-  return pageConfigs[pageConfigKey(entryId)];
-}
