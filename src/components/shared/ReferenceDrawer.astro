@@ -30,6 +30,28 @@ const refs = items.filter((item) => (item.kind ?? 'tutorial') === 'external');
           <h2 class="cs-ref-title" id={`ref-${item.id}`}>
             {item.title}
           </h2>
+          <div class="cs-ref-actions">
+            <button
+              type="button"
+              class="cs-btn"
+              data-ext-action="favorite"
+              data-ext-slug={`external:${item.id}`}
+              aria-pressed="false"
+            >
+              <Icon name="lucide:star" aria-hidden="true" />
+              <span data-ext-label>收藏课程</span>
+            </button>
+            <button
+              type="button"
+              class="cs-btn cs-btn-primary"
+              data-ext-action="complete"
+              data-ext-slug={`external:${item.id}`}
+              aria-pressed="false"
+            >
+              <Icon name="lucide:check" aria-hidden="true" />
+              <span data-ext-label>标记完成课程</span>
+            </button>
+          </div>
           {item.external?.description && <p class="cs-ref-desc">{item.external.description}</p>}
           {(item.external?.resources ?? []).map((group) => (
             <section class="cs-ref-group">
@@ -65,12 +87,14 @@ const refs = items.filter((item) => (item.kind ?? 'tutorial') === 'external');
 </dialog>
 
 <script>
+  import { PROGRESS_EVENT, readProgress, toggleComplete, toggleFavorite } from '@/lib/progress';
+
   const drawer = document.querySelector<HTMLDialogElement>('#cs-ref-drawer');
   if (drawer) {
     const panels = Array.from(drawer.querySelectorAll<HTMLElement>('[data-cs-ref-panel]'));
     let lastTrigger: HTMLElement | null = null;
 
-    const open = (id: string, trigger: HTMLElement) => {
+    const open = (id: string, trigger: HTMLElement | null) => {
       const panel = panels.find((item) => item.dataset.csRefPanel === id);
       if (!panel) return;
       lastTrigger = trigger;
@@ -106,5 +130,50 @@ const refs = items.filter((item) => (item.kind ?? 'tutorial') === 'external');
       lastTrigger?.focus();
       lastTrigger = null;
     });
+
+    // 学习中心收藏的外部教程用 #ref-<id> 直接打开对应面板
+    const openFromHash = () => {
+      const match = window.location.hash.match(/^#ref-(.+)$/);
+      if (match) open(decodeURIComponent(match[1]), null);
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
   }
+
+  // 外部课程按「教程」收藏 / 完成，不写入章节进度
+  const paintExternalActions = () => {
+    const state = readProgress();
+    for (const button of document.querySelectorAll<HTMLElement>('[data-ext-action]')) {
+      const slug = button.dataset.extSlug ?? '';
+      const isFavorite = button.dataset.extAction === 'favorite';
+      const active = isFavorite ? state.favorites.includes(slug) : Boolean(state.completed[slug]);
+      button.classList.toggle('is-active', active);
+      button.classList.toggle('cs-btn-done', active);
+      if (!isFavorite) button.classList.toggle('cs-btn-primary', !active);
+      button.setAttribute('aria-pressed', String(active));
+      const label = button.querySelector<HTMLElement>('[data-ext-label]');
+      if (label) {
+        label.textContent = isFavorite
+          ? active
+            ? '已收藏课程'
+            : '收藏课程'
+          : active
+            ? '已完成课程'
+            : '标记完成课程';
+      }
+    }
+  };
+
+  document.addEventListener('click', (event) => {
+    const button = (event.target as Element | null)?.closest<HTMLElement>('[data-ext-action]');
+    if (!button) return;
+    const slug = button.dataset.extSlug;
+    if (!slug) return;
+    if (button.dataset.extAction === 'favorite') toggleFavorite(slug);
+    else toggleComplete(slug);
+  });
+
+  window.addEventListener(PROGRESS_EVENT, paintExternalActions);
+  window.addEventListener('storage', paintExternalActions);
+  paintExternalActions();
 </script>

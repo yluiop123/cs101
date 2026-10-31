@@ -26,21 +26,30 @@ export interface SeriesRef {
   total: number;
 }
 
+/** 外链课程：没有章节，收藏 / 完成都按教程这一级记录（id 形如 external:<item.id>） */
+export interface ExternalRef {
+  id: string;
+  title: string;
+  href: string;
+}
+
 export interface RouteRef {
   id: string;
   title: string;
   href: string;
   total: number;
   seriesSlugs: string[];
+  externalIds: string[];
 }
 
 interface Props {
   chapters: ChapterRef[];
   series: SeriesRef[];
+  externals: ExternalRef[];
   routes: RouteRef[];
 }
 
-export default function LearningCenterApp({ chapters, series, routes }: Props) {
+export default function LearningCenterApp({ chapters, series, externals, routes }: Props) {
   const [state, setState] = useState<ProgressState>(() => emptyProgress());
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState('');
@@ -59,6 +68,10 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
 
   const chapterById = useMemo(() => new Map(chapters.map((chapter) => [chapter.id, chapter])), [chapters]);
   const routeById = useMemo(() => new Map(routes.map((route) => [route.id, route])), [routes]);
+  const externalById = useMemo(
+    () => new Map(externals.map((item) => [item.id, item])),
+    [externals],
+  );
 
   const completedIds = Object.keys(state.completed).filter((id) => chapterById.has(id));
   const seriesStats = series.map((item) => ({
@@ -68,11 +81,51 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
   const seriesBySlug = new Map(seriesStats.map((item) => [item.slug, item]));
   type SeriesStat = (typeof seriesStats)[number];
 
-  // 教程收藏是 series:<slug>，一条教程只出现一次；旧版章节收藏已在 readProgress 里归一
-  const favoriteSeries = [...new Set(state.favorites)]
-    .filter((id) => id.startsWith('series:'))
-    .map((id) => seriesBySlug.get(id.slice('series:'.length)))
-    .filter((item): item is SeriesStat => Boolean(item));
+  // 教程收藏：普通教程是 series:<slug>，外链课程是 external:<id>，一条只出现一次
+  const favoriteTutorials = (() => {
+    const seen = new Set<string>();
+    const items: {
+      key: string;
+      favoriteId: string;
+      title: string;
+      href: string;
+      done: number;
+      total: number;
+      external: boolean;
+    }[] = [];
+
+    for (const id of state.favorites) {
+      if (seen.has(id)) continue;
+      if (id.startsWith('series:')) {
+        const item = seriesBySlug.get(id.slice('series:'.length));
+        if (!item) continue;
+        seen.add(id);
+        items.push({
+          key: id,
+          favoriteId: id,
+          title: item.title,
+          href: item.href,
+          done: item.done,
+          total: item.total,
+          external: false,
+        });
+      } else if (id.startsWith('external:')) {
+        const item = externalById.get(id);
+        if (!item) continue;
+        seen.add(id);
+        items.push({
+          key: id,
+          favoriteId: id,
+          title: item.title,
+          href: item.href,
+          done: state.completed[id] ? 1 : 0,
+          total: 1,
+          external: true,
+        });
+      }
+    }
+    return items;
+  })();
 
   // 路线收藏是 route:<key>，一条路线只出现一次
   const favoriteRoutes = [...new Set(state.favorites)]
@@ -80,14 +133,18 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
     .map((id) => routeById.get(id))
     .filter((route): route is RouteRef => Boolean(route));
 
-  // 路线进度按「里面已完成教程数 / 教程总数」统计；手动标记完成视为全部教程完成
+  // 路线进度按「里面已完成教程数 / 教程总数」统计：
+  // 普通教程要求所有章节完成，外链课程标记完成即算完成；手动标记路线完成视为全部完成
   const routeStats = favoriteRoutes.map((route) => {
     const tutorials = route.seriesSlugs
       .map((slug) => seriesBySlug.get(slug))
       .filter((item): item is SeriesStat => Boolean(item));
-    const doneTutorials = tutorials.filter((item) => item.done >= item.total).length;
+    const doneSeries = tutorials.filter((item) => item.done >= item.total).length;
+    const doneExternal = route.externalIds.filter((id) =>
+      Boolean(state.completed[`external:${id}`]),
+    ).length;
     const marked = Boolean(state.completed[route.id]);
-    const done = marked ? route.total : doneTutorials;
+    const done = marked ? route.total : doneSeries + doneExternal;
     return {
       ...route,
       done,
@@ -209,23 +266,26 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
         <h2>我的收藏</h2>
 
         <h3 className="cs-me-subtitle">教程</h3>
-        {favoriteSeries.length > 0 ? (
+        {favoriteTutorials.length > 0 ? (
           <ul className="cs-me-grid">
-            {favoriteSeries.map((item) => {
+            {favoriteTutorials.map((item) => {
               const percent = item.total ? Math.round((item.done / item.total) * 100) : 0;
+              const complete = item.total > 0 && item.done >= item.total;
               return (
-                <li key={item.slug} className="cs-me-favorite">
+                <li key={item.key} className="cs-me-favorite">
                   <div className="cs-me-favorite-head">
                     <div className="cs-me-favorite-main">
                       <a className="cs-me-favorite-title" href={withBase(item.href)}>
                         {item.title}
                       </a>
-                      <small>教程</small>
+                      <small>
+                        {item.external ? '外部教程' : complete ? '教程 · 已完成' : '教程'}
+                      </small>
                     </div>
                     <button
                       type="button"
                       className="cs-me-remove"
-                      onClick={() => toggleFavorite(`series:${item.slug}`)}
+                      onClick={() => toggleFavorite(item.favoriteId)}
                       aria-label={`取消收藏 ${item.title}`}
                       title="取消收藏"
                     >
@@ -235,7 +295,11 @@ export default function LearningCenterApp({ chapters, series, routes }: Props) {
                   <div className="cs-me-favorite-meta">
                     <span>{percent}%</span>
                     <span>
-                      {item.done}/{item.total} 章
+                      {item.external
+                        ? complete
+                          ? '已完成教程'
+                          : '未完成'
+                        : `${item.done}/${item.total} 章`}
                     </span>
                   </div>
                   <div className="cs-me-bar" aria-hidden="true">

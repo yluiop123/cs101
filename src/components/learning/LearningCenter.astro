@@ -24,34 +24,65 @@ const seriesRefs = series.map((item) => ({
 }));
 
 const docs = await getCollection('docs');
-const routes = docs
-  .filter((entry) => (entry.data as { route?: PageConfig }).route?.options?.favorite)
-  .map((entry) => {
-    const config = (entry.data as { route: PageConfig }).route;
-    const key = pageConfigKey(entry.id);
-    const slugs = new Set<string>();
-    const tutorialIds = new Set<string>();
-    for (const item of allTierItems(config.tiers)) {
-      if ((item.kind ?? 'tutorial') !== 'tutorial') continue;
-      tutorialIds.add(item.id);
-      let slug: string | undefined;
-      if (item.href) {
-        const match = item.href.match(/^\/(tutorials|business-systems)\/([^/]+)\/$/);
-        if (match) slug = match[1] === 'business-systems' ? `business-${match[2]}` : match[2];
-      } else {
-        slug = item.id;
-      }
-      if (slug && seriesBySlug.has(slug)) slugs.add(slug);
+const routeEntries = docs.filter(
+  (entry) => (entry.data as { route?: PageConfig }).route?.options?.favorite,
+);
+
+// 外链课程没有章节，收藏 / 完成都按「教程」这一级记录：external:<item.id>
+const externalMap = new Map<string, { id: string; title: string; href: string }>();
+for (const entry of routeEntries) {
+  const config = (entry.data as { route: PageConfig }).route;
+  const pageHref = `/${entry.id.replace(/\/index$/, '')}/`;
+  for (const item of allTierItems(config.tiers)) {
+    if (item.kind !== 'external' || externalMap.has(item.id)) continue;
+    externalMap.set(item.id, {
+      id: `external:${item.id}`,
+      title: item.title ?? item.id,
+      href: `${pageHref}#ref-${item.id}`,
+    });
+  }
+}
+const externals = [...externalMap.values()];
+
+const routes = routeEntries.map((entry) => {
+  const config = (entry.data as { route: PageConfig }).route;
+  const key = pageConfigKey(entry.id);
+  const slugs = new Set<string>();
+  const tutorialIds = new Set<string>();
+  const externalIds = new Set<string>();
+  for (const item of allTierItems(config.tiers)) {
+    const kind = item.kind ?? 'tutorial';
+    if (kind === 'external') {
+      externalIds.add(item.id);
+      continue;
     }
-    const seriesSlugs = [...slugs];
-    return {
-      id: `route:${key}`,
-      title: entry.data.title,
-      href: `/${key}/`,
-      total: tutorialIds.size,
-      seriesSlugs,
-    };
-  });
+    if (kind !== 'tutorial') continue;
+    tutorialIds.add(item.id);
+    let slug: string | undefined;
+    if (item.href) {
+      const match = item.href.match(/^\/(tutorials|business-systems)\/([^/]+)\/$/);
+      if (match) slug = match[1] === 'business-systems' ? `business-${match[2]}` : match[2];
+    } else {
+      slug = item.id;
+    }
+    if (slug && seriesBySlug.has(slug)) slugs.add(slug);
+  }
+  const seriesSlugs = [...slugs];
+  return {
+    id: `route:${key}`,
+    title: entry.data.title,
+    href: `/${key}/`,
+    total: tutorialIds.size + externalIds.size,
+    seriesSlugs,
+    externalIds: [...externalIds],
+  };
+});
 ---
 
-<LearningCenterApp client:load chapters={chapters} series={seriesRefs} routes={routes} />
+<LearningCenterApp
+  client:load
+  chapters={chapters}
+  series={seriesRefs}
+  externals={externals}
+  routes={routes}
+/>
