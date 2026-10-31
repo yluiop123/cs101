@@ -1,5 +1,5 @@
 ---
-title: "第 11 章 · 测试"
+title: "测试"
 description: "Angular CLI 生成的项目自带测试设施："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 TestBed 与单元测试三段式
 - 了解服务测试与 HTTP Mock
 
-## 11.1 Angular 的测试底座
+## Angular 的测试底座
 
 Angular CLI 生成的项目**自带测试设施**：
 
@@ -29,7 +29,7 @@ Angular CLI 生成的项目**自带测试设施**：
 
 每个 CLI 生成的组件都带 `xxx.component.spec.ts`——**测试文件与源码同目录同命名**是 Angular 的约定。
 
-## 11.2 三段式：Arrange-Act-Assert
+## 三段式：Arrange-Act-Assert
 
 所有单元测试的通用节奏：
 
@@ -68,7 +68,7 @@ expect(x).toBe(y)   断言（还有 toEqual/toContain/toThrow...）
 beforeEach   每个用例前的准备
 ```
 
-## 11.3 TestBed：组件测试的装配器
+## TestBed：组件测试的装配器
 
 组件依赖模板/DI/输入——需要 **TestBed** 装配测试环境：
 
@@ -116,7 +116,7 @@ describe('LikeCardComponent', () => {
 ④ detectChanges + expect                                同步与断言
 ```
 
-## 11.4 服务测试与 HTTP Mock
+## 服务测试与 HTTP Mock
 
 服务依赖 HttpClient 时，用 **HttpTestingController** mock 后端：
 
@@ -161,7 +161,7 @@ describe('CourseService', () => {
 
 **不发真网络**是单元测试的铁律——快、稳定、可复现。CI 里跑的测试全部走 mock。
 
-## 11.5 测试什么：金字塔取舍
+## 测试什么：金字塔取舍
 
 ```text
         E2E（少）          全流程冒烟（Cypress/Playwright）
@@ -179,7 +179,7 @@ describe('CourseService', () => {
 
 **为"业务逻辑"写测试，不为"样式"写测试。**
 
-## 11.6 综合练习：给 TodoService 写测试
+## 综合练习：给 TodoService 写测试
 
 ```ts
 import { TestBed } from '@angular/core/testing';

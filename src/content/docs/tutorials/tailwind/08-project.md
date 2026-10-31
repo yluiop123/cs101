@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 综合实战"
+title: "综合实战"
 description: "还原一个课程平台首页："
 series: tailwind
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 实战导航栏、卡片网格、响应式与暗色模式
 - 沉淀一套可复用的 Tailwind 组件范式
 
-## 8.1 页面目标与结构
+## 页面目标与结构
 
 还原一个课程平台首页：
 
@@ -34,7 +34,7 @@ tableOfContents: true
 
 前置：按第 2 章在 Vite 项目装好 Tailwind，style.css 里先写好主题（本章沿用第 7 章的 brand 色）。
 
-## 8.2 导航栏
+## 导航栏
 
 ```html
 <header class="sticky top-0 z-10 border-b border-gray-200 bg-white/80 backdrop-blur
@@ -58,7 +58,7 @@ tableOfContents: true
 
 要点：`sticky top-0` 吸顶、`bg-white/80 backdrop-blur` 毛玻璃、导航链接 `hidden md:flex` 移动端收起。
 
-## 8.3 Hero 区
+## Hero 区
 
 ```html
 <section class="bg-brand-50 dark:bg-gray-800/50">
@@ -83,7 +83,7 @@ tableOfContents: true
 
 要点：主副标题的字号阶梯（3xl→5xl）、max-w-2xl 限宽、双按钮的主次对比。
 
-## 8.4 筛选标签栏（JS 联动）
+## 筛选标签栏（JS 联动）
 
 ```html
 <div class="mx-auto max-w-6xl px-4 py-6">
@@ -110,7 +110,7 @@ document.querySelector('#filters').addEventListener('click', (e) => {
 });
 ```
 
-## 8.5 课程卡片组件（本页核心）
+## 课程卡片组件（本页核心）
 
 ```html
 <article class="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white
@@ -140,7 +140,7 @@ line-clamp-2                     描述两行截断
 flex flex-1 flex-col             内容区撑满、footer 贴底
 ```
 
-## 8.6 响应式网格与数据渲染
+## 响应式网格与数据渲染
 
 ```html
 <main class="mx-auto max-w-6xl px-4 pb-16">
@@ -190,7 +190,7 @@ render();
 
 卡片模板由**数据驱动**——筛选切换只是重新渲染，样式类名零拼接。
 
-## 8.7 暗色切换按钮
+## 暗色切换按钮
 
 ```html
 <button id="theme-toggle" class="rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-800">🌙</button>
@@ -209,7 +209,7 @@ btn.addEventListener('click', () =>
 );
 ```
 
-## 8.8 自检清单
+## 自检清单
 
 - [ ] 全部颜色走令牌（brand / gray 阶梯），无硬编码 hex
 - [ ] 每个亮色类都有 dark: 对应类
@@ -217,7 +217,7 @@ btn.addEventListener('click', () =>
 - [ ] 无拼接类名；状态样式走映射表
 - [ ] 间距只用刻度值，未出现任意值（逃生门留到还原设计稿时）
 
-## 8.9 下一步
+## 下一步
 
 Tailwind 毕业后的自然路线：
 

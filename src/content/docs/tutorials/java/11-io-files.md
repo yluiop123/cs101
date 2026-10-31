@@ -1,5 +1,5 @@
 ---
-title: "第 11 章 · IO 与文件"
+title: "IO 与文件"
 description: "Java IO 有两套 API："
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解字节流与字符流的分工
 - 会用缓冲流与序列化
 
-## 11.1 两种姿势：旧流 vs 现代工具
+## 两种姿势：旧流 vs 现代工具
 
 Java IO 有两套 API：
 
@@ -25,7 +25,7 @@ java.io 流（stream）：InputStream/OutputStream/Reader/Writer —— 灵活�
 java.nio.file.Files：现代工具类 —— 一行搞定常见操作（日常首选）
 ```
 
-## 11.2 Files + Path：现代文件操作
+## Files + Path：现代文件操作
 
 ```java
 import java.nio.file.Files;
@@ -60,7 +60,7 @@ try (var walk = Files.walk(Path.of("data"))) {
 
 所有这些方法都抛 **checked 异常 IOException**（第 7 章）——注意 try-catch 或继续上抛。
 
-## 11.3 字节流与字符流
+## 字节流与字符流
 
 ```text
 字节流（8 位）：InputStream / OutputStream —— 万物皆可（图片、视频、二进制）
@@ -105,7 +105,7 @@ try (BufferedWriter writer = Files.newBufferedWriter(
 每次 read 都可能触发一次磁盘/网络 IO；`BufferedReader/BufferedWriter` 内置缓冲区，攒一批再传输——**逐行读文本的标准姿势**（第 12 章的日志分析实战会用到）。
 :::
 
-## 11.4 编码：字符与字节的翻译官
+## 编码：字符与字节的翻译官
 
 ```text
 UTF-8：互联网标准，变长 1~4 字节，中文 3 字节（默认首选）
@@ -121,7 +121,7 @@ String text = Files.readString(Path.of("old.txt"), Charset.forName("GBK"));
 
 乱码 = 编码与解码不一致。"读出来是乱码"排查三板斧：确认源文件编码 → 读时显式指定 → IDE/终端同步设置。
 
-## 11.5 序列化：对象与字节
+## 序列化：对象与字节
 
 **序列化（serialization）**：对象 → 字节流（存盘/网络传输）；反序列化反之：
 
@@ -146,7 +146,7 @@ try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("user.bin"
 JDK 原生序列化有安全隐患（反序列化漏洞）且不可跨语言——**工程实践一律 JSON**（Jackson 库，Spring Boot 教程的默认武器）。理解原生序列化是为了读懂老代码。
 :::
 
-## 11.6 Properties：配置文件标准
+## Properties：配置文件标准
 
 ```properties
 # config.properties
@@ -165,7 +165,7 @@ props.getProperty("db.pool.size", "10");     // 第二参数：默认值
 
 key=value 格式的配置文件 + Properties 读取——最朴素的"配置与代码分离"，第 15 章实战沿用此思路。
 
-## 11.7 综合练习：日志文件分析器
+## 综合练习：日志文件分析器
 
 ```java
 import java.io.IOException;

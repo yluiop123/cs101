@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 文件与异常"
+title: "文件与异常"
 description: "with open(“notes.txt”, “w”, encoding=“utf-8”) as f:"
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解异常体系与 try-except-else-finally
 - 学会自定义异常与"异常即文档"的设计
 
-## 9.1 读写文本文件
+## 读写文本文件
 
 ```python
 # 写文件
@@ -47,7 +47,7 @@ with open("log.txt", "a", encoding="utf-8") as f:
 Windows 默认编码是 GBK——**读写文本一律显式 `encoding="utf-8"`**，否则跨机器乱码（Python 3.15 起才默认 UTF-8）。
 :::
 
-## 9.2 二进制与 shutil
+## 二进制与 shutil
 
 ```python
 # 二进制：图片复制
@@ -66,7 +66,7 @@ shutil.copytree("project", "project-backup")
 shutil.rmtree("temp-dir")                    # 删整棵目录树（谨慎！）
 ```
 
-## 9.3 异常体系
+## 异常体系
 
 ```text
 BaseException
@@ -80,7 +80,7 @@ BaseException
     └── 自定义异常（继承 Exception）
 ```
 
-## 9.4 try / except / else / finally
+## try / except / else / finally
 
 ```python
 def parse_config(path):
@@ -112,7 +112,7 @@ except (ValueError, KeyError) as e:    # ✅ 只接住预期的
     log(f"预期错误：{e}")
 ```
 
-## 9.5 raise：抛出与异常链
+## raise：抛出与异常链
 
 ```python
 def withdraw(balance: float, amount: float) -> float:
@@ -130,7 +130,7 @@ def load_settings(path):
         raise RuntimeError(f"配置文件损坏：{path}") from e    # __cause__ 保留原始异常
 ```
 
-## 9.6 自定义异常：业务语义层
+## 自定义异常：业务语义层
 
 ```python
 class AppError(Exception):
@@ -159,7 +159,7 @@ except AppError as e:
 
 异常类层次 = 错误的分类学：**外层按类型分流处理，内层只管抛**——与 Java 第 7 章 BizException 同构。
 
-## 9.7 EAFP vs LBYL：Python 的风格哲学
+## EAFP vs LBYL：Python 的风格哲学
 
 ```python
 # LBYL（Look Before You Leap）：先检查再操作（Java 风格）
@@ -178,7 +178,7 @@ email = user.get("email")
 
 原则：**能用安全 API 就不用异常控制流程；异常表达"意外"，不表达"分支"**。
 
-## 9.8 综合练习：带容错的词频统计
+## 综合练习：带容错的词频统计
 
 ```python
 from collections import Counter

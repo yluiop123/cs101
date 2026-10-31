@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 过滤、排序与分页"
+title: "过滤、排序与分页"
 description: "SELECT title, price, stock"
 series: sql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 `BETWEEN`、`IN`、`LIKE`、`IS NULL` 四个过滤工具各自的边界
 - 会用 `ORDER BY` 定序、用 `LIMIT`/`OFFSET` 分页，并知道分页会在哪里翻车
 
-## 4.1 比较运算符
+## 比较运算符
 
 ```sql
 SELECT title, price, stock
@@ -41,7 +41,7 @@ MySQL 的 `utf8mb4_general_ci` 里 `_ci` 表示 case-insensitive，所以
 `ILIKE`。跨库迁移时这类差异不会报错，只会让结果悄悄变多或变少。
 :::
 
-## 4.2 逻辑运算符与优先级
+## 逻辑运算符与优先级
 
 `AND` 比 `OR` 优先级高。这条规则每年制造无数 bug：
 
@@ -75,7 +75,7 @@ WHERE city IN ('上海', '北京', '广州')                   -- 等价且好�
 `IN` 还能直接换成子查询（[第 7 章 · 子查询与 CTE](../07-subquery-cte/)），`OR =` 不能。
 :::
 
-## 4.3 BETWEEN、IN 与 LIKE
+## BETWEEN、IN 与 LIKE
 
 ```sql
 -- 时间区间：BETWEEN 含两端，等价于 >= AND <=
@@ -112,7 +112,7 @@ WHERE created_at >= '2025-03-01' AND created_at < '2025-04-01'
 大表上这是性能红线，全文检索要另找工具。
 :::
 
-## 4.4 把"未知"显式写出来
+## 把"未知"显式写出来
 
 [第 3 章 · 查询基础](../03-select-basics/)的结论在这里正式使用：任何比较运算碰到 `NULL`
 都得 `UNKNOWN`，`WHERE` 一律丢弃。
@@ -138,7 +138,7 @@ WHERE city NOT IN ('上海', '北京', NULL)    -- 得 0 行：任何值与 NULL
 安全的替代是 `NOT EXISTS`——它按行判定，不受 `NULL` 传染。
 :::
 
-## 4.5 ORDER BY：排序是"结果"的属性
+## ORDER BY：排序是"结果"的属性
 
 ```sql
 -- 多列排序：先按状态优先级，再按金额从大到小，最后按时间
@@ -167,7 +167,7 @@ SELECT name, city
  ORDER BY CASE WHEN city IS NULL THEN 1 ELSE 0 END, city;
 ```
 
-## 4.6 LIMIT / OFFSET 分页与它的坑
+## LIMIT / OFFSET 分页与它的坑
 
 ```sql
 -- 第 1 页
@@ -210,7 +210,7 @@ SELECT order_id, total
 很多前端把"本页返回 5 行"当成"总共只有 5 行"，就是这么来的。
 :::
 
-## 4.7 综合练习：商品列表分页
+## 综合练习：商品列表分页
 
 ```sql
 -- ① 在售商品按价格从低到高，取第 1 页（每页 4 条）

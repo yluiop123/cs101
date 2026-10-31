@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · 工程化与综合实战"
+title: "工程化与综合实战"
 description: "目录结构（中大型项目的成熟形态）："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 综合运用全教程知识完成"任务看板"项目
 - 沉淀一份 Vue 项目自查清单
 
-## 12.1 工程化约定
+## 工程化约定
 
 **目录结构**（中大型项目的成熟形态）：
 
@@ -64,7 +64,7 @@ export async function createTodo(text) {
 }
 ```
 
-## 12.2 项目目标：任务看板
+## 项目目标：任务看板
 
 功能清单：
 
@@ -78,7 +78,7 @@ export async function createTodo(text) {
 
 技术选型对号入座：state → Pinia store，持久化 → useLocalStorage，拖拽 → 原生 drag 事件 + emit，样式 → scoped CSS。
 
-## 12.3 store：看板数据层
+## store：看板数据层
 
 ```js
 // src/stores/board.js
@@ -126,7 +126,7 @@ export const useBoardStore = defineStore('board', () => {
 });
 ```
 
-## 12.4 组件：泳道与卡片
+## 组件：泳道与卡片
 
 ```vue
 <!-- components/TaskCard.vue -->
@@ -208,7 +208,7 @@ function onAdd(event) {
 </template>
 ```
 
-## 12.5 页面：组装与拖拽逻辑
+## 页面：组装与拖拽逻辑
 
 ```vue
 <!-- views/BoardView.vue -->
@@ -269,7 +269,7 @@ function onDrop(event, toKey) {
 </style>
 ```
 
-## 12.6 原生拖拽要点
+## 原生拖拽要点
 
 ```text
 可拖动元素：draggable="true" + @dragstart 记下 id
@@ -279,7 +279,7 @@ function onDrop(event, toKey) {
 
 生产级拖拽（跨浏览器细节、移动端、动画）用 `vuedraggable` 或 `@dnd-kit` 类库——理解原生原理后再上库。
 
-## 12.7 Vue 项目自查清单
+## Vue 项目自查清单
 
 - [ ] 数据流向清晰：store 管全局、组件 ref 管局部、props 下行 emit 上行
 - [ ] 列表都有稳定 :key（不用 index）
@@ -288,7 +288,7 @@ function onDrop(event, toKey) {
 - [ ] mounted 里借的全局资源，unmounted 里归还
 - [ ] 提交前 build 通过；DevTools 检查无警告
 
-## 12.8 下一步
+## 下一步
 
 Vue 主线毕业。两条延伸路线：
 

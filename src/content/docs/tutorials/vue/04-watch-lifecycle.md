@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 侦听与生命周期"
+title: "侦听与生命周期"
 description: "computed（计算属性）：由现有数据“派生”出新数据，带缓存："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会 watch 侦听数据变化执行副作用
 - 熟悉组件生命周期钩子的常用节点
 
-## 4.1 computed：计算属性
+## computed：计算属性
 
 **computed（计算属性）**：由现有数据"派生"出新数据，带缓存：
 
@@ -58,7 +58,7 @@ const allDone = computed(() => activeCount.value === 0);
 </template>
 ```
 
-## 4.2 computed 可写（少见但要知道）
+## computed 可写（少见但要知道）
 
 ```js
 const firstName = ref('张');
@@ -78,7 +78,7 @@ fullName.value = '李四';   // 触发 set，拆回两个 ref
 
 90% 场景只用只读版。可写版用于"双拆单"这类**视图与数据结构不一致**的适配。
 
-## 4.3 watch：侦听变化执行副作用
+## watch：侦听变化执行副作用
 
 **副作用（side effect）**：改数据之外要做的事（请求、存 localStorage、打日志）——这些不适合放 computed，用 `watch`：
 
@@ -124,7 +124,7 @@ watch([() => state.count, keyword], ([c, k]) => console.log(c, k));
 `watch(state.user.name, …)` ❌（拿到的是字符串值，不是响应式源）。正确写法 `watch(() => state.user.name, …)` ✅——`() =>` 让每次检查都重新取值。
 :::
 
-## 4.4 watch 的选项
+## watch 的选项
 
 ```js
 watch(keyword, handler, {
@@ -134,7 +134,7 @@ watch(keyword, handler, {
 });
 ```
 
-## 4.5 watchEffect：自动收集依赖
+## watchEffect：自动收集依赖
 
 ```js
 import { watchEffect } from 'vue';
@@ -157,7 +157,7 @@ watchEffect(async () => {
 由数据"算"出另一个数据                  → computed（副作用禁区）
 ```
 
-## 4.6 生命周期钩子
+## 生命周期钩子
 
 组件从创建到销毁的关键节点可以挂钩子（hook）：
 
@@ -196,7 +196,7 @@ setup（<script setup> 本体）→ 挂载前 → mounted（DOM 就绪）
 `<script setup>` 顶层直接 await/fetch 也行（SSR 需要时放 setup）；纯客户端项目惯例放 `onMounted`——语义清晰："DOM 好了之后拉数据"。
 :::
 
-## 4.7 清理纪律
+## 清理纪律
 
 **凡在 mounted（或 watchEffect）里"借"的全局资源，必须在 unmounted 里归还**：
 
@@ -212,7 +212,7 @@ stop();   // 手动停止；组件卸载时自动停止
 
 这是防止内存泄漏的核心纪律——组件树动态增删时尤其重要。
 
-## 4.8 综合练习：实时时钟
+## 综合练习：实时时钟
 
 ```vue
 <script setup>

@@ -1,5 +1,5 @@
 ---
-title: "第 14 章 · 反射与注解"
+title: "反射与注解"
 description: "反射（reflection）= 在运行时检查/操作类、方法、字段的能力："
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握注解（annotation）的定义与读取
 - 揭示 Spring 框架的魔法原理
 
-## 14.1 反射：程序审视自己
+## 反射：程序审视自己
 
 **反射（reflection）**= 在运行时检查/操作类、方法、字段的能力：
 
@@ -45,7 +45,7 @@ public class ReflectionDemo {
 }
 ```
 
-## 14.2 反射的典型用途
+## 反射的典型用途
 
 ```text
 框架核心：Spring 的依赖注入、MyBatis 的 ORM 映射（第 15 章/Spring Boot 教程的基础）
@@ -56,7 +56,7 @@ public class ReflectionDemo {
 
 代价：比直接调用慢、绕过编译期类型检查——**业务代码不写反射，框架代码才写**。
 
-## 14.3 注解：贴在代码上的标签
+## 注解：贴在代码上的标签
 
 **注解（annotation）**本身不含逻辑，只是"标记"，由框架在运行时通过反射读取并执行相应行为：
 
@@ -90,7 +90,7 @@ public class Tasks {
 }
 ```
 
-## 14.4 读取注解：框架的核心循环
+## 读取注解：框架的核心循环
 
 ```java
 import java.lang.reflect.Method;
@@ -115,7 +115,7 @@ public class Scheduler {
 
 **这就是全部魔法**：定义注解 → 框架启动时扫描反射 → 读到注解就执行配套逻辑。Spring 的 `@Component`（自动注册 Bean）、`@Autowired`（自动注入）、JUnit 的 `@Test`（自动执行测试）都是这一个模式的变体。
 
-## 14.5 注解在框架中的常见形态
+## 注解在框架中的常见形态
 
 ```java
 // Spring（第 15 章/Spring Boot 预告）
@@ -136,7 +136,7 @@ void 计算正确() { assertEquals(4, add(2, 2)); }
 
 学会"读懂注解的意图"比"手写反射"重要一百倍——业务开发中你消费注解、框架消费你的注解。
 
-## 14.6 注解处理器小实战：模拟迷你路由
+## 注解处理器小实战：模拟迷你路由
 
 ```java
 import java.lang.annotation.*;

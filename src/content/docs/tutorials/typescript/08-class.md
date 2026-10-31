@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 类与面向对象"
+title: "类与面向对象"
 description: "JS class（JavaScript 教程第 9 章）基础上补类型："
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解抽象类与接口的协作
 - 复习 JS 教程第 9 章 class 的 TS 强化点
 
-## 8.1 类字段的类型标注
+## 类字段的类型标注
 
 JS class（[JavaScript 教程第 9 章](../../javascript/)）基础上补类型：
 
@@ -38,7 +38,7 @@ class User {
 }
 ```
 
-## 8.2 访问修饰符：public / private / protected
+## 访问修饰符：public / private / protected
 
 ```ts
 class BankAccount {
@@ -78,7 +78,7 @@ acc.balance;   // ❌ Property 'balance' is private
 
 :::
 
-## 8.3 参数属性：一行声明 + 赋值
+## 参数属性：一行声明 + 赋值
 
 ```ts
 // 传统写法：字段声明 + 构造器赋值，样板代码多
@@ -96,7 +96,7 @@ class UserB {
 }
 ```
 
-## 8.4 readonly 与静态成员
+## readonly 与静态成员
 
 ```ts
 class Config {
@@ -110,7 +110,7 @@ class Config {
 Config.instanceCount;    // 通过类访问，实例访问不到
 ```
 
-## 8.5 类实现接口：implements
+## 类实现接口：implements
 
 ```ts
 interface Serializable {
@@ -128,7 +128,7 @@ class Order implements Serializable {
 
 `implements` 是"履约检查"——漏实现/签名不符立刻标红。
 
-## 8.6 继承与抽象类
+## 继承与抽象类
 
 ```ts
 abstract class Shape {             // 抽象类：不能被直接 new
@@ -162,7 +162,7 @@ shapes.map((s) => s.describe());
 
 `abstract` 表达"基类只定规矩、子类各管实现"——多态（polymorphism）的最小样板。
 
-## 8.7 泛型类
+## 泛型类
 
 ```ts
 class Stack<T> {
@@ -183,7 +183,7 @@ numStack.push('a');   // ❌
 const strStack = new Stack<string>();
 ```
 
-## 8.8 综合示例：类型安全的 TodoStore（JS 第 14 章升级版）
+## 综合示例：类型安全的 TodoStore（JS 第 14 章升级版）
 
 ```ts
 interface Todo {

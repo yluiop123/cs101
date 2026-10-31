@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · 综合实战"
+title: "综合实战"
 description: "├── api/ # 请求层（纯函数）"
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 沉淀 React 项目的工程化规范
 - 对比 Vue 版实现，巩固两框架的异同
 
-## 12.1 项目结构与规范
+## 项目结构与规范
 
 ```text
 src/
@@ -39,7 +39,7 @@ store      useXxxStore   useBoardStore（文件 board.js）
 
 与 Vue 版（[Vue 教程第 12 章](../../vue/)）完全同构的看板需求，用 React 语法重写一遍——**这是检验两套心智是否都建立的最好方式**。
 
-## 12.2 store：看板数据层
+## store：看板数据层
 
 ```js
 // src/stores/board.js
@@ -102,7 +102,7 @@ export const useBoardStore = create(
 
 对照 Vue 版：Pinia 的 ref 数组直接 push/filter，这里**全程不可变更新**（map/filter/展开）——两框架的核心差异浓缩在这一个文件里。
 
-## 12.3 组件：泳道与卡片
+## 组件：泳道与卡片
 
 ```jsx
 // components/TaskCard.jsx
@@ -162,7 +162,7 @@ export default function TaskColumn({ column, onAdd, onRemove, onDragStart, onDro
 }
 ```
 
-## 12.4 页面：组装
+## 页面：组装
 
 ```jsx
 // views/BoardView.jsx
@@ -213,7 +213,7 @@ export default function BoardView() {
 
 原生拖拽三要素与 Vue 版完全一致：draggable / dragover.prevent / drop.prevent；"拖了谁"用 useRef 中转（不触发渲染）。
 
-## 12.5 Vue vs React 实现对照表
+## Vue vs React 实现对照表
 
 | 关注点 | Vue 版 | React 版 |
 | --- | --- | --- |
@@ -227,14 +227,14 @@ export default function BoardView() {
 
 **思路同构、语法各表**——能流畅互译，说明两套心智都已建立。
 
-## 12.6 扩展练习
+## 扩展练习
 
 - 加"编辑任务"：双击卡片变输入框（受控组件 + 状态切换）
 - 加泳道折叠：列标题点击收起（条件渲染）
 - 接真实后端：[Node.js 教程第 10 章](../../nodejs/)的 REST API + api 层改造
 - 性能体检：Profiler 录制拖拽，若卡顿按第 11 章流程优化
 
-## 12.7 React 项目自查清单
+## React 项目自查清单
 
 - [ ] 状态分层清晰：组件 state / Zustand 全局 / props 下行回调上行
 - [ ] 列表 key 稳定唯一（不用 index）
@@ -244,7 +244,7 @@ export default function BoardView() {
 - [ ] 优化有 Profiler 数据支撑
 - [ ] build 通过、控制台无警告
 
-## 12.8 下一步
+## 下一步
 
 React 主线毕业。第三框架：
 

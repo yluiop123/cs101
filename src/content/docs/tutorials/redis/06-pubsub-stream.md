@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 发布订阅与 Stream"
+title: "发布订阅与 Stream"
 description: "127.0.0.1:6379> SUBSCRIBE order:paid"
 series: redis
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会用 `XADD`/`XREADGROUP`/`XACK`/`XPENDING`/`XCLAIM` 搭一个可靠消费的消费者组
 - 能说出 Redis 与专业消息队列的差距，并写出一个基于 ZSet 的延迟队列
 
-## 6.1 Pub/Sub：发完即忘的广播
+## Pub/Sub：发完即忘的广播
 
 ```text
 终端 A
@@ -55,7 +55,7 @@ redis-cli PUBSUB NUMPAT               # PSUBSCRIBE 的模式数
 
 Redis 7.0 起 Cluster 环境还有**分片 Pub/Sub**：`SPUBLISH` / `SSUBSCRIBE` / `SUNSUBSCRIBE`，消息只在承载该频道的分片内广播，避免传统 `PUBLISH` 全网泛洪。跨集群广播需求请改用普通 `PUBLISH` 或专门的总线。
 
-## 6.2 键空间通知：让 Redis 自己喊话
+## 键空间通知：让 Redis 自己喊话
 
 订阅特殊频道，能拿到「某个 key 发生了什么事件」——缓存失效、对象存储回填、审计日志都靠它。
 
@@ -78,7 +78,7 @@ OK
 第 3 章说过，删除是惰性 + 抽样双轨：key 的实际过期时刻与通知到达时刻可能差好几秒，实例阻塞或重启期间通知直接丢失。用「收到 expired 就执行补偿」的架构，缺的那次触发没人补——需要精确延时请用下面的延迟队列。
 :::
 
-## 6.3 Stream：带 ID、可回溯的消息日志
+## Stream：带 ID、可回溯的消息日志
 
 Stream 是**追加-only 的多项日志**（entries），每条消息有单调递增 ID（`毫秒-序号`），有消费者组与确认机制，这才是「Redis 版消息队列」。
 
@@ -108,7 +108,7 @@ redis-cli XINFO STREAM order:events               # length / entries-added / las
 不带 `~` 是**精确**裁剪到恰好 N 条，会拆散内部节点、产生大量小节点；`~` 允许略多于 N 条，按整节点丢弃，代价是内存略超上限。高吞吐流一律用 `~`，容量口径（`redis.conf`）：`stream-node-max-entries 100`、`stream-node-max-bytes 4096`。
 :::
 
-## 6.4 消费者组：认领、确认与待处理清单
+## 消费者组：认领、确认与待处理清单
 
 ```bash
 # 建组：0 表示从流的第一条开始消费；$ 表示只消费新消息
@@ -144,7 +144,7 @@ redis-cli XCLAIM order:events billing worker-2 30000 1759321204512-0
 **正例**：`XGROUP CREATE` + `XREADGROUP ... >` 拿任务，处理完 `XACK`；把 `XAUTOCLAIM` 放进一个每分钟跑一次的守护协程，负责回收死掉 worker 的 PEL。
 :::
 
-## 6.5 与专业消息队列的差距
+## 与专业消息队列的差距
 
 Redis 能做「够用的小流量消息」，但下面的能力它没有，别硬凑：
 
@@ -160,7 +160,7 @@ Redis 能做「够用的小流量消息」，但下面的能力它没有，别�
 
 选型速判：单机 QPS 万级以内、消费者 3~5 个、允许自己写幂等与重试 → Stream 可以；需要分区、需要跨服务可靠投递、需要运维化的死信与延迟级别 → 上 Kafka / RabbitMQ / RocketMQ，把 Redis 留回缓存本职。
 
-## 6.6 延迟队列：ZSet 方案与 Stream 方案
+## 延迟队列：ZSet 方案与 Stream 方案
 
 **ZSet 方案**（最常用）：score 存「应投递的毫秒时间戳」，worker 轮询到期项，一次 Lua 取出批量并删除，保证不重复投递。
 
@@ -185,7 +185,7 @@ while true; do redis-cli EVALSHA "$SHA" 1 order:delay "$(date +%s%3N)" 100; slee
 
 **Stream 方案**：不需要精确延时、只需要「失败后稍后再试」时，直接用 PEL 当延时表——`XPENDING IDLE <毫秒>` 找出冷却够久的条目，再 `XCLAIM` 给自己重试，重试次数超过阈值就搬进死信流。
 
-## 6.7 综合练习：一条带重试与死信的订单流水线
+## 综合练习：一条带重试与死信的订单流水线
 
 需求：订单支付成功后异步发优惠券、加积分、更新 GMV，失败要重试，重复消息要幂等。
 

@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 Python"
+title: "初识 Python"
 description: "Python 是一门解释执行的高级语言（不用编译），以“代码即伪代码”的极简语法著称："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 装好环境：解释器、venv、编辑器
 - 跑通第一个程序并体验 REPL
 
-## 1.1 Python 是什么
+## Python 是什么
 
 Python 是一门**解释执行**的高级语言（不用编译），以"代码即伪代码"的极简语法著称：
 
@@ -31,7 +31,7 @@ print("Hello, Python!")
 Python 源码由**解释器（interpreter）**逐句执行——写完就跑，没有 Java 的 javac 环节。代价是启动慢、运行速度低于编译型语言；收益是开发迭代飞快。性能敏感的场景用 C 扩展（NumPy 的底层）补足。
 :::
 
-## 1.2 版本选择
+## 版本选择
 
 只用 **Python 3**（2 已于 2020 年停止维护）。2026 年主流是 **3.12 / 3.13**：
 
@@ -44,7 +44,7 @@ python3 --version     # macOS/Linux 惯用命令
 Windows 装多个版本时用 `py -3.12` 精确指定版本——`python` 命令可能被商店重定向，`py` 更可靠。
 :::
 
-## 1.3 三种运行方式
+## 三种运行方式
 
 ### ① 脚本文件（正式方式）
 
@@ -78,7 +78,7 @@ pip install ipython    # 第 12 章细讲 pip
 ipython                # 语法高亮、自动补全的 REPL
 ```
 
-## 1.4 虚拟环境 venv：项目隔离的第一课
+## 虚拟环境 venv：项目隔离的第一课
 
 **全局装包 = 依赖地狱**（A 项目要旧版库、B 项目要新版）。**虚拟环境（virtual environment）**为每个项目配一个独立解释器环境：
 
@@ -100,7 +100,7 @@ deactivate
 
 **纪律：每个 Python 项目都先建 venv 再装包**——这是与 Node 教程"每项目一个 node_modules"同构的隔离思想（Node 是目录级隔离，Python 是环境级隔离）。
 
-## 1.5 编辑器配置
+## 编辑器配置
 
 - **VS Code + Python 扩展**（微软官方）：装好后打开 .py 文件即有智能提示；选择解释器（右下角 → 选中 .venv 里的 Python）
 - **PyCharm Community**：纯 Python 项目的重型武器，venv 集成开箱即用
@@ -109,7 +109,7 @@ deactivate
 Python 用**缩进**表达代码块（4 个空格为约定）——不像 Java/JS 用大括号。缩进错误是语法错误，编辑器里把 Tab 自动替换成 4 空格可避坑（VS Code 默认如此）。
 :::
 
-## 1.6 第一个程序：输入、处理、输出
+## 第一个程序：输入、处理、输出
 
 ```python
 # todo.py —— 最小命令行程序
@@ -136,7 +136,7 @@ python todo.py
 
 两个新面孔提前混个脸熟：`f"..."` **f-string** 格式化字符串（第 2 章）、`if __name__ == "__main__"` 主模块守卫（第 7 章）。
 
-## 1.7 动手：探索 REPL
+## 动手：探索 REPL
 
 在 REPL 里完成下面的小实验：
 

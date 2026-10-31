@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 综合实战：CLI 工具"
+title: "综合实战：CLI 工具"
 description: "todo-cli/"
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 flag 与命令行参数处理
 - 学会 JSON 持久化与错误处理分层
 
-## 10.1 项目目标与结构
+## 项目目标与结构
 
 ```text
 todo-cli/
@@ -37,7 +37,7 @@ todo-cli/
 
 对照 Java 版命令行待办：Go 的版本**不需要任何第三方依赖**——标准库全包。
 
-## 10.2 数据模型
+## 数据模型
 
 ```go
 // task.go
@@ -62,7 +62,7 @@ func (t Task) String() string {          // 实现 Stringer（第 6 章）
 }
 ```
 
-## 10.3 持久化层
+## 持久化层
 
 ```go
 // store.go
@@ -107,7 +107,7 @@ func findTask(tasks []Task, id int) (*Task, error) {
 }
 ```
 
-## 10.4 命令实现
+## 命令实现
 
 ```go
 // main.go
@@ -224,7 +224,7 @@ func requireArg(args []string, fn func(string) error) error {
 }
 ```
 
-## 10.5 flag 包：标准参数解析
+## flag 包：标准参数解析
 
 带选项的复杂工具用 flag：
 
@@ -243,7 +243,7 @@ func main() {
 
 经验法则：**子命令式工具**（add/list/done）用 os.Args 手动分发；**选项式工具**（-v -limit）用 flag。更大规模（带子命令+帮助生成）用 cobra 库——第 14 章部署时再用。
 
-## 10.6 测试
+## 测试
 
 ```go
 // task_test.go
@@ -277,7 +277,7 @@ func TestTaskString(t *testing.T) {
 }
 ```
 
-## 10.7 运行效果
+## 运行效果
 
 ```bash
 go build -o todo .
@@ -293,7 +293,7 @@ go build -o todo .
 go test ./...
 ```
 
-## 10.8 自查清单
+## 自查清单
 
 - [ ] 子命令分发 + stderr 错误 + 非零退出码（可脚本化）
 - [ ] JSON 持久化带损坏容错（第 9 章 Unmarshal 指针）

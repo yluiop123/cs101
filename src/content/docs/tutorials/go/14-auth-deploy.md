@@ -1,5 +1,5 @@
 ---
-title: "第 14 章 · 鉴权与部署"
+title: "鉴权与部署"
 description: "JWT（JSON Web Token）= 服务端签名的令牌，客户端每次请求携带："
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 Gin 中间件保护路由
 - 学会编译部署与环境变量管理
 
-## 14.1 认证方案：JWT 是什么
+## 认证方案：JWT 是什么
 
 **JWT（JSON Web Token）**= 服务端签名的令牌，客户端每次请求携带：
 
@@ -32,7 +32,7 @@ tableOfContents: true
 go get github.com/golang-jwt/jwt/v5
 ```
 
-## 14.2 用户模型与密码哈希
+## 用户模型与密码哈希
 
 ```go
 import "golang.org/x/crypto/bcrypt"    // go get golang.org/x/crypto
@@ -55,7 +55,7 @@ func checkPassword(hash, plain string) bool {
 }
 ```
 
-## 14.3 签发与校验 JWT
+## 签发与校验 JWT
 
 ```go
 import (
@@ -99,7 +99,7 @@ func parseToken(tokenStr string) (*Claims, error) {
 }
 ```
 
-## 14.4 Gin 中间件保护路由
+## Gin 中间件保护路由
 
 ```go
 func Auth() gin.HandlerFunc {
@@ -170,7 +170,7 @@ func create(c *gin.Context) {
 }
 ```
 
-## 14.5 配置管理：环境变量
+## 配置管理：环境变量
 
 ```go
 // config.go —— 启动时统一读取并校验
@@ -206,7 +206,7 @@ export JWT_SECRET=$(openssl rand -hex 32)
 # 生产：密钥来自密钥管理服务，绝不进代码库
 ```
 
-## 14.6 部署：单文件二进制的胜利
+## 部署：单文件二进制的胜利
 
 ```bash
 # 交叉编译：在 Mac/Windows 上直接编译 Linux 产物
@@ -265,7 +265,7 @@ WantedBy=multi-user.target
 systemctl enable --now todo    # 开机自启 + 立即启动
 ```
 
-## 14.7 Go Web 全链路自查清单
+## Go Web 全链路自查清单
 
 - [ ] 密码 bcrypt 哈希、响应永不带密码（`json:"-"`）
 - [ ] JWT 密钥走环境变量；校验签名算法

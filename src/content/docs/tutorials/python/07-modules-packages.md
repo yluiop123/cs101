@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 模块与包"
+title: "模块与包"
 description: "每个 .py 文件就是一个模块（module）——代码复用与命名空间的基本单位："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解包（package）的组织与 `__init__.py`
 - 弄懂 `if __name__ == "__main__"` 的原理
 
-## 7.1 模块：一个 .py 文件
+## 模块：一个 .py 文件
 
 每个 .py 文件就是一个**模块（module）**——代码复用与命名空间的基本单位：
 
@@ -47,7 +47,7 @@ from utils import *               # ④ 全部导入 —— ❌ 禁用：命名�
 
 **推荐**：①③ 为主（来源清晰）；别用 ④（冲突风险高，读代码找不到名字出处）。
 
-## 7.2 模块只执行一次与 `__name__`
+## 模块只执行一次与 `__name__`
 
 ```python
 # utils.py 顶层代码：import 时执行，且一个进程内只执行一次（模块缓存）
@@ -67,7 +67,7 @@ if __name__ == "__main__":    # 直接 python utils.py 时 __name__ == "__main__
 
 **作用：让一个文件既能当库被导入，又能当脚本直接运行**——测试代码放守卫里，两不误。
 
-## 7.3 包：模块的目录
+## 包：模块的目录
 
 **包（package）**= 带 `__init__.py` 的目录（Python 3.3+ 支持无 `__init__.py` 的命名空间包，但传统项目都写）：
 
@@ -99,7 +99,7 @@ from services.user import login
 # 使用方：from services import add —— 不用关心内部文件结构
 ```
 
-## 7.4 模块搜索路径
+## 模块搜索路径
 
 ```python
 import sys
@@ -112,7 +112,7 @@ sys.path    # 解释器找模块的目录列表，顺序：
 
 推论：**从项目根目录运行**（`python -m services.todo` 或 `python main.py`），import 才能找到顶层包——"ModuleNotFoundError: No module named 'services'" 十有八九是运行目录不对。
 
-## 7.5 标准库与第三方库的分工
+## 标准库与第三方库的分工
 
 ```python
 import json                 # 标准库：无需安装
@@ -129,7 +129,7 @@ pip install -r requirements.txt  # 依据清单还原环境
 
 `requirements.txt` = Python 世界的 package.json（第 12 章讲工程化的升级形态 pyproject.toml）。
 
-## 7.6 常用内置模块一瞥
+## 常用内置模块一瞥
 
 ```python
 import math
@@ -150,7 +150,7 @@ os.getenv("HOME")                   # 环境变量
 
 （第 8 章精选 os/re/json/datetime/pathlib 展开讲。）
 
-## 7.7 综合练习：多文件待办程序
+## 综合练习：多文件待办程序
 
 ```text
 todoapp/

@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 HTML"
+title: "初识 HTML"
 description: "在浏览器输入一个网址后发生了什么："
 series: html
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 知道 HTML 是什么、处于什么位置
 - 跑通第一个网页，建立开发环境
 
-## 1.1 网页是怎么显示出来的
+## 网页是怎么显示出来的
 
 在浏览器输入一个网址后发生了什么：
 
@@ -31,7 +31,7 @@ HTML 就是这个过程的"原料"：浏览器解析 HTML（HyperText Markup Lan
 
 **超文本**：不止文字，还有图片、链接、视频——而链接让网页之间互相"跳转"，构成了 World Wide Web。
 
-## 1.2 三件套：HTML / CSS / JS
+## 三件套：HTML / CSS / JS
 
 网页由三种技术分工协作：
 
@@ -45,7 +45,7 @@ HTML 就是这个过程的"原料"：浏览器解析 HTML（HyperText Markup Lan
 本教程按 HTML → CSS → JavaScript 的顺序展开——先搭骨架，再化妆，最后注入灵魂。每一层都建立在前一层之上。
 :::
 
-## 1.3 HTML5 简史
+## HTML5 简史
 
 - **1991**：Tim Berners-Lee 发明第一版 HTML，仅十几个标签
 - **1999**：HTML 4.01 成为广泛使用的经典版本
@@ -54,7 +54,7 @@ HTML 就是这个过程的"原料"：浏览器解析 HTML（HyperText Markup Lan
 
 今天的"写 HTML"默认就是写 HTML5，浏览器向后兼容一切合理的历史写法。
 
-## 1.4 认识浏览器开发者工具
+## 认识浏览器开发者工具
 
 用 Chrome / Edge 打开任意网页，按 `F12` 打开**开发者工具（DevTools）**，重点认识 **Elements（元素）面板**：
 
@@ -66,7 +66,7 @@ HTML 就是这个过程的"原料"：浏览器解析 HTML（HyperText Markup Lan
 看到喜欢的网页，F12 打开 Elements 面板研究它的结构——这是前端学习最快的进步方式。
 :::
 
-## 1.5 第一个网页
+## 第一个网页
 
 确保已完成 [VS Code 教程](../../vscode/) 并安装了 **Live Server** 插件（实时预览），然后：
 

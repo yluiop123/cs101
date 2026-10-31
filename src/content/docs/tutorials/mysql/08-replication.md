@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 主从复制与读写分离"
+title: "主从复制与读写分离"
 description: "SELECT @@version, @@binlogformat, @@logbin, @@binlogrowimage, @@expirelogsdays;"
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 搭起一主一从（GTID 模式），并能读懂复制状态里的关键指标
 - 处理复制延迟、中断与主从数据不一致这三类日常故障
 
-## 8.1 binlog 的三种格式
+## binlog 的三种格式
 
 ```sql
 SELECT @@version, @@binlog_format, @@log_bin, @@binlog_row_image, @@expire_logs_days;
@@ -42,7 +42,7 @@ SET SESSION binlog_row_image = MINIMAL;   -- 默认 FULL，以实际值为准
 ① RC 隔离级别下不安全（官方明确要求 ROW）；② `INSERT ... SELECT`、分区表、非确定性函数可能造成主从不一致；③ 从库回放顺序与并发度受限。老项目里看到 STATEMENT 请把它当技术债记录。
 :::
 
-## 8.2 复制原理：一条链上的三个线程
+## 复制原理：一条链上的三个线程
 
 ```text
 主库                          网络                    从库
@@ -81,7 +81,7 @@ Replica_SQL_Running_State                      "Waiting for ..." 之类状态说
 `Seconds_Behind_Source` 依赖主从机器时钟。用 `pt-heartbeat` 在主库写时间戳心跳、在从库读回比较，才能得到不受时钟影响的延迟值。云数据库自带的监控多数就是这么算的。
 :::
 
-## 8.3 异步、半同步与并行回放
+## 异步、半同步与并行回放
 
 ```text
 异步复制（默认）  主库提交即返回，不等从库 → 最快，主库崩溃可能丢已确认事务
@@ -105,7 +105,7 @@ SET GLOBAL replica_parallel_workers = 8;   -- 8.0.26 前叫 slave_parallel_worke
 8.0.22 起 `SHOW SLAVE STATUS` → `SHOW REPLICA STATUS`，`CHANGE MASTER TO` → `CHANGE REPLICATION SOURCE TO`，8.0.26 起 `slave_*` 系列变量改名为 `replica_*`。查不到就试旧名：以 `SELECT VERSION();` 和 `SHOW VARIABLES LIKE '%parallel%';` 的实际输出为准，不要照抄别处的配置片段。
 :::
 
-## 8.4 动手：GTID 模式搭一主一从
+## 动手：GTID 模式搭一主一从
 
 ```bash
 # 两个容器：3307 主，3308 从（端口与密码按你的环境改）
@@ -159,7 +159,7 @@ SELECT * FROM shop.products WHERE product_no = 'P9001';   -- 在从库执行
 `enforce_gtid_consistency = ON` 后，`CREATE TABLE ... SELECT`（会拆成两个事务）、事务内的临时表 DDL 之类都会被拒绝。老项目从 `STATEMENT` + 无 GTID 迁移过来时，这一步是最常见的中断原因，需要改写为"先建表、再 `INSERT ... SELECT`"。
 :::
 
-## 8.5 读写分离与分库分表一瞥
+## 读写分离与分库分表一瞥
 
 复制解决的第一个问题是**读扩展**：写走主库，读走一个或多个从库。
 
@@ -194,7 +194,7 @@ SELECT WAIT_FOR_EXECUTED_GTID_SET('3E11F479-...:1-25', 1);   -- 超时 1 秒
          真到了容量上限再上分片，并且一开始就把 sharding key 定死
 ```
 
-## 8.6 常见故障与处置
+## 常见故障与处置
 
 ```text
 现象                                    先看哪里 / 处置
@@ -233,7 +233,7 @@ PURGE BINARY LOGS BEFORE NOW() - INTERVAL 3 DAY;
 每次跳错都在主从之间留下一条永久差异。跳之前先想清楚：这个事务能否在从库重放？如果不确定，正确做法是重建从库或用 `pt-table-sync` 对齐。线上禁止把 `sql_slave_skip_counter` 当常规运维手段。
 :::
 
-## 8.7 综合练习
+## 综合练习
 
 1. 用 8.4 的脚本搭一主一从，`SHOW REPLICA STATUS\G` 抄下 `Seconds_Behind_Source`、`Executed_Gtid_Set`、`Replica_SQL_Running_State` 三项。
 2. 在主库执行一条更新 200 万行的 `UPDATE`（例如把 `order_items` 某段范围的 `unit_price` 重算），同时每 2 秒在从库读一次延迟，记录延迟曲线；说明为什么延迟出现在**提交之后**。

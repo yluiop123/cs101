@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 JavaScript"
+title: "初识 JavaScript"
 description: "JavaScript（简称 JS）是网页的行为层：HTML 提供结构、CSS 提供外观、JS 让页面“动起来”——响应点击、请求服务器、读写数据。"
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会三种引入方式与 console 调试
 - 跑通第一行交互代码
 
-## 1.1 JavaScript 是什么
+## JavaScript 是什么
 
 JavaScript（简称 JS）是网页的**行为层**：HTML 提供结构、CSS 提供外观、JS 让页面"动起来"——响应点击、请求服务器、读写数据。
 
@@ -30,7 +30,7 @@ JavaScript（简称 JS）是网页的**行为层**：HTML 提供结构、CSS 提
 没有任何关系。1995 年 Netscape 借 Java 的热度改名叫 JavaScript——纯营销行为，两者是完全不同的语言。
 :::
 
-## 1.2 它能做什么
+## 它能做什么
 
 ```text
 页面交互：按钮点击、表单校验、弹窗、轮播、拖拽
@@ -39,7 +39,7 @@ JavaScript（简称 JS）是网页的**行为层**：HTML 提供结构、CSS 提
 平台延伸：Node.js 服务端、小程序、桌面端（Electron）
 ```
 
-## 1.3 三种引入方式
+## 三种引入方式
 
 ```html
 <!-- 方式一：行内（不推荐，仅示意） -->
@@ -64,7 +64,7 @@ JavaScript（简称 JS）是网页的**行为层**：HTML 提供结构、CSS 提
 ```
 :::
 
-## 1.4 console：你的第一调试工具
+## console：你的第一调试工具
 
 打开浏览器控制台（`F12` → Console），JS 的输出都显示在这里：
 
@@ -79,7 +79,7 @@ console.table([{ name: 'Tom', age: 18 }, { name: 'Lucy', age: 20 }]); // 表格�
 本页的代码示例都可以直接贴进控制台运行——控制台就是 JS 的"草稿纸"，比新建文件快得多。
 :::
 
-## 1.5 第一个交互程序
+## 第一个交互程序
 
 ```html
 <button id="btn">点我</button>
@@ -100,7 +100,7 @@ console.table([{ name: 'Tom', age: 18 }, { name: 'Lucy', age: 20 }]); // 表格�
 
 这段代码展示了 JS 三板斧：**找元素（DOM 查询）→ 听事件（监听）→ 改页面（DOM 操作）**——第 10~11 章会系统展开。
 
-## 1.6 alert / prompt / confirm：早期交互三件套
+## alert / prompt / confirm：早期交互三件套
 
 ```js
 alert('欢迎来到 CS101');                 // 警告框
@@ -112,7 +112,7 @@ const ok = confirm('确定要继续吗？');     // 确认框，返回 true/fals
 alert/prompt 会阻塞页面，且样式无法定制——正式项目用自定义弹窗组件替代。但练手阶段它们是最快的反馈工具。
 :::
 
-## 1.7 代码书写规范
+## 代码书写规范
 
 ```js
 // 分号：每条语句结尾写分号（团队统一即可，本教程统一写）

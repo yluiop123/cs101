@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 装饰器与函数式特性"
+title: "装饰器与函数式特性"
 description: "装饰器（decorator）= 接收函数、返回新函数的高阶函数——给函数“套壳”增强，调用方无感："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握带参数装饰器与 functools 常用工具
 - 熟悉函数式特性的日常用法
 
-## 10.1 装饰器是什么
+## 装饰器是什么
 
 **装饰器（decorator）**= 接收函数、返回新函数的高阶函数——给函数"套壳"增强，调用方无感：
 
@@ -36,7 +36,7 @@ shout("hello")          # 'HELLO'
 
 `@` 语法只是糖：`@decorator` 之上的定义行 = `原函数 = decorator(原函数)`。日志、计时、重试、鉴权、缓存——**横切关注点**全部靠它实现（Web 框架的路由注册也是装饰器：`@app.get("/todos")`）。
 
-## 10.2 保留元信息：functools.wraps
+## 保留元信息：functools.wraps
 
 被装饰后，函数的 `__name__`/`__doc__` 变成 wrapper 的——修复它：
 
@@ -58,7 +58,7 @@ shout.__doc__       # '大声喊'
 
 **写装饰器必带 `@functools.wraps(func)`**——调试器、文档工具、序列化都依赖元信息。
 
-## 10.3 带参数的装饰器
+## 带参数的装饰器
 
 三层嵌套：外层收参数、中层收函数、内层执行：
 
@@ -84,7 +84,7 @@ greet("Tom")     # 打印 3 次
 
 读法：`@repeat(times=3)` 先执行 `repeat(3)` 得到真装饰器，再套到 greet 上。
 
-## 10.4 实战装饰器三件套
+## 实战装饰器三件套
 
 ```python
 import functools
@@ -128,7 +128,7 @@ def fetch(url):
     ...
 ```
 
-## 10.5 类装饰器与方法装饰器
+## 类装饰器与方法装饰器
 
 ```python
 # 装饰类：包装整个类
@@ -152,7 +152,7 @@ class Server:
         ...
 ```
 
-## 10.6 函数式特性
+## 函数式特性
 
 ```python
 # map / filter / zip（配推导式选择：Python 社区更爱推导式）
@@ -171,7 +171,7 @@ welcome = partial(send, subject="欢迎注册")    # 主题固定，to/body 后�
 # 不可变思维：用元组代替列表当常量、推导式产生新集合而不是原地修改
 ```
 
-## 10.7 综合练习：装饰器驱动的命令行框架
+## 综合练习：装饰器驱动的命令行框架
 
 ```python
 import functools

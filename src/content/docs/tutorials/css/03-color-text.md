@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 颜色与文本样式"
+title: "颜色与文本样式"
 description: ".color-demo {"
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练使用 font 系列与 text 系列属性
 - 深入理解 line-height 的行为
 
-## 3.1 颜色的四种表示法
+## 颜色的四种表示法
 
 ```css
 .color-demo {
@@ -44,7 +44,7 @@ tableOfContents: true
 </div>
 ```
 
-## 3.2 字体：font 系列
+## 字体：font 系列
 
 ```css
 p {
@@ -70,7 +70,7 @@ p {
 | `em` | 相对**父元素**字号 | 行高、内边距随字号缩放 |
 | `%` | 同 em 类似 | 容器相关尺寸 |
 
-## 3.3 文本：text 系列
+## 文本：text 系列
 
 ```css
 article {
@@ -84,7 +84,7 @@ article {
 a { text-decoration: none; }   /* 去链接下划线的经典用法 */
 ```
 
-## 3.4 行高：line-height 深入
+## 行高：line-height 深入
 
 行高决定**文字行与行之间的距离**，是可读性的第一要素：
 
@@ -99,7 +99,7 @@ p { line-height: 27px; }       /* 固定值：字号变了就坏 */
 
 经验值：正文 1.6~1.8（中文取偏大），标题 1.2~1.4。
 
-## 3.5 文字完整示例
+## 文字完整示例
 
 ```css
 .article { font-family: sans-serif; max-width: 360px; padding: 16px; border: 1px solid #e2e8f0; border-radius: 10px; }

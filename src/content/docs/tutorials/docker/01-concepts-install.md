@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 容器概念与安装"
+title: "容器概念与安装"
 description: "同一份代码，在你的机器上能跑，同事机器上跑不起来，服务器上又换了个错法——这就是经典的「在我机器上是好的」问题。差异来自运行环境：系统版本、依赖库、环境变量、端口占用、文件路径。"
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 在 Linux 上装好 Docker Engine，并知道 Docker Desktop 的差异在哪
 - 跑通第一个容器，配置好镜像加速与日志轮转
 
-## 1.1 容器要解决什么问题
+## 容器要解决什么问题
 
 同一份代码，在你的机器上能跑，同事机器上跑不起来，服务器上又换了个错法——这就是经典的「在我机器上是好的」问题。差异来自运行环境：系统版本、依赖库、环境变量、端口占用、文件路径。
 
@@ -35,7 +35,7 @@ Docker 由 dotCloud 于 2013 年开源，名字来自「码头工人」——它
 | 容器（container） | 镜像运行起来的实例 | 真正在货轮上的那个箱子 |
 | 仓库（registry） | 镜像的存储与分发中心 | 港口与调度中心 |
 
-## 1.2 容器 vs 虚拟机
+## 容器 vs 虚拟机
 
 两者都能在单机上隔离出多个环境，但隔离层次完全不同。
 
@@ -66,7 +66,7 @@ Docker 由 dotCloud 于 2013 年开源，名字来自「码头工人」——它
 需要不同内核（Linux 宿主机上跑 Windows）、需要对抗不可信租户的强隔离、或需要某些内核模块能力时，虚拟机（以及 Kata/Firecracker 这类安全容器）更合适。日常应用交付，容器是默认答案。
 :::
 
-## 1.3 三件套怎么协作
+## 三件套怎么协作
 
 **镜像是一叠只读文件系统层**（layer）加一份 JSON 配置，不是压缩包。每层只记录相对下一层的增改，因此层能被多个镜像共用——`nginx:alpine` 和 `node:alpine` 就共享同一批底层 alpine 层。
 
@@ -103,7 +103,7 @@ CONTAINER ID   IMAGE          STATUS         PORTS                              
 `docker rm` 之后，写在容器里的文件（上传目录、SQLite 文件、日志）全没了。持久化必须走数据卷或 bind mount——见 [第 4 章 · 数据卷与网络](../04-volumes-networks/)。
 :::
 
-## 1.4 namespaces 与 cgroups 点到为止
+## namespaces 与 cgroups 点到为止
 
 Linux 内核提供两样能力，Docker 把它们组合成「容器」：
 
@@ -128,7 +128,7 @@ docker inspect small | grep -E '"Memory"|"NanoCpus"'    # 看限制落到哪个�
 
 记一句就够：**namespaces 决定容器能看见什么，cgroups 决定容器能用多少**。深入调优属于运维进阶，本教程不展开。
 
-## 1.5 安装 Docker Engine（Linux）
+## 安装 Docker Engine（Linux）
 
 以 Ubuntu/Debian 为例，两条官方路径。
 
@@ -167,7 +167,7 @@ docker run --rm hello-world                       # 官方验证镜像
 守护进程以 root 运行，能进 `docker` 组就能操控它，也就变相拿到宿主机 root。共享机器和 CI Runner 上这么做要三思，更严格隔离用 rootless 模式。
 :::
 
-## 1.6 Docker Desktop 与平台差异
+## Docker Desktop 与平台差异
 
 Docker Engine 只原生跑在 Linux（依赖 Linux 内核特性）。Windows 与 macOS 的官方方案是 **Docker Desktop**：一个 GUI 应用内跑一个轻量 Linux 虚拟机，引擎装在那台虚拟机里。
 
@@ -189,7 +189,7 @@ Windows   Docker Desktop（WSL 2 或 Hyper-V 后端，WSL 2 是当前主流）
 它是**开发机工具**。上线用 Linux + Docker Engine（或 Kubernetes 节点），本教程的性能与行为讨论以 Linux Engine 为基准。
 :::
 
-## 1.7 镜像加速与综合练习
+## 镜像加速与综合练习
 
 国内网络直连 Docker Hub 常超时，常见做法是配置 registry mirror。Linux 编辑（或新建）`/etc/docker/daemon.json`，Docker Desktop 在 Settings → Docker Engine 里编辑同一份 JSON：
 

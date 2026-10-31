@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 样式方案"
+title: "样式方案"
 description: "React 不绑定样式方案，主流四选："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 接入 Tailwind CSS（与 Vue 相同的体验）
 - 了解内联样式与方案选型
 
-## 9.1 方案全景
+## 方案全景
 
 React 不绑定样式方案，主流四选：
 
@@ -27,7 +27,7 @@ React 不绑定样式方案，主流四选：
 ④ CSS-in-JS             运行时方案（styled-components 等，渐趋小众）
 ```
 
-## 9.2 CSS Modules
+## CSS Modules
 
 文件名带 `.module.css`，Vite 自动启用——**类名编译成全局唯一**，组件间零冲突：
 
@@ -69,7 +69,7 @@ export default function UserCard({ user, active }) {
 入口 CSS（main.jsx 引入的 index.css）保持全局——放 reset、CSS 变量、通用工具类；组件样式一律 `.module.css`。
 :::
 
-## 9.3 动态类名的组织
+## 动态类名的组织
 
 CSS Modules 里没有 `:class` 对象语法，用工具函数或 clsx 库：
 
@@ -86,7 +86,7 @@ import clsx from 'clsx';
 
 clsx 的对象语法 ≈ Vue 的 `:class="{ ... }"`——心智平移。
 
-## 9.4 Tailwind CSS 接入
+## Tailwind CSS 接入
 
 与 Vue 项目完全相同的流程（[Vite 教程](../../vite/) + [Tailwind 教程](../../tailwind/)）：
 
@@ -135,7 +135,7 @@ export default function Card({ title, desc, done }) {
 </button>
 ```
 
-## 9.5 内联样式：style 对象
+## 内联样式：style 对象
 
 ```jsx
 // 动态样式值（随数据变化）——内联最直接
@@ -152,7 +152,7 @@ export default function Card({ title, desc, done }) {
 全局主题（变量、reset）        → index.css
 ```
 
-## 9.6 方案选型建议
+## 方案选型建议
 
 ```text
 小项目 / 原型          → Tailwind（或纯全局 CSS）
@@ -163,7 +163,7 @@ export default function Card({ title, desc, done }) {
 
 团队一致性 > 方案优劣——混用三套方案才是灾难。
 
-## 9.7 综合练习：同一张卡片的两种实现
+## 综合练习：同一张卡片的两种实现
 
 ```jsx
 // 版本 A：CSS Modules

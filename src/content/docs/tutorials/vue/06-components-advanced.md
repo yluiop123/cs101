@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 组件进阶"
+title: "组件进阶"
 description: "props 传数据，slot 传模板片段——弹窗、卡片这类“外壳固定、内容多变”的组件全靠它："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 provide/inject 的跨层级传递
 - 学会动态组件与异步组件
 
-## 6.1 插槽：把"内容"传给组件
+## 插槽：把"内容"传给组件
 
 props 传数据，**slot 传模板片段**——弹窗、卡片这类"外壳固定、内容多变"的组件全靠它：
 
@@ -53,7 +53,7 @@ props 传数据，**slot 传模板片段**——弹窗、卡片这类"外壳固�
 插槽没被填充时，显示"后备内容"（slot 标签里的默认值）
 ```
 
-## 6.2 作用域插槽：子组件的数据传给插槽内容
+## 作用域插槽：子组件的数据传给插槽内容
 
 有时插槽内容需要用**子组件内部的数据**（如列表项）——作用域插槽（scoped slot）：
 
@@ -85,7 +85,7 @@ defineProps({ todos: Array });
 
 心智模型：**普通插槽是"父传模板"，作用域插槽是"子递数据、父决定怎么渲染"**——表格列、树形组件的自定义渲染都是这个模式。
 
-## 6.3 provide / inject：跨层级传递
+## provide / inject：跨层级传递
 
 深层嵌套时逐层传 props 很痛苦：
 
@@ -119,7 +119,7 @@ const theme = inject('theme');        // 拿到同一个 ref
 字符串 key 'theme' 散落多处容易拼错——工程里把 key 收进一个文件（如 `src/keys.js`），或直接用 Symbol。
 :::
 
-## 6.4 provide/inject 的适用边界
+## provide/inject 的适用边界
 
 ```text
 props/emit：父子直系（默认选择）
@@ -129,7 +129,7 @@ Pinia（第 11 章）：跨组件共享的"业务状态"
 
 原则：provide 的应该是**相对稳定的上下文**，不是随便什么业务数据——滥用 provide 会让数据流不可追踪（"这数据哪来的？"）。
 
-## 6.5 动态组件
+## 动态组件
 
 `<component :is>` 按变量切换组件——标签页的最小实现：
 
@@ -150,7 +150,7 @@ const active = shallowRef(TabHome);   // 组件对象用 shallowRef（无需深�
 </template>
 ```
 
-## 6.6 异步组件：用到才加载
+## 异步组件：用到才加载
 
 ```vue
 <script setup>
@@ -169,7 +169,7 @@ const HeavyChart = defineAsyncComponent(() =>
 
 这正是 [Vite 教程第 5 章](../../vite/)动态 import 分包的组件级应用——重型组件懒加载。
 
-## 6.7 综合练习：通用弹窗组件
+## 综合练习：通用弹窗组件
 
 ```vue
 <!-- components/BaseModal.vue -->

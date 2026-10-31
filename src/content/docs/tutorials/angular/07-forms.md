@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 表单"
+title: "表单"
 description: "响应式表单（Reactive Forms）："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会内置校验器与自定义校验
 - 了解模板驱动表单的定位
 
-## 7.1 两种表单方案
+## 两种表单方案
 
 ```text
 响应式表单（Reactive Forms）：
@@ -28,7 +28,7 @@ tableOfContents: true
   → 认识即可
 ```
 
-## 7.2 响应式表单核心：FormControl / FormGroup
+## 响应式表单核心：FormControl / FormGroup
 
 ```ts
 // register.component.ts
@@ -96,7 +96,7 @@ FormBuilder     工厂：group() 快速搭表单
 (ngSubmit)      表单提交事件（自动 preventDefault）
 ```
 
-## 7.3 校验器与错误信息
+## 校验器与错误信息
 
 ```ts
 import { Validators, AbstractControl, ValidationErrors } from '@angular/forms';
@@ -129,7 +129,7 @@ dirty              用户改过没有（与初始值不同）
 errors             错误对象 { required: true, ... }
 ```
 
-## 7.4 值的读取与监听
+## 值的读取与监听
 
 ```ts
 // 读取
@@ -148,7 +148,7 @@ this.form.controls.username.valueChanges
 
 响应式表单自带 Observable 流——与第 5 章的 RxJS 无缝衔接（valueChanges 直接 pipe 防抖）。
 
-## 7.5 动态表单：FormArray
+## 动态表单：FormArray
 
 ```ts
 form = this.fb.group({
@@ -174,7 +174,7 @@ removeTag(i: number) {
 <button type="button" (click)="addTag()">加标签</button>
 ```
 
-## 7.6 模板驱动表单（认识）
+## 模板驱动表单（认识）
 
 ```html
 <!-- 全在模板里：ngModel 双向绑定 + 指令校验 -->
@@ -186,7 +186,7 @@ removeTag(i: number) {
 
 简单表单（搜索框、单个设置项）用这个最快；结构复杂、需要动态性时回到响应式。
 
-## 7.7 综合练习：注册表单的完整体验流
+## 综合练习：注册表单的完整体验流
 
 清单（整合 7.2~7.5）：
 

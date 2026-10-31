@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 条件与列表渲染"
+title: "条件与列表渲染"
 description: "v-if 与 v-show 的取舍、v-for 与 key 的正确用法、列表增删改与过渡动画。"
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练 v-for 列表渲染与 :key 原理
 - 会做"空状态"与过渡动画的配合
 
-## 7.1 条件渲染：v-if 家族
+## 条件渲染：v-if 家族
 
 ```vue
 <script setup>
@@ -41,7 +41,7 @@ const items = ref([]);
 
 家族规则：`v-else-if` / `v-else` 必须紧跟在 `v-if`（或上一个 else）的元素后面。
 
-## 7.2 v-show：显示与隐藏
+## v-show：显示与隐藏
 
 ```vue
 <template>
@@ -58,7 +58,7 @@ const items = ref([]);
 
 **选择口诀：频繁切换用 v-show，大概率不出现/需要销毁逻辑用 v-if。**（比如弹窗的初始化成本高，用 v-if 惰性创建。）
 
-## 7.3 v-for：列表渲染
+## v-for：列表渲染
 
 ```vue
 <script setup>
@@ -84,7 +84,7 @@ const courses = ref([
 </template>
 ```
 
-## 7.4 :key 的原理：为什么不能省
+## :key 的原理：为什么不能省
 
 `:key` 给每个节点一个"身份证"，Diff 算法靠它判断**复用谁、移动谁**：
 
@@ -101,7 +101,7 @@ const courses = ref([
 3. v-for 必须配 key——不写 Vue 只是警告，但隐患真实存在
 :::
 
-## 7.5 v-for 与 v-if 不同时用在一个元素
+## v-for 与 v-if 不同时用在一个元素
 
 ```vue
 <!-- ❌ 官方不推荐：v-for 优先级高，先遍历再逐项判断 -->
@@ -123,7 +123,7 @@ const activeTodos = computed(() => todos.value.filter(t => !t.done));
 
 computed 过滤是首选——过滤逻辑还能复用与测试。
 
-## 7.6 列表的增删改与不可变更新
+## 列表的增删改与不可变更新
 
 ```js
 const list = ref(['a', 'b', 'c']);
@@ -144,7 +144,7 @@ list.value = list.value.map(item =>
 list.value = [list.value.find(i => i.id === id), ...list.value.filter(i => i.id !== id)];
 ```
 
-## 7.7 过渡动画：transition 组件
+## 过渡动画：transition 组件
 
 列表/条件切换加动画，用内置 `<Transition>` / `<TransitionGroup>`：
 
@@ -172,7 +172,7 @@ list.value = [list.value.find(i => i.id === id), ...list.value.filter(i => i.id 
 
 约定类名：`*-enter-from`（起点）→ `*-enter-active`（过程）→ `*-enter-to`（终点），leave 同理。
 
-## 7.8 综合练习：可筛选任务列表
+## 综合练习：可筛选任务列表
 
 ```vue
 <script setup>

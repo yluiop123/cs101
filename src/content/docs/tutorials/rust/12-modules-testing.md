@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · 模块系统与测试"
+title: "模块系统与测试"
 description: "模块（module）= 命名空间 + 可见性边界。单文件内也能声明模块："
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 分清二进制 crate 与库 crate（`main.rs` 与 `lib.rs`）的职责与依赖边界
 - 写全三层测试：单元 `#[test]`、集成测试 `tests/`、文档测试 `///`
 
-## 12.1 mod：模块与文件组织
+## mod：模块与文件组织
 
 **模块（module）= 命名空间 + 可见性边界**。单文件内也能声明模块：
 
@@ -47,7 +47,7 @@ src/
 
 其他语言用 `include` 粘贴文本；Rust 的 `mod 名;` 只是把文件**挂到模块树上**——每个文件自己又是一个作用域，`use` 照常按需导入。
 
-## 12.2 pub 与可见性边界
+## pub 与可见性边界
 
 默认一切私有——但"私有"按**模块树**判定：条目对"定义它的模块及其后代"可见。放开有梯度：`私有 < pub(super) < pub(crate) < pub`：
 
@@ -74,7 +74,7 @@ fn main() {
 
 `pub(crate)` 是库开发高频档位：模块间协作的实现细节全放开，对用户只留挑选过的 API。编译器按"从调用点到目标的路径上每一级是否都可见"判定，任何一级私有即报错。
 
-## 12.3 use 与重导出（pub use）
+## use 与重导出（pub use）
 
 `use` 惯例与标准库一致：**函数导入到模块一级**（调用保留出处，如 12.1 的 `hosting::add_to_waitlist()`），**类型直接导入名字**：
 
@@ -100,7 +100,7 @@ pub use self::http::request as client;         // 整模块重导出：mylib::cl
 
 记住：`use` 不复制条目也不改变原模块，`pub use` 定义的只是"从哪条路径可以访问"——对外的 **API 门面**。
 
-## 12.4 分离执行与声明：main.rs 与 lib.rs
+## 分离执行与声明：main.rs 与 lib.rs
 
 一个 Cargo 包可同时产出两种 **crate**：
 
@@ -126,7 +126,7 @@ fn main() { run(); }           // 二进制与库是两个独立 crate，各有�
 `cargo new mytool` 生成二进制包，`cargo new --lib mylib` 生成库包。需要被测试驱动、被复用的核心逻辑，先写成 lib 再挂 main，测试会顺得多。
 :::
 
-## 12.5 单元测试：#[test] 与 #[should_panic]
+## 单元测试：#[test] 与 #[should_panic]
 
 单元测试与业务代码同文件，装在 `#[cfg(test)]` 模块里——**只有 `cargo test` 时才编译**，发布产物不含；`assert!` 失败即 panic，接的是[第 7 章 · 错误处理](../07-error-handling/) 的断言工具：
 
@@ -163,7 +163,7 @@ cargo test -- --ignored     # 只跑标了 #[ignore] 的昂贵测试
 `#[should_panic]` 把 panic 本身当信号，返回 Result 的测试没有 panic 可捕获——两种风格不能同用于一个测试函数。
 :::
 
-## 12.6 集成测试、文档测试与基准/覆盖率
+## 集成测试、文档测试与基准/覆盖率
 
 集成测试放包根 `tests/` 目录，**每个文件是独立的 crate**（黑盒：只能走公有 API），`cargo test` 自动发现：
 
@@ -183,7 +183,7 @@ fn greet_trims_input() {
 
 再往进阶两步（简述）：**基准测试**——稳定版不支持内置 `#[bench]`，标准做法是 criterion：`Cargo.toml` 加 `[dev-dependencies] criterion = "0.5"`，`benches/` 目录写基准、`cargo bench` 运行；**覆盖率**——安装 `cargo-llvm-cov` 后一条命令 `cargo llvm-cov` 出报告。
 
-## 12.7 综合练习：lib + tests 的最小完整工程
+## 综合练习：lib + tests 的最小完整工程
 
 把本章拼成真项目（`cargo new hello_lib` 后改造）。文件清单：
 

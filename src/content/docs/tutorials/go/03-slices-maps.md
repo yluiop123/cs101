@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 复合类型：数组、切片、map"
+title: "复合类型：数组、切片、map"
 description: "var a [3]int // [0 0 0] —— 长度是类型的一部分！"
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握切片的追加、扩容与共享语义
 - 熟练 map 的增删改查与 range 遍历
 
-## 3.1 数组：定长、值类型
+## 数组：定长、值类型
 
 ```go
 var a [3]int              // [0 0 0] —— 长度是类型的一部分！
@@ -33,7 +33,7 @@ b[0]                      // 仍是 1
 
 **长度属于类型**（`[3]int` 与 `[4]int` 是不同类型）+ 值拷贝语义——**日常开发几乎不用数组**，它主要作为切片的底层存在。
 
-## 3.2 切片：动态数组的"视图"
+## 切片：动态数组的"视图"
 
 **切片（slice）**= 指向底层数组的窗口 + 长度 len + 容量 cap：
 
@@ -85,7 +85,7 @@ s := make([]int, 0, 100)       // 类型, len, cap —— 已知规模时预分�
 // append 超过 cap 时：底层数组按策略翻倍扩容（整体搬迁）
 ```
 
-## 3.3 遍历：range 的两副面孔
+## 遍历：range 的两副面孔
 
 ```go
 s := []string{"go", "rust", "zig"}
@@ -106,7 +106,7 @@ for i, r := range "你好" {     // 0 '你'  3 '好'（i 是字节偏移！）
 }
 ```
 
-## 3.4 map：键值对（哈希表）
+## map：键值对（哈希表）
 
 ```go
 m := map[string]int{           // map[键类型]值类型
@@ -141,7 +141,7 @@ for _, k := range keys { fmt.Println(k, m[k]) }
 ```
 :::
 
-## 3.5 切片与 map 的组合拳
+## 切片与 map 的组合拳
 
 ```go
 // 计数器（Java HashMap.merge 的 Go 写法）
@@ -159,7 +159,7 @@ for _, p := range people {
 // map[北京:[Tom Jerry] 上海:[Lucy]]
 ```
 
-## 3.6 struct 之外的轻量结构：匿名结构体
+## struct 之外的轻量结构：匿名结构体
 
 ```go
 // 临时数据结构：就地定义（JSON 解析常用）
@@ -177,7 +177,7 @@ people := []struct {
 }
 ```
 
-## 3.7 综合练习：词频统计 Top-K
+## 综合练习：词频统计 Top-K
 
 ```go
 package main

@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 VS Code"
+title: "初识 VS Code"
 description: "Visual Studio Code 是微软在 2015 年发布的免费、开源、跨平台代码编辑器。"
 series: vscode
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 认识编辑器界面的主要组成部分
 - 理解 VS Code 与"IDE"的区别
 
-## 1.1 什么是 VS Code
+## 什么是 VS Code
 
 Visual Studio Code 是微软在 2015 年发布的**免费、开源、跨平台**代码编辑器。注意它和"Visual Studio"是两个不同的产品——VS Code 是轻量编辑器，Visual Studio 是重型集成开发环境（IDE）。
 
@@ -33,7 +33,7 @@ Visual Studio Code 是微软在 2015 年发布的**免费、开源、跨平台**
 VS Code 本体只是一个"壳"，真正强大的地方在于**插件生态**——这也是本教程第 3 章的主题。
 :::
 
-## 1.2 它能用来做什么
+## 它能用来做什么
 
 VS Code 几乎可以覆盖所有的开发场景：
 
@@ -42,7 +42,7 @@ VS Code 几乎可以覆盖所有的开发场景：
 - **数据与脚本**：Python、Jupyter Notebook、Shell 脚本
 - **写作**：Markdown 编辑（本站的教程就是用 VS Code 编写的）
 
-## 1.3 界面速览
+## 界面速览
 
 安装完成后（下一章详解安装），你会看到这样的界面布局：
 
@@ -70,7 +70,7 @@ VS Code 几乎可以覆盖所有的开发场景：
 - **面板区**：终端、输出、问题列表都在这里
 - **状态栏**：显示当前分支、行列位置、文件编码等实时信息
 
-## 1.4 VS Code 与 IDE 的区别
+## VS Code 与 IDE 的区别
 
 很多初学者会问："VS Code 算 IDE 吗？"严格来说它只是**编辑器**，但通过插件它可以无限接近 IDE：
 

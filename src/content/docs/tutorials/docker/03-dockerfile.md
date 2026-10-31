@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 编写 Dockerfile"
+title: "编写 Dockerfile"
 description: "镜像不是手搓出来的，是按 Dockerfile 逐条指令构建出来的。Dockerfile 就是一个纯文本文件，每行一条指令，每条指令产出一层（或只改元数据）。"
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解层缓存规则，能解释「把 `npm install` 放前面」为什么是反例
 - 独立写出一个可用于生产的 Node 服务 Dockerfile，并配好 `.dockerignore`
 
-## 3.1 从一条 build 命令开始
+## 从一条 build 命令开始
 
 镜像不是手搓出来的，是**按 Dockerfile 逐条指令构建**出来的。Dockerfile 就是一个纯文本文件，每行一条指令，每条指令产出一层（或只改元数据）。
 
@@ -41,7 +41,7 @@ docker build --build-arg NODE_ENV=production -t myapp:1.0.0 .
 把 `.git`、`node_modules`、构建产物、数据集留在上下文里，会让每次 build 开头那段 sending build context 变得又慢又占空间。控制上下文的正解是 `.dockerignore`（3.6 节），不是把 Dockerfile 放到更深的目录。
 :::
 
-## 3.2 常用指令速查
+## 常用指令速查
 
 ```dockerfile
 FROM node:20-alpine                                  # 基座：第一条非注释指令
@@ -75,7 +75,7 @@ CMD ["node", "src/server.js"]
 `ARG` 的值不会保留到运行时，`ENV` 会。构建期需要的版本号用 `ARG` 传入再落进 `ENV`（如需运行时可见）：`ARG VERSION` + `ENV APP_VERSION=$VERSION`。密钥绝不用 ARG/ENV 写进镜像——它们会留在镜像历史里，用 BuildKit 的 secret mount（第 5 章、第 7 章）。
 :::
 
-## 3.3 CMD 与 ENTRYPOINT：谁决定容器怎么启动
+## CMD 与 ENTRYPOINT：谁决定容器怎么启动
 
 两者都在指定「容器启动时执行什么」，区别在于**是否容易被覆盖**：
 
@@ -115,7 +115,7 @@ ENTRYPOINT ["curl"]                       # 固定「这是个 curl 工具容器
 CMD ["-s", "https://example.com"]         # docker run 传参即替换默认参数
 ```
 
-## 3.4 COPY 与 ADD：默认用 COPY
+## COPY 与 ADD：默认用 COPY
 
 `ADD = COPY + 两个额外行为`，而这两个额外行为通常不是你想要的：
 
@@ -134,7 +134,7 @@ ADD app-bundle.tar.gz /opt/app/
 `ADD https://example.com/x.tar.gz /opt/` 看起来省事，实际上构建不可复现（内容变了缓存不失效）、无校验、失败信息难读。换成 `RUN curl -fsSL <url> -o /tmp/x && echo "<sha256>  /tmp/x" | sha256sum -c - && tar -xzf /tmp/x -C /opt/app && rm /tmp/x`。
 :::
 
-## 3.5 层缓存与指令顺序
+## 层缓存与指令顺序
 
 Docker 给每条指令算一个缓存键：**父层 ID + 指令内容 + （COPY/ADD 时）被拷贝文件的校验和**。从上往下，一旦某条缓存失效，其后所有指令都要重跑。
 
@@ -173,7 +173,7 @@ Step 5/5 : COPY src ./src            ---> 82c55f2a7d0c     ← 只有这层重�
 `npm install` 会按 `package.json` 的范围语义重新解析依赖，构建结果不稳定；容器构建一律用 `npm ci`（严格按 lockfile 安装）。同理 `pip install -r` 要配锁定的 requirements，`go mod download` 要提交 `go.sum`。第二次构建时只有 `COPY src` 这层重建，`RUN npm ci` 显示 CACHED——用 `docker build --progress=plain` 能直接看到命中情况。
 :::
 
-## 3.6 .dockerignore 与完整实战
+## .dockerignore 与完整实战
 
 `.dockerignore` 决定哪些文件不进上下文，直接语法接近 gitignore：
 
@@ -232,7 +232,7 @@ docker inspect app | grep -A2 Health          # 看健康检查状态
 这份 Dockerfile 里 `node:20-alpine` 带着完整 npm 与工具链跑在生产镜像中，仍然偏大。把「构建」与「运行」拆开能砍掉一大截，那是 [第 5 章 · 多阶段构建与镜像优化](../05-multi-stage/) 的全部内容。
 :::
 
-## 3.7 构建失败常见坑 · 自查清单
+## 构建失败常见坑 · 自查清单
 
 ```text
 unable to prepare context: path "..." not found

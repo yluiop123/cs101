@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 表单与数据请求"
+title: "表单与数据请求"
 description: "React 的 input 值由 state 驱动——受控组件（controlled component）："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 建立请求层的 loading/error 状态机
 - 完成带校验的注册表单实战
 
-## 10.1 受控组件
+## 受控组件
 
 React 的 input 值由 state 驱动——**受控组件（controlled component）**：
 
@@ -58,7 +58,7 @@ onChange={…}       → 输入回写 state（闭合成"双向"）
 `value` 对 checkbox 无意义——读 `checked` 属性。这是最高频的表单 bug。
 :::
 
-## 10.2 提交与阻止默认
+## 提交与阻止默认
 
 ```jsx
 async function onSubmit(e) {
@@ -74,7 +74,7 @@ async function onSubmit(e) {
 
 监听 form 的 submit（回车也能触发）；`e.preventDefault()` 必写。
 
-## 10.3 校验：errors 状态
+## 校验：errors 状态
 
 与 Vue 第 8 章同一模式——**errors 对象管理错误文案**：
 
@@ -122,7 +122,7 @@ export default function RegisterForm() {
 }
 ```
 
-## 10.4 数据请求：请求层 + 状态机
+## 数据请求：请求层 + 状态机
 
 ```js
 // src/api/todo.js —— 纯网络逻辑（与 Vue 同构）
@@ -168,7 +168,7 @@ function TodoList() {
 
 **封装成自定义 Hook**（第 5 章预告的 useRequest，第 9 章正式展开）。
 
-## 10.5 提交防重复与提交后反馈
+## 提交防重复与提交后反馈
 
 ```jsx
 const [submitting, setSubmitting] = useState(false);
@@ -200,7 +200,7 @@ async function onSubmit(e) {
 </button>
 ```
 
-## 10.6 综合练习：登录表单（全要素）
+## 综合练习：登录表单（全要素）
 
 ```jsx
 import { useState } from 'react';

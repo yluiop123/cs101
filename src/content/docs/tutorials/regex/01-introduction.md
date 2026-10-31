@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识正则表达式"
+title: "初识正则表达式"
 description: "正则表达式（Regular Expression，简称 regex 或 regexp）是用一个字符串来描述一类字符串的模式语言。"
 series: regex
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 建立"匹配思维"：从"找一个字符"到"描述一类字符串"
 - 跑通第一个正则测试
 
-## 1.1 正则表达式是什么
+## 正则表达式是什么
 
 正则表达式（Regular Expression，简称 regex 或 regexp）是用**一个字符串来描述一类字符串**的模式语言。
 
@@ -39,7 +39,7 @@ tableOfContents: true
 正则的难点从来不是"背符号"，而是**换一种思维**：从"程序怎么处理字符"换成"目标字符串长什么样"。本章就是帮你完成这个思维切换。
 :::
 
-## 1.2 匹配思维三步法
+## 匹配思维三步法
 
 拿到需求后按三步拆解：
 
@@ -59,7 +59,7 @@ tableOfContents: true
 
 组合成模式：`^[a-zA-Z0-9]{2,8}$` —— 语法后面几章逐个讲，但**拆解思路现在就能开始练**。
 
-## 1.3 你的第一个正则测试
+## 你的第一个正则测试
 
 推荐在线工具 [regex101.com](https://regex101.com/)（可视化解释每个符号，强烈建议边学边练），或在浏览器控制台测试：
 
@@ -79,7 +79,7 @@ const re1 = /pattern/flags
 const re2 = new RegExp('pattern', 'flags')
 ```
 
-## 1.4 最简单的匹配规则
+## 最简单的匹配规则
 
 在讲元字符之前，先记住两条基本规则：
 
@@ -105,7 +105,7 @@ const re2 = new RegExp('pattern', 'flags')
 | `g` | 全局匹配，找出所有（global） |
 | `m` | 多行模式，`^`/`$` 匹配每行的首尾（multiline） |
 
-## 1.5 认识元字符
+## 认识元字符
 
 正则中有一批**有特殊含义的字符**，称为元字符（metacharacter），它们是接下来两章的主角：
 

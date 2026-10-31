@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 指令与管道"
+title: "指令与管道"
 description: "v17+ 推荐的内置控制流（built-in control flow）——模板里的“迷你 JS”："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练使用内置管道（pipe）格式化数据
 - 学会属性指令 class/style 的批量绑定
 
-## 3.1 新控制流：@if / @for / @switch
+## 新控制流：@if / @for / @switch
 
 v17+ 推荐的**内置控制流（built-in control flow）**——模板里的"迷你 JS"：
 
@@ -56,7 +56,7 @@ v17+ 推荐的**内置控制流（built-in control flow）**——模板里的"�
 `track course.id` 的作用与 Vue/React 的 key 完全一致：Diff 时识别"同一个元素"。也可以 `track $index`（按索引，等价于不建议的 index key）。
 :::
 
-## 3.2 旧结构指令（认读存量代码）
+## 旧结构指令（认读存量代码）
 
 新控制流之前，Angular 用"结构指令（structural directives）"：
 
@@ -78,7 +78,7 @@ v17+ 推荐的**内置控制流（built-in control flow）**——模板里的"�
 
 星号语法（*ngIf）是"语法糖"。**新项目一律 @if/@for**，存量代码能认出即可（用 ngUpgrade 检查器可以批量迁移）。
 
-## 3.3 属性指令：class 与 style 批量绑定
+## 属性指令：class 与 style 批量绑定
 
 ```html
 <!-- [ngClass]：对象语法（最像 Vue 的 :class） -->
@@ -93,7 +93,7 @@ v17+ 推荐的**内置控制流（built-in control flow）**——模板里的"�
 
 需要引入 CommonModule 或 NgClass/NgStyle（standalone 组件的 imports 数组）。单个条件类用 `[class.x]` 更轻。
 
-## 3.4 管道：模板里的格式化函数
+## 管道：模板里的格式化函数
 
 **管道（pipe）**在插值/绑定中就地转换数据：
 
@@ -111,7 +111,7 @@ v17+ 推荐的**内置控制流（built-in control flow）**——模板里的"�
 
 常用内置管道：date / currency / percent / number / uppercase / lowercase / titlecase / slice / json。
 
-## 3.5 纯管道 vs 非纯管道
+## 纯管道 vs 非纯管道
 
 ```ts
 // 纯管道（默认）：只在输入引用变化时重算——性能好
@@ -130,7 +130,7 @@ export class SummaryPipe implements PipeTransform {
 
 **默认纯管道**：数组内部元素变了不会触发重算（引用没变）——与 computed 的缓存逻辑同源。需要响应深层变化用 `pure: false`（性能代价，慎用）。
 
-## 3.6 综合练习：可切换视图的课程表
+## 综合练习：可切换视图的课程表
 
 ```ts
 import { Component, signal, computed } from '@angular/core';

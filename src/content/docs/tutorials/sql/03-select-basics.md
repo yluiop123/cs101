@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 查询基础"
+title: "查询基础"
 description: "SELECT name, city -- 取哪些列"
 series: sql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会用列别名、`DISTINCT`、`LIMIT` 控制输出的形状
 - 建立对 `NULL` 与三值逻辑的正确直觉，避开最常见的空结果事故
 
-## 3.1 一条查询的骨架
+## 一条查询的骨架
 
 ```sql
 SELECT name, city            -- 取哪些列
@@ -44,7 +44,7 @@ SELECT name, city, joined_at
 `WHERE` 里可以放：列、常量、比较运算符、`AND`/`OR`/`NOT`、函数调用。
 但**不能放聚合函数**（`WHERE COUNT(*) > 3` 是语法错误），那是[第 5 章 · 聚合与分组](../05-aggregate-group/)里 `HAVING` 的活。
 
-## 3.2 选列、算列与列别名
+## 选列、算列与列别名
 
 列可以是表里的列，也可以是表达式：
 
@@ -95,7 +95,7 @@ SELECT title, price * 0.9 AS discounted
 执行顺序是[第 5 章 · 聚合与分组](../05-aggregate-group/)的正式主题，先记住结论：**别名只能在 `SELECT` 与 `ORDER BY` 里用**。
 :::
 
-## 3.3 DISTINCT：去重而不是"取不同"
+## DISTINCT：去重而不是"取不同"
 
 `DISTINCT` 作用于**整行结果**，不是紧跟它的那一列：
 
@@ -132,7 +132,7 @@ SELECT DISTINCT c.city, p.category
 下一步 `SUM` 就会算错。正确做法是修好连接条件。
 :::
 
-## 3.4 LIMIT：只要前几行
+## LIMIT：只要前几行
 
 MySQL / SQLite 的写法：
 
@@ -169,7 +169,7 @@ SELECT order_id FROM orders ORDER BY created_at DESC LIMIT 3;
 分页的完整坑位在[第 4 章 · 过滤、排序与分页](../04-filter-sort-page/)。
 :::
 
-## 3.5 NULL 是"未知"，不是空也不是零
+## NULL 是"未知"，不是空也不是零
 
 `NULL` 的语义是**这个值当前未知/不适用**，于是它不等于任何东西，包括它自己：
 
@@ -196,7 +196,7 @@ SELECT name FROM customers WHERE city IS NOT NULL;
 `IS NULL` / `IS NOT NULL` 不是"比较"，是"判定"，所以它们是唯一能拿到结果的写法。
 :::
 
-## 3.6 三值逻辑：条件只认「真」
+## 三值逻辑：条件只认「真」
 
 `WHERE` 只保留判定为 `TRUE` 的行，`FALSE` 和 `UNKNOWN` 一起被丢掉。于是：
 
@@ -224,7 +224,7 @@ SELECT name
 同理，`NOT (city = '上海')` 也不等于"非上海"——它对 `NULL` 依然给 `UNKNOWN`。
 `NOT` 只是把 `TRUE`/`FALSE` 互换，`UNKNOWN` 保持不动。
 
-## 3.7 综合练习：客户名单初筛
+## 综合练习：客户名单初筛
 
 ```sql
 -- ① 输出「城市 + 注册时间」，城市为空的显示"未填写"，按时间从新到旧取 5 行

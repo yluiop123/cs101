@@ -1,5 +1,5 @@
 ---
-title: "第 14 章 · 综合实战：CLI 工具"
+title: "综合实战：CLI 工具"
 description: "追加任务， 列出全部， 标记完成；数据存 ，错误走 stderr、退出码非零。"
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握「模型 / 持久化 / 分发 / 错误」四层拆分与模块组织
 - 把第 6 章的 match、第 7 章的 `?`、第 4 章的借用规则落到真实代码里
 
-## 14.1 项目目标与结构
+## 项目目标与结构
 
 `todo add <内容>` 追加任务，`todo list` 列出全部，`todo done <ID>` 标记完成；数据存 `tasks.json`，错误走 stderr、退出码非零。按职责分五个文件（模块与可见性见 [第 12 章 · 模块系统与测试](../12-modules-testing/)）：
 
@@ -44,7 +44,7 @@ serde_json = "1"
 
 只有两个第三方依赖：标准库不带 JSON，所以 serde 必需，参数解析交给标准库（14.4 说明为什么这里不引 clap）。Go 版同类项目「标准库全包」是生态差异，不是优劣。
 
-## 14.2 数据模型与 serde 序列化
+## 数据模型与 serde 序列化
 
 ```rust
 // src/task.rs
@@ -71,7 +71,7 @@ impl std::fmt::Display for Task {  // Display = 给用户看的 {}；Debug({:?})
 
 serde 常用字段属性三个够用很久：`#[serde(default)]` 缺字段给默认值（向前兼容的关键）、`#[serde(rename_all = "camelCase")]` 一次把所有字段换成小驼峰、`#[serde(skip)]` 让字段不参与序列化。想再加 `created_at: u64` 存 Unix 秒，用 `std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH)` 取值并以 `unwrap_or(0)` 兜底（时钟异常不是业务错误，不该 panic）；要显示成 `09-06 17:20` 才需要 `chrono = "0.4"`——它的 `Local.timestamp_opt` 返回「可能不存在」的结果类型，因为时间戳本身可能非法。Rust 连日期库都不肯给你一个会 panic 的接口。
 
-## 14.3 持久化层：store.rs
+## 持久化层：store.rs
 
 ```rust
 // src/store.rs
@@ -113,7 +113,7 @@ impl Store {
 `fs::write` 直接覆盖原文件：进程中途被杀死，存档可能只剩半截。正确做法是「写 `tasks.json.tmp` → `fs::rename` 覆盖」，靠 rename 的原子性保证要么旧版本要么新版本。本章数据量小，且 `load` 对损坏内容会明确报错而非静默清空，所以先不做——但要清楚这是取舍，不是终点。
 :::
 
-## 14.4 入口与参数解析：为什么不引 clap
+## 入口与参数解析：为什么不引 clap
 
 ```rust
 // src/main.rs
@@ -138,7 +138,7 @@ fn main() -> ExitCode {
 
 **为什么不引 clap**：clap 给的是自动 help、短/长名合并（`-v/--verbose`）、子命令树、shell 补全。本项目三个子命令、每个只有位置参数，手写解析约 20 行；引依赖要付编译时间与一套 derive API 的学习成本。**参数形态稳定到「动词 + 位置参数」时，手写解析不会错在哪**——它把校验前置成 14.5 那个枚举，可读性与可测性都不差。反过来，一旦出现布尔取反、嵌套子命令、需要生成补全脚本，手写分支的复杂度就会反超依赖成本；届时只替换 `parse`，`Command` 枚举与 `run` 一行都不用改——这正是把「解析」和「执行」拆成两个函数的原因。
 
-## 14.5 命令分发：match 驱动的 cli.rs
+## 命令分发：match 驱动的 cli.rs
 
 核心手法：**把字符串参数升级成有类型的枚举**——非法命令在解析阶段就被挡掉，`run` 拿到的一定是合法意图。穷尽性与解构的规则见 [第 6 章 · 模式匹配](../06-pattern-matching/)。
 
@@ -208,7 +208,7 @@ pub fn run(cmd: Command, store: &Store) -> Result<(), AppError> {
 
 `Command::Done` 那段是本章唯一「编译器替你排序」的地方：`task` 可变借用 `tasks`，若把要打印的文本留到 `save` 之后再取，就会撞上「可变借用与不可变借用重叠」——借用检查器在 CLI 里的存在感，通常就是这种「先取数据、再落盘」的顺序要求。`parse` 是纯函数，最适合单测：三条用例（add 合并剩余参数、`del 1` 与 `done abc` 都归为 `Usage`、无参数返回帮助）就能守住整条解析路径，写法见第 12 章。
 
-## 14.6 错误处理：自定义 error enum + `?`
+## 错误处理：自定义 error enum + `?`
 
 `?` 一路往上抛时，中间层要能说出「这是哪类失败」，出口才能决定措辞与退出码（详见 [第 7 章 · 错误处理](../07-error-handling/)）。错误流向：`task.rs` 不产生错误；`store.rs` 的 `io::Error`/`serde_json::Error` 经 `From` 变成 `AppError`；`cli.rs` 新增 `Usage` 与 `NotFound`；`main.rs` 是唯一打印和定退出码的地方。
 
@@ -248,7 +248,7 @@ pub fn usage(msg: impl Into<String>) -> AppError { AppError::Usage(msg.into()) }
 都塞进 `Other(String)` 也能跑，但出口就无法区分：前者该打印帮助，后者只需一行错误。枚举的价值是**让调用点能按变体决策**——与第 6 章「给枚举加变体，所有 match 立刻标红」是同一种安全感。样板 `From`/`Display` 写多了就换 thiserror（见 7.5）。
 :::
 
-## 14.7 运行效果
+## 运行效果
 
 ```bash
 cargo build --release
@@ -268,7 +268,7 @@ cargo build --release
 
 再跑一次 `todo list`，`#1` 的行首已变成 `[x]`——存档是 `to_string_pretty` 的产物，纯文本、可以直接手改。`cargo test` 应给出 `3 passed; 0 failed`。
 
-## 14.8 自查清单
+## 自查清单
 
 - [ ] 四个模块职责单一：模型不读盘、持久化不懂业务、分发不打印、main 只定退出码
 - [ ] `Command` 枚举把字符串校验前置，`run` 只处理合法意图

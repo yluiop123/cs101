@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 布局与盒模型工具类"
+title: "布局与盒模型工具类"
 description: "块级"
 series: tailwind
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练使用 padding / margin / border / 圆角
 - 会用任意值（arbitrary values）处理刻度外的需求
 
-## 3.1 display 与定位
+## display 与定位
 
 ```html
 <div class="block">块级</div>
@@ -38,7 +38,7 @@ tableOfContents: true
 | `relative` `absolute` `fixed` `sticky` | position 同名值 |
 | `top-0` `right-4` `bottom-2` `left-1/2` | 偏移，刻度同间距 |
 
-## 3.2 宽高与最大尺寸
+## 宽高与最大尺寸
 
 ```html
 <!-- 固定尺寸：w-16 = 4rem = 64px -->
@@ -59,7 +59,7 @@ tableOfContents: true
 
 常用宽度刻度：`w-1`（4px）到 `w-96`（384px）；`max-w-xs/sm/md/lg/xl/2xl…` 是一组精心设计的阅读宽度。
 
-## 3.3 padding：p / px / py / pt…
+## padding：p / px / py / pt…
 
 ```html
 <div class="p-4">四边 16px</div>
@@ -79,7 +79,7 @@ pt pr pb pl  上右下左单边
 刻度 n 对应 `n × 4px`（1rem = 16px 基准，0.25rem 步进）。看到 `p-6` 就知道是 24px。
 :::
 
-## 3.4 margin：m 系列同构
+## margin：m 系列同构
 
 与 padding 完全同构（m/mx/my/mt/mr/mb/ml），另有负值与 auto：
 
@@ -89,7 +89,7 @@ pt pr pb pl  上右下左单边
 <div class="-mt-2">上移 8px（负值加 - 前缀）</div>
 ```
 
-## 3.5 边框与圆角
+## 边框与圆角
 
 ```html
 <div class="border">1px 边框（v4 默认颜色 currentColor）</div>
@@ -114,7 +114,7 @@ pt pr pb pl  上右下左单边
 v3 里 `border` 默认灰色，v4 改为继承文字色（currentColor）。所以**写 border 时习惯带上颜色**：`border border-gray-200`。
 :::
 
-## 3.6 阴影与溢出
+## 阴影与溢出
 
 ```html
 <div class="shadow-sm">轻阴影</div>
@@ -125,7 +125,7 @@ v3 里 `border` 默认灰色，v4 改为继承文字色（currentColor）。所�
 <div class="overflow-y-auto h-40">区域内滚动</div>
 ```
 
-## 3.7 任意值：刻度不够时
+## 任意值：刻度不够时
 
 内置刻度覆盖不到的精确值，用方括号直接写 CSS：
 
@@ -139,7 +139,7 @@ v3 里 `border` 默认灰色，v4 改为继承文字色（currentColor）。所�
 能用刻度就用刻度（`w-60` 而非 `w-[240px]`）——任意值绕过了设计刻度，用多了一致性就没了。它为"接设计稿的精确还原"而生。
 :::
 
-## 3.8 综合练习：一个标准卡片
+## 综合练习：一个标准卡片
 
 ```html
 <div class="mx-auto max-w-sm overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md">

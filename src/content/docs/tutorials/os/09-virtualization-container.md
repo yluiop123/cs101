@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 虚拟化与容器的内核基础"
+title: "虚拟化与容器的内核基础"
 description: "虚拟化的目标是：一个物理机上跑多个互不知情的客户机（guest），每个都以为自己独占整台硬件。中间那层叫 hypervisor（虚拟机监视器，VMM）。"
 series: os
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 说清"虚拟机"与"容器"的隔离边界差在哪一层，以及容器由哪些内核机制拼成
 - 能解释为什么一个容器**不是**强安全边界，以及需要更强隔离时怎么办
 
-## 9.1 虚拟化的两种路线：全虚拟与半虚拟
+## 虚拟化的两种路线：全虚拟与半虚拟
 
 **虚拟化**的目标是：一个物理机上跑多个互不知情的客户机（guest），每个都以为自己独占整台硬件。中间那层叫 **hypervisor**（虚拟机监视器，VMM）。
 
@@ -45,7 +45,7 @@ cat /proc/cpuinfo | grep flags   # 看有没有 virt 相关标志
 ```
 :::
 
-## 9.2 硬件辅助虚拟化
+## 硬件辅助虚拟化
 
 纯软件全虚拟太累（要翻译每条特权指令），现代 CPU 干脆把虚拟化做进硬件：Intel 叫 **VT-x**，AMD 叫 **AMD-V**。它们在传统的 ring 0–3 之下增加了一个 **root mode**（戏称 ring -1）。
 
@@ -72,7 +72,7 @@ qemu-system-x86_64 -enable-kvm -m 2G -smp 2 \
 硬件辅助不等于零成本。设备模拟、某些 MSR 读写仍会触发 VM exit，陷入 hypervisor 再回来。若客户机频繁访问模拟设备（比如没上 virtio 而用模拟 IDE/网卡），exit 次数暴涨、性能急剧下降——这也是"给 VM 用半虚拟设备"至今仍是最佳实践的原因。
 :::
 
-## 9.3 虚拟机与容器的隔离边界
+## 虚拟机与容器的隔离边界
 
 这是本章最重要的一张对比表。它们的"隔离"发生在完全不同的层。
 
@@ -92,7 +92,7 @@ qemu-system-x86_64 -enable-kvm -m 2G -smp 2 \
 `docker`/`podman` 是命令行前端，真正起容器的是 containerd → runc（runc 才调 namespace/cgroup/seccomp 这些系统调用）；Kubernetes 是跨机器的编排器。同理 libvirt 只是 QEMU/KVM 的管理层。理解"容器最终就是一组 clone/unshare + 写 cgroup 文件 + 装 seccomp 过滤"，就不会被工具名词绕晕。
 :::
 
-## 9.4 namespace 有哪几种
+## namespace 有哪几种
 
 namespace 解决的是"隔离可见性"：让一个进程看到一套独立的系统资源标识。Linux 目前有这几种：
 
@@ -125,7 +125,7 @@ ls -l /proc/<PID>/ns        # 用 inode 号判断两个进程是否共享同一 
 容器里的 PID 1 要负责收尸（回收僵尸子进程）和转发信号，否则子进程变僵尸、`Ctrl-C` 无效——这也是很多镜像要 `--init` 或用 tini/dumb-init 当 PID 1 的原因。另外宿主上 `kill` 容器内进程要用**宿主的 PID**，不是容器里看到的那个小数字。
 :::
 
-## 9.5 cgroup 限制什么
+## cgroup 限制什么
 
 namespace 管"能看见什么"，**cgroup**（control group）管"能用多少"。它按控制器给进程组设资源上限、做层级分配与统计。
 
@@ -159,7 +159,7 @@ cat demo/cpu.stat           # nr_periods / nr_throttled：被限流了多少周�
 # nr_throttled 持续上涨 = 容器被 cpu.max 卡住，是"CPU 不够"的硬证据
 ```
 
-## 9.6 seccomp、能力裁剪与"容器不是安全边界"
+## seccomp、能力裁剪与"容器不是安全边界"
 
 光有 namespace + cgroup，容器里的"root"仍能调用所有系统调用、拥有 `CAP_SYS_ADMIN` 之类特权。再加两层收窄攻击面：
 
@@ -183,7 +183,7 @@ Docker 默认用一份 seccomp profile 挡掉 `reboot`、加载内核模块、`p
   runc 容器  <  加了 seccomp/caps 的 runc  <  gVisor  <  Kata/微VM  <  传统 VM
 ```
 
-## 9.7 综合练习：搭一个"最小容器"并验证边界
+## 综合练习：搭一个"最小容器"并验证边界
 
 不依赖 Docker，用命令行手工体验 namespace + cgroup：
 

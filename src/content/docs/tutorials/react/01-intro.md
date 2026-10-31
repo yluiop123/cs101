@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 React"
+title: "初识 React"
 description: "React 是 Meta 开源的声明式 UI 库（framework 还是 library？——React 只管 UI 渲染层，路由/请求等生态自行组合，所以常被称作“库”）。核心理念一句话："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 跑通第一个 React 项目（Vite 模板）
 - 认识组件与 JSX 的基本样貌
 
-## 1.1 React 是什么
+## React 是什么
 
 React 是 Meta 开源的**声明式 UI 库**（framework 还是 library？——React 只管 UI 渲染层，路由/请求等生态自行组合，所以常被称作"库"）。核心理念一句话：
 
@@ -26,7 +26,7 @@ UI = f(state)    界面是状态的函数
 
 状态（state）是输入，界面是输出。**改状态 → React 自动重渲染界面**——与 Vue 的响应式同宗，但实现路径不同（见 1.5）。
 
-## 1.2 创建项目
+## 创建项目
 
 ```bash
 npm create vite@latest my-react-app -- --template react
@@ -46,7 +46,7 @@ src/
 └── index.css
 ```
 
-## 1.3 挂载与根组件
+## 挂载与根组件
 
 ```jsx
 // src/main.jsx
@@ -64,7 +64,7 @@ createRoot(document.getElementById('root')).render(<App />);
 
 与 Vue 的 `createApp(App).mount('#app')` 殊途同归：入口创建根实例、挂到 DOM 节点。
 
-## 1.4 第一个组件
+## 第一个组件
 
 React 组件就是**返回 JSX 的函数**：
 
@@ -90,7 +90,7 @@ export default function App() {
 2. **属性小驼峰**——`onClick`（不是 onclick）、`className`（不是 class）
 3. **组件即函数**——首字母大写才能当组件用（`<Welcome>` ✅、`<welcome>` ❌）
 
-## 1.5 React vs Vue：两个心智差异
+## React vs Vue：两个心智差异
 
 | 维度 | Vue | React |
 | --- | --- | --- |
@@ -111,7 +111,7 @@ setUser({ ...user, age: 19 });
 
 第 3 章展开。提前建立这个直觉，后面少走弯路。
 
-## 1.6 生态坐标
+## 生态坐标
 
 | 需求 | 方案 | 对应章节 |
 | --- | --- | --- |
@@ -123,7 +123,7 @@ setUser({ ...user, age: 19 });
 
 Next.js 等元框架基于 React（服务端渲染、全栈能力），是进阶方向——先把核心库学扎实。
 
-## 1.7 动手：改造欢迎页
+## 动手：改造欢迎页
 
 ```jsx
 // src/App.jsx

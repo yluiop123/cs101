@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 工程化配置"
+title: "工程化配置"
 description: "npx tsc --init # 生成带注释的完整默认配置"
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 建立 strict 严格模式的项目规范
 - 理解 TS 在 Vite/Vue 项目中的角色分工
 
-## 9.1 初始化 tsconfig
+## 初始化 tsconfig
 
 ```bash
 npx tsc --init     # 生成带注释的完整默认配置
@@ -43,7 +43,7 @@ npx tsc --init     # 生成带注释的完整默认配置
 }
 ```
 
-## 9.2 核心选项逐个讲
+## 核心选项逐个讲
 
 | 选项 | 含义 | 推荐值 |
 | --- | --- | --- |
@@ -59,7 +59,7 @@ npx tsc --init     # 生成带注释的完整默认配置
 `"strict": true` 打开一揽子严格检查：`strictNullChecks`（null/undefined 必须显式处理）、`noImplicitAny`（禁止隐式 any）等。**新项目一律开启**——关掉它等于白学 TS。教程前八章的所有报错，大多源自 strict 的守护。
 :::
 
-## 9.3 strict 家族重点成员
+## strict 家族重点成员
 
 ```ts
 // strictNullChecks：null 不是万金油
@@ -73,7 +73,7 @@ function process(data) { }   // ❌ Implicit any
 function process(data: unknown) { }   // ✅
 ```
 
-## 9.4 路径别名
+## 路径别名
 
 ```ts
 // tsconfig.json
@@ -95,7 +95,7 @@ import { addTodo } from '@/services/todoService';
 `paths` 只影响 TS 的检查；**构建工具**（Vite 的 resolve.alias、测试框架）需要各自配置同一份映射——别名"生效要三处对齐"是新手常见的"编辑器过了、运行报错"原因。
 :::
 
-## 9.5 声明文件（.d.ts）初识
+## 声明文件（.d.ts）初识
 
 第三方库的类型从哪来？——**声明文件（declaration files）**：
 
@@ -116,7 +116,7 @@ npm i -D @types/lodash    # 老库补类型的标准动作
 declare const __APP_VERSION__: string;   // 告诉 TS：这个全局变量存在
 ```
 
-## 9.6 类型检查与构建的分工（Vite 项目）
+## 类型检查与构建的分工（Vite 项目）
 
 ```json
 // package.json —— 现代前端项目的标准脚本
@@ -141,7 +141,7 @@ esbuild 转译速度是 tsc 的几十倍，为了开发体验，类型检查被"
 
 :::
 
-## 9.7 与 JS 项目共存
+## 与 JS 项目共存
 
 渐进迁移策略（老 JS 项目加 TS）：
 
@@ -157,7 +157,7 @@ esbuild 转译速度是 tsc 的几十倍，为了开发体验，类型检查被"
 
 路线：新代码全部 .ts → `checkJs: true` 让 JS 也检查 → 逐文件改名迁移。**从工具函数开始迁**，收益立现。
 
-## 9.8 综合检查：给项目做一次"体检"
+## 综合检查：给项目做一次"体检"
 
 ```bash
 npx tsc --noEmit       # 输出所有类型错误；无输出 = 全绿

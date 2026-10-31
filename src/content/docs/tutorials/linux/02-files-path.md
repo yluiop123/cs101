@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 文件系统与路径"
+title: "文件系统与路径"
 description: "Linux 里定位一个文件有两条路：绝对路径从根 / 出发，相对路径从“当前工作目录”出发。"
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 ls/cd/pwd 与 cp/mv/rm/mkdir/touch 等文件目录日常操作
 - 会区分软链接与硬链接，能用 find/locate/du/df 定位文件与查看空间
 
-## 2.1 绝对路径与相对路径
+## 绝对路径与相对路径
 
 Linux 里定位一个文件有两条路：**绝对路径**从根 `/` 出发，**相对路径**从"当前工作目录"出发。
 
@@ -33,7 +33,7 @@ nginx.conf                   相对路径：取决于你现在站在哪
 - `.` 指当前目录，`..` 指父目录，`~` 指当前用户的家目录（`~devops` 则是 devops 的家）
 - 同一个相对路径在不同目录下含义不同——脚本报"No such file"时先想"我现在在哪"
 
-## 2.2 ls、cd、pwd：走路与张望
+## ls、cd、pwd：走路与张望
 
 ```bash
 pwd              # 报告当前所在目录（print working directory）
@@ -59,7 +59,7 @@ lrwxrwxrwx 1 devops devops   11 Jun  3 09:00 latest -> v2.tar.gz
 `ls -lha` 看全档案、`cd -` 往返、`Tab` 补全路径（补不出来的就是不存在）、`Ctrl+R` 反查历史命令。这四个操作熟练后，终端效率翻倍。目录名含空格时必须引号包住：`cd "My Projects"`，第 9 章会讲透空格陷阱。
 :::
 
-## 2.3 通配符与花括号展开
+## 通配符与花括号展开
 
 shell 在把参数交给命令**之前**就先做展开，这是 Linux 命令行的独门效率来源。
 
@@ -83,7 +83,7 @@ touch 2024-{01,02,03}-report.md       # 批量建文件
 glob 的 `*` 是"任意字符串"，正则的 `*` 是"前一个字符重复 N 次"——同形不同义。本章的 `*.log` 是 glob，第 3 章 grep 里的 `.*` 是正则。另外 glob 展开后若一个都没匹配上，bash 默认把原文传下去（可能让 rm 之类的命令报"文件不存在"，而不是什么都没做）。
 :::
 
-## 2.4 cp、mv、rm、mkdir、touch：日常五件套
+## cp、mv、rm、mkdir、touch：日常五件套
 
 ```bash
 cp a.txt b.txt               # 复制文件
@@ -106,7 +106,7 @@ rm -f *.tmp                  # -f 静默，不存在的也不报错
 
 `mv` 同分区内是改目录项、瞬时完成；跨分区则是完整复制再删除，大文件会慢，进度自己看不到——可以用 `rsync -ah --progress` 替代（选项以 `man rsync` 为准）。
 
-## 2.5 软链接与硬链接
+## 软链接与硬链接
 
 ```bash
 ln -s /usr/share/doc/nginx-doc/ latest-doc   # 软链接（symbolic link）
@@ -139,7 +139,7 @@ ls -li            # 第一列是 inode：t.txt 与 t.hard 相同，t.soft 是另
 软链接指向的目标被删后，链接即悬空，访问报"No such file or directory"；而硬链接删掉原始名后数据依然完好，`ls -li` 的链接数会减一。备份与清理脚本要意识到：**按名字删除不等于按名字删除数据**。
 :::
 
-## 2.6 find、locate 与空间盘点：du、df
+## find、locate 与空间盘点：du、df
 
 `find` 实时遍历目录树，条件组合能力极强：
 
@@ -176,7 +176,7 @@ du -h --max-depth=1 /var | sort -h | tail   # /var 下一层谁最大
 
 `df` 是"各挂载点还剩多少"，`du` 是"这坨目录占了多少"。两者对不上账时，通常是已删除但仍被进程占用的文件（第 8 章用 `lsof`/`/proc` 排查）或被别的挂载点遮住的旧数据。
 
-## 2.7 综合练习
+## 综合练习
 
 **综合练习：给项目目录做大扫除。** 假设 `/tmp/cleanup-demo` 里有一堆混乱文件，完成以下动作链：
 

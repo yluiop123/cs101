@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 核心模块：path / fs / http"
+title: "核心模块：path / fs / http"
 description: "Node 的内置模块（built-in modules）无需安装，require/import 即用。本章讲最核心的三个。"
 series: nodejs
 sidebar:
@@ -18,7 +18,7 @@ tableOfContents: true
 
 Node 的内置模块（built-in modules）无需安装，`require`/`import` 即用。本章讲最核心的三个。
 
-## 5.1 path：路径处理
+## path：路径处理
 
 手拼路径字符串在 Windows（`\`）与 macOS/Linux（`/`）之间必然出错，一律用 path：
 
@@ -49,7 +49,7 @@ const configPath = path.join(__dirname, 'config.json');
 ```
 :::
 
-## 5.2 fs：文件系统
+## fs：文件系统
 
 fs（file system）的每个操作都提供三种风格：**回调式 / Promise 式 / 同步式**。现代代码统一用 Promise 风格（`fs/promises`）：
 
@@ -93,7 +93,7 @@ readable.pipe(writable);
 
 Stream（流）把数据切成小块边读边写，是视频服务、日志收集等场景的基石（进阶话题，理解概念即可）。
 
-## 5.3 http：手写一个最小服务器
+## http：手写一个最小服务器
 
 用 http 模块从零理解"服务器"三要素：**监听端口 → 读请求 → 写响应**：
 
@@ -126,7 +126,7 @@ server.listen(3000, () => {
 真实项目不会裸写 http 模块——Express（第 9 章）在它之上封装了路由、中间件、参数解析。但"请求进来 → 处理 → 响应出去"的模型，是所有框架的公共底座。
 :::
 
-## 5.4 其他常用内置模块速览
+## 其他常用内置模块速览
 
 | 模块 | 用途 | 示例 |
 | --- | --- | --- |
@@ -143,7 +143,7 @@ server.listen(3000, () => {
 console.log(process.argv);   // ['node 路径', '脚本路径', '--env', 'prod']
 ```
 
-## 5.5 综合示例：静态文件服务器
+## 综合示例：静态文件服务器
 
 ```js
 const http = require('http');

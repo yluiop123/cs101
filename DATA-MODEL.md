@@ -333,6 +333,13 @@ tags?: string[], prerequisites?: string[], estMinutes?: number
 `/business-systems/<目录名>/`；`getSeries()` 同时扫描 `tutorials/` 与 `business-systems/` 两个目录，
 面包屑、左侧栏、上一章/下一章、完成按钮都由它统一推导。
 
+**内容规范：**
+
+- 章节 `title` 不要写「第 N 章 · 」，只写本章主题。章节顺序由 `sidebar.order` 与文件名决定，
+  中间增删章节时不需要改标题，也不会出现编号错位。
+- 章内小节标题不要写「1.1 / 1.2」这类章节序号，只写小节题目；右侧目录会按 `##` / `###`
+  层级自动展示。小节锚点由标题生成，同样不依赖章节序号。
+
 构建期 `src/lib/content.ts` 扫描 docs 得到：
 
 ```ts

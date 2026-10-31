@@ -1,5 +1,5 @@
 ---
-title: "第 11 章 · 并发初见：线程与异步"
+title: "并发初见：线程与异步"
 description: "GIL（Global Interpreter Lock，全局解释器锁）：CPython 中同一时刻只有一个线程执行 Python 字节码。推论："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 threading 与 concurrent.futures 基本用法
 - 掌握 asyncio 的 async/await 心智模型
 
-## 11.1 GIL：Python 并发的第一课
+## GIL：Python 并发的第一课
 
 **GIL（Global Interpreter Lock，全局解释器锁）**：CPython 中同一时刻只有一个线程执行 Python 字节码。推论：
 
@@ -33,7 +33,7 @@ IO 密集任务（网络/磁盘）→ 多线程有效（等 IO 时释放 GIL）�
 
 对比 Java：Java 多线程能吃满多核（无 GIL）；Python 的多线程本质是"并发"而非"并行"。
 
-## 11.2 threading：多线程基本用法
+## threading：多线程基本用法
 
 ```python
 import threading
@@ -64,7 +64,7 @@ def safe_increment():
             counter += 1
 ```
 
-## 11.3 concurrent.futures：线程池的现代姿势
+## concurrent.futures：线程池的现代姿势
 
 ```python
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -88,7 +88,7 @@ with ThreadPoolExecutor(max_workers=5) as pool:
 
 ThreadPoolExecutor / ProcessPoolExecutor 同一套 API——**换执行模型只换类名**，业务代码零改动。
 
-## 11.4 多进程：绕开 GIL 吃多核
+## 多进程：绕开 GIL 吃多核
 
 ```python
 from concurrent.futures import ProcessPoolExecutor
@@ -111,7 +111,7 @@ if __name__ == "__main__":                 # 多进程必须有主模块守卫�
 ③ 进程间不共享内存——传数据靠序列化，别想着改全局变量。
 :::
 
-## 11.5 asyncio：单线程的并发模型
+## asyncio：单线程的并发模型
 
 **asyncio** 用"事件循环 + 协程"实现超高并发 IO：
 
@@ -143,7 +143,7 @@ await 处 = 协程主动让位："我在等 IO，CPU 先去跑别人"
 单线程    = 没有 GIL 竞争、没有锁噩梦（但同步计算会卡住整个循环！）
 ```
 
-## 11.6 异步的选型边界
+## 异步的选型边界
 
 ```python
 # ❌ 异步里的坑：在协程中调用同步阻塞函数
@@ -164,7 +164,7 @@ async def good():
 原生 async 库：aiohttp（HTTP）、asyncpg（Postgres）、httpx（两者通吃）。同步库万不得已时用 `asyncio.to_thread(阻塞函数)` 丢线程池。**框架层面：FastAPI/Starlette 原生异步，Django 3.1+ 部分支持**——第 12 章/FastAPI 教程实战中体会。
 :::
 
-## 11.7 综合练习：并发网页标题抓取器
+## 综合练习：并发网页标题抓取器
 
 ```python
 import asyncio

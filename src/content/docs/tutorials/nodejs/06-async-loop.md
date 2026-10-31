@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · Node 中的异步与事件循环"
+title: "Node 中的异步与事件循环"
 description: "Node 主线程是单线程的，但它用事件循环（event loop）+ 线程池把 IO 做成异步："
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握回调约定（error-first）与 Promise 化
 - 能正确回答"Node 为什么适合 IO 密集型任务"
 
-## 6.1 Node 的运行模型：单线程事件循环
+## Node 的运行模型：单线程事件循环
 
 Node 主线程是**单线程**的，但它用**事件循环（event loop）+ 线程池**把 IO 做成异步：
 
@@ -43,7 +43,7 @@ Node 主线程是**单线程**的，但它用**事件循环（event loop）+ 线
 心智模型一致（同步 → 队列 → 回调），Node 多了阶段划分（timers / poll / check 等）与线程池实现。日常开发记住"同步先跑完，回调排队等"即可。
 :::
 
-## 6.2 回调约定：error-first
+## 回调约定：error-first
 
 Node 传统 API 的回调遵循 **error-first（错误优先）** 约定——回调第一个参数永远是错误：
 
@@ -61,7 +61,7 @@ fs.readFile('./data.txt', 'utf-8', (err, data) => {
 
 规则：`err` 为真 → 出错分支；`err` 为 null → 数据在第二个参数。现代代码用 `fs/promises` 的 await 写法（第 5 章），但读老代码与大量第三方库仍会遇到此约定。
 
-## 6.3 把回调函数 Promise 化
+## 把回调函数 Promise 化
 
 遇到老式回调 API，用 `util.promisify` 一行升级：
 
@@ -78,7 +78,7 @@ async function main() {
 main();
 ```
 
-## 6.4 定时器与执行顺序
+## 定时器与执行顺序
 
 ```js
 console.log('1');
@@ -95,7 +95,7 @@ console.log('2');
 一行耗时 5 秒的同步计算（如超大循环），期间**所有请求都在排队**。避免方式：拆分计算、用工作线程（worker_threads，进阶）或交给外部服务。
 :::
 
-## 6.5 流程控制：串行与并行
+## 流程控制：串行与并行
 
 ```js
 // 串行：一个完成才做下一个（有依赖关系）
@@ -123,7 +123,7 @@ async function pool(tasks, limit = 3) {
 }
 ```
 
-## 6.6 unhandled rejection：异步错误兜底
+## unhandled rejection：异步错误兜底
 
 ```js
 // 没人接的 Promise 错误在 Node 15+ 会直接让进程崩溃！
@@ -141,7 +141,7 @@ process.on('unhandledRejection', (err) => {
 main().catch(console.error);
 ```
 
-## 6.7 综合示例：并发下载器
+## 综合示例：并发下载器
 
 ```js
 const fs = require('fs/promises');

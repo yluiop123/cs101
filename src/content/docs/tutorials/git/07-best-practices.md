@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 实战场景与最佳实践"
+title: "实战场景与最佳实践"
 description: "约定式提交（Conventional Commits）是目前最流行的提交信息规范："
 series: git
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会典型事故的恢复方法
 - 建立一份可落地的 Git 日常习惯清单
 
-## 7.1 提交规范：Conventional Commits
+## 提交规范：Conventional Commits
 
 约定式提交（Conventional Commits）是目前最流行的提交信息规范：
 
@@ -43,7 +43,7 @@ fix(nav): 修复移动端导航错位
 "原子提交"是仓库可维护性的核心：一个提交对应一个完整、独立的小改动。这样 revert、cherry-pick、排查问题才能精确到点。
 :::
 
-## 7.2 事故恢复实战手册
+## 事故恢复实战手册
 
 ### 场景一：提交到了错误的分支
 
@@ -82,7 +82,7 @@ git commit -m "chore: 移除误提交的文件"
 
 若是**密码/密钥**泄露：立即作废该密钥，再清理历史（`git filter-repo`），最后推送强制的干净历史。
 
-## 7.3 日常习惯清单
+## 日常习惯清单
 
 ```text
 开工前：  git pull 先同步，再开新分支开发
@@ -100,7 +100,7 @@ git commit -m "chore: 移除误提交的文件"
 
 :::
 
-## 7.4 下一步学习建议
+## 下一步学习建议
 
 - **图形化工具**：VS Code 内置 Git 面板（源代码管理）覆盖 90% 日常操作，配合 GitLens 插件体验更佳
 - **深入原理**：《Pro Git》中文版（git-scm.com/book/zh）免费权威，建议通读第 10 章"Git 内部原理"

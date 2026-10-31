@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 字符串与内置对象"
+title: "字符串与内置对象"
 description: "const s = 'Hello, CS101';"
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 Math 与 Date 的日常用法
 - 了解 JSON 序列化的标准流程
 
-## 7.1 字符串常用方法
+## 字符串常用方法
 
 ```js
 const s = 'Hello, CS101';
@@ -47,7 +47,7 @@ s.toUpperCase();        // 全大写
 所有方法都**返回新字符串**，原字符串永远不变——`s.toUpperCase()` 不接收返回值等于白调用。
 :::
 
-## 7.2 与正则表达式结合
+## 与正则表达式结合
 
 ```js
 const text = '订单号: A1024, B2048';
@@ -59,7 +59,7 @@ text.replace(/\d+/g, '***');  // '订单号: A***, B****'
 
 完整正则体系见[正则表达式教程](../../regex/)，这里记住字符串侧的三个入口：`match` / `replace` / `test`。
 
-## 7.3 模板字符串进阶
+## 模板字符串进阶
 
 ```js
 const user = { name: 'Tom', score: 95 };
@@ -78,7 +78,7 @@ const html = `
 list.map(item => `<li>${item}</li>`).join('');
 ```
 
-## 7.4 Math：数学工具箱
+## Math：数学工具箱
 
 ```js
 Math.round(4.5);      // 5（四舍五入）
@@ -101,7 +101,7 @@ randomInt(1, 6);      // 掷骰子
 `Math.max(...nums)` 把数组展开成参数列表——找数组最大值的最短写法。
 :::
 
-## 7.5 Date：日期时间
+## Date：日期时间
 
 ```js
 const now = new Date();
@@ -130,7 +130,7 @@ now.toLocaleTimeString('zh-CN', { hour12: false });  // '20:30:00'
 3. 复杂日期计算（时区、加减月）建议用库（dayjs），别手搓
 :::
 
-## 7.6 JSON：数据交换格式
+## JSON：数据交换格式
 
 JSON（JavaScript Object Notation）是前后端传输数据的通用格式，长得像 JS 对象（但键必须双引号、不能有函数）：
 
@@ -157,7 +157,7 @@ const copy = JSON.parse(JSON.stringify(user));
 会丢失函数、undefined、Symbol；处理 Date 变字符串。简单数据用它没问题，复杂对象用 `structuredClone()`。
 :::
 
-## 7.7 综合示例：格式化订单摘要
+## 综合示例：格式化订单摘要
 
 ```js
 function formatOrder(order) {

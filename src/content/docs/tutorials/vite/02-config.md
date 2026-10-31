@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 项目结构与配置文件"
+title: "项目结构与配置文件"
 description: "├── index.html # 入口！Vite 以它为起点（不在 public 里）"
 series: vite
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 vite.config 的常用配置（插件/别名/构建选项）
 - 理解 package.json scripts 与 Vite 的关系
 
-## 2.1 标准目录结构
+## 标准目录结构
 
 ```text
 my-app/
@@ -40,7 +40,7 @@ my-app/
 
 :::
 
-## 2.2 vite.config.js：最小配置
+## vite.config.js：最小配置
 
 ```js
 // vite.config.js
@@ -53,7 +53,7 @@ export default defineConfig({
 
 `defineConfig` 只是提供类型提示的包装函数（TS 项目体验更好），不加也能运行。
 
-## 2.3 高频配置一：插件
+## 高频配置一：插件
 
 插件（plugins）是 Vite 的扩展机制，一切能力皆插件：
 
@@ -73,7 +73,7 @@ export default defineConfig({
 
 **脚手架已经帮你配好框架插件**——这个配置的意义在于：装新工具（Tailwind、组件库按需引入等）时知道往哪儿加。
 
-## 2.4 高频配置二：路径别名
+## 高频配置二：路径别名
 
 ```js
 import { fileURLToPath, URL } from 'node:url';
@@ -96,7 +96,7 @@ import { todoService } from '@/services/todoService';   // 代替 ../../services
 Vite 的 `resolve.alias` 管构建；TS 项目还要在 `tsconfig.json` 的 `paths` 里配同一份映射，编辑器才能识别。
 :::
 
-## 2.5 高频配置三：server 与构建
+## 高频配置三：server 与构建
 
 ```js
 export default defineConfig({
@@ -114,7 +114,7 @@ export default defineConfig({
 });
 ```
 
-## 2.6 package.json scripts 与环境判定
+## package.json scripts 与环境判定
 
 ```json
 {
@@ -138,7 +138,7 @@ vite build --watch      # 构建模式监听变更
 新版 Vite（v7+）要求 Node 20.19+ / 22.12+。版本不符会启动报错——`node -v` 先自查，用 nvm 切换（Node 教程第 6 章）。
 :::
 
-## 2.7 综合示例：一个真实项目的配置
+## 综合示例：一个真实项目的配置
 
 ```js
 import { defineConfig } from 'vite';

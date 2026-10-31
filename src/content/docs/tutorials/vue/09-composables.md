@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 组合式函数"
+title: "组合式函数"
 description: "Vue 2 时代复用逻辑靠 mixin（混入）：把数据/方法混进组件。问题：来源不明、命名冲突、难以追踪。"
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会把一段状态逻辑抽成 useXxx 函数
 - 掌握参数传递与返回值约定
 
-## 9.1 复用逻辑的演进
+## 复用逻辑的演进
 
 Vue 2 时代复用逻辑靠 mixin（混入）：把数据/方法混进组件。问题：**来源不明、命名冲突、难以追踪**。
 
@@ -31,7 +31,7 @@ useRequest() → 请求加载状态
 
 命名约定：`use` 开头（useFetch、useLocalStorage、useDebounce…）。
 
-## 9.2 第一个组合式函数：useCounter
+## 第一个组合式函数：useCounter
 
 ```js
 // src/composables/useCounter.js
@@ -65,7 +65,7 @@ const { count, double, increment } = useCounter(10);   // 每次调用独立实�
 
 与普通函数的区别：**内部用了响应式 API 并返回响应式数据**——返回的 ref 在组件里持续"活着"。
 
-## 9.3 实战一：useLocalStorage
+## 实战一：useLocalStorage
 
 把 JS 教程第 12 章的 storage 封装升级为组合式函数：
 
@@ -108,7 +108,7 @@ todos.value.push({ id: 1, text: '体验组合式函数', done: false });
 
 **ref + watch = 自动的数据同步管道**，组件代码里一行持久化都不用写。
 
-## 9.4 实战二：useRequest（加载状态管理）
+## 实战二：useRequest（加载状态管理）
 
 JS 教程第 13 章的请求状态机，组件化封装：
 
@@ -155,7 +155,7 @@ run();   // 组件里三行接入完整加载状态
 </template>
 ```
 
-## 9.5 实战三：useDebounce（防抖）
+## 实战三：useDebounce（防抖）
 
 ```js
 // src/composables/useDebounce.js
@@ -191,7 +191,7 @@ watch(debouncedKeyword, (k) => search(k));
 </template>
 ```
 
-## 9.6 约定与最佳实践
+## 约定与最佳实践
 
 ```js
 // ✅ 输入：参数（可以是普通值或 ref/getter）
@@ -213,7 +213,7 @@ export function useWindowWidth() {
 2. 返回**对象**（不是数组），解构重命名方便
 3. 纯逻辑（无状态）不需要组合式函数——普通 utils 函数即可（格式化、校验规则等）
 
-## 9.7 与 Pinia 的分工
+## 与 Pinia 的分工
 
 ```text
 组合式函数：可复用的"行为逻辑"（怎么请求、怎么存储、怎么防抖）
@@ -222,7 +222,7 @@ Pinia：跨组件共享的"业务状态"（用户信息、购物车全局一份�
 
 两者常配合：Pinia store 内部用组合式函数组织逻辑（第 11 章见）。
 
-## 9.8 综合练习：useTodos 全家桶
+## 综合练习：useTodos 全家桶
 
 ```js
 // src/composables/useTodos.js

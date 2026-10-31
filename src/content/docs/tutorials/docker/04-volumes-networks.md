@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 数据卷与网络"
+title: "数据卷与网络"
 description: "容器可写层随容器消失（第 2 章），要让数据活下来就得挂载。Docker 提供三种："
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 bridge 网络与容器名解析，能让两个容器互相访问
 - 完成一次「数据库容器挂数据卷」的实战，并会备份迁移数据
 
-## 4.1 三种挂载方式
+## 三种挂载方式
 
 容器可写层随容器消失（第 2 章），要让数据活下来就得挂载。Docker 提供三种：
 
@@ -57,7 +57,7 @@ docker run -d --name web \
 把宿主空目录挂到 `/app`，镜像里原本构建进 `/app` 的代码就「消失」了——不是被删，是被遮住。第一次挂载后应用起不来，先怀疑这条。开发期想让镜像保留代码、只覆盖部分文件，就挂到更具体的子路径。
 :::
 
-## 4.2 命名卷的命令与迁移
+## 命名卷的命令与迁移
 
 ```bash
 docker volume create dbdata           # 显式创建（run -v 也会自动创建）
@@ -101,7 +101,7 @@ docker exec db sh -c 'exec mysqldump -uroot -p"$MYSQL_ROOT_PASSWORD" --all-datab
 `tar` 卷时数据库正在写，得到的是撕裂快照，恢复可能失败。生产上以逻辑备份（dump）为主，卷快照作为辅助；并且**定期做一次恢复演练**——没验证过的备份不算备份。
 :::
 
-## 4.3 bridge 网络与容器互访
+## bridge 网络与容器互访
 
 Docker 默认给容器接在 `bridge` 网络（宿主上的 `docker0` 网桥），每个容器拿到该网络内的独立 IP。
 
@@ -137,7 +137,7 @@ Address:   172.21.0.2            ← 容器在该网络内的 IP
 
 同一台宿主机上多个容器监听相同端口是可以的（各自的 NET 命名空间互不干扰），这也是「两个 nginx 都能跑 80」的原理（第 1 章 1.4）。
 
-## 4.4 端口映射与 host 网络
+## 端口映射与 host 网络
 
 对外的口子靠 `-p`（`--publish`）实现：Docker 在宿主上写 iptables/nftables 规则，把宿主端口转发到容器的 IP:端口。
 
@@ -172,7 +172,7 @@ Published ports are discarded when using host network mode   ← -p 会被忽略
 只有在「超高频 UDP/大流量、需要占用大量端口、要跑多播」这类场景才值得。常规 Web 服务用 bridge + `-p` 更好：可移植、隔离清晰、compose 里也不会有端口冲突的意外。另外别把 `-p 8080:80` 裸绑到公网网卡上——管理界面、数据库端口应当只绑 `127.0.0.1`，由反向代理统一对外。
 :::
 
-## 4.5 实战：给 MySQL 容器挂数据卷
+## 实战：给 MySQL 容器挂数据卷
 
 这是最典型的「有状态服务」部署形态：数据在卷里、初始化脚本用 bind mount 只读挂进去。
 
@@ -221,7 +221,7 @@ docker run -d --name db2 -v dbdata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD='please
 docker exec -it db2 mysql -uroot -p app -e "SELECT * FROM users;"    # 数据还在
 ```
 
-## 4.6 挂载与网络的排错套路
+## 挂载与网络的排错套路
 
 ```text
 No such file or directory / permission denied 写不进挂载目录
@@ -245,7 +245,7 @@ docker inspect db | grep -A6 Networks       # 容器在哪些网络、IP 是多�
 docker exec api sh -c 'nslookup db; nc -z -v db 3306'
 ```
 
-## 4.7 日常操作自查清单
+## 日常操作自查清单
 
 - [ ] 持久数据用命名卷，不写容器可写层；开发热更新用 bind mount
 - [ ] bind mount 加 `:ro` 保护宿主文件，路径用绝对路径（`$(pwd)` 拼接）

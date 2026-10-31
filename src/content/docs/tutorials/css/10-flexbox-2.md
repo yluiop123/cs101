@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · Flexbox 布局（下）"
+title: "Flexbox 布局（下）"
 description: "Flex 项目的核心能力是按规则伸缩，三个属性分工："
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 读懂 flex 简写（尤其 `flex: 1`）
 - 完成几个经典布局实战
 
-## 10.1 伸缩三属性
+## 伸缩三属性
 
 Flex 项目的核心能力是**按规则伸缩**，三个属性分工：
 
@@ -48,7 +48,7 @@ Flex 项目的核心能力是**按规则伸缩**，三个属性分工：
 .item { flex-basis: auto; }   /* 回退到 width/height */
 ```
 
-## 10.2 flex 简写辨析
+## flex 简写辨析
 
 ```css
 .item { flex: 1; }            /* 等价 flex: 1 1 0% */
@@ -67,7 +67,7 @@ Flex 项目的核心能力是**按规则伸缩**，三个属性分工：
 常见 bug："flex:1 的侧边栏被文字撑得很宽"——因为 basis 是 auto，内容宽度参与了计算。想纯等分就用 `flex: 1`。
 :::
 
-## 10.3 经典布局 1：侧边栏 + 主内容
+## 经典布局 1：侧边栏 + 主内容
 
 ```css
 .layout { display: flex; min-height: 400px; }
@@ -75,7 +75,7 @@ Flex 项目的核心能力是**按规则伸缩**，三个属性分工：
 .main { flex: 1; }                    /* 吃掉全部剩余空间 */
 ```
 
-## 10.4 经典布局 2：圣杯布局（头/三栏/脚）
+## 经典布局 2：圣杯布局（头/三栏/脚）
 
 ```css
 .holy-grail { display: flex; flex-direction: column; min-height: 100vh; }
@@ -105,7 +105,7 @@ Flex 项目的核心能力是**按规则伸缩**，三个属性分工：
 </div>
 ```
 
-## 10.5 经典布局 3：底部按钮条（一左多右）
+## 经典布局 3：底部按钮条（一左多右）
 
 ```css
 .footer-bar { display: flex; align-items: center; }
@@ -115,7 +115,7 @@ Flex 项目的核心能力是**按规则伸缩**，三个属性分工：
 
 `flex: 1` 的"弹性占位"技巧：不需要 `margin-left: auto` 也能实现左分右合。
 
-## 10.6 等分卡片行
+## 等分卡片行
 
 ```css
 .cards { display: flex; gap: 16px; }
@@ -126,7 +126,7 @@ Flex 项目的核心能力是**按规则伸缩**，三个属性分工：
 Flex 容器支持 `gap`，项目之间的间距由容器统一管理——再也不用"margin-right + :last-child 归零"的老套路。
 :::
 
-## 10.7 换行后的等宽难题
+## 换行后的等宽难题
 
 `flex: 1` + `flex-wrap: wrap` 做自动换行网格时，最后一行可能"撑不满"：
 
@@ -143,7 +143,7 @@ Flex 容器支持 `gap`，项目之间的间距由容器统一管理——再也
 
 `flex-basis` 给最小宽度，实现"自适应卡片流"。要求**最后一行也严格等宽**的场景，请用 Grid（下一章）。
 
-## 10.8 综合实战：聊天界面布局
+## 综合实战：聊天界面布局
 
 ```html
 <style>

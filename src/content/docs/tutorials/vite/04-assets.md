@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 静态资源处理"
+title: "静态资源处理"
 description: "路径一：public/ 目录"
 series: vite
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握资源导入的 ?url / ?raw 变体
 - 学会路径别名与环境变量的正确用法
 
-## 4.1 两条资源路径
+## 两条资源路径
 
 ```text
 路径一：public/ 目录
@@ -41,7 +41,7 @@ el.innerHTML = `<img src="${logoUrl}" alt="logo" />`;
 
 **默认建议**：会随版本变化的资源放 src 走 import（享受指纹缓存）；固定不动的放 public。
 
-## 4.2 处理细节：内联与指纹
+## 处理细节：内联与指纹
 
 ```text
 小资源（< 4KB 默认）：转成 base64 data URL 内联——少一次请求
@@ -61,7 +61,7 @@ export default defineConfig({
 });
 ```
 
-## 4.3 导入变体：?url 与 ?raw
+## 导入变体：?url 与 ?raw
 
 ```js
 // ?url：得到资源 URL（默认行为，可显式写）
@@ -75,7 +75,7 @@ console.log(versionText);      // markdown 原文
 import './style.css';
 ```
 
-## 4.4 CSS 的处理
+## CSS 的处理
 
 ```js
 import './style.css';   // dev：注入 <style>；build：抽成独立 css 文件
@@ -93,7 +93,7 @@ import styles from './style.module.css';
 el.className = styles.title;    // 实际是 style_title__a1b2c 这样的唯一类名
 ```
 
-## 4.5 路径别名回顾
+## 路径别名回顾
 
 ```js
 // vite.config.js（第 2 章配置过）
@@ -108,7 +108,7 @@ import logoUrl from '@/assets/logo.png';        // src 下的任何资源都能 
 
 别名同时适用于 JS 模块与资源导入——相对路径地狱的终结者。
 
-## 4.6 环境变量：import.meta.env
+## 环境变量：import.meta.env
 
 Vite 内置环境变量体系，变量名必须以 `VITE_` 开头才会暴露给前端代码（防止服务端密钥泄漏到浏览器）：
 
@@ -144,7 +144,7 @@ fetch(api);
 
 :::
 
-## 4.7 类型友好的环境变量（TS 项目）
+## 类型友好的环境变量（TS 项目）
 
 ```ts
 // src/env.d.ts —— 让编辑器认识自定义变量
@@ -157,7 +157,7 @@ interface ImportMeta {
 }
 ```
 
-## 4.8 综合练习：配置驱动的 API 层
+## 综合练习：配置驱动的 API 层
 
 ```js
 // src/api.js

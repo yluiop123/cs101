@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 锁与死锁"
+title: "锁与死锁"
 description: "按粒度 全局锁 → 表级锁（含 MDL、意向锁）→ 行级锁（记录/间隙/next-key）"
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 看懂记录锁、间隙锁、next-key 锁的加锁规则与后果
 - 独立排查锁等待与死锁，并用参数与写法把它们控制在可接受范围
 
-## 7.1 锁的地图
+## 锁的地图
 
 ```text
 按粒度   全局锁 → 表级锁（含 MDL、意向锁）→ 行级锁（记录/间隙/next-key）
@@ -36,7 +36,7 @@ SELECT * FROM performance_schema.data_locks;        -- 8.0；5.7 是 information
 SELECT * FROM performance_schema.data_lock_waits;   -- 谁在等谁
 ```
 
-## 7.2 全局锁与表级锁
+## 全局锁与表级锁
 
 全局锁只有一件事要做：让整个库进入只读，用于**逻辑备份**。
 
@@ -65,7 +65,7 @@ UNLOCK TABLES;
 
 MyISAM 只有表锁：一条慢 `SELECT` 就能阻塞同表所有 `UPDATE`。这是它被 InnoDB 取代的核心原因（第 1 章）。
 
-## 7.3 MDL：卡住整张表的元数据锁
+## MDL：卡住整张表的元数据锁
 
 MDL（metadata lock）在 5.5+ 自动加，规则简单但后果严重：
 
@@ -109,7 +109,7 @@ UPDATE performance_schema.setup_instruments SET ENABLED = 'YES', TIMED = 'YES'
 ① 查 `information_schema.innodb_trx` 确认没有长事务持有该表；② 给 DDL 设上限：`SET SESSION lock_wait_timeout = 8;`（单位秒，控制 MDL 等待），拿不到锁就失败退出，比挂住整张表好得多。线上大表改结构请走 gh-ost / pt-osc（第 4 章）。
 :::
 
-## 7.4 InnoDB 行锁：记录锁、间隙锁、next-key 锁
+## InnoDB 行锁：记录锁、间隙锁、next-key 锁
 
 ```text
 记录锁 Record Lock       只锁索引记录本身
@@ -151,7 +151,7 @@ ALTER TABLE order_items ADD KEY idx_name (product_name);   -- 补索引后再按
 `READ COMMITTED` 基本不加间隙锁（只有外键/唯一冲突检查等少数场景），非唯一索引等值也只锁命中的记录，不锁扫描过的范围。这是 RC 吞吐更好、死锁更少的结构性原因，代价是放弃可重复读语义（第 6 章）。
 :::
 
-## 7.5 死锁：成因、排查、预防
+## 死锁：成因、排查、预防
 
 标准死锁剧本 —— 两个事务以相反顺序更新同两行：
 
@@ -202,7 +202,7 @@ mysql -e "SHOW GLOBAL STATUS LIKE 'Innodb_row_lock%';"
 两个事务都对同一无命中间隙做 `INSERT`（各自先加 gap 锁再申请插入意向锁）会死锁，而它们操作的**不是同一行**。这类死锁常出现在"先查存在不存在、不存在就插入"的代码里 —— 解法是给业务键加唯一索引，直接 `INSERT` 让数据库判重。
 :::
 
-## 7.6 锁等待与超时参数
+## 锁等待与超时参数
 
 ```sql
 -- 行锁等待超时：超过就报 1205 并回滚当前语句（不是整个事务）
@@ -234,7 +234,7 @@ SELECT item_id FROM orders WHERE status = 0 LIMIT 10 FOR UPDATE SKIP LOCKED;  --
 SELECT order_id FROM orders WHERE order_id = 1001 FOR UPDATE NOWAIT;           -- 拿不到锁立刻报错
 ```
 
-## 7.7 综合练习：复现一个死锁并解决它
+## 综合练习：复现一个死锁并解决它
 
 1. 两个终端各开一个事务，交叉更新 `orders` 的 1001 与 1002 行（照抄 7.5 的代码），制造一次 1213。
 2. 立刻执行 `SHOW ENGINE INNODB STATUS\G`，抄下 `LATEST DETECTED DEADLOCK` 段落里两个事务的 SQL 与各自持有/等待的锁，写出"谁是主动回滚者"以及判断依据（回滚量 `trx_rows_modified`）。

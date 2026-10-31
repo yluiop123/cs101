@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 表单（上）：基础控件"
+title: "表单（上）：基础控件"
 description: "表单（form）是网页收集用户输入的唯一标准方式——登录、注册、搜索、下单都靠它。"
 series: html
 sidebar:
@@ -18,7 +18,7 @@ tableOfContents: true
 
 表单（form）是网页收集用户输入的唯一标准方式——登录、注册、搜索、下单都靠它。
 
-## 7.1 form：表单的容器
+## form：表单的容器
 
 ```html
 <form action="/api/login" method="post">
@@ -42,7 +42,7 @@ tableOfContents: true
 
 提交原理：点击提交按钮后，浏览器把所有带 `name` 的控件组织成 `key=value` 对发送。`get` 方式数据拼在 URL 后面（`?username=tom&password=123`），`post` 方式放在请求体里。
 
-## 7.2 input 的常用 type
+## input 的常用 type
 
 `<input>` 是单标签，`type` 决定它的形态：
 
@@ -70,7 +70,7 @@ tableOfContents: true
 能用语义 type 就不要一律写 `text`。
 :::
 
-## 7.3 单选与复选的分组
+## 单选与复选的分组
 
 同一组单选框用**相同的 name**，勾选才互斥：
 
@@ -87,7 +87,7 @@ tableOfContents: true
 
 复选框同 name 提交后是多个值（`skill=html&skill=css`）；`value` 指定被选中时提交的内容。
 
-## 7.4 label：点文字也能选中控件
+## label：点文字也能选中控件
 
 label 与控件的关联有两种写法：
 
@@ -109,7 +109,7 @@ label 与控件的关联有两种写法：
 没有 label 的输入控件是无障碍（accessibility）硬伤——视觉正常的用户看 placeholder 猜字段，读屏用户则完全不知道要填什么。
 :::
 
-## 7.5 占位符与初始值
+## 占位符与初始值
 
 ```html
 <input type="text" name="nickname" placeholder="请输入昵称（3~10 字）" />
@@ -119,7 +119,7 @@ label 与控件的关联有两种写法：
 - `placeholder`：提示文字，**输入即消失**——它不是 value，也不会被提交
 - `value`：真实初始值，会被提交
 
-## 7.6 按钮家族：button
+## 按钮家族：button
 
 ```html
 <button type="submit">提交</button>   <!-- 提交表单（默认） -->
@@ -131,7 +131,7 @@ label 与控件的关联有两种写法：
 button 在 form 内的默认 type 是 `submit`——只想做点击交互（如"计算一下"）却忘写 `type="button"`，一点按钮表单就提交刷新了，这是新手最常见的"页面莫名刷新"问题。
 :::
 
-## 7.7 综合示例
+## 综合示例
 
 ```html
 <style>

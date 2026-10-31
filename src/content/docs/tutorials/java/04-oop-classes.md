@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 面向对象：类与对象"
+title: "面向对象：类与对象"
 description: "面向对象（Object-Oriented Programming，OOP）的核心思想：把“数据”和“操作数据的行为”打包在一起。"
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握构造器、this 与 static
 - 初识 JavaBean 与 record
 
-## 4.1 类：对象的图纸
+## 类：对象的图纸
 
 **面向对象（Object-Oriented Programming，OOP）**的核心思想：把"数据"和"操作数据的行为"打包在一起。
 
@@ -48,7 +48,7 @@ public class Main {
 
 `c1` 是一个**引用**（reference）——存的是对象在堆内存里的地址，类似"遥控器"而非"电视机"。
 
-## 4.2 封装：private 字段 + getter/setter
+## 封装：private 字段 + getter/setter
 
 直接暴露字段（`c1.hours = -5`）无法做约束——**封装（encapsulation）**：字段私有，方法公开：
 
@@ -81,7 +81,7 @@ System.out.println(c.getTitle());
 
 `private`：仅本类可见；`public`：到处可见。**字段一律 private** 是 Java 的默认纪律。
 
-## 4.3 构造器（constructor）
+## 构造器（constructor）
 
 创建对象时的初始化钩子：
 
@@ -107,7 +107,7 @@ new Course("Java 教程", 12);   // 调用有参构造器
 
 `this` = 当前对象自身。参数名与字段名撞车时，用 `this.xxx` 区分。**不写任何构造器时编译器送一个默认无参构造器**；一旦手写了有参的，默认的就没了（需要就自己补写）。
 
-## 4.4 static：属于类而不是对象
+## static：属于类而不是对象
 
 ```java
 public class Counter {
@@ -136,7 +136,7 @@ System.out.println(Counter.getTotal());   // 2 —— 通过类名调用
 
 第 1 章的 `main` 为什么是 static？——JVM 启动时还没有任何对象，只能调"不依赖对象"的方法。
 
-## 4.5 常量与工具类惯例
+## 常量与工具类惯例
 
 ```java
 public class MathUtils {
@@ -156,7 +156,7 @@ double area = MathUtils.PI * MathUtils.square(2);
 
 `private` 构造器 + 全 static 方法 = 工具类的标准形态（如 JDK 的 `Math`、`Arrays`）。
 
-## 4.6 JavaBean 与 record
+## JavaBean 与 record
 
 **JavaBean**：封装字段 + 无参构造器 + getter/setter 的数据类约定——框架（Spring/JSON 库）靠这套约定读写对象属性。
 
@@ -177,7 +177,7 @@ p.equals(p2);               // true（自动生成基于值的 equals/hashCode�
 
 **原则：不可变的纯数据用 record；需要 setter/可变状态的类用传统类。**
 
-## 4.7 对象的生命周期与引用
+## 对象的生命周期与引用
 
 ```java
 Course c = new Course("Java", 12);   // 对象在堆上，c 持有引用
@@ -188,7 +188,7 @@ c.getHours();                        // 20 —— 改 d 就是改 c
 c = null;                            // 断开引用；无引用的对象交给 GC 回收
 ```
 
-## 4.8 综合练习：用户类
+## 综合练习：用户类
 
 ```java
 public record User(String name, int age) {

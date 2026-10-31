@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 组件基础"
+title: "组件基础"
 description: "把“头像 + 名字 + 描述”的组合抽成组件，任何地方一行复用："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 defineProps / defineEmits 的父子通信
 - 学会组件的拆分思路
 
-## 5.1 组件：可复用的 UI 单元
+## 组件：可复用的 UI 单元
 
 把"头像 + 名字 + 描述"的组合抽成组件，任何地方一行复用：
 
@@ -61,7 +61,7 @@ import UserCard from '@/components/UserCard.vue';
 
 **组件 = 自定义 HTML 标签**：像用 `<div>` 一样用 `<UserCard>`，数据从属性传入。
 
-## 5.2 props：父传子
+## props：父传子
 
 props（properties）是组件的"函数参数"：
 
@@ -96,7 +96,7 @@ const props = defineProps({
 
 **单向数据流**：props 是只读的——子组件不能改父组件传入的数据（改了 Vue 会警告）。要"向上反馈"，用 emit。
 
-## 5.3 emit：子通知父
+## emit：子通知父
 
 子组件用 `defineEmits` 声明事件，父组件用 `@事件名` 监听：
 
@@ -139,7 +139,7 @@ function onSelect(course) {
 父组件持有数据、子组件负责展示与交互——"状态上提"是 Vue 的默认姿势
 ```
 
-## 5.4 v-model：表单双向绑定的本质
+## v-model：表单双向绑定的本质
 
 `v-model` 是"绑定值 + 监听变更"的语法糖：
 
@@ -180,7 +180,7 @@ const tags = ref([]);
 </template>
 ```
 
-## 5.5 组件上的 v-model（双向组件通信）
+## 组件上的 v-model（双向组件通信）
 
 自定义组件也能支持 `v-model`（第 8 章表单组件实战会用到）：
 
@@ -204,7 +204,7 @@ const model = defineModel();   // Vue 3.4+ 一行搞定
 
 `defineModel()` 声明"本组件支持双向绑定"，父组件即可 `v-model` 之。
 
-## 5.6 组件拆分的判断标准
+## 组件拆分的判断标准
 
 什么时候该拆组件？
 
@@ -224,7 +224,7 @@ src/
 └── App.vue
 ```
 
-## 5.7 综合练习：课程卡片列表
+## 综合练习：课程卡片列表
 
 ```vue
 <!-- components/CourseCard.vue -->

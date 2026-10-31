@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 模块系统：CommonJS 与 ESM"
+title: "模块系统：CommonJS 与 ESM"
 description: "Node 诞生（2009）时 ES 还没有模块标准，社区发明了 CommonJS（CJS）： / 。"
 series: nodejs
 sidebar:
@@ -16,11 +16,11 @@ tableOfContents: true
 - 理解两者的加载机制差异
 - 学会在 Node 项目中选择与混用
 
-## 4.1 为什么 Node 有两套模块
+## 为什么 Node 有两套模块
 
 Node 诞生（2009）时 ES 还没有模块标准，社区发明了 **CommonJS（CJS）**：`require` / `module.exports`。2015 年 ES6 正式推出 **ES Module（ESM）**：`import` / `export`。如今 Node 两套并存——历史包袱与现实标准的叠加。
 
-## 4.2 CommonJS：require 与 module.exports
+## CommonJS：require 与 module.exports
 
 ```js
 // math.js —— 导出
@@ -50,7 +50,7 @@ const path = require('path');
 - **动态**：`require(条件 ? './a' : './b')` 可以运行时决定
 - **值拷贝**：导出的是值的快照，导入方拿到后模块再改不影响已拿到的值
 
-## 4.3 ES Module：import 与 export
+## ES Module：import 与 export
 
 ```js
 // math.mjs / 或项目声明为 ESM 的 .js —— 导出
@@ -75,7 +75,7 @@ import main, { add, PI } from './math.mjs';   // 默认导出不带花括号
 const moduleA = await import('./heavy.mjs');
 ```
 
-## 4.4 如何声明项目用哪套
+## 如何声明项目用哪套
 
 Node 靠 `package.json` 的 `type` 字段区分：
 
@@ -97,7 +97,7 @@ Node 靠 `package.json` 的 `type` 字段区分：
 直接 `"type": "module"`（ESM）——这是 Vite、Vue、React 生态的默认方向，且浏览器端语法完全一致。老项目/某些只发 CJS 的库维护时按需用 CJS。
 :::
 
-## 4.5 ESM 下的路径细节
+## ESM 下的路径细节
 
 ESM 的相对路径**必须写全**，与 CJS 的宽松规则不同：
 
@@ -121,7 +121,7 @@ const __dirname = dirname(__filename);
 // import.meta.url 是当前模块的 file:// 地址
 ```
 
-## 4.6 CJS 与 ESM 互操作
+## CJS 与 ESM 互操作
 
 现代 Node 支持有限互通：
 
@@ -138,7 +138,7 @@ const esm = await import('./modern.mjs');
 Node 22 起实验性支持在 CJS 中 `require` ESM（无顶层 await 的模块），但生态尚未完全铺开——写兼容代码时按"ESM 里可以引 CJS，反过来用动态 import"的规则最稳。
 :::
 
-## 4.7 综合示例：双体系对照
+## 综合示例：双体系对照
 
 同一个工具模块的两种写法：
 

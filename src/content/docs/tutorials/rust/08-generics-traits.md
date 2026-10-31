@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 泛型与 trait"
+title: "泛型与 trait"
 description: "fn largest(list: &[T]) -> &T { // T: PartialOrd 是约束"
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 trait：Rust 的"接口"与标准能力层
 - 学会 trait bound 与 derive 的关系
 
-## 8.1 泛型：类型的形参
+## 泛型：类型的形参
 
 ```rust
 // 泛型函数
@@ -57,7 +57,7 @@ impl Pair<i32> {
 
 与 TS 的 `<T extends {...}>` 完全同构——Rust 的约束用 trait 表达。
 
-## 8.2 trait：行为的契约
+## trait：行为的契约
 
 **trait（特征）**= 接口 + 默认方法 + 运算符能力的统一体：
 
@@ -97,7 +97,7 @@ impl Summary for Tweet {
 
 与 Go 接口一样是**隐式实现**；与 Java 接口一样有默认方法——Rust 取两者之长。
 
-## 8.3 trait bound：约束的三种写法
+## trait bound：约束的三种写法
 
 ```rust
 // ① impl Trait 语法（简洁，最常用）
@@ -122,7 +122,7 @@ where
 
 **select-your-own convention**: 参数用 `impl Trait`、结构体字段与返回类型用泛型约束、复杂签名用 where。
 
-## 8.4 返回 trait 对象 vs 泛型
+## 返回 trait 对象 vs 泛型
 
 ```rust
 // 返回 impl Summary：仍是"某种具体类型"（静态分发，第 11 章对照）
@@ -151,7 +151,7 @@ let items: Vec<Box<dyn Summary>> = vec![
 
 **默认泛型（快）；异构容器用 `Box<dyn Trait>`**。
 
-## 8.5 常用标准 trait 速览
+## 常用标准 trait 速览
 
 ```rust
 // Debug：{:?} 打印（derive 自动）
@@ -178,7 +178,7 @@ impl Add for Vec2 {
 let v = Vec2 { x: 1.0, y: 2.0 } + Vec2 { x: 3.0, y: 4.0 };   // 运算符就是 trait 的糖
 ```
 
-## 8.6 derive 与常用宏的关系
+## derive 与常用宏的关系
 
 ```rust
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -192,7 +192,7 @@ struct Config {
 // （thiserror/serde 的 derive 就是这个机制，第 7/13 章）
 ```
 
-## 8.7 综合练习：面积统计器（trait + 泛型 + 动态分发）
+## 综合练习：面积统计器（trait + 泛型 + 动态分发）
 
 ```rust
 use std::fmt;

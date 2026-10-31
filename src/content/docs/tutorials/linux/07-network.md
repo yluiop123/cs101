@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 网络与排查"
+title: "网络与排查"
 description: "老牌 ifconfig/route 已被 iproute2 套件取代（两厂现代发行版通用，命令为 ip 与 ss）："
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会配置 firewalld/ufw 防火墙，并用 SSH 密钥与 config 文件实现安全免密登录
 - 理解端口转发原理，并按"由近及远"的顺序排查"连不通"问题
 
-## 7.1 ip：网卡、地址与路由
+## ip：网卡、地址与路由
 
 老牌 `ifconfig`/`route` 已被 iproute2 套件取代（两厂现代发行版通用，命令为 `ip` 与 `ss`）：
 
@@ -53,7 +53,7 @@ ip route | grep default     # default via 172.19.0.1 dev eth0 —— 出口网�
 
 读网卡先认三样：网卡名（现代系统多为 eth0/enp0s3  predictable 命名）、内网地址（10/172.16-31/192.168 段）、以及是否有公网地址。云主机通常"公网 IP 不在网卡上"——NAT 在云上完成，`ip a` 只能看到内网地址，这是正常现象（第 10 章再提）。
 
-## 7.2 ss：谁在监听哪个端口
+## ss：谁在监听哪个端口
 
 ```bash
 ss -tlnp                    # tcp listening，带进程名（需 sudo 看全）
@@ -73,7 +73,7 @@ LISTEN  0       128     127.0.0.1:5432      0.0.0.0:*          users:(("postgres
 
 关键信息是 Local Address 那列：`0.0.0.0:80` 表示所有网卡都接受连接，`127.0.0.1:5432` 表示只允许本机访问——"服务起了但外面连不上"的第一嫌疑人就是这个绑定地址。
 
-## 7.3 ping、traceroute、dig：连通三连
+## ping、traceroute、dig：连通三连
 
 ```bash
 ping -c 4 example.com       # -c 4 发四个包就停（不加会一直刷）
@@ -96,7 +96,7 @@ dig +short example.com
 
 解析结果同时有 IPv4 与 IPv6 很正常；若返回空或 NXDOMAIN，先换公共 DNS 复核（`dig @8.8.8.8 example.com`）：能解析说明你机器的 DNS 配置有问题（`resolv.conf` 归 systemd-resolved 管，改法以发行版文档为准），还不行就是域名本身的事。临时验证可改 `/etc/hosts` 强行指到某个 IP——排查完记得删掉，忘掉的 hosts 条目是三个月后灵异故障的经典种子。
 
-## 7.4 curl：从命令行验一次 HTTP
+## curl：从命令行验一次 HTTP
 
 ```bash
 curl -I https://example.com            # 只看响应头（HEAD）
@@ -122,7 +122,7 @@ Connection: keep-alive
 
 健康检查、接口冒烟、验证反代头是否传到（对比经 Nginx 与直连后端的响应差异），全靠 curl 这一层"手工客户端"。测 API 时加 `-w '\n'` 补回车、`-o /dev/null` 丢正文只看头/状态码，脚本化验证第 10 章会再用一次。
 
-## 7.5 防火墙：firewalld 与 ufw
+## 防火墙：firewalld 与 ufw
 
 两厂默认防火墙体系不同：CentOS/RHEL 用 **firewalld**，Ubuntu 主推 **ufw**（底层是 nftables/iptables，无需直接碰）。
 
@@ -148,7 +148,7 @@ sudo ufw enable                                  # 启用（默认策略 incomin
 
 service 名（http/https/ssh）与端口的对应关系由各 firewall 预定义，自定义端口是通用逃生招；zone 概念与更多选项以 `man firewalld`、`ufw help` 为准。
 
-## 7.6 SSH 密钥登录与 config
+## SSH 密钥登录与 config
 
 密码登录的三大罪：可爆破、可钓鱼、难管理。服务器日常应改用**密钥对**（概念与第 1 章 danger 框呼应，这里是实操）：
 
@@ -188,7 +188,7 @@ rsync -avz --progress ./dist/ prod:/opt/myapp/dist/   # 增量同步部署产物
 
 免密之后还有一层体验优化：把常用连接参数写进 config 的 `Host *` 段（如 `ServerAliveInterval 60` 防闲置断连）；选项列表以 `man ssh_config` 为准，别直接照搬网络帖子里的老参数。
 
-## 7.7 端口转发与「连不通」排查自查清单
+## 端口转发与「连不通」排查自查清单
 
 **本地转发**：把远端才能访问的服务，借一条 SSH 隧道映射到本机——调试内网数据库的标准姿势：
 

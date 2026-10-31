@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 核心数据结构：list / tuple / dict / set"
+title: "核心数据结构：list / tuple / dict / set"
 description: "Python 的“万能数组”（对应 JS 数组 / Java 的 ArrayList，但元素类型可以混搭）："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握切片与列表/字典推导式
 - 理解可变与不可变的区别
 
-## 3.1 list：可变有序列表
+## list：可变有序列表
 
 Python 的"万能数组"（对应 JS 数组 / Java 的 ArrayList，但元素类型可以混搭）：
 
@@ -65,7 +65,7 @@ import copy
 deep = copy.deepcopy(a)   # 深拷贝：完全独立
 ```
 
-## 3.2 tuple：不可变序列
+## tuple：不可变序列
 
 ```python
 point = (3, 5)
@@ -83,7 +83,7 @@ def min_max(nums):
 lo, hi = min_max([3, 1, 4])         # 接收端解包
 ```
 
-## 3.3 dict：键值对（最常用）
+## dict：键值对（最常用）
 
 ```python
 user = {"name": "Tom", "age": 18}
@@ -123,7 +123,7 @@ counts = Counter(text.split())
 counts.most_common(3)     # 出现最多的前 3 个
 ```
 
-## 3.4 set：去重与集合运算
+## set：去重与集合运算
 
 ```python
 tags = {"python", "backend", "python"}    # {'python', 'backend'} —— 自动去重
@@ -142,7 +142,7 @@ a - b      # {1}         差集
 a ^ b      # {1, 4}      对称差（不同时属于两者的）
 ```
 
-## 3.5 推导式：Python 的招牌语法
+## 推导式：Python 的招牌语法
 
 **推导式（comprehension）**= 一行完成"遍历+转换+过滤+收集"：
 
@@ -175,7 +175,7 @@ squares = [x ** 2 for x in range(5)]
 复杂逻辑（多层嵌套条件）时退回普通循环——**可读性优先**。
 :::
 
-## 3.6 容器选型速查
+## 容器选型速查
 
 | 需求 | 选择 | 示例 |
 | --- | --- | --- |
@@ -184,7 +184,7 @@ squares = [x ** 2 for x in range(5)]
 | 键找值、缓存、计数 | dict | 用户信息、配置 |
 | 去重、成员判断 | set | 标签集合、已访问ID |
 
-## 3.7 综合练习：学生成绩统计
+## 综合练习：学生成绩统计
 
 ```python
 students = [

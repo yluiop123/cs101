@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 安装与基础配置"
+title: "安装与基础配置"
 description: "前往官网 code.visualstudio.com 下载对应系统的安装包："
 series: vscode
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 安装中文语言包，切换中文界面
 - 完成几个最重要的人工设置
 
-## 2.1 下载与安装
+## 下载与安装
 
 前往官网 [code.visualstudio.com](https://code.visualstudio.com/) 下载对应系统的安装包：
 
@@ -35,7 +35,7 @@ tableOfContents: true
 
 安装完成后打开，第一次启动会显示欢迎页（Welcome），可以先不管它。
 
-## 2.2 设置中文界面
+## 设置中文界面
 
 VS Code 默认英文界面，安装中文语言包即可切换：
 
@@ -50,7 +50,7 @@ VS Code 默认英文界面，安装中文语言包即可切换：
 `Ctrl+Shift+P` 呼出的命令面板是 VS Code 的"万能入口"——记住任何功能的名字，就能在这里搜到并执行。它是本教程最高频的快捷键，没有之一。
 :::
 
-## 2.3 必做的几项设置
+## 必做的几项设置
 
 VS Code 的设置分**用户设置**（全局生效）和**工作区设置**（仅当前项目生效，存放在项目 `.vscode/settings.json` 中）。
 
@@ -78,7 +78,7 @@ VS Code 的设置分**用户设置**（全局生效）和**工作区设置**（�
 `formatOnSave` 需要对应语言安装了格式化插件才会生效（如 JS 的 Prettier、Python 的 Black）。没有格式化工具时保存不会有任何变化。
 :::
 
-## 2.4 设置同步（Settings Sync）
+## 设置同步（Settings Sync）
 
 VS Code 内置配置同步功能（Settings Sync），可以把**设置、快捷键、插件列表、代码片段**同步到你的 GitHub / Microsoft 账号：
 
@@ -86,7 +86,7 @@ VS Code 内置配置同步功能（Settings Sync），可以把**设置、快捷
 2. 登录 GitHub 或 Microsoft 账号
 3. 换新电脑时登录同一账号，选择"从云端下载"即可一键还原
 
-## 2.5 认识 settings.json
+## 认识 settings.json
 
 图形界面改设置，本质都是在改一个 JSON 文件。点击设置界面右上角的"打开设置(JSON)"图标，可以看到类似内容：
 

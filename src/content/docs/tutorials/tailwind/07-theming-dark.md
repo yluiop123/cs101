@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 主题定制与暗色模式"
+title: "主题定制与暗色模式"
 description: "v4 的主题定制直接写在入口 CSS（v3 的 tailwind.config.js 已不需要）："
 series: tailwind
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 v4 的类名式暗色模式
 - 学会"动态类名"的正确写法（避开扫描陷阱）
 
-## 7.1 @theme：在 CSS 里做配置
+## @theme：在 CSS 里做配置
 
 v4 的主题定制直接写在入口 CSS（v3 的 tailwind.config.js 已不需要）：
 
@@ -48,7 +48,7 @@ v4 的主题定制直接写在入口 CSS（v3 的 tailwind.config.js 已不需�
 所有组件都引用 brand/surface 这类**设计令牌**；换主题色 = 改一处 CSS 变量，全站生效。这就是第 1 章说的"一致性来自刻度"的定制形态。
 :::
 
-## 7.2 在默认色板上叠加
+## 在默认色板上叠加
 
 自定义色不必推翻内置色板，两者共存：
 
@@ -66,7 +66,7 @@ v4 的主题定制直接写在入口 CSS（v3 的 tailwind.config.js 已不需�
 <button class="bg-brand-900">深色按钮</button>
 ```
 
-## 7.3 暗色模式：v4 的类名开关
+## 暗色模式：v4 的类名开关
 
 v4 默认的 `dark:` 变体跟随**系统偏好**（prefers-color-scheme）。想要"用户手动切换"，先声明类名策略：
 
@@ -99,7 +99,7 @@ function applyTheme(dark) {
 applyTheme(localStorage.getItem('theme') === 'dark');
 ```
 
-## 7.4 dark: 变体的组织建议
+## dark: 变体的组织建议
 
 ```html
 <!-- 页面骨架：底色与文字成对写 -->
@@ -118,7 +118,7 @@ applyTheme(localStorage.getItem('theme') === 'dark');
 暗色适配的纪律：**每个亮色类旁边紧跟一个 dark: 类**（bg 配 bg、text 配 text、border 配 border）。写组件时一口气写全，回头补最痛苦。
 :::
 
-## 7.5 动态类名：扫描器陷阱
+## 动态类名：扫描器陷阱
 
 扫描器只认**完整字面量**类名——拼接出来的类不会生成 CSS：
 
@@ -142,7 +142,7 @@ el.className = statusClass[status];
 
 **原则：条件选类，不拼接类。**映射表是状态样式（第 5 章 TS 的 statusClass 思路）的标准搭档。
 
-## 7.6 全局基础样式
+## 全局基础样式
 
 需要微调重置（preflight）后的全局样式，用 @layer：
 

@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 网络编程：从 socket 到 epoll"
+title: "网络编程：从 socket 到 epoll"
 description: "Unix 的答案是把网络塞进它最成熟抽象：一切皆文件。一次 TCP 连接、一个监听端口，都是一个整数 fd，读写用和文件一样的 read/write/close。"
 series: network
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 TCP 字节流为什么产生粘包/半包，并用长度前缀协议给出边界
 - 说清阻塞/非阻塞与 select/poll/epoll 的差别，解释 epoll 为什么能扛十万连接
 
-## 10.1 socket 抽象与文件描述符
+## socket 抽象与文件描述符
 
 Unix 的答案是把网络塞进它最成熟抽象：**一切皆文件**。一次 TCP 连接、一个监听端口，都是一个整数 fd，读写用和文件一样的 `read/write/close`。
 
@@ -42,7 +42,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 每个进程默认 fd 上限常见 1024（`ulimit -n` 查看调整）。第 1 万条连接如果 accept 返回 -1 报 Too many open files，先调上限再怪代码——这是 C10K 的第一关（10.6）。
 :::
 
-## 10.2 TCP 服务端最小实现
+## TCP 服务端最小实现
 
 一个能跑的 echo 服务器，注意每一行的语义：
 
@@ -66,7 +66,7 @@ conn.close()
 
 `send` 与 `sendall` 的区别是新手最容易忽略的：`send` 允许**部分写**——内核缓冲区满时只塞进去一半，返回实际字节数；`sendall` 帮你循环补发。单发一条消息务必 `sendall`（10.4 会看到 recv 侧的镜像问题）。
 
-## 10.3 客户端、粘包与消息边界
+## 客户端、粘包与消息边界
 
 客户端侧：
 
@@ -114,7 +114,7 @@ def recv_msg(conn) -> bytes:
 `close(fd)` 直接全关；想「我说完了但还能听你说」时要用 `conn.shutdown(socket.SHUT_WR)` 先发 FIN 半边关闭——做「请求-响应后由发送方先关」类协议时，半关闭是给对方留确认窗口的手段，也是 `CLOSE-WAIT` 堆积类故障（[第 9 章 · 抓包与网络排障实战](../09-debug-toolkit/)）的解药。
 :::
 
-## 10.4 阻塞与非阻塞
+## 阻塞与非阻塞
 
 默认所有 socket 都是阻塞的：`accept`/`recv` 没东西就睡着。这在单连接演示里没问题，一个服务几百连接时线程全睡死在这些调用上。改成非阻塞：
 
@@ -138,7 +138,7 @@ sel.register(srv, selectors.EVENT_READ, data="listener")   # 每个 fd 挂一个
 本章全部是「同步 I/O」：线程仍然要亲自调 recv 把数据拷走，非阻塞+多路复用只是让它**不白等**。真正的异步 I/O（Linux 的 io_uring、Windows 的 IOCP）连拷贝都交给内核完成，这里不展开——面试口诀：非阻塞是「不等」，异步是「不做」。
 :::
 
-## 10.5 select / poll / epoll：为什么 epoll 快
+## select / poll / epoll：为什么 epoll 快
 
 三代多路复用的差别一张表：
 
@@ -181,7 +181,7 @@ for key, mask in evts:
         handle_conn(key.fileobj)      # 非阻塞 recv + 10.3 的收包框架
 ```
 
-## 10.6 线程模型一句话，与 C10K → C10M
+## 线程模型一句话，与 C10K → C10M
 
 服务端并发模型按「一个连接谁来管」分类：
 
@@ -195,7 +195,7 @@ reactor 事件循环         单线程 epoll_wait + 非阻塞读写，回调派�
 
 C10K（单进程一万连接）当年卡在哪：fd 上限、内存（每连接收发缓冲 + 线程栈）、accept 惊群、以及 select 的 O(n)。epoll + 调大 fd 上限 + 单线程事件循环后，C10K 在 2000 年代就是「配置问题」。到 C10M 时瓶颈移到了更深的层：**内核每包的中断、协议栈拷贝与 socket 锁**——解法方向是网卡多队列 RSS 分流、CPU 亲和绑核、DPDK/kernel-bypass 让用户态直接收包、零拷贝（sendfile）与连接复用（呼应第 6 章 keep-alive）。层级越深，越不是「换个模型」而是「重排整条路径」。
 
-## 10.7 综合练习：写一个长度前缀的并发 echo 服务器
+## 综合练习：写一个长度前缀的并发 echo 服务器
 
 把本章零件拼成完整程序：服务端用 `selectors` 接受多客户端，每个连接按 10.3 的长度前缀协议收消息、原样回一条 `echo:` 消息，客户端脚本连发 3 条验证不粘包。
 

@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 综合实战：缓存三兄弟与一个商品详情缓存"
+title: "综合实战：缓存三兄弟与一个商品详情缓存"
 description: "识别它们靠三个数据源同时看："
 series: redis
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 实现一个带互斥重建与空值缓存的商品详情缓存，说清每一步防的是什么
 - 用压测与 `INFO stats` 验证命中率，并知道什么指标该报警
 
-## 8.1 三个经典故障：一张对照表
+## 三个经典故障：一张对照表
 
 | 名称 | 一句话成因 | 现场特征 | 典型触发 |
 | --- | --- | --- | --- |
@@ -34,7 +34,7 @@ redis-cli --latency            # 客户端侧看 Redis 是否变慢
 
 `expired_keys` 短时暴涨 + 数据库打满 → 雪崩；`keyspace_misses` 高但 `expired_keys` 平静 → 更像穿透。
 
-## 8.2 对策矩阵
+## 对策矩阵
 
 **穿透**（目标是「不存在的 ID 也要有东西可返回」）：
 
@@ -61,7 +61,7 @@ redis-cli --latency            # 客户端侧看 Redis 是否变慢
 **正例**：永不过期**只用于**已确认的热点 key 且配合后台刷新任务；其余一律带 TTL + 抖动，实例统一 `allkeys-lru` 并给足内存（第 3 章 3.6 节）。
 :::
 
-## 8.3 更新策略：删除，而不是更新
+## 更新策略：删除，而不是更新
 
 ```text
 Cache-Aside（旁路缓存，主流）
@@ -102,7 +102,7 @@ cache.delete(key);          // 第二次：清掉可能被回填的旧值
 **正例**：数据库是唯一真相源，顺序固定为「更新库 → 删缓存」，删缓存失败就投进重试队列（或订阅 binlog 兜底，如 Canal 类方案），并保证缓存一定带 TTL——TTL 是最后一道自愈机制。
 :::
 
-## 8.4 互斥重建的边界
+## 互斥重建的边界
 
 `SET lock:<key> <owner> NX EX 10` 拿到锁才允许回源，这里的三个细节决定正确性：
 
@@ -114,7 +114,7 @@ cache.delete(key);          // 第二次：清掉可能被回填的旧值
 `lock:goods:1001` 与 `cache:goods:1001` 在集群里大概率分属不同槽，用 Lua 一次操作两者会直接 `CROSSSLOT`。写成 `{goods:1001}:lock` 与 `{goods:1001}:cache`（第 7 章 7.4 节）即可。
 :::
 
-## 8.5 落地：Node + ioredis 的商品详情缓存
+## 落地：Node + ioredis 的商品详情缓存
 
 ```javascript
 // goods-cache.js  ——  依赖安装：npm i ioredis
@@ -196,7 +196,7 @@ export { getGoods, updateGoods, redis };
 
 Java 侧等价方案：Spring Cache + `@Cacheable` 只能解决「读」，互斥重建要么用 Redisson 的 `RLock`，要么自定义 `CacheManager` 包装一层 `get(key, loader)`；不要指望 `@CachePut` 替代删除语义。
 
-## 8.6 压测：让数字说话
+## 压测：让数字说话
 
 ```bash
 # 1) 数据准备：库里只有 200 个真实商品，压测请求从 1~10000 里随机取 ID
@@ -232,7 +232,7 @@ redis-cli --latency
 **正例**：压测脚本同时输出 p50 / p99 / p999 与 `stats:cache` 各计数器；上线后对 `miss_fill` 突增与数据库 QPS 同时告警。
 :::
 
-## 8.7 自查清单
+## 自查清单
 
 **上线前**
 

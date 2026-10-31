@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 枚举与类型编程入门"
+title: "枚举与类型编程入门"
 description: "enum Status {"
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解映射类型与索引访问类型
 - 初识条件类型（工具类型的底层原理）
 
-## 7.1 枚举：命名的常量集合
+## 枚举：命名的常量集合
 
 ```ts
 enum Status {
@@ -50,7 +50,7 @@ function render(s: Status): string {
 }
 ```
 
-## 7.2 更现代的选择：as const 对象
+## 更现代的选择：as const 对象
 
 很多团队弃用 enum（有运行时产物、与 JS 生态略割裂），改用**字面量联合 + as const**：
 
@@ -75,7 +75,7 @@ type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 :::
 
-## 7.3 索引访问类型
+## 索引访问类型
 
 ```ts
 interface User {
@@ -98,7 +98,7 @@ type TodoItem = (typeof todos)[number]; // { id: number; text: string; done: boo
 
 `typeof 变量` 把**运行时值**变成**类型**——从现有数据反推类型的高频技巧。
 
-## 7.4 映射类型：批量生成属性
+## 映射类型：批量生成属性
 
 映射类型（mapped types）对类型做"循环"：
 
@@ -127,7 +127,7 @@ type Editable<T> = {
 
 `[K in keyof T]` = "遍历 T 的每个键"；`T[K]` = 取对应值的类型——与 JS 的 for...in 语法神似，好记。
 
-## 7.5 条件类型：类型层面的三元
+## 条件类型：类型层面的三元
 
 条件类型（conditional types）：**类型依赖另一个类型做判断**：
 
@@ -164,7 +164,7 @@ type UserNoName = MyOmit<User, 'name'>;
 
 第 6 章用的工具类型，全都是"映射 + 条件 + infer"的组合——你已经能读懂它们了。
 
-## 7.6 综合示例：可配置的表单校验器
+## 综合示例：可配置的表单校验器
 
 ```ts
 type Rule<T> = {

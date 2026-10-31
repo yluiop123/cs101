@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 Vite"
+title: "初识 Vite"
 description: "浏览器最终需要的只是 HTML/CSS/JS，但真实项目离不开构建："
 series: vite
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 30 秒跑通第一个 Vite 项目
 - 建立"开发环境 ≠ 生产环境"的心智模型
 
-## 1.1 为什么需要构建工具
+## 为什么需要构建工具
 
 浏览器最终需要的只是 HTML/CSS/JS，但真实项目离不开构建：
 
@@ -29,7 +29,7 @@ tableOfContents: true
 
 WebPack 的方案：**先把所有模块打包成一个/几个 bundle 再启动**。项目越大，启动与热更新越慢——"改一行代码，等 30 秒"。
 
-## 1.2 Vite 的答案：让浏览器自己当打包器
+## Vite 的答案：让浏览器自己当打包器
 
 Vite（法语"快"，发音 /vit/）由 Vue 作者尤雨溪开发。核心思路完全不同：
 
@@ -50,7 +50,7 @@ Vite（法语"快"，发音 /vit/）由 Vue 作者尤雨溪开发。核心思路
 现代浏览器原生支持 ES Module。Vite dev 服务器直接伺服源码，浏览器请求 `main.js` 时才实时转换它。依赖预构建用 esbuild（Go 编写，比 JS 打包器快一个数量级）。
 :::
 
-## 1.3 30 秒上手
+## 30 秒上手
 
 ```bash
 npm create vite@latest my-app
@@ -72,7 +72,7 @@ npm run preview  # 本地预览构建产物
 本站的 VitePress（docs 目录）就是 Vite 生态的一员——之前教程里反复出现的"dev 服务器 / build 命令"，底层都是 Vite 在工作。
 :::
 
-## 1.4 开发环境 vs 生产环境
+## 开发环境 vs 生产环境
 
 Vite 两条流水线，行为刻意不同：
 
@@ -91,7 +91,7 @@ Vite 两条流水线，行为刻意不同：
 1. **dev 能跑 ≠ build 能过**——类型错误、动态导入路径错误，往往构建时才暴露
 2. **上线前必须跑一次 build 验证**，不能只依赖 dev
 
-## 1.5 Vite 在工具链中的位置
+## Vite 在工具链中的位置
 
 ```text
 Vue  create-vue → Vite

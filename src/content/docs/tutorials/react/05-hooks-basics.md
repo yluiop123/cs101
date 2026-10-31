@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · Hooks 入门：useState 与 useEffect"
+title: "Hooks 入门：useState 与 useEffect"
 description: "Hook = “钩住” React 能力的函数，统一 use 前缀："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 深入 useEffect：依赖数组与清理函数
 - 认识 useRef 与自定义 Hooks 的雏形
 
-## 5.1 Hooks 是什么
+## Hooks 是什么
 
 Hook = "钩住" React 能力的函数，统一 `use` 前缀：
 
@@ -45,7 +45,7 @@ const [profile] = useState(null);
 if (isLoggedIn) { /* 用 profile */ }
 ```
 
-## 5.2 useEffect：副作用的舞台
+## useEffect：副作用的舞台
 
 **副作用**：渲染之外的事——请求、定时器、订阅事件、改 document.title。`useEffect(回调, 依赖数组)`：
 
@@ -76,7 +76,7 @@ useEffect(() => { … }, [a, b]);  // 指定依赖：a 或 b 变化后执行
 
 :::
 
-## 5.3 清理函数：借了要还
+## 清理函数：借了要还
 
 useEffect 回调**返回一个函数**，作为"卸载时执行"的清理：
 
@@ -102,7 +102,7 @@ useEffect(() => {
 
 **原则：effect 里 addEventListener/setInterval/订阅了什么，清理函数里就 remove/clear/退订什么**——与 Vue 的 mounted/unmounted 配对同一纪律。
 
-## 5.4 请求的effect
+## 请求的effect
 
 ```jsx
 function CourseDetail({ id }) {
@@ -126,7 +126,7 @@ function CourseDetail({ id }) {
 
 `ignore` 标记解决**竞态**（race condition）：快速切换 id 时，慢的旧请求不能覆盖新请求的结果——异步数据请求的必修细节。
 
-## 5.5 useRef：不触发渲染的"盒子"
+## useRef：不触发渲染的"盒子"
 
 ```jsx
 import { useRef, useEffect } from 'react';
@@ -154,7 +154,7 @@ const timerRef = useRef(null);     // 存定时器 id：改它不触发渲染
 timerRef.current = setInterval(tick, 1000);
 ```
 
-## 5.6 自定义 Hook 雏形
+## 自定义 Hook 雏形
 
 把 useEffect 模式抽成函数（命名 use 开头）就是自定义 Hook：
 
@@ -182,7 +182,7 @@ const width = useWindowWidth();
 
 与 Vue 组合式函数（第 9 章）完全同构——**两框架在"逻辑复用"上殊途同归**。第 9 章系统展开。
 
-## 5.7 综合练习：自动聚焦搜索框 + 标题同步
+## 综合练习：自动聚焦搜索框 + 标题同步
 
 ```jsx
 import { useState, useEffect, useRef } from 'react';

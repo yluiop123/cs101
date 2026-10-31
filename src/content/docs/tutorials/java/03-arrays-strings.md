@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 数组与字符串"
+title: "数组与字符串"
 description: "// 声明与初始化"
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 String 不可变性与其常用方法
 - 会用 StringBuilder 做高效拼接
 
-## 3.1 数组：固定长度的同类型容器
+## 数组：固定长度的同类型容器
 
 ```java
 // 声明与初始化
@@ -53,7 +53,7 @@ int[][] matrix = {
 matrix[1][2]   // 6
 ```
 
-## 3.2 Arrays 工具类
+## Arrays 工具类
 
 ```java
 import java.util.Arrays;
@@ -68,7 +68,7 @@ int[] copy = Arrays.copyOf(nums, 6);         // 复制并扩容 → [1,2,5,8,0,0
 Arrays.fill(copy, 0);                        // 全部填充 0
 ```
 
-## 3.3 String：不可变的字符序列
+## String：不可变的字符序列
 
 ```java
 String s = "Hello, Java";
@@ -109,7 +109,7 @@ s1.equals(s2);   // true  —— equals 比较内容
 `==` 偶尔"看起来对"（字面量会被 JVM 缓存复用），但换种写法就翻车。**铁律：字符串内容比较用 `equals`，`==` 只用于判空或枚举。**
 :::
 
-## 3.4 字符串拼接的性能：StringBuilder
+## 字符串拼接的性能：StringBuilder
 
 ```java
 // 拼接 1 万次：每次 + 都创建新字符串对象 → O(n²) 灾难
@@ -128,7 +128,7 @@ String result2 = sb.toString();
 
 选择口诀：**循环里拼字符串必用 StringBuilder**；两三个片段的一次性拼接用 `+` 无妨。
 
-## 3.5 文本块（Java 15+）
+## 文本块（Java 15+）
 
 多行字符串不再需要拼接和转义：
 
@@ -148,7 +148,7 @@ String sql2 = """
 
 JSON、SQL、HTML 模板场景的可读性利器。
 
-## 3.6 char 与字符串的转换
+## char 与字符串的转换
 
 ```java
 char c = 'A';
@@ -160,7 +160,7 @@ char[] chars = "hello".toCharArray();  // String → char 数组
 char first = "hello".charAt(0);        // 取单个字符
 ```
 
-## 3.7 综合练习：统计单词频率
+## 综合练习：统计单词频率
 
 ```java
 import java.util.Arrays;

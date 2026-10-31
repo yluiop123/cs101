@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 Angular"
+title: "初识 Angular"
 description: "学过 Vue/React 再看 Angular，最大差异是哲学："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用 CLI 创建第一个项目并跑通
 - 认识 standalone 组件与 signal 的基本样貌
 
-## 1.1 Angular 的定位
+## Angular 的定位
 
 学过 Vue/React 再看 Angular，最大差异是**哲学**：
 
@@ -34,7 +34,7 @@ Angular：全家桶——路由、HTTP、表单、DI、测试、i18n 全部内�
 
 Angular 的强约束是一把双刃剑：新手少踩选型坑，但"必须按它的方式来"。本教程用现代 Angular（v17+）的推荐写法：**standalone 组件 + signals + 新控制流**。
 
-## 1.2 环境与创建项目
+## 环境与创建项目
 
 ```bash
 npm install -g @angular/cli     # 全局安装 CLI
@@ -64,7 +64,7 @@ Vue 把三段合进一个 .vue 文件；Angular **按文件类型分离**（comp
 
 :::
 
-## 1.3 第一个组件：standalone 模式
+## 第一个组件：standalone 模式
 
 现代 Angular（v17+）默认 **standalone 组件**——不再需要 NgModule 模块包装，组件直接声明直接用：
 
@@ -114,7 +114,7 @@ selector            自定义标签 <app-hello>
 signal()            响应式状态容器（读 name()、写 name.set(值)）
 ```
 
-## 1.4 signal：Angular 的响应式
+## signal：Angular 的响应式
 
 ```ts
 import { signal, computed } from '@angular/core';
@@ -132,7 +132,7 @@ increment() {
 
 signal 出现之前 Angular 用"可变属性 + 变更检测"（第 9 章讲差异）；新代码一律 signal。
 
-## 1.5 依赖注入初见
+## 依赖注入初见
 
 Angular 最独特的能力：**依赖注入（Dependency Injection，DI）**——类不自己 new 依赖，而是"声明需要、框架递给"：
 
@@ -159,7 +159,7 @@ export class CourseListComponent {
 
 第 4 章专章展开——先记住：**Angular 里"跨组件共享的逻辑"装进 Service，靠 DI 获取**（对应 Vue 的组合式函数/Pinia、React 的自定义 Hook/Zustand）。
 
-## 1.6 学 Angular 的正确姿势
+## 学 Angular 的正确姿势
 
 从 Vue/React 过来，三个适应点：
 
@@ -169,7 +169,7 @@ export class CourseListComponent {
 
 推荐学习路径：**先读结构 → 跟着 CLI 生成 → 再理解机制**——Angular 的机制比 API 多，理解了组件/DI/变更检测三件事，其余都是查文档。
 
-## 1.7 动手：课程列表
+## 动手：课程列表
 
 ```ts
 // src/app/course-list.component.ts

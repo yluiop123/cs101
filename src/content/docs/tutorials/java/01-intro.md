@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 Java"
+title: "初识 Java"
 description: "Java 由 Sun 公司（后并入 Oracle）于 1995 年发布，至今仍是企业级后端的第一语言：国内大厂的服务端、Android 应用、大数据生态（Hadoop、Flink、Kafka）都以 Java 为基石。"
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 分清 JDK / JRE / JVM 三者关系
 - 装好环境，跑通第一个程序
 
-## 1.1 Java 是什么
+## Java 是什么
 
 Java 由 Sun 公司（后并入 Oracle）于 1995 年发布，至今仍是**企业级后端的第一语言**：国内大厂的服务端、Android 应用、大数据生态（Hadoop、Flink、Kafka）都以 Java 为基石。
 
@@ -28,7 +28,7 @@ Java 由 Sun 公司（后并入 Oracle）于 1995 年发布，至今仍是**企�
 
 为什么能做到？关键在 **JVM（Java Virtual Machine，Java 虚拟机）**——每种操作系统都有自己的 JVM 实现，而你的代码只面向 JVM 编写。类比：把你的代码看成"世界语"，JVM 是各国派驻的翻译。
 
-## 1.2 编译执行模型：先编译，再由 JVM 运行
+## 编译执行模型：先编译，再由 JVM 运行
 
 ```text
 HelloWorld.java（源码，人写的）
@@ -44,7 +44,7 @@ HelloWorld.class（字节码 bytecode，JVM 的"机器码"）
 Java 有**垃圾回收（Garbage Collection，GC）**机制——不再使用的对象由 JVM 自动回收，你不需要像 C 语言那样手动 free。这是 Java 体验友好的一大原因。
 :::
 
-## 1.3 JDK / JRE / JVM 的关系
+## JDK / JRE / JVM 的关系
 
 ```text
 JDK（Java Development Kit，开发工具包）
@@ -69,7 +69,7 @@ javac -version   # javac 21.x（编译器也在，说明 JDK 装对了）
 两者都能胜任本教程，选顺手的即可。
 :::
 
-## 1.4 第一个程序
+## 第一个程序
 
 ```java
 // HelloWorld.java —— 文件名必须与 public 类名一致！
@@ -104,11 +104,11 @@ java HelloWorld.java   # 跳过手动编译，直接执行（内部自动编译�
 写练习时很方便；正式项目仍走 javac/Maven 流程。
 :::
 
-## 1.5 Java 的版本策略
+## Java 的版本策略
 
 Java 每 6 个月发布一个新版本，但只有 **LTS（Long-Term Support，长期支持）**版本适合生产：8 → 11 → 17 → 21 → 25。企业新项目多用 17/21，老系统大量停留在 8——**看懂老代码 + 用新语法写新代码**是 Java 工程师的日常，本教程会标注"现代写法"与"传统写法"的差异。
 
-## 1.6 动手：改出你自己的输出
+## 动手：改出你自己的输出
 
 ```java
 public class Profile {

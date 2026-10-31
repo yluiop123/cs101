@@ -1,5 +1,5 @@
 ---
-title: "第 13 章 · GORM 数据库与 REST 实战"
+title: "GORM 数据库与 REST 实战"
 description: "docker run -d --name mysql -p 3306:3306 \"
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 CRUD 与关联查询
 - 把第 12 章的内存存储升级为真实数据库
 
-## 13.1 前置：MySQL 环境
+## 前置：MySQL 环境
 
 ```bash
 # 安装 MySQL（Windows 安装包 / brew install mysql / docker 最快）
@@ -26,7 +26,7 @@ docker run -d --name mysql -p 3306:3306 \
 # 数据库基础（建库/SQL 语法）见 SQL 基础与 MySQL 教程；本章专注 Go 侧
 ```
 
-## 13.2 GORM：Go 的事实标准 ORM
+## GORM：Go 的事实标准 ORM
 
 **ORM（对象关系映射）**= 用结构体描述表、用方法代替 SQL 拼接：
 
@@ -72,7 +72,7 @@ UpdatedAt  更新时间（自动填充）
 DeletedAt  软删除标记（Delete 变成打标记，查询自动过滤 —— 不真删！）
 ```
 
-## 13.3 CRUD 全景
+## CRUD 全景
 
 ```go
 // 增
@@ -107,7 +107,7 @@ db.Order("created_at DESC").Limit(10).Offset(20).Find(&tasks)
 `Updates(Task{Done: false})` 会**跳过零值字段**（false 与"未设置"无法区分）——需要写零值时用 `map[string]any` 或 `Select` 指定字段。
 :::
 
-## 13.4 事务与错误
+## 事务与错误
 
 ```go
 // 事务：闭包内自动提交/回滚
@@ -127,7 +127,7 @@ if errors.Is(err, gorm.ErrRecordNotFound) {
 }
 ```
 
-## 13.5 分层：存储接口 + 依赖注入
+## 分层：存储接口 + 依赖注入
 
 ```go
 // 存储接口：业务层不关心"存在哪"（第 6 章面向接口思想）
@@ -169,7 +169,7 @@ func (s *gormStore) Toggle(id uint) (Task, bool) {
 }
 ```
 
-## 13.6 REST 实战：Gin + GORM 全链路
+## REST 实战：Gin + GORM 全链路
 
 ```go
 package main
@@ -241,7 +241,7 @@ curl localhost:8080/api/todos
 # 重启服务数据还在 —— 真持久化达成
 ```
 
-## 13.7 关联查询一瞥
+## 关联查询一瞥
 
 ```go
 // 一对多：清单 → 任务

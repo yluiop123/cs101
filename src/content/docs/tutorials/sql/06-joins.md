@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 多表连接"
+title: "多表连接"
 description: "不加条件地把两张表配对，行数相乘："
 series: sql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 分清 `INNER` / `LEFT` / `RIGHT` / `FULL` 各保留谁，并会写 MySQL 的 `FULL` 替代式
 - 搞懂连接条件写进 `ON` 和写进 `WHERE` 的差别，以及连接把金额算翻倍的成因
 
-## 6.1 笛卡尔积：连接的起点
+## 笛卡尔积：连接的起点
 
 不加条件地把两张表配对，行数相乘：
 
@@ -40,7 +40,7 @@ SELECT c.name, o.total
 显式 `JOIN ... ON` 的好处正在于此：**不写 `ON` 直接语法报错**，忘了也跑不起来。
 :::
 
-## 6.2 INNER JOIN：只留配对成功的行
+## INNER JOIN：只留配对成功的行
 
 `JOIN` 默认就是 `INNER JOIN`，两边都能配上对才留下：
 
@@ -72,7 +72,7 @@ SELECT o.order_id, it.product_id, it.quantity
 `SUM(orders.total)`，同一笔订单的 `total` 会被加多次——**先数行数，再决定能不能求和**（6.6 演示事故）。
 :::
 
-## 6.3 LEFT JOIN 与 RIGHT JOIN
+## LEFT JOIN 与 RIGHT JOIN
 
 `LEFT JOIN` 保住左表全部行，右表配不上的位置填 `NULL`：
 
@@ -118,7 +118,7 @@ SELECT c.customer_id, c.name
 注意别用 `COUNT(*)`，它会把孙芳那一行也数成 1。
 :::
 
-## 6.4 FULL OUTER JOIN：MySQL 没有，自己拼
+## FULL OUTER JOIN：MySQL 没有，自己拼
 
 `FULL OUTER JOIN` 两边都保：配上的正常输出，两边配不上的各补一行 `NULL`。
 PostgreSQL、SQLite 3.39+ 支持，**MySQL 直接报语法错误**。替代式是"左外连 + 右表独有的行"：
@@ -144,7 +144,7 @@ SELECT c.name, o.order_id
 不加这个条件，右半句返回的就是完整的内连接结果，`UNION ALL` 之后每一笔订单都会出现两次。
 :::
 
-## 6.5 自连接：一张表扮演两个角色
+## 自连接：一张表扮演两个角色
 
 同一张表连自己，用来在表内部配对。找同城客户对：
 
@@ -171,7 +171,7 @@ name_a | name_b | city
 - 加 `a.id < b.id` 去掉 `(x,y)` 与 `(y,x)` 的镜像重复，同时排除自己配自己
 - `city` 为 `NULL` 的两位客户配不出对（比较得 `UNKNOWN`），要连"未填写城市"配对一起看，条件换成 `<=>`（MySQL）或手写 `IS NOT DISTINCT FROM` 思路（第 7 章）
 
-## 6.6 ON 还是 WHERE：LEFT JOIN 的分水岭
+## ON 还是 WHERE：LEFT JOIN 的分水岭
 
 对 `INNER JOIN`，条件放 `ON` 或 `WHERE` 结果一样；对 `LEFT JOIN`，完全不一样。
 
@@ -208,7 +208,7 @@ SELECT c.customer_id, c.name, COUNT(o.order_id) AS n
 ② 先在子查询里按订单聚合，再连接（[第 7 章 · 子查询与 CTE](../07-subquery-cte/)）。
 :::
 
-## 6.7 综合练习：订单明细报表
+## 综合练习：订单明细报表
 
 四表串起来，输出每一行卖了什么、卖给了谁：
 

@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 魔术方法与迭代器生成器"
+title: "魔术方法与迭代器生成器"
 description: "双下划线方法（魔术方法 / dunder methods）让自定义对象接入 Python 内置语法："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 `__str__`/`__repr__`/`__eq__` 等高频魔术方法
 - 学会迭代器协议与生成器
 
-## 6.1 魔术方法：语法的发动机
+## 魔术方法：语法的发动机
 
 双下划线方法（**魔术方法 / dunder methods**）让自定义对象接入 Python 内置语法：
 
@@ -32,7 +32,7 @@ with obj        →  obj.__enter__() / obj.__exit__()
 
 你写 `a + b`，Python 实际调用 `a.__add__(b)`——**运算符就是魔术方法的语法糖**。
 
-## 6.2 高频魔术方法速成
+## 高频魔术方法速成
 
 ```python
 class Playlist:
@@ -81,7 +81,7 @@ print(p)              # 歌单「学习」共 1 首
 
 `__repr__` vs `__str__`：repr 给开发者看（应可复现对象），str 给用户看。只写一个时写 `__repr__`（str 缺省时回落到 repr）。
 
-## 6.3 迭代器协议
+## 迭代器协议
 
 `for x in obj` 背后的机制——**迭代器（iterator）协议**：
 
@@ -105,7 +105,7 @@ for n in Countdown(3):       # 3 2 1 —— for 自动调 __iter__/__next__，�
 
 实现了 `__iter__` 的对象叫**可迭代对象（iterable）**；同时实现 `__next__` 的叫迭代器。
 
-## 6.4 生成器：迭代器的省力写法
+## 生成器：迭代器的省力写法
 
 **生成器（generator）**用 `yield` 关键字把"写迭代器"变成"写普通函数"：
 
@@ -151,7 +151,7 @@ for line in error_lines("app.log"):
     print(line)
 ```
 
-## 6.5 上下文管理器：with 的原理
+## 上下文管理器：with 的原理
 
 `with` 语句（第 9 章文件）背后是 `__enter__`/`__exit__`：
 
@@ -190,7 +190,7 @@ with timer():
     do_something()
 ```
 
-## 6.6 综合练习：斐波那契流
+## 综合练习：斐波那契流
 
 ```python
 def fibonacci():

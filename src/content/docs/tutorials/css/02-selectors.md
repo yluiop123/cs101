@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 选择器与优先级"
+title: "选择器与优先级"
 description: "/ 元素选择器：所有 p /"
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握常用伪类与伪元素
 - 能精确计算优先级，解决"样式为什么不生效"
 
-## 2.1 基础选择器
+## 基础选择器
 
 ```css
 /* 元素选择器：所有 p */
@@ -42,7 +42,7 @@ h1, h2, h3 { font-weight: 700; }
 日常 80% 的样式挂在 class 上——语义由 HTML 结构承担，class 只负责"这一组元素长一样"。
 :::
 
-## 2.2 组合选择器
+## 组合选择器
 
 ```css
 /* 后代选择器：空格——nav 里所有 a（任意深度） */
@@ -58,7 +58,7 @@ h2 + p { margin-top: 4px; }
 h2 ~ p { color: #64748b; }
 ```
 
-## 2.3 伪类：元素"状态"的选择
+## 伪类：元素"状态"的选择
 
 伪类（pseudo-class）用单个冒号，按**状态或位置**匹配：
 
@@ -81,7 +81,7 @@ input:checked { accent-color: #2563eb; }
 `odd` 奇数 / `even` 偶数 / `3` 第三个 / `2n+1` 奇数通式 / `-n+3` 前三个。斑马纹表格就是 `nth-child(even)` 的经典应用。
 :::
 
-## 2.4 伪元素：创建"虚拟元素"
+## 伪元素：创建"虚拟元素"
 
 伪元素（pseudo-element）用双冒号，能**创建出 HTML 里不存在的元素**：
 
@@ -101,7 +101,7 @@ input::placeholder { color: #94a3b8; }
 **单冒号 = 状态**（`:hover`），**双冒号 = 新元素**（`::before`）。老代码里的单冒号伪元素（`:before`）仍兼容，但新代码统一写双冒号。
 :::
 
-## 2.5 优先级：谁说了算
+## 优先级：谁说了算
 
 当多条规则命中同一元素，浏览器按**优先级（specificity）**决胜。用"权重计分"理解：
 
@@ -135,7 +135,7 @@ p                    { color: gray;  }  /* 0-0-0-1 */
 一旦开始用 `!important` 解决冲突，很快整个项目都会变成 `!important` 大战。正确做法：**降低选择器优先级**去覆盖，而不是抬高。看到不得不 important 的场景，先反思选择器设计。
 :::
 
-## 2.6 继承
+## 继承
 
 部分属性（文字类为主）会从父元素**自动传给子元素**：`color`、`font-*`、`line-height`、`text-align` 等；盒模型类（width/margin/border）不继承。
 
@@ -146,7 +146,7 @@ body { font-family: system-ui; color: #1e293b; }
 
 控制继承的三个关键字：`inherit`（强制继承）、`initial`（恢复默认）、`unset`（可继承则继承，否则默认）。
 
-## 2.7 综合示例：交互式列表
+## 综合示例：交互式列表
 
 ```css
 .demo-list { font-family: sans-serif; max-width: 300px; }

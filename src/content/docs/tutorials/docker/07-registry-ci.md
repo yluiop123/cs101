@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 镜像仓库与 CI 发布"
+title: "镜像仓库与 CI 发布"
 description: "仓库（registry）是镜像的分发中心。常见三种形态：Docker Hub（默认，命名空间就是你的用户名）、云厂商镜像服务、内网自建 Registry。"
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 定出可回滚的标签策略，说清 `latest` 的三连坑
 - 用 GitHub Actions 完成「构建 → 缓存复用 → 扫描 → 推送」，并演练一次回滚
 
-## 7.1 仓库、登录与推送
+## 仓库、登录与推送
 
 仓库（registry）是镜像的分发中心。常见三种形态：Docker Hub（默认，命名空间就是你的用户名）、云厂商镜像服务、内网自建 Registry。
 
@@ -57,7 +57,7 @@ curl -s localhost:5000/v2/_catalog         # 仓库列表；/v2/myapp/tags/list 
 `registry:2` 默认没有认证、没有 UI、没有保留策略。内网使用至少要前置 Nginx 做 TLS 与 Basic Auth（挂 `htpasswd`）；跨团队用更倾向于云厂商或 Harbor 这类自带 RBAC、扫描、保留策略的仓库。
 :::
 
-## 7.2 标签策略：为回滚而设计
+## 标签策略：为回滚而设计
 
 一次构建产出的一组 tag 各自承担不同职责：
 
@@ -81,7 +81,7 @@ docker buildx imagetools inspect registry.example.com/team/todo-api:1.4.2   # �
 sha256 摘要不可变     → 永远指向那一次构建，回滚可精确复现
 ```
 
-## 7.3 latest 到底坑在哪
+## latest 到底坑在哪
 
 只要部署文件里出现 `image: myapp:latest`，就会连锁触发三个问题：
 
@@ -95,7 +95,7 @@ sha256 摘要不可变     → 永远指向那一次构建，回滚可精确复�
 本地已存在同名镜像时 `docker run` 不会去仓库核对——于是不同机器上的「同一个 latest」内容不同。开发机上「代码明明改了、容器行为没变」多半就是这条；构建期层缓存的取舍见 [第 3 章 · 编写 Dockerfile](../03-dockerfile/)。
 :::
 
-## 7.4 GitHub Actions：构建并推送
+## GitHub Actions：构建并推送
 
 一条最小可用的发布流水线。Actions 的版本号会持续更新，落地前以各 Action 仓库当前发布版本为准。
 
@@ -161,7 +161,7 @@ Runner 是 `linux/amd64`。要同时给 Apple 芯片开发机或 ARM 服务器�
 多平台镜像是一份 manifest 清单，必须 `push` 到仓库，不能只 `load` 进本地 `docker images`。
 :::
 
-## 7.5 构建缓存复用
+## 构建缓存复用
 
 CI 每次都是干净机器，不复用缓存就意味着每次冷启动依赖安装。三种常用方案：
 
@@ -185,7 +185,7 @@ docker buildx build --no-cache -t myapp:1.4.2 --push .   # 发布前的干净验
 
 配合 Dockerfile 里的 `--mount=type=cache`（[第 5 章 · 多阶段构建与镜像优化](../05-multi-stage/)），常见效果是依赖未变的构建从几分钟降到几十秒。缓存命中率要定期验证：故意改一行 lockfile，看 `npm ci` 那层是否重建，就能确认分层是否合理。`mode=max` 会把中间阶段的层也缓存下来，命中更好但占用更多空间。
 
-## 7.6 镜像扫描与安全基线
+## 镜像扫描与安全基线
 
 让「带已知高危漏洞的镜像」进不了仓库：
 
@@ -225,7 +225,7 @@ docker scout cves myapp:1.4.2
 `--ignore-unfixed` 合理（上游还没补丁），但必须配定期重扫；忽略清单里写明理由与复查日期，否则临时豁免会变永久豁免。
 :::
 
-## 7.7 回滚策略 · 综合练习
+## 回滚策略 · 综合练习
 
 回滚的前提是「上一版镜像还在」且「数据库变更可逆」：
 

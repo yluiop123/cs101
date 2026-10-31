@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 高可用与备份恢复"
+title: "高可用与备份恢复"
 description: "RPO（能丢多少数据） 由备份频率 + binlog 保留决定"
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用全量备份 + binlog 把数据恢复到误操作前的某一秒
 - 说清主从切换的手动流程、自动化方案的能力与风险，并建立监控基线
 
-## 9.1 备份版图：先定 RPO 与 RTO
+## 备份版图：先定 RPO 与 RTO
 
 ```text
 RPO（能丢多少数据）    由备份频率 + binlog 保留决定
@@ -37,7 +37,7 @@ RTO（多久能恢复服务）  由备份方式与实例大小决定 —— 100 
 至少每季度做一次"真恢复演练"：把备份导入一个空实例，抽查关键表行数与最新一条业务记录的时间。同时确认 binlog 保留时长足够覆盖"全量备份间隔 + 演练/追责需要"（`SELECT @@binlog_expire_logs_seconds;` 或旧版 `@@expire_logs_days`，以实际值为准）。
 :::
 
-## 9.2 mysqldump 的正确姿势
+## mysqldump 的正确姿势
 
 ```bash
 # 单库逻辑备份（InnoDB）——参数逐个都有理由
@@ -69,7 +69,7 @@ mydumper -h 127.0.0.1 -u root -p -B shop -T 8 -o /backup/shop-dump   # 8 线程�
 myloader -d /backup/shop-dump -o 8 -B shop                            # 并行导入
 ```
 
-## 9.3 物理备份与大库策略
+## 物理备份与大库策略
 
 物理备份的关键是"拿到一个崩溃一致的数据目录"。
 
@@ -108,7 +108,7 @@ CLONE INSTANCE FROM 'root'@'127.0.0.1':3307 IDENTIFIED BY 'Root@123';
 冷数据   超过 1 年的 orders/order_items 归档到归档库（第 10 章演示）
 ```
 
-## 9.4 时间点恢复（PITR）：把库恢复到误删前的那一秒
+## 时间点恢复（PITR）：把库恢复到误删前的那一秒
 
 场景：15:42 有人执行了 `DELETE FROM orders WHERE created_at < '2020-01-01';`，删掉了 300 万行。你需要恢复到 15:41:50。
 
@@ -148,7 +148,7 @@ CHANGE REPLICATION SOURCE TO SOURCE_DELAY = 3600;   -- 秒，需 STOP REPLICA �
 ```
 :::
 
-## 9.5 主从切换：手动流程与不可省略的检查
+## 主从切换：手动流程与不可省略的检查
 
 计划内切换（机房迁移、版本升级）的标准动作：
 
@@ -172,7 +172,7 @@ START REPLICA;
 如果旧主库只是网络抖动而仍在接受写入，把它下线又上线就形成**双主双写**（brain split），数据分叉后极难合并。可靠方案必须有 fencing：把旧主库的连接切断/隔离（改权重、下 VIP、调云接口关机），而不是只"标记为不可用"。切换脚本里 90% 的复杂度都在这一步。
 :::
 
-## 9.6 自动化高可用：MGR 与 Orchestrator
+## 自动化高可用：MGR 与 Orchestrator
 
 ```text
 MGR（MySQL Group Replication，8.0 核心能力）
@@ -197,7 +197,7 @@ MHA / 云 RDS 高可用     历史方案与托管方案，思路同上：探测 
 InnoDB Cluster / 云托管多可用区     要 RTO 秒级、又不想自研探活与 fencing 时
 ```
 
-## 9.7 综合练习：误删救援 + 监控基线
+## 综合练习：误删救援 + 监控基线
 
 任务一（演练）：在本地实例上完整走一遍 PITR。
 

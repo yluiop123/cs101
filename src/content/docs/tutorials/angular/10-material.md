@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · Angular Material"
+title: "Angular Material"
 description: "Angular Material 是 Angular 官方团队维护的组件库（Google Material Design 规范实现）——与 Vuetify 之于 Vue、Ant Design 之于 React 同位。"
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握高频组件（按钮/输入/表格/弹窗/通知）
 - 了解主题定制的基本方式
 
-## 10.1 Material 是什么
+## Material 是什么
 
 Angular Material 是 Angular 官方团队维护的**组件库**（Google Material Design 规范实现）——与 Vuetify 之于 Vue、Ant Design 之于 React 同位。Angular 项目用它的最大优势：**版本与 Angular 同步发布、深度集成**。
 
@@ -27,7 +27,7 @@ ng add @angular/material
 
 `ng add` 自动完成：安装依赖、入口引入、主题样式、字体配置——CLI 全家桶风格。
 
-## 10.2 高频组件速览
+## 高频组件速览
 
 ```ts
 // 引入方式：standalone 组件的 imports 数组（按需）
@@ -64,7 +64,7 @@ import { MatIconModule } from '@angular/material/icon';
 `<mat-error>` 只在控件 invalid 且 touched 时自动显示——Material 帮你做了第 7 章"错误显示时机"的体验优化。
 :::
 
-## 10.3 表格：mat-table
+## 表格：mat-table
 
 ```ts
 import { MatTableModule } from '@angular/material/table';
@@ -104,7 +104,7 @@ export class CourseTableComponent {
 
 结构固定但功能完备（排序/分页/过滤套件齐全）——企业后台表格的主力。
 
-## 10.4 弹窗：MatDialog
+## 弹窗：MatDialog
 
 ```ts
 import { MatDialog } from '@angular/material/dialog';
@@ -154,7 +154,7 @@ export class ConfirmDialogComponent {
 
 弹窗数据进出全靠 **DI 注入**（MAT_DIALOG_DATA）——Angular 风格的组件 API。
 
-## 10.5 通知：snackbar
+## 通知：snackbar
 
 ```ts
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -171,7 +171,7 @@ export class TodoService {
 
 对照第 5 章的自制 ToastService——Material 场景直接用 snackbar，两者取一。
 
-## 10.6 主题定制
+## 主题定制
 
 `ng add` 生成的主题文件里，自定义品牌色：
 
@@ -197,7 +197,7 @@ html {
 Material 覆盖的是"标准 Material 风格"需求；国内管理后台常选 **NG-ZORRO**（蚂蚁出品，Ant Design 的 Angular 版）或 **PrimeNG**——用法同构（模块引入 + 选择器），学会 Material 后迁移成本低。
 :::
 
-## 10.7 综合练习：Material 化的课程列表
+## 综合练习：Material 化的课程列表
 
 ```html
 <mat-form-field>

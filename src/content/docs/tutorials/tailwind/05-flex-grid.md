@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · Flex 与 Grid 工具类"
+title: "Flex 与 Grid 工具类"
 description: "用 Flex 与 Grid 工具类搭布局：主轴与交叉轴、间距对齐、响应式栅格与页面骨架。"
 series: tailwind
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用 grid 搭建响应式多列布局
 - 掌握 gap 间距与 flex-1 撑满的惯用法
 
-## 5.1 Flex 起步：三行代码的居中
+## Flex 起步：三行代码的居中
 
 ```html
 <!-- 水平垂直居中：使用率最高的组合之一 -->
@@ -31,7 +31,7 @@ items-center    → align-items: center（交叉轴居中）
 justify-center  → justify-content: center（主轴居中）
 ```
 
-## 5.2 主轴方向与间距
+## 主轴方向与间距
 
 ```html
 <div class="flex flex-row">默认：横排</div>
@@ -46,7 +46,7 @@ justify-center  → justify-content: center（主轴居中）
 传统布局用子元素的 margin-right 实现间距（还得处理最后一项的边界）；`gap` 天然"只在元素之间"。**flex/grid 布局里优先用 gap**。
 :::
 
-## 5.3 主轴对齐：justify-*
+## 主轴对齐：justify-*
 
 ```html
 <div class="flex justify-start">起头</div>
@@ -65,7 +65,7 @@ justify-center  → justify-content: center（主轴居中）
 </header>
 ```
 
-## 5.4 交叉轴对齐：items-* 与内容高度
+## 交叉轴对齐：items-* 与内容高度
 
 ```html
 <div class="flex items-start">顶部对齐</div>
@@ -74,7 +74,7 @@ justify-center  → justify-content: center（主轴居中）
 <div class="flex items-stretch">拉伸等高（默认值）</div>
 ```
 
-## 5.5 子项伸缩：flex-1 与 flex-none
+## 子项伸缩：flex-1 与 flex-none
 
 ```html
 <div class="flex gap-2">
@@ -99,7 +99,7 @@ flex-auto  → 按内容伸缩
 </div>
 ```
 
-## 5.6 单个子项的例外：self-*
+## 单个子项的例外：self-*
 
 ```html
 <div class="flex items-start h-32 border">
@@ -108,7 +108,7 @@ flex-auto  → 按内容伸缩
 </div>
 ```
 
-## 5.7 Grid：列数与行数
+## Grid：列数与行数
 
 ```html
 <!-- 三等分栅格 -->
@@ -135,7 +135,7 @@ col-span-2      → 跨 2 列
 row-span-2      → 跨 2 行
 ```
 
-## 5.8 不等分布局：12 列思维
+## 不等分布局：12 列思维
 
 ```html
 <div class="grid grid-cols-12 gap-4">
@@ -150,7 +150,7 @@ row-span-2      → 跨 2 行
 </div>
 ```
 
-## 5.9 综合练习：响应式卡片网格
+## 综合练习：响应式卡片网格
 
 ```html
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

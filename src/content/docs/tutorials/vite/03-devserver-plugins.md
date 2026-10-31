@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 开发服务器与插件"
+title: "开发服务器与插件"
 description: "npm run dev 启动的 dev 服务器是一个“按需编译的静态文件服务”："
 series: vite
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 配置 server.proxy 解决开发期跨域
 - 认识插件机制与常用插件生态
 
-## 3.1 dev 服务器做了什么
+## dev 服务器做了什么
 
 `npm run dev` 启动的 dev 服务器是一个"按需编译的静态文件服务"：
 
@@ -32,7 +32,7 @@ Vite 实时转译该文件（esbuild）并返回
 
 node_modules 里的依赖不参与逐个请求——启动时被**预构建（pre-bundling）**成单文件缓存起来（node_modules/.vite），之后秒回。
 
-## 3.2 HMR：模块热替换
+## HMR：模块热替换
 
 HMR（Hot Module Replacement）= 改代码后**不整页刷新**，只把改动的模块"换"进运行中的应用：
 
@@ -50,7 +50,7 @@ Vite 检测文件变化，通知浏览器（WebSocket）
 - 改了模块的依赖链（如新增文件）→ 自动页面刷新兜底
 - 整个流程毫秒级，这就是"改一行等半秒"到"即改即见"的体验差
 
-## 3.3 server.proxy：开发期跨域解药
+## server.proxy：开发期跨域解药
 
 场景：前端跑在 5173，后端 API 跑在 3000。浏览器同源策略下直接 fetch `http://localhost:3000/api/...` 会跨域。
 
@@ -83,7 +83,7 @@ fetch('/api/todos');   // 实际到达 http://localhost:3000/api/todos
 
 :::
 
-## 3.4 常用 server 选项
+## 常用 server 选项
 
 ```js
 server: {
@@ -95,7 +95,7 @@ server: {
 }
 ```
 
-## 3.5 插件机制一瞥
+## 插件机制一瞥
 
 Vite 插件本质是"带钩子的对象"，在 dev 转译与构建的各环节插手：
 
@@ -116,7 +116,7 @@ const myPlugin = () => ({
 1. `plugins: []` 数组顺序有讲究（按声明先后生效）
 2. 社区插件解决"某类文件怎么被处理"——遇到新需求先找插件
 
-## 3.6 值得认识的常用插件
+## 值得认识的常用插件
 
 | 插件 | 作用 |
 | --- | --- |
@@ -130,7 +130,7 @@ const myPlugin = () => ({
 Vite 插件接口是 Rollup 插件的超集——大量 Rollup 插件可直接用。这继承了 Rollup 生态的厚度。
 :::
 
-## 3.7 综合练习：模拟前后端分离开发
+## 综合练习：模拟前后端分离开发
 
 ```js
 // vite.config.js —— 前端 5173 + 后端 3000 的标准开发配置

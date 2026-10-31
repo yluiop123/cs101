@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 面向对象：类与继承"
+title: "面向对象：类与继承"
 description: "class Course:"
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解类属性与实例属性的区别
 - 掌握继承、super 与 @property 封装
 
-## 5.1 类的基本结构
+## 类的基本结构
 
 ```python
 class Course:
@@ -38,7 +38,7 @@ course.hours                         # 10 —— 属性直接访问
 
 `self` 显式写在参数第一位，是 Python 与 Java（隐式 this）最直观的差异——本质相同。
 
-## 5.2 类属性 vs 实例属性
+## 类属性 vs 实例属性
 
 ```python
 class Counter:
@@ -62,7 +62,7 @@ Counter.total_created  # 仍然是 2
 改类属性一律通过**类名**。
 :::
 
-## 5.3 私有约定与 @property
+## 私有约定与 @property
 
 Python 没有真正的 private——**约定**：单下划线 `_name` 表"内部使用"，双下划线 `__name` 触发名称改写（name mangling）：
 
@@ -89,7 +89,7 @@ acc.balance = -1     # ValueError
 
 `@property` = Java getter/setter 的 Python 解法——**对外像属性、内部可加逻辑**，调用方无感升级。
 
-## 5.4 继承与 super
+## 继承与 super
 
 ```python
 class Animal:
@@ -119,7 +119,7 @@ dog.eat()          # 旺财 在吃东西 →（吃的很快）
 isinstance(dog, Animal)   # True
 ```
 
-## 5.5 多重继承与 MRO
+## 多重继承与 MRO
 
 Python 支持多继承（Java 不支持），查找顺序由 **MRO**（Method Resolution Order，方法解析顺序）决定：
 
@@ -139,7 +139,7 @@ Duck.__mro__             # 查看完整顺序
 
 多继承强大但易乱——优先用**组合**或**接口式单继承**，`Mixin`（混入）是社区惯用的多继承模式（小功能类，如 `JSONSerializableMixin`）。
 
-## 5.6 类方法与静态方法
+## 类方法与静态方法
 
 ```python
 class Date:
@@ -165,7 +165,7 @@ Date.is_leap(2024)       # True
 | 首参 | self（实例） | cls（类） | 无 |
 | 用途 | 操作实例状态 | 备选构造器 | 纯工具逻辑 |
 
-## 5.7 dataclass：数据类的标准答案
+## dataclass：数据类的标准答案
 
 样板代码终结者（Python 3.7+，对标 Java 的 record）：
 
@@ -190,7 +190,7 @@ t.toggle()
 
 **不可变数据**用 `@dataclass(frozen=True)`（赋值报错）。数据建模默认 dataclass，需要大量自定义行为时才手写类。
 
-## 5.8 综合练习：银行账户体系
+## 综合练习：银行账户体系
 
 ```python
 @dataclass

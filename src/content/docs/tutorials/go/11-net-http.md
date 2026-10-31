@@ -1,5 +1,5 @@
 ---
-title: "第 11 章 · net/http 与 Web 基础"
+title: "net/http 与 Web 基础"
 description: "标准库 net/http 就能直接起服务——20 行一个 API："
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握请求读取与响应写出
 - 学会 JSON API 的最小可用实现
 
-## 11.1 net/http：零依赖的 Web 服务
+## net/http：零依赖的 Web 服务
 
 标准库 `net/http` 就能直接起服务——**20 行一个 API**：
 
@@ -58,7 +58,7 @@ type HandlerFunc func(ResponseWriter, *Request)
 第 6 章的接口思想在 Web 层的直接应用。
 :::
 
-## 11.2 ServeMux 路由（1.22 新语法）
+## ServeMux 路由（1.22 新语法）
 
 Go 1.22 起默认路由器支持**方法匹配与路径参数**——简单服务不再需要第三方框架：
 
@@ -83,7 +83,7 @@ func getTodo(w http.ResponseWriter, r *http.Request) {
 
 旧版通配规则（了解）：`/api/` 结尾斜杠 = 前缀匹配；`r.URL.Query()` 取查询参数。
 
-## 11.3 读取请求
+## 读取请求
 
 ```go
 func handle(w http.ResponseWriter, r *http.Request) {
@@ -110,7 +110,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## 11.4 写响应
+## 写响应
 
 ```go
 func ok(w http.ResponseWriter, data any) {
@@ -135,7 +135,7 @@ http.Redirect(w, r, "/login", http.StatusFound)           // 302
 每个请求由独立 goroutine 处理（**天然并发**！），且 ServeHTTP 外层自动 recover panic 返回 500——单请求崩溃不会拖垮整个服务。这也意味着 handler 里可以放心并发（注意共享数据加锁）。
 :::
 
-## 11.5 中间件雏形：包装 HandlerFunc
+## 中间件雏形：包装 HandlerFunc
 
 ```go
 // 日志中间件：函数包装函数（装饰器思想的 Go 版）
@@ -157,7 +157,7 @@ func main() {
 
 手动套壳繁琐——第 12 章的 Gin 用 `r.Use(middleware)` 一行注册。
 
-## 11.6 JSON 待办 API（标准库完整版）
+## JSON 待办 API（标准库完整版）
 
 ```go
 package main

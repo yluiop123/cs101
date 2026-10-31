@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 软件安装与包管理"
+title: "软件安装与包管理"
 description: "包管理器解决三件事：装（含依赖）、记（元数据数据库）、更新（版本与安全补丁）。两大阵营命令一一对照："
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握源码编译三步法 configure/make/make install 及其适用场景
 - 理解第三方源、语言包管理器与 snap/容器包的取舍，会干净地卸载与清理
 
-## 6.1 apt 与 dnf：两条命令家族对照
+## apt 与 dnf：两条命令家族对照
 
 包管理器解决三件事：**装**（含依赖）、**记**（元数据数据库）、**更新**（版本与安全补丁）。两大阵营命令一一对照：
 
@@ -66,7 +66,7 @@ Do you want to continue? [Y/n]
 
 依赖（additional）、建议（suggested，不自动装）、净变化与体积都在屏幕上一一列出——装前扫一眼"多装了哪些包"，是识别"挂羊头"第三方包的第一道防线。dnf 的输出结构相同（事务列表 + 体积 + 确认行），且末尾还能看到 GPG 签名校验环节。
 
-## 6.2 包从哪来：仓库与 key
+## 包从哪来：仓库与 key
 
 apt 的源清单在 `/etc/apt/sources.list` 与 `/etc/apt/sources.list.d/*.list`；dnf 的在 `/etc/yum.repos.d/*.repo`。每个仓库条目给出镜像地址与开关项，**改源之前先备份原文件**。更换国内镜像站能显著提速，URL 因厂商而异，以发行版官方文档为准。
 
@@ -80,7 +80,7 @@ deb [signed-by=/etc/apt/keyrings/example.gpg] https://pkg.example.com/deb stable
 
 dnf 侧对应的是 `/etc/yum.repos.d/example.repo`，段内 `baseurl=`、`gpgkey=`、`enabled=1` 各字段含义自解释，细节以 `man yum.conf` / dnf 文档为准。排查"某包到底从哪个仓库来"：`apt show 包名` 看 Origin 行；dnf 用 `dnf repoquery -i 包名` 或安装日志里的 From 行。
 
-## 6.3 EPEL 与 PPA：补齐"官方没收"的软件
+## EPEL 与 PPA：补齐"官方没收"的软件
 
 Linux 的发行版哲学是"什么都能装"，但法律/许可证原因或太小众的包不进默认仓库：
 
@@ -101,7 +101,7 @@ RHEL 系还有 COPR（社区版 PPA），用法类似，以项目主页给的命
 PPA/COPR/手工 repo 意味着"把陌生人的签名软件以 root 装进系统"。三条自保规则：① 只添加软件**官方网站**列出的源；② 优先发行版官方源，其次才是第三方；③ 定期 `apt list --installed` / `dnf repoquery` 盘点来历不明的包。
 :::
 
-## 6.4 源码编译三步：configure、make、make install
+## 源码编译三步：configure、make、make install
 
 仓库里没有、版本太老、或要关掉不需要的特性时，源码编译是传统手艺：
 
@@ -129,7 +129,7 @@ No package 'openssl' found
 成本：没有自动安全更新、依赖要手动满足、卸载要记着装到哪。收益：定制特性、指定版本。折中方案：优先找官方仓库版 → 语言级包管理器（pip/npm/cargo）→ 官方二进制发行包 → 最后才是源码编译。
 :::
 
-## 6.5 pip、npm 与系统包：各管一段
+## pip、npm 与系统包：各管一段
 
 系统包管理器管系统级软件；语言生态有各自的包管理器，装的东西互不知晓：
 
@@ -155,7 +155,7 @@ error: externally-managed-environment
 
 它正是上述原则的制度化：系统 Python 归包管理器管，pip 别碰。临时项目用 venv（上面的写法），命令行工具用 pipx（装法：`sudo apt install pipx` / `sudo dnf install pipx`）。
 
-## 6.6 snap、flatpak 与容器：新型打包的取舍
+## snap、flatpak 与容器：新型打包的取舍
 
 ```bash
 # Ubuntu 预装 snapd；CentOS 需先启用 EPEL 再装 snapd
@@ -179,7 +179,7 @@ Docker/容器  打包整个运行环境，交付的是"可执行程序"；服务
 
 服务器上处理"某个工具要很新的版本"：先看发行版软件包流/新版源，再考虑官方 .deb/.rpm 包（`sudo apt install ./xxx.deb` 或 `sudo dnf install ./xxx.rpm` 还能顺手解依赖），最后才轮到容器或源码。
 
-## 6.7 综合练习：卸载与残留清理
+## 综合练习：卸载与残留清理
 
 装—查—卸—净 完整闭环，以 nginx 为例走完生命周期：
 

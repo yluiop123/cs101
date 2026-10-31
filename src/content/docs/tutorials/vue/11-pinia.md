@@ -1,5 +1,5 @@
 ---
-title: "第 11 章 · 状态管理 Pinia"
+title: "状态管理 Pinia"
 description: "props/emit 治理“父子”，但跨组件共享会变味："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 Pinia 的 store（state/getter/action）
 - 学会 store 的持久化与组合式函数协作
 
-## 11.1 为什么需要全局状态
+## 为什么需要全局状态
 
 props/emit 治理"父子"，但跨组件共享会变味：
 
@@ -35,7 +35,7 @@ store（单一来源）
 （同一份数据，改一处全局同步）
 ```
 
-## 11.2 定义 store
+## 定义 store
 
 ```js
 // src/stores/counter.js
@@ -66,7 +66,7 @@ const pinia = createPinia();
 createApp(App).use(pinia).mount('#app');
 ```
 
-## 11.3 使用 store
+## 使用 store
 
 ```vue
 <script setup>
@@ -96,7 +96,7 @@ const { increment, reset } = store;             // ✅ 函数直接解构（不�
 ```
 :::
 
-## 11.4 实战 store：用户认证
+## 实战 store：用户认证
 
 ```js
 // src/stores/user.js
@@ -144,7 +144,7 @@ const user = useUserStore();
 
 第 10 章的路由守卫可直接用 store：`router.beforeEach((to) => { if (to.meta.requiresAuth && !useUserStore().isLoggedIn) … })`。
 
-## 11.5 异步数据 store：课程列表
+## 异步数据 store：课程列表
 
 ```js
 // src/stores/courses.js
@@ -187,7 +187,7 @@ store.fetchAll();   // 多个页面调用也只请求一次（loaded 幂等）
 
 `loaded + force` 模式：数据全局加载一次、需要刷新时强制——比每页各自请求高效得多。
 
-## 11.6 store 之间协作
+## store 之间协作
 
 ```js
 // cart store 里使用 user store
@@ -209,7 +209,7 @@ export const useCartStore = defineStore('cart', () => {
 
 Pinia 的 store 就是一个个组合式函数——互相调用毫无障碍（这是组合式写法的最大红利）。
 
-## 11.7 什么时候用 Pinia
+## 什么时候用 Pinia
 
 ```text
 用户认证信息、主题/语言偏好        → ✅ store
@@ -221,7 +221,7 @@ Pinia 的 store 就是一个个组合式函数——互相调用毫无障碍（�
 
 **从"props 钻井痛了"开始用 Pinia**，不要一上来把所有状态都塞 store。
 
-## 11.8 综合练习：三件套联动
+## 综合练习：三件套联动
 
 场景：登录（user store）→ 首页拉课程（courses store）→ 点收藏记录到本地（useLocalStorage 组合式函数）。
 

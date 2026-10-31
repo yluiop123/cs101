@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 背景边框与阴影"
+title: "背景边框与阴影"
 description: ".banner {"
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会写线性/径向渐变
 - 掌握 border-radius 与 box-shadow 的完整用法
 
-## 5.1 背景：background 系列
+## 背景：background 系列
 
 ```css
 .banner {
@@ -41,7 +41,7 @@ tableOfContents: true
 - `contain`：等比缩放到**完整显示**，可能留白（logo 展示）
 :::
 
-## 5.2 渐变：gradient
+## 渐变：gradient
 
 渐变是 `background-image` 的一种，不是"图片"：
 
@@ -59,7 +59,7 @@ tableOfContents: true
 浏览器实时计算生成的"图"，无网络请求、任意尺寸不失真——导航栏、按钮、卡片头部的标配背景。
 :::
 
-## 5.3 边框：border
+## 边框：border
 
 ```css
 .box {
@@ -75,7 +75,7 @@ tableOfContents: true
 }
 ```
 
-## 5.4 圆角：border-radius
+## 圆角：border-radius
 
 ```css
 .avatar { border-radius: 12px; }        /* 统一圆角 */
@@ -84,7 +84,7 @@ tableOfContents: true
 .card   { border-radius: 12px 12px 0 0; } /* 上圆下方：顺时针 上右下左 */
 ```
 
-## 5.5 阴影：box-shadow
+## 阴影：box-shadow
 
 ```css
 /* 语法：x偏移 y偏移 模糊半径 扩散 颜色 */
@@ -103,7 +103,7 @@ tableOfContents: true
 - hover 抬升效果 = transform 上移 + 阴影加大（第 12 章配合 transition）
 :::
 
-## 5.6 轮廓：outline（附赠）
+## 轮廓：outline（附赠）
 
 `outline` 画在盒子外圈、**不占空间**，键盘聚焦（Tab 键）时的默认高亮就是它：
 
@@ -118,7 +118,7 @@ button:focus-visible {
 全局 `outline: none` 会让键盘用户"失焦失明"（不知道焦点在哪）。要么别删，要么用 `:focus-visible` 给一个更美的替代。
 :::
 
-## 5.7 综合示例：一张现代卡片
+## 综合示例：一张现代卡片
 
 ```html
 <style>

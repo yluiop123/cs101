@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · key 设计与过期淘汰"
+title: "key 设计与过期淘汰"
 description: "key 是纯字符串，Redis 不理解它的含义，但人和工具理解。约定："
 series: redis
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 `SCAN` 遍历与大 key / 热 key 的发现与治理手段
 - 会选 `maxmemory-policy`，并能对一个实例做粗粒度内存估算
 
-## 3.1 命名规范：key 是可运维性的第一道门
+## 命名规范：key 是可运维性的第一道门
 
 key 是纯字符串，Redis 不理解它的含义，但**人和工具**理解。约定：
 
@@ -44,7 +44,7 @@ rank:game:score:weekly             # 排行榜
 **正例**：给「主对象」也保留一段字段名 —— `user:1:base`、`user:1:ext`，于是 `user:1:*` 成为覆盖该用户全部数据的干净前缀。
 :::
 
-## 3.2 过期三件套：`EX`、`TTL`、`PERSIST`
+## 过期三件套：`EX`、`TTL`、`PERSIST`
 
 ```text
 127.0.0.1:6379> SET session:abc "token-payload" EX 3600
@@ -86,7 +86,7 @@ redis-cli EXPIRE "cache:user:profile:1001" 3600
 
 过期的实现是**惰性删除 + 定期抽样删除**双轨：访问时发现过期才删（省钱），后台每秒 `hz`（默认 10）次 tick 各抽一批 key 清理（兜底）。所以「过期时间到了 key 一定消失」是错的假设——别用 `KEYS`/`DBSIZE` 的数量去校验过期是否生效，更不要在业务逻辑里用「key 是否还在」表达精确时刻。
 
-## 3.3 `SCAN` 替代 `KEYS`：非阻塞遍历
+## `SCAN` 替代 `KEYS`：非阻塞遍历
 
 `KEYS pattern` 一次性遍历整个键空间并**在单线程里阻塞**，百万 key 规模下能让实例卡住几百毫秒，期间所有请求排队。
 
@@ -121,7 +121,7 @@ redis-cli SCAN 0 MATCH 'cache:user:*' COUNT 100
 
 批量清理不要写 `KEYS ... | xargs DEL`，用 `redis-cli --scan --pattern 'tmp:job:*' --count 500 | xargs -r -L 200 redis-cli UNLINK`。
 
-## 3.4 大 key：发现与治理
+## 大 key：发现与治理
 
 没有官方阈值，工程上通行的判断线：**String 值超过 10 KB，或集合元素超过 5000 个 / 序列化后超过 1 MB**。危害是三件事：删除阻塞、迁移倾斜（第 7 章 Cluster 的 rebalance 以 key 为单位）、网络突发。
 
@@ -148,7 +148,7 @@ DEL 是同步释放，几百毫秒的主线程停顿 = 这段时间所有命令�
 **正例**：`UNLINK` 把内存回收丢给后台线程；若还要更平滑，先分批 `ZPOPMIN key 5000` 削到小量再 `UNLINK`。
 :::
 
-## 3.5 热 key：发现与治理
+## 热 key：发现与治理
 
 热 key 是单条命令 QPS 打满一个核（或把某个分片压垮）。发现路径：
 
@@ -175,7 +175,7 @@ timeout 3 redis-cli MONITOR > /tmp/monitor.log
 - **key 拆分**：`counter:api:hits:2026-09-01` 拆成 `...:s{0..15}` 随机写，读取时 `MGET` 求和——把一次热点变成十六次散点。
 - **多副本 key**：`hot:config:rep{1..8}`，客户端随机选一个读，纯读场景立竿见影。
 
-## 3.6 `maxmemory-policy`：淘汰策略怎么选
+## `maxmemory-policy`：淘汰策略怎么选
 
 内存触顶时的行为由两个配置项决定（`redis.conf`）：
 
@@ -217,7 +217,7 @@ redis-cli CONFIG SET maxmemory-policy volatile-lru
 
 LRU 是**近似**的：Redis 不为全库维护链表，每个 key 记 24 位空闲时间，淘汰时采样 `maxmemory-samples` 个挑最旧。热点越集中，调大 `maxmemory-samples`（默认值以 `CONFIG GET maxmemory-samples` 实测为准）越接近理论 LRU，代价是 CPU。
 
-## 3.7 综合练习：内存估算与一次体检
+## 综合练习：内存估算与一次体检
 
 **目标**：给一个「千万级用户资料缓存」的实例估内存，并验证淘汰配置。
 

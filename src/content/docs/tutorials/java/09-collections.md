@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 集合框架"
+title: "集合框架"
 description: "数组定长、功能裸奔——集合框架（Collections Framework）提供一套开箱即用的容器："
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练 ArrayList、HashMap 的增删改查与遍历
 - 掌握 Collections 与 Stream 的常用操作
 
-## 9.1 集合框架总览
+## 集合框架总览
 
 数组定长、功能裸奔——**集合框架（Collections Framework）**提供一套开箱即用的容器：
 
@@ -38,7 +38,7 @@ Map（键值对，不在 Collection 体系内）
 要 key 查 value          → Map（默认 HashMap）
 ```
 
-## 9.2 List：有序列表
+## List：有序列表
 
 ```java
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ list.removeIf(s -> s.startsWith("J"));
 ```
 :::
 
-## 9.3 Set：去重容器
+## Set：去重容器
 
 ```java
 import java.util.HashSet;
@@ -99,7 +99,7 @@ LinkedHashSet    保持插入顺序
 TreeSet          自动排序（红黑树）
 ```
 
-## 9.4 Map：键值对
+## Map：键值对
 
 ```java
 import java.util.HashMap;
@@ -129,7 +129,7 @@ map.merge(word, 1, Integer::sum);                 // merge：有则加，无则�
 map.computeIfAbsent(word, k -> 0);                // 不存在才计算放入
 ```
 
-## 9.5 不可变集合与 List.of
+## 不可变集合与 List.of
 
 ```java
 // 只读集合（Java 9+）：不能增删改，适合常量列表
@@ -139,7 +139,7 @@ Map<String, Integer> ports = Map.of("http", 80, "https", 443);
 // List.of(null) 直接 NPE —— 不允许 null 元素
 ```
 
-## 9.6 Collections 工具类
+## Collections 工具类
 
 ```java
 import java.util.Collections;
@@ -151,7 +151,7 @@ Collections.max(list); Collections.min(list);
 Collections.unmodifiableList(list);      // 包装成只读视图
 ```
 
-## 9.7 Stream：声明式数据处理
+## Stream：声明式数据处理
 
 **Stream API**（Java 8+）把"循环+条件+收集"变成链式声明——现代 Java 代码的主力写法：
 
@@ -181,7 +181,7 @@ Map<Character, List<String>> groups = names.stream()
 
 Stream 是**惰性求值**：中间操作（filter/map）只是构建管道，终结操作（collect/forEach）才真正执行。
 
-## 9.8 综合练习：学生成绩分析
+## 综合练习：学生成绩分析
 
 ```java
 import java.util.List;

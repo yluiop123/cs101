@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 表单（下）：校验与进阶"
+title: "表单（下）：校验与进阶"
 description: "表单进阶：客户端校验、约束验证 API、自定义错误提示与无障碍提交体验。"
 series: html
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用 HTML5 校验属性实现免 JS 表单校验
 - 深入理解 GET 与 POST 的提交差异
 
-## 8.1 下拉选择：select
+## 下拉选择：select
 
 ```html
 <select name="city">
@@ -36,7 +36,7 @@ tableOfContents: true
 - `<optgroup>`：选项分组（label 只展示、不可选）
 - 提交的是选中项的 `value`；没写 value 时提交选项文字
 
-## 8.2 多行文本：textarea
+## 多行文本：textarea
 
 ```html
 <textarea name="intro" rows="4" placeholder="介绍一下自己…"></textarea>
@@ -44,7 +44,7 @@ tableOfContents: true
 
 注意：textarea 是**双标签**，初始值写在标签内容里（不是 value 属性）。`rows` 只影响初始高度，可拖拽调整（禁用拖拽用 CSS `resize: none`）。
 
-## 8.3 输入建议：datalist
+## 输入建议：datalist
 
 文本框 + 建议列表的组合（可自由输入，也可从建议中选）：
 
@@ -59,7 +59,7 @@ tableOfContents: true
 
 与 select 的区别：datalist **允许输入列表以外的值**，适合"常见项 + 自定义"场景（如输入邮箱、城市）。
 
-## 8.4 分组框：fieldset 与 legend
+## 分组框：fieldset 与 legend
 
 ```html
 <fieldset>
@@ -71,7 +71,7 @@ tableOfContents: true
 
 视觉上是一圈边框加标题，语义上是"一组相关控件"——复杂表单用它分区，结构立刻清晰。
 
-## 8.5 HTML5 免 JS 校验
+## HTML5 免 JS 校验
 
 给控件加属性，浏览器自动完成提交前校验，不合法则阻止提交并提示：
 
@@ -108,7 +108,7 @@ tableOfContents: true
 
 HTML 校验只是第一道防线，**服务端必须再校验一次**——绕过前端校验（直接发请求）易如反掌，前端校验的目标是体验而非安全。
 
-## 8.6 GET 与 POST 深入对比
+## GET 与 POST 深入对比
 
 | 维度 | GET | POST |
 | --- | --- | --- |
@@ -136,7 +136,7 @@ HTML 校验只是第一道防线，**服务端必须再校验一次**——绕�
 GET 的数据直接暴露在地址栏、历史记录与服务器日志中。含敏感信息的表单一律 POST，且全站应使用 HTTPS。
 :::
 
-## 8.7 综合示例
+## 综合示例
 
 ```html
 <style>

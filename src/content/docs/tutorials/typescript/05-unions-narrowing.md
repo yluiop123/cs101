@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 联合类型与类型收窄"
+title: "联合类型与类型收窄"
 description: "type ID = string | number;"
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会用类型守卫（type guard）收窄类型
 - 理解可辨识联合——TS 里最实用的建模模式
 
-## 5.1 联合类型：或
+## 联合类型：或
 
 ```ts
 type ID = string | number;
@@ -36,7 +36,7 @@ setStatus('loaded');    // ❌ 拼错立刻标红——字符串参数的保险�
 凡是"取值固定几种"的参数（状态、类型、模式），都用字面量联合。编辑器还会自动补全候选项。
 :::
 
-## 5.2 交叉类型：且
+## 交叉类型：且
 
 ```ts
 type Draggable = { drag: () => void };
@@ -52,7 +52,7 @@ const w: UIWidget = {
 
 `|` 是"任选其一"，`&` 是"全都得有"——交叉常用于"给已有类型追加字段"（第 3 章）。
 
-## 5.3 联合类型的访问限制
+## 联合类型的访问限制
 
 联合类型只能访问**所有成员共有**的成员：
 
@@ -68,7 +68,7 @@ function area(shape: Shape): number {
 
 怎么安全访问？——**收窄（narrowing）**。
 
-## 5.4 类型守卫：把"或"缩小成"其中之一"
+## 类型守卫：把"或"缩小成"其中之一"
 
 ### typeof 守卫
 
@@ -119,7 +119,7 @@ function pick(x: 'a' | 'b' | 'c', flag: boolean) {
 
 :::
 
-## 5.5 可辨识联合（Discriminated Union）
+## 可辨识联合（Discriminated Union）
 
 给联合的每个成员一个**共享的字面量字段**（tag），switch 它就能整段收窄——TS 里最重要的建模模式：
 
@@ -166,7 +166,7 @@ function render<T>(state: RequestState<T>): string {
 }
 ```
 
-## 5.6 never 兜底：穷尽检查
+## never 兜底：穷尽检查
 
 ```ts
 function area(s: Shape): number {
@@ -183,7 +183,7 @@ function area(s: Shape): number {
 
 `never` 只能赋给 never——把剩余情况赋值给 never 变量，**新增分支漏写就编译报错**，穷尽性有了编译器背书。
 
-## 5.7 综合示例：过滤器配置
+## 综合示例：过滤器配置
 
 ```ts
 type Filter =

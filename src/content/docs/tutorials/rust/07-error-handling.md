@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · 错误处理"
+title: "错误处理"
 description: "enum Option { // 表达“可能没有值”（第 5 章）"
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 `?` 运算符的错误传播链
 - 学会 panic 的边界与自定义错误类型
 
-## 7.1 两种"失败"：Option 与 Result
+## 两种"失败"：Option 与 Result
 
 ```rust
 enum Option<T> {                  // 表达"可能没有值"（第 5 章）
@@ -39,7 +39,7 @@ enum Result<T, E> {               // 表达"可能失败"（带原因）
 
 两者都有大量方法互通（`.ok()` 转 Result、`.ok_or()` 转 Option）。
 
-## 7.2 手动处理：match 全家桶
+## 手动处理：match 全家桶
 
 ```rust
 use std::fs::File;
@@ -66,7 +66,7 @@ let f = File::open("hello.txt").expect("hello.txt 应该存在");   // 带上下
 `unwrap/expect` 把错误变成 panic——库代码与正式业务路径禁用，测试代码可用。
 :::
 
-## 7.3 `?` 运算符：错误传播的语法糖
+## `?` 运算符：错误传播的语法糖
 
 ```rust
 use std::io::{self, Read};
@@ -101,7 +101,7 @@ fn read_username_short(path: &str) -> Result<String, io::Error> {
 
 `?` 的语义：**Ok 则拆值继续，Err 则带上下文立刻 return**——它就是 Java try-catch + Python raise 的"值形态"，但每次传播都显式可见。
 
-## 7.4 错误转换：From trait 与 `?` 的联动
+## 错误转换：From trait 与 `?` 的联动
 
 `?` 会自动调用 `From::from` 把底层错误转换成函数的返回错误类型：
 
@@ -141,7 +141,7 @@ fn load(path: &str) -> Result<i32, AppError> {
 }
 ```
 
-## 7.5 thiserror：自定义错误的工业写法
+## thiserror：自定义错误的工业写法
 
 手写 From/Display 是样板——**thiserror** 宏一行搞定：
 
@@ -168,7 +168,7 @@ enum ApiError {
 
 派生宏自动生成 Display/From/Error 实现——**业务代码定义错误的标准姿势**。
 
-## 7.6 panic 的边界
+## panic 的边界
 
 ```rust
 // panic 的正确用途：程序员的 bug（而非运行环境问题）
@@ -190,7 +190,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 `Box<dyn Error>` = "任意错误类型"（trait 对象，第 8 章展开）——快速原型/CLI 的通用返回。
 
-## 7.7 综合练习：解析器错误处理链
+## 综合练习：解析器错误处理链
 
 ```rust
 #[derive(Debug, thiserror::Error)]

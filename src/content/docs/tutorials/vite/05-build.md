@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 构建与优化"
+title: "构建与优化"
 description: "npm run build"
 series: vite
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解代码分割（code splitting）与分包策略
 - 学会用产物分析定位体积问题
 
-## 5.1 构建做了什么
+## 构建做了什么
 
 ```bash
 npm run build
@@ -44,7 +44,7 @@ npm run preview    # 本地伺服 dist/，模拟线上访问
 dev 跑通 ≠ 构建通过。**提交前 / 部署前必须 build**——动态导入路径错误、类型错误（配 vue-tsc）都在这一步暴露。本站教程开发流程里"每写完一个教程跑一次 build"就是这个纪律。
 :::
 
-## 5.2 代码分割：按需加载
+## 代码分割：按需加载
 
 默认策略：
 
@@ -64,7 +64,7 @@ const routes = {
 
 效果：首屏只加载首屏需要的 JS——Admin 面板、图表库这些"重家伙"推迟到用户真正到达时。
 
-## 5.3 手动分包：manualChunks
+## 手动分包：manualChunks
 
 默认分割不够细时，手动把稳定依赖拆出独立缓存：
 
@@ -89,7 +89,7 @@ export default defineConfig({
 chunk 太碎 → 请求次数多；chunk 太大 → 缓存更新浪费。先看分析数据再动手，不要凭感觉拆。
 :::
 
-## 5.4 产物分析：体积去哪了
+## 产物分析：体积去哪了
 
 ```bash
 npx vite-bundle-visualizer
@@ -105,7 +105,7 @@ npx vite-bundle-visualizer
 | 图标库全量 import | 只 import 用到的图标 |
 | 重复打包（两份相似库） | 统一依赖版本 |
 
-## 5.5 其他构建选项
+## 其他构建选项
 
 ```js
 export default defineConfig({
@@ -124,7 +124,7 @@ export default defineConfig({
 
 :::
 
-## 5.6 缓存友好的部署形态
+## 缓存友好的部署形态
 
 产物本身就是为"长缓存 + 按需失效"设计的：
 
@@ -135,7 +135,7 @@ index.html               → no-cache（每次校验，保证拿到新资源清�
 
 这组策略配合指纹文件名，既快又不会"上线后用户看到旧版本"。
 
-## 5.7 综合示例：优化前后的体检单
+## 综合示例：优化前后的体检单
 
 优化动作清单（按收益排序）：
 

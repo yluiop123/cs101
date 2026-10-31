@@ -1,5 +1,5 @@
 ---
-title: "第 14 章 · 模块化与综合实战"
+title: "模块化与综合实战"
 description: "脚本多了以后， 的问题："
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会组织一个规范的 JS 项目结构
 - 综合实战：从零实现完整的待办清单应用
 
-## 14.1 为什么需要模块化
+## 为什么需要模块化
 
 脚本多了以后，`<script src="a.js"><script src="b.js">` 的问题：
 
@@ -26,7 +26,7 @@ tableOfContents: true
 
 ES Module（ESM，ES6 模块）用"文件即模块"解决一切：每个文件有自己的作用域，通过 `export` 显式暴露、`import` 显式依赖。
 
-## 14.2 export：模块的出口
+## export：模块的出口
 
 ```js
 // utils.js
@@ -50,7 +50,7 @@ export default function main() {
 }
 ```
 
-## 14.3 import：模块的入口
+## import：模块的入口
 
 ```js
 // 命名导入：名字必须与导出一致
@@ -77,7 +77,7 @@ const mod = await import('./heavy-module.js');
 没有 `type="module"`，`import` 语法直接报错。另外 ESM 要求开发时用 **HTTP 服务**访问（Live Server 即可），双击打开 file:// 会跨域报错。
 :::
 
-## 14.4 模块的项目组织
+## 模块的项目组织
 
 典型前端项目的 JS 组织方式：
 
@@ -93,7 +93,7 @@ js-demo/
 
 分工原则：**一个模块一个职责**——数据存取、业务规则、页面渲染互相隔离，改哪里一目了然。
 
-## 14.5 实战前设计：数据层与视图层分离
+## 实战前设计：数据层与视图层分离
 
 待办清单（Todo List）的核心模型（第 6 章已铺垫）：
 
@@ -109,7 +109,7 @@ remove(id)         // 删除
 
 架构：**storage 持久化 ↔ service 业务逻辑 ↔ ui 渲染**，事件只负责"转发用户意图给 service"。
 
-## 14.6 实战：storage.js
+## 实战：storage.js
 
 ```js
 // storage.js —— localStorage 安全读写封装（第 12 章的工程化）
@@ -128,7 +128,7 @@ export function saveTodos(todos) {
 }
 ```
 
-## 14.7 实战：todoService.js
+## 实战：todoService.js
 
 ```js
 // todoService.js —— 纯业务逻辑，不碰 DOM
@@ -168,7 +168,7 @@ export function clearDone() {
 }
 ```
 
-## 14.8 实战：ui.js
+## 实战：ui.js
 
 ```js
 // ui.js —— 只负责"数据 → DOM"
@@ -192,7 +192,7 @@ export function render() {
 }
 ```
 
-## 14.9 实战：app.js 与 index.html
+## 实战：app.js 与 index.html
 
 ```js
 // app.js —— 入口：装配一切
@@ -249,7 +249,7 @@ render();   // 首屏渲染
 - 关掉浏览器再打开，数据依旧——你做出了第一个"有状态"的完整应用
 :::
 
-## 14.10 下一步
+## 下一步
 
 你已完成 JS 核心：语法 → 函数 → 对象 → 数组 → DOM → 异步 → 模块化，并拥有第一个完整项目。
 

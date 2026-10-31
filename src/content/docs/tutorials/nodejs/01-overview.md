@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 Node.js 与安装"
+title: "初识 Node.js 与安装"
 description: "Node.js 让 JavaScript 跑在浏览器之外：2009 年 Ryan Dahl 把 Chrome 的 V8 引擎（JS 执行核心）抽出来，配上文件读写、网络通信等系统能力，造出了一个 JS 运行时（runtime）。"
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 完成 Node.js 安装与版本管理
 - 跑通第一个命令行程序
 
-## 1.1 Node.js 是什么
+## Node.js 是什么
 
 Node.js 让 JavaScript 跑在**浏览器之外**：2009 年 Ryan Dahl 把 Chrome 的 V8 引擎（JS 执行核心）抽出来，配上文件读写、网络通信等系统能力，造出了一个 JS 运行时（runtime）。
 
@@ -27,7 +27,7 @@ Node.js 里的 JS：没有 window/document，但能读写文件、建服务器�
 
 同一个语言，两个世界——这就是"JS 全栈"的基础。
 
-## 1.2 为什么前端必须装 Node
+## 为什么前端必须装 Node
 
 哪怕你只想写前端，Node 环境也是必需品，因为现代前端的整套工具链跑在 Node 上：
 
@@ -42,7 +42,7 @@ Node.js 里的 JS：没有 window/document，但能读写文件、建服务器�
 学完本教程，你不仅掌握"装依赖"，还具备用 Express 写服务端接口的能力（第 9~10 章）——这就是它同时服务前端与后端的原因。
 :::
 
-## 1.3 安装 Node.js
+## 安装 Node.js
 
 ### 方式一：官网安装包（最简单）
 
@@ -72,7 +72,7 @@ nvm use --lts
 Node 版本号 = 大版本.小版本.补丁（如 20.11.1）。**偶数大版本是 LTS**（20、22…），有约 30 个月的支持期；学习与生产一律选 LTS，不要追"最新奇数版"。
 :::
 
-## 1.4 REPL 与第一个程序
+## REPL 与第一个程序
 
 命令行输入 `node` 回车，进入 **REPL（交互式解释器）**——JS 版"控制台"：
 
@@ -105,14 +105,14 @@ node hello.js
 - `require`：CommonJS 的模块引入方式，与浏览器 ESM 的 `import` 并存（第 4 章详讲）
 :::
 
-## 1.5 npm 与 package.json 初见
+## npm 与 package.json 初见
 
 `npm -v` 能输出说明 npm 已随 Node 就位。npm 是 Node 的包管理器（package manager），第 2 章展开。先预热两个事实：
 
 1. `npm -v` / `node -v` 是排查环境问题的第一动作
 2. 项目目录里的 `package.json` 是"项目身份证"（依赖清单 + 脚本）
 
-## 1.6 常见环境问题排查
+## 常见环境问题排查
 
 | 现象 | 原因 | 解法 |
 | --- | --- | --- |

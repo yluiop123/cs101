@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · GFM 扩展语法"
+title: "GFM 扩展语法"
 description: "最早的标准 Markdown 功能有限，各平台纷纷自行增强，其中影响力最大的是 GitHub 推出的 GFM（GitHub Flavored Markdown）。"
 series: markdown
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握任务列表、脚注、自动链接等实用扩展
 - 知道哪些语法是"通用标准"、哪些是"平台扩展"
 
-## 3.1 为什么会有"扩展语法"
+## 为什么会有"扩展语法"
 
 最早的标准 Markdown 功能有限，各平台纷纷自行增强，其中影响力最大的是 GitHub 推出的 **GFM（GitHub Flavored Markdown）**。如今 GFM 的大部分特性已成为事实标准，被 GitHub、掘金、VitePress 等广泛支持。
 
@@ -24,7 +24,7 @@ tableOfContents: true
 基础语法（第 1、2 章）到处通用；本章的扩展语法在**写 GitHub README、 issue、PR 描述**时几乎全部可用，但个别平台可能不支持某几项——发到新平台前先预览确认。
 :::
 
-## 3.2 任务列表（Task List）
+## 任务列表（Task List）
 
 GFM 最实用的扩展，天然适合做清单、待办：
 
@@ -42,7 +42,7 @@ GFM 最实用的扩展，天然适合做清单、待办：
 
 GitHub 的 issue / PR 中可以直接勾选。
 
-## 3.3 表情符号（Emoji）
+## 表情符号（Emoji）
 
 用 `:短名称:` 的语法插入 emoji（GitHub 全站支持）：
 
@@ -54,7 +54,7 @@ GitHub 的 issue / PR 中可以直接勾选。
 
 短名称可在 GitHub 的 emoji 速查表（`github.github.com/gemoji`）查询。README 中适度点缀可以提升亲和力，PR 标题中约定俗成地用 emoji 标注类型（✨ 新功能 / 🐛 修复 / 📝 文档）。
 
-## 3.4 脚注（Footnote）
+## 脚注（Footnote）
 
 脚注用于给正文补充出处与解释，是 GFM 支持的语法：
 
@@ -67,7 +67,7 @@ GitHub 的 issue / PR 中可以直接勾选。
 
 渲染后正文出现可点击的上标序号，点击跳转到文末的脚注内容。注意：GitHub 支持脚注；VitePress 等静态站默认**不启用**脚注插件，需要额外配置——跨平台写作时先预览确认。
 
-## 3.5 折叠区域：details
+## 折叠区域：details
 
 GFM 环境中可直接使用 HTML 标签实现折叠（本站教程的"小测验"就是 VitePress 的 `::: details` 容器实现的同类效果）：
 
@@ -80,7 +80,7 @@ GFM 环境中可直接使用 HTML 标签实现折叠（本站教程的"小测验
 </details>
 ```
 
-## 3.6 转义字符
+## 转义字符
 
 想显示 Markdown 的语法符号本身（如 `*`、`#`、`|`）时，用反斜杠转义：
 
@@ -93,7 +93,7 @@ GFM 环境中可直接使用 HTML 标签实现折叠（本站教程的"小测验
 
 更通用的方案：把符号放进行内代码 `` `*` ``，无需记忆转义规则。
 
-## 3.7 其他常见扩展速查
+## 其他常见扩展速查
 
 | 语法 | 效果 | 支持度 |
 | --- | --- | --- |

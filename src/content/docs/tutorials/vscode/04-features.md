@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 核心功能详解"
+title: "核心功能详解"
 description: "推荐用“打开文件夹”（Ctrl+K Ctrl+O）把整个项目目录作为工作区打开，而不是单开文件——这样资源管理器、全局搜索、Git 功能都以项目为根。"
 series: vscode
 sidebar:
@@ -17,7 +17,7 @@ tableOfContents: true
 - 学会用内置调试器打断点、看变量
 - 了解 Emmet 与代码片段带来的效率提升
 
-## 4.1 文件与工作区管理
+## 文件与工作区管理
 
 ### 打开项目的方式
 
@@ -38,7 +38,7 @@ tableOfContents: true
 输入文件名时支持模糊匹配，比如输入 `sct` 就能匹配到 `screen-config.ts`。文件名记不全也能秒开。
 :::
 
-## 4.2 全局搜索与替换
+## 全局搜索与替换
 
 `Ctrl+Shift+F` 打开全局搜索，在**整个项目**里搜索文本：
 
@@ -48,7 +48,7 @@ tableOfContents: true
 
 正则示例：搜索 `console\.log\(.*\)` 可一键找出项目里所有调试输出语句，配合全局替换批量清理。
 
-## 4.3 集成终端
+## 集成终端
 
 ``Ctrl+` ``（反引号，Tab 键上方）打开集成终端：
 
@@ -60,7 +60,7 @@ tableOfContents: true
 命令面板输入 `Terminal: Select Default Profile`，选择你喜欢的 shell。前端开发推荐 Git Bash 或 PowerShell 7。
 :::
 
-## 4.4 断点调试
+## 断点调试
 
 以调试 JavaScript 为例，体验内置调试器：
 
@@ -79,7 +79,7 @@ tableOfContents: true
 
 调试比"到处加 console.log 打印"高效得多——这是从新手进阶到熟练开发者的重要一步。
 
-## 4.5 内置 Emmet：HTML/CSS 加速器
+## 内置 Emmet：HTML/CSS 加速器
 
 VS Code 内置了 Emmet 缩写展开，输入缩写按 `Tab` 即可生成代码：
 
@@ -99,7 +99,7 @@ VS Code 内置了 Emmet 缩写展开，输入缩写按 `Tab` 即可生成代码�
 
 CSS 中也有对应缩写，如输入 `m10` 展开为 `margin: 10px;`，`p20` 展开为 `padding: 20px;`。学会几个高频缩写，写模板的速度翻倍。
 
-## 4.6 代码片段（Snippets）
+## 代码片段（Snippets）
 
 输入 `log` 按 Tab 自动展开为 `console.log()`——这就是代码片段。
 

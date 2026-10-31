@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 服务与 RxJS 入门"
+title: "服务与 RxJS 入门"
 description: "中大型 Angular 项目的服务分层惯例："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 Observable 的"订阅"模型
 - 认识 toSignal 桥接：RxJS 与 signal 协作
 
-## 5.1 服务层的组织
+## 服务层的组织
 
 中大型 Angular 项目的服务分层惯例：
 
@@ -66,7 +66,7 @@ export class CourseService {
 
 组件只管渲染，业务逻辑全在 Service——组件可替换、逻辑可测试。
 
-## 5.2 RxJS：Angular 的"异步水流"底座
+## RxJS：Angular 的"异步水流"底座
 
 **RxJS**（Reactive Extensions）处理"随时间到来的数据流"。核心概念 **Observable（可观察对象）**：
 
@@ -101,7 +101,7 @@ Observable：可以多次发出值的"水流"（HTTP、事件、定时器都适�
 
 Angular 内部（HttpClient、Router 事件）全是 Observable——**读懂订阅/退订是 Angular 必修**，哪怕你写业务时主要用 signal。
 
-## 5.3 async 管道：模板里的订阅
+## async 管道：模板里的订阅
 
 手动订阅要记得退订（内存泄漏），模板里用 **async 管道**自动管理：
 
@@ -120,7 +120,7 @@ export class TimerComponent {
 }
 ```
 
-## 5.4 toSignal：把流变成响应式状态
+## toSignal：把流变成响应式状态
 
 现代 Angular 的推荐姿势——**RxJS 流转 signal**：
 
@@ -143,7 +143,7 @@ HTTP/事件流/复杂时序  → RxJS（Angular 内置设施的母语）
 衔接                 → toSignal（流进组件）/ from App?
 ```
 
-## 5.5 通知服务实战：BehaviorSubject 与 signal 的对比
+## 通知服务实战：BehaviorSubject 与 signal 的对比
 
 旧式 Angular 全局通知常用 **BehaviorSubject**（保存最新值的流）：
 
@@ -193,7 +193,7 @@ export class SomeComponent {
 
 **新代码用 signal**；BehaviorSubject 能读懂（存量项目与 RxJS 深水区会遇到）。
 
-## 5.6 综合练习：搜索服务（流式防抖）
+## 综合练习：搜索服务（流式防抖）
 
 一个 RxJS 仍有优势的场景——**防抖搜索流**：
 

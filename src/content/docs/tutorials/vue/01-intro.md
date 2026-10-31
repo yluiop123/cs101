@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 Vue 3"
+title: "初识 Vue 3"
 description: "JS 教程第 13 章的计数器：手动找到 DOM、改文本（命令式）："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 跑通第一个 Vue 3 项目（create-vue 脚手架）
 - 认识单文件组件（SFC）与组合式 API 的基本样貌
 
-## 1.1 从"操作 DOM"到"声明结果"
+## 从"操作 DOM"到"声明结果"
 
 JS 教程第 13 章的计数器：**手动**找到 DOM、改文本（命令式）：
 
@@ -46,7 +46,7 @@ const count = ref(0);   // 响应式数据
 
 数据变 → 视图自动变。你不再写任何"更新 DOM"的代码。
 
-## 1.2 创建项目
+## 创建项目
 
 ```bash
 npm create vue@latest my-vue-app
@@ -61,7 +61,7 @@ npm run dev    # http://localhost:5173
 
 生成的结构就是 [Vite 教程第 2 章](../../vite/)的标准布局——Vite 底座 + `@vitejs/plugin-vue`。
 
-## 1.3 单文件组件（SFC）
+## 单文件组件（SFC）
 
 Vue 项目的核心单位是**单文件组件（Single-File Component，.vue 文件）**，一个文件管一个组件的三件事：
 
@@ -86,7 +86,7 @@ h1 { color: #42b883; }
 
 三大块各司其职，`scoped` 样式隔离是 SFC 的杀手锏之一（组件再多也不互相污染）。
 
-## 1.4 应用与组件树
+## 应用与组件树
 
 ```js
 // src/main.js —— 入口：创建应用并挂载
@@ -115,7 +115,7 @@ App
 
 **开发 Vue 应用 = 设计这棵树的形状**（哪些组件、谁管什么数据、怎么传）。
 
-## 1.5 组合式 API：本教程的主线
+## 组合式 API：本教程的主线
 
 Vue 组件有两套写法：
 
@@ -138,7 +138,7 @@ const increment = () => count.value++;
 编译期语法糖：里面的顶层变量（数据、函数）**自动暴露给模板**使用，不用写 return。模板里 `{{ count }}` 直接可用。
 :::
 
-## 1.6 Vue 生态一览
+## Vue 生态一览
 
 | 成员 | 职责 | 对应章节 |
 | --- | --- | --- |
@@ -148,7 +148,7 @@ const increment = () => count.value++;
 | Vite | 构建 | [Vite 教程](../../vite/) |
 | DevTools | 浏览器调试扩展 | 装一个，调试组件必备 |
 
-## 1.7 动手：改造欢迎页
+## 动手：改造欢迎页
 
 把脚手架首页改成自己的：
 

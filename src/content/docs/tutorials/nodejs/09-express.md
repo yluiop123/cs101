@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · Express 入门"
+title: "Express 入门"
 description: "第 5 章用原生 http 模块写路由，路径一多就陷入 if-else 泥潭。Express（expressjs.com）把“路由、中间件、参数解析”标准化："
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解路由与中间件两大核心概念
 - 掌握请求参数的三种读取方式
 
-## 9.1 Express：Node 事实标准的 Web 框架
+## Express：Node 事实标准的 Web 框架
 
 第 5 章用原生 http 模块写路由，路径一多就陷入 if-else 泥潭。Express（expressjs.com）把"路由、中间件、参数解析"标准化：
 
@@ -42,7 +42,7 @@ app.listen(port, () => {
 
 对比原生写法，路由按"方法 + 路径"清晰声明，处理函数只关心业务。
 
-## 9.2 路由：REST 风格的起点
+## 路由：REST 风格的起点
 
 ```js
 // 不同方法 + 不同路径 = 不同接口
@@ -67,7 +67,7 @@ res.json(data);         // 显式 JSON
 res.status(404).json({ error: 'not found' });   // 链式：状态码 + 内容
 ```
 
-## 9.3 中间件：Express 的灵魂
+## 中间件：Express 的灵魂
 
 中间件（middleware）= 一层层"处理函数"，请求流经它们**按注册顺序**逐个处理：
 
@@ -102,7 +102,7 @@ app.use(cors());
 `express.json()` 必须注册在**读 req.body 的路由之前**；`static` 通常放最前（静态资源优先）。顺序错了就是"body 是 undefined"这类玄学问题。
 :::
 
-## 9.4 读取请求体的三种姿势
+## 读取请求体的三种姿势
 
 ```js
 app.use(express.json());   // 先开启
@@ -119,7 +119,7 @@ app.use(express.urlencoded({ extended: true }));
 // 3. 原始数据：req 上以流形式读取（大文件上传场景，进阶）
 ```
 
-## 9.5 路由模块化：Router
+## 路由模块化：Router
 
 路由都堆在 server.js 会失控，用 `express.Router` 拆分：
 
@@ -140,7 +140,7 @@ const todosRouter = require('./routes/todos');
 app.use('/api/todos', todosRouter);   // 该路由下所有路径自动带 /api/todos 前缀
 ```
 
-## 9.6 错误处理中间件
+## 错误处理中间件
 
 ```js
 // 四参数形式 = 错误处理中间件（必须放最后）
@@ -159,7 +159,7 @@ app.get('/boom', async (req, res, next) => {
 });
 ```
 
-## 9.7 项目结构惯例
+## 项目结构惯例
 
 ```text
 express-app/

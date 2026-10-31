@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · JSX 与组件"
+title: "JSX 与组件"
 description: "JSX（JavaScript XML）= JS 里写“HTML”。它不是模板字符串，而是语法糖——构建时被转译成函数调用："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会组件的组合与 props 传参
 - 理解 children 与组件拆分
 
-## 2.1 JSX 是什么
+## JSX 是什么
 
 JSX（JavaScript XML）= **JS 里写"HTML"**。它不是模板字符串，而是语法糖——构建时被转译成函数调用：
 
@@ -30,7 +30,7 @@ const el = createElement('h1', { className: 'title' }, '你好');
 
 **JSX 产物是对象不是字符串**——可以存变量、当参数传、条件拼接，比模板字符串强大得多。
 
-## 2.2 JSX 六条规则
+## JSX 六条规则
 
 ```jsx
 // ① 只能一个根元素（Fragment 解决）
@@ -65,7 +65,7 @@ return (
 `style={{ }}` 外层大括号 = "这里是表达式"，内层 = JS 对象；属性小驼峰（fontSize），数字单位默认 px。
 :::
 
-## 2.3 条件渲染的 JSX 风格
+## 条件渲染的 JSX 风格
 
 没有 v-if——用 JS 表达式：
 
@@ -100,7 +100,7 @@ function Profile({ user }) {
 }
 ```
 
-## 2.4 props：组件的参数
+## props：组件的参数
 
 ```jsx
 // 子组件：参数解构即 props
@@ -124,7 +124,7 @@ function CourseCard({ title, hours, done = false }) {
 - **props 只读**（单向数据流），不能在子组件里改
 - 默认值用参数默认 `done = false`
 
-## 2.5 children：标签中间的内容
+## children：标签中间的内容
 
 组件标签包裹的内容通过 `children` prop 传入：
 
@@ -142,7 +142,7 @@ function Card({ children }) {
 
 children 可以是 JSX、字符串、甚至函数（渲染函数作 children = React 版"作用域插槽"）。
 
-## 2.6 组合与拆分
+## 组合与拆分
 
 React 项目就是组件树的组装：
 
@@ -183,7 +183,7 @@ src/
 └── App.jsx
 ```
 
-## 2.7 综合练习：用户资料卡
+## 综合练习：用户资料卡
 
 ```jsx
 function Avatar({ name, size = 40 }) {

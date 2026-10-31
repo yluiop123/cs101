@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 状态与事件"
+title: "状态与事件"
 description: "函数组件每次渲染都会“重新执行”——普通变量一刷新就丢。useState 让值跨渲染存活："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解"不可变更新"与 setState 的批处理
 - 会做对象/数组状态的安全更新
 
-## 3.1 useState：给组件装上记忆
+## useState：给组件装上记忆
 
 函数组件每次渲染都会"重新执行"——普通变量一刷新就丢。`useState` 让值跨渲染存活：
 
@@ -43,7 +43,7 @@ setCount(新值)     → 修改并触发重渲染
 
 **setCount 触发的不是"修改变量"，而是"用新值重跑整个组件函数"**——这就是 1.5 说的心智差异。
 
-## 3.2 事件处理
+## 事件处理
 
 ```jsx
 export default function Demo() {
@@ -69,7 +69,7 @@ export default function Demo() {
 
 事件名小驼峰：`onClick` / `onChange` / `onSubmit` / `onKeyDown` / `onBlur`。
 
-## 3.3 不可变更新：对象状态
+## 不可变更新：对象状态
 
 **规则：永远生成新对象/新数组，绝不直接改旧值。**
 
@@ -97,7 +97,7 @@ setUser(user);
 React 靠"引用是否变化"判断要不要更新（Object.is 比较）。直接改旧对象 = 引用不变 = 系统不知道你改了。**引用比较 + 不可变更新是一对配套设计。**
 :::
 
-## 3.4 不可变更新：数组状态
+## 不可变更新：数组状态
 
 JS 教程第 8 章的不可变数组方法全套适用：
 
@@ -120,7 +120,7 @@ setTodos(todos.map(t =>
 
 **push/splice/直接赋值索引 ❌**（变异原数组，引用未变）。Vue 里 push 能触发更新（Proxy 拦截），React 里不行——跨框架最容易踩的坑。
 
-## 3.5 更新函数：基于旧值计算
+## 更新函数：基于旧值计算
 
 新值依赖旧值时，传**函数**而不是值：
 
@@ -140,7 +140,7 @@ function handleClick() {
 
 **口诀：新值与旧状态有关 → 用更新函数 `setX(c => …)`；与旧值无关 → 直接传值。**
 
-## 3.6 批处理（Batching）
+## 批处理（Batching）
 
 一次事件处理函数里多次 setState，React 会**合并成一次渲染**：
 
@@ -163,7 +163,7 @@ function handleClick() {
 }
 ```
 
-## 3.7 综合练习：点赞按钮
+## 综合练习：点赞按钮
 
 ```jsx
 import { useState } from 'react';

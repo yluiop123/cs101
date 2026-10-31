@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 镜像与容器基本操作"
+title: "镜像与容器基本操作"
 description: "docker run 会自动拉取镜像，但显式 pull 能让你先确认版本再启动："
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解镜像的只读分层，以及容器与镜像之间「模板 + 实例」的关系
 - 会清理磁盘、会读懂常见报错，不再对着终端发呆
 
-## 2.1 pull 与 images：把镜像拿到本地
+## pull 与 images：把镜像拿到本地
 
 `docker run` 会自动拉取镜像，但显式 pull 能让你先确认版本再启动：
 
@@ -50,7 +50,7 @@ docker rmi nginx:latest           # 删本地镜像（有容器引用它时删�
 tag 是可以被重新推送覆盖的：今天 `nginx:alpine` 指向的镜像，下周可能就是另一个。锁定 `IMAGE ID` 或 `sha256:` 摘要才能复现同一构建。CI 里锁摘要、本地开发用 tag，是常见分工。
 :::
 
-## 2.2 run：容器启动参数解剖
+## run：容器启动参数解剖
 
 `docker run` = 创建 + 启动。参数极多，先掌握这一批：
 
@@ -91,7 +91,7 @@ docker run -d -P nginx:alpine               # -P：随机宿主端口映射到�
 左侧是宿主机端口，右侧是容器内端口。容器里的进程如果监听 3000，你却写了 `-p 3000:80`，结果是连不上——右侧必须是应用**真正监听**的端口。这是新手第一大坑。
 :::
 
-## 2.3 ps / stop / rm：生命周期四件套
+## ps / stop / rm：生命周期四件套
 
 容器的状态机很简单：
 
@@ -122,7 +122,7 @@ docker rm $(docker ps -aq --filter "status=exited")    # 批量删已退出的
 `docker stop` 只停进程，容器对象和它的可写层还在；`docker rm` 才回收。已退出的容器不删会一直占名字，`docker run --name web` 会报 `Conflict. The container name "/web" is already in use`——先 `docker rm web` 或换个名字。
 :::
 
-## 2.4 logs / exec / inspect：看现场三连
+## logs / exec / inspect：看现场三连
 
 容器「起不来」时，这三条命令覆盖 90% 的排查。
 
@@ -151,7 +151,7 @@ docker cp web:/etc/nginx/nginx.conf ./nginx.conf     # 从容器里拷文件出�
 alpine / distroless / scratch 类精简镜像里没有 bash 甚至没有 sh。看到 `exec failed` 先怀疑镜像没带 shell，而不是命令写错了。
 :::
 
-## 2.5 镜像分层与容器的关系
+## 镜像分层与容器的关系
 
 镜像是**一叠只读层**，`docker history` 能看见每一层对应 Dockerfile 的哪条指令。启动容器时，Docker 在这叠只读层之上叠一层**可写层**（overlayfs 的上层），容器里的所有写入都发生在这层：
 
@@ -178,7 +178,7 @@ docker commit web web-snapshot:v1    # 把可写层固化成新镜像（应急�
 `docker commit` 会丢失 Dockerfile 的可复现性和分层优势，产物无法审计。它可以用来抢救一次性现场，正式镜像一律回到 Dockerfile 构建（[第 3 章 · 编写 Dockerfile](../03-dockerfile/)）。
 :::
 
-## 2.6 清理命令与磁盘占用
+## 清理命令与磁盘占用
 
 Docker 的磁盘占用是新手最容易忽略的运维问题。先看账本再动手：
 
@@ -204,7 +204,7 @@ docker system prune -a --volumes    # 核弹级清理，跑之前先想清楚
 只要数据卷没被任何容器引用（比如 compose 项目改名了、容器已删），`docker volume prune` 就会连数据一起删。生产机上执行任何 prune 之前，先 `docker volume ls` 和 `docker system df -v` 确认，并保留备份（备份做法见 [第 4 章 · 数据卷与网络](../04-volumes-networks/)）。
 :::
 
-## 2.7 常见报错的读法 · 自查清单
+## 常见报错的读法 · 自查清单
 
 报错不要只看第一行，Docker 的错误信息通常包含「类型 + 原因 + 建议」：
 

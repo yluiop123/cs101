@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 并发模式与 sync 包"
+title: "并发模式与 sync 包"
 description: "第 7 章用 channel 解决协作；共享内存场景用 sync 包："
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 认识 sync.Map 与 atomic 原子操作
 - 沉淀并发安全的三条铁律与经典模式
 
-## 8.1 竞态条件重演与 sync 的位置
+## 竞态条件重演与 sync 的位置
 
 第 7 章用 channel 解决协作；**共享内存场景**用 sync 包：
 
@@ -41,7 +41,7 @@ fmt.Println(counter)               // 随机 < 1000
 go run -race main.go    # 竞态检测器：精确报告冲突的读写位置
 ```
 
-## 8.2 sync.WaitGroup：等待一组 goroutine
+## sync.WaitGroup：等待一组 goroutine
 
 ```go
 var wg sync.WaitGroup
@@ -71,7 +71,7 @@ for i := 0; i < 3; i++ {
 ```
 :::
 
-## 8.3 sync.Mutex：互斥锁
+## sync.Mutex：互斥锁
 
 ```go
 type SafeCounter struct {
@@ -101,7 +101,7 @@ rw.RLock() / rw.RUnlock()      // 读锁：可并发多个读
 rw.Lock()  / rw.Unlock()       // 写锁：独占
 ```
 
-## 8.4 sync.Once：全局只执行一次
+## sync.Once：全局只执行一次
 
 ```go
 var (
@@ -119,7 +119,7 @@ func GetConfig() *Config {
 
 单例、连接池初始化、懒加载——**Once = 并发安全的懒初始化**（不用自己 double-check 加锁）。
 
-## 8.5 atomic：无锁原子操作
+## atomic：无锁原子操作
 
 ```go
 import "sync/atomic"
@@ -144,7 +144,7 @@ goroutine 间传数据      → channel（首选！）
 一次性初始化            → sync.Once
 ```
 
-## 8.6 sync.Map：特定场景的并发 map
+## sync.Map：特定场景的并发 map
 
 ```go
 var m sync.Map                   // 内部优化过：读多写少、键集合稳定时快
@@ -158,7 +158,7 @@ m.Range(func(k, v any) bool {    // 遍历（无类型安全：any 出入）
 
 `sync.Map` 类型不安全（值都是 any）——**常规场景仍是 `Mutex + map[T]U`**（类型安全 + 直观），sync.Map 只在读多写少的缓存场景胜出。
 
-## 8.7 经典模式：errgroup 与 worker pool 收编
+## 经典模式：errgroup 与 worker pool 收编
 
 ```go
 // golang.org/x/sync/errgroup：WaitGroup + 错误传递（第 7 章爬虫骨架的收编版）
@@ -186,7 +186,7 @@ func fetchAll(urls []string) error {
 // ctx.Done() 关闭 → 所有监听者退出
 ```
 
-## 8.8 综合练习：并发安全的限流计数器
+## 综合练习：并发安全的限流计数器
 
 ```go
 package main

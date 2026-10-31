@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 基础语法与文档结构"
+title: "基础语法与文档结构"
 description: "三个名词的关系用一句话说清："
 series: html
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解标准文档结构与 head 区的常见配置
 - 学会 HTML 注释与空元素
 
-## 2.1 标签、元素、属性
+## 标签、元素、属性
 
 三个名词的关系用一句话说清：
 
@@ -30,7 +30,7 @@ tableOfContents: true
 
 属性值用双引号包裹（单引号也合法，但**团队统一用双引号**）。
 
-## 2.2 嵌套规则
+## 嵌套规则
 
 元素可以互相嵌套，形成树状结构：
 
@@ -47,7 +47,7 @@ tableOfContents: true
 1. **不允许交叉**：`<b><i>文字</b></i>` 是错的，谁先开谁后关
 2. **正确缩进**：子元素缩进两个空格，层级一目了然
 
-## 2.3 注释
+## 注释
 
 ```html
 <!-- 这是一条注释，浏览器不会显示它 -->
@@ -62,7 +62,7 @@ tableOfContents: true
 网页源码任何人可见（Ctrl+U 查看），注释里**不要写密码、密钥、敏感信息**。
 :::
 
-## 2.4 标准文档结构
+## 标准文档结构
 
 ```html
 <!DOCTYPE html>
@@ -94,7 +94,7 @@ tableOfContents: true
 新建 `xxx.html` 后输入 `!` 按 Tab（Emmet），瞬间生成以上完整骨架（见 [VS Code 教程第 4 章](../../vscode/)）。
 :::
 
-## 2.5 head 里还常放什么
+## head 里还常放什么
 
 ```html
 <head>
@@ -115,7 +115,7 @@ tableOfContents: true
 </head>
 ```
 
-## 2.6 空元素（Void Elements）
+## 空元素（Void Elements）
 
 少数元素**没有内容、也没有结束标签**，称为空元素：
 

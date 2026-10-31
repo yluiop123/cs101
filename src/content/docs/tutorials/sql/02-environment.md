@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 环境与客户端"
+title: "环境与客户端"
 description: "docker run -d --name mysql8 -e MYSQLROOTPASSWORD=123456 \"
 series: sql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会用命令行客户端与图形工具执行 SQL、看结果
 - 建好并灌满本教程唯一的样例库 `shop`（电商四表）
 
-## 2.1 安装 MySQL 8
+## 安装 MySQL 8
 
 ```bash
 # 方式 A：Docker，最干净（删容器即卸载）
@@ -39,7 +39,7 @@ mysql> SELECT VERSION();                -- 8.0.x / 8.4.x 均可，必须 8.0 以
 直接报语法错误。先跑 `SELECT VERSION();`，别在 5.7 上跟 8.0 的写法较劲。
 :::
 
-## 2.2 退路：SQLite，零配置
+## 退路：SQLite，零配置
 
 不想装服务就用 SQLite——一个文件就是一个数据库，手机 App 与测试环境里到处都是它：
 
@@ -61,7 +61,7 @@ SQLite 出于历史原因**默认不检查外键**，每个新会话都要先手
 `PRAGMA foreign_keys = ON;`，否则[第 8 章 · 数据修改与约束](../08-dml-ddl/)的级联实验会得到错误结论。
 :::
 
-## 2.3 客户端：命令行与图形工具
+## 客户端：命令行与图形工具
 
 | 工具 | 类型 | 适合场景 |
 | --- | --- | --- |
@@ -85,7 +85,7 @@ SOURCE C:/sql/schema.sql;   -- 执行本地 SQL 文件
 再怀疑 SQL——你没写 `LIMIT` 的那些行一直都在表里。
 :::
 
-## 2.4 样例数据库：schema.sql
+## 样例数据库：schema.sql
 
 后续 6 章的所有查询都打这四张表，照抄即可执行（MySQL 8）：
 
@@ -145,7 +145,7 @@ CREATE TABLE order_items (
 `orders.total` 冗余一份，是为了让账单查询不必每次重算明细，代价是要靠事务保证一致（第 8 章）。
 :::
 
-## 2.5 样例数据：seed.sql
+## 样例数据：seed.sql
 
 ```sql
 -- seed.sql（显式写主键，方便跨章节引用固定 ID）
@@ -200,7 +200,7 @@ INSERT INTO order_items (item_id, order_id, product_id, quantity, unit_price) VA
 - 订单 4 状态是 `cancelled`，但 `total` 仍占着 —— 第 5 章聚合要不要排除它
 - 明细 7 的 `unit_price`（359）与商品现价（399）不同 —— 第 6 章算营业额该用谁
 
-## 2.6 导入、验证与常见报错
+## 导入、验证与常见报错
 
 ```bash
 mysql -h 127.0.0.1 -u root -p < schema.sql   # 先结构
@@ -228,7 +228,7 @@ ERROR 1452 Cannot add or update a child row  → 外键指向不存在的父行�
 反过来插会撞 `ERROR 1452`，反过来建表会撞 `ERROR 3780`（被引用的表还不存在）。
 :::
 
-## 2.7 综合练习：把样例库跑起来
+## 综合练习：把样例库跑起来
 
 ```sql
 -- ① 版本与当前库

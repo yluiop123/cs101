@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 安装与体系结构"
+title: "安装与体系结构"
 description: "客户端敲下 SELECT FROM orders WHERE customerid = 1001;，请求在 MySQL 内部大致这样流动："
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 分清 binlog、redo log、undo log 的归属层与作用
 - 用容器起一个可用的 MySQL 8，并会改 `my.cnf` 里的关键参数
 
-## 1.1 一条 SQL 走过的三层
+## 一条 SQL 走过的三层
 
 客户端敲下 `SELECT * FROM orders WHERE customer_id = 1001;`，请求在 MySQL 内部大致这样流动：
 
@@ -46,7 +46,7 @@ Server 层 管"这句话怎么理解、怎么执行"：SQL 解析、语法检查
 5.7 及以前有个"查询缓存"（结果级缓存），因为失效粒度太粗、命中率低，8.0 起被整体移除。看到教程里讲 `query_cache_size` 却查不到这个变量，不是你的问题：以 `SELECT VERSION()` 的实际版本为准，8.0 里它已不存在（`SHOW VARIABLES LIKE 'query_cache%';` 无输出）。
 :::
 
-## 1.2 InnoDB 与 MyISAM
+## InnoDB 与 MyISAM
 
 MySQL 是"一库多引擎"的架构，同一实例里不同表可以用不同引擎。生产上几乎只有 InnoDB 一个选项，但理解差异有助于看懂老项目。
 
@@ -80,7 +80,7 @@ COUNT(*) 无 WHERE  需扫一遍索引计数        直接读元数据，瞬间�
 MyISAM 只有表锁：一条 `UPDATE` 就能阻塞整张表的所有写入，且掉电后索引损坏需要修复。遇到 `Engine=MyISAM` 的老表，转换方式是 `ALTER TABLE t ENGINE = InnoDB;`——注意这是**复制整表**的大 DDL，大表请配合第 4 章的 online DDL 或 gh-ost。
 :::
 
-## 1.3 三份日志分别住在哪
+## 三份日志分别住在哪
 
 这是面试与排障都绕不开的一张图：
 
@@ -111,7 +111,7 @@ undo log（回滚日志 / InnoDB 层）
 
 崩溃发生在第 2 步之前 → 回滚；发生在第 2、3 步之间 → 由 binlog 是否完整来决定提交与否。规则是"binlog 写了就提交"，所以从库和备份永远不会拿到主库没承认的数据。
 
-## 1.4 my.cnf：配置文件与常用参数
+## my.cnf：配置文件与常用参数
 
 先看配置文件从哪读、读了什么：
 
@@ -162,7 +162,7 @@ expire_logs_days = 7
 `my.cnf` 改动需要重启 mysqld；带 `SET GLOBAL` 的运行时改动**重启即失效**，两者不能互相替代。查全部配置值：`SHOW VARIABLES LIKE '%参数名片段%';`；查非默认配置：`SELECT * FROM performance_schema.variables_info WHERE variable_source <> '';`（需 8.0 且有权限）。
 :::
 
-## 1.5 容器方式起一个 MySQL
+## 容器方式起一个 MySQL
 
 学习阶段最省事的方式是 Docker，不污染本机也方便销毁重来。
 
@@ -199,7 +199,7 @@ docker exec -it mysql8 mysql -uroot -pRoot@123 shop
 SQL 基础教程里的 `customers`、`orders`、`order_items`、`products` 四张表在本系列继续使用，字段名保持一致。若本地还没有，按 [第 2 章 · 数据类型与表设计](../02-data-types-schema/) 给出的 DDL 建表即可，第 10 章的实战也从这份结构出发。
 :::
 
-## 1.6 连接器与账号：常见姿势
+## 连接器与账号：常见姿势
 
 ```bash
 # 连接：主机、端口、用户、库名
@@ -234,7 +234,7 @@ ERROR 2013: Lost connection during query   → 连接被杀、超时或实例重
 `mysql -uroot -p123456` 会出现在 `ps` 输出和 shell history 中。用 `-p` 交互输入，或写入 `~/.my.cnf`（权限设 600）：`[client] user=... password=...`。
 :::
 
-## 1.7 综合练习
+## 综合练习
 
 1. 起一个容器实例，用 `SELECT VERSION(), @@innodb_buffer_pool_size, @@max_connections;` 记录三个实际值，并注明你的版本。
 2. 执行 `SHOW TABLE STATUS WHERE Name = 'orders';`，找出 `Engine`、`Rows`、`Data_length`、`Index_length` 四列，说出 `Engine` 是 InnoDB 还是 MyISAM。

@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 基础语法与流程控制"
+title: "基础语法与流程控制"
 description: "Python 变量不声明类型，类型跟着值走（动态类型）："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练 if / for / while 与 match 分支
 - 会用 f-string 格式化字符串
 
-## 2.1 变量与动态类型
+## 变量与动态类型
 
 Python 变量**不声明类型**，类型跟着值走（动态类型）：
 
@@ -47,7 +47,7 @@ def add(a: int, b: int) -> int:    # 提示不影响运行，只是给人和工�
 ```
 :::
 
-## 2.2 数值与字符串
+## 数值与字符串
 
 ```python
 # 数值
@@ -74,7 +74,7 @@ len("hello")             # 5
 "py" in "python"         # True —— 成员判断
 ```
 
-## 2.3 f-string：格式化首选
+## f-string：格式化首选
 
 ```python
 name, score = "Tom", 92.5
@@ -87,7 +87,7 @@ f"{0.85:.0%}"                         # '85%' —— 百分比
 
 f-string 表达式里可以直接调函数、做运算——Java 的 String.format + "%d" 世界从此远离。
 
-## 2.4 运算符差异提示（对 Java/JS 老手）
+## 运算符差异提示（对 Java/JS 老手）
 
 ```python
 10 / 3       # 3.333... —— 普通除法永远得 float（Java 是 3！）
@@ -99,7 +99,7 @@ None is None # is 判"同一个对象"；None 比较用 is，不用 ==
 not / and / or   # 逻辑运算符是单词（Java 是 !/&&/||）
 ```
 
-## 2.5 条件：if / elif / else
+## 条件：if / elif / else
 
 ```python
 score = 85
@@ -125,7 +125,7 @@ if x is not None:    # 明确判"有没有值"时用 is not None
 ```
 :::
 
-## 2.6 循环：for 与 while
+## 循环：for 与 while
 
 ```python
 # for 遍历序列（不是 C 式计数循环！）
@@ -158,7 +158,7 @@ for n in range(2, 100):
         print(n, "是质数")
 ```
 
-## 2.7 match：结构化分支（3.10+）
+## match：结构化分支（3.10+）
 
 ```python
 def handle(command):
@@ -175,7 +175,7 @@ def handle(command):
 
 类比 Java 的 switch 箭头语法，但 match 能**按结构匹配**（列表模式、解构）——处理命令行参数非常顺手。
 
-## 2.8 综合练习：BMI 计算器
+## 综合练习：BMI 计算器
 
 ```python
 def bmi(height_m: float, weight_kg: float) -> float:

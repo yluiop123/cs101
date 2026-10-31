@@ -1,5 +1,5 @@
 ---
-title: "第 11 章 · 性能优化"
+title: "性能优化"
 description: "React 渲染分两步："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 memo/useMemo/useCallback 三件套
 - 学会懒加载与列表虚拟化的应用场景
 
-## 11.1 React 的性能模型
+## React 的性能模型
 
 React 渲染分两步：
 
@@ -37,7 +37,7 @@ Commit   Diff 对比，更新真实 DOM（精确）
 React DevTools 的 **Profiler** 面板录制交互，看每个组件渲染次数与耗时。没有数据支撑的 memo 化是"负优化"（缓存本身也有成本）。
 :::
 
-## 11.2 useMemo：缓存计算结果
+## useMemo：缓存计算结果
 
 ```jsx
 import { useMemo } from 'react';
@@ -62,7 +62,7 @@ function Dashboard({ todos, filter }) {
 
 该用的信号：**计算昂贵**（大数组排序/聚合）**且**重算频繁。普通小计算不需要——缓存本身也有开销。
 
-## 11.3 useCallback：缓存函数引用
+## useCallback：缓存函数引用
 
 组件重跑时，函数字面量会**重新创建**（引用变化）：
 
@@ -81,7 +81,7 @@ const remove = useCallback((id) => {
 }, []);                                              // 依赖空数组：函数永远同一引用
 ```
 
-## 11.4 memo：组件级缓存
+## memo：组件级缓存
 
 `memo()` 包裹的组件：**props 没变（浅比较）就跳过重渲染**：
 
@@ -109,7 +109,7 @@ memo + useCallback 有代码噪音成本。**只对"渲染昂贵 + 父组件高�
 
 :::
 
-## 11.5 懒加载与代码分割
+## 懒加载与代码分割
 
 路由级懒加载（第 7 章）是最大杠杆；组件级同理：
 
@@ -141,7 +141,7 @@ import _ from 'lodash';
 import debounce from 'lodash-es/debounce';
 ```
 
-## 11.6 长列表虚拟化
+## 长列表虚拟化
 
 千条以上的列表只渲染可视区——**虚拟化（virtualization）**：
 
@@ -185,7 +185,7 @@ function BigList({ items }) {
 
 只渲染可视区 + 缓冲区的十几行——DOM 数量恒定，万条列表丝滑滚动。**超过 ~200 条的常驻列表**才值得上。
 
-## 11.7 优化检查单
+## 优化检查单
 
 ```text
 □ Profiler 录制确认瓶颈（没有数据不动手）

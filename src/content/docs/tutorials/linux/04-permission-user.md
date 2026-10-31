@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 权限、用户与组"
+title: "权限、用户与组"
 description: "Linux 权限的最小单元是三枚比特：r 读、w 写、x 执行，分别对属主（user）、属组（group）、其他人（other）各来一组。"
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 分清 sudo 与 su 的使用场景，理解用户/组在 /etc/passwd 等文件中的记录方式
 - 认识 SUID/SGID/Sticky 特殊权限与 ACL，建立一套权限问题的排查思路
 
-## 4.1 rwx 与数字表示
+## rwx 与数字表示
 
 Linux 权限的最小单元是三枚比特：**r 读、w 写、x 执行**，分别对**属主（user）、属组（group）、其他人（other）**各来一组。
 
@@ -47,7 +47,7 @@ ls -l /etc/hosts
 700   私有目录：只许属主进出
 ```
 
-## 4.2 chmod、chown 与 umask
+## chmod、chown 与 umask
 
 ```bash
 chmod 644 report.txt              # 数字法：直接设定
@@ -69,7 +69,7 @@ umask            # 常见输出 0022
 对着 `/`、`/home`、`/usr` 来一发 `chmod -R 777` 能把系统权限体系搅得面目全非且几乎不可逆。执行递归改权限前必须：① 确认路径拼写；② 先 `ls -l 目标目录` 看清现状；③ 只给"确实需要的最小范围"加权限。777 不是解决方案，是事故报告的第一行。
 :::
 
-## 4.3 sudo 与 su
+## sudo 与 su
 
 ```bash
 sudo apt update            # 以 root 身份执行"这一条命令"（Ubuntu）
@@ -103,7 +103,7 @@ newgrp - 或重新登录使组生效        # 组变更不影响已登录会话
 sudo 校验的是**当前用户**的密码（超时后可再输，`sudo -k` 强制下次重新输入）。任何让你"把密码粘进脚本/发给我"的教程或客服都是钓鱼。服务器生产环境优先用密钥 + 受限账号，第 7、10 章展开。
 :::
 
-## 4.4 用户与组：系统里的花名册
+## 用户与组：系统里的花名册
 
 ```bash
 id                      # 当前用户的 uid/gid/附属组
@@ -150,7 +150,7 @@ sudo userdel -r coder                          # 删用户并连带家目录
 `usermod -aG` 之后**当前已登录的会话不会获得新组**——组成员关系在登录时快照。验证用 `id`：若列表里没有新组，重新登录（或退出 SSH 重连）即可；"加了 docker 组却 permission denied"的帖子十有八九栽在这一步。
 :::
 
-## 4.5 特殊权限：SUID、SGID、Sticky
+## 特殊权限：SUID、SGID、Sticky
 
 普通 rwx 之外还有三个特殊位：
 
@@ -176,7 +176,7 @@ chmod +t share/                # 目录 Sticky：防互删
 SUID 让所有执行者借用属主身份。历史上无数提权案例源于一个"配置不当的 SUID 程序"。原则：SUID 只留给经过审计的系统工具；需要"以某身份运行"的服务场景，用 sudo 规则精确授权或 systemd 的 User= 指定（第 5 章），而不是 chmod u+s。
 :::
 
-## 4.6 ACL 一瞥：rwx 不够用时
+## ACL 一瞥：rwx 不够用时
 
 rwx 只能表达"一个属主 + 一个属组 + 其他人"，需要"额外给 devops 读写、给 ops 只读"就得请出 **ACL**（访问控制列表）：
 
@@ -189,7 +189,7 @@ ls -l file.txt                         # 权限串末尾多一个 + 号，说明
 
 ACL 需要文件系统挂载支持（ext4/xfs 现代发行版默认开启），`setfacl`/`getfacl` 属 acl 包，未安装时 `sudo apt install acl` 或 `sudo dnf install acl`。团队共享目录常见组合：目录 SGID + `setfacl -d -m g:project:rw dir/`（`-d` 设为默认 ACL，作用于未来新建文件）。
 
-## 4.7 自查清单：当"Permission denied"出现时
+## 自查清单：当"Permission denied"出现时
 
 按顺序走一遍，九成权限问题在此终结：
 

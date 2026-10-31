@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 接口与内部类"
+title: "接口与内部类"
 description: "接口（interface）只声明“能做什么”，不关心“谁做、怎么做”："
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解"面向接口编程"与默认方法
 - 认识函数式接口与 Lambda 的关系
 
-## 6.1 接口：能力的契约
+## 接口：能力的契约
 
 **接口（interface）**只声明"能做什么"，不关心"谁做、怎么做"：
 
@@ -48,7 +48,7 @@ public class Course implements Serializable {
 }
 ```
 
-## 6.2 一个类可以实现多个接口
+## 一个类可以实现多个接口
 
 继承只能单继承（一个 extends），接口可以**多实现**——这是接口弥补单继承的关键价值：
 
@@ -65,7 +65,7 @@ public class SmartPhone implements Camera, Phone, GPS {
 }
 ```
 
-## 6.3 面向接口编程
+## 面向接口编程
 
 **依赖抽象，不依赖具体**——变量/参数/返回值尽量声明为接口类型：
 
@@ -90,7 +90,7 @@ save(new Course("Vue 教程"));      // Course 实现了 Serializable ✅
 
 前端类比：Vue 的 props 类型约定、TS 的 interface——**接口是"形状契约"，实现方各自负责履约**。
 
-## 6.4 接口的成员
+## 接口的成员
 
 ```java
 public interface Animal {
@@ -124,7 +124,7 @@ public interface Animal {
 
 经验法则：**优先接口；只有需要给子类提供公共状态/部分实现时才用抽象类**。
 
-## 6.5 函数式接口与 Lambda
+## 函数式接口与 Lambda
 
 **只有一个抽象方法的接口**叫**函数式接口（functional interface）**——它是 Lambda 的目标类型：
 
@@ -152,7 +152,7 @@ add2.calc(3, 4);   // 7
 
 Lambda 本质是"接口方法的简写实现"。JDK 内置了大量函数式接口（第 9 章集合的 `forEach`、`removeIf` 都是），Stream API（第 9 章）把它们的威力发挥到极致。
 
-## 6.6 匿名内部类与内部类
+## 匿名内部类与内部类
 
 **内部类（inner class）**：定义在另一个类内部的类：
 
@@ -189,7 +189,7 @@ Thread t2 = new Thread(() -> System.out.println("跑任务"));
 
 新代码一律优先 Lambda；读老项目要认得出匿名内部类。
 
-## 6.7 综合练习：支付渠道抽象
+## 综合练习：支付渠道抽象
 
 ```java
 public interface Payment {

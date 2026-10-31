@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 生命周期与变更检测"
+title: "生命周期与变更检测"
 description: "组件从创建到销毁的关键节点，实现接口即可挂钩："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 Angular 的变更检测与 Zone.js
 - 认识 OnPush 与 signal 的性能优势
 
-## 9.1 生命周期钩子
+## 生命周期钩子
 
 组件从创建到销毁的关键节点，实现接口即可挂钩：
 
@@ -56,7 +56,7 @@ export class DemoComponent implements OnInit, OnDestroy {
 
 **纪律与 Vue/React 一致：初始化借的资源，销毁前归还。**
 
-## 9.2 请求放哪：constructor vs ngOnInit
+## 请求放哪：constructor vs ngOnInit
 
 ```ts
 // 都可以，但 ngOnInit 更语义化（输入已就绪、可返回清理）
@@ -71,7 +71,7 @@ export class CourseListComponent {
 
 惯例：构造器只做 DI 注入与简单初始化；**异步请求与订阅放 ngOnInit**。
 
-## 9.3 变更检测：Angular 的"心跳"
+## 变更检测：Angular 的"心跳"
 
 Angular 怎么知道"数据变了要刷新界面"？——**变更检测（change detection）**：
 
@@ -91,7 +91,7 @@ Angular（默认）：全局心跳——任何异步后从根到叶检查全部�
 
 默认策略在中小项目毫无问题（检查绑定很快）；大项目用下面两招优化。
 
-## 9.4 OnPush：按需检查
+## OnPush：按需检查
 
 ```ts
 @Component({
@@ -106,7 +106,7 @@ export class HeavyTableComponent {
 
 OnPush 语义：**只有"输入引用变化 / 自身事件 / signal 变化"才检查本组件**——树中被高频心跳扫到的"昂贵叶子"可以显式豁免。
 
-## 9.5 signal：新时代的细粒度更新
+## signal：新时代的细粒度更新
 
 signal 让 Angular 拥有类似 Vue 的**精确更新**：
 
@@ -135,7 +135,7 @@ export class CounterComponent {
 
 演进方向一句话：**"Zone.js 全局心跳 → signal 细粒度响应"**——新项目全 signal + OnPush，变更检测成本与界面规模解耦。
 
-## 9.6 effect：signal 的副作用
+## effect：signal 的副作用
 
 ```ts
 import { effect } from '@angular/core';
@@ -154,7 +154,7 @@ export class ThemeComponent {
 
 与 Vue 的 watchEffect 同构：自动收集依赖、自动在组件销毁时停止。
 
-## 9.7 综合练习：窗口尺寸追踪组件
+## 综合练习：窗口尺寸追踪组件
 
 ```ts
 import { Component, signal, computed, effect, OnDestroy } from '@angular/core';

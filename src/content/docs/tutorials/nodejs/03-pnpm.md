@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · pnpm 与现代包管理"
+title: "pnpm 与现代包管理"
 description: "npm 早期把每个项目的依赖完整复制一份到自己的 nodemodules。十个项目用 Vue，磁盘上就有十份 Vue。"
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练掌握 pnpm 的日常命令（与 npm 一一对应）
 - 会把 npm 项目迁移到 pnpm
 
-## 3.1 npm 的两个老问题
+## npm 的两个老问题
 
 ### 问题一：磁盘黑洞
 
@@ -35,7 +35,7 @@ node_modules/
 
 于是你的代码 `import xxx from 'compiler-core'`（你没声明过这个依赖）也能跑通——这就是**幽灵依赖**：能跑，但危险。哪天 Vue 升级不再依赖它，你的项目当场崩掉。
 
-## 3.2 pnpm 的解法：全局仓库 + 硬链接
+## pnpm 的解法：全局仓库 + 硬链接
 
 pnpm（performant npm）在磁盘上维护一个**全局内容寻址仓库（store）**，项目的 node_modules 里放的只是指向 store 的**硬链接**：
 
@@ -61,7 +61,7 @@ my-app/node_modules/
 
 你的代码 `require('compiler-core')` 会**直接报错**——依赖必须声明才能用，依赖关系从此诚实。
 
-## 3.3 pnpm 命令：与 npm 对照表
+## pnpm 命令：与 npm 对照表
 
 | 场景 | npm | pnpm |
 | --- | --- | --- |
@@ -87,7 +87,7 @@ pnpm -v
 只记三处差异：安装依赖用 **add**（不是 install）、卸载用 **remove**、临时执行用 **dlx**（不是 npx）。其余命令与 npm 同名。
 :::
 
-## 3.4 迁移 npm 项目到 pnpm
+## 迁移 npm 项目到 pnpm
 
 ```bash
 # 1. 清理 npm 的痕迹
@@ -105,7 +105,7 @@ pnpm ls --depth 0
 `package-lock.json` 与 `pnpm-lock.yaml` **不要共存**——同一个项目只认一个包管理器，混用会导致依赖解析不一致。团队选定后写进 README。
 :::
 
-## 3.5 pnpm 的其他实用能力
+## pnpm 的其他实用能力
 
 ```bash
 pnpm store path        # 查看全局仓库位置

@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 标准库精选与测试"
+title: "标准库精选与测试"
 description: "import ("
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 time、encoding/json 的日常用法
 - 建立 go test 的测试习惯
 
-## 9.1 strings：字符串操作全家桶
+## strings：字符串操作全家桶
 
 ```go
 import (
@@ -39,7 +39,7 @@ fmt.Sprintf("坐标(%d, %d)", 3, 5)      // 格式化（不打印，返回字符
 // 动词：%s 字符串 %d 整数 %f 浮点 %.2f 两位 %q 带引号 %v 万能 %T 类型
 ```
 
-## 9.2 strconv：字符串与数值转换
+## strconv：字符串与数值转换
 
 ```go
 import "strconv"
@@ -51,7 +51,7 @@ strconv.ParseBool("true")
 strconv.Quote("hi")                    // "hi"（带引号转义）
 ```
 
-## 9.3 time：时间处理
+## time：时间处理
 
 ```go
 import "time"
@@ -80,7 +80,7 @@ time.Sleep(500 * time.Millisecond)
 `2006-01-02 15:04:05` = `1 2 3 4 5` 递增（月日时分秒）——背下这一行，Go 时间格式永不错。
 :::
 
-## 9.4 encoding/json：JSON 序列化
+## encoding/json：JSON 序列化
 
 ```go
 import "encoding/json"
@@ -113,7 +113,7 @@ pretty, _ := json.MarshalIndent(u, "", "  ")
 `json.Unmarshal(data, u2)` ❌（拷贝进去，外面拿不到）——必须 `&u2`。错误一律检查（err != nil），JSON 解析是真实世界的失败重灾区。
 :::
 
-## 9.5 其他高频标准包
+## 其他高频标准包
 
 ```go
 import (
@@ -142,7 +142,7 @@ slices.Max(nums); slices.Min(nums)
 maps.Keys(m); maps.Clone(m)
 ```
 
-## 9.6 go test：测试即一等公民
+## go test：测试即一等公民
 
 ```go
 // calculator.go
@@ -212,7 +212,7 @@ func TestAdd(t *testing.T) {
 }
 ```
 
-## 9.7 benchmark 与模糊测试一瞥
+## benchmark 与模糊测试一瞥
 
 ```go
 // 基准测试：BenchmarkXxx
@@ -233,7 +233,7 @@ func FuzzParseAge(f *testing.F) {
 // go test -fuzz=FuzzParseAge
 ```
 
-## 9.8 综合练习：为 To-Do 服务补测试
+## 综合练习：为 To-Do 服务补测试
 
 ```go
 // service_test.go

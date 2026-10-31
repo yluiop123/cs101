@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · HTTPS 与 TLS"
+title: "HTTPS 与 TLS"
 description: "先在局域网里亲眼看看「明文」是什么意思："
 series: network
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 能画出 TLS 1.2 与 1.3 的握手时序，解释一次握手里加密与认证如何分工
 - 会用证书链思路排查「不受信任的证书」，并用 openssl 读懂一张真实证书
 
-## 7.1 为什么需要 TLS
+## 为什么需要 TLS
 
 先在局域网里亲眼看看「明文」是什么意思：
 
@@ -42,7 +42,7 @@ http.server.test(HandlerClass=http.server.SimpleHTTPRequestHandler)
 「HTTPS」= HTTP over TLS：TCP 之上先做 TLS 握手建立加密通道，之后的 HTTP 报文全部塞进这条通道里跑。默认端口 443，URL 方案名写 `https`，仅此而已——HTTP 层的知识（[第 6 章 · HTTP/1.1、HTTP/2 与缓存](../06-http/)）一字不改地全部适用。
 :::
 
-## 7.2 对称与非对称的配合
+## 对称与非对称的配合
 
 两种加密各有致命的短板，于是 TLS 让它们搭档：
 
@@ -74,7 +74,7 @@ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256         ← 1.2 套件
 
 GCM、ChaCha20-Poly1305 这类 AEAD 模式加密与防篡改一手包办；需要另配 HMAC 的 CBC 模式历史上一堆 padding oracle 事故，1.3 直接全部移除。配服务器时只在 AEAD 里挑即可。
 
-## 7.3 证书链与信任
+## 证书链与信任
 
 上面第 2 步有个鸡生蛋问题：服务器的证书本身怎么信？答案是**信任链**：
 
@@ -110,7 +110,7 @@ with socket.create_connection(("example.com", 443)) as sock:
 过期           notBefore / notAfter 两个边界，客户端系统时钟漂移也会「被过期」
 ```
 
-## 7.4 握手：一次往返与复用
+## 握手：一次往返与复用
 
 TLS 1.2 完整握手需要 **2 个 RTT**（两个来回）才开始传数据：
 
@@ -137,7 +137,7 @@ TCP 握手 1 RTT + TLS 1.2 全握手 2 RTT + 首个 HTTP 请求 1 RTT  ≈  4 �
 
 所以「连接能不能复用」是性能关键问题——这也解释了[第 6 章](../06-http/)为什么 HTTP/2 要拼命把一切塞进同一条连接：省的不只是 TCP，更是 TLS。
 
-## 7.5 TLS 1.2 与 1.3 的差别
+## TLS 1.2 与 1.3 的差别
 
 1.3 是一次彻底的瘦身，可用下面对照表速记：
 
@@ -152,7 +152,7 @@ ClientHello   明文参数              仍要伪装兼容首包（中间盒不�
 
 0-RTT 指复用会话时客户端把首条应用数据直接塞进第一个包。代价：这层数据**不保证防重放**——攻击者可以原样重发那份加密数据，服务器无从分辨。所以协议规定：0-RTT 里只能放幂等请求，绝不能再放「确认转账」（对照[第 6 章](../06-http/)的方法幂等表）。
 
-## 7.6 HSTS 与常见配置错误
+## HSTS 与常见配置错误
 
 TLS 只管「加密后的连接」，管不住两件事：**用户第一次输入的是 http**、以及**站点自己悄悄降级**。
 
@@ -184,7 +184,7 @@ ctx = ssl.create_default_context()
 ctx.minimum_version = ssl.TLSVersion.TLSv1_2    # 1.0/1.1 不再出现在协商结果里
 ```
 
-## 7.7 综合练习：用 openssl 看一张真实证书
+## 综合练习：用 openssl 看一张真实证书
 
 ```bash
 # 1) 连上去，看握手过程与证书链（-servername 模拟 SNI，多数站点必须带）

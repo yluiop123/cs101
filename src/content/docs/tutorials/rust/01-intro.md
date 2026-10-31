@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 Rust"
+title: "初识 Rust"
 description: "Rust 由 Mozilla 主导开发，2015 年发布 1.0。它同时做到了两件“不可能”的事："
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 装好工具链，跑通第一个程序
 - 认识 cargo 与 crate 生态
 
-## 1.1 Rust 是什么
+## Rust 是什么
 
 Rust 由 Mozilla 主导开发，2015 年发布 1.0。它同时做到了两件"不可能"的事：
 
@@ -45,7 +45,7 @@ fn main() {
 第一眼"反直觉"，这正是 Rust 的独特之处——**编译器在你写的时候就告诉你谁拥有数据、谁能用多久**。所有空指针/UAF（use after free）在编译期被消灭。
 :::
 
-## 1.2 安装：rustup 一键全家桶
+## 安装：rustup 一键全家桶
 
 ```bash
 # 官方安装器 rustup（管理工具链版本）
@@ -60,7 +60,7 @@ rustup update        # 升级工具链
 
 **cargo** 是 Rust 的核心体验：构建、依赖、测试、文档、发布一条命令全包（对标 Node 的 npm+Vite+jest 合体）。
 
-## 1.3 Hello, World 与 Hello, Cargo
+## Hello, World 与 Hello, Cargo
 
 ```rust
 // main.rs —— 手写版
@@ -89,7 +89,7 @@ hello/
     └── main.rs          # 源码
 ```
 
-## 1.4 Cargo.toml 与依赖（crate）
+## Cargo.toml 与依赖（crate）
 
 ```toml
 # Cargo.toml
@@ -111,7 +111,7 @@ cargo build                          # 首次构建自动从 crates.io 下载依
 - **crates.io** = 官方仓库（对标 npmjs.com）
 - `Cargo.lock` = 版本锁定（对标 package-lock.json）
 
-## 1.5 编辑器：rust-analyzer
+## 编辑器：rust-analyzer
 
 **VS Code + rust-analyzer 扩展**（官方推荐）：
 
@@ -121,7 +121,7 @@ Rust 编译器报错以"教学级详细"著称：错误信息会告诉你怎么�
 配合 rust-analyzer 几乎是"编译器手把手教写代码"。
 ```
 
-## 1.6 语法预览：眼熟三件事
+## 语法预览：眼熟三件事
 
 ```rust
 fn main() {                              // fn 声明函数（同 Go）
@@ -144,7 +144,7 @@ fn main() {                              // fn 声明函数（同 Go）
 
 先眼熟三件事：**`!` 宏调用**、**类型后置**、**表达式导向**（`if` 是表达式，能返回值——第 2 章讲）。
 
-## 1.7 动手：第一个 cargo 项目
+## 动手：第一个 cargo 项目
 
 ```bash
 cargo new guess && cd guess

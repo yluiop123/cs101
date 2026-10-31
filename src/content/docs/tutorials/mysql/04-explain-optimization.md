@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 执行计划与查询优化"
+title: "执行计划与查询优化"
 description: "EXPLAIN 打印的是优化器打算怎么执行，不是实际耗时。语法是把 EXPLAIN 加在任何 SELECT 前面："
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用慢查询日志把"最该优化的 SQL"捞出来并量化
 - 改造深分页与文件排序，安全地给大表做 DDL
 
-## 4.1 EXPLAIN 全景：先跑起来
+## EXPLAIN 全景：先跑起来
 
 `EXPLAIN` 打印的是优化器**打算怎么执行**，不是实际耗时。语法是把 `EXPLAIN` 加在任何 `SELECT` 前面：
 
@@ -52,7 +52,7 @@ Extra       执行细节与警告信号
 `rows` 来自采样统计。刚做完大批量导入后，执行 `ANALYZE TABLE orders;` 重新采样（8.0 下它对 InnoDB 只更新统计、不锁写），优化器可能立刻改变索引选择。
 :::
 
-## 4.2 type 与 key_len：命中了多少索引
+## type 与 key_len：命中了多少索引
 
 type 从好到坏的经典阶梯：
 
@@ -88,7 +88,7 @@ utf8mb4    每字符最多按 4 字节算：VARCHAR(50) → 50 × 4 + 2
 优化器按成本决定最终 `key`。小表、命中比例过高、`SELECT *` 导致大量回表，都会让它宁选 `ALL`。想让优化器"再看看"，先更新统计信息，再考虑 `FORCE INDEX`——但强制索引是双刃剑，数据分布一变就可能更慢，线上慎用并留下说明。
 :::
 
-## 4.3 Extra、rows 与 filtered
+## Extra、rows 与 filtered
 
 ```text
 Using index              覆盖索引，没有回表（好）
@@ -111,7 +111,7 @@ type=ALL + rows 很大 + filtered 很小
 
 `filtered` 是"预计过滤后剩余行占 rows 的百分比"。`rows = 100000, filtered = 0.11` 意味着扫十万行只为留一百行——这种查询是加联合索引的头号目标。
 
-## 4.4 慢查询日志：把最该改的 SQL 捞出来
+## 慢查询日志：把最该改的 SQL 捞出来
 
 ```sql
 SHOW VARIABLES LIKE 'slow_query_log%';
@@ -151,7 +151,7 @@ SELECT * FROM sys.statement_analysis LIMIT 10;   -- 需 sys 库（8.0 默认自�
 先看"总耗时最大"的语句（累计效应），而不是"单次最慢"的那条。低频大查询可以靠拆任务解决，高频中等查询才通常是系统瓶颈。
 :::
 
-## 4.5 深分页与文件排序
+## 深分页与文件排序
 
 慢写法与快写法：
 
@@ -203,7 +203,7 @@ SELECT @@sort_buffer_size;   -- 按连接分配，不是全局内存；调到 8M
 `ORDER BY a DESC, b ASC` 这种混合方向，5.7 及以前无法用索引满足；8.0 支持降序索引，可以显式建 `(a DESC, b ASC)`。先 `SELECT VERSION();` 再决定写法。
 :::
 
-## 4.6 大表 DDL 与 online DDL
+## 大表 DDL 与 online DDL
 
 千万级表上加一列、建一个索引，能不能不锁表？取决于算法：
 
@@ -237,7 +237,7 @@ WHERE trx_started < NOW() - INTERVAL 10 SECOND;
 
 超大表或有严格 SLA 时，用第三方工具：`gh-ost`（伪装从库读 binlog 增量拷贝，可随时暂停回滚）或 `pt-online-schema-change`（影子表 + 触发器 + 原子改名）。它们的共同套路是"影子表 + 增量同步 + 切换"，代价是需要额外磁盘空间与更长的总时长。
 
-## 4.7 综合练习
+## 综合练习
 
 给 `order_items`（千万行）做一次完整诊断。原始 SQL：
 

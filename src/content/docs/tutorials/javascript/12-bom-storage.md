@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · BOM 与浏览器存储"
+title: "BOM 与浏览器存储"
 description: "DOM 管“页面内容”，BOM（Browser Object Model，浏览器对象模型）管“浏览器本身”——地址栏、历史记录、窗口尺寸、定时器都由它提供，核心入口是全局对象 window。"
 series: javascript
 sidebar:
@@ -15,7 +15,7 @@ tableOfContents: true
 - 理解 BOM 提供的浏览器级能力（location/定时器/历史）
 - 掌握 localStorage / sessionStorage / cookie 的选择与用法
 
-## 12.1 BOM 是什么
+## BOM 是什么
 
 DOM 管"页面内容"，BOM（Browser Object Model，浏览器对象模型）管"浏览器本身"——地址栏、历史记录、窗口尺寸、定时器都由它提供，核心入口是全局对象 `window`。
 
@@ -25,7 +25,7 @@ window.innerHeight;   // 视口高度
 window.alert('hi');   // 全局方法可省略 window.
 ```
 
-## 12.2 location：地址栏
+## location：地址栏
 
 ```js
 location.href;                 // 完整 URL（读）
@@ -46,7 +46,7 @@ location.replace('/about.html');  // 跳转（不可后退）
 location.reload();                // 刷新
 ```
 
-## 12.3 定时器
+## 定时器
 
 ```js
 // setTimeout：延迟执行一次（毫秒）
@@ -78,7 +78,7 @@ const countdown = setInterval(() => {
 回调执行慢于间隔时会"堆积"。轮询场景的现代替代：递归 setTimeout（上一次执行完再排下一次）。**页面卸载前清除定时器**是习惯性要求。
 :::
 
-## 12.4 history 与窗口
+## history 与窗口
 
 ```js
 history.back();       // 后退
@@ -92,7 +92,7 @@ window.scrollY;                    // 当前滚动距离
 window.scrollTo({ top: 0, behavior: 'smooth' });   // 平滑回顶部
 ```
 
-## 12.5 localStorage：持久存储
+## localStorage：持久存储
 
 键值对存储，**关闭浏览器、重启电脑都在**（同源共享）：
 
@@ -113,7 +113,7 @@ const saved = JSON.parse(localStorage.getItem('user') ?? 'null');
 `JSON.parse(null)` 会报错，读对象时给默认值（`?? 'null'` 模式）或封装工具函数——第 14 章实战会封装一个 `storage.js`。
 :::
 
-## 12.6 三种存储对比与选型
+## 三种存储对比与选型
 
 | 特性 | localStorage | sessionStorage | cookie |
 | --- | --- | --- | --- |
@@ -133,7 +133,7 @@ const saved = JSON.parse(localStorage.getItem('user') ?? 'null');
 明文存储、无加密——**绝不存密码、令牌等敏感信息**。超过 5MB 或需要结构化查询，用 IndexedDB（进阶）。
 :::
 
-## 12.7 综合示例：记住用户的主题选择
+## 综合示例：记住用户的主题选择
 
 ```js
 const themeBtn = document.querySelector('#theme-toggle');

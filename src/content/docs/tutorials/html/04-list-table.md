@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 列表与表格"
+title: "列表与表格"
 description: "内容顺序无关时用无序列表（unordered list）："
 series: html
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握表格完整结构与合并单元格
 - 建立"表格只装数据"的正确观念
 
-## 4.1 无序列表：ul + li
+## 无序列表：ul + li
 
 内容**顺序无关**时用无序列表（unordered list）：
 
@@ -30,7 +30,7 @@ tableOfContents: true
 
 列表项（list item）内的内容不限：文字、链接、图片甚至另一个列表。
 
-## 4.2 有序列表：ol + li
+## 有序列表：ol + li
 
 内容**顺序重要**时用有序列表（ordered list）：
 
@@ -55,7 +55,7 @@ tableOfContents: true
 
 编号样式（数字/字母/罗马数字）交给 CSS 的 `list-style-type` 控制，HTML 不管外观。
 
-## 4.3 嵌套列表
+## 嵌套列表
 
 子列表写在**父列表项 `<li>` 的内部**：
 
@@ -76,7 +76,7 @@ tableOfContents: true
 子列表放在 `<li>` 外面、两个 `<li>` 之间是非法结构，渲染易错、语义断裂。**子列表永远是 `<li>` 的孩子**。
 :::
 
-## 4.4 描述列表：dl + dt + dd
+## 描述列表：dl + dt + dd
 
 "术语 + 解释"型的内容用描述列表（description list）：
 
@@ -95,7 +95,7 @@ tableOfContents: true
 
 典型场景：术语表、FAQ、键值对展示（如商品参数）。
 
-## 4.5 表格：table 家族
+## 表格：table 家族
 
 展示**二维数据**（行 × 列）用表格：
 
@@ -138,7 +138,7 @@ tableOfContents: true
 | `<td>` | 数据单元格（table data） |
 | `<thead>` / `<tbody>` / `<tfoot>` | 语义分区（thead/tfoot 可选，tbody 建议写） |
 
-## 4.6 合并单元格
+## 合并单元格
 
 用 `colspan`（跨列）与 `rowspan`（跨行）属性：
 
@@ -161,7 +161,7 @@ tableOfContents: true
 **被"吃掉"的格子不用写**。colspan="2" 意味着同行少写一个 td；rowspan="2" 意味着下一行少写一个 td。数错格子是表格排版错位的头号原因。
 :::
 
-## 4.7 表格的正确用途
+## 表格的正确用途
 
 :::danger[表格不是布局工具]
 2000 年代流行用 `<table>` 摆页面布局，如今是**明确的反模式**：

@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 泛型深入"
+title: "泛型深入"
 description: "没有泛型的容器装什么都行，取出来都得强转："
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解通配符 `?` 与上下界约束
 - 认识类型擦除及其实际影响
 
-## 10.1 为什么需要泛型
+## 为什么需要泛型
 
 没有泛型的容器装什么都行，取出来都得强转：
 
@@ -39,7 +39,7 @@ String s = list.get(0);   // 无需强转，类型自动正确
 
 第 9 章的 `List<String>` 就是泛型的应用——本章学习"自己写泛型"。
 
-## 10.2 泛型类
+## 泛型类
 
 类型参数用大写字母约定：`T`（Type）、`E`（Element）、`K/V`（Key/Value）、`R`（Result）：
 
@@ -85,7 +85,7 @@ public class Pair<K, V> {
 Pair<String, Integer> port = new Pair<>("http", 80);
 ```
 
-## 10.3 泛型方法
+## 泛型方法
 
 ```java
 public class Utils {
@@ -107,7 +107,7 @@ String first = Utils.firstOrNull(List.of("a", "b"));   // T 推断为 String
 
 与泛型类的区别：**泛型方法的 T 是"方法级别"的**，每次调用可以推断出不同类型。
 
-## 10.4 类型约束：extends 上界
+## 类型约束：extends 上界
 
 ```java
 // T 必须是 Number 或其子类（才能调用 doubleValue()）
@@ -126,7 +126,7 @@ sum(List.of("a"));               // ❌ String 不是 Number
 
 `<T extends 接口>` 同理——约束 T 必须实现某接口（对比 TS 的 `<T extends { length: number }>`，思想完全一致）。
 
-## 10.5 通配符：? 的两种形态
+## 通配符：? 的两种形态
 
 泛型没有协变——`List<Dog>` 不是 `List<Animal>` 的子类型！通配符解决"接受一组相关泛型"的问题：
 
@@ -159,7 +159,7 @@ fillDogs(new ArrayList<Animal>());   // ✅
 
 记忆口诀（PECS）：**Producer Extends, Consumer Super**——读数据用 extends，写数据用 super。
 
-## 10.6 类型擦除（type erasure）
+## 类型擦除（type erasure）
 
 Java 泛型是**编译期**检查，运行时类型信息被**擦除**：
 
@@ -178,7 +178,7 @@ T[] arr = new T[10]; // ❌ 同理
 
 对比 C#/TS：C# 泛型运行时保留（真泛型），TS 泛型纯编译期。Java 介于两者——**编译期检查 + 运行时擦除**。需要运行时类型信息时，传 `Class<T>` 参数（第 14 章反射会用到这个技巧）。
 
-## 10.7 泛型与继承的实战套路
+## 泛型与继承的实战套路
 
 ```java
 // 通用响应包装（前后端交互的标准结构）
@@ -208,7 +208,7 @@ ApiResponse<Void> deleted = ApiResponse.fail(404, "未找到");
 
 这个 `ApiResponse<T>` 在 Spring Boot 教程里会原样出现——泛型是读懂任何 Java 框架源码的门票。
 
-## 10.8 综合练习：类型安全的缓存
+## 综合练习：类型安全的缓存
 
 ```java
 import java.util.Map;

@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 隔离级别与 MVCC"
+title: "隔离级别与 MVCC"
 description: "准备一张表并在两个会话（A、B）里交替执行："
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 RC 与 RR 在 MySQL 里的实际行为差异与取舍
 - 能说清 read view、行版本号如何决定"哪一版数据对我可见"
 
-## 6.1 三个并发异常
+## 三个并发异常
 
 准备一张表并在两个会话（A、B）里交替执行：
 
@@ -40,7 +40,7 @@ UPDATE orders SET status = 1 WHERE order_id = 1001;
 在会话 B 执行 `SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;` 后 `START TRANSACTION; SELECT status FROM orders WHERE order_id = 1001;` 会看到 `1`；回到会话 A 执行 `ROLLBACK;` 再读一次变回 `0`。这就是脏读，也是为什么 `READ UNCOMMITTED` 在生产上几乎没有正当使用场景。
 :::
 
-## 6.2 四种隔离级别
+## 四种隔离级别
 
 ```sql
 -- 查看（全局 / 当前会话）
@@ -61,7 +61,7 @@ SERIALIZABLE         普通读也加锁（或转成加锁读）→ 全避免，�
 
 MySQL/InnoDB 的默认是 `REPEATABLE READ`（以 `SELECT @@transaction_isolation;` 实测为准）。互联网业务里 `READ COMMITTED` 同样常见，理由是并发更好、锁更少、语义更直观。
 
-## 6.3 RC 与 RR 在 MySQL 的真实差别
+## RC 与 RR 在 MySQL 的真实差别
 
 差别只有一句话：**生成 read view 的时机**。
 
@@ -108,7 +108,7 @@ REPEATABLE READ     两次都是 0          ← 快照保证可重复
 `READ COMMITTED` + `binlog_format = STATEMENT` 会得到不可预测的主从结果（同一语句在从库执行时看到的不是同一份数据）。切到 RC 时同步检查：`SELECT @@binlog_format;`，需要为 `ROW`（第 8 章）。
 :::
 
-## 6.4 行版本号：隐藏的两列
+## 行版本号：隐藏的两列
 
 InnoDB 每行都带两个隐藏列（`information_schema` 里看不到，但真实存在）：
 
@@ -134,7 +134,7 @@ SELECT @@innodb_read_only;             -- 顺带确认实例角色
 SELECT trx_id, trx_started FROM information_schema.innodb_trx ORDER BY trx_id;
 ```
 
-## 6.5 Read View 的可见性算法
+## Read View 的可见性算法
 
 快照读生成一个 read view，核心是四个字段：
 
@@ -161,7 +161,7 @@ RR 与 RC 的差别在这里变成一行代码：RC 每条语句重建 read view
 最老活跃事务把 purge 挡在那里（第 5 章），版本链随之变长。一个跑了半小时的事务现在读一行，可能要沿 undo 链回溯几百个版本才能找到可见版本 —— MVCC 的"读不加锁"并不等于"读免费"。
 :::
 
-## 6.6 快照读与当前读
+## 快照读与当前读
 
 ```sql
 -- 快照读：读 MVCC 版本链，不加锁（绝大多数 SELECT）
@@ -198,7 +198,7 @@ SELECT COUNT(*) FROM orders WHERE customer_id = 1001;   -- 现在变 6：自己�
 准确说法：**快照读**通过 MVCC 不会看到新插入的行；**当前读**在 RR 下靠 next-key 锁阻止别人往范围内插入。但如果别的会话已经插入并提交、你的事务此后才做当前读，就会同时看到"快照里的旧世界"和"当前读里的新世界" —— 即所谓"第二种丢失更新/幻读"。要么在同一事务里避免混用两种读，要么用 `SELECT ... FOR UPDATE` 起手把范围锁住（详见第 7 章）。
 :::
 
-## 6.7 综合练习：两个终端复现三种现象
+## 综合练习：两个终端复现三种现象
 
 用 `mysql -h 127.0.0.1 -u shop_app -p shop` 开两个终端，记为 A、B。每步都先写 SQL 再写预期。
 

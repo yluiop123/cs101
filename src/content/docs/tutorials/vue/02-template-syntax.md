@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 模板语法"
+title: "模板语法"
 description: "双大括号（mustache）把数据渲染成文本："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练绑定 class 与 style
 - 理解指令（directive）的通用语法
 
-## 2.1 插值：文本绑定
+## 插值：文本绑定
 
 双大括号（mustache）把数据渲染成文本：
 
@@ -39,7 +39,7 @@ const raw = '<b>加粗</b>';
 插值 `{{ }}` 自动转义（安全）；`v-html` 原样插入 HTML——**内容含用户输入时绝不能用**，否则脚本注入。只在渲染可信内容时使用。
 :::
 
-## 2.2 v-bind：属性绑定
+## v-bind：属性绑定
 
 插值不能用在 HTML 属性里——属性绑定用 `v-bind`（缩写 `:`）：
 
@@ -69,7 +69,7 @@ const id = ref('main-box');
 src="imgUrl"      → 字符串，值就是 "imgUrl" 四个字母
 ```
 
-## 2.3 v-on：事件绑定
+## v-on：事件绑定
 
 `v-on`（缩写 `@`）绑定事件：
 
@@ -109,7 +109,7 @@ function submit(event) {
 
 常用修饰符：`.prevent`（阻止默认）、`.stop`（停止冒泡）、`.once`（一次）、`.enter` / `.esc`（按键）、`.self`（仅自身）。
 
-## 2.4 class 绑定：对象与数组语法
+## class 绑定：对象与数组语法
 
 Vue 的拿手好戏——动态 class 用**对象/数组语法**表达：
 
@@ -145,7 +145,7 @@ const activeClass = ref('active');
 [Tailwind CSS 教程第 7 章](../../tailwind/)的"映射表 + 条件选类"在 Vue 里就是 `:class` 对象语法——`:class="statusClass[status]"`。
 :::
 
-## 2.5 指令的通用语法
+## 指令的通用语法
 
 `v-` 开头的特殊属性统称**指令（directive）**，核心家族：
 
@@ -160,7 +160,7 @@ const activeClass = ref('active');
 
 前四种本章之外（第 7、8 章细讲），本章掌握 `v-bind` 与 `v-on` 就能写大半界面。
 
-## 2.6 模板引用：拿真实的 DOM
+## 模板引用：拿真实的 DOM
 
 偶尔需要直接操作 DOM（聚焦输入框、测量尺寸）——模板引用（template ref）：
 
@@ -182,7 +182,7 @@ onMounted(() => {
 
 原则：**数据驱动优先，template ref 是最后手段**——能用响应式数据表达的，绝不手摸 DOM。
 
-## 2.7 综合练习：点赞卡片
+## 综合练习：点赞卡片
 
 ```vue
 <script setup>

@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 远程仓库与 GitHub"
+title: "远程仓库与 GitHub"
 description: "本地仓库保存在你电脑上，远程仓库（remote）托管在服务器上（GitHub / Gitee / GitLab / 公司内网 Git）。它解决两个问题："
 series: git
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 clone / push / pull / fetch 四大远程命令
 - 完成 GitHub 账号配置与 SSH 密钥连接
 
-## 4.1 远程仓库的角色
+## 远程仓库的角色
 
 本地仓库保存在你电脑上，**远程仓库（remote）**托管在服务器上（GitHub / Gitee / GitLab / 公司内网 Git）。它解决两个问题：
 
@@ -25,7 +25,7 @@ tableOfContents: true
 
 一个本地仓库可以关联多个远程（如同时推 GitHub 和 Gitee），最常用的是名为 `origin` 的默认远程。
 
-## 4.2 注册 GitHub 与创建仓库
+## 注册 GitHub 与创建仓库
 
 1. 注册 [github.com](https://github.com/) 账号
 2. 点击右上角 **+** → **New repository**
@@ -34,7 +34,7 @@ tableOfContents: true
 
 创建完成，GitHub 会给出两种衔接方式：`https` 或 `ssh` 地址。
 
-## 4.3 关联远程与首次推送
+## 关联远程与首次推送
 
 ```bash
 # 关联远程仓库，命名为 origin
@@ -49,7 +49,7 @@ git remote -v
 
 推送后刷新 GitHub 页面，你的提交历史就出现在网页上了。
 
-## 4.4 日常推送与拉取
+## 日常推送与拉取
 
 ```bash
 # 推送本地新提交
@@ -77,7 +77,7 @@ cd 仓库名
 
 `clone` 会自动完成：下载全部历史 + 关联 origin + 建立跟踪分支，开箱即用。
 
-## 4.5 SSH 密钥：免密安全连接
+## SSH 密钥：免密安全连接
 
 HTTPS 方式每次推送都要求输入账号密码（token）。SSH 密钥一次配置，永久免密且更安全：
 
@@ -99,7 +99,7 @@ ssh -T git@github.com
 
 之后把远程地址换成 SSH 形式（`git@github.com:用户名/仓库名.git`）即可免密推送。
 
-## 4.6 推送被拒绝怎么办
+## 推送被拒绝怎么办
 
 多人协作时，若远程有你没有的新提交，`push` 会被拒绝：
 

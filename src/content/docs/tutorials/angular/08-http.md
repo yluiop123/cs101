@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · HTTP 与服务端交互"
+title: "HTTP 与服务端交互"
 description: "// main.ts / app.config.ts 注册"
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会 Interceptor 统一处理鉴权与错误
 - 建立服务层 + 组件层的请求架构
 
-## 8.1 HttpClient：Angular 的 fetch
+## HttpClient：Angular 的 fetch
 
 ```ts
 // main.ts / app.config.ts 注册
@@ -69,7 +69,7 @@ export class TodoApi {
 返回 Observable —— 惰性：不订阅不发请求
 ```
 
-## 8.2 服务层包装：流转状态
+## 服务层包装：流转状态
 
 ```ts
 // services/todo.service.ts —— 订阅 API、维护 signal 状态
@@ -123,7 +123,7 @@ export class TodoListComponent {
 
 **架构：Api 层（HTTP 细节）→ Service 层（状态与流程）→ 组件（展示）**——与 Vue/React 版"api + store/组件"三层完全同构。
 
-## 8.3 Interceptor：请求的统一关卡
+## Interceptor：请求的统一关卡
 
 **拦截器（interceptor）**= 每个 HTTP 请求都要过的关卡（对应 axios 的 interceptor）：
 
@@ -172,7 +172,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
 两大经典用途：**authInterceptor**（自动带凭证）+ **errorInterceptor**（统一报错）——业务代码从此不再重复写这些。
 
-## 8.4 环境与基地址
+## 环境与基地址
 
 ```text
 src/environments/
@@ -194,7 +194,7 @@ private base = `${environment.apiUrl}/todos`;   // api 层引用环境
 
 与 Vite 的 `VITE_API_BASE` 思路一致——环境差异收敛在配置层。
 
-## 8.5 综合练习：完整 CRUD 页面
+## 综合练习：完整 CRUD 页面
 
 清单（整合本章）：
 

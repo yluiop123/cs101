@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 为什么用 Redis 与安装"
+title: "为什么用 Redis 与安装"
 description: "Redis 的全称是 REmote DIctionary Server，名字已经把本质说完了：远端（Remote）+ 字典（Dictionary）。"
 series: redis
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用包管理器与 Docker 各起一个实例，并用 redis-cli 跑通第一轮命令
 - 会读 `INFO` 的关键指标，给实例出一份体检报告
 
-## 1.1 Redis 是什么：把一张哈希表搬到网络上
+## Redis 是什么：把一张哈希表搬到网络上
 
 Redis 的全称是 REmote DIctionary Server，名字已经把本质说完了：**远端（Remote）+ 字典（Dictionary）**。进程内维护一张巨大的哈希表，key 是字符串，value 支持五种主体结构（[第 2 章 · 五大数据类型](../02-data-types/)），所有读写都走内存。
 
@@ -34,7 +34,7 @@ Redis 的全称是 REmote DIctionary Server，名字已经把本质说完了：*
 Redis 6.0 起网络 I/O 可以多线程（`io-threads` 配置项，**默认关闭**，以 `CONFIG GET io-threads` 实测为准），但命令本身仍在主线程按到达顺序串行执行。所以一个 `redis-server` 进程大约吃满一个 CPU 核——多核机器上的正确姿势是**跑多个实例**或用 [第 7 章 · 主从、哨兵与集群](../07-cluster/) 的水平拆分，而不是指望单实例自动用上 16 个核。
 :::
 
-## 1.2 它能解决哪三类问题
+## 它能解决哪三类问题
 
 | 场景 | 用到的能力 | 典型命令 |
 | --- | --- | --- |
@@ -52,7 +52,7 @@ Redis 6.0 起网络 I/O 可以多线程（`io-threads` 配置项，**默认关�
 
 也不要指望它做复杂查询：Redis 没有二级索引、没有 `JOIN`、没有范围之外的过滤能力。需要「按多个条件查列表」时，先回到 SQL。
 
-## 1.3 安装：包管理器、源码与验证
+## 安装：包管理器、源码与验证
 
 Redis 官方**不支持 Windows 原生运行**，Windows 上请走 Docker 或 WSL2。
 
@@ -84,7 +84,7 @@ redis-cli PING                  # 返回 PONG 即链路正常
 `redis-cli PING` 若返回 `(error) NOAUTH Authentication required.`，说明实例设了 `requirepass`，后续每条命令都要带 `-a 密码`；若返回 `Could not connect to Redis`，先确认端口与 `bind` 而不是怀疑程序。
 :::
 
-## 1.4 redis-cli：第一轮命令与交互约定
+## redis-cli：第一轮命令与交互约定
 
 ```text
 127.0.0.1:6379> PING
@@ -122,7 +122,7 @@ redis-cli --hotkeys                        # 基于空闲时间找热 key（需 
 `redis-cli KEYS '*'` 是 O(N) 且**阻塞主线程**的扫描。跟着教程在空实例上敲没问题，生产库请一律换成 `SCAN`（[第 3 章 · key 设计与过期淘汰](../03-keys-expiry/) 展开）。
 :::
 
-## 1.5 Docker：一分钟起一个可复现的实例
+## Docker：一分钟起一个可复现的实例
 
 教程与团队协作推荐这种方式——版本、参数、数据目录全部锁死在一条命令里。
 
@@ -158,7 +158,7 @@ docker run -d --name redis-747 \
 **正例**：端口映射显式绑定 `127.0.0.1`（如上例）、设置密码、生产环境再用防火墙/安全组限制来源 IP；能走内网就别走公网。
 :::
 
-## 1.6 别急着上线：持久化与安全的默认值
+## 别急着上线：持久化与安全的默认值
 
 Redis 的出厂默认值偏保守、偏开发友好，几个必须知道的：
 
@@ -187,7 +187,7 @@ redis-cli CONFIG GET requirepass      # 设了密码时返回被隐藏，属正�
 `0` 表示**不设上限**：实例会一直吃到操作系统 OOM killer 来杀进程，被杀时内存里未落盘的数据一起消失。缓存型实例务必给一个低于物理内存的值（留 20%~30% 给 fork 时的写时复制，见第 4 章）。
 :::
 
-## 1.7 综合练习：用 INFO 出一份体检报告
+## 综合练习：用 INFO 出一份体检报告
 
 `INFO` 是最被低估的调试入口，一段输出就是一份体检表。
 

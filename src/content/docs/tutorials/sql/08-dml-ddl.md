@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 数据修改与约束"
+title: "数据修改与约束"
 description: "-- ① 指定列名（推荐：列顺序变了也不会错）"
 series: sql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 `CREATE` / `ALTER` / `DROP` 与六大约束，理解数据库替你拦下了什么
 - 会用 `BEGIN` / `COMMIT` / `ROLLBACK` 把多条语句绑成一次不可分割的变更
 
-## 8.1 INSERT：写入行
+## INSERT：写入行
 
 ```sql
 -- ① 指定列名（推荐：列顺序变了也不会错）
@@ -50,7 +50,7 @@ INSERT INTO customers (email, name, joined_at) VALUES ('lina@example.com', '李�
 跨库迁移时这段必改。
 :::
 
-## 8.2 UPDATE：WHERE 是安全带
+## UPDATE：WHERE 是安全带
 
 ```sql
 -- 图书类全场九折：多个赋值用逗号，右侧读的都是旧值
@@ -83,7 +83,7 @@ MySQL 的系统变量 `sql_safe_updates` 默认为 1：`WHERE` 里没有键列�
 执行完一定要看回执 `Query OK, 2 rows affected`——行数与预期不符，立刻 `ROLLBACK`。
 :::
 
-## 8.3 DELETE 与 TRUNCATE
+## DELETE 与 TRUNCATE
 
 ```sql
 -- 删一行：先用同条件 SELECT 确认
@@ -118,7 +118,7 @@ DELETE FROM customers   WHERE customer_id = 1;
 子查询里直接引用**正在改的那张表**（`ERROR 1093`），真要绕就再包一层派生表。
 :::
 
-## 8.4 DDL：CREATE / ALTER / DROP
+## DDL：CREATE / ALTER / DROP
 
 ```sql
 CREATE TABLE monthly_sales (                     -- DDL 演示用，别动 shop 的四张主表
@@ -143,7 +143,7 @@ DROP TABLE IF EXISTS monthly_sales;      -- 生产环境不写不带 IF EXISTS �
 改列类型（`MODIFY`）在大表上会重建表，线上要走专门的变更流程。
 :::
 
-## 8.5 六大约束
+## 六大约束
 
 约束是**写在表结构里的规则**，数据库每次写入都检查：
 
@@ -183,7 +183,7 @@ MySQL/PG/SQLite 都允许同一列里有多个 `NULL` 通过唯一约束（`NULL
 既要唯一又要必填，就写 `NOT NULL` + `UNIQUE`。
 :::
 
-## 8.6 外键级联与事务基础
+## 外键级联与事务基础
 
 外键的删除/更新策略写在 `REFERENCES` 后面：
 
@@ -218,7 +218,7 @@ MySQL 里 `CREATE` / `ALTER` / `DROP` 会**隐式提交**当前事务。在事�
 事务内 DDL 的（`BEGIN; ALTER TABLE ...; ROLLBACK;` 可行）。
 :::
 
-## 8.7 综合练习：一次下单的完整流程
+## 综合练习：一次下单的完整流程
 
 ```sql
 -- 客户 6 买 2 件保温杯 + 1 件机械键盘，一条事务搞定

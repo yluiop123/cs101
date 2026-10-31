@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 盒子模型"
+title: "盒子模型"
 description: "CSS 中所有元素都是矩形盒子（box），由内到外四层："
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会用 box-sizing 杜绝"越改越宽"
 - 理解外边距合并与常见间距方案
 
-## 4.1 每个元素都是盒子
+## 每个元素都是盒子
 
 CSS 中所有元素都是**矩形盒子（box）**，由内到外四层：
 
@@ -41,7 +41,7 @@ CSS 中所有元素都是**矩形盒子（box）**，由内到外四层：
 }
 ```
 
-## 4.2 关键问题：width 到底算多大
+## 关键问题：width 到底算多大
 
 默认规则（`content-box`）下：**width 只管内容区**，实际占位 = 内容 + 内边距 + 边框：
 
@@ -58,7 +58,7 @@ CSS 中所有元素都是**矩形盒子（box）**，由内到外四层：
 给定宽的容器加 padding/border，它就变宽、布局就崩——这是所有 CSS 新手的第一次"灵异事件"。根源就是默认的 `content-box`。
 :::
 
-## 4.3 解药：box-sizing: border-box
+## 解药：box-sizing: border-box
 
 ```css
 .card {
@@ -82,7 +82,7 @@ CSS 中所有元素都是**矩形盒子（box）**，由内到外四层：
 }
 ```
 
-## 4.4 padding 与 margin 的写法
+## padding 与 margin 的写法
 
 四个方向可分别控制，简写按"**上右下左**"顺时针：
 
@@ -111,7 +111,7 @@ CSS 中所有元素都是**矩形盒子（box）**，由内到外四层：
 背景色延伸到 padding 区域（所以按钮文字与边缘的距离用 padding），margin 是纯透明间隙。想让点击区域变大 → padding；想让元素与别人拉开 → margin。
 :::
 
-## 4.5 外边距合并（margin collapse）
+## 外边距合并（margin collapse）
 
 **垂直方向相邻**的两个块级元素，上下 margin 会"合并"取较大者，而不是相加：
 
@@ -140,7 +140,7 @@ CSS 中所有元素都是**矩形盒子（box）**，由内到外四层：
 与其纠结合并规则，不如**只用一个方向的 margin**（团队规范如"margin 只用 bottom"），从源头减少相遇。
 :::
 
-## 4.6 块级元素的水平居中
+## 块级元素的水平居中
 
 ```css
 .container {

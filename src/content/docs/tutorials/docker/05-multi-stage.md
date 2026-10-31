@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 多阶段构建与镜像优化"
+title: "多阶段构建与镜像优化"
 description: "第 3 章末尾那个 Dockerfile 能跑，但镜像里装着完整 Node 工具链、npm 缓存、devDependencies、编译工具——生产运行时只需要 node 二进制和 nodemodules 里的生产依赖。"
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 能按取舍表选出 base 镜像（alpine / slim / distroless / scratch）
 - 掌握六条瘦身手段与非 root、HEALTHCHECK 这两条安全基线
 
-## 5.1 问题：构建依赖全被带进了生产镜像
+## 问题：构建依赖全被带进了生产镜像
 
 第 3 章末尾那个 Dockerfile 能跑，但镜像里装着完整 Node 工具链、npm 缓存、devDependencies、编译工具——生产运行时只需要 `node` 二进制和 `node_modules` 里的生产依赖。
 
@@ -30,7 +30,7 @@ tableOfContents: true
 
 多余的体积不只是「拉取慢」：每多一个可执行文件、包管理器、shell，就多一分被利用的攻击面，也多一分 CVE 扫描告警。
 
-## 5.2 builder 与 runtime 分离
+## builder 与 runtime 分离
 
 一条 Dockerfile 里可以有多个 `FROM`，每个 `FROM` 开启一个新阶段（stage），用 `AS` 命名；后一个阶段用 `COPY --from=` 精确取前一个阶段的产物。**最终镜像 = 最后一个阶段**。
 
@@ -83,7 +83,7 @@ ENTRYPOINT ["/server"]
 关掉 CGO 得到静态二进制，`scratch` 里除了它什么都不剩（Go 官方镜像的推荐形态）。
 :::
 
-## 5.3 base 镜像怎么选
+## base 镜像怎么选
 
 | base | 典型体积 | 有 shell | 调试便利 | 适用 |
 | --- | --- | --- | --- | --- |
@@ -103,7 +103,7 @@ ENTRYPOINT ["/server"]
 再小的 base，用 `latest` 也意味着某天构建出来的镜像突然变了、体积暴涨或行为不同。固定 `nginx:alpine` 这类滚动 tag 时，至少在生产环境用 digest 或明确的版本号锁住（第 7 章）。
 :::
 
-## 5.4 减小体积的六条手段
+## 减小体积的六条手段
 
 1. **换更小的 base**：从 `node:20` 到 `node:20-alpine` 通常就是几百 MB 的差距。
 2. **多阶段构建**：工具链、编译产物中间态一律留在 builder。
@@ -132,7 +132,7 @@ docker build --progress=plain -t myapp:2.0.0 .   # 构建过程逐层输出大�
 docker images                             # 总体积
 ```
 
-## 5.5 非 root 用户与 HEALTHCHECK
+## 非 root 用户与 HEALTHCHECK
 
 **非 root**：容器里的 root 是宿主机上的 root（同一 UID 0），一旦应用漏洞导致任意文件写入或容器逃逸，影响远大于普通用户。
 
@@ -165,7 +165,7 @@ docker run --no-healthcheck app          # 运行时禁用镜像自带检查
 `--restart unless-stopped` 只看进程退出，不看健康状态。健康检查失败要自愈，需要在 compose 里用 `depends_on: condition: service_healthy`（编排效果，见第 6 章）或额外的守护方案。健康检查也别打重接口：用一个不查数据库全表、只探活且几毫秒返回的路径。
 :::
 
-## 5.6 构建缓存：--no-cache 与缓存挂载
+## 构建缓存：--no-cache 与缓存挂载
 
 BuildKit（现代 Docker 的默认构建器）的常用控制手段：
 
@@ -214,7 +214,7 @@ rm ./npm.token                          # 用完立刻删，且别把它提交�
 `docker build --build-arg SECRET=x` 的值能被 `docker history` 看到。构建期需要凭据一律用 `--mount=type=secret`，或者干脆在 CI 里用云端缓存与私有 registry 认证（第 7 章）。
 :::
 
-## 5.7 体积前后对比 · 综合练习
+## 体积前后对比 · 综合练习
 
 示例项目的实测形态（数字请自己跑一遍核对，这里给出的是量级关系）：
 

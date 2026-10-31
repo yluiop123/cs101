@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 持久化：RDB 与 AOF"
+title: "持久化：RDB 与 AOF"
 description: "Redis 有两条互相独立的持久化路线："
 series: redis
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会配 `appendfsync`、AOF 重写阈值与混合持久化，并说清选型理由
 - 独立完成一次「删库→从快照恢复」的演练，并能解释延迟抖动的来源
 
-## 4.1 两条路线：状态快照 vs 命令日志
+## 两条路线：状态快照 vs 命令日志
 
 Redis 有两条互相独立的持久化路线：
 
@@ -43,7 +43,7 @@ Docker 里跑 `docker run redis:7.2` 未挂 `-v ...:/data`，重启容器后 `du
 **正例**：`-v "$PWD/redis-data:/data"` 显式挂载（第 1 章 1.5 节），并且把 `dir` 与挂载点核对一致——`redis-cli CONFIG GET dir` 的输出必须是宿主机可读的路径。
 :::
 
-## 4.2 RDB：fork、写时复制与触发条件
+## RDB：fork、写时复制与触发条件
 
 自动触发由 `save` 配置项控制（`redis.conf`），默认值形如：
 
@@ -86,7 +86,7 @@ latest_fork_usec:24512
 `SAVE` 在**主线程**同步写快照，期间实例完全不响应，百万级数据可停顿十几秒；`stop-writes-on-bgsave-error yes`（默认）还会让子进程写失败后**拒绝所有写命令**。生产环境只允许 `BGSAVE`。
 :::
 
-## 4.3 AOF：追加、刷盘与重写
+## AOF：追加、刷盘与重写
 
 AOF 把每个写变更追加到缓冲区，按策略刷盘，文件持续增长。核心配置（`redis.conf`）：
 
@@ -124,7 +124,7 @@ redis-cli CONFIG SET auto-aof-rewrite-min-size 128mb
 
 重写同样是 fork 子进程，父进程期间收到的新写命令先进缓冲区，重写完成后追加进新文件，不会丢。增量 fsync 由 `aof-rewrite-incremental-fsync yes` 控制，避免一次性刷盘造成文件系统级卡顿。
 
-## 4.4 混合持久化与选型
+## 混合持久化与选型
 
 `aof-use-rdb-preamble yes`（即 **混合持久化**）让重写出的新 AOF 文件**前半段是 RDB 二进制、后半段是重写期间的增量写命令**。于是：
 
@@ -141,7 +141,7 @@ redis-cli CONFIG SET auto-aof-rewrite-min-size 128mb
 大内存实例频繁重启            → AOF 关闭或拉长重写阈值，重启用 RDB 快速拉起
 ```
 
-## 4.5 恢复演练：把「能恢复」变成肌肉记忆
+## 恢复演练：把「能恢复」变成肌肉记忆
 
 载入优先级：**`appendonly yes` 时读 AOF（含 RDB preamble），忽略 `dump.rdb`；`appendonly no` 时读 `dump.rdb`**。恢复过程会阻塞到载入完成，`loading:1` 期间除 `SHUTDOWN` 外所有命令返回 `LOADING Redis is loading the dataset in memory`。
 
@@ -168,7 +168,7 @@ redis-check-aof --fix /data/appendonlydir/appendonly.aof.1.incr.aof
 线上 AOF 出问题，直接对生产目录跑 `--fix` 等于二次破坏。正确顺序：`SHUTDOWN` → 完整拷贝 `dir` 目录 → 在副本上试验 → 确认无误再替换上线。RDB 与 AOF 至少一份保留 7 天，并做异地副本。
 :::
 
-## 4.6 持久化对延迟与内存的影响
+## 持久化对延迟与内存的影响
 
 持久化不是免费的，可观测的三处代价：
 
@@ -191,7 +191,7 @@ echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
 ```
 :::
 
-## 4.7 综合练习：亲手量出「丢多少数据」
+## 综合练习：亲手量出「丢多少数据」
 
 **目标**：用一组实验把「RDB 丢多少」「AOF 丢多少」变成可见数字。
 

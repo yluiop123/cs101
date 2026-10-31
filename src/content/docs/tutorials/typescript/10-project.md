@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 综合实战"
+title: "综合实战"
 description: "ts-todo/"
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 覆盖接口建模、模块拆分与 DOM 类型
 - 体验"类型先于实现"的开发流
 
-## 10.1 项目结构与目标
+## 项目结构与目标
 
 ```text
 ts-todo/
@@ -32,7 +32,7 @@ ts-todo/
 
 开发顺序：**types → storage → service → ui → main**——"先定形状，再填实现"，类型设计先行是 TS 项目的标准节奏。
 
-## 10.2 第一步：types.ts（数据建模）
+## 第一步：types.ts（数据建模）
 
 ```ts
 // src/types.ts —— 全项目的类型中心
@@ -55,7 +55,7 @@ export interface TodoService {
 
 先写接口的好处：ui/main 可以**对着蓝图开发**（哪怕实现还没写完，编辑器已能提示）。
 
-## 10.3 第二步：storage.ts（泛型持久化）
+## 第二步：storage.ts（泛型持久化）
 
 ```ts
 // src/storage.ts
@@ -78,7 +78,7 @@ export function createJSONStore<T>(key: string) {
 }
 ```
 
-## 10.4 第三步：todoService.ts（业务层）
+## 第三步：todoService.ts（业务层）
 
 ```ts
 // src/todoService.ts
@@ -129,7 +129,7 @@ export const todoService = {
 
 对照 JS 版：逻辑完全一致，但 `text.trim()` 的"非空检查"、`switch` 的穷尽性全部有编译器背书。
 
-## 10.5 第四步：ui.ts（DOM 层的类型）
+## 第四步：ui.ts（DOM 层的类型）
 
 ```ts
 // src/ui.ts
@@ -193,7 +193,7 @@ export function initUI(): void {
 3. `dataset.id` 永远是 string，`Number()` 转换处 TS 会提醒类型不匹配
 :::
 
-## 10.6 第五步：main.ts（入口）
+## 第五步：main.ts（入口）
 
 ```ts
 // src/main.ts
@@ -203,7 +203,7 @@ initUI();
 console.log('TS Todo 已启动');
 ```
 
-## 10.7 HTML 与运行
+## HTML 与运行
 
 ```html
 <!-- index.html -->
@@ -226,7 +226,7 @@ pnpm create vite ts-todo --template vanilla-ts
 cd ts-todo && pnpm install && pnpm dev
 ```
 
-## 10.8 体检：让类型检查说话
+## 体检：让类型检查说话
 
 ```bash
 npx tsc --noEmit
@@ -241,7 +241,7 @@ todoService.toggle('1');        // ❌ string 不能赋给 number
 
 JS 版这两处都只能靠运行时崩掉才暴露——这就是 TS 教程的价值浓缩。
 
-## 10.9 下一步
+## 下一步
 
 TS 之旅毕业。它不是新语言，而是 JS 的"类型护栏 + 提示放大器"：
 

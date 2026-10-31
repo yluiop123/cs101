@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 抓包与网络排障实战"
+title: "抓包与网络排障实战"
 description: "网络故障的定位永远是从下往上逐层确认「这层通了没有」，每层一个代表命令："
 series: network
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会读 ping/traceroute/dig/ss/tcpdump/curl -v 的输出关键列，知道每个数字含义
 - 能用这套工具组合独立定位一个「偶发超时」，并把证据链写清楚
 
-## 9.1 排查顺序：像剥洋葱一样分层
+## 排查顺序：像剥洋葱一样分层
 
 网络故障的定位永远是从下往上逐层确认「这层通了没有」，每层一个代表命令：
 
@@ -34,7 +34,7 @@ tableOfContents: true
 如果现象本身已经指明了层级（比如浏览器报 `ERR_CERT_AUTHORITY_INVALID`），直接从 ④ 开始，但结论仍要向下验证一层：证书报错时顺手确认 ③ 端口是通的，排除「报错是假象、其实是连错了别的服务」。
 :::
 
-## 9.2 ping 与 traceroute：先看有没有路
+## ping 与 traceroute：先看有没有路
 
 ```bash
 ping -c 10 api.example.com        # 发 10 个包，看统计
@@ -70,7 +70,7 @@ Ncat: Connection refused.               ← 对端明确拒绝：进程没监听
 Ncat: Connection timed out.             ← 连 SYN 都没回：防火墙丢包或路由黑洞，回头查 ②
 ```
 
-## 9.3 dig：把解析结果钉死
+## dig：把解析结果钉死
 
 ```bash
 dig api.example.com +noall +answer            # 只看答案段
@@ -98,7 +98,7 @@ curl --resolve api.example.com:443:93.184.216.34 https://api.example.com/health
 
 `--resolve` 把域名硬钉到指定 IP（SNI 与 Host 仍用域名）。这条命令通、平时不通 → 问题锁定在解析层；这条也不通 → 继续往下查。
 
-## 9.4 ss 与 netstat：看本机端口与连接状态
+## ss 与 netstat：看本机端口与连接状态
 
 `netstat` 是老将，`ss` 是它的现代替代（信息更多、更快），常用组合：
 
@@ -130,7 +130,7 @@ ss -tan state established | wc -l      # 与监控曲线对账，确认有没有
 监听行里的地址若是 `127.0.0.1:8080`，服务根本没暴露到外部网卡——这不是防火墙问题，是绑错地址。先看监听行第一列：`0.0.0.0` / `*` 才是全网卡监听（对照[第 10 章 · 网络编程：从 socket 到 epoll](../10-socket/)的 bind 写法）。
 :::
 
-## 9.5 tcpdump / tshark 与 Wireshark 关键列
+## tcpdump / tshark 与 Wireshark 关键列
 
 抓包是最后一层证据：前面都在「问系统」，这里直接看线上字节。过滤器是它的灵魂：
 
@@ -153,7 +153,7 @@ Protocol/Info   一眼认出 SYN/ACK/ICMP/重传（Info 列有描述）
 右键 Follow TCP Stream    看这条会话的完整字节内容，HTTP 明文时最直观
 ```
 
-## 9.6 curl -v 与时间拆解
+## curl -v 与时间拆解
 
 一条 `curl -v` 把 ①–⑤ 层全部过一遍：DNS 结果、TCP 连接、TLS 参数、请求头、响应头、重定向链：
 
@@ -176,7 +176,7 @@ dns=0.030 connect=0.085 tls=0.260 ttfb=0.910 total=0.930
 
 再强调一次读法：`-w` 的各段是**累积时间轴**，永远做差看，不看单值。排「偶发」要批量采样——同一命令循环 100 次把整行 `-w` 输出落盘，用 Python 统计 P50/P95/P99：偶发的慢只有分位数能现形，平均值会骗人。这正是 9.7 案件的入口手法。
 
-## 9.7 综合练习：定位一个「偶发超时」
+## 综合练习：定位一个「偶发超时」
 
 场景：网关日志里 2% 的 `/api/order` 请求耗时超过 5s，直接重试就好。按本章顺序走完整个案子：
 

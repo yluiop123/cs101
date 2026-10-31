@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 定位与层级"
+title: "定位与层级"
 description: "定位（position）让元素脱离常规流或在其上精确定位："
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 实现相对定位/绝对定位的经典搭配
 - 理解 z-index 与层叠上下文规则
 
-## 8.1 position：五兄弟
+## position：五兄弟
 
 定位（position）让元素**脱离常规流**或在其上精确定位：
 
@@ -32,7 +32,7 @@ tableOfContents: true
 定位模式必须配合偏移属性才有意义：`top` / `right` / `bottom` / `left`。relative 与 absolute 的"参照物"完全不同，是新手混淆的重灾区。
 :::
 
-## 8.2 relative：相对自己偏移
+## relative：相对自己偏移
 
 ```css
 .tip {
@@ -44,7 +44,7 @@ tableOfContents: true
 
 关键认知：元素**仍然占据原位置的流空间**，视觉上只是"平移"了，原来的坑还留着。
 
-## 8.3 absolute：子绝父相
+## absolute：子绝父相
 
 绝对定位元素脱离流，参照物是**最近的、position 不是 static 的祖先**：
 
@@ -82,7 +82,7 @@ tableOfContents: true
 如果所有祖先都是 static，absolute 元素会参照**初始包含块**（大致是页面根）定位——"明明写了 right:8px 却跑到页面右上角"就是这个原因。给参照祖先补 `position: relative` 即可。
 :::
 
-## 8.4 fixed 与 sticky
+## fixed 与 sticky
 
 ```css
 /* 吸顶导航：永远钉在视口顶部 */
@@ -108,7 +108,7 @@ tableOfContents: true
 sticky 要求：祖先元素**没有** `overflow: hidden/auto/scroll`（会截断粘性行为）、父容器高度足够。粘不住时先查祖先的 overflow。
 :::
 
-## 8.5 z-index 与层叠上下文
+## z-index 与层叠上下文
 
 定位元素会重叠，`z-index` 决定谁在上面：
 
@@ -132,7 +132,7 @@ sticky 要求：祖先元素**没有** `overflow: hidden/auto/scroll`（会截�
 
 团队实践：z-index 用**分层常量**管理（如 10/100/1000/9999 对应 普通悬浮/下拉/吸顶/弹窗），避免 9999 之后的 10000 军备竞赛。
 
-## 8.6 综合示例：悬浮操作按钮 + 消息条
+## 综合示例：悬浮操作按钮 + 消息条
 
 ```html
 <style>

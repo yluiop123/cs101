@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · Docker Compose 编排"
+title: "Docker Compose 编排"
 description: "前几章手工起容器时，网络、卷、环境变量、端口堆成一条要折行的长命令。应用一旦超过 3 个容器，就需要声明式编排：把拓扑写进文件，一条命令拉起整套。"
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用健康条件把多容器应用的启动顺序管对，起一套 web + api + db
 - 掌握 profile 与多文件覆盖、日常子命令，以及上生产前要改的东西
 
-## 6.1 从一串 docker run 到一份文件
+## 从一串 docker run 到一份文件
 
 前几章手工起容器时，网络、卷、环境变量、端口堆成一条要折行的长命令。应用一旦超过 3 个容器，就需要**声明式编排**：把拓扑写进文件，一条命令拉起整套。
 
@@ -29,7 +29,7 @@ docker-compose version        # 老的独立二进制，已停止维护，新环
 
 Compose 用「项目名」圈住一组资源：默认取定义文件所在目录名，网络与卷会被命名成 `项目名_default`、`项目名_dbdata`。同机放两套同名项目会互相覆盖，用顶层 `name:` 字段或 `COMPOSE_PROJECT_NAME` 显式区分。
 
-## 6.2 文件骨架与命名规则
+## 文件骨架与命名规则
 
 文件名推荐 `compose.yaml`（历史写法 `docker-compose.yml` 也认）。顶层主要是三块：
 
@@ -54,7 +54,7 @@ volumes:
 服务里只写 `- /var/lib/mysql`（不带源）会得到匿名卷：`docker compose down` 时它被留着，你却不知道里面是什么。持久数据一律在上层 `volumes:` 声明命名卷。
 :::
 
-## 6.3 服务字段详解
+## 服务字段详解
 
 ```yaml
 services:
@@ -89,7 +89,7 @@ services:
 | `profiles` | 按需启用的服务分组 |
 | `container_name` | 一般别设：破坏多副本与 `down` 的可预测性 |
 
-## 6.4 环境变量与 .env
+## 环境变量与 .env
 
 两层机制别混：项目根目录的 `.env` 供 **Compose 自己做 `${VAR}` 插值**；`env_file` 才是把键值**注入容器**环境变量。
 
@@ -119,7 +119,7 @@ docker compose --env-file prod.env config
 `docker compose config` 把插值结果明文打印，别把它粘进工单或聊天记录。`.env` 的文件权限设成 600，密钥传递在构建期用 secret 挂载（[第 5 章 · 多阶段构建与镜像优化](../05-multi-stage/)）、在运行期用编排平台的凭据机制。
 :::
 
-## 6.5 实战：web + api + db 一起起
+## 实战：web + api + db 一起起
 
 一套最小可用的三层结构：Nginx 发静态资源并反代，API 只暴露给内部网络，MySQL 的数据在命名卷里。
 
@@ -181,7 +181,7 @@ curl -s -o /dev/null -w "%{http_code}\n" localhost:8080
 
 `api` 不 `ports` 只 `expose`，外部只能通过 `web` 访问它；`db` 只在 `backend` 网络里，`web` 路由不到它；`docker compose ps` 里三个服务的 STATUS 都会带上 `(healthy)`。这就是第 4 章网络隔离思路在 compose 里的落法。
 
-## 6.6 启动顺序、profile 与多文件覆盖
+## 启动顺序、profile 与多文件覆盖
 
 `depends_on` **只保证被依赖的容器先启动**，不保证它能接受连接。裸写 `depends_on: [ db ]` 时，MySQL 容器起来了但还在初始化数据目录，API 一连就失败。三种 condition 按可靠性递增：
 
@@ -231,7 +231,7 @@ services:
 
 合并规则要点：**映射递归合并，列表默认追加而不是替换**。要真正替换端口/挂载这类列表，用规范提供的 `!reset` / `!override` 标签（较老的 Compose 版本不支持，先 `docker compose version` 确认）。
 
-## 6.7 常用子命令与生产自查清单
+## 常用子命令与生产自查清单
 
 ```bash
 docker compose up -d --build          # 重新构建后再起

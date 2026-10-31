@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · 响应式与动画实战"
+title: "响应式与动画实战"
 description: "/ 默认样式：移动端优先 /"
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会 transition 过渡与 animation 关键帧动画
 - 用 CSS 变量统一管理主题，完成综合实战
 
-## 12.1 媒体查询：按条件套样式
+## 媒体查询：按条件套样式
 
 ```css
 /* 默认样式：移动端优先 */
@@ -41,7 +41,7 @@ tableOfContents: true
 先写手机端样式（最简单），再用 `min-width` 逐级增强——比"桌面优先再压缩"的思路维护成本低得多。媒体查询还能查其他条件：`prefers-color-scheme`（深色模式）、`prefers-reduced-motion`（减少动画）。
 :::
 
-## 12.2 rem 与 vw：让尺寸随屏幕流动
+## rem 与 vw：让尺寸随屏幕流动
 
 ```css
 html { font-size: 16px; }
@@ -52,7 +52,7 @@ html { font-size: 16px; }
 
 组合策略：**布局用百分比/max-width，文字用 rem，全屏元素用 vw**。
 
-## 12.3 过渡：transition
+## 过渡：transition
 
 让属性变化"平滑发生"而不是瞬间跳变：
 
@@ -75,7 +75,7 @@ html { font-size: 16px; }
 `transform`（位移/缩放/旋转）与 `opacity` 的动画由合成器处理，性能远优于改 top/width——**动画性能两条铁律：只用 transform 与 opacity**。
 :::
 
-## 12.4 关键帧动画：animation
+## 关键帧动画：animation
 
 比 transition 更自由的动画——自己定义"每一步"：
 
@@ -126,7 +126,7 @@ html { font-size: 16px; }
 
 三个效果：悬停按钮（transition 抬升）、跳动徽标（keyframes + infinite alternate）、加载骨架屏（渐变 + background-position 动画）。在本地运行后悬停按钮即可体验过渡效果。
 
-## 12.5 CSS 变量：统一管理主题
+## CSS 变量：统一管理主题
 
 ```css
 :root {
@@ -147,7 +147,7 @@ html { font-size: 16px; }
 
 变量在 `:root` 定义、`var()` 引用、可被 JS 动态修改（`document.documentElement.style.setProperty('--brand', ...)`）——换肤、主题切换的基建。
 
-## 12.6 综合实战：响应式登录页
+## 综合实战：响应式登录页
 
 ```html
 <style>

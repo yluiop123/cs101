@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 路由 Vue Router"
+title: "路由 Vue Router"
 description: "多页传统站点：每次跳转整页刷新。单页应用（SPA）用前端路由（router）在不刷新的前提下切换“页面”："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握路由参数、嵌套路由与编程式导航
 - 学会导航守卫做登录拦截
 
-## 10.1 为什么需要路由
+## 为什么需要路由
 
 多页传统站点：每次跳转整页刷新。**单页应用（SPA）**用前端路由（router）在不刷新的前提下切换"页面"：
 
@@ -26,7 +26,7 @@ URL 变了 → 路由器匹配配置 → 渲染对应组件（其余不动）
 
 Vue Router 是 Vue 官方路由方案，`npm create vue` 时勾选 Router 即已装好。
 
-## 10.2 基本配置
+## 基本配置
 
 ```js
 // src/router/index.js
@@ -52,7 +52,7 @@ createApp(App).use(router).mount('#app');
 
 **懒加载**：`() => import(...)` 动态导入——每个页面拆独立 chunk（[Vite 教程第 5 章](../../vite/)的分包），首屏只加载首页代码。**生产项目路由一律懒加载**（首页可静态导入）。
 
-## 10.3 两个核心组件
+## 两个核心组件
 
 ```vue
 <template>
@@ -71,7 +71,7 @@ createApp(App).use(router).mount('#app');
 
 RouterLink 激活时自动加 `router-link-active` 类——配合 CSS 做高亮导航。
 
-## 10.4 动态路由参数
+## 动态路由参数
 
 ```js
 // 路由定义：冒号声明参数
@@ -98,7 +98,7 @@ watch(() => route.params.id, load);
 </script>
 ```
 
-## 10.5 编程式导航
+## 编程式导航
 
 代码里跳转（提交后跳、登录后跳）：
 
@@ -113,7 +113,7 @@ router.replace('/login');        // 替换（不留历史记录）
 router.back();                   // 回退
 ```
 
-## 10.6 嵌套路由
+## 嵌套路由
 
 页面里的"子页面"（布局复用）：
 
@@ -137,7 +137,7 @@ router.back();                   // 回退
 </template>
 ```
 
-## 10.7 导航守卫：登录拦截
+## 导航守卫：登录拦截
 
 **守卫（guard）**= 跳转的"关卡"，最常用的是全局前置守卫：
 
@@ -170,7 +170,7 @@ async function onLogin() {
 }
 ```
 
-## 10.8 404 与重定向
+## 404 与重定向
 
 ```js
 routes: [
@@ -179,7 +179,7 @@ routes: [
 ]
 ```
 
-## 10.9 综合练习：带守卫的迷你站
+## 综合练习：带守卫的迷你站
 
 ```js
 // 完整路由表

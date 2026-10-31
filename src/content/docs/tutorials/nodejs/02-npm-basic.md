@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · npm 基础：package.json 与依赖安装"
+title: "npm 基础：package.json 与依赖安装"
 description: "每个 Node/前端项目都以 package.json 开局："
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练使用 npm 的安装、卸载与运行命令
 - 分清 dependencies 与 devDependencies
 
-## 2.1 初始化项目：package.json 诞生
+## 初始化项目：package.json 诞生
 
 每个 Node/前端项目都以 `package.json` 开局：
 
@@ -43,7 +43,7 @@ npm init -y     # -y = 全部采用默认值，快速生成
 它是项目的**身份证 + 依赖清单 + 任务清单**：项目叫什么、依赖哪些包、能执行哪些命令——团队协作时，别人拿到 package.json 就能还原整个环境（代码靠 Git，环境靠它）。
 :::
 
-## 2.2 安装依赖：npm install
+## 安装依赖：npm install
 
 ```bash
 # 安装运行时依赖（生产环境需要）
@@ -75,7 +75,7 @@ my-app/
 新同事上手：`git clone` 后一句 `npm install` 环境即就位。
 :::
 
-## 2.3 dependencies vs devDependencies
+## dependencies vs devDependencies
 
 ```json
 {
@@ -92,7 +92,7 @@ my-app/
 
 判断标准：**代码打包发布后还需要它吗？** 需要 → dependencies；只是开发过程用（构建/检查/测试）→ devDependencies。
 
-## 2.4 语义化版本（Semver）
+## 语义化版本（Semver）
 
 `^4.17.21` 这类版本号是"语义化版本"（Semantic Versioning）：
 
@@ -111,7 +111,7 @@ my-app/
 package.json 里的 `^4.17.21` 是**范围**——不同时间安装可能拿到不同的 4.x 小版本。lock 文件把"实际装到的精确版本"钉死，这就是它必须提交的原因。
 :::
 
-## 2.5 常用 npm 命令速查
+## 常用 npm 命令速查
 
 ```bash
 npm install              # 按 package.json + lock 安装全部依赖（装新项目第一步）
@@ -125,7 +125,7 @@ npm ls                   # 查看已安装依赖树
 npm ls --depth=0         # 只看直接依赖
 ```
 
-## 2.6 scripts：项目任务清单
+## scripts：项目任务清单
 
 ```json
 {
@@ -148,7 +148,7 @@ npm start        # start/stop/test 有特权：可省略 run
 scripts 执行时，npm 会把 `node_modules/.bin` 加入 PATH——所以 `vite` 不必全局安装也能跑。**项目工具优先装在项目里**，避免全局版本不可控。
 :::
 
-## 2.7 npx：临时执行包命令
+## npx：临时执行包命令
 
 ```bash
 npx create-vue my-project   # 临时下载执行，用完即弃（无需全局安装）
@@ -157,7 +157,7 @@ npx prettier --write .      # 一次性格式化
 
 `npx` = "执行包提供的命令，本地有就用本地的，没有就临时下载"。脚手架类工具（用一次）非常适合 npx。
 
-## 2.8 综合流程：从零到跑起来
+## 综合流程：从零到跑起来
 
 ```bash
 mkdir demo-app && cd demo-app

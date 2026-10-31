@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 接口与组合"
+title: "接口与组合"
 description: "接口（interface）= 一组方法签名。与 Java 的最大差异：实现是隐式的——不用声明 implements，方法凑齐就算实现："
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握常用标准接口与空接口
 - 学会"面向接口 + 组合"的 Go 设计
 
-## 6.1 接口：方法的集合
+## 接口：方法的集合
 
 **接口（interface）**= 一组方法签名。与 Java 的最大差异：**实现是隐式的**——不用声明 implements，方法凑齐就算实现：
 
@@ -45,7 +45,7 @@ Go：**只看行为**（有方法就匹配），显式声明反而不存在。
 收益：可以在**不改第三方类型**的前提下让它满足你的接口——给标准库类型"补"接口是日常操作。
 :::
 
-## 6.2 接口的多实现与组合
+## 接口的多实现与组合
 
 ```go
 type Reader interface {
@@ -65,7 +65,7 @@ type ReadWriter interface {
 
 **标准库就是小接口的教科书**：`io.Reader`、`io.Writer` 各只有一个方法——能用一个方法说清的绝不用两个。**接口越小，实现者越多，组合力越强**。
 
-## 6.3 面向接口编程的 Go 姿态
+## 面向接口编程的 Go 姿态
 
 ```go
 // 消费者定义接口（不是生产者！）—— Go 的独特惯例
@@ -96,7 +96,7 @@ checkout := Checkout{gateway: MockGateway{}}       // 测试
 
 注意方向：**接口定义在使用方**（Java 定义在提供方）——消费视角声明需求，实现方各显神通，解耦更彻底。
 
-## 6.4 空接口 interface{} 与 any
+## 空接口 interface{} 与 any
 
 **空接口**（没有任何方法）= 任何类型都实现它 = 万能容器（对应 Java Object，但更彻底）：
 
@@ -131,7 +131,7 @@ func describe(v any) string {
 
 Go 1.18 前没有泛型，interface{} 是唯一出路；**现在优先泛型，interface{} 留给真正"类型未知"的场景**（JSON 解析、打印日志）。
 
-## 6.5 接口值的两层结构
+## 接口值的两层结构
 
 ```go
 var s Serializable            // nil 接口：类型为 nil + 值为 nil
@@ -160,7 +160,7 @@ err == nil                    // false！—— 判空失败的经典 bug
 **原则：函数返回错误时，正常路径直接 `return nil`**，不要返回"装着 nil 的接口"。
 :::
 
-## 6.6 常用标准接口速览
+## 常用标准接口速览
 
 ```go
 // Stringer：自定义打印（Go 版 toString）
@@ -183,7 +183,7 @@ type Handler interface { ServeHTTP(ResponseWriter, *Request) }
 
 **识别接口的敏感度**决定读 Go 代码的速度——看到"少方法小接口"就想到"万物皆可实现它"。
 
-## 6.7 综合练习：接口驱动的通知系统
+## 综合练习：接口驱动的通知系统
 
 ```go
 package main

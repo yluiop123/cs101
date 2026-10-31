@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · 工程化综合实战"
+title: "工程化综合实战"
 description: "目录结构（CLI 风格 + 按领域分组的成熟形态）："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 综合运用全教程知识完成"任务看板"
 - 沉淀 Angular 项目自查清单，三框架视野收束
 
-## 12.1 工程化规范
+## 工程化规范
 
 **目录结构**（CLI 风格 + 按领域分组的成熟形态）：
 
@@ -59,7 +59,7 @@ ng build         # 构建（产物到 dist/）
 
 **约定即文档**：Angular 项目无论谁写，结构长得都一样——这就是强约定工程的价值。
 
-## 12.2 项目目标：任务看板（Angular 版）
+## 项目目标：任务看板（Angular 版）
 
 与 Vue/React 版同需求，Angular 姿态实现：
 
@@ -71,7 +71,7 @@ ng build         # 构建（产物到 dist/）
 ⑤ ng build + 自查清单收尾
 ```
 
-## 12.3 服务：看板数据层
+## 服务：看板数据层
 
 ```ts
 // features/board/board.service.ts
@@ -152,7 +152,7 @@ export class BoardService {
 
 signal + effect 实现自动持久化（对照 Vue 的 watch 版、React 的 persist 中间件版——三框架同一需求的三种语法）。
 
-## 12.4 组件：卡片与泳道
+## 组件：卡片与泳道
 
 ```ts
 // features/board/components/task-card/task-card.component.ts
@@ -245,7 +245,7 @@ export class TaskColumnComponent {
 
 拖拽数据传递用标准 **DataTransfer**（Angular 社区惯例）——比"全局中转变量"更规范，跨组件无耦合。
 
-## 12.5 页面：组装
+## 页面：组装
 
 ```ts
 // features/board/board.component.ts
@@ -282,7 +282,7 @@ export class BoardComponent {
 
 事件层层上抛到页面，页面直接转调 service 方法——**组件树薄、服务层厚**的 Angular 姿态。
 
-## 12.6 三框架实现对照（终章总结）
+## 三框架实现对照（终章总结）
 
 | 关注点 | Vue | React | Angular |
 | --- | --- | --- | --- |
@@ -300,7 +300,7 @@ export class BoardComponent {
 
 **三套语法，一个思维**：声明式渲染、组件树、单向数据流、状态分层——学到的是"框架无关的前端工程能力"。
 
-## 12.7 Angular 项目自查清单
+## Angular 项目自查清单
 
 - [ ] 服务职责单一，providedIn root 默认全局
 - [ ] signal 状态 + computed 派生；模板保持"薄"
@@ -310,7 +310,7 @@ export class BoardComponent {
 - [ ] 核心服务有 spec 测试；ng build 通过
 - [ ] 路由懒加载（loadComponent）
 
-## 12.8 课程体系收束
+## 课程体系收束
 
 至此，三大前端框架（Vue/React/Angular）全部完成。回顾整个教程路径：
 

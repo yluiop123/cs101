@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 结构体与枚举"
+title: "结构体与枚举"
 description: "struct User {"
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会用 impl 定义方法（关联函数）
 - 理解枚举携带数据与 Option
 
-## 5.1 结构体：数据聚合
+## 结构体：数据聚合
 
 ```rust
 struct User {
@@ -53,7 +53,7 @@ p.0
 struct AlwaysEqual;
 ```
 
-## 5.2 方法：impl 块
+## 方法：impl 块
 
 ```rust
 #[derive(Debug)]                       // 派生调试打印（标准库帮实现）
@@ -99,7 +99,7 @@ println!("{:?}", rect);                     // Rectangle { width: 6.0, height: 8
 | `&mut self` | 可变借用 | 修改内部状态 |
 | `self` | 拿走所有权 | 构建新值/消费型转换 |
 
-## 5.3 枚举：携带数据的变体
+## 枚举：携带数据的变体
 
 第 2 章预览过——枚举是 Rust 建模的核心武器：
 
@@ -123,7 +123,7 @@ impl Message {
 }
 ```
 
-## 5.4 Option：没有 null 的世界
+## Option：没有 null 的世界
 
 Rust **没有 null**——"可能没有值"用标准库枚举 `Option<T>` 表达：
 
@@ -153,7 +153,7 @@ Java 的 null 是"隐形炸弹"——任何引用都可能突然是 null（NPE �
 Rust：**类型系统强制区分"一定有值"（T）与"可能有值"（Option\<T\>）**——想用 T 的方法必须先拆开 Option（编译器盯着）。空指针这一类 bug 从语言层面消失。
 :::
 
-## 5.5 derive：自动实现常用 trait
+## derive：自动实现常用 trait
 
 ```rust
 #[derive(Debug, Clone, PartialEq)]      // 编译器生成实现
@@ -178,7 +178,7 @@ Eq        全等（哈希键需要）Hash      可做 HashMap 键
 Default   全零值构造      Ord        排序比较
 ```
 
-## 5.6 综合练习：任务管理器建模
+## 综合练习：任务管理器建模
 
 ```rust
 #[derive(Debug, Clone, PartialEq)]

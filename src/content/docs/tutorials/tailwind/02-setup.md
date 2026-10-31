@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 安装与配置"
+title: "安装与配置"
 description: "前置：已有 Vite 项目（Vite 教程）或任意 Vite/Vue/React 脚手架。"
 series: tailwind
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 零安装体验（CDN / Playground）
 - 理解 `@import "tailwindcss"` 做了什么
 
-## 2.1 方式一：Vite 项目（正式项目标准流程）
+## 方式一：Vite 项目（正式项目标准流程）
 
 前置：已有 Vite 项目（[Vite 教程](../../vite/)）或任意 Vite/Vue/React 脚手架。
 
@@ -58,7 +58,7 @@ import './style.css';
 标题变大、加粗、变蓝且有下划线，浏览器 DevTools 里能看到 `text-3xl` 等类命中了规则——环境就绪。
 :::
 
-## 2.2 方式二：CDN 快速体验（零安装）
+## 方式二：CDN 快速体验（零安装）
 
 临时原型、CodePen 类场景：
 
@@ -81,11 +81,11 @@ import './style.css';
 浏览器内实时编译，体积大、无优化，**不要用于生产**。正式项目一律走 2.1 的构建流程。
 :::
 
-## 2.3 在线 Playground
+## 在线 Playground
 
 官方 [Playground](https://play.tailwindcss.com)——左侧写带 Tailwind 类名的 HTML，右侧实时预览。第 3~6 章的工具类都可以在这里随手验证，不污染本地项目。
 
-## 2.4 v4 的工作原理：扫描 + 按需生成
+## v4 的工作原理：扫描 + 按需生成
 
 ```text
 你写  <div class="p-4 text-lg">
@@ -102,7 +102,7 @@ import './style.css';
 1. **按需生成**：哪怕类库有上万个类，最终产物只含你用过的
 2. **类名必须是完整字面量**——`bg-${color}-500` 这种动态拼接扫描器认不出来（第 7 章讲正确姿势）
 
-## 2.5 常见安装问题
+## 常见安装问题
 
 **类名写了没效果**：90% 是 CSS 没引入或插件没接——检查 main 里是否 import 了 style.css、vite.config 里是否加了 `tailwindcss()`。
 
@@ -110,7 +110,7 @@ import './style.css';
 
 **检测生产产物**：构建后检查 `dist/assets/*.css`，应只有几 KB～十几 KB（按需生成的证据）。
 
-## 2.6 项目结构建议
+## 项目结构建议
 
 ```text
 my-app/

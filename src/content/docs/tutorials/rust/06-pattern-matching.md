@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 模式匹配"
+title: "模式匹配"
 description: "enum Coin {"
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练 if let / while let 的简洁写法
 - 学会 @ 绑定、守卫与组合模式
 
-## 6.1 match：穷尽性的 switch
+## match：穷尽性的 switch
 
 ```rust
 enum Coin {
@@ -49,7 +49,7 @@ match value {
 }
 ```
 
-## 6.2 解构：模式撕开数据结构
+## 解构：模式撕开数据结构
 
 match 的模式不止匹配值，还**绑定内部数据**：
 
@@ -77,7 +77,7 @@ match msg {
 }
 ```
 
-## 6.3 守卫（guard）：条件附加
+## 守卫（guard）：条件附加
 
 ```rust
 let n = 5;
@@ -91,7 +91,7 @@ match n {
 
 守卫在模式后加 `if 条件`——匹配模式后再验条件，不满足则继续尝试下一分支。
 
-## 6.4 @ 绑定：匹配的同时捕获
+## @ 绑定：匹配的同时捕获
 
 ```rust
 match age {
@@ -101,7 +101,7 @@ match age {
 }
 ```
 
-## 6.5 if let：单分支的简洁写法
+## if let：单分支的简洁写法
 
 只需要处理一种模式时，match 显得啰嗦——**if let**：
 
@@ -132,7 +132,7 @@ while let Some(top) = stack.pop() {
 }
 ```
 
-## 6.6 解构赋值与 let 模式
+## 解构赋值与 let 模式
 
 ```rust
 // let 也是模式匹配！
@@ -146,7 +146,7 @@ let Some(v) = Some(42) else {                 // let-else（1.65+）：不匹配
 println!("{}", v);                             // 此后 v 确定存在
 ```
 
-## 6.7 综合练习：JSON 值解析器
+## 综合练习：JSON 值解析器
 
 ```rust
 // 用枚举 + match 实现迷你 JSON 值模型（真实 serde 库的思想原型）

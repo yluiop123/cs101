@@ -1,5 +1,5 @@
 ---
-title: "第 13 章 · 异步编程"
+title: "异步编程"
 description: "JS 是单线程语言——同一时刻只做一件事。如果“请求服务器”这样的慢操作同步执行，页面会卡死等待。异步（asynchronous）让慢操作“先挂起、完成后再回来处理”："
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 从回调演进到 Promise 再到 async/await
 - 会用 fetch 请求真实接口
 
-## 13.1 为什么需要异步
+## 为什么需要异步
 
 JS 是**单线程**语言——同一时刻只做一件事。如果"请求服务器"这样的慢操作同步执行，页面会卡死等待。异步（asynchronous）让慢操作"先挂起、完成后再回来处理"：
 
@@ -27,7 +27,7 @@ console.log('2. 同步任务');
 // 输出顺序：1 → 2 → 3（定时器哪怕 0ms 也要等同步代码跑完）
 ```
 
-## 13.2 事件循环：异步的调度机制
+## 事件循环：异步的调度机制
 
 事件循环（event loop）的运行规则：
 
@@ -52,7 +52,7 @@ console.log('2. 同步任务');
 "同步排队执行，异步回调排队等叫号"——理解了这个，setTimeout(fn, 0) 也要排队就不再神秘。
 :::
 
-## 13.3 回调时代的问题
+## 回调时代的问题
 
 最早的异步全靠回调函数：
 
@@ -67,7 +67,7 @@ getUser(id, (user) => {
 });
 ```
 
-## 13.4 Promise：异步的"容器"
+## Promise：异步的"容器"
 
 Promise（承诺）代表"一个未来才有结果的操作"，三种状态：**pending（进行中）→ fulfilled（成功）/ rejected（失败）**，状态一旦改变不可逆。
 
@@ -111,7 +111,7 @@ await Promise.allSettled([fetchUser(), fetchPosts()]);
 await Promise.race([fetchA(), fetchB()]);
 ```
 
-## 13.5 async/await：同步写法的异步
+## async/await：同步写法的异步
 
 `async/await` 是 Promise 的语法糖，用同步的书写方式表达异步流程：
 
@@ -144,7 +144,7 @@ const [ra, rb] = await Promise.all([fetchA(), fetchB()]);
 ```
 :::
 
-## 13.6 fetch：网络请求标准 API
+## fetch：网络请求标准 API
 
 ```js
 // GET 请求
@@ -199,7 +199,7 @@ async function createTodo(text) {
 把这段代码放进本地 HTML 文件运行，按钮会真实请求公共测试接口（jsonplaceholder.typicode.com）并渲染结果——一个最小完整的"fetch → await → 渲染"闭环。
 :::
 
-## 13.7 综合示例：带加载态的请求封装
+## 综合示例：带加载态的请求封装
 
 ```js
 async function request(url, options = {}) {

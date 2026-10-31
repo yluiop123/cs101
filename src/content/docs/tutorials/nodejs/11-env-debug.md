@@ -1,5 +1,5 @@
 ---
-title: "第 11 章 · 环境变量与调试"
+title: "环境变量与调试"
 description: "同一份代码要跑在两个环境："
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 .env 文件与 dotenv 的标准用法
 - 学会 Node 的三种调试方式
 
-## 11.1 为什么需要环境变量
+## 为什么需要环境变量
 
 同一份代码要跑在两个环境：
 
@@ -27,7 +27,7 @@ tableOfContents: true
 
 **配置与代码分离**：代码只读"变量名"，具体值由环境注入。好处：不用改代码切换环境、敏感信息（密钥/密码）不进 Git。
 
-## 11.2 process.env：读取环境变量
+## process.env：读取环境变量
 
 ```js
 // Node 里所有环境变量挂在 process.env 上
@@ -38,7 +38,7 @@ console.log(process.env.DATABASE_URL);
 
 注意：**值全部是字符串**——`process.env.PORT === '3000'`，比较数字要 `Number(process.env.PORT)`。
 
-## 11.3 .env 文件：本地开发的变量清单
+## .env 文件：本地开发的变量清单
 
 约定：项目根目录放 `.env`，用 `key=value` 格式书写，代码启动时由 dotenv 加载进 process.env。
 
@@ -83,7 +83,7 @@ const port = Number(process.env.PORT) || 3000;
 node --env-file=.env.production server.js   # Node 20+ 原生支持，无需 dotenv
 ```
 
-## 11.4 配置的最佳实践：集中收敛
+## 配置的最佳实践：集中收敛
 
 ```js
 // config.js —— 所有配置的唯一出口
@@ -105,7 +105,7 @@ app.listen(port, () => console.log(isProd ? '生产模式' : '开发模式'));
 
 好处：配置读取一处收口，漏配/写错一眼定位；切换配置源（如改读配置中心）只改一个文件。
 
-## 11.5 调试方式一：console 三板斧
+## 调试方式一：console 三板斧
 
 ```js
 console.log('普通');
@@ -116,7 +116,7 @@ const data = await query();
 console.timeEnd('query');              // query: 23.4ms
 ```
 
-## 11.6 调试方式二：VS Code 断点调试（推荐）
+## 调试方式二：VS Code 断点调试（推荐）
 
 1. 代码行号左侧**点击打断点**
 2. 侧边栏"运行和调试"→ 选择 **Node.js** 配置 → F5 启动
@@ -144,7 +144,7 @@ console.timeEnd('query');              // query: 23.4ms
 }
 ```
 
-## 11.7 调试方式三：nodemon 热重启
+## 调试方式三：nodemon 热重启
 
 改一行代码手动重启太痛苦，nodemon 监听文件变化自动重启：
 
@@ -161,7 +161,7 @@ npm run dev    # 改代码 → 自动重启 → 立即生效
 
 nodemon 与断点调试不冲突（launch.json 里用 nodemon 作为 runtimeExecutable 亦可）。
 
-## 11.8 日志分级意识
+## 日志分级意识
 
 ```js
 // 简易分级（生产项目用 pino/winston 等日志库）

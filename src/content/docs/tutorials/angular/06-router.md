@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 路由"
+title: "路由"
 description: "// src/app/app.routes.ts —— 路由表（独立文件，CLI 生成项目自带）"
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握路由参数、懒加载与子路由
 - 学会用守卫做登录拦截
 
-## 6.1 配置路由
+## 配置路由
 
 ```ts
 // src/app/app.routes.ts —— 路由表（独立文件，CLI 生成项目自带）
@@ -40,7 +40,7 @@ providers: [provideRouter(routes)]
 
 `loadComponent` = 组件级懒加载（standalone 时代的懒加载方式）——**生产项目路由一律懒加载**，与 Vue/React 同理（Vite 教程第 5 章分包原理相同）。
 
-## 6.2 出口与导航
+## 出口与导航
 
 ```ts
 // 根组件
@@ -61,7 +61,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 export class AppComponent {}
 ```
 
-## 6.3 路由参数
+## 路由参数
 
 ```ts
 // 路由定义
@@ -93,7 +93,7 @@ export class CourseDetailComponent {
 }
 ```
 
-## 6.4 编程式导航
+## 编程式导航
 
 ```ts
 import { Router } from '@angular/router';
@@ -110,7 +110,7 @@ export class LoginComponent {
 }
 ```
 
-## 6.5 子路由与 Outlet 嵌套
+## 子路由与 Outlet 嵌套
 
 ```ts
 export const routes: Routes = [
@@ -135,7 +135,7 @@ export const routes: Routes = [
 <router-outlet></router-outlet>   <!-- 子路由出口 -->
 ```
 
-## 6.6 守卫：登录拦截
+## 守卫：登录拦截
 
 Angular v15+ 用**函数式守卫（functional guards）**：
 
@@ -177,7 +177,7 @@ onLoginSuccess() {
 
 对照：Vue 的 beforeEach / React 的守卫组件，Angular 是"路由配置挂函数"——**守卫本身也是 DI 的受益者**（inject 服务做判断）。
 
-## 6.7 传递数据的其他方式
+## 传递数据的其他方式
 
 ```ts
 // 查询参数
@@ -189,7 +189,7 @@ this.router.navigate(['/confirm'], { state: { order: orderData } });
 // 读取：history.state.order
 ```
 
-## 6.8 综合练习：带守卫的迷你站
+## 综合练习：带守卫的迷你站
 
 ```ts
 export const routes: Routes = [

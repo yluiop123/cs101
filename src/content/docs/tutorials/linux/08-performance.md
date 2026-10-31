@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 磁盘、内存与性能观测"
+title: "磁盘、内存与性能观测"
 description: "total used free shared buff/cache available"
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 会读 load average 并结合 CPU 数量判断系统真忙还是假忙
 - 掌握 CPU 高、磁盘满、inode 满、TIME_WAIT 堆积四类问题的标准排查路径
 
-## 8.1 free：内存到底够不够
+## free：内存到底够不够
 
 ```bash
 free -h
@@ -36,7 +36,7 @@ available 逼近 0，si/so 换页持续        → 真缺内存（vmstat 验证�
 used 持续爬升、回收不动                  → 疑似泄漏，转应用层排查
 ```
 
-## 8.2 vmstat 与 iostat：持续观察的节奏
+## vmstat 与 iostat：持续观察的节奏
 
 一次性快照（free/df/ps）回答"现在怎样"，间隔采样回答"趋势与瓶颈在哪"。vmstat 属 procps（预装），iostat 属 **sysstat 包**（`sudo apt install sysstat` / `sudo dnf install sysstat`）：
 
@@ -85,7 +85,7 @@ nvme0n1 写满负荷（%util 96）但 await 仅 7ms——设备忙但响应健�
 各列精确定义与计数口径（尤其 iostat 的 adb_s、aqu_sz 等扩展列）以 `man vmstat`、`man iostat` 为准；本章给的是"先扫哪几眼"的优先级，不是完整说明书。
 :::
 
-## 8.3 load average：三个数字的读法
+## load average：三个数字的读法
 
 ```bash
 uptime
@@ -110,7 +110,7 @@ load 曲线      三数对比：1 分钟 > 15 分钟 → 正在恶化；反之 �
 
 同样是 load 4，`top` 里 us 占满 → CPU 密集型；wa 占满 → 磁盘拖的后腿（数据库/日志盘慢），处理方向完全不同。**load 是症状，不是病因**——病因要靠下面的四步法定位。
 
-## 8.4 CPU 高排查四步法
+## CPU 高排查四步法
 
 1. **定机器**：集群多台先 `uptime`/`top` 横向比，找 load 明显高的那台（第 5 章仪表盘）。
 2. **定进程**：`top` 里按 `P` 排序，看 %CPU 头部进程；记下 PID 与命令。`ps -o pid,user,%cpu,etime,cmd -p PID` 确认它"跑了多久、什么身份、完整命令行"。
@@ -131,7 +131,7 @@ Threads 24 (Total: 24 threads, 2 running, 22 sleeping)
 生产突发高 CPU：先评估是否降级/扩容保业务，**不要在生产机器上跑实验性重负载诊断**（如全局 perf 采样）；保留现场（top 截图、jstack 快照）比当场跑完所有工具更重要。
 :::
 
-## 8.5 磁盘满与 inode 满
+## 磁盘满与 inode 满
 
 写不进数据时先分诊，两类"满"都会报 No space left on device：
 
@@ -163,7 +163,7 @@ overlay            0     0     0    -  /var/lib/docker/overlay2
 
 常见元凶与正规解法：日志膨胀 → logrotate（第 10 章）；journald 无限增长 → `sudo journalctl --vacuum-size=200M` 并在 `/etc/journald.conf` 设 SystemMaxUse（参数以 `man journald.conf` 为准）；Docker 悬空镜像与日志 → `docker system prune`（先 `docker system df` 看账，命令语义以 `docker system --help` 为准）。
 
-## 8.6 TIME_WAIT 与连接数
+## TIME_WAIT 与连接数
 
 ```bash
 ss -s                       # 汇总：timewait 计数一眼可见
@@ -190,7 +190,7 @@ TIME_WAIT 是什么：**主动关闭连接的一方**要等 2MSL（常见约 60 
 该参数在早期内核上因 NAT 环境丢包问题严重，已在较新内核中被移除。遇到建议"开 recycle"的教程要警惕其年代；改任何 sysctl 前用 `sysctl 参数名` 记录当前值并确认内核文档里它存在，改完 `ss -s` 观察效果。
 :::
 
-## 8.7 自查清单：从 top 到定位代码的一条龙
+## 自查清单：从 top 到定位代码的一条龙
 
 综合演练——"服务变慢"的完整动线，按序执行并记录每步输出：
 

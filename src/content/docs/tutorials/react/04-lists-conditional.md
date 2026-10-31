@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 列表与条件渲染"
+title: "列表与条件渲染"
 description: "没有 v-for——数组 map 成 JSX："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 React 风格的条件渲染组合拳
 - 实现过滤、空状态与动画过渡
 
-## 4.1 map 渲染列表
+## map 渲染列表
 
 没有 v-for——数组 `map` 成 JSX：
 
@@ -42,7 +42,7 @@ export default function CourseList() {
 
 map 回调返回 JSX，整个表达式就是"一组元素"——JS 对象可以自由组合的直观体现。
 
-## 4.2 key：Diff 的身份证
+## key：Diff 的身份证
 
 React 更新时用 **Diff 算法**对比新旧两棵元素树，`key` 帮它识别"哪些元素是同一个"：
 
@@ -59,7 +59,7 @@ React 更新时用 **Diff 算法**对比新旧两棵元素树，`key` 帮它识�
 2. key 只需在**兄弟之间**唯一（同一列表内），不是全局唯一
 3. 数据没有 id 时可用稳定字段（标题/唯一值组合），实在没有再考虑 crypto.randomUUID() 生成时赋值
 
-## 4.3 条件渲染全家桶
+## 条件渲染全家桶
 
 React 条件渲染就是 JS 语法本身：
 
@@ -106,7 +106,7 @@ function EmptyOrList({ items }) {
 `{count && <Badge />}`——count 为 0 时渲染出"0"（0 是 falsy 但会被输出为文本）。写法防御：`{count > 0 && <Badge />}`。
 :::
 
-## 4.4 列表 + 条件：过滤渲染
+## 列表 + 条件：过滤渲染
 
 ```jsx
 export default function TodoList({ todos, showDone }) {
@@ -127,7 +127,7 @@ export default function TodoList({ todos, showDone }) {
 
 更复杂时用 `useMemo` 缓存过滤结果（第 11 章性能）。
 
-## 4.5 列表操作与不可变更新
+## 列表操作与不可变更新
 
 第 3 章数组更新的列表版速查：
 
@@ -147,7 +147,7 @@ setTodos(todos.map(t => (t.id === id ? { ...t, done: !t.done } : t)));
 setTodos([todos.find(t => t.id === id), ...todos.filter(t => t.id !== id)]);
 ```
 
-## 4.6 列表动画：CSS 过渡
+## 列表动画：CSS 过渡
 
 React 没有内置 TransitionGroup，常见两种方式：
 
@@ -168,7 +168,7 @@ React 没有内置 TransitionGroup，常见两种方式：
 
 增删过渡的精细控制用 `framer-motion` 类库——先用 CSS 动画满足 80% 需求。
 
-## 4.7 综合练习：可筛选任务列表（React 版）
+## 综合练习：可筛选任务列表（React 版）
 
 ```jsx
 import { useState } from 'react';

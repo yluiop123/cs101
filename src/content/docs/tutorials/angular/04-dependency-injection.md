@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 依赖注入"
+title: "依赖注入"
 description: "不用 DI，组件自己“new”依赖："
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 inject() 与服务注册方式
 - 学会层级注入器的选择
 
-## 4.1 为什么需要 DI
+## 为什么需要 DI
 
 不用 DI，组件自己"new"依赖：
 
@@ -39,7 +39,7 @@ class CourseListComponent {
 
 DI 容器（Angular 的"注入器"）负责：创建实例 → 缓存单例 → 按需递送。类比：外卖平台——你要"一份 CourseService"，不用管厨房怎么做的。
 
-## 4.2 服务：DI 的主要载体
+## 服务：DI 的主要载体
 
 **服务（service）**= 无模板的类，承载业务逻辑/数据/工具：
 
@@ -66,7 +66,7 @@ export class ComponentA {
 
 `providedIn: 'root'` = 全局单例——**这就是 Angular 版的"全局状态"**（对应 Pinia/Zustand 的生态位之一）。
 
-## 4.3 inject()：现代取用方式
+## inject()：现代取用方式
 
 ```ts
 import { Component, inject } from '@angular/core';
@@ -89,7 +89,7 @@ inject() 的好处：不依赖构造函数、可在字段默认值/组合逻辑�
 只能在**注入上下文**里调用：组件/指令/服务的字段初始化或构造过程中。普通函数、事件回调里不行（那时上下文已销毁）。
 :::
 
-## 4.4 注入层级：全局 vs 局部
+## 注入层级：全局 vs 局部
 
 Angular 有层级注入器（hierarchical injectors）：
 
@@ -114,7 +114,7 @@ providers: [...]     → 组件子树唯一（编辑器草稿、局部会话）
 
 选择口诀：**默认 root；只有"每个子树要独立实例"时才用 providers**。
 
-## 4.5 用接口/令牌解耦
+## 用接口/令牌解耦
 
 面向抽象而非实现——InjectionToken：
 
@@ -137,7 +137,7 @@ logger.log('hello');     // 换实现（写文件版 logger）时使用方零改
 
 这就是第 1 章说的"可测试性"来源：测试时注册一个假的 LOGGER 即可。
 
-## 4.6 DI 与前三框架的对照
+## DI 与前三框架的对照
 
 | 需求 | Vue | React | Angular |
 | --- | --- | --- | --- |
@@ -147,7 +147,7 @@ logger.log('hello');     // 换实现（写文件版 logger）时使用方零改
 
 Angular 的 DI 是**语言级设施**（前两者是库方案）——这也是"企业级"的底气：状态、逻辑、配置的共享有统一机制。
 
-## 4.7 综合练习：主题服务
+## 综合练习：主题服务
 
 ```ts
 // services/theme.service.ts

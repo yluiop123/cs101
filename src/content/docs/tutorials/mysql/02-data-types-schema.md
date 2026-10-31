@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 数据类型与表设计"
+title: "数据类型与表设计"
 description: "-- 常见整型的取值范围（UNSIGNED 只影响非负一侧的上限）"
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 utf8mb4 与排序规则对存储、索引和查询结果的影响
 - 定下一张表的主键策略与 NULL 取舍
 
-## 2.1 整型与小数：先定范围，再定精度
+## 整型与小数：先定范围，再定精度
 
 ```sql
 -- 常见整型的取值范围（UNSIGNED 只影响非负一侧的上限）
@@ -53,7 +53,7 @@ SELECT CAST('0.1' AS DOUBLE) * 3;    -- 尾数可能不是你要的 0.3000000000
 `FLOAT`/`DOUBLE` 存金额会导致：对账差几分钱、`WHERE total_amount = 99.99` 命中不了、聚合误差累积。正确写法是 `DECIMAL(M, D)`：`M` 是总位数、`D` 是小数位数，`DECIMAL(12, 2)` 足够装万亿级金额。另一种方案是"分为单位存 `BIGINT`"，性能更好但要全链路统一，别一半元一半分。
 :::
 
-## 2.2 字符串：CHAR、VARCHAR、TEXT 与 JSON
+## 字符串：CHAR、VARCHAR、TEXT 与 JSON
 
 ```text
 CHAR(n)      定长：不足补空格，最多 255 个字符；适合哈希值、国家码这类长度恒定的列
@@ -100,7 +100,7 @@ ALTER TABLE products
 以 `SELECT VERSION()` 确认 5.7+ 才支持生成列。
 :::
 
-## 2.3 时间类型：DATETIME 与 TIMESTAMP
+## 时间类型：DATETIME 与 TIMESTAMP
 
 ```text
 DATETIME   范围 1000-01-01 ~ 9999-12-31，8 字节，"墙上时钟"，不涉及时区换算
@@ -130,7 +130,7 @@ ALTER TABLE orders
 把 `TIMESTAMP` 列的数据迁移到另一个 `time_zone` 不同的实例，读出来的钟点会变；`DATETIME` 不会。团队里必须统一：应用侧传字符串还是传时间戳、数据库列存哪种，全库一致并在注释里写明时区（例如"本列按东八区存储"）。
 :::
 
-## 2.4 字符集与排序规则
+## 字符集与排序规则
 
 MySQL 的 `utf8` 不是完整 UTF-8，它是 `utf8mb3`（每字符最多 3 字节），存不了 emoji 和生僻字。
 
@@ -160,7 +160,7 @@ utf8mb4_0900_ai_ci    8.0 新默认（基于 Unicode 9.0 规则），性能与�
 表是 `utf8mb4` 但客户端连接是 `latin1`，中文会存成乱码（`???` 或"娴烽」式乱码）。排查用 `SHOW VARIABLES LIKE 'character_set_%';`，重点是 `character_set_client`、`_connection`、`_results`；连接串显式写 `charset=utf8mb4`。
 :::
 
-## 2.5 NULL 的取舍与列属性
+## NULL 的取舍与列属性
 
 ```sql
 -- NULL 参与的三件事，结果常常出乎意料
@@ -185,7 +185,7 @@ SELECT IFNULL(city, '未知') FROM customers;-- 需要显式兜底
 金额、数量、状态这类"业务上必有值"的列一律 `NOT NULL DEFAULT ...`；只有"事件尚未发生"的列（`paid_at`、`cancel_reason`）允许 `NULL`。这样第 6 章统计、第 10 章归档脚本都能少写一半 `IFNULL`。
 :::
 
-## 2.6 主键：自增、业务主键与分布式 ID
+## 主键：自增、业务主键与分布式 ID
 
 ```sql
 -- 三种候选
@@ -209,7 +209,7 @@ UUID 主键  16/36 字节 + 完全随机 → 写入在 B+ 树里到处跳，页�
 `AUTO_INCREMENT` 是"分配即递增"：事务回滚、批量插入预分配、实例重启都可能留下空洞。任何业务都不允许把 `order_id` 的连续性当成正确性前提。当前值可看 `SHOW TABLE STATUS WHERE Name = 'orders';` 的 `Auto_increment` 列。
 :::
 
-## 2.7 综合练习：给 orders 做一次 DDL 评审
+## 综合练习：给 orders 做一次 DDL 评审
 
 下面是一段"能跑但会返工"的建表语句：
 

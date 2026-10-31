@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 响应式基础"
+title: "响应式基础"
 description: "普通 JS 对象变了，页面不会自己变（要手动改 DOM）。响应式（reactivity）= 给数据装上“变更广播”："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 ref 与 reactive 的区别与选择
 - 避开响应式丢失的常见陷阱
 
-## 3.1 响应式是什么
+## 响应式是什么
 
 普通 JS 对象变了，页面不会自己变（要手动改 DOM）。**响应式（reactivity）**= 给数据装上"变更广播"：
 
@@ -27,7 +27,7 @@ tableOfContents: true
 
 实现基础是 ES 的 Proxy（代理）：Vue 用 Proxy 包住你的数据对象，拦截读写，自动完成收集与广播。**你只管改数据，渲染全自动。**
 
-## 3.2 ref：最通用的响应式容器
+## ref：最通用的响应式容器
 
 `ref()` 把任意值变成响应式"容器"：
 
@@ -60,7 +60,7 @@ function increment() {
 `count++`（少了 .value）不会报错也不会生效——容器本身是常量。看到"改了数据没反应"，先查 `.value`。
 :::
 
-## 3.3 reactive：对象的另一种包装
+## reactive：对象的另一种包装
 
 `reactive()` 直接代理对象本身（不用 .value）：
 
@@ -83,7 +83,7 @@ state.user.name = 'Lucy';    // 深层也是响应式
 </template>
 ```
 
-## 3.4 ref vs reactive：怎么选
+## ref vs reactive：怎么选
 
 | 维度 | ref | reactive |
 | --- | --- | --- |
@@ -104,7 +104,7 @@ count++;   // 视图不更新
 
 reactive 的适用场景只剩一个：**组合式函数里聚合一组相关状态**（第 9 章再遇）。日常组件开发 `ref` 走天下。
 
-## 3.5 响应式是"深度"的
+## 响应式是"深度"的
 
 ```js
 const user = ref({
@@ -118,7 +118,7 @@ user.value.profile.address.city = '上海';   // ✅ 深层修改照样触发更
 
 ref 内部用 reactive 包装对象值——所以嵌套多深都响应式，不用逐层手动处理。
 
-## 3.6 数组的注意点
+## 数组的注意点
 
 ```js
 const todos = ref([
@@ -136,7 +136,7 @@ todos.value = todos.value.map(t =>
 );
 ```
 
-## 3.7 只读与浅层（了解）
+## 只读与浅层（了解）
 
 ```js
 import { ref, readonly, shallowRef } from 'vue';
@@ -150,7 +150,7 @@ bigList.value[0].name = 'x';      // ⚠️ 不触发（浅层）——性能优
 
 初学记两个名字即可，第 12 章实战遇到大列表会再用到 shallowRef。
 
-## 3.8 综合练习：响应式购物车
+## 综合练习：响应式购物车
 
 ```vue
 <script setup>

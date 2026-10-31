@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 基础语法与流程控制"
+title: "基础语法与流程控制"
 description: "var count int = 42 // 完整声明：var 名字 类型 = 值"
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练 if / for / switch 的 Go 写法
 - 会用指针的基础形态
 
-## 2.1 变量与常量
+## 变量与常量
 
 ```go
 var count int = 42            // 完整声明：var 名字 类型 = 值
@@ -44,7 +44,7 @@ fmt.Println("hi")     // ❌ 编译失败：x declared and not used
 Go 强制你处理每个声明的变量——**没有死代码的宽容**。真想占位用 `_`（空白标识符）。
 :::
 
-## 2.2 基本类型
+## 基本类型
 
 ```go
 // 整数（与 Java 差异：没有隐式类型转换！）
@@ -71,7 +71,7 @@ s := strconv.Itoa(i)  // int → string（strconv 包）
 n, err := strconv.Atoi("42")   // string → int（可能失败，第 4 章错误处理）
 ```
 
-## 2.3 零值（zero value）：没有未初始化变量
+## 零值（zero value）：没有未初始化变量
 
 Go 没有"未初始化"状态——每个类型都有零值：
 
@@ -85,7 +85,7 @@ var f float64    // 0.0
 
 **string 的零值是空串而不是 null**——Java 的 NPE 灾难在 Go 里少了一大来源。
 
-## 2.4 指针：有限但够用
+## 指针：有限但够用
 
 Go 有指针但**没有指针运算**——比 C 安全，比 Java 灵活：
 
@@ -107,7 +107,7 @@ bump(&x)
 Go 的函数参数**全部值传递**——传结构体会拷贝整个结构体。想"传引用"就传指针（拷贝的是 8 字节地址）。第 5 章方法的接收者会再遇它。
 :::
 
-## 2.5 if：条件是表达式，不用括号
+## if：条件是表达式，不用括号
 
 ```go
 score := 85
@@ -128,7 +128,7 @@ if n, err := strconv.Atoi("42"); err == nil {
 }
 ```
 
-## 2.6 for：唯一的循环关键字
+## for：唯一的循环关键字
 
 ```go
 // 三段式（同 C 家族）
@@ -150,7 +150,7 @@ for _, v := range []int{1, 2, 3} {
 
 `range` 返回两个值：`index, value`——**不需要的用 `_` 丢弃**。
 
-## 2.7 switch：默认不穿透
+## switch：默认不穿透
 
 ```go
 // 默认每个 case 自动 break（没有 fall-through！）
@@ -180,7 +180,7 @@ case string:
 }
 ```
 
-## 2.8 综合练习：猜数字游戏
+## 综合练习：猜数字游戏
 
 ```go
 package main

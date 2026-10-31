@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 数组"
+title: "数组"
 description: "数组（array）是有序的值列表，索引从 0 开始："
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握遍历三件套 map / filter / reduce
 - 会用查找与排序的常用套路
 
-## 6.1 数组基础
+## 数组基础
 
 数组（array）是**有序**的值列表，索引从 0 开始：
 
@@ -33,7 +33,7 @@ const mixed = [1, 'two', true, { id: 1 }, [2, 3]];
 
 数组是对象——`typeof []` 是 `'object'`，判断用 `Array.isArray(langs)`。
 
-## 6.2 增删改查
+## 增删改查
 
 | 操作 | 方法 | 说明 |
 | --- | --- | --- |
@@ -59,7 +59,7 @@ list.slice(1, 3);          // ['X','c'] —— 原数组不变
 push/pop/splice/sort **修改原数组**；slice/map/filter/concat **返回新数组**。写"不可变"代码（React/Vue 状态）时只用后者 + 展开语法 `[...list, 'new']`。
 :::
 
-## 6.3 遍历与转换三件套
+## 遍历与转换三件套
 
 ### map：一一映射
 
@@ -103,7 +103,7 @@ const names = users
   .map(u => u.name);        // ['Tom', 'Jerry']
 ```
 
-## 6.4 查找与判断
+## 查找与判断
 
 ```js
 const users = [{ id: 1, name: 'Tom' }, { id: 2, name: 'Lucy' }];
@@ -115,7 +115,7 @@ users.every(u => u.age > 10);       // 全部满足 → true
 users.includes('Tom');              // 简单值包含判断（元素级）
 ```
 
-## 6.5 排序与反转
+## 排序与反转
 
 ```js
 const nums = [40, 100, 1, 5];
@@ -133,7 +133,7 @@ users.sort((a, b) => a.age - b.age);
 ['张三', '李四'].sort((a, b) => a.localeCompare(b, 'zh'));
 ```
 
-## 6.6 其他高频方法
+## 其他高频方法
 
 ```js
 // 合并
@@ -149,7 +149,7 @@ const all = [...arr1, ...arr2];
 ['a', 'b'].includes('a');      // true
 ```
 
-## 6.7 综合示例：待办列表数据操作
+## 综合示例：待办列表数据操作
 
 ```js
 let todos = [

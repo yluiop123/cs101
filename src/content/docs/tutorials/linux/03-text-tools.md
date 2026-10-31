@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 文件查看与文本处理"
+title: "文件查看与文本处理"
 description: "cat notes.md # 整个打到屏幕上（短文件）"
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 grep 正则过滤与 cut/sort/uniq/tr/wc 的管道组合拳
 - 会用 sed 做批量替换、awk 做列统计、diff/patch 比较与打补丁
 
-## 3.1 查看文件：cat、less、head、tail
+## 查看文件：cat、less、head、tail
 
 ```bash
 cat notes.md             # 整个打到屏幕上（短文件）
@@ -40,7 +40,7 @@ Ctrl+d/Ctrl+u  半屏滚动     q     退出
 
 日志类文件永远在长大，`head`/`tail` 让你只看一头，`less` 让你不卡终端地翻阅——不要用 `cat` 打开一个几百 MB 的日志，屏幕会被瞬间刷爆且无法中断。
 
-## 3.2 tail -f：盯住正在写的日志
+## tail -f：盯住正在写的日志
 
 ```bash
 tail -f /var/log/nginx/access.log     # 从尾部开始，持续输出新行
@@ -63,7 +63,7 @@ grep ' 500 ' access.log > errors.log & tail -f errors.log  # 过滤结果落盘�
 
 管道里 grep 的输出默认按块缓冲，配合 `-f` 会"半天不出字"，`--line-buffered` 是按行刷的解药——这是 tail -f 管道组合最常见的隐形坑。若服务由 systemd 托管（[第 5 章 · 进程与服务管理](../05-process-systemd/)），`journalctl -u 服务名 -f` 天然支持过滤（`-p err` 按级别），多数场景比 tail -f 更省心。
 
-## 3.3 grep 与正则：从万行日志里捞那一行
+## grep 与正则：从万行日志里捞那一行
 
 ```bash
 grep error app.log              # 含 error 的行
@@ -99,7 +99,7 @@ grep 命中后的典型输出（`-n` 给行号，方便跳转 `less +42 app.log`
 
 顺带两条实用项：grep 撞到二进制内容会输出 "Binary file matches"，加 `-a` 强制按文本处理；跨大量小文件搜索时，先 `find 目录 -name "*.log" -print0 | xargs -0 grep 'error'`（或 grep -r 直接上），选项语义以 `man grep`、`man xargs` 为准。
 
-## 3.4 管道组合拳：cut、sort、uniq、tr、wc
+## 管道组合拳：cut、sort、uniq、tr、wc
 
 管道 `|` 把上一个命令的标准输出接到下一个命令的标准输入，一条链就是一条流水线。先看五个零件：
 
@@ -130,7 +130,7 @@ cut -d' ' -f1 access.log | sort | uniq -c | sort -rn | head -n 10
 忘了先 sort 是这条管道最常见的错误：`sort | uniq -c` 顺序写反或漏掉 sort，数字会全错。凡见 `uniq` 前面必须有 `sort`。
 :::
 
-## 3.5 sed：流编辑器做批量替换
+## sed：流编辑器做批量替换
 
 sed 逐行读入、按脚本处理、逐行输出。最常用的就是替换与删除：
 
@@ -154,7 +154,7 @@ for f in *.jpg; do mv "$f" "${f%.jpg}.png"; done        # 确认无误后去掉 
 `sed -i`（无备份后缀）直接改写原文件，写错正则一轮就把源数据毁干净。规矩：**先不带 -i 打印出来看效果，再加 `-i.原扩展名` 留备份**，最后一道保险是动手前 `cp file file.bak`。循环中的 `for`/`${f%.jpg}` 语法在第 9 章正式讲解。
 :::
 
-## 3.6 awk：面向列的迷你统计语言
+## awk：面向列的迷你统计语言
 
 awk 把每行按空白（或 `-F` 指定分隔符）切成列：`$1` 是第一列，`$0` 是整行，`NF` 是列数，`NR` 是行号。
 
@@ -181,7 +181,7 @@ awk '{count[$9]++} END {for (s in count) print s, count[s]}' access.log
 
 关联数组 `count[$9]` 以状态码值为下标自动建桶，`END` 块在文件读完后汇总。awk 有自己完整的语言特性（变量、函数、条件），本节是够用 subset，深入以 `man awk` 为准。
 
-## 3.7 diff、patch 与综合练习
+## diff、patch 与综合练习
 
 ```bash
 diff -u old.conf new.conf              # unified 格式输出差异

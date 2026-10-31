@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · 工程化与综合实战"
+title: "工程化与综合实战"
 description: "现代 Python 项目的标准入口（取代散落的 setup.py/requirements 分家）："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 综合运用全教程知识完成"日志分析 CLI"
 - 沉淀 Python 项目自查清单
 
-## 12.1 pyproject.toml：项目统一说明书
+## pyproject.toml：项目统一说明书
 
 现代 Python 项目的标准入口（取代散落的 setup.py/requirements 分家）：
 
@@ -48,7 +48,7 @@ pip install -e ".[dev]"     # 可编辑安装本项目 + 开发依赖
 
 venv（第 1 章）+ pyproject + pip freeze 三者配合，就是 Python 世界的"环境还原三件套"。
 
-## 12.2 代码质量四件套
+## 代码质量四件套
 
 ```bash
 # ① ruff：Linter + 格式化（速度碾压旧组合 flake8+black，2024 起的事实标准）
@@ -97,7 +97,7 @@ def test_analyze(sample_log):
     assert result["levels"]["INFO"] == 1
 ```
 
-## 12.3 项目结构与目标
+## 项目结构与目标
 
 ```text
 logkit/
@@ -115,7 +115,7 @@ logkit/
 
 目标功能：解析日志文件 → 统计各级别数量 → 找 ERROR 明细 → 输出报告。
 
-## 12.4 数据模型与解析层
+## 数据模型与解析层
 
 ```python
 # src/logkit/models.py —— 类型提示 + dataclass（第 5/8 章）
@@ -178,7 +178,7 @@ def analyze(path: Path) -> LogReport:
     return report
 ```
 
-## 12.5 CLI 入口
+## CLI 入口
 
 ```python
 # src/logkit/cli.py —— argparse 标准库参数解析
@@ -222,7 +222,7 @@ python -m logkit.cli app.log --errors
 # [16:02:11] 数据库连接超时
 ```
 
-## 12.6 测试
+## 测试
 
 ```python
 # tests/test_analyzer.py
@@ -258,7 +258,7 @@ ruff check .     # All checks passed
 mypy src/        # Success
 ```
 
-## 12.7 Python 项目自查清单
+## Python 项目自查清单
 
 - [ ] venv 隔离 + pyproject.toml 声明依赖
 - [ ] 类型提示覆盖公共 API，mypy 通过
@@ -268,7 +268,7 @@ mypy src/        # Success
 - [ ] 文件 IO 显式 utf-8；异常精确捕获、不静默吞
 - [ ] 入口带 argparse + `if __name__ == "__main__"`
 
-## 12.8 下一步
+## 下一步
 
 Python 主线毕业。两条延伸：
 

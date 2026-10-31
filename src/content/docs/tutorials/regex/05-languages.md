@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 各语言中的正则"
+title: "各语言中的正则"
 description: "正则的模式语法基本跨语言通用（第 2、3 章所学），但调用 API 各家不同。本章横向对比，重点讲透 JavaScript。"
 series: regex
 sidebar:
@@ -18,7 +18,7 @@ tableOfContents: true
 
 正则的**模式语法**基本跨语言通用（第 2、3 章所学），但**调用 API** 各家不同。本章横向对比，重点讲透 JavaScript。
 
-## 5.1 JavaScript 正则 API 全景
+## JavaScript 正则 API 全景
 
 ### 创建
 
@@ -68,7 +68,7 @@ for (const m of 'a1b2'.matchAll(/(\w)(\d)/g)) {
 带 `g` 标志的正则在 `test`/`exec` 时会移动内部指针（lastIndex），**同一个正则对象反复 test 可能时对时错**。需要多次 test 时每次用字面量新建，或去掉 `g` 标志。
 :::
 
-## 5.2 Python 中的正则
+## Python 中的正则
 
 ```python
 import re
@@ -90,7 +90,7 @@ re.sub(r'-', '/', '2024-01')      # '2024/01'
 Python 字符串加 `r` 前缀（raw string）可避免 `\d` 被解释成转义序列，写正则的标准姿势：`r'...'`。
 :::
 
-## 5.3 Java 中的正则
+## Java 中的正则
 
 ```java
 import java.util.regex.*;
@@ -112,7 +112,7 @@ while (m2.find()) {
 
 注意 Java 字符串本身要转义 `\`，所以模式里写 `\\d`。
 
-## 5.4 跨语言对照速查
+## 跨语言对照速查
 
 | 能力 | JavaScript | Python | Java |
 | --- | --- | --- | --- |

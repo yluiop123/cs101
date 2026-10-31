@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 综合实战：把一台裸机变成可上线的服务器"
+title: "综合实战：把一台裸机变成可上线的服务器"
 description: "场景设定：一台刚装好 Ubuntu 24.04（或 CentOS Stream）的云主机，只有 root 密码可登录。"
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 用 systemd 托管应用、Nginx 做反向代理，并用防火墙只开放必要端口
 - 交付一套日志轮转 + 定时备份 + 上线自查清单的运维闭环
 
-## 10.1 新机器第一步：用户与 SSH 加固
+## 新机器第一步：用户与 SSH 加固
 
 场景设定：一台刚装好 Ubuntu 24.04（或 CentOS Stream）的云主机，只有 root 密码可登录。目标应用是一个跑在 `8080` 端口的 Web 服务（语言不限，本章以 Node 演示）。密钥登录按 [第 7 章 · 网络与排查](../07-network/) 的方式先推好公钥，再开始初始化：
 
@@ -54,7 +54,7 @@ sudo systemctl restart sshd         # CentOS 服务名是 sshd
 ① 保持当前 root 会话不要关——它是逃生通道；② 新开终端用 `ssh devops@...` 验证密钥登录成功、确认密码登录已被拒绝，再动防火墙；③ 云主机若连逃生通道都没了，用厂商控制台 VNC 复位。顺序错了，把自己锁在门外的是大多数。
 :::
 
-## 10.2 安装运行时与依赖
+## 安装运行时与依赖
 
 ```bash
 # 通用工具打底（两厂命令并列）：
@@ -83,7 +83,7 @@ sudo -u myapp bash -c 'cd /opt/myapp && npm ci --omit=dev'
 
 `EnvironmentFile` 所需的密钥放 `/etc/myapp.env`，属主 myapp、权限 600（第 4 章的规则），**绝不写进 git 仓库**。
 
-## 10.3 systemd 托管应用
+## systemd 托管应用
 
 把第 5 章的 unit 模板落成生产形态，`/etc/systemd/system/myapp.service`：
 
@@ -119,7 +119,7 @@ curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:8080/health
 
 `ProtectSystem=full`、`NoNewPrivileges` 是低成本的加固项，含义与更多沙箱指令以 `man systemd.exec` 为准。更新发布的标准循环：`rsync 新版本 -> sudo systemctl restart myapp -> journalctl 观察启动 -> 健康检查`，回滚即反向重放上一版本。
 
-## 10.4 Nginx 反向代理
+## Nginx 反向代理
 
 应用监听 `127.0.0.1:8080`（unit/应用配置里绑 localhost，外部只能经 Nginx 进来）：
 
@@ -157,7 +157,7 @@ CentOS Stream/RHEL 默认 SELinux Enforcing，Nginx 向外发起上游连接会�
 
 HTTPS 用 Let's Encrypt 的 certbot：按官网给出的发行版对应命令安装（certbot 的包名与 nginx 插件名两厂不同，以官网指南为准），证书续订由 certbot 自带的 timer 自动完成（`systemctl list-timers | grep certbot` 验证）。
 
-## 10.5 日志、logrotate 与备份定时化
+## 日志、logrotate 与备份定时化
 
 journald 的自管理先立规矩：`/etc/journald.conf` 设 `SystemMaxUse=500M`（参数以 `man journald.conf` 为准）后 `sudo systemctl restart systemd-journald`。
 
@@ -192,7 +192,7 @@ sudo crontab -e
 cron 里 PATH 极简、无用户 shell 环境：脚本在 cron 失败而在手工执行正常，九成是环境变量问题。对策：脚本内自带绝对路径与显式 PATH（第 9 章脚本正是这么写的），把输出重定向落盘（`>> 日志 2>&1`），否则 cron 只会把输出尝试发邮件。
 :::
 
-## 10.6 防火墙：只开 80/443（和 SSH）
+## 防火墙：只开 80/443（和 SSH）
 
 ```bash
 # Ubuntu（ufw）：
@@ -214,7 +214,7 @@ sudo firewall-cmd --list-all
 
 主机之外，云控制台**安全组**同样只放行 22/80/443（出方向按需）——两层取交集，任何一层漏配都是事故。8080 永远不对公网开放：它绑在 127.0.0.1 上本就连不到（第 7 章的绑定地址），防火墙再兜一道底，双层防御。
 
-## 10.7 上线自查清单
+## 上线自查清单
 
 逐项打勾，全绿才算"可上线"：
 

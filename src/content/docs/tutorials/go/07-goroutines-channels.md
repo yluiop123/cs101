@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · goroutine 与 channel"
+title: "goroutine 与 channel"
 description: "goroutine = Go 的用户级“线程”，由运行时调度（非操作系统线程）："
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 channel 的方向、缓冲与关闭语义
 - 学会用 channel 组织并发协作
 
-## 7.1 goroutine：轻到可以开几万个
+## goroutine：轻到可以开几万个
 
 **goroutine** = Go 的用户级"线程"，由运行时调度（非操作系统线程）：
 
@@ -57,7 +57,7 @@ func main() {
 没有"等子 goroutine"的隐式机制——main 一返回，一切戛然而止。等待需要显式协作（WaitGroup/channel）。
 :::
 
-## 7.2 channel：goroutine 之间的传送带
+## channel：goroutine 之间的传送带
 
 **channel（通道）**是 goroutine 间通信的类型安全管道：
 
@@ -89,7 +89,7 @@ fmt.Println(<-ch)
 | 发送时机 | 有人接收才继续 | 缓冲没满就继续 |
 | 语义 | 同步交接（双方会合） | 异步队列 |
 
-## 7.3 通道的方向与关闭
+## 通道的方向与关闭
 
 ```go
 // 方向限制：编译器约束通道用途
@@ -122,7 +122,7 @@ func main() {
    v, ok := <-ch    // ok=false 表示通道已关闭且取空
 ```
 
-## 7.4 select：多路复用
+## select：多路复用
 
 **select** = channel 版的 switch：同时等待多个通道，谁先就绪处理谁：
 
@@ -147,7 +147,7 @@ default:
 }
 ```
 
-## 7.5 单向数据流：流水线模式
+## 单向数据流：流水线模式
 
 ```go
 // 生成 → 加工 → 消费 的流水线（pipeline）
@@ -180,7 +180,7 @@ func main() {
 
 每个环节一个 goroutine、通道串联、`defer close` 层层收尾——数据流式处理的 Go 标准范式。
 
-## 7.6 综合练习：并发爬虫骨架
+## 综合练习：并发爬虫骨架
 
 ```go
 package main

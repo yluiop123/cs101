@@ -1,5 +1,5 @@
 ---
-title: "第 15 章 · Axum 初见：Web 服务"
+title: "Axum 初见：Web 服务"
 description: "一个 HTTP 服务大部分时间在等：等数据库、等下游接口。"
 series: rust
 sidebar:
@@ -18,7 +18,7 @@ tableOfContents: true
 
 > 本章按 **axum 0.7** 的写法。0.6 与 0.7 在 handler trait、提取器参数顺序、`with_state` 上都有差异，跨章抄代码前先对齐版本号。
 
-## 15.1 为什么 Rust Web 生态以异步运行时为中心
+## 为什么 Rust Web 生态以异步运行时为中心
 
 一个 HTTP 服务大部分时间在等：等数据库、等下游接口。传统「一个请求一个线程」在并发上万时会被内存和上下文切换拖垮。Go 的答案是 goroutine——每请求几千字节栈、由运行时调度、语言内置；Rust 的答案是 `async fn`：两次 `.await` 之间的代码被编译成一个状态机，等待时不占线程，但**语言本身不带调度器**。
 
@@ -26,7 +26,7 @@ tableOfContents: true
 
 代价也要说清楚：同步与异步代码不互通，异步函数里不能阻塞；生态按「谁是调用方」分裂成 `foo` 与 `tokio-fork`；`.await` 点必须显式写出，跨 `.await` 的借用规则会立刻提醒你别把引用带进未来。这正是 [第 13 章 · 并发编程](../13-concurrency/)「Rust 把并发成本前移到编译期」思路的延续。
 
-## 15.2 依赖与第一个服务
+## 依赖与第一个服务
 
 ```toml
 # Cargo.toml
@@ -57,7 +57,7 @@ async fn main() {
 
 三件事在这里定型：**handler 就是 async 函数**（`async fn`，或返回 future 的闭包），**Router 是路由表**，**`serve` 本身是一个 future**——`.await` 之后进程才真正开始循环处理连接。对照 Go 的 `http.ListenAndServe(":8080", r)`：Go 一行阻塞调用，Rust 拆成「拿 listener」和「poll future」两步，多出来的自由度正是异步化换来的。
 
-## 15.3 Router：方法分派、前缀挂载与合并
+## Router：方法分派、前缀挂载与合并
 
 ```rust
 // 五件套挂在 /todos 下：同一路径按 HTTP 方法分派
@@ -80,7 +80,7 @@ let app = Router::new()
 axum 的中间件复用 tower 的 `Layer`/`Service`：`Router::layer(...)` 包住整棵子树，`route_layer(...)` 只包某条路由；请求日志、超时这类现成能力来自 `tower-http`（例如 `TraceLayer::new_for_http()` 配 `.layer(...)`）。本章不写中间件，知道入口在 `layer` 就够。
 :::
 
-## 15.4 提取器：从请求里拿数据
+## 提取器：从请求里拿数据
 
 **提取器（extractor）**是 handler 参数的类型：你声明要什么，框架负责从请求里解析出来，解析失败就不进你的函数。0.7 有条硬规则：**提取器参数写在最前面，请求体提取器（`Json`）必须是最后一个参数**——0.6 不检查顺序，这是最常见的版本差异。
 
@@ -109,7 +109,7 @@ async fn by_query(Query(q): Query<ListQuery>) -> String {
 
 参数缺失或类型不符时，框架直接回一个错误响应，你的 handler 根本不会被调用——省掉了 Go 里 `if err := c.ShouldBindJSON(&req); err != nil { ... }` 那段手写分支。
 
-## 15.5 State：共享数据与 Arc
+## State：共享数据与 Arc
 
 内存表要跨请求存活，靠 `State` 提取器。关键规则：**State 每个请求克隆一份**，所以内部类型必须 `Clone`，而且克隆要便宜。
 
@@ -137,7 +137,7 @@ let app = Router::new().route("/count", get(count)).with_state(db);
 `std::sync::Mutex` 的 guard 不能跨越 `.await`：异步任务在 await 点可能被换到另一条线程上恢复，锁就「漂」在线程之间，轻则死锁重则编译不过。要在持锁期间做异步 I/O，换 `tokio::sync::Mutex`（它的 `lock()` 返回 future，配合 `.await` 用）。本章的 handler 全程只碰内存，std 版够用且更快。
 :::
 
-## 15.6 响应：impl IntoResponse 与状态码
+## 响应：impl IntoResponse 与状态码
 
 handler 的返回值只要实现 `IntoResponse` 就能直接送出去：`&str`、`Json<T>`、`StatusCode` 以及它们的元组都可以。
 
@@ -163,7 +163,7 @@ async fn risky(Path(id): Path<u64>) -> Result<Json<u64>, StatusCode> {
 
 最后一种最有意思：`Result` 本身就是合法返回值，`?` 在 handler 里照常可用，错误一路上传后由框架转成响应——[第 7 章 · 错误处理](../07-error-handling/) 的传播链直接接到了 HTTP 层。真实项目通常给自己的错误类型实现 `IntoResponse`，一次决定「业务错误 → 状态码 + JSON 结构」的映射。
 
-## 15.7 综合：todo 五件套与 curl 验证
+## 综合：todo 五件套与 curl 验证
 
 把 [第 14 章 · 综合实战：CLI 工具](../14-cli-project/) 的数据模型搬上来——存储从 `tasks.json` 换成 `Arc<Mutex<Vec<Task>>>`，进程重启即失忆，持久化留作练习：
 
@@ -268,7 +268,7 @@ curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:3000/todos/99
 
 Windows PowerShell 里 `curl` 是 `Invoke-WebRequest` 的别名，参数不兼容：改用 `curl.exe` 或 `Invoke-RestMethod`。
 
-## 15.8 自查清单
+## 自查清单
 
 - [ ] Cargo.toml 给 tokio 打开了 `macros` 与 `rt-multi-thread`，否则启动就报 runtime 相关错误
 - [ ] `Json` 请求体提取器在参数表最后一位，`State`/`Path`/`Query` 在最前

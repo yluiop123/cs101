@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 运算符与流程控制"
+title: "运算符与流程控制"
 description: "10 + 3 // 13"
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 if / switch / for / while 的选择标准
 - 会用 break/continue 控制循环
 
-## 3.1 算术与赋值运算符
+## 算术与赋值运算符
 
 ```js
 // 算术
@@ -37,7 +37,7 @@ n += 5;   // 15，等价 n = n + 5
 n -= 3; n *= 2; n /= 4;   // 都有对应形式
 ```
 
-## 3.2 比较运算符：=== 是铁律
+## 比较运算符：=== 是铁律
 
 ```js
 '5' == 5     // true  —— == 会先转换类型再比较（宽松相等）
@@ -60,7 +60,7 @@ const level = score >= 90 ? 'A' : 'B';
 // 优于 if 的场景：需要"值"而不是"动作"时
 ```
 
-## 3.3 逻辑运算符
+## 逻辑运算符
 
 ```js
 // && 与：都真才真；|| 或：有真就真；! 非：取反
@@ -90,7 +90,7 @@ const port = config.port ?? 3000;   // ?? 只在 null/undefined 时用默认值
 // 与 || 的区别：port 为 0 或 '' 时，?? 会保留 0/''，|| 会错误地换成 3000
 ```
 
-## 3.4 分支：if 与 switch
+## 分支：if 与 switch
 
 ```js
 // if / else if / else：区间、复杂条件
@@ -130,7 +130,7 @@ function calc(price, isVip) {
 }
 ```
 
-## 3.5 循环：for 与 while
+## 循环：for 与 while
 
 ```js
 // 经典 for：已知次数
@@ -165,7 +165,7 @@ do {
 遍历数组 → `for...of`；遍历对象 → `Object.keys()` + `for...of` 更安全；计数/步进逻辑 → 经典 for；"直到满足为止" → while。数组的函数式遍历（map/filter）在第 6 章登场。
 :::
 
-## 3.6 break 与 continue
+## break 与 continue
 
 ```js
 // break：终止整个循环
@@ -181,7 +181,7 @@ for (let i = 1; i <= 6; i++) {
 }
 ```
 
-## 3.7 综合练习：FizzBuzz
+## 综合练习：FizzBuzz
 
 ```js
 // 经典面试题：1~100，3 的倍数打印 Fizz，5 的倍数打印 Buzz，

@@ -1,5 +1,5 @@
 ---
-title: "第 2 章 · 组件与模板"
+title: "组件与模板"
 description: "// course-card.component.ts"
 series: angular
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 学会组件间的 @Input/@Output 通信
 - 理解 signal 驱动的组件更新
 
-## 2.1 插值与属性绑定
+## 插值与属性绑定
 
 ```ts
 // course-card.component.ts
@@ -52,7 +52,7 @@ export class CourseCardComponent {
 [disabled]="b"    布尔属性绑定
 ```
 
-## 2.2 事件绑定
+## 事件绑定
 
 ```ts
 @Component({
@@ -82,7 +82,7 @@ export class DemoComponent {
 
 对照记忆：Vue 的 `@click` = Angular 的 `(click)`；Vue 的 `.prevent` 修饰符在 Angular 里没有——**手动 preventDefault**。
 
-## 2.3 双向绑定：[(ngModel)] 与 signal 双写
+## 双向绑定：[(ngModel)] 与 signal 双写
 
 Angular 的双向绑定 = 属性绑定 + 事件绑定的语法糖 `[(…)]`（"香蕉在盒子里"）：
 
@@ -107,7 +107,7 @@ export class NameBoxComponent {
 
 `[(ngModel)]` 与 signal 配合：输入时自动 `name.set(新值)`。**需要 signalInput/unset 的细节**——纯 signal 字段 + ngModel 的组合在新版 Angular 有更好的支持（signal 表单），传统 reactive forms 见第 7 章。
 
-## 2.4 @Input：父传子
+## @Input：父传子
 
 ```ts
 // child/course-card.component.ts
@@ -149,7 +149,7 @@ input.required   必填声明（编译期强约束——Angular 类型化模板�
 @Input()         老式装饰器版（存量代码会见到）
 ```
 
-## 2.5 @Output：子通知父
+## @Output：子通知父
 
 ```ts
 // child/confirm-button.component.ts
@@ -189,7 +189,7 @@ export class ParentComponent {
 方括号下行、圆括号上行、香蕉盒 [(…)] 双向
 ```
 
-## 2.6 内容投影：ng-content
+## 内容投影：ng-content
 
 React 的 children / Vue 的 slot，Angular 叫 **ng-content**：
 
@@ -214,7 +214,7 @@ export class PanelComponent {}
 </app-panel>
 ```
 
-## 2.7 综合练习：点赞卡片
+## 综合练习：点赞卡片
 
 ```ts
 import { Component, input, output, signal, computed } from '@angular/core';

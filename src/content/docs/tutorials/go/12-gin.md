@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · Gin 路由与中间件"
+title: "Gin 路由与中间件"
 description: "标准库 API 写到 5 个接口就露出痛点："
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握参数绑定（JSON/URI/Query）与校验
 - 学会编写中间件与统一错误处理
 
-## 12.1 为什么需要 Web 框架
+## 为什么需要 Web 框架
 
 标准库 API 写到 5 个接口就露出痛点：
 
@@ -33,7 +33,7 @@ tableOfContents: true
 go get github.com/gin-gonic/gin
 ```
 
-## 12.2 第一个 Gin 服务
+## 第一个 Gin 服务
 
 ```go
 package main
@@ -58,7 +58,7 @@ func main() {
 
 `c *gin.Context` 是 Gin 的核心对象：取参数、绑数据、写响应全靠它。
 
-## 12.3 路由与参数
+## 路由与参数
 
 ```go
 r := gin.Default()
@@ -88,7 +88,7 @@ api := r.Group("/api")
 // /api/v1/todos
 ```
 
-## 12.4 参数绑定：ShouldBindJSON
+## 参数绑定：ShouldBindJSON
 
 **绑定（binding）**= 反序列化 + 校验一步到位：
 
@@ -122,7 +122,7 @@ c.ShouldBindUri(&req)      // 路径参数绑定
 c.ShouldBindQuery(&req)    // 查询参数绑定
 ```
 
-## 12.5 中间件：洋葱模型
+## 中间件：洋葱模型
 
 ```go
 // 中间件签名：c.Next() 前是"进入"，之后是"返回"（洋葱包裹）
@@ -161,7 +161,7 @@ api.GET("/me", func(c *gin.Context) {
 
 对照第 11 章手动包装——`Use()` 让中间件按声明顺序自动组成洋葱。
 
-## 12.6 统一错误响应与 panic 恢复
+## 统一错误响应与 panic 恢复
 
 ```go
 // gin.Default 自带 Recovery 中间件：panic 自动变 500（服务不倒）
@@ -191,7 +191,7 @@ func list(c *gin.Context) {
 }
 ```
 
-## 12.7 综合练习：Gin 版待办 API
+## 综合练习：Gin 版待办 API
 
 ```go
 package main

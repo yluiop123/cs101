@@ -1,5 +1,5 @@
 ---
-title: "第 1 章 · 初识 TypeScript"
+title: "初识 TypeScript"
 description: "TypeScript（简称 TS）是微软开发的 JavaScript 超集：在 JS 的全部语法之上增加了静态类型系统（static type system）。"
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 体会静态类型带来的实际收益
 - 跑通第一个 TS 程序（编译与执行）
 
-## 1.1 TypeScript 是什么
+## TypeScript 是什么
 
 TypeScript（简称 TS）是微软开发的 **JavaScript 超集**：在 JS 的全部语法之上增加了**静态类型系统（static type system）**。
 
@@ -49,7 +49,7 @@ add(1, '2');    // ❌ 编辑器直接标红：Argument of type 'string' is not 
 浏览器只认识 JS；TS 是"开发阶段的质量关卡"。
 :::
 
-## 1.2 为什么要学：三个真实收益
+## 为什么要学：三个真实收益
 
 ### 收益一：把运行时错误变成编辑时错误
 
@@ -78,7 +78,7 @@ if (user) {
 Vue 3、Angular、React 生态（官方文档以 TS 为主）、VS Code 本身……前端职位 JD 中 TS 已是标配。
 :::
 
-## 1.3 环境搭建：tsc 编译器
+## 环境搭建：tsc 编译器
 
 ```bash
 mkdir ts-demo && cd ts-demo
@@ -108,7 +108,7 @@ node hello.js         # 运行编译产物
 不想装环境时，用官方在线编辑器 [TypeScript Playground](https://www.typescriptlang.org/play)——左边写 TS、右边实时看编译结果与类型报错，适合本章随手验证。
 :::
 
-## 1.4 编译器在做什么
+## 编译器在做什么
 
 ```text
 类型检查（type checking）：发现类型不匹配，报错但不产文件
@@ -127,7 +127,7 @@ const n = 42;
 编译后的 JS **没有任何类型信息**。所以 TS 不能拦截"运行时才发生"的事（如接口返回的数据格式错）——那需要运行时校验配合（第 10 章实战中体现）。
 :::
 
-## 1.5 前端工具链中的 TS
+## 前端工具链中的 TS
 
 真实项目几乎不手动跑 `tsc`：
 

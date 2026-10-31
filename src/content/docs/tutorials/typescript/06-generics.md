@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 泛型"
+title: "泛型"
 description: "不用泛型，“相同逻辑、不同类型”只能二选一："
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握泛型函数/接口/约束的写法
 - 熟练使用常用工具类型（Utility Types）
 
-## 6.1 泛型解决什么问题
+## 泛型解决什么问题
 
 不用泛型，"相同逻辑、不同类型"只能二选一：
 
@@ -46,7 +46,7 @@ const s = first(['a', 'b']);     // s: string
 
 :::
 
-## 6.2 泛型函数：推断与显式指定
+## 泛型函数：推断与显式指定
 
 ```ts
 function identity<T>(value: T): T {
@@ -64,7 +64,7 @@ function pair<K, V>(key: K, value: V): [K, V] {
 const p = pair('age', 18);      // [string, number]
 ```
 
-## 6.3 泛型约束：extends 限定范围
+## 泛型约束：extends 限定范围
 
 ```ts
 // 约束：T 必须有 length 属性
@@ -86,7 +86,7 @@ getProp(user, 'weight');  // ❌ 'weight' 不是 user 的键
 
 `T[K]` 的返回类型是**精确的**——取 name 得 string，取 age 得 number。这就是"索引访问类型"的威力。
 
-## 6.4 泛型接口与泛型类型
+## 泛型接口与泛型类型
 
 ```ts
 // 泛型接口：响应结构的标准建模
@@ -118,7 +118,7 @@ type AsyncState<T> =
 const userState: AsyncState<User> = { status: 'loading' };
 ```
 
-## 6.5 泛型默认值
+## 泛型默认值
 
 ```ts
 interface Paginated<T = unknown> {
@@ -130,7 +130,7 @@ const anyPage: Paginated = { list: [], total: 0 };       // T = unknown
 const userPage: Paginated<User> = { list: [], total: 0 }; // 显式指定
 ```
 
-## 6.6 常用工具类型（Utility Types）
+## 常用工具类型（Utility Types）
 
 TS 内置了一批泛型工具，日常使用率极高：
 
@@ -171,7 +171,7 @@ Partial/Pick/Omit/Record/Readonly 五个覆盖 80% 日常需求。本质都是"�
 
 :::
 
-## 6.7 综合示例：泛型化的存储工具
+## 综合示例：泛型化的存储工具
 
 ```ts
 // JS 教程第 12 章 storage 封装的 TS 版

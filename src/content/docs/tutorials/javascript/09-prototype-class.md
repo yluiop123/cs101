@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · 面向对象与原型"
+title: "面向对象与原型"
 description: "对象字面量适合单个对象；大量相似对象需要模板："
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解原型（prototype）与继承机制
 - 会用 class 组织有状态的对象
 
-## 9.1 从对象字面量到"批量生产"
+## 从对象字面量到"批量生产"
 
 对象字面量适合单个对象；**大量相似对象**需要模板：
 
@@ -43,7 +43,7 @@ u1.sayHi();   // '我是 Tom'
 
 `new` 做了四件事：创建空对象 → 把 `this` 指向它 → 执行函数体 → 返回该对象。
 
-## 9.2 class：现代语法糖
+## class：现代语法糖
 
 ES6 的 class 是构造函数 + 原型的语法糖，写法更接近其他语言：
 
@@ -77,7 +77,7 @@ User.createGuest();   // '游客' 实例
 `class User {...}` 本质仍是函数 + 原型。日常开发用 class 写，理解原理看下一节。
 :::
 
-## 9.3 原型：方法共享的机制
+## 原型：方法共享的机制
 
 ```js
 class User {
@@ -100,7 +100,7 @@ arr.foo      // undefined —— 链走到底也没有
 
 第 6 章的数组方法、字符串方法，全部来自原型链。
 
-## 9.4 继承：extends 与 super
+## 继承：extends 与 super
 
 ```js
 class Animal {
@@ -136,7 +136,7 @@ d instanceof Animal;   // true —— instanceof 沿原型链判断
 `extends` 后在 `constructor` 里使用 `this` 之前必须调用 `super(...)`，否则报错。
 :::
 
-## 9.5 封装：私有字段
+## 封装：私有字段
 
 ```js
 class Wallet {
@@ -157,7 +157,7 @@ w.#balance;       // ❌ 语法错误：外部不可访问
 
 `#私有字段` 让"内部状态 + 公开方法"的封装设计真正落地。
 
-## 9.6 综合示例：待办事项类
+## 综合示例：待办事项类
 
 ```js
 class TodoList {

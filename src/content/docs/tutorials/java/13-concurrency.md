@@ -1,5 +1,5 @@
 ---
-title: "第 13 章 · 线程池与并发工具"
+title: "线程池与并发工具"
 description: "线程创建销毁有开销，无节制 new Thread 会拖垮系统。线程池（thread pool）：预建一批线程反复使用："
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 Executors 常用工厂与 Future 异步结果
 - 熟悉 JUC 高频工具（原子类、并发集合、CountDownLatch）
 
-## 13.1 线程池：复用而非滥造
+## 线程池：复用而非滥造
 
 线程创建销毁有开销，无节制 new Thread 会拖垮系统。**线程池（thread pool）**：预建一批线程反复使用：
 
@@ -26,7 +26,7 @@ tableOfContents: true
 
 三大好处：降低创建销毁开销、控制并发上限（防资源耗尽）、统一管理（监控/拒绝策略）。
 
-## 13.2 创建与使用线程池
+## 创建与使用线程池
 
 ```java
 import java.util.concurrent.ExecutorService;
@@ -68,7 +68,7 @@ newScheduledThreadPool(n) 定时/周期任务
 Executors 的工厂在阿里规范中不推荐直接用于生产（如 newFixedThreadPool 的队列无界，可能堆积内存溢出）。生产用 `new ThreadPoolExecutor(核心数, 最大数, 存活时间, 时间单位, 有界队列, 拒绝策略)` 显式指定参数——本章理解机制即可，Spring Boot 里默认线程池配置已封装好这些。
 :::
 
-## 13.3 原子类：无锁的线程安全计数
+## 原子类：无锁的线程安全计数
 
 ```java
 import java.util.concurrent.atomic.AtomicInteger;
@@ -104,7 +104,7 @@ public class Counter {
 }
 ```
 
-## 13.4 并发集合
+## 并发集合
 
 ```java
 import java.util.concurrent.ConcurrentHashMap;
@@ -137,7 +137,7 @@ new Thread(() -> {
 }).start();
 ```
 
-## 13.5 CountDownLatch 与 Semaphore
+## CountDownLatch 与 Semaphore
 
 ```java
 // CountDownLatch：等待 N 个任务全部完成（第 12 章用过）
@@ -158,7 +158,7 @@ try {
 
 数据库连接池、接口限流都是 Semaphore 思想。
 
-## 13.6 并发三大原则回顾
+## 并发三大原则回顾
 
 ```text
 ① 原子性：count++ 用 AtomicInteger 或 synchronized（别依赖"看起来一行"）
@@ -166,7 +166,7 @@ try {
 ③ 有序性：发布对象前完成初始化（final 字段天然安全）
 ```
 
-## 13.7 综合练习：并发统计单词数
+## 综合练习：并发统计单词数
 
 ```java
 import java.nio.file.Files;

@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 表单处理"
+title: "表单处理"
 description: "第 5 章已入门 v-model，这里补齐全景："
 series: vue
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握校验的"错误状态管理"模式
 - 实现一个带校验的注册表单
 
-## 8.1 控件绑定速查
+## 控件绑定速查
 
 第 5 章已入门 v-model，这里补齐全景：
 
@@ -67,7 +67,7 @@ const form = ref({
 `v-model` 直连 ref（零散变量）适合小表单；多字段表单把字段聚成一个 `form` 对象统一管理——提交、重置、校验都对着一个对象操作。
 :::
 
-## 8.2 表单提交的标准写法
+## 表单提交的标准写法
 
 ```vue
 <script setup>
@@ -92,7 +92,7 @@ async function onSubmit() {
 
 要点：监听 `<form>` 的 submit（回车与按钮都能触发）+ `.prevent` 阻止默认刷新。
 
-## 8.3 校验模式：errors 对象
+## 校验模式：errors 对象
 
 校验的本质是**管理一个 errors 对象**：
 
@@ -149,7 +149,7 @@ errors[field] = 错误文案 或 ''（空串即无错）
 错误信息 v-if 渲染在对应控件下方
 ```
 
-## 8.4 即时校验：失焦与输入时
+## 即时校验：失焦与输入时
 
 ```vue
 <script setup>
@@ -175,7 +175,7 @@ const usernameError = computed(() => {
 
 体验黄金组合：**失焦校验单字段 + 提交校验全表单**——不打扰输入，又不放过错误。
 
-## 8.5 提交状态与防重复
+## 提交状态与防重复
 
 ```vue
 <script setup>
@@ -206,7 +206,7 @@ async function onSubmit() {
 
 `submitting` 驱动两件事：按钮置灰 + 文案变化——JS 教程第 13 章 loading 思路的组件化。
 
-## 8.6 重置与初始值
+## 重置与初始值
 
 ```js
 const initialForm = { username: '', password: '', agree: false };
@@ -224,7 +224,7 @@ function reset() {
 直接 `Object.assign(form, formInitial)` 引用同一对象会被后续修改污染——初始值先解构拷贝（`{ ...initialForm }`）再存。
 :::
 
-## 8.7 综合练习：完整注册表单
+## 综合练习：完整注册表单
 
 把 8.3~8.6 组合：reactive form + errors + touched + computed 单字段校验 + submitting 防重 + reset。清单：
 

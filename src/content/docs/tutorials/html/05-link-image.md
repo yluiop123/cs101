@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 链接与图片"
+title: "链接与图片"
 description: "（anchor，锚）是 Web 的灵魂——正是它把一个个网页连成了“网”："
 series: html
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解相对路径与绝对路径的写法规则
 - 掌握 `<img>` 的属性体系与图片格式选型
 
-## 5.1 超链接：a 标签
+## 超链接：a 标签
 
 `<a>`（anchor，锚）是 Web 的灵魂——正是它把一个个网页连成了"网"：
 
@@ -34,7 +34,7 @@ tableOfContents: true
 | `./about.html` | 跳转站内页面 |
 | `mailto:` | 唤起邮件客户端 |
 
-## 5.2 相对路径与绝对路径
+## 相对路径与绝对路径
 
 ```text
 my-site/
@@ -57,7 +57,7 @@ my-site/
 相对路径以**当前 HTML 文件所在目录**为基准，而不是以浏览器地址栏为准。文件挪动位置后相对路径要跟着改——这是图片裂开的头号原因。
 :::
 
-## 5.3 锚点链接：跳到页面某个位置
+## 锚点链接：跳到页面某个位置
 
 给目标元素一个 `id`，链接指向 `#id` 即可跳转：
 
@@ -69,7 +69,7 @@ my-site/
 
 常见应用：文章目录、返回顶部（`href="#"` 或指向顶部元素）。跨页面也能用：`./docs.html#install` 直接定位到 docs 页的 install 区块。
 
-## 5.4 新窗口打开与安全
+## 新窗口打开与安全
 
 ```html
 <a href="https://example.com" target="_blank" rel="noopener noreferrer">
@@ -84,7 +84,7 @@ my-site/
 带 `target="_blank"` 的外链**务必**写 `rel="noopener noreferrer"`——历史上新窗口可以通过 `opener` 篡改原页面，这是真实存在的攻击向量。
 :::
 
-## 5.5 下载链接
+## 下载链接
 
 ```html
 <a href="./files/report.pdf" download>下载报表</a>
@@ -93,7 +93,7 @@ my-site/
 
 对同源文件，`download` 属性触发下载而非打开；对浏览器不能直接预览的类型（zip 等），不写 `download` 也会下载。
 
-## 5.6 图片：img 标签
+## 图片：img 标签
 
 ```html
 <img src="./assets/logo.png" alt="网站 Logo" width="120" height="40" loading="lazy" />
@@ -121,7 +121,7 @@ my-site/
 
 `<img>` 是行内元素，多个图片排一行；它与文字混排时默认贴齐基线，细节对齐交给 CSS。
 
-## 5.7 图片格式怎么选
+## 图片格式怎么选
 
 | 格式 | 特点 | 适用场景 |
 | --- | --- | --- |
@@ -135,7 +135,7 @@ my-site/
 照片用 JPEG/WebP，透明/图标用 PNG 或 SVG，Logo 图标优先 SVG。拿不准就 WebP。
 :::
 
-## 5.8 综合示例
+## 综合示例
 
 ```html
 <style>

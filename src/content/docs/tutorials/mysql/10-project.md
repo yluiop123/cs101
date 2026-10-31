@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 综合实战：一个订单库的优化全过程"
+title: "综合实战：一个订单库的优化全过程"
 description: "背景：单实例 MySQL 8， 库， 1200 万行、 三千万行。"
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 把索引、SQL 改写、分区与归档四种手段按顺序落到实处
 - 建立可复用的压测脚本与优化前后对比方法
 
-## 10.1 场景与目标表结构
+## 场景与目标表结构
 
 背景：单实例 MySQL 8，`shop` 库，`orders` 1200 万行、`order_items` 三千万行。近期三类问题集中爆发：商家后台列表页超时、财务对账报表跑不完、磁盘被数据与 binlog 撑满。四表结构与 SQL 基础教程及 [第 2 章 · 数据类型与表设计](../02-data-types-schema/) 一致，本章主角是 `orders`：
 
@@ -38,7 +38,7 @@ CREATE TABLE orders (
 
 其余三表本章用到的列与现有索引：`customers` 只有主键与 `uk_username`、`uk_mobile`；`products` 除主键与 `uk_product_no` 外没有二级索引；`order_items` 有 `idx_order_product (order_id, product_id)`。隐患很清楚：`orders` 只有 `(customer_id, created_at)` 一条二级索引，没有状态维度也没有独立时间索引。
 
-## 10.2 造数据：灌进一千万行
+## 造数据：灌进一千万行
 
 逐行 `INSERT` 一千万次是不可接受的（第 5 章），这里用"递归 CTE 造序号 + 集合化插入 + 分批提交"：
 
@@ -77,7 +77,7 @@ FROM orders AS o INNER JOIN products AS p ON p.product_id = 1 + o.order_id % 500
 数据灌完后用 `SELECT TABLE_NAME, TABLE_ROWS, DATA_LENGTH FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'shop';` 核对规模（`TABLE_ROWS` 是估算值，精确数还要 `COUNT(*)`）。另外 `SET GLOBAL innodb_flush_log_at_trx_commit = 2;` 与 `SET GLOBAL unique_checks = 0;` 能显著提速，但生产禁止，灌完必须改回 1，回到第 5 章的"双一"基线。
 :::
 
-## 10.3 第一步：定位问题 SQL
+## 第一步：定位问题 SQL
 
 ```bash
 mysql -e "SET GLOBAL slow_query_log = ON; SET GLOBAL long_query_time = 1;"
@@ -111,7 +111,7 @@ Q2  type = ALL，rows 接近全表，Extra = Using temporary; Using filesort
 Q3  type = ALL，rows 约等于商品总数，Extra = Using where; Using filesort
 ```
 
-## 10.4 第二步：索引改造
+## 第二步：索引改造
 
 顺序按第 3 章口诀：等值 → 多值/范围 → 排序 → 需要覆盖的列。
 
@@ -136,7 +136,7 @@ SELECT * FROM sys.schema_unused_indexes WHERE object_schema = 'shop';
 先查 `information_schema.innodb_trx` 确认没有长事务（第 7 章的 MDL 连锁阻塞），再 `SET SESSION lock_wait_timeout = 8;` 让拿不到锁的 DDL 快速失败。单次建索引要几十分钟以上或主从延迟敏感时（第 8 章），改用 gh-ost / pt-osc，并按内存余量调整 8.0.27+ 的 `innodb_ddl_threads`、`innodb_ddl_buffer_size`（`SHOW VARIABLES LIKE 'innodb_ddl%';`）。
 :::
 
-## 10.5 第三步：SQL 改写
+## 第三步：SQL 改写
 
 Q1 用延迟关联，把"扫描 50 万行宽记录"变成"在索引里定位 50 万个主键 + 回表 20 次"：
 
@@ -173,7 +173,7 @@ GROUP BY created_at, pay_method;
 `GROUP BY` 千万行会撑爆磁盘临时表并冲刷缓冲池。做法：固定路由到从库（第 8 章），或按天预聚合成 `orders_daily_stats` 小表由夜间任务写入、报表只读它 —— 对第 4 章的 `Created_tmp_disk_tables` 指标改善最直接。
 :::
 
-## 10.6 第四步：分区与归档
+## 第四步：分区与归档
 
 `orders` 的写入集中在最近三个月，历史行只查不改，适合按时间 RANGE 分区，让冷数据能被整块摘走：
 
@@ -226,7 +226,7 @@ pt-archiver --source h=127.0.0.1,D=shop,t=orders --dest h=127.0.0.1,D=shop_archi
   --limit 2000 --commit-each --sleep 0.5 --max-lag 1 --progress 10000
 ```
 
-## 10.7 第五步：压测验证与自查清单
+## 第五步：压测验证与自查清单
 
 ```bash
 #!/usr/bin/env bash

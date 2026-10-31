@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 综合实战：整套应用容器化"
+title: "综合实战：整套应用容器化"
 description: "示例项目 ：Vue 单页应用 + Node API + MySQL + Redis 队列 + 后台 worker。"
 series: docker
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 规划网络分层与数据卷，配好健康检查、日志轮转与备份
 - 用一份 compose 起整套环境，并拿着上线清单完成发布自查
 
-## 8.1 目标架构
+## 目标架构
 
 示例项目 `todo-app`：Vue 单页应用 + Node API + MySQL + Redis 队列 + 后台 worker。源码分三坨（`web/`、`server/`、`worker/`，各自带 lockfile），Dockerfile 与 nginx 配置放在 `deploy/`，初始化 SQL 放在 `db/init/`。容器化后的拓扑：
 
@@ -30,7 +30,7 @@ tableOfContents: true
 
 四个 Dockerfile 的职责边界很清楚：`gateway` 与 `frontend` 是「配置与产物打包型」，`api` 与 `worker` 是「依赖安装 + 构建 + 降权型」。四份文件共用一个构建上下文（仓库根目录），因此 `COPY` 路径都从根写起。
 
-## 8.2 网络与数据卷规划
+## 网络与数据卷规划
 
 网络按「谁能访问谁」切三层（第 4 章原则的落地）：
 
@@ -50,7 +50,7 @@ todo_redis-data   → queue:/data             AOF 可重建，但仍纳入备份
 证书等宿主目录    → gateway:/etc/... :ro    bind mount，只读
 ```
 
-## 8.3 网关与前端镜像
+## 网关与前端镜像
 
 `deploy/nginx/gateway.conf` 的关键片段（它只是被 COPY 进镜像的普通文件）：
 
@@ -100,7 +100,7 @@ HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD wget -qO- http://127.0.0
 
 `deploy/nginx/frontend.conf` 里有两段是 SPA 必需的：`location / { try_files $uri $uri/ /index.html; }` 保证刷新 `/todos/12` 不会 404；对带哈希的 `js|css|woff2|png|svg` 设 `expires 30d` 与 `Cache-Control "public, immutable"`，让浏览器长期缓存。顺带一提，`frontend` 只被 gateway 访问：多这一层换来统一入口与 TLS、`/api` 同源免 CORS、访问日志集中、后端可独立重启。
 
-## 8.4 后端 API 镜像
+## 后端 API 镜像
 
 ```dockerfile
 # deploy/Dockerfile.api
@@ -128,7 +128,7 @@ CMD ["node", "dist/server.js"]
 
 三条约定：应用必须监听 `0.0.0.0:8000`（写死 `127.0.0.1` 会让容器外访问不到）；连接串全部来自环境变量，`DB_HOST=db`、`QUEUE_HOST=queue` 用服务名；`/healthz` 只做轻量探测，别在里面扫全表。
 
-## 8.5 worker 镜像与迁移任务
+## worker 镜像与迁移任务
 
 worker 与 api 的依赖和入口都不同，单独一份 Dockerfile 更便于审计与独立伸缩：
 
@@ -147,7 +147,7 @@ CMD ["node", "src/consumer.js"]                # 从 redis 拉任务、写库
 
 数据库首次初始化靠 MySQL 镜像的入口脚本（[第 4 章 · 数据卷与网络](../04-volumes-networks/)）：`db/init/01-schema.sql` 挂到 `/docker-entrypoint-initdb.d`，只在数据卷为空时按文件名顺序执行。之后的 schema 变更一律走一次性迁移任务，它与 api 共用镜像、只换 `command`，定义见下面的 compose——注意它不设 `ports`、不进 `edge` 网络，且 `restart` 写作带引号的 `"no"`（YAML 裸写 `no` 会被解析成布尔 `false`）。
 
-## 8.6 compose.yaml：一次起整套
+## compose.yaml：一次起整套
 
 ```yaml
 name: todo
@@ -227,7 +227,7 @@ docker compose logs -f api worker    # 追日志看启动过程
 
 迁移有两种节奏：让 `up` 自动跑一次性任务（简单，但迁移失败会连带 `api` 起不来），或发布时先 `docker compose run --rm migrate` 成功再 `up -d`（可控性更好）。注意 `service_completed_successfully` 只对「会退出的服务」有意义。
 
-## 8.7 日志、备份与上线自查清单
+## 日志、备份与上线自查清单
 
 单容器日志必须设上限，否则 json-file 驱动会把宿主磁盘写满（第 1 章的全局 `log-opts` 只是兜底）：给服务加 `logging: { driver: json-file, options: { max-size: "20m", max-file: "5" } }`。排障导出与每日备份：
 

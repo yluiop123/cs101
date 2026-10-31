@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 事务与 ACID"
+title: "事务与 ACID"
 description: "-- 开启事务的三种等价写法"
 series: mysql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 说清 redo log、undo log、刷盘参数如何换来原子性与持久性
 - 识别并排查长事务，写出可回滚、不拖垮库的应用事务代码
 
-## 5.1 事务边界：BEGIN / COMMIT / ROLLBACK
+## 事务边界：BEGIN / COMMIT / ROLLBACK
 
 ```sql
 -- 开启事务的三种等价写法
@@ -64,7 +64,7 @@ START TRANSACTION READ ONLY;   -- 只读事务：优化器可少做锁簿记，�
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED;  -- 只对下一个事务生效（第 6 章）
 ```
 
-## 5.2 ACID 分别由谁实现
+## ACID 分别由谁实现
 
 ```text
 A 原子性   undo log：先把"改之前长什么样"记下来，失败时反向恢复
@@ -75,7 +75,7 @@ D 持久性   redo log（WAL）+ 刷盘策略 + doublewrite：提交了就认为
 
 一致性是**目的**，其余三者是**手段**。数据库只能保证它认识的约束，"库存不能为负"这种规则要靠你写进 `CHECK` 约束、唯一索引或代码里 —— MySQL 8.0.16+ 才真正强制执行 `CHECK` 约束（更早版本只是解析后忽略，可用 `SELECT VERSION();` 确认）。
 
-## 5.3 redo log：先写日志，再改数据
+## redo log：先写日志，再改数据
 
 如果每次提交都把缓冲池里脏的 16KB 页刷到随机位置，成本会高得不可用。InnoDB 用 **WAL（Write-Ahead Logging）**：
 
@@ -119,7 +119,7 @@ SHOW VARIABLES WHERE Variable_name LIKE 'innodb_log%';
 SHOW VARIABLES LIKE 'innodb_redo_log_capacity';
 ```
 
-## 5.4 undo log：回滚与快照的两个用途
+## undo log：回滚与快照的两个用途
 
 一行被改了三次，undo log 里就串起一条**版本链**：
 
@@ -142,7 +142,7 @@ SHOW ENGINE INNODB STATUS\G        -- 找 "History list length"
 SELECT COUNT(*) FROM information_schema.innodb_trx;   -- 当前活动事务数
 ```
 
-## 5.5 长事务的危害
+## 长事务的危害
 
 长事务的定义不是"跑得久"，而是**持有快照或锁时间过久的连接**。
 
@@ -171,7 +171,7 @@ KILL 12345;   -- trx_mysql_thread_id：确认是问题连接后再杀
 调用外部 HTTP/RPC、读写 Redis、发消息队列、遍历大结果集做复杂计算、等待人工输入 —— 都发生在事务持有锁与快照期间。正确姿势是：短事务读 → 事务外算 → 短事务写；远程调用放到事务提交后（或用本地消息表/事务性发件箱模式）。
 :::
 
-## 5.6 应用侧的事务姿势
+## 应用侧的事务姿势
 
 批量写 1000 行的两种写法，性能差距可达一到两个数量级：
 
@@ -210,7 +210,7 @@ COMMIT;
 mysql -e "SELECT * FROM information_schema.innodb_trx WHERE trx_query IS NULL ORDER BY trx_started;"
 ```
 
-## 5.7 综合练习：安全扣库存
+## 综合练习：安全扣库存
 
 需求：用户下单时扣减 3 个商品的库存，任一商品库存不足则整单失败。
 

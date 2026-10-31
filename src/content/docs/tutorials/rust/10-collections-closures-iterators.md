@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · 集合、闭包与迭代器"
+title: "集合、闭包与迭代器"
 description: "第 3 章 · 所有权 说明 String、Vec、HashMap 都是堆上、拥有所有权、可增长的容器。这一节把操作补齐。"
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 分清闭包的 Fn / FnMut / FnOnce 三档捕获规则与 `move` 的时机
 - 理解迭代器的 `next` 协议与惰性，能读懂并写出适配器链
 
-## 10.1 三个常用集合
+## 三个常用集合
 
 [第 3 章 · 所有权](../03-ownership/) 说明 `String`、`Vec<T>`、`HashMap` 都是堆上、拥有所有权、可增长的容器。这一节把操作补齐。
 
@@ -83,7 +83,7 @@ println!("{:?} 总分 {}", names, total);
 ② 拿着 `keys()`/`values()` 的迭代器时不能再 `insert`，不可变借用与可变借用打架，编译器直接拒收。
 :::
 
-## 10.2 闭包：能捕获环境的匿名函数
+## 闭包：能捕获环境的匿名函数
 
 ```rust
 let factor = 3;
@@ -107,7 +107,7 @@ let nums = vec![1, 2, 3];
 let doubled: Vec<i32> = nums.iter().map(|x| x * 2).collect();   // 闭包 + 迭代器的日常形态
 ```
 
-## 10.3 Fn / FnMut / FnOnce 与 move
+## Fn / FnMut / FnOnce 与 move
 
 编译器按闭包**怎么用捕获的变量**决定它实现哪个 trait，三档是一条继承链：
 `Fn: FnMut`、`FnMut: FnOnce`，也就是 Fn 最宽松。
@@ -156,7 +156,7 @@ fn main() {
 存进结构体字段。这三类报错的措辞几乎都含 `closure may outlive the current function`，看到就先试 `move`。
 :::
 
-## 10.4 Iterator 与 next 协议
+## Iterator 与 next 协议
 
 集合侧有三个入口，区别就在所有权上：
 
@@ -204,7 +204,7 @@ let mapped = v.iter().map(|x| {
 let sum: i32 = mapped.sum();     // 消费的一刻才逐个拉动 → 打印 处理 1 / 2 / 3
 ```
 
-## 10.5 常用适配器速查
+## 常用适配器速查
 
 ```rust
 let nums = vec![1, 2, 3, 4, 5, 6, 7, 8];
@@ -253,7 +253,7 @@ let flat: Vec<i32> = rows.iter().flat_map(|row| row.iter().copied()).collect(); 
 | `copied()` / `cloned()` | `&T` 迭代器 → `T` | 省掉满屏 `*x` |
 | `rev()` / `inspect(f)` | 反向 / 窥视不改值 | `inspect` 是链式调试利器 |
 
-## 10.6 消费器与自定义迭代器
+## 消费器与自定义迭代器
 
 消费器真正驱动 `next` 走完整个序列：
 
@@ -309,7 +309,7 @@ fn main() {
 Rust 标准库选外部迭代：一切皆 Iterator，零成本抽象靠的是这套统一协议
 ```
 
-## 10.7 综合练习：词频 Top N
+## 综合练习：词频 Top N
 
 把本章全部串起来：统计 → 排序 → 取前 N → 拼接输出。
 

@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 函数与错误处理"
+title: "函数与错误处理"
 description: "func add(a, b int) int { // 同类型参数可简写"
 series: go
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解 Go 的错误处理哲学（error 即值）
 - 学会 panic/recover 的边界
 
-## 4.1 函数基础与多返回值
+## 函数基础与多返回值
 
 ```go
 func add(a, b int) int {            // 同类型参数可简写
@@ -49,7 +49,7 @@ sum([]int{1, 2, 3}...)               // 展开切片传入
 result := func(x int) int { return x * 2 }(21)   // 42
 ```
 
-## 4.2 命名返回值与 defer
+## 命名返回值与 defer
 
 ```go
 // 命名返回值：函数体内可直接当变量用
@@ -79,7 +79,7 @@ defer fmt.Println(2)
 defer fmt.Println(3)      // 输出 3 2 1
 ```
 
-## 4.3 错误处理：error 即值
+## 错误处理：error 即值
 
 Go 没有 try-catch——**错误是普通返回值**，用多返回值传出：
 
@@ -147,7 +147,7 @@ var ErrEmpty = errors.New("内容为空")
 if errors.Is(err, ErrEmpty) { ... }
 ```
 
-## 4.4 panic 与 recover：最后的保险丝
+## panic 与 recover：最后的保险丝
 
 ```go
 // panic：不可恢复的严重错误（数组越界、nil 解引用、显式 panic）
@@ -173,7 +173,7 @@ func safeCall(fn func()) (err error) {
 
 **原则**：业务代码用 error 表达一切可预期失败；panic 只用于"程序员犯错"（如必应存在的配置缺失）；HTTP 框架会帮你 recover 每个请求的 panic（第 11 章）。
 
-## 4.5 泛型函数（1.18+）
+## 泛型函数（1.18+）
 
 ```go
 // 类型参数：[T any] 声明；约束控制能力
@@ -205,7 +205,7 @@ Sum([]float64{1.5, 2.5})     // 4
 
 泛型解决"容器与算法的类型安全"，但**别滥用**——接口（第 6 章）在 Go 里仍是第一选择。
 
-## 4.6 综合练习：带重试的函数执行器
+## 综合练习：带重试的函数执行器
 
 ```go
 package main

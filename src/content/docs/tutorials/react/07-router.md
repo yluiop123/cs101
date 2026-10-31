@@ -1,5 +1,5 @@
 ---
-title: "第 7 章 · React Router 路由"
+title: "React Router 路由"
 description: "npm install react-router-dom"
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握动态参数、编程式导航与嵌套路由
 - 学会登录拦截与 404 兜底
 
-## 7.1 安装与基本配置
+## 安装与基本配置
 
 ```bash
 npm install react-router-dom
@@ -60,7 +60,7 @@ Route          path → element 的映射
 *              通配 404
 ```
 
-## 7.2 导航：Link 与 NavLink
+## 导航：Link 与 NavLink
 
 ```jsx
 import { Link, NavLink } from 'react-router-dom';
@@ -79,7 +79,7 @@ function Nav() {
 }
 ```
 
-## 7.3 动态参数与 useParams
+## 动态参数与 useParams
 
 ```jsx
 <Route path="/course/:id" element={<CourseDetail />} />
@@ -105,7 +105,7 @@ export default function CourseDetail() {
 }
 ```
 
-## 7.4 编程式导航
+## 编程式导航
 
 ```jsx
 import { useNavigate } from 'react-router-dom';
@@ -123,7 +123,7 @@ function Login() {
 }
 ```
 
-## 7.5 嵌套路由与 Outlet
+## 嵌套路由与 Outlet
 
 ```jsx
 <Routes>
@@ -152,7 +152,7 @@ export default function UserLayout() {
 }
 ```
 
-## 7.6 路由懒加载与 Suspense
+## 路由懒加载与 Suspense
 
 ```jsx
 import { lazy, Suspense } from 'react';
@@ -173,7 +173,7 @@ export default function App() {
 
 **懒加载 + Suspense 兜底**是生产项目路由的标准形态（首页组件可保持静态导入）。
 
-## 7.7 登录拦截
+## 登录拦截
 
 React Router 没有全局守卫钩子——惯用**守卫组件**包裹受保护路由：
 
@@ -222,7 +222,7 @@ function Login() {
 
 组件化守卫比配置式守卫更"React"——逻辑即组件，可任意组合（RequireAuth + RequireAdmin 叠加）。
 
-## 7.8 综合练习：迷你站路由表
+## 综合练习：迷你站路由表
 
 ```jsx
 <Routes>

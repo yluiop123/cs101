@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 接口与类型别名"
+title: "接口与类型别名"
 description: "接口（interface）给“对象长什么样”起个名字："
 series: typescript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握可选、只读、索引签名与扩展
 - 分清 interface 与 type 的使用场景
 
-## 3.1 interface：结构的契约
+## interface：结构的契约
 
 接口（interface）给"对象长什么样"起个名字：
 
@@ -38,7 +38,7 @@ function addTodo(item: Todo): Todo[] {
 
 对比第 2 章：同样的结构只写一次——这就是类型可读性与可维护性的分水岭。
 
-## 3.2 可选、只读与只读数组
+## 可选、只读与只读数组
 
 ```ts
 interface User {
@@ -58,7 +58,7 @@ const fixed: readonly number[] = [1, 2, 3];
 fixed.push(4);   // ❌ Property 'push' does not exist on type 'readonly number[]'
 ```
 
-## 3.3 方法与索引签名
+## 方法与索引签名
 
 ```ts
 interface Counter {
@@ -77,7 +77,7 @@ const dict: Dictionary = {
 dict.anything = '任意字符串键都是 string 值';
 ```
 
-## 3.4 扩展：interface 的继承
+## 扩展：interface 的继承
 
 ```ts
 interface Animal {
@@ -98,7 +98,7 @@ const dog: Dog = {
 
 `extends` 复用已有结构——修改 Animal 时所有继承它的类型自动跟进。
 
-## 3.5 type：类型别名
+## type：类型别名
 
 类型别名（type alias）用 `type` 给**任何类型**起名——不只是对象：
 
@@ -124,7 +124,7 @@ type Calc = (a: number, b: number) => number;
 const add: Calc = (a, b) => a + b;
 ```
 
-## 3.6 type 的交叉与扩展
+## type 的交叉与扩展
 
 ```ts
 interface A {
@@ -140,7 +140,7 @@ type C = {
 };
 ```
 
-## 3.7 interface vs type：怎么选
+## interface vs type：怎么选
 
 | 能力 | interface | type |
 | --- | --- | --- |
@@ -164,7 +164,7 @@ interface Window {   // 再写一次，两份自动合并
 
 :::
 
-## 3.8 综合示例：重构待办数据模型
+## 综合示例：重构待办数据模型
 
 ```ts
 // 第 2 章重复的两次标注，收敛为一组接口

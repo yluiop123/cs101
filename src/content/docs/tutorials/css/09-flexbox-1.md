@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · Flexbox 布局（上）"
+title: "Flexbox 布局（上）"
 description: ".container {"
 series: css
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟练使用主轴对齐 justify-content
 - 熟练使用交叉轴对齐 align-items 与 align-content
 
-## 9.1 一行代码开启 Flex 布局
+## 一行代码开启 Flex 布局
 
 ```css
 .container {
@@ -34,7 +34,7 @@ tableOfContents: true
 `display: flex` 的元素是**弹性容器（flex container）**，它的直接子元素是**弹性项目（flex item）**。所有对齐属性都作用在容器上；伸缩属性作用在项目上（第 10 章）。
 :::
 
-## 9.2 主轴与交叉轴
+## 主轴与交叉轴
 
 理解 Flex 的钥匙是**两根轴**：
 
@@ -59,7 +59,7 @@ flex-direction: row（默认）
 主轴是水平时，`justify-content` 管水平对齐；一旦改成 `column`，主轴变垂直——**`justify-content` 就改为管垂直对齐**。新手"设了居中却不居中"多半是轴方向记混了。
 :::
 
-## 9.3 主轴对齐：justify-content
+## 主轴对齐：justify-content
 
 控制项目**沿主轴**如何分布：
 
@@ -94,7 +94,7 @@ flex-direction: row（默认）
 
 把代码存为 HTML 打开，对照四种分布方式的差异。
 
-## 9.4 交叉轴对齐：align-items
+## 交叉轴对齐：align-items
 
 控制项目**沿交叉轴**的对齐（主轴水平时即垂直方向）：
 
@@ -112,7 +112,7 @@ flex-direction: row（默认）
 Flex 项目默认 `stretch`——同一行里最高的那个项目决定行高，其余项目被拉到一样高。这就是"Flex 卡片自动等高"的原理；不想等高就显式设 `align-items: flex-start`。
 :::
 
-## 9.5 水平垂直居中：一行搞定
+## 水平垂直居中：一行搞定
 
 传统"居中玄学"在 Flex 里就是两行：
 
@@ -124,7 +124,7 @@ Flex 项目默认 `stretch`——同一行里最高的那个项目决定行高�
 }
 ```
 
-## 9.6 换行：flex-wrap
+## 换行：flex-wrap
 
 默认项目挤在一行（被压缩）也不换行；允许换行用 `flex-wrap`：
 
@@ -141,7 +141,7 @@ Flex 项目默认 `stretch`——同一行里最高的那个项目决定行高�
 `align-items` 管一行内的对齐；`align-content` 管**行与行之间**的分布。单行时 `align-content` 无效果——这是另一个高频混淆点。
 :::
 
-## 9.7 项目上的两个小属性
+## 项目上的两个小属性
 
 ```css
 .item {
@@ -150,7 +150,7 @@ Flex 项目默认 `stretch`——同一行里最高的那个项目决定行高�
 }
 ```
 
-## 9.8 综合示例：导航栏
+## 综合示例：导航栏
 
 ```html
 <style>

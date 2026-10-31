@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 原理浅析与常见问题"
+title: "原理浅析与常见问题"
 description: "① 原生 ESM 伺服：dev 不打包，浏览器按需请求单模块"
 series: vite
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 看懂 Vite 与 Rollup/esbuild 的分工
 - 建立常见报错的排查手册
 
-## 6.1 快的三个机制回顾
+## 快的三个机制回顾
 
 ```text
 ① 原生 ESM 伺服：dev 不打包，浏览器按需请求单模块
@@ -26,7 +26,7 @@ tableOfContents: true
 
 对比 Webpack "启动即全量打包"的模式，Vite 把成本**从启动时挪到了每个请求时**——而每个请求的处理量很小，于是"秒开 + 毫秒级热更"。
 
-## 6.2 工具分工图
+## 工具分工图
 
 ```text
 esbuild（Go）     依赖预构建 / TS·JSX 转译 —— 只求快
@@ -36,7 +36,7 @@ Vite 本体         dev 服务器 + 两者的"总线" + 插件体系
 
 为什么生产不用 esbuild 打包？Rollup 的代码分割与摇树更成熟、产物更优。esbuild 与 Rollup 的融合（Rust 版打包器 Rolldown）是 Vite 的演进方向，日常使用不受影响。
 
-## 6.3 HMR 的边界
+## HMR 的边界
 
 HMR 不是万能的：
 
@@ -48,7 +48,7 @@ CSS / Vue SFC / React 组件   → 完整 HMR，状态保留
 
 理解冒泡：模块自身不声明"如何热替换"时，更新会向上传递，直到遇到能处理的模块（组件文件），否则整页刷新兜底——**所以"改着改着突然整页刷了"不是 bug，是兜底机制**。
 
-## 6.4 报错排查手册
+## 报错排查手册
 
 ### 启动就报错
 
@@ -88,7 +88,7 @@ export default defineConfig({
 改了 .env 不生效              → 重启 dev 服务器（env 不走 HMR）
 ```
 
-## 6.5 缓存与"玄学问题"
+## 缓存与"玄学问题"
 
 三层缓存，出"灵异现象"时按序清：
 
@@ -107,7 +107,7 @@ rm -rf node_modules && npm install
 先看报错信息第一行 → 清 .vite 缓存 → 检查 config 改动是否需要重启 → 才考虑重装依赖。**dev 服务器不会热加载 vite.config.js**——改完配置必须重启！这是最高频的"改了没生效"。
 :::
 
-## 6.6 VitePress：本站与 Vite 的关系
+## VitePress：本站与 Vite 的关系
 
 本站（VitePress）就是"Vite 之上的静态站点框架"：
 
@@ -119,7 +119,7 @@ build 模式：全量静态化输出 dist/
 
 理解了 Vite 的 dev/build 双模式，就理解了本站全部构建行为——课程从 Node 教程的 npm scripts 到今天，工具链知识已经闭环。
 
-## 6.7 下一步
+## 下一步
 
 构建工具毕业。接下来把它用进框架实战：
 

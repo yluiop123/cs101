@@ -1,5 +1,5 @@
 ---
-title: "第 10 章 · REST API 实战"
+title: "REST API 实战"
 description: "REST（Representational State Transfer）是一种接口设计风格，核心约定："
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 完整实现一个"待办清单" REST API
 - 用前端 fetch 联调验证
 
-## 10.1 REST 是什么
+## REST 是什么
 
 REST（Representational State Transfer）是一种接口设计风格，核心约定：
 
@@ -34,7 +34,7 @@ DELETE /api/todos/3      删除第 3 条
 同一套 URL 语义全团队通用，前端、后端、测试对"这个接口干什么"零沟通成本——它不是协议，是**被广泛采纳的约定**。
 :::
 
-## 10.2 状态码：接口的语言
+## 状态码：接口的语言
 
 | 状态码 | 含义 | 使用场景 |
 | --- | --- | --- |
@@ -59,7 +59,7 @@ res.status(404).json({ error: '待办不存在' });
 { "code": 1001, "message": "标题不能为空" }
 ```
 
-## 10.3 数据层：JSON 文件当数据库
+## 数据层：JSON 文件当数据库
 
 学习阶段用 JSON 文件持久化（数据库在后续的 MySQL 教程接管）：
 
@@ -110,7 +110,7 @@ module.exports = {
 };
 ```
 
-## 10.4 路由层：完整的五个接口
+## 路由层：完整的五个接口
 
 ```js
 // routes/todos.js
@@ -176,7 +176,7 @@ app.use((err, req, res, next) => {  // 兜底错误处理
 app.listen(3000, () => console.log('API: http://localhost:3000/api/todos'));
 ```
 
-## 10.5 联调：用前端 fetch 消费接口
+## 联调：用前端 fetch 消费接口
 
 ```js
 // 与 JS 教程第 13 章的 fetch 知识衔接
@@ -219,7 +219,7 @@ Content-Type: application/json
 ```
 :::
 
-## 10.6 服务端也要校验
+## 服务端也要校验
 
 ```js
 // 创建接口的参数校验（前端校验会被绕过，服务端是最后防线）

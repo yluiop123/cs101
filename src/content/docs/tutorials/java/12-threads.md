@@ -1,5 +1,5 @@
 ---
-title: "第 12 章 · 多线程基础"
+title: "多线程基础"
 description: "单线程串行执行，一个慢任务拖住整个程序："
 series: java
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 Thread 创建与生命周期
 - 学会 synchronized 解决竞态条件
 
-## 12.1 为什么需要多线程
+## 为什么需要多线程
 
 单线程串行执行，一个慢任务拖住整个程序：
 
@@ -52,7 +52,7 @@ public class Counter {
 
 `count++` 不是原子操作：两个线程同时读到 100，各自 +1 写回 101——一次加法被"丢失"。
 
-## 12.2 创建线程的两种方式
+## 创建线程的两种方式
 
 ```java
 // ① 继承 Thread
@@ -77,7 +77,7 @@ new Thread(() -> System.out.println("Lambda 任务")).start();   // Runnable 是
 
 **线程池方式才是工程标配**（第 13 章）——直接 new Thread 在生产代码里几乎见不到。
 
-## 12.3 线程生命周期
+## 线程生命周期
 
 ```text
 NEW        创建了还没 start()
@@ -98,7 +98,7 @@ Thread.currentThread();  // 拿当前线程对象
 t.setDaemon(true);       // 守护线程：JVM 退出不等它（如 GC 线程）
 ```
 
-## 12.4 synchronized：最简单的锁
+## synchronized：最简单的锁
 
 `synchronized`（同步）保证**同一时刻只有一个线程**进入被保护的代码：
 
@@ -144,7 +144,7 @@ Runnable task = () -> {
 加锁 = 串行化 = 牺牲性能。原则：**锁粒度尽量小**（锁代码块不锁整个方法）、**锁对象尽量专用**（别锁 String 字面量/Integer 缓存等被共享的对象）。
 :::
 
-## 12.5 volatile：可见性关键字
+## volatile：可见性关键字
 
 ```java
 private volatile boolean running = true;   // volatile：修改立即可见于其他线程
@@ -162,7 +162,7 @@ public void stop() {
 
 `volatile` 解决**可见性**（一个线程的修改立刻刷新到主内存），但不解决**原子性**（count++ 依然会丢）。典型用途：状态标志位。计数这类复合操作还是得 synchronized 或原子类（第 13 章）。
 
-## 12.6 wait / notify：线程协作
+## wait / notify：线程协作
 
 ```java
 public class TaskQueue {
@@ -184,7 +184,7 @@ public class TaskQueue {
 
 `wait/notifyAll` 必须在 synchronized 块内使用。生产者-消费者模式的原生实现——第 13 章的 BlockingQueue 会给出更省心的现成方案。
 
-## 12.7 综合练习：并发下载模拟器
+## 综合练习：并发下载模拟器
 
 ```java
 import java.util.List;

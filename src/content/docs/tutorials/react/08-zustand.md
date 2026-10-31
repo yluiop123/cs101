@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 状态管理：Zustand"
+title: "状态管理：Zustand"
 description: "状态提升会让父组件变厚；Context 滥用会引发大范围重渲染。Zustand（德语“状态”）用最小的 API 提供“组件外的全局状态”："
 series: react
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 create 定义 store 与组件订阅
 - 学会持久化中间件与 store 组合
 
-## 8.1 为什么是 Zustand
+## 为什么是 Zustand
 
 状态提升会让父组件变厚；Context 滥用会引发大范围重渲染。**Zustand**（德语"状态"）用最小的 API 提供"组件外的全局状态"：
 
@@ -27,7 +27,7 @@ Zustand：一个 create 函数完事，体积极小，React 主流轻量首选
 
 与 Pinia 的对照：同样是"组件外的响应式单例 store"，Zustand 更赤裸（不依赖 Provider、直接 import 使用）。
 
-## 8.2 安装与定义 store
+## 安装与定义 store
 
 ```bash
 npm install zustand
@@ -61,7 +61,7 @@ export default function Counter() {
 
 **选择器（selector）**是 Zustand 的精髓：`useCounterStore(s => s.count)` 只订阅 count——count 变了才重渲染本组件，其他状态变化与我无关（性能默认就好）。
 
-## 8.3 set 与 get：更新的两种姿势
+## set 与 get：更新的两种姿势
 
 ```js
 export const useUserStore = create((set, get) => ({
@@ -82,7 +82,7 @@ export const useUserStore = create((set, get) => ({
 
 **重要：部分更新**——`set({ a: 1 })` 只改 a，其余字段保留（自动浅合并），与 React 的 `setUser({ ...user, a: 1 })` 不同，Zustand 帮你做了合并。
 
-## 8.4 实战 store：购物车
+## 实战 store：购物车
 
 ```js
 // src/stores/cart.js
@@ -125,7 +125,7 @@ const total = useCartStore((s) =>
 `s => ({ a: s.a, b: s.b })` 每次都返回新对象（引用不同）→ 每次更新都重渲染。多值订阅要么分别订阅，要么用 `useShallow`（浅比较）包装。
 :::
 
-## 8.5 异步 action
+## 异步 action
 
 action 就是普通函数，async 随便写：
 
@@ -157,7 +157,7 @@ useEffect(() => { fetchAll(); }, [fetchAll]);
 
 多个页面调用 fetchAll 也只请求一次——`loaded` 幂等模式（与 Pinia 版思路一致）。
 
-## 8.6 持久化中间件
+## 持久化中间件
 
 ```js
 import { create } from 'zustand';
@@ -179,7 +179,7 @@ export const useCartStore = create(
 
 一行 `persist` 包装——store 变化自动写 localStorage、启动时自动恢复。**刷新页面购物车还在**，零额外代码。
 
-## 8.7 store 之间协作
+## store 之间协作
 
 ```js
 // 在 action 里直接调用其他 store 的 hook
@@ -200,7 +200,7 @@ export const useCartStore = create((set, get) => ({
 action 内：useXxxStore.getState()  （取瞬时值，不订阅）
 ```
 
-## 8.8 综合练习：全站通知队列
+## 综合练习：全站通知队列
 
 ```js
 // src/stores/toast.js

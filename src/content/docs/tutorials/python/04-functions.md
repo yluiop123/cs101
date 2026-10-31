@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 函数与作用域"
+title: "函数与作用域"
 description: "def greet(name):"
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解作用域（LEGB）与闭包
 - 会写类型提示让代码可维护
 
-## 4.1 函数定义与调用
+## 函数定义与调用
 
 ```python
 def greet(name):
@@ -38,7 +38,7 @@ ops = {"add": add, "mul": lambda x, y: x * y}
 ops["add"](1, 2)         # 3
 ```
 
-## 4.2 参数的五种形态
+## 参数的五种形态
 
 ```python
 # ① 位置参数：按顺序
@@ -89,7 +89,7 @@ def add_item(item, items=None):    # ✅ 标准解法：None 哨兵
 ```
 :::
 
-## 4.3 返回值：元组与多返回
+## 返回值：元组与多返回
 
 ```python
 def min_max(nums):
@@ -100,7 +100,7 @@ lo, hi = min_max([3, 1, 4])          # 接收端解包
 
 没有 return 语句的函数返回 `None`——Java 的 void 在 Python 里是"隐式返回 None"。
 
-## 4.4 作用域：LEGB 规则
+## 作用域：LEGB 规则
 
 变量查找顺序：**L**ocal → **E**nclosing（外层函数）→ **G**lobal（模块）→ **B**uilt-in（内置）：
 
@@ -138,7 +138,7 @@ def outer2():
 全局可变状态是 bug 温床——数据通过**参数传入、返回值带出**才是正道。global/nolocal 认识即可，正式代码极少用。
 :::
 
-## 4.5 闭包（closure）
+## 闭包（closure）
 
 **闭包** = 内层函数"记住"外层函数的变量：
 
@@ -157,7 +157,7 @@ triple(5)     # 15
 
 闭包是装饰器（第 10 章）的基石——"函数工厂"模式。
 
-## 4.6 类型提示（type hints）
+## 类型提示（type hints）
 
 ```python
 def process(items: list[str], limit: int = 10) -> list[str]:
@@ -178,7 +178,7 @@ def save(user: User) -> None: ...            # 类类型
 
 类型提示**运行时不校验**（传错类型不报错），但编辑器智能提示、mypy 静态检查、FastAPI 的参数验证都靠它——现代 Python 工程的标配。
 
-## 4.7 lambda 与高阶函数
+## lambda 与高阶函数
 
 ```python
 # lambda：一行小函数（能 def 就别用 lambda 表达复杂逻辑）
@@ -192,7 +192,7 @@ list(map(str, nums))                          # ['3','1','4','1','5']
 sum(x for x in nums if x % 2 == 1)           # 生成器表达式求奇数和：9
 ```
 
-## 4.8 综合练习：命令行计算器（函数版）
+## 综合练习：命令行计算器（函数版）
 
 ```python
 OPERATIONS = {

@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · workspace 与 monorepo"
+title: "workspace 与 monorepo"
 description: "Monorepo（单仓库）：多个相关项目/包放在一个 Git 仓库里统一管理。与之相对的传统方式叫 polyrepo（每项目一仓）。"
 series: nodejs
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 pnpm workspace 的配置与使用
 - 学会多包之间的引用与任务编排
 
-## 8.1 什么情况需要 monorepo
+## 什么情况需要 monorepo
 
 **Monorepo（单仓库）**：多个相关项目/包放在**一个** Git 仓库里统一管理。与之相对的传统方式叫 polyrepo（每项目一仓）。
 
@@ -39,7 +39,7 @@ my-platform/
 2. 一个包改动要同步 N 个仓库，版本对不齐
 3. 联调需要来回切仓库、link 本地包
 
-## 8.2 pnpm workspace 配置
+## pnpm workspace 配置
 
 pnpm 原生支持 workspace（工作区），一行配置开启：
 
@@ -63,7 +63,7 @@ packages:
 
 安装依赖：**在对应包目录里执行即可**，pnpm 自动识别 workspace 上下文。
 
-## 8.3 workspace 内的核心命令
+## workspace 内的核心命令
 
 ```bash
 # 在指定包里执行命令（--filter 按包名过滤）
@@ -83,7 +83,7 @@ pnpm add -D -w eslint          # -w = workspace-root
 pnpm -r build
 ```
 
-## 8.4 包之间的引用
+## 包之间的引用
 
 `packages/utils` 要被 `apps/web` 使用：
 
@@ -113,7 +113,7 @@ import { formatDate } from '@acme/utils';
 它告诉 pnpm"用本仓库的版本"而不是去 npm 下载。修改 packages/utils 源码，apps/web **立即生效**（指向的就是源码）——联调零成本，这正是 monorepo 的核心爽点。
 :::
 
-## 8.5 实战：三包最小 monorepo
+## 实战：三包最小 monorepo
 
 ```text
 demo-monorepo/
@@ -135,7 +135,7 @@ pnpm --filter @demo/app index.js    # 输出 add(1,2) 的结果
 
 十行配置，获得"多包 + 内部链接 + 统一安装"的完整能力。
 
-## 8.6 任务编排：依赖感知的构建
+## 任务编排：依赖感知的构建
 
 ```bash
 pnpm -r build        # 按拓扑顺序构建：utils 先于 app（app 依赖 utils）
@@ -148,7 +148,7 @@ pnpm 自动分析包间依赖关系，**被依赖者先构建**——monorepo �
 包多了以后，Turborepo/Nx 等工具提供**增量构建**（只重建受影响的包）与远程缓存。起步阶段 pnpm workspace 足够，规模上来了再加 Turbo——通常就是 `turbo.json` 一层壳。
 :::
 
-## 8.7 monorepo 的代价
+## monorepo 的代价
 
 诚实地列出成本，避免盲目上船：
 

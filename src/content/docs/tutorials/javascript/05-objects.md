@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 对象入门"
+title: "对象入门"
 description: "对象（object）用键值对把相关数据打包："
 series: javascript
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 理解引用类型的"地址共享"行为
 - 会用解构与展开语法简化对象操作
 
-## 5.1 对象：属性的集合
+## 对象：属性的集合
 
 对象（object）用**键值对**把相关数据打包：
 
@@ -31,7 +31,7 @@ const user = {
 };
 ```
 
-## 5.2 读取与修改
+## 读取与修改
 
 ```js
 // 点号：属性名是固定标识符时
@@ -54,7 +54,7 @@ delete user.isAdmin;              // 删除属性
 user.name !== undefined      // 常用替代写法
 ```
 
-## 5.3 this：方法里的"自己"
+## this：方法里的"自己"
 
 ```js
 const user = {
@@ -68,7 +68,7 @@ user.sayHi();   // '我是 Tom'
 
 `this` 指向"方法被谁调用"。普通函数中 `this` 的行为复杂多变（第 9 章展开），**日常对象方法里记住"this = 该对象"即可**。
 
-## 5.4 引用类型的核心行为：共享地址
+## 引用类型的核心行为：共享地址
 
 基本类型复制的是**值**，对象复制的是**地址**：
 
@@ -88,7 +88,7 @@ a.name                // 仍是 'Lucy'，c 是独立副本
 `{...a}` 复制后，若属性值本身是对象/数组，**内层仍是共享地址**（改内层还是互相影响）。完整独立的"深拷贝"用 `structuredClone(obj)`（现代标准）。
 :::
 
-## 5.5 遍历对象
+## 遍历对象
 
 ```js
 const user = { name: 'Tom', age: 18, city: '北京' };
@@ -105,7 +105,7 @@ for (const [key, value] of Object.entries(user)) {
 }
 ```
 
-## 5.6 解构：精准提取
+## 解构：精准提取
 
 ```js
 const user = { name: 'Tom', age: 18, city: '北京' };
@@ -125,7 +125,7 @@ function renderCard({ name, age }) {
 renderCard(user);
 ```
 
-## 5.7 展开语法：合并与改写
+## 展开语法：合并与改写
 
 ```js
 const base = { name: 'Tom', role: 'student' };
@@ -137,7 +137,7 @@ const updated = { ...base, role: 'admin', level: 3 };
 // 不可变更新：不修改原对象，生成新对象（React/Vue 状态更新的标准姿势）
 ```
 
-## 5.8 综合示例：购物车条目
+## 综合示例：购物车条目
 
 ```js
 const item = {

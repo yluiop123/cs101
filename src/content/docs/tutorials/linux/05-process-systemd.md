@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 进程与服务管理"
+title: "进程与服务管理"
 description: "每个运行的程序都是一个进程：程序代码 + 独立的内存空间 + 至少一个线程。PID 是它的身份证号。"
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握前后台作业控制与 kill 信号，能优雅地停掉一个进程
 - 会用 systemctl/journalctl 管理现成服务，并能亲手写一个 unit 文件让程序开机自启
 
-## 5.1 ps：给进程拍快照
+## ps：给进程拍快照
 
 每个运行的程序都是一个**进程**：程序代码 + 独立的内存空间 + 至少一个线程。PID 是它的身份证号。
 
@@ -37,7 +37,7 @@ devops 2345 0.3  1.2 120340 24800 ?  Sl   10:12  0:15  node app.js
 
 STAT 状态码里最常见的：`R` 运行中、`S` 睡眠（等事件，正常）、`D` 不可中断睡眠（**在等 IO，堆积时要警觉**）、`Z` 僵尸、`T` 被停止、`<`/`N` 优先级高低。
 
-## 5.2 top 与 htop：给系统开实时仪表盘
+## top 与 htop：给系统开实时仪表盘
 
 ```bash
 top              # 经典实时视图
@@ -60,7 +60,7 @@ CPU行:   %Cpu(s): 12.3 us, 3.1 sy, 0.0 ni, 84.0 id, 0.6 wa
 鼠标可点、树状视图、F9 直接杀进程。安装：`sudo apt install htop` 或 `sudo dnf install htop`（CentOS 不在基础源时先装 EPEL，见 [第 6 章 · 软件安装与包管理](../06-packages/)）。资源消耗的解读方法两厂一致。
 :::
 
-## 5.3 进程树、父子与僵尸
+## 进程树、父子与僵尸
 
 ```bash
 pstree -p            # 树状视图带 PID（没装则 apt/dnf install pstree）
@@ -75,7 +75,7 @@ ps aux | awk '$8 ~ /Z/ {print}'      # 列出当前僵尸进程
 
 少量僵尸无害；大量增长说明父进程有 bug，处理思路：先解决父进程（重启它，僵尸随之由 systemd 接管收割），而不是试图杀僵尸本身（杀不掉，它已经死了）。孤儿进程会被 PID 1 收养并由它正常收割，这是设计行为不是故障。
 
-## 5.4 前台、后台与作业控制
+## 前台、后台与作业控制
 
 ```bash
 sleep 300 &              # 放到后台启动，输出 [1] 进程号
@@ -96,7 +96,7 @@ disown                                  # 或：已启动的作业从作业表�
 nohup 进程脱离了终端也脱离了管理：没人给它重启、没人收日志轮转。它是调试期的权宜之计；**正式长跑的服务请写成 systemd unit**（5.6 节），第 10 章生产部署全程使用 systemd。
 :::
 
-## 5.5 kill 与信号
+## kill 与信号
 
 kill 发送的是**信号**，不是"立即处决"：
 
@@ -114,7 +114,7 @@ killall nginx          # 按命令名杀
 
 信号清单用 `kill -l` 现场查看；各程序自定义了哪些信号行为，以 `man 程序名` 为准（如 nginx 的 `-s reload` 本质就是给主进程发 HUP）。
 
-## 5.6 systemctl 与 journalctl：现代服务管理
+## systemctl 与 journalctl：现代服务管理
 
 systemd 身兼二职：它是 PID 1（init），也是服务与日志的统一管理器。核心命令：
 
@@ -165,7 +165,7 @@ Loaded 行告诉你 unit 文件位置与是否 enable；Active 行有启动时�
 同样的服务，unit 名可能不同：Ubuntu 是 `ssh.service`，CentOS 是 `sshd.service`。查名字是通用招：`systemctl list-units --type=service | grep -i ssh`。第 10 章改 SSH 配置后重启服务会再次遇到这个差异。
 :::
 
-## 5.7 综合练习：把一个命令变成开机自启的服务
+## 综合练习：把一个命令变成开机自启的服务
 
 把一个"裸命令"变成受 systemd 托管的服务，就是在 `/etc/systemd/system/` 下写一份 unit 文件。假设应用放在 `/opt/myapp`、以 `myapp` 用户运行：
 

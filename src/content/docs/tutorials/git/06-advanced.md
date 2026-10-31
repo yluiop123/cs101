@@ -1,5 +1,5 @@
 ---
-title: "第 6 章 · 进阶技巧"
+title: "进阶技巧"
 description: "变基（rebase）把当前分支的提交“搬到”另一条分支的最新提交之后，让历史呈现为一条直线："
 series: git
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 stash / cherry-pick / tag 的实用价值
 - 分清 reset 三种模式与 revert 的回退策略
 
-## 6.1 变基：git rebase
+## 变基：git rebase
 
 变基（rebase）把当前分支的提交"搬到"另一条分支的最新提交之后，让历史呈现为一条直线：
 
@@ -56,7 +56,7 @@ git rebase -i HEAD~3   # 整理最近 3 个提交
 
 最常用场景：开发中产生了 5 个零碎提交（"改一下""再改一下"），合并前用 squash 收拾成 1 个干净的提交。
 
-## 6.2 暂存现场：git stash
+## 暂存现场：git stash
 
 正改一半，突然要切分支处理紧急问题？改动还没到能提交的程度——用储藏（stash）：
 
@@ -67,7 +67,7 @@ git stash pop        # 恢复最近一次储藏并删除记录
 git stash apply      # 恢复但保留记录
 ```
 
-## 6.3 摘取提交：git cherry-pick
+## 摘取提交：git cherry-pick
 
 把某一条提交"复制"到当前分支，适合把某个 bug 修复单独摘到别的分支：
 
@@ -75,7 +75,7 @@ git stash apply      # 恢复但保留记录
 git cherry-pick a1b2c3d
 ```
 
-## 6.4 打标签：git tag
+## 打标签：git tag
 
 标签（tag）用于给重要节点（通常是版本发布）做永久标记，与分支不同——标签指向后不再移动：
 
@@ -86,7 +86,7 @@ git push origin v1.0.0            # 推送标签
 git tag -l                        # 列出所有标签
 ```
 
-## 6.5 回退：reset 与 revert
+## 回退：reset 与 revert
 
 ### git reset：移动分支指针
 

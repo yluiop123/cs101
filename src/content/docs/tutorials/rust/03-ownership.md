@@ -1,5 +1,5 @@
 ---
-title: "第 3 章 · 所有权"
+title: "所有权"
 description: "手动管理（C/C++）：malloc/free 手动配对 → 快，但悬空指针/泄漏是灾难"
 series: rust
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 Copy 类型与 Clone 的区别
 - 建立"值有唯一主人"的心智模型
 
-## 3.1 内存管理三条路
+## 内存管理三条路
 
 ```text
 手动管理（C/C++）：malloc/free 手动配对 → 快，但悬空指针/泄漏是灾难
@@ -26,7 +26,7 @@ tableOfContents: true
 
 **所有权（ownership）**是 Rust 的灵魂：没有 GC，内存的分配与释放**由编译器在编译期静态确定**——每个值恰好在作用域结束时释放。
 
-## 3.2 三条铁律
+## 三条铁律
 
 ```text
 ① Rust 中每个值都有一个"所有者"（owner）
@@ -43,7 +43,7 @@ tableOfContents: true
 
 类比：**每个值是一个"苹果"，变量是"拿着苹果的手"**——一只手拿一个苹果；手松开（离开作用域），苹果被吃掉（drop）。
 
-## 3.3 移动（move）：赋值 = 转移所有权
+## 移动（move）：赋值 = 转移所有权
 
 ```rust
 let s1 = String::from("hello");
@@ -65,7 +65,7 @@ String ≈ [指针 → 堆数据, 长度, 容量]
 
 **没有深拷贝的性能开销，也没有二次释放的安全风险**——编译期一次静态检查全部搞定。
 
-## 3.4 Copy 类型：栈上的值不走 move
+## Copy 类型：栈上的值不走 move
 
 不是所有类型都 move——**简单栈值默认按位拷贝（Copy trait）**：
 
@@ -80,7 +80,7 @@ println!("{}", x);      // ✅ x 依然有效！
 
 直觉：**栈上小值拷贝便宜 → Copy；堆上数据拷贝昂贵 → move**。
 
-## 3.5 函数传参：同样遵循 move
+## 函数传参：同样遵循 move
 
 ```rust
 fn take(s: String) {          // 参数接收 = 所有权转移给函数
@@ -110,7 +110,7 @@ peek(&s);
 println!("{}", s);            // ✅
 ```
 
-## 3.6 函数返回值：所有权交还
+## 函数返回值：所有权交还
 
 ```rust
 fn make_string() -> String {
@@ -129,7 +129,7 @@ let (s2, len) = swap(String::from("hello"));
 
 **Rust 的所有权流向**：传入（move）→ 处理 → 返回（move 回来）。编译器全程追踪，任何一处"用了已交出的值"都过不了编译。
 
-## 3.7 所有权与 drop 顺序
+## 所有权与 drop 顺序
 
 ```rust
 struct Badge(&'static str);
@@ -150,7 +150,7 @@ fn main() {
 
 `impl Drop` 让自定义类型接入"离开作用域自动清理"——RAII（Resource Acquisition Is Initialization）思想的 Rust 实现（C++ 教程第 6 章会对照讲）。
 
-## 3.8 编译器的"教学时刻"
+## 编译器的"教学时刻"
 
 ```rust
 let s = String::from("hi");
@@ -174,7 +174,7 @@ s.push_str("!");   // 编译错误原文：
 
 错误信息自带**原因（move occurs）+ 位置（三处标注）+ 修复建议（clone）**——被报错"教育"的过程就是学所有权的过程，人人如此。
 
-## 3.9 综合练习：所有权流向追踪
+## 综合练习：所有权流向追踪
 
 ```rust
 fn main() {

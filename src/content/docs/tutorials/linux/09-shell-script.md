@@ -1,5 +1,5 @@
 ---
-title: "第 9 章 · Shell 脚本编程"
+title: "Shell 脚本编程"
 description: "脚本 = 把命令写进文件。第一行的 shebang 告诉系统“用哪个解释器执行我”："
 series: linux
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 识破引号与空格的地雷区，会用 set -euo pipefail 给脚本上"安全带"
 - 掌握位置参数与 getopts 的参数解析，并完成一个带日志与错误处理的备份脚本
 
-## 9.1 shebang 与变量
+## shebang 与变量
 
 脚本 = 把命令写进文件。第一行的 **shebang** 告诉系统"用哪个解释器执行我"：
 
@@ -43,7 +43,7 @@ echo $((count * 2 + 1))    # 7
 
 执行方式的区别：`bash backup.sh`（新开解释器，不看权限位）、`./backup.sh`（要求可执行权限 + 看 shebang，第 4 章的 x 位在此兑现）、`source backup.sh`（在当前 shell 执行，常用于加载环境配置）。
 
-## 9.2 引号与空格：脚本第一大坑
+## 引号与空格：脚本第一大坑
 
 规则一句话：**所有变量引用都默认写成 `"$var"`，除非你明确知道自己在干什么。**
 
@@ -66,7 +66,7 @@ rm -rf "${dir:?变量未设置}"  # 进阶：为空/未设时直接报错退出�
 无引号变量遇到三件事会同时翻车：分词（空格拆成多词）、glob 展开（`*` 变成一堆文件名）、空值（变量为空导致参数消失）。写脚本时把 `"$@"`、`"$var"` 当肌肉记忆；对已有脚本做静态体检可装 shellcheck（`sudo apt install shellcheck` / `sudo dnf install shellcheck`），它会把上述问题全部点名。
 :::
 
-## 9.3 条件与 test
+## 条件与 test
 
 ```bash
 if [ -f "$file" ]; then            # 文件存在且是普通文件
@@ -100,7 +100,7 @@ esac
 `[[ ]]` 是 bash 内建，支持模式匹配、不拆词、更安全；写 bash 脚本（shebang 明确是 bash）时优先 `[[ ]]`。但 POSIX 脚本（shebang 用 /bin/sh）只能用 `[ ]`——sh 可能是 dash。拿不准就用 `[ ]` + 给所有变量加引号。
 :::
 
-## 9.4 循环与函数
+## 循环与函数
 
 ```bash
 #!/usr/bin/env bash
@@ -132,7 +132,7 @@ if log "检查完成"; then :; fi  # log 的退出码即最后一条命令的退
 
 函数内变量**一律 `local`**，否则默认全局，函数之间的变量会互相踩：`local tmp=$(mktemp)`。
 
-## 9.5 严格模式、位置参数与 getopts
+## 严格模式、位置参数与 getopts
 
 每个正式脚本的开头三行"安全带"：
 
@@ -178,7 +178,7 @@ echo "从 $src 到 $dest，剩余参数: $*"
 
 长选项（`--source` 风格）getopts 不原生支持，可用 `--` 手工 case 匹配或 GNU `getopt` 程序——用法以 `man getopt` 为准；多数运维脚本短选项已够。
 
-## 9.6 日志与错误处理
+## 日志与错误处理
 
 脚本的"可运维"程度取决于出错时你看得见什么。基础件：
 
@@ -194,7 +194,7 @@ trap 'warn "脚本在第 $LINENO 行附近异常退出（exit=$?）"' ERR   # se
 
 要点：`tee -a` 既落盘又上屏；警告/错误走 stderr（`>&2`）方便分离；系统级脚本可改用 `logger` 命令进 journald（`logger -t backup 消息`，用法以 `man logger` 为准）；给临时文件上 `mktemp`，退出时 `trap cleanup EXIT` 清扫。
 
-## 9.7 综合练习：数据库目录每日备份脚本
+## 综合练习：数据库目录每日备份脚本
 
 把本章全部零件组装成可用的 `db-backup.sh`（承接 [第 10 章 · 综合实战](../10-deploy-project/) 的定时化）：
 

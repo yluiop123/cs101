@@ -1,5 +1,5 @@
 ---
-title: "第 4 章 · 排版与颜色"
+title: "排版与颜色"
 description: "极小 12px"
 series: tailwind
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 熟悉内置色板与颜色修饰（透明度）
 - 会组织列表、链接与文字截断
 
-## 4.1 字号与字重
+## 字号与字重
 
 ```html
 <p class="text-xs">极小 12px</p>
@@ -42,7 +42,7 @@ tableOfContents: true
 <p class="text-sm text-gray-500">辅助说明</p>
 ```
 
-## 4.2 行高、字距与对齐
+## 行高、字距与对齐
 
 ```html
 <p class="leading-relaxed">宽松行高，适合长段落阅读</p>
@@ -60,7 +60,7 @@ tableOfContents: true
 v4 里 `text-lg` 等字号工具类会**自动带上匹配的行高**（字号越大行高越大）。单独用 `leading-*` 只在需要覆盖时出场。
 :::
 
-## 4.3 内置色板：10 档灰阶思维
+## 内置色板：10 档灰阶思维
 
 每个色系由浅到深 100→900（另加 50 与 950）：
 
@@ -92,7 +92,7 @@ v4 里 `text-lg` 等字号工具类会**自动带上匹配的行高**（字号�
 | 边框/分隔 | gray-200 / gray-100 |
 | 区块底色 | gray-50 |
 
-## 4.4 文字与背景色
+## 文字与背景色
 
 ```html
 <p class="text-blue-600">蓝色文字（常用于链接）</p>
@@ -102,7 +102,7 @@ v4 里 `text-lg` 等字号工具类会**自动带上匹配的行高**（字号�
 <div class="bg-red-100 text-red-800 p-3 rounded">错误提示</div>
 ```
 
-## 4.5 透明度修饰符
+## 透明度修饰符
 
 色值后加 `/透明度`，同刻度体系（0~100，步进 5）：
 
@@ -123,7 +123,7 @@ v4 里 `text-lg` 等字号工具类会**自动带上匹配的行高**（字号�
 </div>
 ```
 
-## 4.6 文字装饰与列表
+## 文字装饰与列表
 
 ```html
 <a class="underline decoration-blue-400 decoration-2">自定义下划线</a>
@@ -140,7 +140,7 @@ v4 里 `text-lg` 等字号工具类会**自动带上匹配的行高**（字号�
 Tailwind 的 preflight 重置了默认样式：标题不再自带加粗、ul 不带圆点、h1 字号与正文一样大。**所有视觉层级都靠你写类名**——这不是 bug，是"白纸"哲学。
 :::
 
-## 4.7 文字截断
+## 文字截断
 
 单行截断三件套：
 
@@ -157,7 +157,7 @@ Tailwind 的 preflight 重置了默认样式：标题不再自带加粗、ul 不
 <p class="line-clamp-3">最多三行</p>
 ```
 
-## 4.8 综合练习：通知列表项
+## 综合练习：通知列表项
 
 ```html
 <div class="flex items-start gap-3 p-4 border-b border-gray-100">

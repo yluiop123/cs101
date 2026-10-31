@@ -1,5 +1,5 @@
 ---
-title: "第 5 章 · 聚合与分组"
+title: "聚合与分组"
 description: "聚合把多行压成一行："
 series: sql
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 `GROUP BY` 折叠分组、`HAVING` 过滤分组的分工
 - 记住 SQL 的执行顺序，从此不再问"为什么 `WHERE` 里不能用别名"
 
-## 5.1 五个聚合函数
+## 五个聚合函数
 
 聚合把**多行压成一行**：
 
@@ -46,7 +46,7 @@ n_orders | gmv     | avg_total | max_total | min_total
 `WHERE` 在分组之前执行，那时候还没有"一组"可以聚合。
 :::
 
-## 5.2 COUNT 的三种形态
+## COUNT 的三种形态
 
 ```sql
 SELECT COUNT(*)          AS n_all,        -- 8：所有行
@@ -73,7 +73,7 @@ SELECT COUNT(city) * 1.0 / COUNT(*) AS city_fill_rate
 `COALESCE(SUM(total), 0)` 兜住，否则整个表达式会被 `NULL` 传染。
 :::
 
-## 5.3 GROUP BY：把行折叠成组
+## GROUP BY：把行折叠成组
 
 `SELECT` 里出现的**每一个非聚合列**，都必须出现在 `GROUP BY` 里——这是铁律。
 
@@ -119,7 +119,7 @@ PostgreSQL / SQLite 允许 `GROUP BY ym`（按别名分组），MySQL 在 `ONLY_
 模式下要求把表达式重写一遍。跨库时按最严格的写法来。
 :::
 
-## 5.4 HAVING：过滤"组"，不是过滤"行"
+## HAVING：过滤"组"，不是过滤"行"
 
 `WHERE` 先筛行，再分组；`HAVING` 在分组之后筛组：
 
@@ -147,7 +147,7 @@ SELECT customer_id, COUNT(*) AS n, SUM(total) AS spent
 **判断标准很简单：条件里含聚合函数才用 `HAVING`。**
 :::
 
-## 5.5 执行顺序：一切困惑的答案
+## 执行顺序：一切困惑的答案
 
 书写顺序与执行顺序不是一回事：
 
@@ -175,7 +175,7 @@ SELECT customer_id, SUM(total) AS spent     -- ④ 才计算
 | `HAVING` | 否（建议重写） | 部分方言 | 是 |
 | `ORDER BY` | 是 | **是** | 是 |
 
-## 5.6 聚合与 NULL、以及最常见的报错
+## 聚合与 NULL、以及最常见的报错
 
 ```sql
 -- 错误：SELECT 里出现既不聚合也不分组的列，MySQL 8 默认开 ONLY_FULL_GROUP_BY
@@ -218,7 +218,7 @@ SELECT COALESCE(city, '未填写') AS city, COUNT(*) AS n
 -- 未填写 2 / 上海 3 / 北京 2 / 广州 1
 ```
 
-## 5.7 综合练习：客户消费报表
+## 综合练习：客户消费报表
 
 ```sql
 -- 一张报表：每位客户的下单次数、总消费、最大单、平均单，排除取消单，

@@ -1,5 +1,5 @@
 ---
-title: "第 8 章 · 标准库精选"
+title: "标准库精选"
 description: "比 os.path 字符串拼接现代得多——路径操作一律 pathlib："
 series: python
 sidebar:
@@ -16,7 +16,7 @@ tableOfContents: true
 - 掌握 json/datetime/re/os 四大高频模块
 - 认识 collections 与 itertools 的利器
 
-## 8.1 pathlib：路径的面向对象封装
+## pathlib：路径的面向对象封装
 
 比 os.path 字符串拼接现代得多——**路径操作一律 pathlib**：
 
@@ -45,7 +45,7 @@ Path(".").rglob("*.log")             # 递归所有层级
 Path("data/logs").mkdir(parents=True, exist_ok=True)
 ```
 
-## 8.2 json：数据交换的标准格式
+## json：数据交换的标准格式
 
 ```python
 import json
@@ -67,7 +67,7 @@ user = json.loads(Path("user.json").read_text(encoding="utf-8"))
 `json.dumps(data)` 默认把中文转成 `\uXXXX` 转义——**面向人的文件加 `ensure_ascii=False`**，接口传输可保持默认。
 :::
 
-## 8.3 datetime：日期时间
+## datetime：日期时间
 
 ```python
 from datetime import datetime, date, timedelta, timezone
@@ -94,7 +94,7 @@ dt.isoformat()                             # '2026-09-06T14:30:05'
 datetime.fromisoformat("2026-09-06T14:30:05")
 ```
 
-## 8.4 re：正则表达式
+## re：正则表达式
 
 正则语法见[正则表达式教程](../../regex/)，这里只讲 Python 用法：
 
@@ -123,7 +123,7 @@ pattern = re.compile(r"\d+")       # 频繁使用先编译
 pattern.findall("a1b22c")
 ```
 
-## 8.5 os 与环境变量
+## os 与环境变量
 
 ```python
 import os
@@ -136,7 +136,7 @@ os.cpu_count()                             # CPU 核数（线程池大小参考�
 os.urandom(16)                             # 密码学安全随机字节
 ```
 
-## 8.6 collections：增强容器
+## collections：增强容器
 
 ```python
 from collections import Counter, defaultdict, deque
@@ -154,7 +154,7 @@ queue = deque()
 queue.append("x"); queue.popleft()          # 尾进头出 O(1)（list.pop(0) 是 O(n)）
 ```
 
-## 8.7 itertools：迭代器工具箱
+## itertools：迭代器工具箱
 
 ```python
 import itertools as it
@@ -166,7 +166,7 @@ list(it.permutations("abc", 2))       # 排列
 list(it.combinations([1,2,3], 2))     # 组合
 ```
 
-## 8.8 综合练习：日志分析器（标准库全家桶）
+## 综合练习：日志分析器（标准库全家桶）
 
 ```python
 import re
