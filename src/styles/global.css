@@ -714,6 +714,7 @@ html.cs-drawer-open {
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
+  margin: 0;
   border: 1px solid var(--cs-border);
   border-radius: var(--cs-radius);
   background: var(--cs-bg);
