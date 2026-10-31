@@ -68,14 +68,6 @@ if (!isSplash) {
   }
 }
 
-const difficultyLabels: Record<string, string> = {
-  beginner: '入门',
-  intermediate: '进阶',
-  advanced: '高级',
-};
-const difficulty = difficultyLabels[data.difficulty as string];
-const seriesLabel = data.series ? seriesMeta[data.series] ?? data.series : undefined;
-const hasMeta = Boolean(seriesLabel || data.duration || difficulty || data.tags?.length);
 ---
 
 {
@@ -135,21 +127,6 @@ const hasMeta = Boolean(seriesLabel || data.duration || difficulty || data.tags?
           </div>
         ) : null}
       </div>
-
-      {hasMeta && (
-        <p class="cs-page-meta">
-          {seriesLabel && <span class="cs-meta-item">{seriesLabel}</span>}
-          {data.duration && <span class="cs-meta-item">约 {data.duration} 分钟</span>}
-          {difficulty && <span class="cs-meta-item">难度：{difficulty}</span>}
-          {data.tags?.length > 0 && (
-            <span class="cs-meta-item">标签：{data.tags.join(' / ')}</span>
-          )}
-        </p>
-      )}
-
-      {isChapter && seriesSlug && (
-        <p class="cs-title-hint">进度与收藏保存在本机浏览器，无需登录</p>
-      )}
     </>
   )
 }
