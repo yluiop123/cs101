@@ -1,6 +1,6 @@
 ---
 title: "PACS 影像归档与通信"
-description: "属于「医疗健康系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "PACS 影像归档与通信 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-PACS（影像归档与通信）属于「医疗健康系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：管医学影像的采集、存储、调阅和报告，让影像在院内共享。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 医疗健康系统 |
+| 典型用户 | 放射科医生、临床医生、技师、患者、远程会诊 |
+| 核心模块 | 检查登记、影像采集、归档存储、阅片、报告、会诊、打印 |
+| 常见产品 | 联影 PACS、东软 PACS、锐珂 PACS、西门子 PACS |
+| 开源项目 | Orthanc、dcm4che、Weasis、OHIF Viewer |
+
+## 这个系统解决什么问题
+
+影像胶片难保存、难调阅，患者换院要重拍，临床医生看不到历史影像。PACS 把 CT、MR、DR、超声等影像归档，支持临床调阅和报告。
+
+它是放射科和临床之间的影像枢纽，也是远程会诊的基础。
+
+## 学习路径
 
 <SeriesChapters series="business-pacs" />

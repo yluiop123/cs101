@@ -1,6 +1,6 @@
 ---
 title: "数据中台 / 业务中台"
-description: "属于「通用企业管理系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "数据中台 / 业务中台 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-数据中台 / 业务中台属于「通用企业管理系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：把分散在各系统的数据和服务沉淀成可复用资产，避免重复建设。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 企业通用系统 |
+| 典型用户 | 数据工程师、数据产品经理、业务开发、分析师、管理层 |
+| 核心模块 | 数据集成、数据治理、指标中心、标签画像、数据服务、业务能力中心 |
+| 常见产品 | 阿里云 DataWorks、华为云 DataArts、腾讯云 TBDS、数澜科技 |
+| 开源项目 | Apache DolphinScheduler、Apache SeaTunnel、DataHub、Apache Atlas、Apache Flink |
+
+## 这个系统解决什么问题
+
+系统越建越多，数据口径不一致、通用能力重复开发：每个业务都自己做用户、商品、订单、支付。中台把数据和能力沉淀下来，供前台复用。
+
+数据中台负责采集、治理、指标、标签和服务化；业务中台把用户、商品、订单、支付等通用能力做成共享服务。
+
+## 学习路径
 
 <SeriesChapters series="business-data-platform" />

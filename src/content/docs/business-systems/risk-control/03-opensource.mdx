@@ -1,0 +1,31 @@
+---
+title: "风控与反欺诈系统 开源项目与产品"
+series: business-risk-control
+description: "风控与反欺诈系统 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Drools | Java | Apache-2.0 | 规则引擎 | 风控规则 | https://github.com/kiegroup/drools |
+| Apache Flink | Java / Scala | Apache-2.0 | 实时计算 | 实时特征 | https://github.com/apache/flink |
+| Open Policy Agent | Go | Apache-2.0 | 策略引擎 | 访问与决策 | https://github.com/open-policy-agent/opa |
+| Feast | Python / Go | Apache-2.0 | 特征平台 | 模型特征 | https://github.com/feast-dev/feast |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| 同盾科技 | 同盾 | 反欺诈与风控 | 中大型金融机构 |
+| 蚂蚁风险大脑 | 蚂蚁 | 智能风控 | 大型金融机构 |
+| 腾讯云天御 | 腾讯云 | 业务安全 | 中大型企业 |
+| 邦盛科技 | 邦盛 | 实时风控 | 中大型金融机构 |
+
+## 选型建议
+
+- 先有数据和名单，再谈模型，规则是冷启动的基础
+- 误杀率和拦截率要一起看，不能只追求拦截
+- 决策流要可解释、可回滚，方便策略迭代

@@ -1,0 +1,31 @@
+---
+title: "支付清算系统 开源项目与产品"
+series: business-payment-clearing
+description: "支付清算系统 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Mojaloop | Java / Node.js | Apache-2.0 | 实时支付 | 支付网络 | https://github.com/mojaloop/mojaloop |
+| Apache Fineract | Java / MySQL | Apache-2.0 | 支付与账务 | 数字金融 | https://github.com/apache/fineract |
+| Hyperledger Fabric | Go | Apache-2.0 | 联盟链支付 | 机构间清算 | https://github.com/hyperledger/fabric |
+| Apache OFBiz | Java | Apache-2.0 | 支付与订单 | 定制化项目 | https://github.com/apache/ofbiz-framework |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| 银联商务 | 银联 | 收单与清算 | 大型商户 |
+| Ping++ | Ping++ | 聚合支付 | 中大型企业 |
+| 汇付天下 | 汇付 | 支付与结算 | 中大型企业 |
+| 连连支付 | 连连 | 跨境与收单 | 中大型企业 |
+
+## 选型建议
+
+- 先明确业务模式（收单、代付、分账、跨境），再选方案
+- 对账和差错处理能力比支付成功率更影响长期运营
+- 合规资质和资金存管是硬门槛

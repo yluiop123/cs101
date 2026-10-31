@@ -1,6 +1,6 @@
 ---
 title: "MES 制造执行系统"
-description: "属于「制造与工业系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "MES 制造执行系统 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-MES（制造执行系统）属于「制造与工业系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：把生产订单变成工单、工序、报工和追溯，管住车间每一天的执行。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 制造与供应链系统 |
+| 典型用户 | 生产计划、车间主任、班组长、操作工、质量人员、设备人员 |
+| 核心模块 | 工单管理、排产派工、生产执行、物料管理、质量管理、设备管理、追溯看板 |
+| 常见产品 | Siemens Opcenter、SAP Digital Manufacturing、宝信 MES、用友 MES |
+| 开源项目 | ERPNext Manufacturing、Odoo MRP、Apache OFBiz Manufacturing、OpenBoxes |
+
+## 这个系统解决什么问题
+
+ERP 下达生产订单后，车间靠纸质工单和 Excel 排产，进度、良率、在制品不透明，出了问题也难追溯到具体批次。MES 承接计划，管理工单、工序、设备、质量和物料。
+
+它让管理层看到「今天该做什么、做到哪、为什么没完成」，也让质量部门能顺着批次反查原料、设备和操作人。
+
+## 学习路径
 
 <SeriesChapters series="business-mes" />

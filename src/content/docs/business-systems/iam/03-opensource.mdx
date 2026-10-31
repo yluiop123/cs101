@@ -1,0 +1,32 @@
+---
+title: "IAM 身份与访问管理 开源项目与产品"
+series: business-iam
+description: "IAM 身份与访问管理 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Keycloak | Java | Apache-2.0 | 身份与 SSO | 中大型企业 | https://github.com/keycloak/keycloak |
+| Authentik | Python / Go | MIT | 身份平台 | 中小企业 | https://github.com/goauthentik/authentik |
+| Ory | Go | Apache-2.0 | 身份与授权 | 技术团队 | https://github.com/ory |
+| Apache Syncope | Java | Apache-2.0 | 身份管理 | 中大型企业 | https://github.com/apache/syncope |
+| Casdoor | Go | Apache-2.0 | 统一认证 | 中小企业 | https://github.com/casdoor/casdoor |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| Okta | Okta | 身份云 | 中大型企业 |
+| Microsoft Entra ID | Microsoft | 身份与访问 | 中大型企业 |
+| 阿里云 IDaaS | 阿里云 | 身份服务 | 中大型企业 |
+| 竹云 | 竹云 | 国内 IAM | 中大型企业 |
+
+## 选型建议
+
+- 先统一账号和组织，再谈 SSO
+- 高风险应用必须支持 MFA 和权限复核
+- 和 HR、SIEM 的集成决定自动化程度

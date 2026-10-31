@@ -1,6 +1,6 @@
 ---
 title: "BSS 业务支撑"
-description: "属于「通信与运营商系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "BSS 业务支撑 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-BSS（业务支撑）属于「通信与运营商系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：管电信运营商的客户、产品、订单、计费和账务，是业务侧的核心支撑。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 公共服务与平台系统 |
+| 典型用户 | 营业员、客服、产品经理、计费人员、财务 |
+| 核心模块 | 客户管理、产品配置、订单、计费、账务、客服 |
+| 常见产品 | Amdocs、Ericsson BSS、华为 BSS、亚信科技 |
+| 开源项目 | Kill Bill、Apache OFBiz、Odoo、ERPNext |
+
+## 这个系统解决什么问题
+
+运营商产品多、套餐复杂、订单和计费链路长，客户变更和账单争议频繁。BSS 管客户、产品、订单、计费、账务和客服。
+
+它和 OSS（网络运维）一起构成运营商 IT 的两大支柱。
+
+## 学习路径
 
 <SeriesChapters series="business-bss" />

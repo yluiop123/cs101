@@ -1,6 +1,6 @@
 ---
 title: "SIEM 安全信息与事件管理"
-description: "属于「安全与合规系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "SIEM 安全信息与事件管理 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-SIEM（安全信息与事件管理）属于「安全与合规系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：收集日志、关联分析、检测告警和响应安全事件。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 公共服务与平台系统 |
+| 典型用户 | SOC 分析师、安全工程师、应急响应、合规 |
+| 核心模块 | 日志采集、解析归一、关联规则、告警、事件调查、报表合规 |
+| 常见产品 | Splunk、IBM QRadar、奇安信、深信服 |
+| 开源项目 | Wazuh、Elastic Security、OpenSearch Security Analytics、Graylog |
+
+## 这个系统解决什么问题
+
+安全设备多、日志分散，攻击发现靠人盯，事件响应缺流程。SIEM 把日志采集、归一化、关联规则、告警和响应集中起来。
+
+它让安全团队从「看设备」变成「看事件」，并满足合规审计要求。
+
+## 学习路径
 
 <SeriesChapters series="business-siem" />

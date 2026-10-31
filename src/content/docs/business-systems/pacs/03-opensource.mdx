@@ -1,0 +1,31 @@
+---
+title: "PACS 影像归档与通信 开源项目与产品"
+series: business-pacs
+description: "PACS 影像归档与通信 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Orthanc | C++ | GPL-3.0 | DICOM 服务器 | 影像归档 | https://github.com/orthanc-server/orthanc |
+| dcm4che | Java | MPL-1.1 / GPL | DICOM 工具 | 影像平台 | https://github.com/dcm4che/dcm4che |
+| Weasis | Java | EPL-2.0 | 影像阅片 | 临床调阅 | https://github.com/nroduit/Weasis |
+| OHIF Viewer | JavaScript | MIT | Web 阅片 | 远程会诊 | https://github.com/OHIF/Viewers |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| 联影 PACS | 联影 | 影像归档 | 大型医院 |
+| 东软 PACS | 东软 | 影像信息化 | 大型医院 |
+| 锐珂 PACS | 锐珂 | 影像管理 | 中大型医院 |
+| 西门子 PACS | Siemens | 影像归档 | 大型医院 |
+
+## 选型建议
+
+- 先确认设备型号和 DICOM 兼容性
+- 存储容量和调阅速度是长期痛点，提前规划
+- 远程会诊要确认网络、安全和影像脱敏

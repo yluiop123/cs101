@@ -1,0 +1,31 @@
+---
+title: "库存中心 开源项目与产品"
+series: business-inventory-center
+description: "库存中心 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Apache OFBiz | Java | Apache-2.0 | 库存与订单 | 定制化项目 | https://github.com/apache/ofbiz-framework |
+| Odoo Inventory | Python / PostgreSQL | LGPL-3.0 | 多仓库存 | 中小企业 | https://github.com/odoo/odoo |
+| ERPNext Stock | Python / MariaDB | GPL-3.0 | 库存模块 | 中小企业 | https://github.com/frappe/erpnext |
+| Saleor | Python / GraphQL | BSD-3-Clause | 电商库存 | 电商团队 | https://github.com/saleor/saleor |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| 阿里库存中心 | 阿里 | 电商库存 | 大型电商 |
+| 京东库存中心 | 京东 | 库存与履约 | 大型电商 |
+| 旺店通 | 旺店通 | 电商库存 | 中大型电商 |
+| 聚水潭 | 聚水潭 | 库存与订单 | 中大型电商 |
+
+## 选型建议
+
+- 先统一 SKU 和仓库编码，否则库存永远对不上
+- 多渠道卖货时，渠道分配规则比库存数量更重要
+- 确认与 WMS 的实物库存同步频率和异常处理

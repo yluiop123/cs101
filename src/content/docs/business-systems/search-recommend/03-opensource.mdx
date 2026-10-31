@@ -1,0 +1,32 @@
+---
+title: "推荐与搜索系统 开源项目与产品"
+series: business-search-recommend
+description: "推荐与搜索系统 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Elasticsearch | Java | Elastic-2.0 / SSPL | 搜索与检索 | 通用搜索 | https://github.com/elastic/elasticsearch |
+| OpenSearch | Java | Apache-2.0 | 搜索与日志 | 通用搜索 | https://github.com/opensearch-project/OpenSearch |
+| Vespa | Java / C++ | Apache-2.0 | 搜索与推荐 | 大规模检索 | https://github.com/vespa-engine/vespa |
+| Milvus | Go / C++ | Apache-2.0 | 向量检索 | 语义搜索 | https://github.com/milvus-io/milvus |
+| Qdrant | Rust | Apache-2.0 | 向量数据库 | 语义搜索 | https://github.com/qdrant/qdrant |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| 阿里云 OpenSearch | 阿里云 | 搜索服务 | 中大型企业 |
+| 腾讯云搜索 | 腾讯云 | 搜索与推荐 | 中大型企业 |
+| 百度智能推荐 | 百度 | 推荐服务 | 中大型企业 |
+| 神策推荐 | 神策 | 推荐与营销 | 中大型企业 |
+
+## 选型建议
+
+- 先有足够的行为数据，再做个性化推荐
+- 搜索先解决「搜得到」，再优化「排得准」
+- 向量检索适合语义搜索，但要和关键词召回结合

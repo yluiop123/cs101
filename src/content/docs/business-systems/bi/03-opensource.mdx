@@ -1,0 +1,32 @@
+---
+title: "BI 商业智能与数据可视化 开源项目与产品"
+series: business-bi
+description: "BI 商业智能与数据可视化 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Apache Superset | Python / React | Apache-2.0 | BI 与看板 | 中大型团队 | https://github.com/apache/superset |
+| Metabase | Clojure / React | AGPL-3.0 | 自助 BI | 中小企业 | https://github.com/metabase/metabase |
+| Redash | Python / React | BSD-2-Clause | 查询与看板 | 中小团队 | https://github.com/getredash/redash |
+| Grafana | Go / TypeScript | AGPL-3.0 | 监控与可视化 | 运维/实时看板 | https://github.com/grafana/grafana |
+| Lightdash | TypeScript | MIT | dbt 原生 BI | 数据团队 | https://github.com/lightdash/lightdash |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| Tableau | Salesforce | 可视化分析 | 中大型企业 |
+| Power BI | Microsoft | BI 与报表 | 中小企业到大型企业 |
+| FineBI | 帆软 | 国内 BI | 中大型企业 |
+| 观远数据 | 观远 | 零售消费 BI | 中大型企业 |
+
+## 选型建议
+
+- 先统一指标口径，再选 BI 工具，否则只是把错误口径可视化
+- 小团队用 Metabase 或 Superset 就能起步
+- 需要深度自助分析和大数据量时再评估商业产品

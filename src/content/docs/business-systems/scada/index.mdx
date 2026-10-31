@@ -1,6 +1,6 @@
 ---
 title: "SCADA 数据采集与监控系统"
-description: "属于「制造与工业系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "SCADA 数据采集与监控系统 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-SCADA（数据采集与监控系统）属于「制造与工业系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：采集设备与产线数据，做实时监控、报警和远程控制。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 制造与供应链系统 |
+| 典型用户 | 值班员、设备工程师、工艺工程师、能源管理 |
+| 核心模块 | 数据采集、画面组态、报警管理、趋势与历史、远程控制、报表 |
+| 常见产品 | Ignition、WinCC、iFIX、组态王 |
+| 开源项目 | FUXA、ScadaBR、OpenSCADA、ThingsBoard、Grafana |
+
+## 这个系统解决什么问题
+
+设备状态、温度、压力、产量散在各处，故障发现靠人巡检，历史数据留不下来。SCADA 把 PLC、传感器和仪表的数据采集上来，做画面监控、报警、趋势和历史存储。
+
+它让值班人员在控制室就能看到现场状态，并在异常时第一时间收到报警。
+
+## 学习路径
 
 <SeriesChapters series="business-scada" />

@@ -1,0 +1,31 @@
+---
+title: "SIEM 安全信息与事件管理 开源项目与产品"
+series: business-siem
+description: "SIEM 安全信息与事件管理 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Wazuh | C / Python | GPL-2.0 | SIEM/XDR | 中小企业 | https://github.com/wazuh/wazuh |
+| Elastic Security | Java / TypeScript | Elastic-2.0 | 安全分析 | 中大型企业 | https://github.com/elastic/elasticsearch |
+| OpenSearch Security Analytics | Java | Apache-2.0 | 安全分析 | 中大型企业 | https://github.com/opensearch-project/security-analytics |
+| Graylog | Java | SSPL | 日志管理 | 日志集中 | https://github.com/Graylog2/graylog2-server |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| Splunk | Splunk | SIEM 与可观测 | 大型企业 |
+| IBM QRadar | IBM | SIEM | 大型企业 |
+| 奇安信 | 奇安信 | 安全运营 | 中大型企业 |
+| 深信服 | 深信服 | 安全平台 | 中大型企业 |
+
+## 选型建议
+
+- 先明确日志源和合规要求，再选 SIEM
+- 规则和运营团队比工具更重要
+- 日志量和存储成本要提前测算

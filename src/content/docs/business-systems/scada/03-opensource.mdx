@@ -1,0 +1,32 @@
+---
+title: "SCADA 数据采集与监控系统 开源项目与产品"
+series: business-scada
+description: "SCADA 数据采集与监控系统 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| FUXA | TypeScript / Node.js | MIT | Web SCADA | 中小型监控 | https://github.com/frangoteam/FUXA |
+| ScadaBR | Java | GPL-3.0 | SCADA/HMI | 中小型监控 | https://github.com/ScadaBR/ScadaBR |
+| OpenSCADA | C++ | GPL-2.0 | 工业自动化 | 工业现场 | https://github.com/OpenSCADA/OpenSCADA |
+| ThingsBoard | Java / TypeScript | Apache-2.0 | IoT 平台 | 设备接入与看板 | https://github.com/thingsboard/thingsboard |
+| Grafana | Go / TypeScript | AGPL-3.0 | 时序可视化 | 监控看板 | https://github.com/grafana/grafana |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| Ignition | Inductive Automation | Web SCADA | 中大型工业 |
+| WinCC | Siemens | SCADA/HMI | 大型工业 |
+| iFIX | GE Vernova | SCADA | 大型工业 |
+| 组态王 | 亚控科技 | 国内组态 | 中小型工业 |
+
+## 选型建议
+
+- 先整理点表和通讯协议，这是 SCADA 项目成败的关键
+- 远程控制必须配套操作票和权限，不能只做画面
+- 需要和 MES/EMS 集成时，优先选支持标准协议和 API 的平台

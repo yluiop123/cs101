@@ -199,10 +199,10 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 | 页面 | 配置 | 规模 | 渲染开关 |
 | --- | --- | --- | --- |
 | 首页 `/` | `index.mdx` 的 `route` | 6 分节 / 35 条（全部为路线 / 规划中占位） | `markKind: "auto"` |
-| 业务系统 `/business-systems/` | `business-systems/index.mdx` 的 `route` | 14 分节 / 72 条 | `markKind: "auto"` |
+| 业务系统 `/business-systems/` | `business-systems/index.mdx` 的 `route` | 6 分节 / 37 条 | `markKind: "auto"` |
 | 全部技术路线 `/tech-stack/` | `tech-stack/index.mdx` 的 `route` | 4 分节 / 19 条 | `markKind: "none"`、`columns: 2`、`sidebar.mode: "routes"` |
 
-也就是说：**首页就是一条路线（6 个分节），业务系统也是一条路线（14 个分节）**，
+也就是说：**首页就是一条路线（6 个分节），业务系统也是一条路线（6 个分节）**，
 和「Java 技术路线（4 个分节）」没有任何结构差别。
 
 ## 4. 业务系统：条目只写 id
@@ -223,7 +223,7 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 ```
 
 - 卡片标题取自 `docs/business-systems/<id>/index.mdx` 的 `title`，入口直达第一章，都由 `RouteSections` 补全；
-- 业务系统章节页（`01-overview` / `02-tech`）正文是静态引导语，不再有 `BizSystemChapter` 组件、
+- 业务系统章节页（`01-overview` / `02-features` / `03-opensource`）正文是静态内容，不再有 `BizSystemChapter` 组件、
   `summary` / `related` 字段，也没有 `findBusinessSystem` 查表。
 
 ## 5. 计算机科学：外部引用（external）
@@ -315,7 +315,7 @@ tags?: string[], prerequisites?: string[], estMinutes?: number
 | 教程系列首页 | `docs/tutorials/<id>/index.mdx` | `title`、`description`、`sidebar.order: 0`、`sidebar.hidden: true`；正文用 `<SeriesChapters series="<id>" />` |
 | 教程章节 | `docs/tutorials/<id>/01-xxx.md` | `title`、`description?`、`duration?`、`sidebar.order`、`tableOfContents: true` |
 | 技术路线页 | `docs/tech-stack/<route-id>.mdx` | `title`（卡片与左侧栏都用它）、`description`；frontmatter 写 `route.tiers` / `route.options` / `route.sidebar`，正文只写 `<RoutePage />` |
-| 业务系统教程 | `docs/business-systems/<id>/` | 2 章静态引导语；与普通教程分开存放 |
+| 业务系统教程 | `docs/business-systems/<id>/` | 3 章：系统介绍、功能与流程、开源项目与产品；与普通教程分开存放 |
 | 计算机科学 | `docs/computer-science/{zh,en}/index.mdx` | frontmatter 写 `route`，正文只写 `<RoutePage />`，课程条目为 `kind: 'external'` |
 
 业务系统教程的系列 id 是 `business-<目录名>`（如 `business-erp`），页面地址是

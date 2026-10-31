@@ -1,6 +1,6 @@
 ---
 title: "CMS 内容管理"
-description: "属于「内容与营销系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "CMS 内容管理 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-CMS（内容管理）属于「内容与营销系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：管内容的创建、审核、发布、版本和多端分发。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 公共服务与平台系统 |
+| 典型用户 | 编辑、审核、运营、开发、管理员 |
+| 核心模块 | 内容模型、编辑器、审核发布、版本、栏目专题、多端 API、检索 |
+| 常见产品 | Contentful、Adobe Experience Manager、Sitecore、内容管理系统厂商 |
+| 开源项目 | Strapi、Directus、Payload、WordPress、Ghost |
+
+## 这个系统解决什么问题
+
+内容散在多个平台，发布流程不规范，改版和回滚困难，多端展示不一致。CMS 把内容模型、编辑、审核、发布、版本和分发统一起来。
+
+它让编辑专注内容，让开发通过模板和 API 控制展示。
+
+## 学习路径
 
 <SeriesChapters series="business-cms" />

@@ -1,0 +1,31 @@
+---
+title: "MES 制造执行系统 开源项目与产品"
+series: business-mes
+description: "MES 制造执行系统 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| ERPNext Manufacturing | Python / MariaDB | GPL-3.0 | 制造执行 | 中小企业 | https://github.com/frappe/erpnext |
+| Odoo MRP | Python / PostgreSQL | LGPL-3.0 | 生产管理 | 中小企业 | https://github.com/odoo/odoo |
+| Apache OFBiz Manufacturing | Java | Apache-2.0 | 生产模块 | 定制化项目 | https://github.com/apache/ofbiz-framework |
+| OpenBoxes | Groovy / MySQL | Eclipse-1.0 | 供应链与库存 | 医疗/物资 | https://github.com/openboxes/openboxes |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| Siemens Opcenter | Siemens | 离散制造 MES | 大型制造 |
+| SAP Digital Manufacturing | SAP | MES 与制造集成 | 大型制造 |
+| 宝信 MES | 宝信软件 | 钢铁/流程制造 | 大型制造 |
+| 用友 MES | 用友 | 国内制造执行 | 中大型制造 |
+
+## 选型建议
+
+- 先梳理工艺路线、工序和报工规则，再上 MES
+- 离散制造和流程制造的 MES 差异很大，选型要匹配行业
+- 确认与 ERP、SCADA、WMS 的接口边界，避免重复采集

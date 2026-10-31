@@ -1,0 +1,31 @@
+---
+title: "ERP 企业资源计划 开源项目与产品"
+series: business-erp
+description: "ERP 企业资源计划 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Odoo | Python / PostgreSQL | LGPL-3.0 | 全模块 ERP | 中小企业、二次开发 | https://github.com/odoo/odoo |
+| ERPNext | Python / MariaDB | GPL-3.0 | 轻量 ERP | 中小企业 | https://github.com/frappe/erpnext |
+| Apache OFBiz | Java | Apache-2.0 | 企业自动化套件 | 定制化项目 | https://github.com/apache/ofbiz-framework |
+| Tryton | Python / PostgreSQL | GPL-3.0 | 模块化 ERP | 中小企业 | https://github.com/tryton/tryton |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| SAP S/4HANA | SAP | 大型企业核心 ERP | 大型集团 |
+| Oracle Fusion ERP | Oracle | 云端 ERP | 中大型企业 |
+| 用友 U8 / YonBIP | 用友 | 国内 ERP | 中大型企业 |
+| 金蝶云星空 | 金蝶 | 国内 ERP | 中小企业 |
+
+## 选型建议
+
+- 快速验证业务模型，先用 Odoo 或 ERPNext 跑通采购、销售、库存三条线
+- 多组织、多币种、复杂合并报表优先考虑商业产品
+- 二次开发前先确认主数据与单据流，不要先改界面

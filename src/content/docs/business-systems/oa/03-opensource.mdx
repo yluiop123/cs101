@@ -1,0 +1,31 @@
+---
+title: "OA 协同办公系统 开源项目与产品"
+series: business-oa
+description: "OA 协同办公系统 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Flowable | Java | Apache-2.0 | 工作流引擎 | 自研 OA | https://github.com/flowable/flowable-engine |
+| Activiti | Java | Apache-2.0 | BPM 引擎 | 自研 OA | https://github.com/Activiti/Activiti |
+| Dolibarr | PHP / MySQL | GPL-3.0 | ERP+OA | 中小企业 | https://github.com/Dolibarr/dolibarr |
+| Odoo | Python / PostgreSQL | LGPL-3.0 | 协同与审批 | 已用 Odoo 的团队 | https://github.com/odoo/odoo |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| 钉钉 | 阿里 | 协同办公平台 | 中小企业到大型企业 |
+| 企业微信 | 腾讯 | 协同办公平台 | 中小企业到大型企业 |
+| 飞书 | 字节 | 协同办公平台 | 中大型企业 |
+| 泛微 e-cology | 泛微 | 国内 OA | 中大型企业 |
+
+## 选型建议
+
+- 流程简单优先用钉钉/飞书/企业微信自带审批，别急着自研
+- 流程复杂、需要和业务系统深度集成时再考虑专业 OA 或 Flowable
+- 先把审批表单和权限梳理清楚，工具只是承载

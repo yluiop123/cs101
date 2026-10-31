@@ -1,6 +1,6 @@
 ---
 title: "WMS 仓储管理"
-description: "属于「制造与工业系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "WMS 仓储管理 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-WMS（仓储管理）属于「制造与工业系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：管仓库里的收货、上架、拣货、复核、发货和盘点。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 制造与供应链系统 |
+| 典型用户 | 仓管员、收货员、拣货员、发货员、仓库主管 |
+| 核心模块 | 收货、上架、库存、拣货、发货、盘点、报表 |
+| 常见产品 | SAP EWM、Manhattan WMS、富勒 WMS、唯智 WMS |
+| 开源项目 | OpenBoxes、Odoo Inventory、ERPNext Stock、Apache OFBiz |
+
+## 这个系统解决什么问题
+
+库存账实不符、找货慢、拣货出错、发货漏单，是仓库最常见的痛点。WMS 用库位、批次、波次和扫码把仓库作业标准化。
+
+它让每一件货「在哪、有多少、什么时候进出」都可查，也让仓库产能和人员绩效可衡量。
+
+## 学习路径
 
 <SeriesChapters series="business-wms" />

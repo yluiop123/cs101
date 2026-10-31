@@ -1,0 +1,32 @@
+---
+title: "数据中台 / 业务中台 开源项目与产品"
+series: business-data-platform
+description: "数据中台 / 业务中台 的常见开源项目、商业产品与选型建议。"
+sidebar:
+  order: 3
+---
+
+## 开源项目
+
+| 项目 | 技术栈 | License | 定位 | 适合场景 | 仓库 |
+| --- | --- | --- | --- | --- | --- |
+| Apache DolphinScheduler | Java | Apache-2.0 | 任务调度 | 数据平台 | https://github.com/apache/dolphinscheduler |
+| Apache SeaTunnel | Java | Apache-2.0 | 数据集成 | 数据平台 | https://github.com/apache/seatunnel |
+| DataHub | Java / Python | Apache-2.0 | 元数据与血缘 | 数据治理 | https://github.com/datahub-project/datahub |
+| Apache Atlas | Java | Apache-2.0 | 元数据治理 | 大数据平台 | https://github.com/apache/atlas |
+| Apache Flink | Java / Scala | Apache-2.0 | 实时计算 | 实时数据 | https://github.com/apache/flink |
+
+## 商业产品
+
+| 产品 | 厂商 | 定位 | 适用规模 |
+| --- | --- | --- | --- |
+| 阿里云 DataWorks | 阿里云 | 数据开发与治理 | 中大型企业 |
+| 华为云 DataArts | 华为云 | 数据治理 | 中大型企业 |
+| 腾讯云 TBDS | 腾讯云 | 大数据平台 | 中大型企业 |
+| 数澜科技 | 数澜 | 数据中台 | 中大型企业 |
+
+## 选型建议
+
+- 没有稳定业务场景和治理团队时，不要先建中台
+- 先从指标中心和元数据治理切入，见效最快
+- 业务中台要按领域拆分，避免做成新的单体

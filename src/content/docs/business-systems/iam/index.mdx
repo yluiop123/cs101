@@ -1,6 +1,6 @@
 ---
 title: "IAM 身份与访问管理"
-description: "属于「安全与合规系统」的业务系统：它是干什么的、在整体架构里的位置，以及常用技术栈。"
+description: "IAM 身份与访问管理 是什么、核心功能、业务流程与开源项目。"
 sidebar:
   order: 0
   hidden: true
@@ -8,10 +8,26 @@ sidebar:
 
 import SeriesChapters from '@/components/tutorials/SeriesChapters.astro';
 
-> 状态：可学习 · 共 2 章
+> 状态：可学习 · 共 3 章
 
-IAM（身份与访问管理）属于「安全与合规系统」。本教程说明它解决什么问题、常见的实现方式，以及上手需要哪些技术栈。
+**一句话定位**：统一身份、认证、授权和审计，让正确的人访问正确的资源。
 
-## 章节目录
+## 系统档案
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属分类 | 公共服务与平台系统 |
+| 典型用户 | 员工、IT 管理员、安全、审计、外部用户 |
+| 核心模块 | 身份目录、单点登录、多因素认证、授权、权限申请、审计 |
+| 常见产品 | Okta、Microsoft Entra ID、阿里云 IDaaS、竹云 |
+| 开源项目 | Keycloak、Authentik、Ory、Apache Syncope、Casdoor |
+
+## 这个系统解决什么问题
+
+员工在多系统有多个账号，离职权限回收不及时，权限泛滥，审计拿不出证据。IAM 做统一身份、单点登录、授权、审批和审计。
+
+它既提升员工体验，也降低账号泄露和越权风险。
+
+## 学习路径
 
 <SeriesChapters series="business-iam" />
