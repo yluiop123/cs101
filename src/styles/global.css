@@ -68,7 +68,16 @@ html {
 /* ============ 顶部栏 ============ */
 header.header {
   background: var(--cs-bg);
+}
+
+/* Starlight 的 PageFrame 在外层套了一个 header，自定义 Header 是内层 header。
+   分隔线只画在最外层，否则内外两层各有一条，看起来就是两条横线。 */
+header.header:not(.cs-header) {
   border-bottom: 1px solid var(--cs-border);
+}
+
+header.header.cs-header {
+  border-bottom: 0;
 }
 
 header.header a.site-title {

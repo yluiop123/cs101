@@ -198,11 +198,11 @@ import RoutePage from '@/components/shared/RoutePage.astro';
 
 | 页面 | 配置 | 规模 | 渲染开关 |
 | --- | --- | --- | --- |
-| 首页 `/` | `index.mdx` 的 `route` | 5 分节 / 19 条（全部为路线 / 规划中占位） | `markKind: "auto"` |
+| 首页 `/` | `index.mdx` 的 `route` | 6 分节 / 35 条（全部为路线 / 规划中占位） | `markKind: "auto"` |
 | 业务系统 `/business-systems/` | `business-systems/index.mdx` 的 `route` | 14 分节 / 72 条 | `markKind: "auto"` |
 | 全部技术路线 `/tech-stack/` | `tech-stack/index.mdx` 的 `route` | 4 分节 / 19 条 | `markKind: "none"`、`columns: 2`、`sidebar.mode: "routes"` |
 
-也就是说：**首页就是一条路线（5 个分节），业务系统也是一条路线（14 个分节）**，
+也就是说：**首页就是一条路线（6 个分节），业务系统也是一条路线（14 个分节）**，
 和「Java 技术路线（4 个分节）」没有任何结构差别。
 
 ## 4. 业务系统：条目只写 id
