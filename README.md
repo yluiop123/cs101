@@ -1,4 +1,4 @@
-# CS101 · 中文计算机学习路径
+# CS101 学习地图
 
 > 从「学什么、按什么顺序学、在哪里练、学到哪了」出发的计算机学习路径站。
 > **Astro + Starlight + React + Tailwind CSS**，依赖使用最新稳定版（例外见 [VERSIONS.md](./VERSIONS.md)）。

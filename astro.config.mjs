@@ -27,7 +27,7 @@ export default defineConfig({
     react(),
     starlight({
       title: 'CS101',
-      description: '中文计算机学习路径：教程目录 / 应用领域 / 业务系统 / 计算机科学',
+      description: 'CS101 学习地图：教程 / 技术路线 / 业务系统 / 计算机科学',
       favicon: '/icon.svg',
       defaultLocale: 'root',
       locales: {
